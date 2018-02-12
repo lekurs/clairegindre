@@ -1,0 +1,322 @@
+/* CSS GLOBAL clairegindre */
+
+html, body {
+    font-family: 'Assistant';
+    font-weight: normal;
+    margin: 0 auto;
+}
+
+/* GLOBALS CSS RULES */
+.header-img {
+    background: url("/images/anlor-nico-header-photo.jpg") no-repeat center;
+    min-height: 100vh;
+    width: auto;
+    -webkit-background-size: cover;
+    background-size: cover;
+    display: block;
+    /*-webkit-clip-path: polygon(50% 0, 100% 0, 100% 86%, 50% 100%, 0 86%, 0 0);*/
+    /*clip-path: polygon(50% 0, 100% 0, 100% 86%, 50% 100%, 0 86%, 0 0);*/
+}
+
+.logo-content {
+    margin-top: 2%;
+    min-width: 165px;
+    min-height: 180px;
+    max-width: 220px;
+}
+
+.logo-img {
+    background: url("/images/logo.png") no-repeat center;
+    background-size: contain;
+    min-height: 160px;
+    height: 100%;
+    display: block;
+}
+
+.left-menu {
+    margin-top: 5%;
+    text-transform: uppercase;
+}
+
+.left-menu a {
+    color: #fff;
+}
+
+.right-menu {
+    margin-top: 5%;
+    text-transform: uppercase;
+}
+
+.right-menu a {
+    color: #fff;
+}
+
+.scroll-down {
+    position: absolute;
+    width: 100%;
+    bottom: 2%;
+    display: flex;
+    justify-content: center;
+    color: #fff;
+}
+
+h2.last-report {
+    text-transform: uppercase;
+}
+
+section.portfolio {
+    width: 80%;
+    margin: 0 auto;
+}
+
+/*.img-1 {*/
+    /*background: url('/images/mariage-home.jpg') no-repeat center;*/
+    /*background-size: cover;*/
+/*height: 500px;*/
+    /*margin: 5px;*/
+    /*padding: 0;*/
+/*}*/
+
+/*.img-2 {*/
+    /*background: url('/images/anlor-nico-header-photo.jpg') no-repeat center;*/
+    /*background-size: cover;*/
+    /*height: 500px;*/
+    /*margin: 5px;*/
+    /*padding: 0;*/
+    /*width: auto;*/
+/*}*/
+
+/*.img-3 {*/
+    /*background: url('/images/anlor-nico-header-photo.jpg') no-repeat center;*/
+    /*background-size: cover;*/
+    /*height: 350px;*/
+    /*margin: 5px;*/
+    /*padding: 0;*/
+
+/*}*/
+
+/*.img-4 {*/
+    /*background: url('/images/mariage-home.jpg') no-repeat center;*/
+    /*background-size: cover;*/
+    /*height: 300px;*/
+    /*width: 100%;*/
+    /*margin: 5px;*/
+    /*padding: 0;*/
+/*}*/
+
+/*.img-5 {*/
+    /*background: url('/images/mariage-home.jpg') no-repeat center;*/
+    /*background-size: cover;*/
+    /*height: auto;*/
+    /*margin: 5px;*/
+    /*padding: 0;*/
+
+/*}*/
+
+/*.img-6 {*/
+    /*background: url('/images/mariage-home.jpg') no-repeat center;*/
+    /*background-size: cover;*/
+    /*height: 200px;*/
+    /*margin: 5px;*/
+    /*padding: 0;*/
+
+/*}*/
+
+/*.img-7 {*/
+    /*background: url('/images/mariage-home.jpg') no-repeat center;*/
+    /*background-size: cover;*/
+    /*height: 300px;*/
+    /*margin: 5px;*/
+    /*padding: 0;*/
+
+/*}*/
+
+/*.img-8 {*/
+    /*background: url('/images/mariage-home.jpg') no-repeat center;*/
+    /*background-size: cover;*/
+    /*height: 350px;*/
+    /*margin: 5px;*/
+    /*padding: 0;*/
+
+/*}*/
+
+/*.img-9 {*/
+    /*background: url('/images/mariage-home.jpg') no-repeat center;*/
+    /*background-size: cover;*/
+    /*height: 200px;*/
+    /*margin: 5px;*/
+    /*padding: 0;*/
+
+/*}*/
+
+section.presentations {
+    background: url('/images/background/presentation-full.jpg') no-repeat center;
+    background-size: cover;
+    position: relative;
+    -webkit-clip-path: polygon(100% 0%, 0% 0%, 0% 100%, 100% 80%);
+    clip-path: polygon(100% 0%, 0% 0%, 0% 100%, 100% 80%);
+    height: 92vh;
+}
+
+.height-pres {
+    height: 60vh;
+}
+
+
+
+.bg-presentations {
+    height: 92vh;
+    -webkit-clip-path: polygon(0 100%, 0 80%, 100% 100%);
+    clip-path: polygon(0 100%, 0 80%, 100% 100%);
+    background-color: #5f6b67;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.hello-container {
+    width: 50%;
+    height: 70%;
+    background-color: #fff;
+    background-color: rgba(255, 255, 255, 0.5);
+    margin-top: auto;
+    position: relative;
+}
+
+.photo-presentations {
+    background: url('/images/clairegindre.jpeg') no-repeat center;
+    background-size: contain;
+    position: absolute;
+    top: 12%;
+    left: -25%;
+    width: 50%;
+    height: 75%;
+}
+
+div.contact-triangle {
+    background-color: #fff;
+    min-height: 300px;
+    position: relative;
+}
+
+div.polygon-absolute {
+    -webkit-clip-path: polygon(0 0, 100% 0, 50% 50%);
+    clip-path: polygon(0 0, 100% 0, 50% 50%);
+    /*background: url('/images/background/image-contact.jpg') no-repeat center;*/
+    /*background-size: cover;*/
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+}
+
+div.polygon-triangle-absolute {
+    -webkit-clip-path: polygon(0 0, 100% 50%, 0 100%);
+    clip-path: polygon(0 0, 100% 50%, 0 100%);
+    background-color: #5f6b67;
+    width: 50%;
+    min-height: 300px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.triple-triangle {
+    margin: 0;
+    padding: 0;
+}
+
+.triple-triangle > img {
+    width: 100px;
+    height: auto;
+}
+
+.contact-form {
+    border: none;
+    border-bottom: 1px solid #8d9693;
+    border-radius: 0;
+}
+
+input.contact-form {
+    width: 90%;
+    margin: 15px 0;
+}
+
+textarea.contact-form {
+    height: 130px;
+    width: 95%;
+    border: 1px solid #8d9693;
+    margin: 15px 0;
+}
+
+input.sub-contact {
+    width: 95%;
+    margin: 15px 0 35px 0;
+    border: none;
+    background-color: #8d9693;
+    color: #fff;
+}
+
+.insta-list {
+    display: grid;
+    grid-gap: 1rem;
+    grid-template-columns: repeat(auto-fit, 250px);
+    grid-auto-rows: 250px;
+}
+
+.insta-list img {
+    max-width: 100%;
+    align-self: stretch;
+    justify-self: stretch;
+    object-fit: cover;
+}
+
+.fit-left {
+    object-position: left;
+}
+
+/*.instagram-link {*/
+    /*width: calc(100%/3);*/
+    /*!*max-height: 100%*!*/
+/*}*/
+
+/*.insta-img {*/
+    /*min-width: 100%;*/
+    /*height: auto;*/
+    /*box-sizing: content-box;*/
+    /*object-fit: cover;*/
+/*}*/
+
+.infos-carousel {
+    position: absolute;
+    top: 15%;
+    left: 15%;
+    width: 70%;
+    height: 70%;
+    background-color: #fff;
+    opacity: .6;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 0 10%;
+}
+
+.comment-contain {
+    height: 100%;
+}
+
+.comment-slider {
+    height: 80%;
+}
+
+.footer-contain {
+    min-height: 300px;
+    background-color: #242424;
+    color: #fff;
+    padding-top: 2%;
+}
+
+footer ul li a{
+    color: #fff;
+}

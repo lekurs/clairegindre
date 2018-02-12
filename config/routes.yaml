@@ -1,0 +1,106 @@
+#index:
+#    path: /
+#    controller: App\Controller\DefaultController::index
+
+index:
+    path: /
+    defaults:
+        _controller: App\Controller\MainController::index
+
+aboutme:
+    path: /aboutme
+    defaults:
+        _controller: App\Controller\AboutMeController::show
+
+photos:
+    path: /photos/{page}
+    defaults:
+        page: 1
+        _controller: App\Controller\PortfolioController::list
+    requirements:
+        page: '\d+'
+
+informations:
+    path: /infos
+    defaults:
+        _controller: App\Controller\InformationsController::show
+
+clients:
+    path: /clients
+    defaults:
+        _controller: App\Controller\CustomersController::list
+
+contact:
+    path: /contact
+    defaults:
+        _controller: App\Controller\ContactController::show
+
+contactPost:
+    path: /contact/post
+    defaults:
+        _controller: App\Controller\ContactController::post
+
+contact_sucess:
+    path: /
+    defaults:
+        _controller: App\Controller\MainController::index
+
+admin:
+    path: /admin
+    defaults:
+        _controller: App\Controller\AdminController::show
+
+adminCustomers:
+    path: /admin/customers
+    defaults:
+       _controller: App\Controller\CustomersController::list
+
+adminAddCustomer:
+    path: /admin/customers/add
+    defaults:
+       _controller: App\Controller\CustomersController::show
+
+adminValidAddCustomer:
+    path: /admin/customers/add/valid
+    defaults:
+        _controller: App\Controller\CustomersController::add
+
+adminUpdateCustomer:
+    path: /admin/customers/update/{slug}
+    defaults:
+        _controller: App\Controller\CustomersController::update
+
+adminDeleteCustomers:
+    path: /admin/customers/delete/{slug}
+    defaults:
+        _controller: App\Controller\CustomersController::delete
+
+adminGallery:
+    path: /admin/gallery
+    defaults:
+        _controller: App\Controller\GalleryController::list
+
+adminGalleryAdd:
+    path: /admin/gallery/add
+    defaults:
+        _controller: App\Controller\GalleryController::add
+
+adminGalleryUpdate:
+    path: /admin/gallery/update/{slug}
+    defaults:
+        _controller: App\Controller\GalleryController::update
+
+adminGalleryDelete:
+    path: /admin/gallery/delete/{slug}
+    defaults:
+        _controller: App\Controller\GalleryController::delete
+
+adminSite:
+    path: /admin/interface
+    defaults:
+        _controller: App\Controller\InterfaceController::show
+
+adminSiteIndex:
+    path: /admin/interface/index
+    defaults:
+        _controller: App\Controller\InterfaceController::adminIndex

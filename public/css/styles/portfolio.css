@@ -1,0 +1,59 @@
+.portfolio {
+    height: 92vh;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.top-block {
+    max-width: 100%;
+    display: flex;
+    flex-shrink: 0;
+    /*height: calc(100%/3);*/
+    min-width: 100%;
+}
+
+.portfolio a {
+    display: block;
+    height: auto;
+    min-width: calc(100%/3);
+}
+
+a.contain-1 {
+    background: url('/images/mariage-home.jpg') no-repeat center center;
+    background-size: cover;
+    max-width: 200%;
+    height: 150%;
+}
+
+a.contain-2 {
+    background: url('/images/mariage-home.jpg') no-repeat center center;
+    background-size: cover;
+    max-width: 100%;
+    height: auto;
+}
+
+.right-block {
+    max-width: calc(100%/4);
+    display: flex;
+    flex-direction: column;
+    height: 200%;
+    min-width: calc(100%/4);
+}
+
+a.contain-3 {
+    background: url('/images/mariage-home.jpg') no-repeat center center;
+    background-size: cover;
+    max-width: 100%;
+    height: 100%;
+}
+
+a.contain-4 {
+    background: url('/images/mariage-home.jpg') no-repeat center center;
+    background-size: cover;
+    max-width: 100%;
+    height: 100%;
+}
