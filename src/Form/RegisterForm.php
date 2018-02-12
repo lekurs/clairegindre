@@ -11,6 +11,7 @@ namespace App\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -35,6 +36,16 @@ class RegisterForm extends AbstractType
             ->add('passwordRegistration', PasswordType::class, array(
                 'label' => 'Mot de passe',
                 'required' => true,
+            ))
+            ->add('date_wedding', TextType::class, array(
+                'label' => 'Date évèvement',
+                'required' => true,
+            ))
+            ->add('type', TextType::class, array(
+                'label' => 'Type d\'évènement',
+            ))
+            ->add('picture', FileType::class, array(
+                'label' => 'Thumbnail présentation'
             ))
             ;
     }

@@ -1,21 +1,71 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Bidule
- * Date: 12/02/2018
- * Time: 16:25
- */
 
 namespace App\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
 
+/**
+ * @ORM\Entity(repositoryClass="App\Repository\RegisterRepository")
+ */
 class Register
 {
+    /**
+     * @ORM\Id
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
+     */
+    private $id;
 
-    protected $email;
-    protected $name;
-    protected $lastName;
-    protected $password;
+    /**
+     * @ORM\Column(type="string", length=100, nullable=true)
+     */
+    private $email;
+
+    /**
+     * @ORM\Column(type="string", length=100, nullable=true)
+     */
+    private $name;
+
+    /**
+     * @ORM\Column(type="string", length=100, nullable=true)
+     */
+    private $lastname;
+
+    /**
+     * @ORM\Column(type="string", length=30, nullable=true)
+     */
+    private $password;
+
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $dateWedding;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $type;
+
+    /**
+     * @ORM\Column(type="string", length=300)
+     */
+    private $picture;
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id): void
+    {
+        $this->id = $id;
+    }
 
     /**
      * @return mixed
@@ -52,17 +102,17 @@ class Register
     /**
      * @return mixed
      */
-    public function getLastName()
+    public function getLastname()
     {
-        return $this->lastName;
+        return $this->lastname;
     }
 
     /**
-     * @param mixed $lastName
+     * @param mixed $lastname
      */
-    public function setLastName($lastName): void
+    public function setLastname($lastname): void
     {
-        $this->lastName = $lastName;
+        $this->lastname = $lastname;
     }
 
     /**
@@ -80,5 +130,54 @@ class Register
     {
         $this->password = $password;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getDateWedding()
+    {
+        return $this->dateWedding;
+    }
+
+    /**
+     * @param mixed $dateWedding
+     */
+    public function setDateWedding($dateWedding): void
+    {
+        $this->dateWedding = $dateWedding;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param mixed $type
+     */
+    public function setType($type): void
+    {
+        $this->type = $type;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPicture()
+    {
+        return $this->picture;
+    }
+
+    /**
+     * @param mixed $picture
+     */
+    public function setPicture($picture): void
+    {
+        $this->picture = $picture;
+    }
+
 
 }

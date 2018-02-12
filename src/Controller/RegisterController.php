@@ -20,7 +20,7 @@ class RegisterController extends Controller
         $title = "Inscrire un nouveau client";
 
         $register = $this->createForm(RegisterForm::class, array(
-            'action' => $this->generateUrl('adminAddCustomer'),
+            'action' => $this->generateUrl('adminAddUser'),
             'method' => 'POST',
         ));
 

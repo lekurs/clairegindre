@@ -1,0 +1,23 @@
+App\Entity\Register:
+    type: entity
+    id:
+          id:
+                type: integer
+                generator: { strategy: AUO }
+    fields:
+        email:
+                type: string
+                length: 100
+                nullable: true
+        name:
+                type: string
+                length: 100
+                nullable: true
+        lastname:
+                type: string
+                length: 100
+                nullable: true
+        password:
+                type: string
+                length: 30
+                nullable: true
