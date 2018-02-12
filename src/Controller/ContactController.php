@@ -10,13 +10,13 @@ namespace App\Controller;
 
 
 use App\Form\ContactForm;
-use App\helpers\ContactMailHelper;
+use App\Helper\ContactMailHelper;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 class ContactController extends Controller
 {
-    public function post(Request $request)
+    public function post(Request $request, ContactMailHelper $contactMailHelper)
     {
         $task = new ContactForm();
         $form = $this->createForm(ContactForm::class);
@@ -28,7 +28,7 @@ class ContactController extends Controller
            $task = $form->getData();
 
            //Send Mail Confirm
-            $send = new ContactMailHelper();
+            $contactMailHelper->send($request);
 
            $this->addFlash(
                'contact_sucess',

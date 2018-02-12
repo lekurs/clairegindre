@@ -6,7 +6,7 @@
  * Time: 00:08
  */
 
-namespace App\helpers;
+namespace App\Helper;
 
 
 use Symfony\Component\HttpFoundation\Request;

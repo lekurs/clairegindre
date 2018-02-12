@@ -10,6 +10,7 @@ namespace App\Controller;
 
 
 use App\Form\ContactForm;
+use App\Helper\InstagramHelper;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class MainController extends Controller
 {
@@ -17,7 +18,7 @@ class MainController extends Controller
     {
       $title = "Bienvenue sur le site de Claire GINDRE - Photographe";
 
-      $insta = new InstagramController;
+      $insta = new InstagramHelper();
       $json = $insta->show();
 
       $contact = $this->createForm(ContactForm::class, array(

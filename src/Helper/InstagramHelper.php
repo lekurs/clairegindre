@@ -6,12 +6,9 @@
  * Time: 20:40
  */
 
-namespace App\Controller;
+namespace App\Helper;
 
-
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
-class InstagramController extends Controller
+class InstagramHelper
 {
     private $token = '7848828.8164d1d.64d97923593041f2883c257a3f8e1884';
 

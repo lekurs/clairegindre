@@ -50,30 +50,30 @@ admin:
     defaults:
         _controller: App\Controller\AdminController::show
 
-adminCustomers:
-    path: /admin/customers
+adminRegister:
+    path: /admin/register
     defaults:
-       _controller: App\Controller\CustomersController::list
+       _controller: App\Controller\RegisterController::show
 
 adminAddCustomer:
     path: /admin/customers/add
     defaults:
-       _controller: App\Controller\CustomersController::show
+       _controller: App\Controller\UsersController::add
 
-adminValidAddCustomer:
-    path: /admin/customers/add/valid
-    defaults:
-        _controller: App\Controller\CustomersController::add
+#adminAddUser:
+#    path: /admin/user/add/valid
+#    defaults:
+#        _controller: App\Controller\UsersController::addUser
 
 adminUpdateCustomer:
     path: /admin/customers/update/{slug}
     defaults:
-        _controller: App\Controller\CustomersController::update
+        _controller: App\Controller\UsersController::update
 
 adminDeleteCustomers:
     path: /admin/customers/delete/{slug}
     defaults:
-        _controller: App\Controller\CustomersController::delete
+        _controller: App\Controller\UsersController::delete
 
 adminGallery:
     path: /admin/gallery
