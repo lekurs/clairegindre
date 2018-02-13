@@ -83,6 +83,8 @@ class Register
      * @Assert\Image(
      *          allowLandscape = true,
      *          allowPortrait = true,
+     *          mimeTypes = { "image/png", "image/jpg" },
+     *          mimeTypeMessage = "Format accepté : JPEG ou PNG uniquement"
  *     )
      */
     private $picture;
