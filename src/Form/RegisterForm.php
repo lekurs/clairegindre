@@ -9,13 +9,16 @@
 namespace App\Form;
 
 
+use App\Entity\Register;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class RegisterForm extends AbstractType
 {
@@ -29,7 +32,7 @@ class RegisterForm extends AbstractType
             ->add('name', TextType::class, array(
                 'label' => 'Nom',
                 'required' => true,
-            ))
+              ))
             ->add('lastName', TextType::class, array(
                 'label' => 'Prénom',
                 'required' => true,
@@ -43,12 +46,25 @@ class RegisterForm extends AbstractType
                 'widget' => 'single_text',
                 'required' => true,
             ))
-//            ->add('type', TextType::class, array(
-//                'label' => 'Type d\'évènement',
-//            ))
+            ->add('type', ChoiceType::class, array(
+                'label' => 'Type d\'évènement',
+                'choices' => array(
+                   'Mariage' => 'mariage',
+                   'Famille' => 'famille',
+                   'Couple' => 'couple'
+                ),
+
+            ))
             ->add('picture', FileType::class, array(
                 'label' => 'Thumbnail présentation'
             ))
             ;
+    }
+
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults(array(
+            'data_class' => Register::class,
+        ));
     }
 }

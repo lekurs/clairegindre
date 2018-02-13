@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\RegisterRepository")
@@ -18,21 +19,55 @@ class Register
 
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
+     * @Assert\Email
      */
     private $email;
 
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
+     * @Assert\Regex(
+     *              pattern="/\d/",
+     *              match = false,
+     *              message = "Le nom ne peut pas contenir un numéro"
+     *  )
+     * @Assert\Length(
+     *              min = 2,
+     *              max = 50,
+     *              minMessage = "Le nom doit contenir au moins {{ limit }} caractères",
+     *              maxMessage = "Le nom ne doit pas dépasser {{ limit }} caractères"
+     * )
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
+     * @Assert\Length(
+     *              min = 2,
+     *              max = 50,
+     *              minMessage = "Le prénom doit être de {{ limit }} caractères minimum",
+     *              maxMessage = "Le prénom ne doit pas dépasser {{ limit }} caractères",
+     *     )
+     * @Assert\Regex(
+     *              pattern="/\d/",
+     *              match = false,
+     *              message = "Le nom ne peut pas contenir de chiffre"
+     *  )
      */
     private $lastname;
 
     /**
      * @ORM\Column(type="string", length=30, nullable=true)
+     * @Assert\Length(
+     *              min = 8,
+     *              max = 20,
+     *              minMessage = "Le mot de passe doit contenir au minimum {{ limit }} caractères",
+     *              maxMessage = "Le mot de passe ne peut pas dépasser {{ limit }} caractères"
+     * )
+     * @Assert\Regex(
+     *              pattern="/^[A-Z-,;:!?.§@&#]+[a-z0-9 -,;:!?.&#]{2,}+$/",
+     *              match=false,
+     *              message = "Première lettre majuscule suivi"
+     * )
      */
     private $password;
 
@@ -41,11 +76,11 @@ class Register
      */
     private $dateWedding;
 
-//    /**
-//     * @ORM\Column(type="integer", nullable=true)
-//     */
-//    private $type;
-//
+    /**
+     * @ORM\Column(type="string", length=50, nullable=true)
+     */
+    private $type;
+
     /**
      * @ORM\Column(type="string", length=300)
      */

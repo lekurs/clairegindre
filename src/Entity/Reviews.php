@@ -35,5 +35,5 @@ class Reviews
      * @ORM\Column(type="string", length=200, nullable=true)
      */
     private $image;
-    
+
 }

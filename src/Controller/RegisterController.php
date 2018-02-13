@@ -9,6 +9,7 @@
 namespace App\Controller;
 
 
+use App\Entity\Category;
 use App\Entity\Register;
 use App\Form\RegisterForm;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -38,6 +39,7 @@ class RegisterController extends Controller
             //add flash
             $this->addFlash('register_success', 'Utilisateur bien ajouté');
             $this->addFlash('register_error', 'Erreur : l\'utilisateur n\'a pas été ajouté');
+
             return $this->redirectToRoute('admin');
         }
 
