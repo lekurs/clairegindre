@@ -33,6 +33,17 @@ class RegisterController extends Controller
         {
             $em = $this->getDoctrine()->getManager();
 
+            $picture = $user->getPicture();
+
+            $pictureName = $this->generateUniqueFileName().'.'.$picture->guessExtension();
+
+            $picture->move(
+                $this->getParameter('customer_directory'),
+                $pictureName
+            );
+
+            $user->setPicture($pictureName);
+
             $em->persist($user);
             $em->flush();
 
@@ -47,5 +58,10 @@ class RegisterController extends Controller
             'title' => $title,
             'register' => $register->createView(),
         ));
+    }
+
+    private function generateUniqueFileName()
+    {
+        return md5(uniqid());
     }
 }

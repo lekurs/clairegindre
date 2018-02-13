@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -63,11 +64,6 @@ class Register
      *              minMessage = "Le mot de passe doit contenir au minimum {{ limit }} caractères",
      *              maxMessage = "Le mot de passe ne peut pas dépasser {{ limit }} caractères"
      * )
-     * @Assert\Regex(
-     *              pattern="/^[A-Z-,;:!?.§@&#]+[a-z0-9 -,;:!?.&#]{2,}+$/",
-     *              match=false,
-     *              message = "Première lettre majuscule suivi"
-     * )
      */
     private $password;
 
@@ -83,6 +79,11 @@ class Register
 
     /**
      * @ORM\Column(type="string", length=300)
+     * @Assert\NotBlank(message = "Merci d'ajouter une photo au format JPEG ou PNG")
+     * @Assert\Image(
+     *          allowLandscape = true,
+     *          allowPortrait = true,
+ *     )
      */
     private $picture;
 
@@ -207,12 +208,12 @@ class Register
     }
 
     /**
-     * @param mixed $picture
+     * @return $this
      */
-    public function setPicture($picture): void
+    public function setPicture($file=null)
     {
-        $this->picture = $picture;
+        $this->picture = $file;
+
+        return $this;
     }
-
-
 }
