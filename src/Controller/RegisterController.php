@@ -47,7 +47,7 @@ class RegisterController extends Controller
             $em->persist($user);
             $em->flush();
 
-            //add flash
+            //FlashMessages
             $this->addFlash('register_success', 'Utilisateur bien ajouté');
             $this->addFlash('register_error', 'Erreur : l\'utilisateur n\'a pas été ajouté');
 
