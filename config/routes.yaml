@@ -55,16 +55,6 @@ adminRegister:
     defaults:
        _controller: App\Controller\RegisterController::register
 
-#adminAddUser:
-#    path: /admin/user/add
-#    defaults:
-#       _controller: App\Controller\UserController::add
-
-#adminAddUser:
-#    path: /admin/user/add/valid
-#    defaults:
-#        _controller: App\Controller\UsersController::addUser
-
 adminUpdateUser:
     path: /admin/user/update/{slug}
     defaults:

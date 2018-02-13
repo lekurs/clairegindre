@@ -46,9 +46,9 @@ class RegisterForm extends AbstractType
 //            ->add('type', TextType::class, array(
 //                'label' => 'Type d\'évènement',
 //            ))
-//            ->add('picture', FileType::class, array(
-//                'label' => 'Thumbnail présentation'
-//            ))
+            ->add('picture', FileType::class, array(
+                'label' => 'Thumbnail présentation'
+            ))
             ;
     }
 }

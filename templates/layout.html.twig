@@ -50,7 +50,7 @@
 <body>
     {% block body %}
         {% block FlashMessage %}
-            {% for flash_message in app.flashes %}
+            {% for flash_message in app.flashes('contact_success') %}
                 <div class="alert alert-success">
                     {{ flash_message }}
                 </div>

@@ -46,10 +46,10 @@ class Register
 //     */
 //    private $type;
 //
-//    /**
-//     * @ORM\Column(type="string", length=300)
-//     */
-//    private $picture;
+    /**
+     * @ORM\Column(type="string", length=300)
+     */
+    private $picture;
 
     /**
      * @return mixed
