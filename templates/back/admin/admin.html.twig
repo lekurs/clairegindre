@@ -1,1 +1,17 @@
+{% extends "admin_layout.html.twig" %}
+
+{%  block head %}
+    {{ parent() }}
+    <title>{{ title }}</title>
+{% endblock %}
+
+{% block content %}
+    {% block FlashMessage %}
+        {% for flash_message in app.flashes('register_success') %}
+            <div class="alert alert-success">
+                {{ flash_message }}
+            </div>
+        {% endfor %}
+        {% endblock %}
 <h1>Bienvenue sur l'admin</h1>
+{% endblock %}

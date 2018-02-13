@@ -10,6 +10,7 @@ namespace App\Form;
 
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
@@ -21,32 +22,33 @@ class RegisterForm extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('emailRegistration', EmailType::class, array(
+            ->add('email', EmailType::class, array(
                 'label' => 'Email',
                 'required' => true,
             ))
-            ->add('nameRegistration', TextType::class, array(
+            ->add('name', TextType::class, array(
                 'label' => 'Nom',
                 'required' => true,
             ))
-            ->add('lastNameRegistration', TextType::class, array(
+            ->add('lastName', TextType::class, array(
                 'label' => 'Prénom',
                 'required' => true,
             ))
-            ->add('passwordRegistration', PasswordType::class, array(
+            ->add('password', PasswordType::class, array(
                 'label' => 'Mot de passe',
                 'required' => true,
             ))
-            ->add('date_wedding', TextType::class, array(
+            ->add('date_wedding', DateType::class, array(
                 'label' => 'Date évèvement',
+                'widget' => 'single_text',
                 'required' => true,
             ))
-            ->add('type', TextType::class, array(
-                'label' => 'Type d\'évènement',
-            ))
-            ->add('picture', FileType::class, array(
-                'label' => 'Thumbnail présentation'
-            ))
+//            ->add('type', TextType::class, array(
+//                'label' => 'Type d\'évènement',
+//            ))
+//            ->add('picture', FileType::class, array(
+//                'label' => 'Thumbnail présentation'
+//            ))
             ;
     }
 }

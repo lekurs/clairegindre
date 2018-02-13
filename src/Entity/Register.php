@@ -41,15 +41,15 @@ class Register
      */
     private $dateWedding;
 
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $type;
-
-    /**
-     * @ORM\Column(type="string", length=300)
-     */
-    private $picture;
+//    /**
+//     * @ORM\Column(type="integer", nullable=true)
+//     */
+//    private $type;
+//
+//    /**
+//     * @ORM\Column(type="string", length=300)
+//     */
+//    private $picture;
 
     /**
      * @return mixed
