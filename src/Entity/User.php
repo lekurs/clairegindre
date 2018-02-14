@@ -3,13 +3,14 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\RegisterRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
-class Register
+class User implements UserInterface
 {
     /**
      * @ORM\Id
@@ -54,13 +55,13 @@ class Register
      *              message = "Le nom ne peut pas contenir de chiffre"
      *  )
      */
-    private $lastname;
+    private $lastName;
 
     /**
-     * @ORM\Column(type="string", length=30, nullable=true)
+     * @ORM\Column(type="string", length=64, nullable=true)
      * @Assert\Length(
      *              min = 8,
-     *              max = 20,
+     *              max = 64,
      *              minMessage = "Le mot de passe doit contenir au minimum {{ limit }} caractères",
      *              maxMessage = "Le mot de passe ne peut pas dépasser {{ limit }} caractères"
      * )
@@ -91,7 +92,7 @@ class Register
      *          allowPortrait = true,
      *          mimeTypes = { "image/png", "image/jpg" },
      *          mimeTypesMessage = "Format accepté : JPEG ou PNG uniquement"
- *     )
+     *     )
      */
     private $picture;
 
@@ -146,19 +147,18 @@ class Register
     /**
      * @return mixed
      */
-    public function getLastname()
+    public function getLastName()
     {
-        return $this->lastname;
+        return $this->lastName;
     }
 
     /**
-     * @param mixed $lastname
+     * @param mixed $lastName
      */
-    public function setLastname($lastname): void
+    public function setLastName($lastName): void
     {
-        $this->lastname = $lastname;
+        $this->lastName = $lastName;
     }
-
     /**
      * @return mixed
      */
@@ -173,6 +173,22 @@ class Register
     public function setPassword($password): void
     {
         $this->password = $password;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPlainPassword()
+    {
+        return $this->plainPassword;
+    }
+
+    /**
+     * @param $password
+     */
+    public function setPlainPassword($password)
+    {
+        $this->plainPassword = $password;
     }
 
     /**
@@ -223,5 +239,59 @@ class Register
         $this->picture = $file;
 
         return $this;
+    }
+
+    /**
+     * Returns the roles granted to the user.
+     *
+     * <code>
+     * public function getRoles()
+     * {
+     *     return array('ROLE_USER');
+     * }
+     * </code>
+     *
+     * Alternatively, the roles might be stored on a ``roles`` property,
+     * and populated in any number of different ways when the user object
+     * is created.
+     *
+     * @return (Role|string)[] The user roles
+     */
+    public function getRoles()
+    {
+        // TODO: Implement getRoles() method.
+    }
+
+    /**
+     * Returns the salt that was originally used to encode the password.
+     *
+     * This can return null if the password was not encoded using a salt.
+     *
+     * @return string|null The salt
+     */
+    public function getSalt()
+    {
+        return null;
+    }
+
+    /**
+     * Returns the username used to authenticate the user.
+     *
+     * @return string The username
+     */
+    public function getUsername()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Removes sensitive data from the user.
+     *
+     * This is important if, at any given point, sensitive information like
+     * the plain-text password is stored on this object.
+     */
+    public function eraseCredentials()
+    {
+        // TODO: Implement eraseCredentials() method.
     }
 }
