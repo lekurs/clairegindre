@@ -8,8 +8,7 @@
 
 namespace App\Form;
 
-
-use App\Entity\Register;
+use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -20,7 +19,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class RegisterForm extends AbstractType
+class UserForm extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -37,14 +36,16 @@ class RegisterForm extends AbstractType
                 'label' => 'Prénom',
                 'required' => true,
             ))
-            ->add('password', PasswordType::class, array(
+            ->add('plainPassword', PasswordType::class, array(
                 'label' => 'Mot de passe',
                 'required' => true,
             ))
             ->add('date_wedding', DateType::class, array(
                 'label' => 'Date évèvement',
                 'widget' => 'single_text',
+//                'html5' => false,
                 'required' => true,
+//                'attr' => ['class' => 'js-datepicker'],
             ))
             ->add('type', ChoiceType::class, array(
                 'label' => 'Type d\'évènement',
@@ -56,7 +57,8 @@ class RegisterForm extends AbstractType
 
             ))
             ->add('picture', FileType::class, array(
-                'label' => 'Thumbnail présentation'
+                'label' => 'Choisissez un fichier',
+//                'attr' => ['class' => 'custom-file-input']
             ))
             ;
     }
@@ -64,7 +66,7 @@ class RegisterForm extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => Register::class,
+            'data_class' => User::class,
         ));
     }
 }

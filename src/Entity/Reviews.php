@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ReviewsRepository")
@@ -17,23 +19,145 @@ class Reviews
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=100, nullable=true)
+     * @ORM\Column(type="integer")
+     * @Assert\NotBlank
+     *
+     */
+    private $userId;
+
+    /**
+     * @ORM\Column(type="string", length=100)
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *          min = 5,
+     *          max = 100,
+ *              minMessage = "Le nom doit contenir au moins {{ limit }} caractères",
+     *          maxMessage = "Le nom ne doit pas dépasser {{ limit }} caractères"
+     * )
      */
     private $name;
 
     /**
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(type="text")
+     * @Assert\NotBlank
      */
     private $reviews;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="integer", options={"default": 1})
      */
     private $online;
 
     /**
      * @ORM\Column(type="string", length=200, nullable=true)
+     * @Assert\Image(
+     *          allowLandscape = true,
+     *          allowPortrait = true,
+     *          mimeTypes = { "image/png", "image/jpg" },
+     *          mimeTypesMessage = "Format accepté : JPEG ou PNG uniquement"
+     *     )
      */
     private $image;
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id): void
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUserId()
+    {
+        return $this->userId;
+    }
+
+    /**
+     * @param mixed $userId
+     */
+    public function setUserId($userId): void
+    {
+        $this->userId = $userId;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param mixed $name
+     */
+    public function setName($name): void
+    {
+        $this->name = $name;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getReviews()
+    {
+        return $this->reviews;
+    }
+
+    /**
+     * @param mixed $reviews
+     */
+    public function setReviews($reviews): void
+    {
+        $this->reviews = $reviews;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getOnline()
+    {
+        return $this->online;
+    }
+
+    /**
+     * @param mixed $online
+     */
+    public function setOnline($online): void
+    {
+        $this->online = $online;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param null $file
+     * @return $this
+     */
+    public function setImage($file=null)
+    {
+        $this->image = $file;
+
+        return $this;
+    }
+
+
 
 }

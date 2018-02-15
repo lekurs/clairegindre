@@ -10,8 +10,8 @@ namespace App\Controller;
 
 
 use App\Entity\Category;
-use App\Entity\Register;
-use App\Form\RegisterForm;
+use App\Entity\User;
+use App\Form\UserForm;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -23,15 +23,14 @@ class RegisterController extends Controller
 
         $title = "Inscrire un nouveau client";
 
-        $user = new Register();
+        $user = new User();
 
-        $register = $this->createForm(RegisterForm::class, $user);
+        $register = $this->createForm(UserForm::class, $user);
 
         $register->handleRequest($request);
 
         if($register->isSubmitted() && $register->isValid())
         {
-            $em = $this->getDoctrine()->getManager();
 
             $picture = $user->getPicture();
 
@@ -44,6 +43,10 @@ class RegisterController extends Controller
 
             $user->setPicture($pictureName);
 
+            $password = $encoder->encodePassword($user, $user->getPlainPassword());
+            $user->setPassword($password);
+
+            $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
 

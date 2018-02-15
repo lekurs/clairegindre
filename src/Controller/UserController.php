@@ -10,7 +10,8 @@ namespace App\Controller;
 
 
 use App\Entity\Register;
-use App\Form\RegisterForm;
+use App\Entity\User;
+use App\Form\UserForm;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -18,8 +19,8 @@ class UserController extends Controller
 {
     public function add(Request $request)
     {
-        $task = new RegisterForm();
-        $form = $this->createForm(RegisterForm::class);
+        $task = new UserForm();
+        $form = $this->createForm(UserForm::class);
 
         $form->handleRequest($request);
 
@@ -46,5 +47,21 @@ class UserController extends Controller
 
             return $this->redirectToRoute('/admin');
         }
+    }
+
+    public function show()
+    {
+        $title = 'Administration des clients';
+
+        $users = $this->getDoctrine()
+            ->getRepository(User::class)
+            ->findAll();
+
+        var_dump($users);
+
+        return $this->render('back/admin/users.html.twig', array(
+            'title' => $title,
+            'users' => $users,
+        ));
     }
 }

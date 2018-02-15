@@ -70,5 +70,4 @@ class ContactForm extends AbstractType
                 'required' => true,
             ));
     }
-
 }
