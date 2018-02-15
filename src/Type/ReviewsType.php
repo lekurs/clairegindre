@@ -6,7 +6,7 @@
  * Time: 15:53
  */
 
-namespace App\Form;
+namespace App\Type;
 
 
 use App\Entity\Reviews;

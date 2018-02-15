@@ -6,9 +6,9 @@
  * Time: 20:40
  */
 
-namespace App\Helper;
+namespace App\Lib;
 
-class InstagramHelper
+class InstagramLib
 {
     private $token = '7848828.8164d1d.64d97923593041f2883c257a3f8e1884';
 

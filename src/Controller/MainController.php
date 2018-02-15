@@ -9,19 +9,19 @@
 namespace App\Controller;
 
 
-use App\Form\ContactForm;
-use App\Helper\ContactMailHelper;
-use App\Helper\InstagramHelper;
+use App\Type\ContactForm;
+use App\Lib\ContactMailLib;
+use App\Lib\InstagramLib;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 class MainController extends Controller
 {
-    public function index(Request $request, ContactMailHelper $contactMailHelper)
+    public function index(Request $request, ContactMailLib $contactMailHelper)
     {
       $title = "Bienvenue sur le site de Claire GINDRE - Photographe";
 
-      $insta = new InstagramHelper();
+      $insta = new InstagramLib();
       $json = $insta->show();
 
 

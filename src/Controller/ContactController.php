@@ -9,14 +9,14 @@
 namespace App\Controller;
 
 
-use App\Form\ContactForm;
-use App\Helper\ContactMailHelper;
+use App\Type\ContactForm;
+use App\Lib\ContactMailLib;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 class ContactController extends Controller
 {
-    public function post(Request $request, ContactMailHelper $contactMailHelper)
+    public function post(Request $request, ContactMailLib $contactMailHelper)
     {
         $task = new ContactForm();
         $form = $this->createForm(ContactForm::class);

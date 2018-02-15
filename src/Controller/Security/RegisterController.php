@@ -6,48 +6,43 @@
  * Time: 16:26
  */
 
-namespace App\Controller;
+namespace App\Controller\Security;
 
 
+use App\Builder\Interfaces\UserBuilderInterface;
 use App\Entity\Category;
-use App\Entity\User;
-use App\Form\UserForm;
+use App\Type\UserForm;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class RegisterController extends Controller
 {
-    public function register(Request $request, UserPasswordEncoderInterface $encoder)
+    public function register(Request $request, UserPasswordEncoderInterface $encoder, UserBuilderInterface $userBuilder)
     {
 
         $title = "Inscrire un nouveau client";
 
-        $user = new User();
+        $userBuilder->create();
 
-        $register = $this->createForm(UserForm::class, $user);
-
-        $register->handleRequest($request);
+        $register = $this->createForm(UserForm::class, $userBuilder->getUser())->handleRequest($request);
 
         if($register->isSubmitted() && $register->isValid())
         {
+            $pictureName = $this->generateUniqueFileName().'.'.$register->getData()->getPicture()->guessExtension();
 
-            $picture = $user->getPicture();
-
-            $pictureName = $this->generateUniqueFileName().'.'.$picture->guessExtension();
-
-            $picture->move(
+            $register->getData()->getPicture()->move(
                 $this->getParameter('customer_directory'),
                 $pictureName
             );
 
-            $user->setPicture($pictureName);
+            $userBuilder->withPicture($pictureName);
 
-            $password = $encoder->encodePassword($user, $user->getPlainPassword());
-            $user->setPassword($password);
+            $password = $encoder->encodePassword($userBuilder->getUser(), $userBuilder->getUser()->getPlainPassword());
+            $userBuilder->withPassword($password);
 
             $em = $this->getDoctrine()->getManager();
-            $em->persist($user);
+            $em->persist($userBuilder->getUser());
             $em->flush();
 
             //FlashMessages

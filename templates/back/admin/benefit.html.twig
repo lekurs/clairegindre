@@ -1,0 +1,16 @@
+{% extends "admin_layout.html.twig" %}
+
+{%  block head %}
+    {{ parent() }}
+    <title>Administration des familles</title>
+{% endblock %}
+
+{% block content %}
+    <h1>Administration des catégories de prestations</h1>
+    {{ form_start(benefitType) }}
+    {{ form_widget(benefitType) }}
+    <div class="btn-group">
+        <button type="submit" class="btn btn-primary">Enregistrer</button>
+    </div>
+    {{ form_end(benefitType) }}
+{% endblock %}

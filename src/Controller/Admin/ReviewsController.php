@@ -10,7 +10,7 @@ namespace App\Controller\Admin;
 
 
 use App\Entity\Reviews;
-use App\Form\ReviewsType;
+use App\Type\ReviewsType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 

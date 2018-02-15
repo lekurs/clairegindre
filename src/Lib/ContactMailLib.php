@@ -6,12 +6,12 @@
  * Time: 00:08
  */
 
-namespace App\Helper;
+namespace App\Lib;
 
 
 use Symfony\Component\HttpFoundation\Request;
 
-class ContactMailHelper
+class ContactMailLib
 {
     private $mailer;
 
