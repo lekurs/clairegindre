@@ -33,6 +33,13 @@ class BenefitBuilder implements BenefitBuilderInterface
         return $this;
     }
 
+    public function withId(int $id): BenefitBuilderInterface
+    {
+        $this->benefit->setId($id);
+
+        return $this;
+    }
+
     /**
      * @return mixed
      */

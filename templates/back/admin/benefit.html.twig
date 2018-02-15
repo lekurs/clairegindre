@@ -2,15 +2,47 @@
 
 {%  block head %}
     {{ parent() }}
-    <title>Administration des familles</title>
+        {% block title %}
+            <title>Administration des familles</title>
+        {% endblock %}
 {% endblock %}
 
 {% block content %}
-    <h1>Administration des catégories de prestations</h1>
-    {{ form_start(benefitType) }}
-    {{ form_widget(benefitType) }}
-    <div class="btn-group">
-        <button type="submit" class="btn btn-primary">Enregistrer</button>
-    </div>
-    {{ form_end(benefitType) }}
+    <section>
+        <div class="container">
+            <div class="col">
+                <h1>Administration des catégories de prestations</h1>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <h2 class="text-uppercase">Prestations actuelles</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6 text-uppercase font-weight-bold">Prestations</div>
+                <div class="col text-uppercase font-weight-bold">Modifier</div>
+                <div class="col text-uppercase font-weight-bold">Supprimer</div>
+            </div>
+            {% for benefit in benefits %}
+            <div class="row">
+                <div class="col-6">{{ benefit.name }}</div>
+                <div class="col"><a href="{{ path('adminBenefitEdit', {'id': benefit.id}) }}"><i class="fa fa-edit"></i></a></div>
+                <div class="col"><i class="fa fa-trash"></i></div>
+            </div>
+                {% endfor %}
+            <div class="row">
+                <div class="col">
+                    <h2>Ajouter une prestation</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col benefit-form">
+                {{ form_start(benefitType) }}
+                        {{ form_row(benefitType.name) }}
+                        <button type="submit" class="btn btn-primary submit-form">Enregistrer</button>
+                </div>
+            {{ form_end(benefitType) }}
+            </div>
+        </div>
+    </section>
 {% endblock %}

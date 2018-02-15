@@ -103,4 +103,9 @@ AdminSiteReviews:
 adminBenefit:
     path: /admin/configuration/benefit
     defaults:
-      _controller: App\Controller\Configuration\BenefitController::addBenefit
+      _controller: App\Controller\Configuration\BenefitController::show
+
+adminBenefitEdit:
+    path: /admin/configuration/benefit/{id}
+    defaults:
+      _controller: App\Controller\Configuration\BenefitEditController::edit

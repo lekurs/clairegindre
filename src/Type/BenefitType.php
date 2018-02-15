@@ -24,7 +24,7 @@ class BenefitType extends AbstractType
             ->add('name', TextType::class, array(
                 'label' => 'Nom de la prestation',
                 'label_attr' => ['class' => 'sr-only'],
-//                'placeholder' => 'Prestation',
+                'attr' => ['placeholder' => 'Prestation', 'class' => 'benefit_name'],
             ))
             ;
     }

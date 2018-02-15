@@ -10,6 +10,7 @@ namespace App\Controller\Configuration;
 
 
 use App\Builder\BenefitBuilder;
+use App\Entity\Benefit;
 use App\Type\BenefitType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,8 +18,12 @@ use Symfony\Component\HttpFoundation\Request;
 class BenefitController extends Controller
 {
 
-    public function addBenefit(Request $request, BenefitBuilder $benefitBuilder)
+    public function show(Request $request, BenefitBuilder $benefitBuilder)
     {
+        $benefit = $this->getDoctrine()
+            ->getRepository(Benefit::class)
+            ->findAll();
+
         $benefitBuilder->create();
 
         $benefitType = $this->createForm(BenefitType::class, $benefitBuilder->getBenefit())->handleRequest($request);
@@ -35,6 +40,7 @@ class BenefitController extends Controller
         }
 
         return $this->render('back/admin/benefit.html.twig', array(
+            'benefits' => $benefit,
             'benefitType' => $benefitType->createView(),
         ));
     }

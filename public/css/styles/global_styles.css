@@ -18,6 +18,12 @@ html, body {
     /*clip-path: polygon(50% 0, 100% 0, 100% 86%, 50% 100%, 0 86%, 0 0);*/
 }
 
+.submit-form {
+    width: 100%;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
 .logo-content {
     margin-top: 2%;
     min-width: 165px;
