@@ -55,6 +55,11 @@ adminRegister:
     defaults:
        _controller: App\Controller\RegisterController::register
 
+adminUsers:
+    path: /admin/users
+    defaults:
+       _controller: App\Controller\UserController::show
+
 adminUpdateUser:
     path: /admin/user/update/{slug}
     defaults:

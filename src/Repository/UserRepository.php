@@ -13,6 +13,18 @@ class UserRepository extends ServiceEntityRepository
         parent::__construct($registry, User::class);
     }
 
+    public function showAll(): array
+    {
+        $qb = $this->createQueryBuilder()
+            ->select('*')
+            ->from('user')
+            ->orderBy('id')
+            ->getQuery()
+            ;
+
+        return $qb->execute();
+    }
+
     /*
     public function findBySomething($value)
     {

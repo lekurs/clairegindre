@@ -1,0 +1,12 @@
+{% extends('admin_layout.html.twig') %}
+
+{%  block header %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+    <h1>Administration des utilisateurs</h1>
+    {% for user in users %}
+    <p>{{ user.name }}</p>
+    {% endfor %}
+{% endblock %}
