@@ -29,16 +29,16 @@ clients:
     path: /clients
     defaults:
         _controller: App\Controller\CustomersController::list
+#
+#contact:
+#    path: /contact
+#    defaults:
+#        _controller: App\Controller\ContactController::show
 
-contact:
-    path: /contact
-    defaults:
-        _controller: App\Controller\ContactController::show
-
-contactPost:
-    path: /contact/post
-    defaults:
-        _controller: App\Controller\ContactController::post
+#contactPost:
+#    path: /contact/post
+#    defaults:
+#        _controller: App\Controller\MainController::index
 
 contact_sucess:
     path: /
@@ -88,9 +88,9 @@ adminGalleryDelete:
 adminSite:
     path: /admin/interface
     defaults:
-        _controller: App\Controller\InterfaceController::show
+        _controller: App\Controller\Admin\InterfaceController::show
 
-adminSiteIndex:
-    path: /admin/interface/index
+AdminSiteReviews:
+    path: /admin/interface/reviews
     defaults:
-        _controller: App\Controller\InterfaceController::adminIndex
+      _controller: App\Controller\Admin\ReviewsController::addReviews
