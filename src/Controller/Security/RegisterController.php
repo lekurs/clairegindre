@@ -9,8 +9,10 @@
 namespace App\Controller\Security;
 
 
+use App\Builder\Interfaces\PictureBuilderInterface;
 use App\Builder\Interfaces\UserBuilderInterface;
 use App\Entity\Category;
+use App\Services\PictureService;
 use App\Type\UserForm;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,31 +20,32 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class RegisterController extends Controller
 {
-    public function register(Request $request, UserPasswordEncoderInterface $encoder, UserBuilderInterface $userBuilder)
+    public function register(Request $request, UserPasswordEncoderInterface $encoder, UserBuilderInterface $userBuilder, PictureService $pictureService, PictureBuilderInterface $pictureBuilder)
     {
-
-        $title = "Inscrire un nouveau client";
-
         $userBuilder->create();
 
         $register = $this->createForm(UserForm::class, $userBuilder->getUser())->handleRequest($request);
 
         if($register->isSubmitted() && $register->isValid())
         {
-            $pictureName = $this->generateUniqueFileName().'.'.$register->getData()->getPicture()->guessExtension();
+//            $pictureName = $this->generateUniqueFileName().'.'.$register->getData()->getPicture()->guessExtension();
+//
+//            $register->getData()->getPicture()->move(
+//                $this->getParameter('customer_directory'),
+//                $pictureName
+//            );
 
-            $register->getData()->getPicture()->move(
-                $this->getParameter('customer_directory'),
-                $pictureName
-            );
+            $pictureBuilder->create();
 
-            $userBuilder->withPicture($pictureName);
+            $pictureName = $pictureService->move($register->getData()->getPicture());
+            $picture = $pictureBuilder->withName($pictureName);
 
             $password = $encoder->encodePassword($userBuilder->getUser(), $userBuilder->getUser()->getPlainPassword());
             $userBuilder->withPassword($password);
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($userBuilder->getUser());
+            $em->persist($pictureBuilder->getPicture());
             $em->flush();
 
             //FlashMessages
@@ -53,7 +56,6 @@ class RegisterController extends Controller
         }
 
         return $this->render('back/admin/register.html.twig', array(
-            'title' => $title,
             'register' => $register->createView(),
         ));
     }

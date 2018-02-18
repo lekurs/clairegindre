@@ -17,7 +17,5 @@ interface BenefitBuilderInterface
 
     public function withName(string $name): BenefitBuilderInterface;
 
-    public function withId(int $id): BenefitBuilderInterface;
-
     public function getBenefit(): Benefit;
 }

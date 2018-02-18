@@ -25,21 +25,18 @@ class BenefitEditController extends Controller
             ->getRepository(Benefit::class)
             ->find($id);
 
-        $benefitType = $this->createForm(BenefitType::class, $benefitBuilder->getBenefit())->handleRequest($request);
+        $benefitType = $this->createForm(BenefitType::class, $benefit)->handleRequest($request);
 
-//        $benefit = $benefitBuilder->withId($id);
+        if($benefitType->isSubmitted() && $benefitType->isValid())
+        {
+            $em = $this->getDoctrine()->getManager();
+            $benefitBuilder->withName($benefitType->getName()); //Pas certain de moi là :/
+            $em->flush();
 
-//        if($benefitType)
-//        $em = $this->getDoctrine()->getManager();
-//
-//        $benefit = $em->getRepository(Benefit::class)->find($id);
-//
-//        if(!$benefit)
-//        {
-//            throw $this->createNotFoundException(
-//                'Aucune prestation trouvée'
-//            );
-//        }
+            $this->addFlash('benefitEdit_success', 'La prestation a été mise à jour');
+
+            return $this->redirectToRoute('adminBenefit');
+        }
 
         return $this->render('back/admin/benefit_edit.html.twig', array(
             'benefitType' => $benefitType->createView(),

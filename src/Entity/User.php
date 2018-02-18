@@ -90,8 +90,8 @@ class User implements UserInterface
      * @Assert\Image(
      *          allowLandscape = true,
      *          allowPortrait = true,
-     *          mimeTypes = { "image/png", "image/jpg" },
-     *          mimeTypesMessage = "Format accepté : JPEG ou PNG uniquement"
+     *          mimeTypes = { "image/png", "image/jpg"},
+     *          mimeTypesMessage = "Format accepté : JPEG/JPG ou PNG uniquement"
      *     )
      */
     private $picture;

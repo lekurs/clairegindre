@@ -9,6 +9,7 @@
 namespace App\Builder\Interfaces;
 
 
+use App\Entity\Picture;
 use App\Entity\User;
 
 interface UserBuilderInterface
@@ -17,7 +18,7 @@ interface UserBuilderInterface
 
     public function withPassword(string $password): UserBuilderInterface;
 
-    public function withPicture(string $picture): UserBuilderInterface;
+    public function withPicture(Picture $picture): UserBuilderInterface;
 
     public function getUser(): User;
 }

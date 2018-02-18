@@ -46,7 +46,7 @@ class Benefit
     }
 
     /**
-     * @param mixed $benefit
+     * @param mixed $name
      */
     public function setName($name): void
     {

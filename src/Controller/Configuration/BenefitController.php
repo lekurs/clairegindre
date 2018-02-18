@@ -20,13 +20,17 @@ class BenefitController extends Controller
 
     public function show(Request $request, BenefitBuilder $benefitBuilder)
     {
-        $benefit = $this->getDoctrine()
-            ->getRepository(Benefit::class)
-            ->findAll();
-
         $benefitBuilder->create();
 
+        $benefit = $this->getDoctrine()->getManager()
+            ->getRepository(Benefit::class, $benefitBuilder->getBenefit())
+            ->findAll();
+
         $benefitType = $this->createForm(BenefitType::class, $benefitBuilder->getBenefit())->handleRequest($request);
+        $benefitType->remove('id');
+        $benefitType->remove('benefit');
+
+//        $benefitTypeShow = $this->createForm(BenefitType::class, $benefit)->handleRequest($request);
 
         if($benefitType->isSubmitted() && $benefitType->isValid())
         {
@@ -36,12 +40,13 @@ class BenefitController extends Controller
 
             $this->addFlash('benefit_succes', 'Votre prestation à bien été ajoutée');
 
-            $this->redirectToRoute('adminBenefit');
+            return $this->redirectToRoute('adminBenefit');
         }
 
         return $this->render('back/admin/benefit.html.twig', array(
             'benefits' => $benefit,
             'benefitType' => $benefitType->createView(),
+//            'benefitTypeShow' => $benefitTypeShow->createView(),
         ));
     }
 }

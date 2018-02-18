@@ -11,6 +11,8 @@ namespace App\Type;
 
 use App\Entity\Benefit;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -26,6 +28,15 @@ class BenefitType extends AbstractType
                 'label_attr' => ['class' => 'sr-only'],
                 'attr' => ['placeholder' => 'Prestation', 'class' => 'benefit_name'],
             ))
+            ->add('id', HiddenType::class)
+//            ->add('benefit', CollectionType::class, array(
+//                'entry_type'   => BenefitType::class,
+//                'entry_options'  => array(
+//                    'attr'      => array('class' => 'form-row')
+//                ),
+//                'allow_add' => true,
+//                'allow_delete' => true,
+//            ))
             ;
     }
 

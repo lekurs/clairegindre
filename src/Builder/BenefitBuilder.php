@@ -28,14 +28,7 @@ class BenefitBuilder implements BenefitBuilderInterface
 
     public function withName(string $name): BenefitBuilderInterface
     {
-        $this->benefit->setBenefit($name);
-
-        return $this;
-    }
-
-    public function withId(int $id): BenefitBuilderInterface
-    {
-        $this->benefit->setId($id);
+        $this->benefit->setName($name);
 
         return $this;
     }

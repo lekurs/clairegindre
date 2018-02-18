@@ -8,8 +8,8 @@
 
 namespace App\Builder;
 
-
 use App\Builder\Interfaces\UserBuilderInterface;
+use App\Entity\Picture;
 use App\Entity\User;
 
 class UserBuilder implements UserBuilderInterface
@@ -33,7 +33,7 @@ class UserBuilder implements UserBuilderInterface
         return $this;
     }
 
-    public function withPicture(string $picture): UserBuilderInterface
+    public function withPicture(Picture $picture): UserBuilderInterface
     {
         $this->user->setPicture($picture);
 
