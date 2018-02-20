@@ -82,7 +82,7 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
      */
-    private $type;
+    private $benefit;
 
     /**
      * @ORM\Column(type="string", length=300)
@@ -210,17 +210,17 @@ class User implements UserInterface
     /**
      * @return mixed
      */
-    public function getType()
+    public function getBenefit()
     {
-        return $this->type;
+        return $this->benefit;
     }
 
     /**
-     * @param mixed $type
+     * @param mixed $benefit
      */
-    public function setType($type): void
+    public function setBenefit($benefit): void
     {
-        $this->type = $type;
+        $this->benefit = $benefit;
     }
 
     /**

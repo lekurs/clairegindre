@@ -36,11 +36,27 @@ class PictureBuilder implements PictureBuilderInterface
     public function withExtension(string $extension): PictureBuilderInterface
     {
         $this->picture->setExtension($extension);
+
+        return $this;
     }
 
     public function withPath(string $path): PictureBuilderInterface
     {
         $this->picture->setPicturePath($path);
+
+        return $this;
+    }
+
+    public function withBenefit(string $benefit): PictureBuilderInterface
+    {
+        $this->picture->setBenefitFamily($benefit);
+
+        return $this;
+    }
+
+    public function withUserName(string $userName): PictureBuilderInterface
+    {
+        $this->picture->setUserName($userName);
 
         return $this;
     }

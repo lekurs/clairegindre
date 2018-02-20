@@ -47,7 +47,7 @@ class UserForm extends AbstractType
                 'required' => true,
 //                'attr' => ['class' => 'js-datepicker'],
             ))
-            ->add('type', ChoiceType::class, array(
+            ->add('benefit', ChoiceType::class, array(
                 'label' => 'Type d\'évènement',
                 'choices' => array(
                    'Mariage' => 'mariage',

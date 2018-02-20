@@ -11,7 +11,6 @@ namespace App\Controller\Security;
 
 use App\Builder\Interfaces\PictureBuilderInterface;
 use App\Builder\Interfaces\UserBuilderInterface;
-use App\Entity\Category;
 use App\Services\PictureService;
 use App\Type\UserForm;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -23,25 +22,26 @@ class RegisterController extends Controller
     public function register(Request $request, UserPasswordEncoderInterface $encoder, UserBuilderInterface $userBuilder, PictureService $pictureService, PictureBuilderInterface $pictureBuilder)
     {
         $userBuilder->create();
+        $pictureBuilder->create();
 
         $register = $this->createForm(UserForm::class, $userBuilder->getUser())->handleRequest($request);
 
         if($register->isSubmitted() && $register->isValid())
         {
-//            $pictureName = $this->generateUniqueFileName().'.'.$register->getData()->getPicture()->guessExtension();
-//
-//            $register->getData()->getPicture()->move(
-//                $this->getParameter('customer_directory'),
-//                $pictureName
-//            );
+            $picture = $userBuilder->getUser()->getPicture();
+            $pictureName = $pictureService->move($picture);
+            $pictureBuilder->withName($pictureName);
 
-            $pictureBuilder->create();
+            $benefit = $userBuilder->getUser()->getBenefit();
+            $pictureBuilder->withBenefit($benefit);
 
-            $pictureName = $pictureService->move($register->getData()->getPicture());
-            $picture = $pictureBuilder->withName($pictureName);
+            $userName = $userBuilder->getUser()->getUsername();
+            $pictureBuilder->withUserName($userName);
 
             $password = $encoder->encodePassword($userBuilder->getUser(), $userBuilder->getUser()->getPlainPassword());
             $userBuilder->withPassword($password);
+
+            $userBuilder->withPicture($pictureBuilder->getPicture()->getPictureName());
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($userBuilder->getUser());
@@ -58,10 +58,5 @@ class RegisterController extends Controller
         return $this->render('back/admin/register.html.twig', array(
             'register' => $register->createView(),
         ));
-    }
-
-    private function generateUniqueFileName()
-    {
-        return md5(uniqid());
     }
 }

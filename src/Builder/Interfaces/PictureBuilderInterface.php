@@ -21,5 +21,9 @@ interface PictureBuilderInterface
 
     public function withExtension(string $extension): PictureBuilderInterface;
 
+    public function withUserName(string $userName): PictureBuilderInterface;
+
+    public function withBenefit(string $benefit): PictureBuilderInterface;
+
     public function getPicture():Picture;
 }

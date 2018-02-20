@@ -31,24 +31,24 @@ class Picture
     private $pictureName;
 
     /**
-     * @ORM\Column(type="string", length=5)
+     * @ORM\Column(type="string", length=5, nullable=true)
      */
     private $picturePath;
 
     /**
-     * @ORM\Column(type="string", length=150)
+     * @ORM\Column(type="string", length=150, nullable=true)
      */
     private $extension;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=50)
      */
-    private $benefitFamilyId;
+    private $benefitFamily;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=50)
      */
-    private $userId;
+    private $userName;
 
     /**
      * @return mixed
@@ -117,33 +117,33 @@ class Picture
     /**
      * @return mixed
      */
-    public function getBenefitFamilyId()
+    public function getBenefitFamily()
     {
-        return $this->benefitFamilyId;
+        return $this->benefitFamily;
     }
 
     /**
-     * @param mixed $benefitFamilyId
+     * @param mixed $benefitFamily
      */
-    public function setBenefitFamilyId($benefitFamilyId): void
+    public function setBenefitFamily($benefitFamily): void
     {
-        $this->benefitFamilyId = $benefitFamilyId;
+        $this->benefitFamily = $benefitFamily;
     }
 
     /**
      * @return mixed
      */
-    public function getUserId()
+    public function getUserName()
     {
         return $this->userId;
     }
 
     /**
-     * @param mixed $userId
+     * @param mixed $userName
      */
-    public function setUserId($userId): void
+    public function setUserName($userName): void
     {
-        $this->userId = $userId;
+        $this->userName = $userName;
     }
 
 
