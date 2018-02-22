@@ -33,7 +33,7 @@ class UserBuilder implements UserBuilderInterface
         return $this;
     }
 
-    public function withPicture(string $picture): UserBuilderInterface
+    public function withPicture(Picture $picture): UserBuilderInterface
     {
         $this->user->setPicture($picture);
 

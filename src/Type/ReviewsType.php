@@ -10,6 +10,7 @@ namespace App\Type;
 
 
 use App\Entity\Reviews;
+use App\Subscriber\ReviewImageSubscriber;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -21,6 +22,15 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ReviewsType extends AbstractType
 {
+    /**
+     * @var ReviewImageSubscriber
+     */
+    private $reviewImageSubscriber;
+
+    public function __construct(ReviewImageSubscriber $imageSubscriber)
+    {
+        $this->reviewImageSubscriber = $imageSubscriber;
+    }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -46,8 +56,9 @@ class ReviewsType extends AbstractType
                 'attr' => ['class' => 'btn btn-primary btn-sm active'],
 
             ))
-            ->add('userId', HiddenType::class)
             ;
+
+        $builder->get("image")->addEventSubscriber($this->reviewImageSubscriber);
     }
 
     public function configureOptions(OptionsResolver $resolver)

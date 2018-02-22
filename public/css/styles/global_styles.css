@@ -265,9 +265,9 @@ input.sub-contact {
 
 .insta-list {
     display: grid;
-    grid-gap: 1rem;
-    grid-template-columns: repeat(auto-fit, 250px);
-    grid-auto-rows: 250px;
+    grid-gap: 0rem;
+    grid-template-columns: repeat(auto-fit, 33%);
+    grid-auto-rows: 50%;
 }
 
 .insta-list img {
@@ -280,18 +280,6 @@ input.sub-contact {
 .fit-left {
     object-position: left;
 }
-
-/*.instagram-link {*/
-    /*width: calc(100%/3);*/
-    /*!*max-height: 100%*!*/
-/*}*/
-
-/*.insta-img {*/
-    /*min-width: 100%;*/
-    /*height: auto;*/
-    /*box-sizing: content-box;*/
-    /*object-fit: cover;*/
-/*}*/
 
 .infos-carousel {
     position: absolute;

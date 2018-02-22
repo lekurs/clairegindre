@@ -9,7 +9,7 @@
 namespace App\Controller\Security;
 
 
-use App\Entity\Register;
+use App\Builder\UserBuilder;
 use App\Entity\User;
 use App\Type\UserForm;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -17,19 +17,24 @@ use Symfony\Component\HttpFoundation\Request;
 
 class UserController extends Controller
 {
-    public function show()
+    public function show(UserBuilder $userBuilder, Request $request)
     {
-        $title = 'Administration des clients';
+        $userBuilder->create();
 
         $users = $this->getDoctrine()
             ->getRepository(User::class)
             ->findAll();
 
-        var_dump($users);
+            $task = $this->createForm(UserForm::class, $userBuilder->getUser())->handleRequest($request);
+
+            if($task->isSubmitted() && $task->isValid())
+            {
+
+            }
 
         return $this->render('back/admin/users.html.twig', array(
-            'title' => $title,
             'users' => $users,
+            'user_form' => $task->createView(),
         ));
     }
 }

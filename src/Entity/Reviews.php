@@ -18,12 +18,12 @@ class Reviews
      */
     private $id;
 
-    /**
-     * @ORM\Column(type="integer")
-     * @Assert\NotBlank
-     *
-     */
-    private $userId;
+//    /**
+//     * @ORM\Column(type="integer", nullable=true)
+//     * @Assert\NotBlank
+//     *
+//     */
+//    private $userId;
 
     /**
      * @ORM\Column(type="string", length=100)
@@ -49,13 +49,7 @@ class Reviews
     private $online;
 
     /**
-     * @ORM\Column(type="string", length=200, nullable=true)
-     * @Assert\Image(
-     *          allowLandscape = true,
-     *          allowPortrait = true,
-     *          mimeTypes = { "image/png", "image/jpg" },
-     *          mimeTypesMessage = "Format accepté : JPEG ou PNG uniquement"
-     *     )
+     * @ORM\OneToOne(targetEntity="App\Entity\Picture", mappedBy="review", cascade={"persist", "remove"})
      */
     private $image;
 
@@ -148,16 +142,12 @@ class Reviews
     }
 
     /**
-     * @param null $file
-     * @return $this
+     * @param Picture $picture
      */
-    public function setImage($file=null)
+    public function setImage(Picture $picture)
     {
-        $this->image = $file;
+        $this->image = $picture;
 
-        return $this;
+        $picture->setReview($this);
     }
-
-
-
 }

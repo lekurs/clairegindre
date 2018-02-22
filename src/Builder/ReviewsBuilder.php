@@ -10,6 +10,7 @@ namespace App\Builder;
 
 
 use App\Builder\Interfaces\ReviewsBuilderInterface;
+use App\Entity\Picture;
 use App\Entity\Reviews;
 
 class ReviewsBuilder implements ReviewsBuilderInterface
@@ -19,9 +20,16 @@ class ReviewsBuilder implements ReviewsBuilderInterface
      */
     private $reviews;
 
-    public function create(string $reviews): ReviewsBuilderInterface
+    public function create(): ReviewsBuilderInterface
     {
-        $this->reviews = $reviews;
+        $this->reviews = new Reviews();
+
+        return $this;
+    }
+
+    public function withPicture(Picture $picture): ReviewsBuilderInterface
+    {
+        $this->reviews->setImage($picture);
 
         return $this;
     }

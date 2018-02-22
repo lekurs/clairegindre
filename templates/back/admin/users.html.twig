@@ -6,7 +6,42 @@
 
 {% block content %}
     <h1>Administration des utilisateurs</h1>
-    {% for user in users %}
-    <p>{{ user.name }}</p>
-    {% endfor %}
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <p>Nom</p>
+            </div>
+            <div class="col">
+                <p>Prénoms</p>
+            </div>
+            <div class="col">
+                <p>Images</p>
+            </div>
+            <div class="col">
+                <p>Editer</p>
+            </div>
+            <div class="col">
+                <p>Supprimer</p>
+            </div>
+        </div>
+        {% for user in users %}
+            <div class="row no-gutters">
+                <div class="col">
+                    <p>{{ user.name }}</p>
+                </div>
+                <div class="col">
+                    <p>{{ user.lastname }}</p>
+                </div>
+                <div class="col">
+                    <p><img src="/images/upload/{{ user.picture}}" /></p>
+                </div>
+                <div class="col">
+                    <i class="fa fa-edit"></i>
+                </div>
+                <div class="col">
+                    <a href="{{ path('adminDeleteUser', {'id': user.id}) }}" ><i class="fa fa-trash"></i></a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
 {% endblock %}

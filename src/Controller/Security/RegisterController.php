@@ -28,10 +28,6 @@ class RegisterController extends Controller
 
         if($register->isSubmitted() && $register->isValid())
         {
-            $picture = $userBuilder->getUser()->getPicture();
-            $pictureName = $pictureService->move($picture);
-            $pictureBuilder->withName($pictureName);
-
             $benefit = $userBuilder->getUser()->getBenefit();
             $pictureBuilder->withBenefit($benefit);
 
@@ -41,11 +37,8 @@ class RegisterController extends Controller
             $password = $encoder->encodePassword($userBuilder->getUser(), $userBuilder->getUser()->getPlainPassword());
             $userBuilder->withPassword($password);
 
-            $userBuilder->withPicture($pictureBuilder->getPicture()->getPictureName());
-
             $em = $this->getDoctrine()->getManager();
             $em->persist($userBuilder->getUser());
-            $em->persist($pictureBuilder->getPicture());
             $em->flush();
 
             //FlashMessages

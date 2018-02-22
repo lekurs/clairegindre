@@ -27,15 +27,12 @@ class PictureService
      */
     public function move(UploadedFile $uploadedFile)
     {
-            $pictureName = $this->namePicture().'.'.$uploadedFile->guessExtension();
+            $pictureName = md5(uniqid()).'.'.$uploadedFile->guessExtension();
 
             $uploadedFile->move($this->targetDir, $pictureName);
 
             return $pictureName;
     }
 
-    private function namePicture()
-    {
-        return md5(uniqid());
-    }
+    //Prévoir le nom public
 }

@@ -9,6 +9,7 @@
 namespace App\Type;
 
 use App\Entity\User;
+use App\Subscriber\ReviewImageSubscriber;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -21,6 +22,16 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class UserForm extends AbstractType
 {
+    /**
+     * @var ReviewImageSubscriber
+     */
+    private $reviewImageSubscriber;
+
+    public function __construct(ReviewImageSubscriber $reviewImageSubscriber)
+    {
+        $this->reviewImageSubscriber = $reviewImageSubscriber;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -61,6 +72,7 @@ class UserForm extends AbstractType
 //                'attr' => ['class' => 'custom-file-input']
             ))
             ;
+        $builder->get('picture')->addEventSubscriber($this->reviewImageSubscriber);
     }
 
     public function configureOptions(OptionsResolver $resolver)

@@ -27,4 +27,4 @@ services:
 
     App\Services\PictureService:
         arguments:
-          $targetDir: '%kernel.project_dir%/public/images/upload'
+          $targetDir: '%kernel.project_dir%/public/images/upload/{path}'

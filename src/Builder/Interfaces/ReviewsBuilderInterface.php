@@ -9,12 +9,15 @@
 namespace App\Builder\Interfaces;
 
 
+use App\Entity\Picture;
 use App\Entity\Reviews;
 
 interface ReviewsBuilderInterface
 {
 
-    public function create(string $reviews): ReviewsBuilderInterface;
+    public function create(): ReviewsBuilderInterface;
+
+    public function withPicture(Picture $picture): ReviewsBuilderInterface;
 
     public function getReviews(): Reviews;
 

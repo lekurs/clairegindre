@@ -15,10 +15,7 @@ class AdminController extends Controller
 {
     public function show()
     {
-        $title = 'Bienvenue dans l\'administration';
-
         return $this->render('back/admin/admin.html.twig', array(
-            'title' => $title,
         ));
     }
 

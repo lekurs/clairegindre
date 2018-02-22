@@ -85,14 +85,7 @@ class User implements UserInterface
     private $benefit;
 
     /**
-     * @ORM\Column(type="string", length=300)
-     * @Assert\NotBlank(message = "Merci d'ajouter une photo au format JPEG ou PNG")
-     * @Assert\Image(
-     *          allowLandscape = true,
-     *          allowPortrait = true,
-     *          mimeTypes = { "image/png", "image/jpg"},
-     *          mimeTypesMessage = "Format accepté : JPEG/JPG ou PNG uniquement"
-     *     )
+     * @ORM\OneToOne(targetEntity="App\Entity\Picture", mappedBy="user", cascade={"persist", "remove"})
      */
     private $picture;
 
@@ -232,13 +225,13 @@ class User implements UserInterface
     }
 
     /**
-     * @return $this
+     * @param Picture $picture
      */
-    public function setPicture($file=null)
+    public function setPicture(Picture $picture)
     {
-        $this->picture = $file;
+        $this->picture = $picture;
 
-        return $this;
+        $picture->setUser($this);
     }
 
     /**

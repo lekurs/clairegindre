@@ -9,30 +9,34 @@
 namespace App\Controller\Admin;
 
 
-use App\Entity\Reviews;
+use App\Builder\PictureBuilder;
+use App\Builder\ReviewsBuilder;
 use App\Type\ReviewsType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 class ReviewsController extends Controller
 {
-    public function addReviews(Request $request)
+    public function show(Request $request, ReviewsBuilder $reviewsBuilder, PictureBuilder $pictureBuilder)
     {
-        $title = 'Administration des avis clients';
+        $reviewsBuilder->create();
+        $pictureBuilder->create();
 
-        $reviews = new Reviews();
-
-        $reviewsForm = $this->createForm(ReviewsType::class, $reviews);
-
-        $reviewsForm->handleRequest($request);
+        $reviewsForm = $this->createForm(ReviewsType::class, $reviewsBuilder->getReviews())->handleRequest($request);
 
         if($reviewsForm->isSubmitted() && $reviewsForm->isValid())
         {
+            $pictureBuilder->withBenefit('slider');
+            $pictureBuilder->withUserName($reviewsBuilder->getReviews()->getName());
 
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($reviewsBuilder->getReviews());
+            $em->flush();
+
+            return $this->redirectToRoute('adminReviews');
         }
 
         return $this->render('back/admin/slider_reviews.html.twig', array(
-            'title' => $title,
             'reviewsForm' => $reviewsForm->createView(),
         ));
     }

@@ -60,15 +60,15 @@ adminUsers:
     defaults:
        _controller: App\Controller\Security\UserController::show
 
-adminUpdateUser:
-    path: /admin/user/update/{slug}
+adminEditUser:
+    path: /admin/user/edit/{id}
     defaults:
-        _controller: App\Controller\Admin\UserController::update
+        _controller: App\Controller\Admin\UserEditController::edit
 
 adminDeleteUser:
-    path: /admin/user/delete/{slug}
+    path: /admin/user/delete/{id}
     defaults:
-        _controller: App\Controller\Admin\UserController::delete
+        _controller: App\Controller\Admin\UserDeleteController::delete
 
 adminGallery:
     path: /admin/gallery
@@ -95,10 +95,10 @@ adminSite:
     defaults:
         _controller: App\Controller\Admin\InterfaceController::show
 
-AdminSiteReviews:
-    path: /admin/interface/reviews
-    defaults:
-      _controller: App\Controller\Admin\ReviewsController::addReviews
+#AdminSiteReviews:
+#    path: /admin/interface/reviews
+#    defaults:
+#      _controller: App\Controller\Admin\ReviewsController::addReviews
 
 adminBenefit:
     path: /admin/configuration/benefit
@@ -109,3 +109,8 @@ adminBenefitEdit:
     path: /admin/configuration/benefit/{id}
     defaults:
       _controller: App\Controller\Configuration\BenefitEditController::edit
+
+adminReviews:
+    path: /admin/interface/reviews
+    defaults:
+      _controller: App\Controller\Admin\ReviewsController::show

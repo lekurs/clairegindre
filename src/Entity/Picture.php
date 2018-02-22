@@ -51,6 +51,48 @@ class Picture
     private $userName;
 
     /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Reviews", inversedBy="image")
+     */
+    private $review;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\User", inversedBy="picture")
+     */
+    private $user;
+
+    /**
+     * @return mixed
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param mixed $user
+     */
+    public function setUser($user): void
+    {
+        $this->user = $user;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getReview()
+    {
+        return $this->review;
+    }
+
+    /**
+     * @param mixed $review
+     */
+    public function setReview($review): void
+    {
+        $this->review = $review;
+    }
+
+    /**
      * @return mixed
      */
     public function getId()
