@@ -18,6 +18,8 @@ interface UserBuilderInterface
 
     public function withPassword(string $password): UserBuilderInterface;
 
+    public function withRole(): UserBuilderInterface;
+
     public function withPicture(Picture $picture): UserBuilderInterface;
 
     public function getUser(): User;

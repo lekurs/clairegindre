@@ -40,6 +40,15 @@ class UserBuilder implements UserBuilderInterface
         return $this;
     }
 
+    public function withRole(): UserBuilderInterface
+    {
+        $role = "ROLE_USER";
+
+        $this->user->setRoles($role);
+
+        return $this;
+    }
+
     public function getUser(): User
     {
         return $this->user;

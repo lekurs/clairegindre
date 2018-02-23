@@ -39,7 +39,7 @@ class UserForm extends AbstractType
                 'label' => 'Email',
                 'required' => true,
             ))
-            ->add('name', TextType::class, array(
+            ->add('username', TextType::class, array(
                 'label' => 'Nom',
                 'required' => true,
               ))

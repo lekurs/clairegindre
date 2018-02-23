@@ -29,16 +29,6 @@ clients:
     path: /clients
     defaults:
         _controller: App\Controller\CustomersController::list
-#
-#contact:
-#    path: /contact
-#    defaults:
-#        _controller: App\Controller\ContactController::show
-
-#contactPost:
-#    path: /contact/post
-#    defaults:
-#        _controller: App\Controller\MainController::index
 
 contact_sucess:
     path: /
@@ -49,6 +39,11 @@ admin:
     path: /admin
     defaults:
         _controller: App\Controller\Admin\AdminController::show
+
+adminLogin:
+    path: /administrator
+    defaults:
+        _controller: App\Controller\Security\SecurityController::login
 
 adminRegister:
     path: /admin/register
@@ -71,14 +66,14 @@ adminDeleteUser:
         _controller: App\Controller\Admin\UserDeleteController::delete
 
 adminGallery:
-    path: /admin/gallery
+    path: /admin/gallery/{id}
     defaults:
-        _controller: App\Controller\GalleryController::list
+        _controller: App\Controller\Admin\Gallery\GalleryController::show
 
-adminGalleryAdd:
-    path: /admin/gallery/add
-    defaults:
-        _controller: App\Controller\GalleryController::add
+#adminGalleryAdd:
+#    path: /admin/gallery/add/{id}
+#    defaults:
+#        _controller: App\Controller\Admin\Gallery\GalleryController::show
 
 adminGalleryUpdate:
     path: /admin/gallery/update/{slug}

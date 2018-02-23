@@ -9,6 +9,7 @@
 namespace App\Controller\Admin;
 
 
+use App\Builder\Interfaces\UserBuilderInterface;
 use App\Builder\UserBuilder;
 use App\Entity\User;
 use App\Type\UserForm;
@@ -17,11 +18,20 @@ use Symfony\Component\HttpFoundation\Request;
 
 class UserEditController extends Controller
 {
-    public function edit($id)
+    public function edit($id, Request $request, UserBuilderInterface $userBuilder)
     {
-//        $em = $this->getDoctrine()->getManager();
-//        $user = $em->getRepository(User::class)->find($id);
-//
 
+        $form = $this->createForm(UserForm::class);
+
+        if($form->isSubmitted() && $form->isValid())
+        {
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository(User::class)->find($id);
+        }
+
+
+        return $this->render('back/admin/editUser.html.twig', array(
+            'form' => $form->createView(),
+        ));
     }
 }

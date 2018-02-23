@@ -3,10 +3,12 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\EquatableInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
+//EquatableInterface
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
@@ -20,7 +22,7 @@ class User implements UserInterface
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=100, nullable=true)
+     * @ORM\Column(type="string", length=100, unique=true)
      * @Assert\Email
      */
     private $email;
@@ -39,7 +41,7 @@ class User implements UserInterface
      *              maxMessage = "Le nom ne doit pas dépasser {{ limit }} caractères"
      * )
      */
-    private $name;
+    private $username;
 
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
@@ -89,6 +91,21 @@ class User implements UserInterface
      */
     private $picture;
 
+//    /**
+//     * @ORM\Column(type="array")
+//     */
+//    private $roles;
+
+//    /**
+//     * @ORM\Column(name="is_active", type="boolean")
+//     */
+//    private $isActive;
+
+    public function __construct()
+    {
+        $this->isActive = true;
+    }
+
     /**
      * @return mixed
      */
@@ -124,17 +141,17 @@ class User implements UserInterface
     /**
      * @return mixed
      */
-    public function getName()
+    public function getUsername()
     {
-        return $this->name;
+        return $this->username;
     }
 
     /**
      * @param mixed $name
      */
-    public function setName($name): void
+    public function setUsername($name): void
     {
-        $this->name = $name;
+        $this->username = $name;
     }
 
     /**
@@ -252,7 +269,12 @@ class User implements UserInterface
      */
     public function getRoles()
     {
-        // TODO: Implement getRoles() method.
+        return $this->roles;
+    }
+
+    public function setRoles($roles)
+    {
+        $this->roles[] = $roles;
     }
 
     /**
@@ -265,16 +287,6 @@ class User implements UserInterface
     public function getSalt()
     {
         return null;
-    }
-
-    /**
-     * Returns the username used to authenticate the user.
-     *
-     * @return string The username
-     */
-    public function getUsername()
-    {
-        return $this->name;
     }
 
     /**

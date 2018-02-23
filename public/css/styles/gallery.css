@@ -1,0 +1,24 @@
+.box_files {
+    display: none;
+}
+
+.box.has-advanced-upload {
+    background-color: white;
+    outline: 2px dashed black;
+    outline-offset: -10px;
+    height: 540px;
+}
+.box .has-advanced-upload .box__dragndrop {
+    display: inline;
+}
+
+.box.is_dragover {
+    background-color: grey;
+}
+
+.box.is-uploading .box__input {
+    visibility: hidden;
+}
+.box.is-uploading .box__uploading {
+    display: block;
+}

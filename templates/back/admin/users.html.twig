@@ -18,6 +18,12 @@
                 <p>Images</p>
             </div>
             <div class="col">
+                <p>Prestation</p>
+            </div>
+            <div class="col">
+                <p>Ajouter une gallerie</p>
+            </div>
+            <div class="col">
                 <p>Editer</p>
             </div>
             <div class="col">
@@ -27,16 +33,22 @@
         {% for user in users %}
             <div class="row no-gutters">
                 <div class="col">
-                    <p>{{ user.name }}</p>
+                    <p>{{ user.username }}</p>
                 </div>
                 <div class="col">
                     <p>{{ user.lastname }}</p>
                 </div>
                 <div class="col">
-                    <p><img src="/images/upload/{{ user.picture}}" /></p>
+                    {#<p><img src="/images/upload/{{ user.picture}}" /></p>#}
                 </div>
                 <div class="col">
-                    <i class="fa fa-edit"></i>
+                    <p>{{ user.benefit }}</p>
+                </div>
+                <div class="col">
+                    <p><a href="{{ path('adminGallery', {'id': user.id}) }}">Ajouter</a></p>
+                </div>
+                <div class="col">
+                    <a href="{{ path('adminEditUser', {'id': user.id}) }}"><i class="fa fa-edit"></i></a>
                 </div>
                 <div class="col">
                     <a href="{{ path('adminDeleteUser', {'id': user.id}) }}" ><i class="fa fa-trash"></i></a>

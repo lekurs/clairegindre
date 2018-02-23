@@ -22,6 +22,11 @@ class Benefit
     private $name;
 
     /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Gallery", mappedBy="benefit", cascade={"persist", "remove"})
+     */
+    private $gallery;
+
+    /**
      * @return mixed
      */
     public function getId()
@@ -53,5 +58,21 @@ class Benefit
         $this->name = $name;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getGallery()
+    {
+        return $this->gallery;
+    }
 
+    /**
+     * @param Benefit $benefit
+     */
+    public function setGallery(Benefit $benefit): void
+    {
+        $this->gallery = $benefit;
+
+        $benefit->setGallery($this);
+    }
 }

@@ -11,7 +11,6 @@
             <link href="{{ asset('/css/styles/large_styles.css') }}" rel="stylesheet" />
             <link href="{{ asset('/css/styles/medium_styles.css') }}" rel="stylesheet" />
             <link href="{{ asset('/css/styles/small_styles.css') }}" rel="stylesheet" />
-            <link href="{{ asset('/css/styles/gallery.css') }}" rel="stylesheet" />
             <link href="{{ asset('/fonts/font-awesome.min.css') }}" rel="stylesheet">
             <link href="https://fonts.googleapis.com/css?family=Assistant:200,300,400,600,700,800|Quicksand:300,400,500,700" rel="stylesheet">
         {% endblock %}
@@ -42,7 +41,7 @@
         {% endblock %}
 
         {%  block title %}
-            <title>Administration</title>
+            <title>Administration | Connexion</title>
         {% endblock %}
 
     </head>
@@ -51,14 +50,30 @@
 <body>
 {% block body %}
     {% block content %}
-        {% endblock %}
+        <div class="container">
+            {% if error %}
+            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            {% endif %}
+            <div class="form-group">
+                <form action="{{ path('adminLogin') }}" method="post">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="_username" value="{{ last_username }}" />
+
+                    <label for="password">Mot de passe</label>
+                    <input type="password" id="password" name="_password" />
+
+                    <button type="submit" class="submit-form">Connexion</button>
+                </form>
+            </div>
+        </div>
+    {% endblock %}
 {% endblock %}
 </body>
 
 {% block javascripts %}
     <script src="/js/vendor/jquery-min.js"></script>
     <script src="/js/vendor/bootstrap.bundle.js"></script>
-    {#<script src="/js/back/datepicker.js"></script>#}
+    <script src="/js/back/datepicker.js"></script>
 {% endblock %}
 
 </html>

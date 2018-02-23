@@ -72,88 +72,8 @@ h2.last-report {
 
 section.portfolio {
     width: 80%;
-    margin: 0 auto;
+    margin: 80px auto 100px;
 }
-
-/*.img-1 {*/
-    /*background: url('/images/mariage-home.jpg') no-repeat center;*/
-    /*background-size: cover;*/
-/*height: 500px;*/
-    /*margin: 5px;*/
-    /*padding: 0;*/
-/*}*/
-
-/*.img-2 {*/
-    /*background: url('/images/anlor-nico-header-photo.jpg') no-repeat center;*/
-    /*background-size: cover;*/
-    /*height: 500px;*/
-    /*margin: 5px;*/
-    /*padding: 0;*/
-    /*width: auto;*/
-/*}*/
-
-/*.img-3 {*/
-    /*background: url('/images/anlor-nico-header-photo.jpg') no-repeat center;*/
-    /*background-size: cover;*/
-    /*height: 350px;*/
-    /*margin: 5px;*/
-    /*padding: 0;*/
-
-/*}*/
-
-/*.img-4 {*/
-    /*background: url('/images/mariage-home.jpg') no-repeat center;*/
-    /*background-size: cover;*/
-    /*height: 300px;*/
-    /*width: 100%;*/
-    /*margin: 5px;*/
-    /*padding: 0;*/
-/*}*/
-
-/*.img-5 {*/
-    /*background: url('/images/mariage-home.jpg') no-repeat center;*/
-    /*background-size: cover;*/
-    /*height: auto;*/
-    /*margin: 5px;*/
-    /*padding: 0;*/
-
-/*}*/
-
-/*.img-6 {*/
-    /*background: url('/images/mariage-home.jpg') no-repeat center;*/
-    /*background-size: cover;*/
-    /*height: 200px;*/
-    /*margin: 5px;*/
-    /*padding: 0;*/
-
-/*}*/
-
-/*.img-7 {*/
-    /*background: url('/images/mariage-home.jpg') no-repeat center;*/
-    /*background-size: cover;*/
-    /*height: 300px;*/
-    /*margin: 5px;*/
-    /*padding: 0;*/
-
-/*}*/
-
-/*.img-8 {*/
-    /*background: url('/images/mariage-home.jpg') no-repeat center;*/
-    /*background-size: cover;*/
-    /*height: 350px;*/
-    /*margin: 5px;*/
-    /*padding: 0;*/
-
-/*}*/
-
-/*.img-9 {*/
-    /*background: url('/images/mariage-home.jpg') no-repeat center;*/
-    /*background-size: cover;*/
-    /*height: 200px;*/
-    /*margin: 5px;*/
-    /*padding: 0;*/
-
-/*}*/
 
 section.presentations {
     background: url('/images/background/presentation-full.jpg') no-repeat center;
@@ -167,8 +87,6 @@ section.presentations {
 .height-pres {
     height: 60vh;
 }
-
-
 
 .bg-presentations {
     height: 92vh;

@@ -61,6 +61,11 @@ class Picture
     private $user;
 
     /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Gallery", inversedBy="gallery")
+     */
+    private $gallery;
+
+    /**
      * @return mixed
      */
     public function getUser()
@@ -188,5 +193,20 @@ class Picture
         $this->userName = $userName;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getGallery()
+    {
+        return $this->gallery;
+    }
+
+    /**
+     * @param mixed $gallery
+     */
+    public function setGallery($gallery): void
+    {
+        $this->gallery = $gallery;
+    }
 
 }

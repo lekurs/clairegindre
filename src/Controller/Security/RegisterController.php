@@ -37,13 +37,14 @@ class RegisterController extends Controller
             $password = $encoder->encodePassword($userBuilder->getUser(), $userBuilder->getUser()->getPlainPassword());
             $userBuilder->withPassword($password);
 
+            $userBuilder->withRole();
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($userBuilder->getUser());
             $em->flush();
 
             //FlashMessages
             $this->addFlash('register_success', 'Utilisateur bien ajouté');
-            $this->addFlash('register_error', 'Erreur : l\'utilisateur n\'a pas été ajouté');
 
             return $this->redirectToRoute('admin');
         }
