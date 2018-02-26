@@ -17,9 +17,9 @@
             <div class="col">
                 <p>Images</p>
             </div>
-            <div class="col">
-                <p>Prestation</p>
-            </div>
+            {#<div class="col">#}
+                {#<p>Prestation</p>#}
+            {#</div>#}
             <div class="col">
                 <p>Ajouter une gallerie</p>
             </div>
@@ -41,9 +41,9 @@
                 <div class="col">
                     {#<p><img src="/images/upload/{{ user.picture}}" /></p>#}
                 </div>
-                <div class="col">
-                    <p>{{ user.benefit }}</p>
-                </div>
+                {#<div class="col">#}
+                    {#<p>{{ user.benefit }}</p>#}
+                {#</div>#}
                 <div class="col">
                     <p><a href="{{ path('adminGallery', {'id': user.id}) }}">Ajouter</a></p>
                 </div>

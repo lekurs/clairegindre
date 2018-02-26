@@ -17,12 +17,13 @@ class Gallery
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\User", inversedBy="gallery")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="gallery", cascade={"persist"})
+     * @ORM\JoinColumn(referencedColumnName="id", name="user_id")
      */
     private $user;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Benefit", inversedBy="gallery")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Benefit", inversedBy="gallery")
      */
     private $benefit;
 
@@ -51,11 +52,14 @@ class Gallery
     }
 
     /**
-     * @param mixed $user
+     * @param User $user
+     * @return $this
      */
-    public function setUser($user): void
+    public function setUser(User $user)
     {
         $this->user = $user;
+
+        return $this;
     }
 
     /**
@@ -67,11 +71,14 @@ class Gallery
     }
 
     /**
-     * @param mixed $benefit
+     * @param Benefit $benefit
+     * @return $this
      */
-    public function setBenefit($benefit): void
+    public function setBenefit(Benefit $benefit)
     {
         $this->benefit = $benefit;
+
+        return $this;
     }
 
 

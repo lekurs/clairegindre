@@ -184,8 +184,10 @@ input.sub-contact {
 .insta-list {
     display: grid;
     grid-gap: 0rem;
-    grid-template-columns: repeat(auto-fit, 33%);
+    grid-template-columns: repeat(auto-fit, 33.33%);
     grid-auto-rows: 50%;
+    margin-left: -0.1px;
+    margin-bottom: -0.1px;
 }
 
 .insta-list img {

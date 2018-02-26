@@ -10,15 +10,34 @@ namespace App\Builder;
 
 
 use App\Builder\Interfaces\GalleryBuilderInterface;
+use App\Entity\Benefit;
 use App\Entity\Gallery;
+use App\Entity\User;
 
 class GalleryBuilder implements GalleryBuilderInterface
 {
+    /**
+     * @var Gallery
+     */
     private $gallery;
 
     public function create(): GalleryBuilderInterface
     {
         $this->gallery = new Gallery();
+
+        return $this;
+    }
+
+    public function withUser(User $user): GalleryBuilderInterface
+    {
+        $this->gallery->setUser($user);
+
+        return $this;
+    }
+
+    public function withBenefit(Benefit $benefit): GalleryBuilderInterface
+    {
+        $this->gallery->setBenefit($benefit);
 
         return $this;
     }

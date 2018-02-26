@@ -10,7 +10,10 @@ namespace App\Type;
 
 
 use App\Entity\Benefit;
+use App\Repository\BenefitRepository;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -23,20 +26,15 @@ class BenefitType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', TextType::class, array(
-                'label' => 'Nom de la prestation',
-                'label_attr' => ['class' => 'sr-only'],
-                'attr' => ['placeholder' => 'Prestation', 'class' => 'benefit_name'],
+            ->add('name', EntityType::class, array(
+                'class' => Benefit::class,
+                'query_builder' => function (BenefitRepository $er) {
+                    return $er->createQueryBuilder('b')
+                        ->orderBy('b.name', 'ASC');
+                },
+                'choice_label' => 'name',
+                'label_attr' => ['class' => 'sr-only',],
             ))
-            ->add('id', HiddenType::class)
-//            ->add('benefit', CollectionType::class, array(
-//                'entry_type'   => BenefitType::class,
-//                'entry_options'  => array(
-//                    'attr'      => array('class' => 'form-row')
-//                ),
-//                'allow_add' => true,
-//                'allow_delete' => true,
-//            ))
             ;
     }
 
@@ -46,5 +44,4 @@ class BenefitType extends AbstractType
             'data_class' => Benefit::class,
             ));
     }
-
 }

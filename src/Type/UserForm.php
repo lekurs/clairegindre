@@ -58,15 +58,14 @@ class UserForm extends AbstractType
                 'required' => true,
 //                'attr' => ['class' => 'js-datepicker'],
             ))
-            ->add('benefit', ChoiceType::class, array(
-                'label' => 'Type d\'évènement',
-                'choices' => array(
-                   'Mariage' => 'mariage',
-                   'Famille' => 'famille',
-                   'Couple' => 'couple'
-                ),
-
-            ))
+//            ->add('benefit', ChoiceType::class, array(
+//                'label' => 'Type d\'évènement',
+//                'choices' => array(
+//                   'Mariage' => 'mariage',
+//                   'Famille' => 'famille',
+//                   'Couple' => 'couple'
+//                ),
+//            ))
             ->add('picture', FileType::class, array(
                 'label' => 'Choisissez un fichier',
 //                'attr' => ['class' => 'custom-file-input']

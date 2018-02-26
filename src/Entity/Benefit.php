@@ -22,7 +22,8 @@ class Benefit
     private $name;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Gallery", mappedBy="benefit", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="App\Entity\Gallery", mappedBy="benefit", cascade={"persist"})
+     * @ORM\JoinColumn(referencedColumnName="id", name="benefit_id")
      */
     private $gallery;
 
@@ -73,6 +74,6 @@ class Benefit
     {
         $this->gallery = $benefit;
 
-        $benefit->setGallery($this);
+        $benefit->setBenefit($this);
     }
 }

@@ -28,8 +28,8 @@ class RegisterController extends Controller
 
         if($register->isSubmitted() && $register->isValid())
         {
-            $benefit = $userBuilder->getUser()->getBenefit();
-            $pictureBuilder->withBenefit($benefit);
+//            $benefit = $userBuilder->getUser()->getBenefit();
+//            $pictureBuilder->withBenefit($benefit);
 
             $userName = $userBuilder->getUser()->getUsername();
             $pictureBuilder->withUserName($userName);
@@ -37,7 +37,7 @@ class RegisterController extends Controller
             $password = $encoder->encodePassword($userBuilder->getUser(), $userBuilder->getUser()->getPlainPassword());
             $userBuilder->withPassword($password);
 
-            $userBuilder->withRole();
+//            $userBuilder->withRole();
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($userBuilder->getUser());

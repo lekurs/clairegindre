@@ -82,11 +82,6 @@ class User implements UserInterface
     private $dateWedding;
 
     /**
-     * @ORM\Column(type="string", length=50, nullable=true)
-     */
-    private $benefit;
-
-    /**
      * @ORM\OneToOne(targetEntity="App\Entity\Picture", mappedBy="user", cascade={"persist", "remove"})
      */
     private $picture;
@@ -101,10 +96,16 @@ class User implements UserInterface
 //     */
 //    private $isActive;
 
-    public function __construct()
-    {
-        $this->isActive = true;
-    }
+//    public function __construct()
+//    {
+//        $this->isActive = true;
+//    }
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Gallery", mappedBy="user")
+ * @ORM\JoinColumn(referencedColumnName="user_id", name="id")
+     */
+private $gallery;
 
     /**
      * @return mixed
@@ -220,22 +221,6 @@ class User implements UserInterface
     /**
      * @return mixed
      */
-    public function getBenefit()
-    {
-        return $this->benefit;
-    }
-
-    /**
-     * @param mixed $benefit
-     */
-    public function setBenefit($benefit): void
-    {
-        $this->benefit = $benefit;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getPicture()
     {
         return $this->picture;
@@ -250,6 +235,23 @@ class User implements UserInterface
 
         $picture->setUser($this);
     }
+
+    /**
+     * @return mixed
+     */
+    public function getGallery()
+    {
+        return $this->gallery;
+    }
+
+    /**
+     * @param mixed $gallery
+     */
+    public function setGallery($gallery): void
+    {
+        $this->gallery = $gallery;
+    }
+
 
     /**
      * Returns the roles granted to the user.
@@ -271,11 +273,11 @@ class User implements UserInterface
     {
         return $this->roles;
     }
-
-    public function setRoles($roles)
-    {
-        $this->roles[] = $roles;
-    }
+//
+//    public function setRoles($roles)
+//    {
+//        $this->roles[] = $roles;
+//    }
 
     /**
      * Returns the salt that was originally used to encode the password.

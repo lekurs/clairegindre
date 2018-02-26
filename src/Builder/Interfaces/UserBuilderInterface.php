@@ -16,9 +16,11 @@ interface UserBuilderInterface
 {
     public function create(): UserBuilderInterface;
 
+    public function withId(int $user): UserBuilderInterface;
+
     public function withPassword(string $password): UserBuilderInterface;
 
-    public function withRole(): UserBuilderInterface;
+//    public function withRole(): UserBuilderInterface;
 
     public function withPicture(Picture $picture): UserBuilderInterface;
 

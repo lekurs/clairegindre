@@ -26,6 +26,13 @@ class UserBuilder implements UserBuilderInterface
         return $this;
     }
 
+    public function withId(int $user): UserBuilderInterface
+    {
+        $this->user->setId($user);
+
+        return $this;
+    }
+
     public function withPassword(string $password): UserBuilderInterface
     {
         $this->user->setPassword($password);
@@ -40,14 +47,14 @@ class UserBuilder implements UserBuilderInterface
         return $this;
     }
 
-    public function withRole(): UserBuilderInterface
-    {
-        $role = "ROLE_USER";
-
-        $this->user->setRoles($role);
-
-        return $this;
-    }
+//    public function withRole(): UserBuilderInterface
+//    {
+//        $role = "ROLE_USER";
+//
+//        $this->user->setRoles($role);
+//
+//        return $this;
+//    }
 
     public function getUser(): User
     {
