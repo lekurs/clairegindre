@@ -28,6 +28,10 @@ class InstagramLib
         {
             $json = $media->data;
         }
+        if($media->meta->code >= 400)
+        {
+            return false;
+        }
         return $json;
     }
 

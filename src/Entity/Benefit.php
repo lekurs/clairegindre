@@ -70,10 +70,8 @@ class Benefit
     /**
      * @param Benefit $benefit
      */
-    public function setGallery(Benefit $benefit): void
+    public function setGallery($benefit): void
     {
         $this->gallery = $benefit;
-
-        $benefit->setBenefit($this);
     }
 }

@@ -103,9 +103,10 @@ class User implements UserInterface
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Gallery", mappedBy="user")
- * @ORM\JoinColumn(referencedColumnName="user_id", name="id")
+     * @ORM\JoinColumn(referencedColumnName="user_id", name="id")
      */
-private $gallery;
+    private $gallery;
+
 
     /**
      * @return mixed

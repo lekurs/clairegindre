@@ -164,13 +164,14 @@
                     <div class="row no-gutters">
                         <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
                             <div class="row no-gutters">
-                                <div class="col-12 d-flex justify-content-center">
-                                    {{ form_widget(contact.name, {'attr': {'placeholder': 'Nom : ', 'class': 'contact-form' }}) }}
+                                <div class="col-12 d-flex justify-content-center input-content">
+                                    {{ form_label(contact.name) }}
+                                    {{ form_widget(contact.name, {'attr': {'class': 'contact-form' }}) }}
                                 </div>
                             </div>
                             <div class="row no-gutters">
                                 <div class="col-12 d-flex justify-content-center">
-                                    {{ form_widget(contact.firstname, {'attr': {'placeholder': 'Prénom : ', 'class': 'contact-form' }}) }}
+                                    {{ form_widget(contact.firstname, {'attr': {'class': 'contact-form' }}) }}
                                 </div>
                             </div>
                             <div class="row no-gutters">
@@ -331,6 +332,7 @@
 {% block javascripts %}
     <script src="/js/vendor/jquery-min.js"></script>
     <script src="/js/vendor/bootstrap.bundle.js"></script>
+    <script src="{{ asset('/js/front/types.js') }}"></script>
 {% endblock %}
 
 </html>

@@ -76,3 +76,28 @@
     background: url('/images/anlor-nico-test-portrait.jpg') no-repeat center;
     background-size: cover;
 }
+
+.thumb {
+    position: relative;
+    overflow: hidden;
+}
+
+.link_hover {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(95,107,103,.7);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    text-align: center;
+}
+
+.link_hover h2 {
+    text-transform: uppercase;
+    font-size: 1.8em;
+}

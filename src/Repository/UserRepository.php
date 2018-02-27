@@ -33,14 +33,13 @@ class UserRepository extends EntityRepository implements UserLoaderInterface
 
     public function showOne($id): array
     {
-        $qb = $this->createQueryBuilder()
-            ->select('*')
-            ->from('user')
-            ->where('id = :id')
+        return $this->createQueryBuilder('u')
+            ->where('u.id = :id')
             ->setParameter('id', $id)
-            ->getQuery();
+            ->getQuery()
+            ->getResult();
 
-        return $qb->execute();
+//        return $qb->execute();
     }
 
     /*

@@ -52,14 +52,13 @@ class Gallery
     }
 
     /**
-     * @param User $user
-     * @return $this
+     * @param $user
      */
     public function setUser(User $user)
     {
         $this->user = $user;
 
-        return $this;
+        $user->setGallery($this);
     }
 
     /**
@@ -71,14 +70,13 @@ class Gallery
     }
 
     /**
-     * @param Benefit $benefit
-     * @return $this
+     * @param $benefit
      */
     public function setBenefit(Benefit $benefit)
     {
         $this->benefit = $benefit;
 
-        return $this;
+        $benefit->setGallery($this);
     }
 
 

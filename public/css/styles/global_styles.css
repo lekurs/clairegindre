@@ -6,6 +6,11 @@ html, body {
     margin: 0 auto;
 }
 
+input:focus, textarea:focus, select:focus, button:focus {
+    border: none !important;
+    box-shadow: none !important;
+}
+
 /* GLOBALS CSS RULES */
 .header-img {
     background: url("/images/anlor-nico-header-photo.jpg") no-repeat center;
@@ -157,13 +162,52 @@ div.polygon-triangle-absolute {
 
 .contact-form {
     border: none;
-    border-bottom: 1px solid #8d9693;
     border-radius: 0;
-}
-
-input.contact-form {
+    height: 70px;
     width: 90%;
     margin: 15px 0;
+    transition: .2s ease-out, opacity .2s linear;
+    font-size: 16px;
+    background-color: yellow;
+}
+
+.label_test {
+    display: block;
+    font-size: 16px;
+    transform: translate(2.5em, 3.5em);
+    color: blue;
+    transition: all 0.5s;
+}
+
+.input-content:after, .input-content:before {
+    content: '';
+    position: absolute;
+    display: block;
+    width: 90%;
+    height: 2px;
+    background-color: blue;
+    bottom: 14%;
+    left: 6.5%;
+    transition: all 0.5s;
+}
+
+.input-content::after {
+    background-color: red;
+    transform: scaleX(0);
+}
+
+.is-active::after {
+    transform: scaleX(1);
+}
+
+.is-active .label_test {
+    color: purple;
+}
+
+.is-completed .label_test {
+    font-size: 12px;
+    transform: translateY(70%);
+    border: 1px solid red;
 }
 
 textarea.contact-form {

@@ -33,11 +33,17 @@ class GalleryController extends Controller
 
         $user = $this->getDoctrine()
             ->getRepository(User::class)
-            ->findOneBy(['id' => $id]);
+            ->showOne($id);
+
+//        $user = $this->getDoctrine()
+//            ->getRepository(User::class)
+//            ->findOneBy(['id' => $id]);
 
         $gallery = $this->getDoctrine()
             ->getRepository(Gallery::class)
             ->findOneBy(['user' => $id]);
+
+        var_dump($user);
 
 //        if(!$gallery) {
 //            throw $this->createNotFoundException(
@@ -70,17 +76,19 @@ class GalleryController extends Controller
 //            $env->persist($galerie);
 //            $env->flush();
 //
-            $benefitId = $benefitBuilder->getBenefit();
+//            $users = new User();
+//
+//            $users->setId($user->getId());
+//
+//            var_dump($user->getId());
+//
+            var_dump($userBuilder->getUser());
+            die();
+            $galleryBuilder->withUser($userBuilder->getUser());
             $galleryBuilder->withBenefit($benefitBuilder->getBenefit());
 
-//            echo "<pre>";
-//            var_dump($benefitBuilder->getBenefit());
-//            echo "</pre>";
-            $userId = $userBuilder->withId($user->getId());
-            $galleryBuilder->withUser($userId->getUser());
-//            var_dump($userId->getUser());
-//            echo "</pre>";
-//            die();
+            var_dump($galleryBuilder->withUser($userBuilder->getUser()->getId()));
+            die();
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($galleryBuilder->getGallery());
