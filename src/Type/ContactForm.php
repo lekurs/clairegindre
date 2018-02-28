@@ -26,32 +26,38 @@ class ContactForm extends AbstractType
         $builder
             ->add('name', TextType::class, array(
                 'label' => 'Nom :',
-                'label_attr' => ['class' => 'label_test'],
+                'label_attr' => ['class' => 'label_contact'],
                 'required' => true,
                 ))
             ->add('firstname', TextType::class, array(
-                'label' => 'Prénom',
+                'label' => 'Prénom :',
+                'label_attr' => ['class' => 'label_contact'],
                 'required' => true,
             ))
             ->add('email', EmailType::class, array(
-                'label' => 'Email',
+                'label' => 'Email :',
+                'label_attr' => ['class' => 'label_contact'],
                 'required' => true,
             ))
             ->add('phone', TelType::class, array(
                 'label' => 'Téléphone',
+                'label_attr' => ['class' => 'label_contact'],
                 'required' => true,
             ))
             ->add('date', DateType::class, array(
                 'label' => 'Date de l\'évenement',
+                'label_attr' => ['class' => 'label_contact'],
                 'widget' => 'single_text',
                 'required' => true,
             ))
             ->add('place', TextType::class, array(
                 'label' => 'Lieu de l\'évenement',
+                'label_attr' => ['class' => 'label_contact'],
                 'required' => false,
             ))
             ->add('howKnow', TextType::class, array(
                 'label' => 'Comment m\'avez vous connu',
+                'label_attr' => ['class' => 'label_contact'],
                 'required' => false,
             ))
             ->add('event', CheckboxType::class, array(
@@ -68,6 +74,7 @@ class ContactForm extends AbstractType
             ))
             ->add('details', TextareaType::class, array(
                 'label' => 'Tous les détails de votre évènement m\'intéresse, le style de votre mariage, le nombre d\'invités, le type de cérémonie ...',
+                'label_attr' => ['class' => 'label_contact'],
                 'required' => true,
             ));
     }

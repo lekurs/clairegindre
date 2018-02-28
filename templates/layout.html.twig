@@ -170,35 +170,40 @@
                                 </div>
                             </div>
                             <div class="row no-gutters">
-                                <div class="col-12 d-flex justify-content-center">
+                                <div class="col-12 d-flex justify-content-center input-content">
+                                    {{ form_label(contact.firstname) }}
                                     {{ form_widget(contact.firstname, {'attr': {'class': 'contact-form' }}) }}
                                 </div>
                             </div>
                             <div class="row no-gutters">
-                                <div class="col-12 d-flex justify-content-center">
-                                    {{ form_widget(contact.email, {'attr': {'placeholder': 'Email : email@email.com ', 'class': 'contact-form' }}) }}
+                                <div class="col-12 d-flex justify-content-center input-content">
+                                    {{ form_label(contact.email) }}
+                                    {{ form_widget(contact.email, {'attr': { 'class': 'contact-form' }}) }}
                                 </div>
                             </div>
                             <div class="row no-gutters">
-                                <div class="col-12 d-flex justify-content-center">
-                                    {{ form_widget(contact.phone, {'attr': {'placeholder': 'Téléphone : ', 'class': 'contact-form' }}) }}
+                                <div class="col-12 d-flex justify-content-center input-content">
+                                    {{ form_label(contact.phone) }}
+                                    {{ form_widget(contact.phone, {'attr': {'class': 'contact-form' }}) }}
                                 </div>
                             </div>
                         </div>
                         <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
                             <div class="row no-gutters">
-                                <div class="col-12 d-flex justify-content-center">
+                                <div class="col-12 d-flex justify-content-center input-content">
                                     {{ form_widget(contact.date, {'attr': {'class': 'contact-form'}}) }}
                                 </div>
                             </div>
                             <div class="row no-gutters">
-                                <div class="col-12 d-flex justify-content-center">
-                                    {{ form_widget(contact.place, {'attr': {'placeholder': 'Lieu de votre évènement : ', 'class': 'contact-form' }}) }}
+                                <div class="col-12 d-flex justify-content-center input-content">
+                                    {{ form_label(contact.place) }}
+                                    {{ form_widget(contact.place, {'attr': {'class': 'contact-form' }}) }}
                                 </div>
                             </div>
                             <div class="row no-gutters">
-                                <div class="col-12 d-flex justify-content-center">
-                                    {{ form_widget(contact.howKnow, {'attr': {'placeholder': 'Comment m\'avez vous connu ? ', 'class': 'contact-form' }}) }}
+                                <div class="col-12 d-flex justify-content-center input-content">
+                                    {{ form_label(contact.howKnow) }}
+                                    {{ form_widget(contact.howKnow, {'attr': {'class': 'contact-form' }}) }}
                                 </div>
                             </div>
                             <div class="row no-gutters">
