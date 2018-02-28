@@ -12,6 +12,11 @@ aboutme:
     defaults:
         _controller: App\Controller\AboutMeController::show
 
+faq:
+    path: /faq
+    defaults:
+        _controller: App\Controller\Front\FaqController::show
+
 photos:
     path: /photos/{page}
     defaults:

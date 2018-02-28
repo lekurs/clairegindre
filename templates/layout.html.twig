@@ -12,7 +12,7 @@
             <link href="{{ asset('/css/styles/medium_styles.css') }}" rel="stylesheet" />
             <link href="{{ asset('/css/styles/small_styles.css') }}" rel="stylesheet" />
             <link href="{{ asset('/fonts/font-awesome.min.css') }}" rel="stylesheet">
-            <link href="https://fonts.googleapis.com/css?family=Assistant:200,300,400,600,700,800|Quicksand:300,400,500,700" rel="stylesheet">
+            <link href="https://fonts.googleapis.com/css?family=Assistant:200,300,400,600,700,800|Playfair+Display:400,700" rel="stylesheet">
         {% endblock %}
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -41,9 +41,7 @@
         {% endblock %}
 
         {%  block title %}
-            <title>{{ title }}</title>
         {% endblock %}
-
     </head>
 {% endblock %}
 
@@ -66,6 +64,7 @@
                 <div class="row no-gutters">
                     <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 header-img">
                         <div class="row justify-content-center no-gutters">
+                            {% block left_menu %}
                             {# LEFT MENU #}
                             <nav class="col-lg-5 col-xl-5 left-menu d-none d-md-none d-sm-none d-lg-block d-xl-block">
                                 <div class="row no-gutters justify-content-center align-items-center">
@@ -101,11 +100,15 @@
                                     </div>
                                 </div>
                             </nav>
+                            {% endblock %}
                             {# LOGO#}
+                            {% block logo %}
                             <div class="col-lg-2 col-xl-2 logo-content">
                                 <h1><a href="#" class="logo-img"></a></h1>
                             </div>
+                            {% endblock %}
                             {# RIGHT MENU #}
+                            {% block right_menu %}
                             <nav class="col-lg-5 col-xl-5 right-menu d-none d-md-none d-sm-none d-lg-block d-xl-block">
                                 <div class="row no-gutters justify-content-center align-items-center">
                                     <div class="col-lg-6 col-xl-6">
@@ -129,6 +132,7 @@
                                     </div>
                                 </div>
                             </nav>
+                            {% endblock %}
                         </div>
                 </div>
             </div>
@@ -137,7 +141,6 @@
 
             </header>
         {% endblock %}
-    {% endblock %}
 
     {% block content %}
 
@@ -150,7 +153,7 @@
                 <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 contact-article">
                     <div class="row no-gutters">
                         <div class="col-12">
-                            <p class="text-center triple-triangle"><img src="{{ asset('/images/pictos/trois-triangle.png') }}" alt="contact-clairegindre" /></p>
+                            <p class="text-center triple-triangle"><img src="{{ asset('/images/interface/pictos/trois-triangle.png') }}" alt="contact-clairegindre" /></p>
                         </div>
                     </div>
                     <div class="row no-gutters">
@@ -340,4 +343,5 @@
     <script src="{{ asset('/js/front/types.js') }}"></script>
 {% endblock %}
 
+{% endblock %}
 </html>

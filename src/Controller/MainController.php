@@ -17,11 +17,10 @@ use Symfony\Component\HttpFoundation\Request;
 
 class MainController extends Controller
 {
-    public function index(Request $request, ContactMailLib $contactMailHelper)
+    public function index(Request $request, ContactMailLib $contactMailHelper, InstagramLib $insta)
     {
       $title = "Bienvenue sur le site de Claire GINDRE - Photographe";
 
-      $insta = new InstagramLib();
       $json = $insta->show();
 
 

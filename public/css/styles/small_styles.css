@@ -2,4 +2,15 @@
 /*MOBILE */
 @media all and (max-width : 480px) {
 
+    .infos-content {
+        height: 30vh;
+    }
+
+    .infos-txt {
+        background-color: #242424;
+        color: #fff;
+    }
+    .infos-txt p {
+        margin: 0;
+    }
 }

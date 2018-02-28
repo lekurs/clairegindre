@@ -2,13 +2,18 @@
 
 html, body {
     font-family: 'Assistant';
-    font-weight: normal;
+    font-weight: 200;
     margin: 0 auto;
+    letter-spacing: .2px;
 }
 
 input:focus, textarea:focus, select:focus, button:focus {
     border: none !important;
     box-shadow: none !important;
+}
+
+.container-fluid {
+    padding: 0;
 }
 
 /* GLOBALS CSS RULES */
@@ -19,8 +24,6 @@ input:focus, textarea:focus, select:focus, button:focus {
     -webkit-background-size: cover;
     background-size: cover;
     display: block;
-    /*-webkit-clip-path: polygon(50% 0, 100% 0, 100% 86%, 50% 100%, 0 86%, 0 0);*/
-    /*clip-path: polygon(50% 0, 100% 0, 100% 86%, 50% 100%, 0 86%, 0 0);*/
 }
 
 .submit-form {
@@ -44,6 +47,14 @@ input:focus, textarea:focus, select:focus, button:focus {
     display: block;
 }
 
+.logo-img-color {
+    background: url("/images/interface/logos/logo-color.png") no-repeat center;
+    background-size: contain;
+    min-height: 160px;
+    height: 100%;
+    display: block;
+}
+
 .left-menu {
     margin-top: 5%;
     text-transform: uppercase;
@@ -53,6 +64,13 @@ input:focus, textarea:focus, select:focus, button:focus {
     color: #fff;
 }
 
+.nav-link {
+    margin-top: 5%;
+    text-transform: uppercase;
+    color: #000000;
+    font-family: Playfair;
+}
+
 .right-menu {
     margin-top: 5%;
     text-transform: uppercase;
@@ -60,6 +78,10 @@ input:focus, textarea:focus, select:focus, button:focus {
 
 .right-menu a {
     color: #fff;
+}
+
+.right-menu-black a {
+    color: #000000;
 }
 
 .scroll-down {
@@ -73,6 +95,94 @@ input:focus, textarea:focus, select:focus, button:focus {
 
 h2.last-report {
     text-transform: uppercase;
+}
+
+/*FAQ */
+.infos-content {
+    background: url("/images/interface/faq/nico_anlor_faq.jpg") no-repeat center;
+    position: relative;
+    background-size: cover;
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-end;
+    color: #fff;
+    padding-top: 10%;
+}
+
+.infos-content h2 {
+    font-family: Playfair;
+    font-weight: 400;
+    letter-spacing: .1em;
+    font-size: 3.5em;
+}
+
+.infos-title {
+    font-size: 3em;
+    font-family: Playfair;
+    font-weight: 400;
+    letter-spacing: .2rem;
+}
+
+.info-p {
+    font-weight: 300;
+}
+
+.social-media {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    right: 8%;
+    top: 5%;
+}
+
+.social-media i {
+    margin: 10px;
+}
+
+.benefits {
+    background-color: #242424;
+    color: #fff;
+    height: 30vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding-left: 3%;
+}
+
+.benefits > span {
+    margin-top: 10%;
+    margin-bottom: 2%;
+    height: 10%;
+    width: 10%;
+}
+
+/*.benefits::after{*/
+    /*content: '';*/
+    /*height: 20vh;*/
+    /*width: 1px;*/
+    /*background-color: grey;*/
+/*}*/
+
+span.wedding {
+    background: url("/images/interface/pictos/mariage.png") no-repeat center;
+        background-size: contain;
+}
+
+span.couple {
+    background: url("/images/interface/pictos/couple.png") no-repeat center;
+        background-size: contain;
+}
+
+span.family {
+    background: url("/images/interface/pictos/family.png") no-repeat center;
+        background-size: contain;
+}
+
+.pricing {
+    font-weight: 600;
 }
 
 section.portfolio {
@@ -185,7 +295,7 @@ div.polygon-triangle-absolute {
     position: absolute;
     display: block;
     width: 90%;
-    height: 2px;
+    height: .5px;
     background-color: #5f6b67;
     bottom: 14%;
     left: 5%;
@@ -193,7 +303,7 @@ div.polygon-triangle-absolute {
 }
 
 .input-content::after {
-    background-color: #000000;
+    height: 2px;
     transform: scaleX(0);
 }
 
@@ -219,7 +329,7 @@ textarea.contact-form {
     margin: 15px 0;
 }
 
-input.sub-contact {
+input.sub-contact, button.sub-contact {
     width: 95%;
     margin: 15px 0 35px 0;
     border: none;
@@ -278,5 +388,62 @@ input.sub-contact {
 }
 
 footer ul li a{
+    color: #fff;
+}
+
+
+/** LOGIN **/
+
+.connection-container {
+    background: url("/images/interface/connection/back-connect.jpg") no-repeat center;
+    background-size: cover;
+    height: 100vh;
+}
+
+.form-content {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-connection {
+    width: 30%;
+}
+
+.form-connection input,label, button {
+    width: 90%;
+    margin: 10px;
+    background-color: transparent;
+}
+
+.form-connection input {
+    border: none;
+    border-bottom: 1px solid #5f6b67;
+}
+
+.form-connection input:focus {
+    outline: none;
+}
+
+.login {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.password {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.sub-login {
+    width: 90%;
+    border: none;
+    background-color: #8d9693;
     color: #fff;
 }

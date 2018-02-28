@@ -1,6 +1,17 @@
 
 /* TABLETTE */
 @media all and (min-width: 481px) and (max-width: 1400px) {
+    .infos-content {
+        height: 30vh;
+    }
 
+    .infos-txt {
+        background-color: #242424;
+        color: #fff;
+    }
+
+    .infos-txt p {
+        margin: 0;
+    }
 
 }

@@ -1,0 +1,91 @@
+{% extends "layout.html.twig" %}
+{%  block head %}
+    {{ parent() }}
+    <title>Foire aux questions</title>
+{% endblock %}
+
+    {% block header %}
+        <div class="row no-gutters">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                <div class="row justify-content-center no-gutters">
+                    {% block left_menu %}
+                        {{ parent() }}
+                    {% endblock %}
+
+                    {% block logo %}
+                        <div class="col-lg-2 col-xl-2 logo-content">
+                            <h1><a href="#" class="logo-img-color"></a></h1>
+                        </div>
+                    {% endblock %}
+
+                    {% block right_menu %}
+                        {{ parent() }}
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+    {% endblock %}
+
+{% block content %}
+    {% block informations %}
+        <div class="container-fluid no-gutters">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 infos-content">
+                <div class="row no-gutters">
+                    <div class="offset-8 col-md-3 col-lg-3 col-xl-3 d-xl-block d-lg-block d-sm-none d-none">
+                        <h2 class="text-uppercase">infos</h2>
+                        <p class="text-justify info-p">Vous venez de visiter mon site et vous avez sûrement tout un tas de questions. Sur cette page vous touverez un maximum d'informations concernant, mes prestations et tarifs ainsi qu'un petit florilège de questions qui
+                        reviennent souvent lors de mes rendez-vous. Si jamais les réponses à vos questions ne se trouvent pas sur cette page, n'hésitez pas à m'envoyer un message via le formulaire de contact.
+                        Alors c'est parti, bonne lecture !!!</p>
+                    </div>
+                </div>
+                <div class="social-media">
+                    <i class="fa fa-facebook fa-2x"></i>
+                    <i class="fa fa-instagram fa-2x"></i>
+                    <i class="fa fa-pinterest fa-2x"></i>
+                </div>
+            </div>
+            <div class="col-12 col-sm-12 d-lg-none d-xl-none infos-txt">
+                <h2 class="text-uppercase">infos</h2>
+                <p class="text-justify info-p">Vous venez de visiter mon site et vous avez sûrement tout un tas de questions. Sur cette page vous touverez un maximum d'informations concernant, mes prestations et tarifs ainsi qu'un petit florilège de questions qui
+                    reviennent souvent lors de mes rendez-vous. Si jamais les réponses à vos questions ne se trouvent pas sur cette page, n'hésitez pas à m'envoyer un message via le formulaire de contact.
+                    Alors c'est parti, bonne lecture !!!</p>
+            </div>
+            <div class="row d-flex">
+                <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 benefits">
+                    <span class="ico wedding"></span>
+                    <h2 class="text-uppercase infos-title">Mariage</h2>
+                    <p class="text-justify"> Guard 1: [after Homer destroyed the bill of rights] You just licked off the part that forbids cruel and unusual punishment.  Guard 2: [putting on brass knuckles] Hehe, beautiful.
+                        [in front a "Best Teacher's Award" committee]  Bart: [in a video] This year, I'd like to nominate my teacher- Ms. Krabappel.
+                        Chief Wiggum: Slink away boys, slink away.</p>
+                    <p class="pricing">à partir de 900 €</p>
+                </div>
+                <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 benefits">
+                    <span class="ico couple"></span>
+                    <h2 class="text-uppercase  infos-title">Couple</h2>
+                    <p class="text-justify"> Guard 1: [after Homer destroyed the bill of rights] You just licked off the part that forbids cruel and unusual punishment.  Guard 2: [putting on brass knuckles] Hehe, beautiful.
+                        [in front a "Best Teacher's Award" committee]  Bart: [in a video] This year, I'd like to nominate my teacher- Ms. Krabappel.
+                        Chief Wiggum: Slink away boys, slink away.</p>
+                    <p class="pricing">à partir de 200 €</p>
+                </div>
+                <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 benefits">
+                    <span class="ico family"></span>
+                    <h2 class="text-uppercase infos-title">Famille</h2>
+                    <p class="text-justify"> Guard 1: [after Homer destroyed the bill of rights] You just licked off the part that forbids cruel and unusual punishment.  Guard 2: [putting on brass knuckles] Hehe, beautiful.
+                        [in front a "Best Teacher's Award" committee]  Bart: [in a video] This year, I'd like to nominate my teacher- Ms. Krabappel.
+                        [first lines of an episode]  Kent Brockman: ...which, if true, means death for us all.
+                        Chief Wiggum: Slink away boys, slink away.</p>
+                    <p class="pricing">à partir de 250 €</p>
+                </div>
+            </div>
+        </div>
+    {% endblock %}
+{% endblock %}
+
+{% block contact %}
+    {{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+ {{ parent() }}
+    <script src="{{ asset('/js/front/menu.js') }}"></script>
+{% endblock %}
