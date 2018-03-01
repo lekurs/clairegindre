@@ -22,12 +22,12 @@
             <div class="row"></div>
         </div>
 
-        {#{% block form %}#}
-            {#<div class="form">#}
-                {#{{ form_start(gallery_form, {attr: {class: 'box'}}) }}#}
-                {#{{ form_end(gallery_form) }}#}
-            {#</div>#}
-        {#{% endblock %}#}
+        {% block form %}
+            <div class="form">
+                {{ form_start(gallery_form, {attr: {class: 'box'}}) }}
+                {{ form_end(gallery_form) }}
+            </div>
+        {% endblock %}
 
     </div>
 </section>

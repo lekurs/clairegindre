@@ -43,7 +43,8 @@ class GalleryController extends Controller
             ->getRepository(Gallery::class)
             ->findOneBy(['user' => $id]);
 
-        var_dump($user);
+
+        dump($user);
 
 //        if(!$gallery) {
 //            throw $this->createNotFoundException(
@@ -82,13 +83,13 @@ class GalleryController extends Controller
 //
 //            var_dump($user->getId());
 //
-            var_dump($userBuilder->getUser());
-            die();
-            $galleryBuilder->withUser($userBuilder->getUser());
+//            var_dump($userBuilder->getUser());
+//            die();
+            $galleryBuilder->withUser($userBuilder->getUser()); //User depuis BDD => à modifier $user->getId()
             $galleryBuilder->withBenefit($benefitBuilder->getBenefit());
 
-            var_dump($galleryBuilder->withUser($userBuilder->getUser()->getId()));
-            die();
+//            var_dump($galleryBuilder->withUser($userBuilder->getUser()->getId()));
+//            die();
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($galleryBuilder->getGallery());

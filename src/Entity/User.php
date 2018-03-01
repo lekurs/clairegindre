@@ -86,10 +86,10 @@ class User implements UserInterface
      */
     private $picture;
 
-//    /**
-//     * @ORM\Column(type="array")
-//     */
-//    private $roles;
+    /**
+     * @ORM\Column(type="array")
+     */
+    private $roles;
 
 //    /**
 //     * @ORM\Column(name="is_active", type="boolean")
@@ -274,11 +274,11 @@ class User implements UserInterface
     {
         return $this->roles;
     }
-//
-//    public function setRoles($roles)
-//    {
-//        $this->roles[] = $roles;
-//    }
+
+    public function setRoles($roles)
+    {
+        $this->roles[] = $roles;
+    }
 
     /**
      * Returns the salt that was originally used to encode the password.

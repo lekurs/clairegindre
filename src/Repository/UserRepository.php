@@ -7,6 +7,7 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Bridge\Doctrine\Security\User\UserLoaderInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class UserRepository extends EntityRepository implements UserLoaderInterface
 {
@@ -31,13 +32,13 @@ class UserRepository extends EntityRepository implements UserLoaderInterface
         return $qb->execute();
     }
 
-    public function showOne($id): array
+    public function showOne($id): User
     {
         return $this->createQueryBuilder('u')
             ->where('u.id = :id')
             ->setParameter('id', $id)
             ->getQuery()
-            ->getResult();
+            ->getOneOrNullResult();
 
 //        return $qb->execute();
     }

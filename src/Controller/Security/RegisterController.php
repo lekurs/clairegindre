@@ -37,7 +37,7 @@ class RegisterController extends Controller
             $password = $encoder->encodePassword($userBuilder->getUser(), $userBuilder->getUser()->getPlainPassword());
             $userBuilder->withPassword($password);
 
-//            $userBuilder->withRole();
+            $userBuilder->withRole('ROLE_USER');
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($userBuilder->getUser());
