@@ -16,6 +16,7 @@ use App\Builder\UserBuilder;
 use App\Entity\Benefit;
 use App\Entity\Gallery;
 use App\Entity\User;
+use App\Lib\UploadGalleryLib;
 use App\Type\BenefitType;
 use App\Type\GalleryType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -35,16 +36,10 @@ class GalleryController extends Controller
             ->getRepository(User::class)
             ->showOne($id);
 
-//        $user = $this->getDoctrine()
-//            ->getRepository(User::class)
-//            ->findOneBy(['id' => $id]);
-
         $gallery = $this->getDoctrine()
             ->getRepository(Gallery::class)
             ->findOneBy(['user' => $id]);
 
-
-        dump($user);
 
 //        if(!$gallery) {
 //            throw $this->createNotFoundException(

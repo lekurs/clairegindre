@@ -22,3 +22,57 @@
 .box.is-uploading .box__uploading {
     display: block;
 }
+
+.drop-container {
+    width: 100%;
+    min-height: 540px;
+    height: auto;
+}
+
+.dropfiles {
+
+}
+
+.messageUpload {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 150px;
+    text-align: center;
+    border: 1px dashed #000000;
+    margin-bottom: 30px;
+}
+
+.hover {
+    border-color: #0000F0;
+    color: #0000F0;
+    font-size: 2em;
+}
+
+.area-upload {
+    width: 70%;
+    height: 480px;
+    border: 1px solid #242424;
+    text-align: center;
+    overflow: auto;
+}
+
+.area-upload:hover {
+    cursor: pointer;
+}
+
+#file {
+    display: none;
+}
+
+.img_upload {
+    width: 20%;
+}
+
+.upload-img-container {
+    width: 100%;
+    background-size: cover;
+    height: 70vh;
+    overflow: auto;
+    border: 1px solid #242424;
+}

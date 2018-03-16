@@ -46,7 +46,7 @@ admin:
         _controller: App\Controller\Admin\AdminController::show
 
 adminLogin:
-    path: /administrator
+    path: /login
     defaults:
         _controller: App\Controller\Security\SecurityController::login
 
@@ -74,11 +74,6 @@ adminGallery:
     path: /admin/gallery/{id}
     defaults:
         _controller: App\Controller\Admin\Gallery\GalleryController::show
-
-#adminGalleryAdd:
-#    path: /admin/gallery/add/{id}
-#    defaults:
-#        _controller: App\Controller\Admin\Gallery\GalleryController::show
 
 adminGalleryUpdate:
     path: /admin/gallery/update/{slug}
@@ -114,3 +109,6 @@ adminReviews:
     path: /admin/interface/reviews
     defaults:
       _controller: App\Controller\Admin\ReviewsController::show
+
+logout:
+    path: /logout

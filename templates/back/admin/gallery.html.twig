@@ -22,11 +22,31 @@
             <div class="row"></div>
         </div>
 
-        {% block form %}
-            <div class="form">
-                {{ form_start(gallery_form, {attr: {class: 'box'}}) }}
-                {{ form_end(gallery_form) }}
+        {#{% block form %}#}
+            {#<div class="form">#}
+                {#{{ form_start(gallery_form, {attr: {class: 'box'}}) }}#}
+                {#{{ form_end(gallery_form) }}#}
+            {#</div>#}
+        {#{% endblock %}#}
+
+        {#{% block draganddrop %}#}
+        {#<div class="container-drag">#}
+            {#{{ form_start(gallery_form) }}#}
+            {#<div class="area-upload">#}
+                {#{{ form_widget(gallery_form) }}#}
+                {#<h1>Drag & drop your files here</h1>#}
+            {#</div>#}
+            {#{{ form_end(gallery_form) }}#}
+        {#</div>#}
+        {#{% endblock %}#}
+
+        {% block drop %}
+        <div class="drop-container">
+            <div class="dropfiles">
+                <div class="messageUpload"></div>
+                    <div class="upload-img-container"></div>
             </div>
+        </div>
         {% endblock %}
 
     </div>
@@ -35,7 +55,9 @@
 
 {% block javascripts %}
     {{ parent() }}
-    <script src="/js/back/gallery.js"></script>
+    <script src="/js/back/dropfiles.js"></script>
+    <script>$('.dropfiles').dropfiles({
+        })</script>
 {% endblock %}
 
 
