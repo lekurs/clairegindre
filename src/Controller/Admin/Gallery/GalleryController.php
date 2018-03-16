@@ -54,37 +54,8 @@ class GalleryController extends Controller
         if($benefit_form->isSubmitted() && $benefit_form->isValid()) {
 //            Ajout de la galerie photo
 
-//            $em = $this->getDoctrine()->getManager()
-//                ->getRepository(User::class)
-//                ->find('2');
-//
-//            $galerie = new Gallery();
-//            $galerie->setUser($em);
-//
-//            $benefit = new Benefit();
-//            $emBene = $this->getDoctrine()->getManager()
-//                ->getRepository(Benefit::class)
-//                ->find('2');
-//
-//            $galerie->setBenefit($emBene);
-//
-//            $env = $this->getDoctrine()->getManager();
-//            $env->persist($galerie);
-//            $env->flush();
-//
-//            $users = new User();
-//
-//            $users->setId($user->getId());
-//
-//            var_dump($user->getId());
-//
-//            var_dump($userBuilder->getUser());
-//            die();
             $galleryBuilder->withUser($userBuilder->getUser()); //User depuis BDD => à modifier $user->getId()
             $galleryBuilder->withBenefit($benefitBuilder->getBenefit());
-
-//            var_dump($galleryBuilder->withUser($userBuilder->getUser()->getId()));
-//            die();
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($galleryBuilder->getGallery());
@@ -95,7 +66,7 @@ class GalleryController extends Controller
             $this->redirectToRoute('adminGallery');
         }
 
-        $gallery_form = $this->createForm(GalleryType::class, $pictureBuilder->getPicture())->handleRequest($request);
+        $gallery_form = $this->createForm(GalleryType::class, $galleryBuilder->getGallery())->handleRequest($request);
 
 //        if($gallery_form->isSubmitted() && $gallery_form->isValid()) {
 //

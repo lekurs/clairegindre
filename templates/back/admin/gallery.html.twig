@@ -15,40 +15,26 @@
         </div>
 
         <div class="col">
-            {{ form_start(benefit_form) }}
-            {{ form_row(benefit_form.name) }}
-            <button type="submit" name="submit_benefit" class="btn btn-primary">Ajouter</button>
-            {{ form_end(benefit_form) }}
+            {{ form_start(gallery_form) }}
+            {{ form_row(gallery_form.benefit) }}
             <div class="row"></div>
         </div>
 
-        {#{% block form %}#}
-            {#<div class="form">#}
-                {#{{ form_start(gallery_form, {attr: {class: 'box'}}) }}#}
-                {#{{ form_end(gallery_form) }}#}
-            {#</div>#}
-        {#{% endblock %}#}
-
-        {#{% block draganddrop %}#}
-        {#<div class="container-drag">#}
-            {#{{ form_start(gallery_form) }}#}
-            {#<div class="area-upload">#}
-                {#{{ form_widget(gallery_form) }}#}
-                {#<h1>Drag & drop your files here</h1>#}
-            {#</div>#}
-            {#{{ form_end(gallery_form) }}#}
-        {#</div>#}
-        {#{% endblock %}#}
 
         {% block drop %}
         <div class="drop-container">
             <div class="dropfiles">
-                <div class="messageUpload"></div>
-                    <div class="upload-img-container"></div>
+                <div class="messageUpload">
+                    {{ form_row(gallery_form.picturename) }}
+                </div>
+                    <div class="upload-img-container">
+                    </div>
             </div>
         </div>
         {% endblock %}
 
+            <button type="submit" name="submit_benefit" class="btn btn-primary">Ajouter</button>
+            {{ form_end(gallery_form) }}
     </div>
 </section>
 {% endblock %}

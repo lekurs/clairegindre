@@ -32,31 +32,42 @@
                 e.preventDefault();
                 var files = e.dataTransfer.files;
 
-                console.log(files);
+                // console.log(files);
                 show(files, $(this), 0);
-                console.log($(this));
             }, false);
         });
 
-        function upload(files, area, index) {
-            var file = files[index]; //Relance un à un les fichiers permettant d'éviter la surcharge du nav
-            var xhr = new XMLHttpRequest();
-            xhr.open('post', o.script, true);
-            xhr.setRequestHeader('content-type', 'multipart/form-data');
-            xhr.setRequestHeader('x-file-type', file.type);
-            xhr.setRequestHeader('x-file-size', file.size);
-            xhr.setRequestHeader('x-file-name', file.name);
-            xhr.send(file);
-        }
+        // function upload(files, area, index) {
+        //     var file = files[index]; //Relance un à un les fichiers permettant d'éviter la surcharge du nav
+        //     var xhr = new XMLHttpRequest();
+        //     xhr.open('post', o.script, true);
+        //     xhr.setRequestHeader('content-type', 'multipart/form-data');
+        //     xhr.setRequestHeader('x-file-type', file.type);
+        //     xhr.setRequestHeader('x-file-size', file.size);
+        //     xhr.setRequestHeader('x-file-name', file.name);
+        //     xhr.send(file);
+        // }
 
         function show(files, area, index) {
             var file = files[index];
             $('.messageUpload').removeClass('hover');
+                // console.log(file.name);
+                var array = new Array();
             for(var i =0; i<files.length;i++)
             {
-            // $('.drop-container').append('<div class="upload-img-container">');
-                $('.upload-img-container').append('<img src="'+URL.createObjectURL(files[i])+'" class="img_upload" />');
+                $('.upload-img-container').append('<img src="'+URL.createObjectURL(files[i])+'" class="img_upload" data-prototype/>');
+                //Création du tableau CollectionType Symfony
+                // var list = $('.box_files').attr('data-list');
+                // var newWidget = list.attr('data-prototype');
+                // newWidget = newWidget.replace(/__name__/g);
+                //
+                // var newElem = Jquery(list.attr('data-widget-tags')).html(newWidget);
+                // newElem.appendTo(list);
+
+                array.push(i, files[i].name);
             }
+
+            console.log(array);
         }
     }
 

@@ -24,8 +24,14 @@ class Gallery
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Benefit", inversedBy="gallery")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $benefit;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Picture", cascade={"persist"}, mappedBy="gallery")
+     */
+    private $pictureName;
 
     /**
      * @return mixed
@@ -77,6 +83,24 @@ class Gallery
         $this->benefit = $benefit;
 
         $benefit->setGallery($this);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPictureName()
+    {
+        return $this->pictureName;
+    }
+
+    /**
+     * @param Picture $picture
+     */
+    public function setPictureName(Picture $picture): void
+    {
+        $this->pictureName = $picture;
+
+        $picture->setPictureName($this);
     }
 
 

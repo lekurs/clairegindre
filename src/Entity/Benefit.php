@@ -74,4 +74,9 @@ class Benefit
     {
         $this->gallery = $benefit;
     }
+
+    public function __toString()
+    {
+        return $this->name;
+    }
 }
