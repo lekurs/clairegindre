@@ -47,11 +47,9 @@ class GalleryController extends Controller
 //            );
 //        }
 
+        $gallery_form = $this->createForm(GalleryType::class, $galleryBuilder->getGallery())->handleRequest($request);
 
-
-        $benefit_form = $this->createForm(BenefitType::class, $benefitBuilder->getBenefit())->handleRequest($request);
-
-        if($benefit_form->isSubmitted() && $benefit_form->isValid()) {
+        if($gallery_form->isSubmitted() && $gallery_form->isValid()) {
 //            Ajout de la galerie photo
 
             $galleryBuilder->withUser($userBuilder->getUser()); //User depuis BDD => à modifier $user->getId()
@@ -66,10 +64,6 @@ class GalleryController extends Controller
             $this->redirectToRoute('adminGallery');
         }
 
-        $gallery_form = $this->createForm(GalleryType::class, $galleryBuilder->getGallery())->handleRequest($request);
-
-//        if($gallery_form->isSubmitted() && $gallery_form->isValid()) {
-//
 //            $this->addFlash('gallery_success', 'La galerie à bien été mise à jour');
 //            return $this->redirectToRoute('adminUsers');
 //        }
@@ -78,7 +72,6 @@ class GalleryController extends Controller
             'gallery_form' => $gallery_form->createView(),
             'user' => $user,
             'gallery' => $gallery,
-            'benefit_form' => $benefit_form->createView(),
         ));
     }
 }

@@ -28,6 +28,7 @@ class GalleryType extends AbstractType
                 'entry_options' => array(
                     'attr' => [
                         'class' => 'box_files',
+                        'multiple' => true,
                         ]
                 ),
             ))
