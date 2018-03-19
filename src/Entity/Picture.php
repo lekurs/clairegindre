@@ -20,6 +20,7 @@ class Picture
 
     /**
      * @ORM\Column(type="string", length = 300)
+     * @ORM\ManyToOne(targetEntity="App\Entity\Gallery", cascade={"persist"})
      * @Assert\NotBlank(message = "Merci d'ajouter une photo au format JPEG ou PNG")
      * @Assert\Image(
      *          allowLandscape = true,
@@ -28,7 +29,7 @@ class Picture
      *          mimeTypesMessage = "Format accepté : JPEG / JPG ou PNG uniquement"
      *     )
      */
-    private $pictureName;
+    private $picture;
 
     /**
      * @ORM\Column(type="string", length=5, nullable=true)
@@ -43,7 +44,7 @@ class Picture
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
      */
-    private $benefitFamily;
+    private $benefit;
 
     /**
      * @ORM\Column(type="string", length=50)
@@ -116,17 +117,17 @@ class Picture
     /**
      * @return mixed
      */
-    public function getPictureName()
+    public function getPicture()
     {
-        return $this->pictureName;
+        return $this->picture;
     }
 
     /**
      * @param mixed $pictureName
      */
-    public function setPictureName($pictureName): void
+    public function setPicture($pictureName): void
     {
-        $this->pictureName = $pictureName;
+        $this->picture = $pictureName;
     }
 
     /**
@@ -164,17 +165,17 @@ class Picture
     /**
      * @return mixed
      */
-    public function getBenefitFamily()
+    public function getBenefit()
     {
-        return $this->benefitFamily;
+        return $this->benefit;
     }
 
     /**
      * @param mixed $benefitFamily
      */
-    public function setBenefitFamily($benefitFamily): void
+    public function setBenefit($benefitFamily): void
     {
-        $this->benefitFamily = $benefitFamily;
+        $this->benefit = $benefitFamily;
     }
 
     /**
@@ -209,4 +210,18 @@ class Picture
         $this->gallery = $gallery;
     }
 
+    public function __toString()
+    {
+        return $this->picture;
+    }
+
+    public function addTag(Gallery $gallery)
+    {
+        $gallery->setGallery($this);
+    }
+
+    public function removeTag(Picture $picture)
+    {
+        $this->picture->remove($picture);
+    }
 }

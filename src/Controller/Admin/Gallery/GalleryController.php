@@ -11,26 +11,41 @@ namespace App\Controller\Admin\Gallery;
 
 use App\Builder\BenefitBuilder;
 use App\Builder\GalleryBuilder;
+use App\Builder\Interfaces\InterfacesController\GalleryControllerInterface;
 use App\Builder\PictureBuilder;
 use App\Builder\UserBuilder;
-use App\Entity\Benefit;
 use App\Entity\Gallery;
 use App\Entity\User;
 use App\Lib\UploadGalleryLib;
-use App\Type\BenefitType;
 use App\Type\GalleryType;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
+use Twig\Environment;
 
 class GalleryController extends Controller
 {
 
-    public function show($id, Request $request, GalleryBuilder $galleryBuilder, PictureBuilder $pictureBuilder, BenefitBuilder $benefitBuilder, UserBuilder $userBuilder)
+    /**
+     * @param $id
+     * @param Request $request
+     * @param GalleryBuilder $galleryBuilder
+     * @param PictureBuilder $pictureBuilder
+     * @param BenefitBuilder $benefitBuilder
+     * @param UserBuilder $userBuilder
+     * @return mixed
+     *
+//     * @Route(path="admin/gallery/{id}", methods={"GET"})
+     */
+    public function show($id, Request $request, GalleryBuilder $galleryBuilder, PictureBuilder $pictureBuilder)
     {
         $galleryBuilder->create();
         $pictureBuilder->create();
-        $benefitBuilder->create();
-        $userBuilder->create();
+
+//        $user = $entityManager->getRepository(User::class)->showOne($id);
 
         $user = $this->getDoctrine()
             ->getRepository(User::class)
@@ -47,19 +62,23 @@ class GalleryController extends Controller
 //            );
 //        }
 
-        $gallery_form = $this->createForm(GalleryType::class, $galleryBuilder->getGallery())->handleRequest($request);
+        $gallery_form = $this->createForm(GalleryType::class, $pictureBuilder->getPicture())->handleRequest($request);
 
         if($gallery_form->isSubmitted() && $gallery_form->isValid()) {
 //            Ajout de la galerie photo
 
-            $galleryBuilder->withUser($userBuilder->getUser()); //User depuis BDD => à modifier $user->getId()
-            $galleryBuilder->withBenefit($benefitBuilder->getBenefit());
+//            $galleryBuilder->withUser($userBuilder->getUser()); //User depuis BDD => à modifier $user->getId()
+//            $galleryBuilder->withBenefit($benefitBuilder->getBenefit());
 
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($galleryBuilder->getGallery());
-            $em->flush();
+            //Upload des fichiers images de la gallerie dans le répertoire correspondant
+
+//            $em = $entityManager->getEventManager();
+
+//            $em = $this->getDoctrine()->getManager();
+//            $em->persist($galleryBuilder->getGallery());
+//            $em->flush();
 //
-            $this->addFlash('gallery_succes', 'Galerie ajoutée');
+//            $this->addFlash('gallery_succes', 'Galerie ajoutée');
 //
             $this->redirectToRoute('adminGallery');
         }
@@ -74,4 +93,9 @@ class GalleryController extends Controller
             'gallery' => $gallery,
         ));
     }
+
+//    public function __construct(EntityManagerInterface $entityManager)
+//    {
+//        $this->EntityManagerInterface = $entityManager;
+//    }
 }

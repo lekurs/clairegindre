@@ -40,10 +40,10 @@ contact_sucess:
     defaults:
         _controller: App\Controller\MainController::index
 
-admin:
-    path: /admin
-    defaults:
-        _controller: App\Controller\Admin\AdminController::show
+#admin:
+#    path: /admin
+#    defaults:
+#        _controller: App\Controller\Admin\AdminController::show
 
 adminLogin:
     path: /login

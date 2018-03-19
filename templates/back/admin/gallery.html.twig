@@ -26,15 +26,20 @@
             <div class="dropfiles">
                 <div class="messageUpload"></div>
                     <div class="upload-img-container">
-                        {{ form_row(gallery_form.picturename) }}
+                        {{ form_widget(gallery_form.picture) }}
+                            {% for fileField in gallery_form.picture %}
+                                    <a>{{ form_row(fileField.picture) }}</a>
+                                </div>
+                            {% endfor %}
+                        </div>
                     </div>
             </div>
-        </div>
         {% endblock %}
 
-            <button type="submit" name="submit_benefit" class="btn btn-primary">Ajouter</button>
+            <button type="submit" name="submit-gallery" class="btn btn-primary test-btn">Ajouter</button>
             {{ form_end(gallery_form) }}
     </div>
+
 </section>
 {% endblock %}
 

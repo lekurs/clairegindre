@@ -31,7 +31,7 @@ class Gallery
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Picture", cascade={"persist"}, mappedBy="gallery")
      */
-    private $pictureName;
+    private $picture;
 
     /**
      * @return mixed
@@ -88,20 +88,31 @@ class Gallery
     /**
      * @return mixed
      */
-    public function getPictureName()
+    public function getPicture()
     {
-        return $this->pictureName;
+        return $this->picture;
     }
 
     /**
      * @param Picture $picture
      */
-    public function setPictureName(Picture $picture): void
+    public function setPicture(Picture $picture): void
     {
-        $this->pictureName = $picture;
+        $this->picture = $picture;
 
         $picture->setPictureName($this);
     }
 
+    public function __toString()
+    {
+        return $this->picture;
+    }
+
+    public function addPicture(Picture $picture)
+    {
+        if(!$this->picture->contains($picture)) {
+            $this->picture->add($picture);
+        }
+    }
 
 }
