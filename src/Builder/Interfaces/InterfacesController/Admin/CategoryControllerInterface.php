@@ -1,15 +1,7 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Bidule
- * Date: 20/03/2018
- * Time: 11:22
- */
 
 namespace App\Builder\Interfaces\InterfacesController\Admin;
 
-
-use App\Builder\BenefitBuilder;
 use App\Builder\CategoryBuilder;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -18,6 +10,13 @@ use Twig\Environment;
 
 interface CategoryControllerInterface
 {
+    /**
+     * CategoryControllerInterface constructor.
+     * @param Environment $twig
+     * @param CategoryBuilder $categoryBuilder
+     * @param FormFactoryInterface $formFactory
+     * @param EntityManagerInterface $manager
+     */
     public function __construct(
         Environment $twig,
         CategoryBuilder $categoryBuilder,
@@ -25,6 +24,9 @@ interface CategoryControllerInterface
         EntityManagerInterface $manager
     );
 
+    /**
+     * @param Request $request
+     * @return mixed
+     */
     public function __invoke(Request $request);
-
 }

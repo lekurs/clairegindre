@@ -9,7 +9,7 @@
     $.fn.dropfiles = function(oo) {
         if (oo)
             $.extend(o, oo); //Fusionne les paramètres
-
+            console.log(o.script);
         this.each(function () {
             $('.messageUpload').append(o.message);
             $(this).bind({
@@ -42,11 +42,19 @@
 
         function show(files, area, index) {
             var file = files[index];
+            var xhr = new XMLHttpRequest();
+            xhr.open('post', o.script, true);
+            xhr.setRequestHeader('content-type', 'mutlipart/form-data');
+            xhr.setRequestHeader('x-file-type', file.type);
+            xhr.setRequestHeader('x-file-size', file.size);
+            xhr.setRequestHeader('x-file-name', file.name);
+            xhr.send();
             $('.messageUpload').removeClass('hover');
             for (var i = 0; i < files.length; i++) {
                 $('.upload-img-container').append('<img src="' + URL.createObjectURL(files[i]) + '" class="img_upload" data-list="#picturename-fields-list"/>');
+
                 //Création du tableau CollectionType Symfony
-                addField(container, files[i].name);
+                // addField(container, files[i].name);
         // console.log($(':file')[0].name);
             }
         }
@@ -76,14 +84,16 @@
         //     }
         // }
 
-        $('.test-btn').on('mouseover', function () {
-            var fichier = $(':file');
-            var max = $(':file').length;
-            for(var i=0; i<max; i++) {
-                // return $(fichier)[i];
-                console.log(fichier[i]);
-                // console.log($(fichier)[i].name);
-            }
-        });
+        // $('.test-btn').on('mouseover', function () {
+        //     var fichier = $(':file');
+        //     var max = $(':file').length;
+        //     for(var i=0; i<max; i++) {
+        //         console.log(fichier);
+        //         // fichier.val(fichier);
+        //         // return $(fichier)[i];
+        //         console.log(new File([], fichier[1]));
+        //         // console.log($(fichier)[i].name);
+        //     }
+        // });
     }
 }) (jQuery);

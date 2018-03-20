@@ -63,8 +63,17 @@ class GalleryController extends Controller
 //        }
 
         $gallery_form = $this->createForm(GalleryType::class, $pictureBuilder->getPicture())->handleRequest($request);
+        //if method_post => traitement if($request->isMethod("POST"))
+
+        if($request->isMethod("POST")) {
+            $h = getallheaders();
+            $source = file_get_contents('php://input');
+            file_put_contents('img/'.$h['x-file-name'],$source);
+        }
 
         if($gallery_form->isSubmitted() && $gallery_form->isValid()) {
+            dump($request);
+            die();
 //            Ajout de la galerie photo
 
 //            $galleryBuilder->withUser($userBuilder->getUser()); //User depuis BDD => à modifier $user->getId()

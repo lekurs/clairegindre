@@ -8,10 +8,9 @@
 
 namespace App\Controller\Admin\Blog;
 
-
-use App\Builder\BenefitBuilder;
 use App\Builder\CategoryBuilder;
 use App\Builder\Interfaces\InterfacesController\Admin\CategoryControllerInterface;
+use App\Entity\Category;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -58,7 +57,7 @@ class CategoryController implements CategoryControllerInterface
     }
 
     /**
-     * @Route(path="/admin/blog")
+     * @Route(name="adminBlog", path="/admin/blog")
      * @param Request $request
      * @return Response
      * @throws \Twig_Error_Loader
@@ -69,9 +68,9 @@ class CategoryController implements CategoryControllerInterface
     {
         $this->categoryBuilder->create();
 
-        $categories = $this->manager->getRepository('App:Category')->getAll();
+        $categories = $this->manager->getRepository(Category::class)->getAll();
 
-        $categoryType = $this->formFactory->create('App\Type\CategoryType', $this->categoryBuilder->getCategory())->handleRequest($request);
+        $categoryType = $this->formFactory->create(Category::class, $this->categoryBuilder->getCategory())->handleRequest($request);
 
         if($categoryType->isSubmitted() && $categoryType->isValid()) {
             //On récupère l'entité chargée
@@ -81,7 +80,7 @@ class CategoryController implements CategoryControllerInterface
             $em->persist($category);
             $em->flush();
 
-//            return new RedirectResponse($this->tw);
+//            return new RedirectResponse($this->tw); urlGeneratorInterface
         }
 
         return new Response($this->twig->render('back/admin/blog.html.twig', array(

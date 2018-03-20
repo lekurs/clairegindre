@@ -43,6 +43,12 @@ class Category
     private $benefit;
 
     /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Picture", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $picture;
+
+    /**
      * @return mixed
      */
     public function getId()
@@ -137,6 +143,25 @@ class Category
     public function setBenefit(Benefit $benefit)
     {
         $this->benefit = $benefit;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPicture()
+    {
+        return $this->picture;
+    }
+
+    /**
+     * @param Picture $picture
+     * @return $this
+     */
+    public function setPicture(Picture $picture)
+    {
+        $this->picture = $picture;
 
         return $this;
     }
