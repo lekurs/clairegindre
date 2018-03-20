@@ -9,8 +9,7 @@
 namespace App\Controller\Admin;
 
 
-use App\Builder\Interfaces\InterfacesController\AdminInterfaceController;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use App\Builder\Interfaces\InterfacesController\Admin\AdminInterfaceController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;

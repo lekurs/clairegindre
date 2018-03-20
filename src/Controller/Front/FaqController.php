@@ -17,7 +17,7 @@ class FaqController extends Controller
 {
     public function show(InstagramLib $insta)
     {
-        $contactType = $this->createForm('App\Type\ContactForm');
+        $contactType = $this->createForm('ContactType');
 
         $instagram = $insta->show();
 

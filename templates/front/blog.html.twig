@@ -1,0 +1,41 @@
+{% extends "layout.html.twig" %}
+
+{% block head %}
+{{ parent() }}
+    <title>Blog</title>
+{% endblock %}
+
+{% block header %}
+    <div class="row no-gutters">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+            <div class="row justify-content-center no-gutters">
+                {% block left_menu %}
+                    {{ parent() }}
+                {% endblock %}
+
+                {% block logo %}
+                    <div class="col-lg-2 col-xl-2 logo-content">
+                        <h1><a href="#" class="logo-img-color"></a></h1>
+                    </div>
+                {% endblock %}
+
+                {% block right_menu %}
+                    {{ parent() }}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+<h2>test</h2>
+{% endblock %}
+
+{% block contact %}
+    {{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('/js/front/menu.js') }}"></script>
+{% endblock %}

@@ -9,7 +9,7 @@
 namespace App\Controller;
 
 
-use App\Type\ContactForm;
+use App\Type\ContactType;
 use App\Lib\ContactMailLib;
 use App\Lib\InstagramLib;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -24,8 +24,8 @@ class MainController extends Controller
       $json = $insta->show();
 
 
-      $contactForm = new ContactForm();
-      $contact = $this->createForm(ContactForm::class);
+      $contactForm = new ContactType();
+      $contact = $this->createForm(ContactType::class);
 
       $contact->handleRequest($request);
 

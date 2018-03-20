@@ -35,7 +35,7 @@ class ReviewsType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', TextType::class, array(
+            ->add('title', TextType::class, array(
                 'label' => 'Nom du client',
                 'required' => true,
             ))

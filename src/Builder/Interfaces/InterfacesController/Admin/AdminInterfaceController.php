@@ -6,7 +6,7 @@
  * Time: 16:18
  */
 
-namespace App\Builder\Interfaces\InterfacesController;
+namespace App\Builder\Interfaces\InterfacesController\Admin;
 
 
 use Symfony\Component\HttpFoundation\Request;

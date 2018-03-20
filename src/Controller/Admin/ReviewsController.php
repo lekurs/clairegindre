@@ -9,35 +9,83 @@
 namespace App\Controller\Admin;
 
 
+use App\Builder\Interfaces\InterfacesController\ReviewsControllerInterface;
 use App\Builder\PictureBuilder;
 use App\Builder\ReviewsBuilder;
 use App\Type\ReviewsType;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+use Twig\Environment;
 
-class ReviewsController extends Controller
+class ReviewsController implements ReviewsControllerInterface
 {
-    public function show(Request $request, ReviewsBuilder $reviewsBuilder, PictureBuilder $pictureBuilder)
+    /**
+     * @var PictureBuilder
+     */
+    private $pictureBuilder;
+
+    /**
+     * @var ReviewsBuilder
+     */
+    private $reviewBuilder;
+
+    /**
+     * @var Environment
+     */
+    private $twig;
+
+    /**
+     * @var EntityManager
+     */
+    private $manager;
+
+    /**
+     * @var FormFactoryInterface
+     */
+    private $formFactory;
+
+    public function __construct(
+        Environment $twig,
+        PictureBuilder $pictureBuilder,
+        ReviewsBuilder $reviewsBuilder,
+        EntityManagerInterface $manager,
+        FormFactoryInterface $formFactory
+    ) {
+            $this->twig = $twig;
+            $this->pictureBuilder = $pictureBuilder;
+            $this->reviewBuilder = $reviewsBuilder;
+            $this->manager = $manager;
+            $this->formFactory = $formFactory;
+    }
+
+    /**
+     * @Route(path="/admin/interface/reviews", methods={"GET"})
+     * @param Request $request
+     * @return mixed
+     */
+    public function __invoke(Request $request)
     {
-        $reviewsBuilder->create();
-        $pictureBuilder->create();
+        $this->reviewBuilder->create();
+        $reviewsForm = $this->formFactory->create(ReviewsType::class, $this->reviewBuilder->getReviews())->handleRequest($request);
 
-        $reviewsForm = $this->createForm(ReviewsType::class, $reviewsBuilder->getReviews())->handleRequest($request);
+//        if()
+//        {
+//            $this->pictureBuilder->withBenefit('slider');
+//            $this->pictureBuilder->withUserName($this->reviewBuilder->getReviews()->getName());
+//
+//            $em = $this->getDoctrine()->getManager();
+//            $em->persist($this->reviewBuilder->getReviews());
+//            $em->flush();
+//
+//            return $this->redirectToRoute('adminReviews');
+//        }
 
-        if($reviewsForm->isSubmitted() && $reviewsForm->isValid())
-        {
-            $pictureBuilder->withBenefit('slider');
-            $pictureBuilder->withUserName($reviewsBuilder->getReviews()->getName());
-
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($reviewsBuilder->getReviews());
-            $em->flush();
-
-            return $this->redirectToRoute('adminReviews');
-        }
-
-        return $this->render('back/admin/slider_reviews.html.twig', array(
+        return new Response($this->twig->render('back/admin/slider_reviews.html.twig', array(
             'reviewsForm' => $reviewsForm->createView(),
-        ));
+        )));
     }
 }
