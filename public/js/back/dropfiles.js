@@ -42,20 +42,35 @@
 
         function show(files, area, index) {
             var file = files[index];
+            var form = $('#gallery')[0];
             var xhr = new XMLHttpRequest();
+
+            $('.messageUpload').removeClass('hover');
             xhr.open('post', o.script, true);
             xhr.setRequestHeader('content-type', 'mutlipart/form-data');
-            xhr.setRequestHeader('x-file-type', file.type);
-            xhr.setRequestHeader('x-file-size', file.size);
-            xhr.setRequestHeader('x-file-name', file.name);
-            xhr.send();
-            $('.messageUpload').removeClass('hover');
+
             for (var i = 0; i < files.length; i++) {
                 $('.upload-img-container').append('<img src="' + URL.createObjectURL(files[i]) + '" class="img_upload" data-list="#picturename-fields-list"/>');
 
                 //Création du tableau CollectionType Symfony
-                // addField(container, files[i].name);
+                addField(container, files[i].name);
+                xhr.setRequestHeader('x-file-type', file.type);
+                xhr.setRequestHeader('x-file-size', file.size);
+                xhr.setRequestHeader('x-file-name', file.name);
+                xhr.send();
         // console.log($(':file')[0].name);
+        //         $.ajax({
+        //             url: o.script,
+        //             type: "POST",
+        //             data: new FormData(form),
+        //             contentType: false,
+        //             cache: false,
+        //             processData: false,
+        //             success: function (data) {
+        //                 $('.test-success').hide();
+        //                 $('.test-success-message').html(data);
+        //             }
+        //         });
             }
         }
 
