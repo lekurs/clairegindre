@@ -35,7 +35,7 @@ class Reviews
      *          maxMessage = "Le nom ne doit pas dépasser {{ limit }} caractères"
      * )
      */
-    private $name;
+    private $title;
 
     /**
      * @ORM\Column(type="text")
@@ -72,33 +72,17 @@ class Reviews
     /**
      * @return mixed
      */
-    public function getUserId()
+    public function getTitle()
     {
-        return $this->userId;
+        return $this->title;
     }
 
     /**
-     * @param mixed $userId
+     * @param mixed $title
      */
-    public function setUserId($userId): void
+    public function setTitle($title): void
     {
-        $this->userId = $userId;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * @param mixed $name
-     */
-    public function setName($name): void
-    {
-        $this->name = $name;
+        $this->title = $title;
     }
 
     /**
