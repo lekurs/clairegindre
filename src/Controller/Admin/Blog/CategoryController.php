@@ -9,11 +9,10 @@
 namespace App\Controller\Admin\Blog;
 
 use App\Builder\CategoryBuilder;
-use App\Builder\Interfaces\InterfacesController\Admin\CategoryControllerInterface;
+use App\Controller\InterfacesController\Admin\CategoryControllerInterface;
 use App\Entity\Category;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;

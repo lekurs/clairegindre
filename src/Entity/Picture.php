@@ -21,13 +21,7 @@ class Picture
     /**
      * @ORM\Column(type="string", length = 300)
      * @ORM\ManyToOne(targetEntity="App\Entity\Gallery", cascade={"persist"})
-     * @Assert\NotBlank(message = "Merci d'ajouter une photo au format JPEG ou PNG")
-     * @Assert\Image(
-     *          allowLandscape = true,
-     *          allowPortrait = true,
-     *          mimeTypes = { "image/png", "image/jpg", "image/jpeg" },
-     *          mimeTypesMessage = "Format accepté : JPEG / JPG ou PNG uniquement"
-     *     )
+
      */
     private $picture;
 
@@ -171,11 +165,14 @@ class Picture
     }
 
     /**
-     * @param mixed $benefitFamily
+     * @param Benefit $benefit
+     * @return $this
      */
-    public function setBenefit($benefitFamily): void
+    public function setBenefit(Benefit $benefit)
     {
-        $this->benefit = $benefitFamily;
+        $this->benefit = $benefit;
+
+        return $this;
     }
 
     /**
@@ -213,15 +210,5 @@ class Picture
     public function __toString()
     {
         return $this->picture;
-    }
-
-    public function addTag(Gallery $gallery)
-    {
-        $gallery->setGallery($this);
-    }
-
-    public function removeTag(Picture $picture)
-    {
-        $this->picture->remove($picture);
     }
 }

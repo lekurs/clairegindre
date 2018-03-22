@@ -11,17 +11,16 @@ namespace App\Controller\Admin\Gallery;
 
 use App\Builder\BenefitBuilder;
 use App\Builder\GalleryBuilder;
-use App\Builder\Interfaces\InterfacesController\GalleryControllerInterface;
 use App\Builder\PictureBuilder;
 use App\Builder\UserBuilder;
 use App\Entity\Gallery;
 use App\Entity\User;
 use App\Lib\UploadGalleryLib;
+use App\Services\PictureService;
 use App\Type\GalleryType;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -41,12 +40,11 @@ class GalleryController extends Controller
      *
 //     * @Route(path="admin/gallery/{id}", methods={"GET"})
      */
-    public function show($id, Request $request, GalleryBuilder $galleryBuilder, PictureBuilder $pictureBuilder)
+    public function show($id, Request $request, GalleryBuilder $galleryBuilder, PictureBuilder $pictureBuilder, UserBuilder $userBuilder)
     {
         $galleryBuilder->create();
         $pictureBuilder->create();
-
-//        $user = $entityManager->getRepository(User::class)->showOne($id);
+        $userBuilder->create();
 
         $user = $this->getDoctrine()
             ->getRepository(User::class)
@@ -56,7 +54,6 @@ class GalleryController extends Controller
             ->getRepository(Gallery::class)
             ->findOneBy(['user' => $id]);
 
-
 //        if(!$gallery) {
 //            throw $this->createNotFoundException(
 //                'Pas de galerie photo pour ce client'
@@ -64,31 +61,45 @@ class GalleryController extends Controller
 //        }
 
         $gallery_form = $this->createForm(GalleryType::class, $pictureBuilder->getPicture())->handleRequest($request);
-        //if method_post => traitement if($request->isMethod("POST"))
 
-        dump($request);
-
-        if($request->isMethod("POST")) {
-//            dump($request);
-            $h = getallheaders();
-//            $this->retrieveAction($request);
-            $source = file_get_contents('php://input');
-            file_put_contents('img/'.$h['x-file-name'],$source);
-            $source = $_FILES['file']['tmp_name'];
-            $target = "test/upload".$_FILES['file']['name'];
-            move_uploaded_file($source, $target);
-        }
 
         if($gallery_form->isSubmitted() && $gallery_form->isValid()) {
-            dump($request);
+            $fileSystem = new Filesystem();
+
+            try{
+                $fileSystem->mkdir('gallery/', 0700);
+            } catch (IOExceptionInterface $exception) {
+                echo "une erreur est survenue durant la création du répertoire : ".$exception->getPath();
+            }
+
+            $fileSystem->mkdir('gallery/upload/'.$user->getLastName());
+
+            foreach($request->files as $file)
+            {
+                foreach ($file as $picture)
+                {dump($picture);
+                    foreach ($picture as $upload)
+                    {
+                        dump($picture['name']);
+                        //Upload de l'image
+                        $upload->move('gallery/upload/'.$user->getLastName(), $upload->getClientOriginalName());
+                        $pictureBuilder->withName($upload->getClientOriginalName());
+                        $pictureBuilder->withUserName($user->getLastName());
+                        $pictureBuilder->withPath('gallery/upload/'.$user->getLastName());
+                        dump($pictureBuilder->getPicture());
+//                        $galleryBuilder->withUser($user)->withBenefit($pictureBuilder->getPicture()->getBenefit());
+                        dump($galleryBuilder->getGallery());
+                        die();
+
+                        //Ajout en bdd
+                        $em = $this->getDoctrine()->getManager();
+                        $em->persist($galleryBuilder->getGallery());
+                        $em->persist($pictureBuilder->getPicture());
+                        $em->flush();
+                    }
+                }
+            }
             die();
-//            Ajout de la galerie photo
-
-//            $galleryBuilder->withUser($userBuilder->getUser()); //User depuis BDD => à modifier $user->getId()
-//            $galleryBuilder->withBenefit($benefitBuilder->getBenefit());
-
-            //Upload des fichiers images de la gallerie dans le répertoire correspondant
-
 //            $em = $entityManager->getEventManager();
 
 //            $em = $this->getDoctrine()->getManager();

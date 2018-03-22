@@ -9,13 +9,13 @@
 namespace App\Controller\Admin;
 
 
-use App\Builder\Interfaces\InterfacesController\Admin\AdminInterfaceController;
+use App\Controller\InterfacesController\Admin;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Twig\Environment;
 
-class AdminController implements AdminInterfaceController
+class AdminController implements Admin\AdminInterfaceController
 {
     /**
      * @Route(path="admin", methods={"GET"})

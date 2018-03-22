@@ -23,7 +23,7 @@ class PictureType extends AbstractType
         $builder
             ->add('picture', FileType::class, array(
                 'label' => 'Ajoutez votre image',
-                'label_attr' => ['class' => 'sr-only']
+                'label_attr' => ['class' => 'sr-only'],
             ));
     }
 

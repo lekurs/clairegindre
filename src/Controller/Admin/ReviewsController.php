@@ -9,9 +9,9 @@
 namespace App\Controller\Admin;
 
 
-use App\Builder\Interfaces\InterfacesController\ReviewsControllerInterface;
 use App\Builder\PictureBuilder;
 use App\Builder\ReviewsBuilder;
+use App\Controller\InterfacesController\ReviewsControllerInterface;
 use App\Type\ReviewsType;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;

@@ -8,5 +8,57 @@
 {% endblock %}
 
 {% block content %}
-coucou
+    {#<div id="upload">fichier</div>#}
+    <input type="file" name="upload" multiple>
+    <button type="submit" name="test-sub" id="prout">Envoyer</button>
+{% endblock %}
+{% block JS %}
+<script>
+    console.log("ok");
+    {#$('#prout').on('click', function () {#}
+        {#console.log('ok');#}
+    var file_data = $('#upload').prop("files")[0];
+    console.log(file_data);
+    var form_data = new FormData();
+    form_data.append("file", file_data);
+    form_data.append('user_id', '123');
+        $.ajax({
+            url: {{ path('adminGallery', {'id': app.request.attributes.get('_route_params').id }) }},
+            data: script,
+            type: "post",
+            contentType: false,
+            processData: false
+        });
+    {#})#}
+
+</script>
+    {#<script>#}
+        {#$(function(){#}
+            {#var btnUpload=$('#upload');#}
+            {#var status=$('#status');#}
+            {#new AjaxUpload(btnUpload, {#}
+                {#action: 'upload-file.php',#}
+                {#//Name of the file input box#}
+                {#name: 'uploadfile',#}
+                {#onSubmit: function(file, ext){#}
+                    {#if (! (ext && /^(jpg|png|jpeg|gif)$/.test(ext))){#}
+                        {#// check for valid file extension#}
+                        {#status.text('Only JPG, PNG or GIF files are allowed');#}
+                        {#return false;#}
+                    {#}#}
+                    {#status.text('Uploading...');#}
+                {#},#}
+                {#onComplete: function(file, response){#}
+                    {#//On completion clear the status#}
+                    {#status.text('');#}
+                    {#//Add uploaded file to list#}
+                    {#if(response==="success"){#}
+                        {#$('<li></li>').appendTo('#files').html('<img src="./uploads/'+file+'" alt="" /><br />'+file).addClass('success');#}
+                    {#} else{#}
+                        {#$('<li></li>').appendTo('#files').text(file).addClass('error');#}
+                    {#}#}
+                {#}#}
+            {#});#}
+        {#});#}
+    {#</script>#}
 {% endblock %}

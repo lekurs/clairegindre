@@ -10,7 +10,7 @@ namespace App\Controller\Front;
 
 
 use App\Builder\CategoryBuilder;
-use App\Builder\Interfaces\InterfacesController\BlogControllerInterface;
+use App\Controller\InterfacesController\BlogControllerInterface;
 use App\Lib\InstagramLib;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;

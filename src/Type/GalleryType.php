@@ -22,21 +22,11 @@ class GalleryType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('picture', CollectionType::class, array(
-                'entry_type' => PictureType::class,
-                'allow_add' => true,
-                'allow_delete' => true,
-                'by_reference' => false,
-                'label' => 'fichiers',
-                'label_attr' => ['class' => 'sr-only',],
-                'entry_options' => array(
-                    'attr' => [
-                        'class' => 'box_files',
-                        'multiple' => true,
-                        ]
-                ),
+                ->add('benefit', BenefitType::class)
+                ->add('picture', FileType::class, array(
+                'multiple' => true,
+                'mapped' => false,
             ))
-            ->add('benefit', BenefitType::class)
         ;
     }
 

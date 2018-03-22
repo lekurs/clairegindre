@@ -28,7 +28,7 @@ class PictureBuilder implements PictureBuilderInterface
 
     public function withName(string $name): PictureBuilderInterface
     {
-        $this->picture->setPictureName($name);
+        $this->picture->setPicture($name);
 
         return $this;
     }
@@ -49,7 +49,7 @@ class PictureBuilder implements PictureBuilderInterface
 
     public function withBenefit(string $benefit): PictureBuilderInterface
     {
-        $this->picture->setBenefitFamily($benefit);
+        $this->picture->setBenefit($benefit);
 
         return $this;
     }

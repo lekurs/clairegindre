@@ -13,27 +13,29 @@
         <div class="col">
             <h1>Gallerie client : {{ user.username }}</h1>
         </div>
+        {{ form_start(gallery_form) }}
+        {{ form_widget(gallery_form) }}
+        {#<div class="col">#}
+            {#{{ form_start(gallery_form) }}#}
+            {#{{ form_row(gallery_form.benefit) }}#}
+            {#<div class="row"></div>#}
+        {#</div>#}
 
-        <div class="col">
-            {{ form_start(gallery_form) }}
-            {{ form_row(gallery_form.benefit) }}
-            <div class="row"></div>
-        </div>
-
-        {% block drop %}
-        <div class="drop-container">
-            <div class="dropfiles">
-                <div class="messageUpload"></div>
-                    <div class="upload-img-container">
-                        {{ form_widget(gallery_form.picture) }}
-                            {% for fileField in gallery_form.picture %}
-                                    <a>{{ form_row(fileField.picture) }}</a>
-                                </div>
-                            {% endfor %}
-                        </div>
-                    </div>
-            </div>
-        {% endblock %}
+        {#{% block drop %}#}
+        {#<div class="drop-container">#}
+            {#<div class="dropfiles">#}
+                {#<div class="messageUpload"></div>#}
+                    {#<div class="upload-img-container">#}
+                        {#<input type="file" name="upload" id="upload" multiple>#}
+                        {#<button id="ok">ok</button>#}
+                        {#{{ form_widget(gallery_form.picture) }}#}
+                            {#{% for fileField in gallery_form.picture %}#}
+                                    {#<a>{{ form_row(fileField.picture) }}</a>#}
+                            {#{% endfor %}#}
+                    {#</div>#}
+                {#</div>#}
+        {#</div>#}
+        {#{% endblock %}#}
 
             <button type="submit" name="submit-gallery" class="btn btn-primary test-btn">Ajouter</button>
             {{ form_end(gallery_form) }}
@@ -48,4 +50,23 @@
     <script>$('.dropfiles').dropfiles({
             script:'{{ path('adminGallery', {'id': app.request.attributes.get('_route_params').id }) }}',
         })</script>
+    <script>
+        $('#ok').on('click', function () {
+            var file_data = $("#upload").prop("files")[0];   // Getting the properties of file from file field
+            var form_data = new FormData();                  // Creating object of FormData class
+            form_data.append("file", file_data)              // Appending parameter named file with properties of file_field to form_data
+            form_data.append("user_id", 123)                 // Adding extra parameters to form_data
+            var path = '{{ path('adminGallery', {'id': app.request.attributes.get('_route_params').id }) }}';
+            console.log(form_data);
+            $.ajax({
+                url: path,
+                dataType: 'script',
+                cache: false,
+                contentType: false,
+                processData: false,
+                data: form_data,                         // Setting the data attribute of ajax with file_data
+                type: 'post'
+            })
+        })
+    </script>
 {% endblock %}

@@ -10,6 +10,7 @@ namespace App\Services;
 
 
 
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class PictureService
@@ -35,4 +36,8 @@ class PictureService
     }
 
     //Prévoir le nom public
+    private function directory($name, Filesystem $filesystem)
+    {
+        $filesystem->mkdir($name);
+    }
 }
