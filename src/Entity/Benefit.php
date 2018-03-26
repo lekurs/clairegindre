@@ -2,30 +2,38 @@
 
 namespace App\Entity;
 
+use App\Entity\Interfaces\BenefitInterface;
+use App\Entity\Interfaces\CategoryInterface;
+use App\Entity\Interfaces\UserInterface;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass="App\Repository\BenefitRepository")
- */
-class Benefit
+
+class Benefit implements BenefitInterface
 {
     /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
+     * @var string
      */
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=50)
+     * @var string
      */
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Gallery", mappedBy="benefit", cascade={"persist"})
-     * @ORM\JoinColumn(referencedColumnName="id", name="benefit_id")
+     * @var CategoryInterface
      */
-    private $gallery;
+    private $category;
+
+    /**
+     * @var \ArrayAccess
+     */
+    private $galleries;
+
+    /**
+     * @var UserInterface
+     */
+    private $user;
 
     /**
      * @return mixed

@@ -2,63 +2,86 @@
 
 namespace App\Entity;
 
+use App\Entity\Interfaces\ArticleInterface;
+use App\Entity\Interfaces\GalleryInterface;
+use App\Entity\Interfaces\UserInterface;
 use Doctrine\ORM\Mapping as ORM;
+use Ramsey\Uuid\Uuid;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
-/**
- * @ORM\Entity(repositoryClass="App\Repository\PictureRepository")
- */
+
 class Picture
 {
     /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
+     * @var string
      */
     private $id;
 
     /**
-     * @ORM\Column(type="string", length = 300)
-     * @ORM\ManyToOne(targetEntity="App\Entity\Gallery", cascade={"persist"})
-
+     * @var string
      */
-    private $picture;
+    private $pictureName;
 
     /**
-     * @ORM\Column(type="string", length=5, nullable=true)
+     * @var string
      */
-    private $picturePath;
+    private $publicPath;
 
     /**
-     * @ORM\Column(type="string", length=150, nullable=true)
+     * @var string
      */
     private $extension;
 
     /**
-     * @ORM\Column(type="string", length=50, nullable=true)
+     * @var int
      */
-    private $benefit;
+    private $displayOrder;
 
     /**
-     * @ORM\Column(type="string", length=50)
+     * @var boolean
      */
-    private $userName;
+    private $favorite;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Reviews", inversedBy="image")
-     */
-    private $review;
-
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\User", inversedBy="picture")
-     */
-    private $user;
-
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Gallery", inversedBy="gallery")
+     * @var GalleryInterface
      */
     private $gallery;
+
+    /**
+     * @var ArticleInterface
+     */
+    private $article;
+
+    /**
+     * Picture constructor.
+     * @param string $pictureName
+     * @param string $publicPath
+     * @param string $extension
+     * @param int $displayOrder
+     * @param bool $favorite
+     * @param GalleryInterface $gallery
+     * @param ArticleInterface $article
+     */
+    public function __construct(
+        string $pictureName,
+        string $publicPath,
+        string $extension,
+        int $displayOrder = 0,
+        bool $favorite = false,
+        GalleryInterface $gallery = null,
+        ArticleInterface $article = null
+    ) {
+        $this->id = Uuid::uuid4();
+        $this->pictureName = $pictureName;
+        $this->publicPath = $publicPath;
+        $this->extension = $extension;
+        $this->displayOrder = $displayOrder;
+        $this->favorite = $favorite;
+        $this->gallery = $gallery;
+        $this->article = $article;
+    }
+
 
     /**
      * @return mixed
@@ -166,13 +189,12 @@ class Picture
 
     /**
      * @param Benefit $benefit
-     * @return $this
      */
     public function setBenefit(Benefit $benefit)
     {
         $this->benefit = $benefit;
 
-        return $this;
+        $benefit->setName($this);
     }
 
     /**
@@ -205,10 +227,5 @@ class Picture
     public function setGallery($gallery): void
     {
         $this->gallery = $gallery;
-    }
-
-    public function __toString()
-    {
-        return $this->picture;
     }
 }

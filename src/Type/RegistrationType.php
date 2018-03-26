@@ -9,6 +9,9 @@
 namespace App\Type;
 
 use App\Entity\User;
+use App\Subscriber\Interfaces\ProfileImageUploadSubscriberInterface;
+use App\Subscriber\Interfaces\UserFolderSubscriberInterface;
+use App\Subscriber\ProfileProfileImageUploadSubscriber;
 use App\Subscriber\ReviewImageSubscriber;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -20,17 +23,29 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class UserForm extends AbstractType
+class RegistrationType extends AbstractType
 {
     /**
-     * @var ReviewImageSubscriber
+     * @var ProfileProfileImageUploadSubscriber
      */
-    private $reviewImageSubscriber;
+    private $profileImageUploadSubscriber;
 
-    public function __construct(ReviewImageSubscriber $reviewImageSubscriber)
+    /**
+     * @var UserFolderSubscriberInterface
+     */
+    private $userFolderSubscriber;
+
+    /**
+     * RegistrationType constructor.
+     * @param ProfileProfileImageUploadSubscriber $profileImageUploadSubscriber
+     * @param UserFolderSubscriberInterface $userFolderSubscriber
+     */
+    public function __construct(ProfileProfileImageUploadSubscriber $profileImageUploadSubscriber, UserFolderSubscriberInterface $userFolderSubscriber)
     {
-        $this->reviewImageSubscriber = $reviewImageSubscriber;
+        $this->profileImageUploadSubscriber = $profileImageUploadSubscriber;
+        $this->userFolderSubscriber = $userFolderSubscriber;
     }
+
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -58,20 +73,13 @@ class UserForm extends AbstractType
                 'required' => true,
 //                'attr' => ['class' => 'js-datepicker'],
             ))
-//            ->add('benefit', ChoiceType::class, array(
-//                'label' => 'Type d\'évènement',
-//                'choices' => array(
-//                   'Mariage' => 'mariage',
-//                   'Famille' => 'famille',
-//                   'Couple' => 'couple'
-//                ),
-//            ))
             ->add('picture', FileType::class, array(
                 'label' => 'Choisissez un fichier',
+                'mapped' => false,
 //                'attr' => ['class' => 'custom-file-input']
             ))
             ;
-        $builder->get('picture')->addEventSubscriber($this->reviewImageSubscriber);
+        $builder->get('picture')->addEventSubscriber($this->profileImageUploadSubscriber);
     }
 
     public function configureOptions(OptionsResolver $resolver)

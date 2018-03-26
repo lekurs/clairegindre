@@ -2,56 +2,38 @@
 
 namespace App\Entity;
 
+use App\Entity\Interfaces\ArticleInterface;
+use App\Entity\Interfaces\ReviewInterface;
+use App\Entity\Interfaces\UserInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 
-/**
- * @ORM\Entity(repositoryClass="App\Repository\ReviewsRepository")
- */
-class Reviews
+
+class Reviews implements ReviewInterface
 {
+
     /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
+     * @var string
      */
     private $id;
 
-//    /**
-//     * @ORM\Column(type="integer", nullable=true)
-//     * @Assert\NotBlank
-//     *
-//     */
-//    private $userId;
-
     /**
-     * @ORM\Column(type="string", length=100)
-     * @Assert\NotBlank
-     * @Assert\Length(
-     *          min = 5,
-     *          max = 100,
- *              minMessage = "Le nom doit contenir au moins {{ limit }} caractères",
-     *          maxMessage = "Le nom ne doit pas dépasser {{ limit }} caractères"
-     * )
+     * @var string
      */
     private $title;
 
     /**
-     * @ORM\Column(type="text")
-     * @Assert\NotBlank
+     * @var ArticleInterface
      */
-    private $reviews;
+    private $article;
 
-    /**
-     * @ORM\Column(type="integer", options={"default": 1})
-     */
     private $online;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Picture", mappedBy="review", cascade={"persist", "remove"})
+     * @var UserInterface
      */
-    private $image;
+    private $author;
 
     /**
      * @return mixed

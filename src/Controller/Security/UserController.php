@@ -11,7 +11,7 @@ namespace App\Controller\Security;
 
 use App\Builder\UserBuilder;
 use App\Entity\User;
-use App\Type\UserForm;
+use App\Type\RegistrationType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -25,7 +25,7 @@ class UserController extends Controller
             ->getRepository(User::class)
             ->findAll();
 
-            $task = $this->createForm(UserForm::class, $userBuilder->getUser())->handleRequest($request);
+            $task = $this->createForm(RegistrationType::class, $userBuilder->getUser())->handleRequest($request);
 
             if($task->isSubmitted() && $task->isValid())
             {

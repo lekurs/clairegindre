@@ -2,36 +2,29 @@
 
 namespace App\Entity;
 
+use App\Entity\Interfaces\BenefitInterface;
+use App\Entity\Interfaces\GalleryInterface;
+use App\Entity\Interfaces\UserInterface;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass="App\Repository\GalleryRepository")
- */
-class Gallery
+class Gallery implements GalleryInterface
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="gallery", cascade={"persist"})
-     * @ORM\JoinColumn(referencedColumnName="id", name="user_id")
+     * @var UserInterface
      */
     private $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Benefit", inversedBy="gallery")
-     * @ORM\JoinColumn(nullable=false)
+     * @var BenefitInterface
      */
     private $benefit;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Picture", cascade={"persist"}, mappedBy="gallery")
+     * @var \ArrayAccess
      */
-    private $picture;
+    private $pictures;
 
     /**
      * @return mixed

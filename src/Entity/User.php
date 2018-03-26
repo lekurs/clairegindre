@@ -2,110 +2,92 @@
 
 namespace App\Entity;
 
+use App\Entity\Interfaces\PictureInterface;
+use App\Entity\Interfaces\UserInterface as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+use Ramsey\Uuid\Uuid;
 use Symfony\Component\Security\Core\User\EquatableInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
-//EquatableInterface
-/**
- * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
- */
-class User implements UserInterface
+
+class User implements UserInterface, BaseUser
 {
+
     /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
+     * @var string
      */
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=100, unique=true)
-     * @Assert\Email
+     * @var string
      */
     private $email;
 
     /**
-     * @ORM\Column(type="string", length=100, nullable=true)
-     * @Assert\Regex(
-     *              pattern="/\d/",
-     *              match = false,
-     *              message = "Le nom ne peut pas contenir un numéro"
-     *  )
-     * @Assert\Length(
-     *              min = 2,
-     *              max = 50,
-     *              minMessage = "Le nom doit contenir au moins {{ limit }} caractères",
-     *              maxMessage = "Le nom ne doit pas dépasser {{ limit }} caractères"
-     * )
+     * @var string
      */
     private $username;
 
     /**
-     * @ORM\Column(type="string", length=100, nullable=true)
-     * @Assert\Length(
-     *              min = 2,
-     *              max = 50,
-     *              minMessage = "Le prénom doit être de {{ limit }} caractères minimum",
-     *              maxMessage = "Le prénom ne doit pas dépasser {{ limit }} caractères",
-     *     )
-     * @Assert\Regex(
-     *              pattern="/\d/",
-     *              match = false,
-     *              message = "Le nom ne peut pas contenir de chiffre"
-     *  )
+     * @var string
      */
     private $lastName;
 
     /**
-     * @ORM\Column(type="string", length=64, nullable=true)
-     * @Assert\Length(
-     *              min = 8,
-     *              max = 64,
-     *              minMessage = "Le mot de passe doit contenir au minimum {{ limit }} caractères",
-     *              maxMessage = "Le mot de passe ne peut pas dépasser {{ limit }} caractères"
-     * )
+     * @var string
      */
     private $password;
 
     /**
-     * @Assert\NotBlank
-     * @Assert\Length(max=4096)
+     * @var string
      */
     private $plainPassword;
 
     /**
-     * @ORM\Column(type="date", nullable=true)
+     * @var \DateTime
      */
     private $dateWedding;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Picture", mappedBy="user", cascade={"persist", "remove"})
+     * @var PictureInterface
      */
     private $picture;
 
     /**
-     * @ORM\Column(type="array")
+     * @var array
      */
     private $roles;
 
-//    /**
-//     * @ORM\Column(name="is_active", type="boolean")
-//     */
-//    private $isActive;
-
-//    public function __construct()
-//    {
-//        $this->isActive = true;
-//    }
+    /**
+     * @var \ArrayAccess
+     */
+    private $galleries;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Gallery", mappedBy="user")
-     * @ORM\JoinColumn(referencedColumnName="user_id", name="id")
+     * @var \ArrayAccess
      */
-    private $gallery;
+    private $benefits;
+
+    /**
+     * @var \ArrayAccess
+     */
+    private $articles;
+
+    /**
+     * @var \ArrayAccess
+     */
+    private $reviews;
+
+    /**
+     * User constructor.
+     * @param string $id
+     */
+    public function __construct()
+    {
+        $this->id = Uuid::uuid4();
+    }
 
 
     /**
@@ -190,22 +172,6 @@ class User implements UserInterface
     /**
      * @return mixed
      */
-    public function getPlainPassword()
-    {
-        return $this->plainPassword;
-    }
-
-    /**
-     * @param $password
-     */
-    public function setPlainPassword($password)
-    {
-        $this->plainPassword = $password;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getDateWedding()
     {
         return $this->dateWedding;
@@ -279,6 +245,24 @@ class User implements UserInterface
     {
         $this->roles[] = $roles;
     }
+
+    /**
+     * @return string
+     */
+    public function getPlainPassword(): ?string
+    {
+        return $this->plainPassword;
+    }
+
+    /**
+     * @param string $plainPassword
+     */
+    public function setPlainPassword(string $plainPassword): void
+    {
+        $this->plainPassword = $plainPassword;
+    }
+
+
 
     /**
      * Returns the salt that was originally used to encode the password.

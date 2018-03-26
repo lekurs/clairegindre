@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                          http://raw.github.com/doctrine/doctrine2/master/doctrine-mapping.xsd">
+
+    <entity name="App\Entity\Benefit" table="clairegindre_benefit" repository-class="App\Repository\BenefitRepository">
+        <id name="id" column="id" type="string"/>
+
+        <one-to-many field="galleries" target-entity="App\Entity\Gallery" mapped-by="benefit" />
+        <many-to-one field="category" target-entity="App\Entity\Category" inversed-by="benefits" />
+        <many-to-one field="user" target-entity="App\Entity\User" inversed-by="benefits" />
+    </entity>
+
+</doctrine-mapping>

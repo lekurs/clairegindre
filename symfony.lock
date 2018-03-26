@@ -74,6 +74,9 @@
     "ocramius/proxy-manager": {
         "version": "2.1.1"
     },
+    "paragonie/random_compat": {
+        "version": "v2.0.11"
+    },
     "psr/cache": {
         "version": "1.0.1"
     },
@@ -85,6 +88,9 @@
     },
     "psr/simple-cache": {
         "version": "1.0.0"
+    },
+    "ramsey/uuid": {
+        "version": "3.7.3"
     },
     "swiftmailer/swiftmailer": {
         "version": "v6.0.2"

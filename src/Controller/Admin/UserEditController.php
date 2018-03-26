@@ -12,7 +12,7 @@ namespace App\Controller\Admin;
 use App\Builder\Interfaces\UserBuilderInterface;
 use App\Builder\UserBuilder;
 use App\Entity\User;
-use App\Type\UserForm;
+use App\Type\RegistrationType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -21,7 +21,7 @@ class UserEditController extends Controller
     public function edit($id, Request $request, UserBuilderInterface $userBuilder)
     {
 
-        $form = $this->createForm(UserForm::class);
+        $form = $this->createForm(RegistrationType::class);
 
         if($form->isSubmitted() && $form->isValid())
         {

@@ -2,55 +2,35 @@
 
 namespace App\Entity;
 
+use App\Entity\Interfaces\CategoryInterface;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass="App\Repository\CategoryRepository")
- */
-class Category
+
+class Category implements CategoryInterface
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
+
     private $id;
 
-    /**
-     * @ORM\Column(type="string", length=150)
-     */
     private $title;
 
-    /**
-     * @ORM\Column(type="text")
-     */
     private $category;
 
-    /**
-     * @ORM\Column(type="date")
-     */
     private $date;
 
-    /**
-     * @ORM\Column(type="boolean")
-     */
     private $online;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Benefit", cascade={"persist"})
-     * @ORM\JoinColumn(nullable=false)
+     * @var \ArrayAccess
      */
-    private $benefit;
+    private $benefits;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Picture", cascade={"persist"})
-     * @ORM\JoinColumn(nullable=false)
-     */
     private $picture;
 
     /**
-     * @return mixed
+     * @var \ArrayAccess
      */
+    private $articles;
+
     public function getId()
     {
         return $this->id;

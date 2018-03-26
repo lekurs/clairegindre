@@ -13,126 +13,158 @@ use App\Builder\BenefitBuilder;
 use App\Builder\GalleryBuilder;
 use App\Builder\PictureBuilder;
 use App\Builder\UserBuilder;
+use App\Controller\InterfacesController\GalleryControllerInterface;
 use App\Entity\Gallery;
+use App\Entity\Picture;
 use App\Entity\User;
 use App\Lib\UploadGalleryLib;
-use App\Services\PictureService;
+use App\Services\PictureUploaderHelper;
 use App\Type\GalleryType;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Form\FormFactory;
+use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Twig\Environment;
 
-class GalleryController extends Controller
+class GalleryController implements GalleryControllerInterface
 {
+    /**
+     * @var Environment
+     */
+    private $twig;
 
     /**
-     * @param $id
-     * @param Request $request
+     * @var GalleryBuilder
+     */
+    private $galleryBuilder;
+
+    /**
+     * @var PictureBuilder
+     */
+    private $pictureBuilder;
+
+    /**
+     * @var UserBuilder
+     */
+    private $userBuilder;
+
+    /**
+     * @var BenefitBuilder
+     */
+    private $benefitBuilder;
+
+    /**
+     * @var PictureUploaderHelper
+     */
+    private $pictureService;
+
+    /**
+     * @var FormFactoryInterface
+     */
+    private $form;
+
+    /**
+     * @var EntityManagerInterface
+     */
+    private $entityManager;
+
+    /**
+     * @var UrlGeneratorInterface
+     */
+    private $urlGenerator;
+
+    /**
+     * GalleryController constructor.
+     * @param Environment $twig
      * @param GalleryBuilder $galleryBuilder
      * @param PictureBuilder $pictureBuilder
-     * @param BenefitBuilder $benefitBuilder
      * @param UserBuilder $userBuilder
-     * @return mixed
-     *
-//     * @Route(path="admin/gallery/{id}", methods={"GET"})
+     * @param BenefitBuilder $benefitBuilder
+     * @param PictureUploaderHelper $pictureService
+     * @param FormFactoryInterface $form
+     * @param EntityManagerInterface $entityManager
      */
-    public function show($id, Request $request, GalleryBuilder $galleryBuilder, PictureBuilder $pictureBuilder, UserBuilder $userBuilder)
-    {
-        $galleryBuilder->create();
-        $pictureBuilder->create();
-        $userBuilder->create();
+    public function __construct(
+        GalleryBuilder $galleryBuilder,
+        PictureBuilder $pictureBuilder,
+        BenefitBuilder $benefitBuilder,
+        UserBuilder $userBuilder,
+        Environment $twig,
+        EntityManagerInterface $entityManager,
+        FormFactoryInterface $form,
+        PictureUploaderHelper $pictureService,
+        UrlGeneratorInterface $urlGenerator
+    )    {
+        $this->twig = $twig;
+        $this->galleryBuilder = $galleryBuilder;
+        $this->pictureBuilder = $pictureBuilder;
+        $this->userBuilder = $userBuilder;
+        $this->benefitBuilder = $benefitBuilder;
+        $this->pictureService = $pictureService;
+        $this->form = $form;
+        $this->entityManager = $entityManager;
+    }
 
-        $user = $this->getDoctrine()
-            ->getRepository(User::class)
+
+    /**
+     * @Route(name="adminGallery", path="/admin/gallery/{id}")
+     * @param $id
+     * @param Request $request
+     * @return Response
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     */
+    public function __invoke($id, Request $request)
+    {
+        $this->galleryBuilder->create();
+//        $this->pictureBuilder->create();
+//        $this->userBuilder->create();
+
+        $user = $this->entityManager->getRepository(User::class)
+//            ->getRepository(User::class)
             ->showOne($id);
 
-        $gallery = $this->getDoctrine()
-            ->getRepository(Gallery::class)
+        $gallery = $this->entityManager->getRepository(Gallery::class)
+//            ->getRepository(Gallery::class)
             ->findOneBy(['user' => $id]);
 
-//        if(!$gallery) {
-//            throw $this->createNotFoundException(
-//                'Pas de galerie photo pour ce client'
-//            );
-//        }
-
-        $gallery_form = $this->createForm(GalleryType::class, $pictureBuilder->getPicture())->handleRequest($request);
-
+        $gallery_form = $this->form->create(GalleryType::class, $this->galleryBuilder->getGallery())->handleRequest($request);
 
         if($gallery_form->isSubmitted() && $gallery_form->isValid()) {
-            $fileSystem = new Filesystem();
-
-            try{
-                $fileSystem->mkdir('gallery/', 0700);
-            } catch (IOExceptionInterface $exception) {
-                echo "une erreur est survenue durant la création du répertoire : ".$exception->getPath();
+            foreach($request->files->get('gallery')['picture'] as $file)
+            {           //Upload de l'image
+                $file->move('gallery/upload/'.$user->getLastName(), $file->getClientOriginalName());
+//                        $benefitBuilder->withName()
+                $this->pictureBuilder->withName($file->getClientOriginalName());
+                $this->pictureBuilder->withUserName($user->getLastName());
+                $this->pictureBuilder->withPath('gallery/upload/'.$user->getLastName());
+                $this->galleryBuilder->withUser($user);
+//                        $galleryBuilder->withBenefit($pictureBuilder->getPicture()->getBenefit());
+                $em = $this->entityManager;
+                $em->persist($this->galleryBuilder->getGallery());
+                $em->persist($this->pictureBuilder->getPicture());
             }
 
-            $fileSystem->mkdir('gallery/upload/'.$user->getLastName());
+            //Ajout en bdd
 
-            foreach($request->files as $file)
-            {
-                foreach ($file as $picture)
-                {dump($picture);
-                    foreach ($picture as $upload)
-                    {
-                        dump($picture['name']);
-                        //Upload de l'image
-                        $upload->move('gallery/upload/'.$user->getLastName(), $upload->getClientOriginalName());
-                        $pictureBuilder->withName($upload->getClientOriginalName());
-                        $pictureBuilder->withUserName($user->getLastName());
-                        $pictureBuilder->withPath('gallery/upload/'.$user->getLastName());
-                        dump($pictureBuilder->getPicture());
-//                        $galleryBuilder->withUser($user)->withBenefit($pictureBuilder->getPicture()->getBenefit());
-                        dump($galleryBuilder->getGallery());
-                        die();
-
-                        //Ajout en bdd
-                        $em = $this->getDoctrine()->getManager();
-                        $em->persist($galleryBuilder->getGallery());
-                        $em->persist($pictureBuilder->getPicture());
-                        $em->flush();
-                    }
-                }
-            }
+            $em->flush();
             die();
-//            $em = $entityManager->getEventManager();
 
-//            $em = $this->getDoctrine()->getManager();
-//            $em->persist($galleryBuilder->getGallery());
-//            $em->flush();
-//
 //            $this->addFlash('gallery_succes', 'Galerie ajoutée');
 //
             $this->redirectToRoute('adminGallery');
         }
-
-//            $this->addFlash('gallery_success', 'La galerie à bien été mise à jour');
-//            return $this->redirectToRoute('adminUsers');
-//        }
-
-        return $this->render('back/admin/gallery.html.twig', array(
+        return new Response($this->twig->render('back/admin/gallery.html.twig', array(
             'gallery_form' => $gallery_form->createView(),
-            'user' => $user,
-            'gallery' => $gallery,
-        ));
-    }
-
-    private function retrieveAction(Request $request)
-    {
-        $file = $request->files->get('gallery[picture]');
-        $status = array('status' => "success", "fileUploaded" => false);
-
-        if(!is_null($file)) {
-            $filename = $file->getClientOriginalExtension();
-            $path = "test";
-            $file->move($path,$filename);
-            $status = array('status' => "success", "fileUploaded" => true);
-        }
-        return new JsonResponse($status);
+            'user' => $user
+        )));
     }
 }

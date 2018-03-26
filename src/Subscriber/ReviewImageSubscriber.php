@@ -10,7 +10,7 @@ namespace App\Subscriber;
 
 
 use App\Builder\Interfaces\PictureBuilderInterface;
-use App\Services\PictureService;
+use App\Services\PictureUploaderHelper;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -18,7 +18,7 @@ use Symfony\Component\Form\FormEvents;
 class ReviewImageSubscriber implements EventSubscriberInterface
 {
     /**
-     * @var PictureService
+     * @var PictureUploaderHelper
      */
     private $pictureService;
 
@@ -27,7 +27,7 @@ class ReviewImageSubscriber implements EventSubscriberInterface
      */
     private $pictureBuilder;
 
-    public function __construct(PictureService $pictureService, PictureBuilderInterface $pictureBuilder)
+    public function __construct(PictureUploaderHelper $pictureService, PictureBuilderInterface $pictureBuilder)
     {
         $this->pictureService = $pictureService;
         $this->pictureBuilder = $pictureBuilder;

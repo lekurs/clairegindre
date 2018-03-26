@@ -70,10 +70,10 @@ adminDeleteUser:
     defaults:
         _controller: App\Controller\Admin\UserDeleteController::delete
 
-adminGallery:
-    path: /admin/gallery/{id}
-    defaults:
-        _controller: App\Controller\Admin\Gallery\GalleryController::show
+#adminGallery:
+#    path: /admin/gallery/{id}
+#    defaults:
+#        _controller: App\Controller\Admin\Gallery\GalleryController::show
 
 adminGalleryUpdate:
     path: /admin/gallery/update/{slug}

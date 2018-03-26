@@ -11,29 +11,22 @@ namespace App\Controller\Security;
 
 use App\Builder\Interfaces\PictureBuilderInterface;
 use App\Builder\Interfaces\UserBuilderInterface;
-use App\Services\PictureService;
-use App\Type\UserForm;
+use App\Services\PictureUploaderHelper;
+use App\Type\RegistrationType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class RegisterController extends Controller
 {
-    public function register(Request $request, UserPasswordEncoderInterface $encoder, UserBuilderInterface $userBuilder, PictureService $pictureService, PictureBuilderInterface $pictureBuilder)
+    public function register(Request $request, UserPasswordEncoderInterface $encoder, UserBuilderInterface $userBuilder, PictureUploaderHelper $pictureService, PictureBuilderInterface $pictureBuilder)
     {
         $userBuilder->create();
-        $pictureBuilder->create();
+//        $pictureBuilder->create();
 
-        $register = $this->createForm(UserForm::class, $userBuilder->getUser())->handleRequest($request);
+        $register = $this->createForm(RegistrationType::class, $userBuilder->getUser())->handleRequest($request);
 
-        if($register->isSubmitted() && $register->isValid())
-        {
-//            $benefit = $userBuilder->getUser()->getBenefit();
-//            $pictureBuilder->withBenefit($benefit);
-
-            $userName = $userBuilder->getUser()->getUsername();
-            $pictureBuilder->withUserName($userName);
-
+        if($register->isSubmitted() && $register->isValid()) {
             $password = $encoder->encodePassword($userBuilder->getUser(), $userBuilder->getUser()->getPlainPassword());
             $userBuilder->withPassword($password);
 
