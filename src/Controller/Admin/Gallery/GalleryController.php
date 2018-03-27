@@ -129,38 +129,25 @@ class GalleryController implements GalleryControllerInterface
 //        $this->userBuilder->create();
 
         $user = $this->entityManager->getRepository(User::class)
-//            ->getRepository(User::class)
             ->showOne($id);
 
         $gallery = $this->entityManager->getRepository(Gallery::class)
-//            ->getRepository(Gallery::class)
             ->findOneBy(['user' => $id]);
 
         $gallery_form = $this->form->create(GalleryType::class, $this->galleryBuilder->getGallery())->handleRequest($request);
 
         if($gallery_form->isSubmitted() && $gallery_form->isValid()) {
-            foreach($request->files->get('gallery')['picture'] as $file)
-            {           //Upload de l'image
-                $file->move('gallery/upload/'.$user->getLastName(), $file->getClientOriginalName());
-//                        $benefitBuilder->withName()
-                $this->pictureBuilder->withName($file->getClientOriginalName());
-                $this->pictureBuilder->withUserName($user->getLastName());
-                $this->pictureBuilder->withPath('gallery/upload/'.$user->getLastName());
-                $this->galleryBuilder->withUser($user);
-//                        $galleryBuilder->withBenefit($pictureBuilder->getPicture()->getBenefit());
-                $em = $this->entityManager;
-                $em->persist($this->galleryBuilder->getGallery());
-                $em->persist($this->pictureBuilder->getPicture());
-            }
+
+            $this->galleryBuilder->withUser($user);
 
             //Ajout en bdd
-
+            $em = $this->entityManager;
+            $em->persist($this->galleryBuilder->getGallery());
             $em->flush();
-            die();
 
 //            $this->addFlash('gallery_succes', 'Galerie ajoutée');
 //
-            $this->redirectToRoute('adminGallery');
+//            $this->redirectToRoute('adminGallery');
         }
         return new Response($this->twig->render('back/admin/gallery.html.twig', array(
             'gallery_form' => $gallery_form->createView(),

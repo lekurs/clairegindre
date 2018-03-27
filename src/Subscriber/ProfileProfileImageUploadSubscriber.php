@@ -40,8 +40,11 @@ class ProfileProfileImageUploadSubscriber implements EventSubscriberInterface, P
      * @param string $targetDir
      * @param PictureUploaderHelper $pictureUploaderHelper
      */
-    public function __construct(Filesystem $fileSystem, string $targetDir, PictureUploaderHelper $pictureUploaderHelper)
-    {
+    public function __construct(
+        Filesystem $fileSystem,
+        string $targetDir,
+        PictureUploaderHelper $pictureUploaderHelper
+    ) {
         $this->fileSystem = $fileSystem;
         $this->targetDir = $targetDir;
         $this->pictureUploaderHelper = $pictureUploaderHelper;
@@ -64,6 +67,8 @@ class ProfileProfileImageUploadSubscriber implements EventSubscriberInterface, P
         }
         $this->pictureUploaderHelper->move($event->getData(), $this->targetDir . '/customers/', $event->getData()->getClientOriginalName());
         $picture = new Picture($event->getData()->getClientOriginalName(), '/images/upload/customers', $event->getData()->guessClientExtension());
+        dump($event->getForm()->getParent()->getData());
+        die();
         $event->getForm()->getParent()->getData()->setPicture($picture);
     }
 }

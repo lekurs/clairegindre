@@ -23,7 +23,9 @@ class UserController extends Controller
 
         $users = $this->getDoctrine()
             ->getRepository(User::class)
-            ->findAll();
+            ->showAll();
+
+        dump($users);
 
             $task = $this->createForm(RegistrationType::class, $userBuilder->getUser())->handleRequest($request);
 
@@ -33,8 +35,8 @@ class UserController extends Controller
             }
 
         return $this->render('back/admin/users.html.twig', array(
-            'users' => $users,
             'user_form' => $task->createView(),
+            'users' => $users,
         ));
     }
 }

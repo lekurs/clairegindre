@@ -22,15 +22,19 @@ class UserRepository extends EntityRepository implements UserLoaderInterface
 
     public function showAll(): array
     {
-        $qb = $this->createQueryBuilder()
-            ->select('*')
-            ->from('user')
-            ->orderBy('id')
-            ->getQuery()
+        $qb = $this->createQueryBuilder('u')
+                ->select('u.username', 'u.email', 'u.id', 'u.lastName')
+                ->orderBy('u.id', 'DESC')
+                ->getQuery()
             ;
 
         return $qb->execute();
     }
+//
+//public function showAll()
+//{
+//
+//}
 
     public function showOne($id): User
     {

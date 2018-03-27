@@ -6,6 +6,7 @@ use App\Entity\Interfaces\BenefitInterface;
 use App\Entity\Interfaces\CategoryInterface;
 use App\Entity\Interfaces\UserInterface;
 use Doctrine\ORM\Mapping as ORM;
+use Ramsey\Uuid\Uuid;
 
 
 class Benefit implements BenefitInterface
@@ -34,6 +35,29 @@ class Benefit implements BenefitInterface
      * @var UserInterface
      */
     private $user;
+
+    public function __construct()
+    {
+        $this->id = Uuid::uuid4();
+    }
+
+    /**
+     * @return \ArrayAccess
+     */
+    public function getGalleries(): \ArrayAccess
+    {
+        return $this->galleries;
+    }
+
+    /**
+     * @param \ArrayAccess $galleries
+     */
+    public function setGalleries(\ArrayAccess $galleries): void
+    {
+        $this->galleries = $galleries;
+    }
+
+
 
     /**
      * @return mixed
@@ -65,26 +89,5 @@ class Benefit implements BenefitInterface
     public function setName($name): void
     {
         $this->name = $name;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getGallery()
-    {
-        return $this->gallery;
-    }
-
-    /**
-     * @param Benefit $benefit
-     */
-    public function setGallery($benefit): void
-    {
-        $this->gallery = $benefit;
-    }
-
-    public function __toString()
-    {
-        return $this->name;
     }
 }

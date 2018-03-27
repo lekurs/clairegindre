@@ -28,10 +28,6 @@ class BenefitType extends AbstractType
         $builder
             ->add('name', EntityType::class, array(
                 'class' => Benefit::class,
-                'query_builder' => function (BenefitRepository $er) {
-                    return $er->createQueryBuilder('b')
-                        ->orderBy('b.name', 'ASC');
-                },
                 'choice_label' => 'name',
                 'label_attr' => ['class' => 'sr-only',],
             ))

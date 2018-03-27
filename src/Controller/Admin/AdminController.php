@@ -18,7 +18,7 @@ use Twig\Environment;
 class AdminController implements Admin\AdminInterfaceController
 {
     /**
-     * @Route(path="admin", methods={"GET"})
+     * @Route(name="admin", path="admin", methods={"GET"})
      */
     public function __invoke(Request $request, Environment $environment)
     {

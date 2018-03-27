@@ -19,19 +19,20 @@
                 </div>
             </div>
             <div class="row">
+                {% if benefits is empty %}
+                    <div class="col">Aucune prestation pour le moment</div>
+                {% else %}
                 <div class="col-6 text-uppercase font-weight-bold">Prestations</div>
                 <div class="col text-uppercase font-weight-bold">Modifier</div>
                 <div class="col text-uppercase font-weight-bold">Supprimer</div>
+                    {% for benefit in benefits %}
+                        <div class="col-6">{{ benefit.name }}</div>
+                        <div class="col"><i class="fa fa-edit"></i></div>
+                        <div class="col"><i class="fa fa-trash"></i></div>
+                    {% endfor %}
+                {% endif %}
             </div>
-            {#{{ form_start(benefitTypeShow) }}#}
-            {#{% for benefit in benefits %}#}
-            {#<div class="row">#}
-                {#<div class="col-6">{{ form_row(benefitTypeShow.benefit) }} {{ form_row(benefitTypeShow.id) }}</div>#}
-                {#<div class="col"><a href="{{ path('adminBenefitEdit', {'id': benefit.id}) }}"><i class="fa fa-edit"></i></a></div>#}
-                {#<div class="col"><i class="fa fa-trash"></i></div>#}
-            {#</div>#}
-                {#{% endfor %}#}
-            {#{{ form_end(benefitTypeShow) }}#}
+
             <div class="row">
                 <div class="col">
                     <h2>Ajouter une prestation</h2>

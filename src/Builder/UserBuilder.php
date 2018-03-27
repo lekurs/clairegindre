@@ -35,7 +35,7 @@ class UserBuilder implements UserBuilderInterface
 
     public function withPassword(string $password): UserBuilderInterface
     {
-        $this->user->setPassword($password);
+        $this->user->setPlainPassword($password);
 
         return $this;
     }

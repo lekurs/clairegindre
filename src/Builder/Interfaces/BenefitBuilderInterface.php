@@ -9,7 +9,14 @@
 namespace App\Builder\Interfaces;
 
 
+use App\Entity\Benefit;
+
 interface BenefitBuilderInterface
 {
+    public function create(): BenefitBuilderInterface;
+
+    public function withName(Benefit $name): BenefitBuilderInterface;
+
+    public function getBenefit(): Benefit;
 
 }

@@ -6,8 +6,10 @@
 
     <entity name="App\Entity\Benefit" table="clairegindre_benefit" repository-class="App\Repository\BenefitRepository">
         <id name="id" column="id" type="string"/>
+        <field name="name" type="string" length="50" nullable="false" unique="false"/>
 
         <one-to-many field="galleries" target-entity="App\Entity\Gallery" mapped-by="benefit" />
+
         <many-to-one field="category" target-entity="App\Entity\Category" inversed-by="benefits" />
         <many-to-one field="user" target-entity="App\Entity\User" inversed-by="benefits" />
     </entity>

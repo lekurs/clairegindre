@@ -4,12 +4,9 @@ namespace App\Entity;
 
 use App\Entity\Interfaces\PictureInterface;
 use App\Entity\Interfaces\UserInterface as BaseUser;
-use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\Uuid;
-use Symfony\Component\Security\Core\User\EquatableInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 
 class User implements UserInterface, BaseUser
@@ -82,11 +79,34 @@ class User implements UserInterface, BaseUser
 
     /**
      * User constructor.
-     * @param string $id
+     * @param string $email
+     * @param string $username
+     * @param string $lastName
+     * @param string $password
+     * @param string $plainPassword
+     * @param \DateTime $dateWedding
+     * @param PictureInterface $picture
+     * @param array $roles
      */
-    public function __construct()
-    {
+    public function __construct(
+//        string $email,
+//        string $username,
+//        string $lastName,
+//        string $password,
+//        string $plainPassword,
+//        \DateTime $dateWedding,
+//        PictureInterface $picture,
+//        array $roles
+    ) {
         $this->id = Uuid::uuid4();
+//        $this->email = $email;
+//        $this->username = $username;
+//        $this->lastName = $lastName;
+//        $this->password = $password;
+//        $this->plainPassword = $plainPassword;
+//        $this->dateWedding = $dateWedding;
+//        $this->picture = $picture;
+//        $this->roles = $roles;
     }
 
 

@@ -12,4 +12,6 @@ namespace App\Entity\Interfaces;
 interface PictureInterface
 {
 
+    public function __construct(string $pictureName, string $picturePath, string $extension, int $displayOrder, bool $favorite, GalleryInterface $gallery, ArticleInterface $article);
+
 }

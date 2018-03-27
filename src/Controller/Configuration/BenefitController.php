@@ -46,7 +46,6 @@ class BenefitController extends Controller
         return $this->render('back/admin/benefit.html.twig', array(
             'benefits' => $benefit,
             'benefitType' => $benefitType->createView(),
-//            'benefitTypeShow' => $benefitTypeShow->createView(),
         ));
     }
 }

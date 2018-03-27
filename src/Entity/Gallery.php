@@ -6,6 +6,7 @@ use App\Entity\Interfaces\BenefitInterface;
 use App\Entity\Interfaces\GalleryInterface;
 use App\Entity\Interfaces\UserInterface;
 use Doctrine\ORM\Mapping as ORM;
+use Ramsey\Uuid\Uuid;
 
 class Gallery implements GalleryInterface
 {
@@ -32,6 +33,11 @@ class Gallery implements GalleryInterface
     public function getId()
     {
         return $this->id;
+    }
+
+    public function __construct()
+    {
+        $this->id = Uuid::uuid4();
     }
 
     /**
@@ -71,11 +77,9 @@ class Gallery implements GalleryInterface
     /**
      * @param $benefit
      */
-    public function setBenefit(Benefit $benefit)
+    public function setBenefit(\ArrayAccess $benefit): void
     {
         $this->benefit = $benefit;
-
-        $benefit->setGallery($this);
     }
 
     /**
@@ -93,19 +97,22 @@ class Gallery implements GalleryInterface
     {
         $this->picture = $picture;
 
-        $picture->setPictureName($this);
+        $picture->setPicture($this);
     }
 
-    public function __toString()
+    /**
+     * @return \ArrayAccess
+     */
+    public function getPictures(): \ArrayAccess
     {
-        return $this->picture;
+        return $this->pictures;
     }
 
-    public function addPicture(Picture $picture)
+    /**
+     * @param \ArrayAccess $pictures
+     */
+    public function setPictures(\ArrayAccess $pictures): void
     {
-        if(!$this->picture->contains($picture)) {
-            $this->picture->add($picture);
-        }
+        $this->pictures = $pictures;
     }
-
 }

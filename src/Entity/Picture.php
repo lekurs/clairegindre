@@ -4,12 +4,8 @@ namespace App\Entity;
 
 use App\Entity\Interfaces\ArticleInterface;
 use App\Entity\Interfaces\GalleryInterface;
-use App\Entity\Interfaces\UserInterface;
-use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\Uuid;
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-
 
 class Picture
 {

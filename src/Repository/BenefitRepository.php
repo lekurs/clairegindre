@@ -16,9 +16,9 @@ class BenefitRepository extends ServiceEntityRepository
 
     public function getAll(): array
     {
-        $qb = $this->createQueryBuilder()
-            ->select('*')
-            ->from('benefit')
+        $qb = $this->createQueryBuilder('b')
+            ->select('b.name')
+//            ->from('benefit')
             ->orderBy('id')
             ->getQuery()
             ;
@@ -28,9 +28,9 @@ class BenefitRepository extends ServiceEntityRepository
 
     public function getOne($id): array
     {
-        $qb = $this->createQueryBuilder()
-            ->select('name')
-            ->from('benefit')
+        $qb = $this->createQueryBuilder('b')
+            ->select('b.name')
+//            ->from('benefit')
             ->where('id='.$id)
             ->getQuery()
             ;
