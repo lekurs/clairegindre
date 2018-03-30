@@ -9,13 +9,12 @@
 namespace App\Type;
 
 
-use App\Entity\Gallery;
+use App\Entity\Benefit;
 use App\Entity\Interfaces\GalleryInterface;
-use App\Entity\Picture;
 use App\Subscriber\GalleryImageUploadSubscriber;
-use App\Subscriber\Interfaces\ProfileImageUploadSubscriberInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -40,13 +39,20 @@ class GalleryType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-//                ->add('benefit', BenefitType::class)
-                ->add('picture', FileType::class, array(
+                ->add('benefit', EntityType::class, array(
+                    'class' => Benefit::class,
+                    'choice_label' => 'name',
+                    'label_attr' => ['class' => 'sr-only',],
+                    'constraints' => [
+                        new UniqueEntity(['fields' => 'id'])
+                    ]
+                ))
+                ->add('pictures', FileType::class, array(
                 'multiple' => true,
                 'mapped' => false,
             ))
         ;
-        $builder->get('picture')->addEventSubscriber($this->galleryImageUploadSubscriber);
+        $builder->get('pictures')->addEventSubscriber($this->galleryImageUploadSubscriber);
     }
 
     public function configureOptions(OptionsResolver $resolver)

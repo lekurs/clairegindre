@@ -20,7 +20,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Twig\Environment;
 
-interface GalleryControllerInterface
+interface GalleryAddControllerInterface
 {
     public function __invoke($id, Request $request);
 

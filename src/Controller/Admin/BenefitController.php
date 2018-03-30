@@ -14,6 +14,7 @@ use App\Controller\InterfacesController\Admin\BenefitControllerInterface;
 use App\Entity\Benefit;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -86,7 +87,7 @@ class BenefitController implements BenefitControllerInterface
             $em->persist($benefitType->getData());
             $em->flush();
 
-            return $this->url->generate('admin'); //Voir avec Guillaume
+            return new RedirectResponse($this->url->generate('admin')); //Voir avec Guillaume
         }
 
         return new Response($this->twig->render('back/admin/benefit.html.twig', array(

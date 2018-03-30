@@ -16,7 +16,7 @@ class CategoryRepository extends ServiceEntityRepository
     public function getAll()
     {
         return $this->createQueryBuilder('c')
-            ->orderBy('c.date')
+            ->orderBy('c.date', 'ASC')
             ->getQuery()
             ->getResult();
     }

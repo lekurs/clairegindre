@@ -27,6 +27,12 @@ class Gallery implements GalleryInterface
      */
     private $pictures;
 
+
+
+    public function __construct()
+    {
+        $this->id = Uuid::uuid4();
+    }
     /**
      * @return mixed
      */
@@ -34,12 +40,6 @@ class Gallery implements GalleryInterface
     {
         return $this->id;
     }
-
-    public function __construct()
-    {
-        $this->id = Uuid::uuid4();
-    }
-
     /**
      * @param mixed $id
      */
@@ -62,8 +62,6 @@ class Gallery implements GalleryInterface
     public function setUser(User $user)
     {
         $this->user = $user;
-
-        $user->setGallery($this);
     }
 
     /**
@@ -77,7 +75,7 @@ class Gallery implements GalleryInterface
     /**
      * @param $benefit
      */
-    public function setBenefit(\ArrayAccess $benefit): void
+    public function setBenefit(BenefitInterface $benefit): void
     {
         $this->benefit = $benefit;
     }
@@ -85,34 +83,18 @@ class Gallery implements GalleryInterface
     /**
      * @return mixed
      */
-    public function getPicture()
-    {
-        return $this->picture;
-    }
-
-    /**
-     * @param Picture $picture
-     */
-    public function setPicture(Picture $picture): void
-    {
-        $this->picture = $picture;
-
-        $picture->setPicture($this);
-    }
-
-    /**
-     * @return \ArrayAccess
-     */
-    public function getPictures(): \ArrayAccess
+    public function getPictures()
     {
         return $this->pictures;
     }
 
     /**
-     * @param \ArrayAccess $pictures
+     * @param Picture $picture
      */
-    public function setPictures(\ArrayAccess $pictures): void
+    public function setPictures(Picture $picture): void
     {
-        $this->pictures = $pictures;
+        $this->pictures[] = $picture;
+
+        $picture->setPicture($this);
     }
 }

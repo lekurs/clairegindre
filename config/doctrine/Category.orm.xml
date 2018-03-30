@@ -6,9 +6,16 @@
 
     <entity name="App\Entity\Category" table="clairegindre_category" repository-class="App\Repository\CategoryRepository">
         <id name="id" column="id" type="string"/>
+        <field name="date" type="date" nullable="false" unique="false" />
+        <field name="title" type="string" length="150" nullable="false" unique="false" />
+        <field name="online" type="boolean" nullable="false" unique="false" />
 
         <one-to-many field="articles" target-entity="App\Entity\Article" mapped-by="categories" />
-        <one-to-many field="benefits" target-entity="App\Entity\Benefit" mapped-by="category" />
+        <one-to-many field="benefits" target-entity="App\Entity\Benefit" mapped-by="category">
+            <!--<cascade>-->
+                <!--<cascade-persist/>-->
+            <!--</cascade>-->
+        </one-to-many>
     </entity>
 
 </doctrine-mapping>

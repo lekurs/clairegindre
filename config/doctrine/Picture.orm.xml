@@ -6,7 +6,7 @@
 
     <entity name="App\Entity\Picture" table="clairegindre_picture" repository-class="App\Repository\PictureRepository">
     <id name="id" column="id" type="string"/>
-            <field name="pictureName" type="string" length="100" nullable="false" unique="true" />
+            <field name="pictureName" type="string" length="100" nullable="false" unique="false" />
             <field name="publicPath" type="string" length="255" nullable="false" unique="false" />
             <field name="extension" type="string" length="5" nullable="false" unique="false" />
             <field name="displayOrder" type="integer" nullable="true" unique="false" />

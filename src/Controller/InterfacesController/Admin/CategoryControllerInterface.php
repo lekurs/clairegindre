@@ -3,6 +3,7 @@
 namespace App\Controller\InterfacesController\Admin;
 
 use App\Builder\CategoryBuilder;
+use App\Builder\Interfaces\CategoryBuilderInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,13 +14,13 @@ interface CategoryControllerInterface
     /**
      * CategoryControllerInterface constructor.
      * @param Environment $twig
-     * @param CategoryBuilder $categoryBuilder
+     * @param CategoryBuilderInterface $categoryBuilder
      * @param FormFactoryInterface $formFactory
      * @param EntityManagerInterface $manager
      */
     public function __construct(
         Environment $twig,
-        CategoryBuilder $categoryBuilder,
+        CategoryBuilderInterface $categoryBuilder,
         FormFactoryInterface $formFactory,
         EntityManagerInterface $manager
     );

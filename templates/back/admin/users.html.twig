@@ -39,13 +39,23 @@
                     <p>{{ user.lastName }}</p>
                 </div>
                 <div class="col">
-                    {#<p><img src="/images/upload/{{ user.picture}}" /></p>#}
+                    {#<p><img src="/images/upload/customers/{{ user.pictureName}}" /></p>#}
                 </div>
                 {#<div class="col">#}
                     {#<p>{{ user.benefit }}</p>#}
                 {#</div>#}
                 <div class="col">
-                    <p><a href="{{ path('adminGallery', {'id': user.id}) }}">Ajouter</a></p>
+                    {#{% if galleriesByUser is empty %}#}
+                    <p><a href="{{ path('adminAddGallery', {'id': user.id}) }}">Ajouter</a></p>
+                    {#{% endif %}#}
+                    {#<p><i class="fa fa-chevron-down show-gallery"></i></p>#}
+                            {#<div class="row">#}
+                                {#{% for galleryByUser in galleriesByUser %}#}
+                                {#<div class="col show-gallery-details">#}
+                                    {#{{ galleryByUser.id }}#}
+                                {#</div>#}
+                                {#{% endfor %}#}
+                            {#</div>#}
                 </div>
                 <div class="col">
                     <a href="{{ path('adminEditUser', {'id': user.id}) }}"><i class="fa fa-edit"></i></a>
@@ -55,5 +65,10 @@
                 </div>
             </div>
         {% endfor %}
+        <div class="row">
+            <div class="col add_user">
+                <a href="{{ path('adminRegister') }}">Ajouter un utilisateur</a>
+            </div>
+        </div>
     </div>
 {% endblock %}

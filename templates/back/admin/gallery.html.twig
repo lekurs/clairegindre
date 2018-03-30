@@ -1,32 +1,26 @@
-{% extends "admin_layout.html.twig" %}
+{% extends "back/admin/admin.html.twig" %}
 
-{%  block head %}
+{% block head %}
     {{ parent() }}
     {% block title %}
-        <title>Administration des familles</title>
+        <title>Galeries utilisateurs</title>
     {% endblock %}
 {% endblock %}
 
 {% block content %}
-<section>
     <div class="container">
-        <div class="col">
-            <h1>Gallerie client : {{ user.username }}</h1>
+        <div class="row">
+            <div class="col">Client</div>
+            <div class="col">Galerie(s)</div>
+            <div class="col">Edit</div>
+            <div class="col">Del</div>
         </div>
-        {{ form_start(gallery_form) }}
-        {{ form_widget(gallery_form) }}
 
-            <button type="submit" name="submit-gallery" class="btn btn-primary test-btn">Ajouter</button>
-            {{ form_end(gallery_form) }}
+{% for gallery in galleryByUser %}
+        <div class="row">
+            <div class="col">{{ gallery.user.username }}</div>
+    {{ gallery.id }}
+        </div>
+{% endfor %}
     </div>
-
-</section>
-{% endblock %}
-
-{% block javascripts %}
-    {{ parent() }}
-    <script src="/js/back/dropfiles.js"></script>
-    <script>$('.dropfiles').dropfiles({
-            script:'{{ path('adminGallery', {'id': app.request.attributes.get('_route_params').id }) }}',
-        })</script>
 {% endblock %}

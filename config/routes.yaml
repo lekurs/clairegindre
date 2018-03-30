@@ -55,10 +55,10 @@ adminRegister:
     defaults:
        _controller: App\Controller\Security\RegisterController::register
 
-adminUsers:
-    path: /admin/users
-    defaults:
-       _controller: App\Controller\Security\UserController::show
+#adminUsers:
+#    path: /admin/users
+#    defaults:
+#       _controller: App\Controller\Security\UserController::show
 
 adminEditUser:
     path: /admin/user/edit/{id}
@@ -73,7 +73,7 @@ adminDeleteUser:
 #adminGallery:
 #    path: /admin/gallery/{id}
 #    defaults:
-#        _controller: App\Controller\Admin\Gallery\GalleryController::show
+#        _controller: App\Controller\Admin\Gallery\GalleryAddAddController::show
 
 adminGalleryUpdate:
     path: /admin/gallery/update/{slug}

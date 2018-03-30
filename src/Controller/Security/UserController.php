@@ -9,34 +9,82 @@
 namespace App\Controller\Security;
 
 
-use App\Builder\UserBuilder;
+use App\Builder\Interfaces\GalleryBuilderInterface;
+use App\Builder\Interfaces\UserBuilderInterface;
+use App\Controller\InterfacesController\Admin\UserControllerInterface;
+use App\Entity\Benefit;
+use App\Entity\Gallery;
 use App\Entity\User;
+use App\Repository\BenefitRepository;
 use App\Type\RegistrationType;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+use Twig\Environment;
 
-class UserController extends Controller
+class UserController implements UserControllerInterface
 {
-    public function show(UserBuilder $userBuilder, Request $request)
-    {
-        $userBuilder->create();
+    /**
+     * @var Environment
+     */
+    private $twig;
 
-        $users = $this->getDoctrine()
-            ->getRepository(User::class)
+
+    /**
+     * @var EntityManagerInterface
+     */
+    private $entityManager;
+
+    /**
+     * @var UserBuilderInterface
+     */
+    private $userBuilder;
+
+    /**
+     * @var GalleryBuilderInterface
+     */
+    private $galleryBuilder;
+
+    /**
+     * UserController constructor.
+     * @param Environment $twig
+     * @param EntityManagerInterface $entityManager
+     * @param UserBuilderInterface $userBuilder
+     * @param GalleryBuilderInterface $galleryBuilder
+     */
+    public function __construct(
+        Environment $twig,
+        EntityManagerInterface $entityManager,
+        UserBuilderInterface $userBuilder,
+        GalleryBuilderInterface $galleryBuilder
+    ) {
+        $this->twig = $twig;
+        $this->entityManager = $entityManager;
+        $this->userBuilder = $userBuilder;
+        $this->galleryBuilder = $galleryBuilder;
+    }
+
+
+    /**
+     * @Route(name="adminUsers", path="admin/users", methods={"GET"})
+     * @param Request $request
+     * @return Response
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     */
+    public function __invoke(Request $request)
+    {
+        $users = $this->entityManager->getRepository(User::class)
             ->showAll();
 
-        dump($users);
+        $galleriesByUser = $this->entityManager->getRepository(Gallery::class)->showGalleryByUser();
 
-            $task = $this->createForm(RegistrationType::class, $userBuilder->getUser())->handleRequest($request);
-
-            if($task->isSubmitted() && $task->isValid())
-            {
-
-            }
-
-        return $this->render('back/admin/users.html.twig', array(
-            'user_form' => $task->createView(),
+        return new Response($this->twig->render('back/admin/users.html.twig', array(
             'users' => $users,
-        ));
+            'galleriesByUser' => $galleriesByUser
+        )));
     }
 }

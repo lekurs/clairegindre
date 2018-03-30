@@ -4,19 +4,36 @@ namespace App\Entity;
 
 use App\Entity\Interfaces\CategoryInterface;
 use Doctrine\ORM\Mapping as ORM;
+use Ramsey\Uuid\Uuid;
+use Ramsey\Uuid\UuidInterface;
 
 
 class Category implements CategoryInterface
 {
 
+    /**
+     * @var UuidInterface
+     */
     private $id;
 
+    /**
+     * @var string
+     */
     private $title;
 
+    /**
+     * @var string
+     */
     private $category;
 
+    /**
+     * @var \DateTime
+     */
     private $date;
 
+    /**
+     * @var boolean
+     */
     private $online;
 
     /**
@@ -24,12 +41,30 @@ class Category implements CategoryInterface
      */
     private $benefits;
 
+    /**
+     * @var string
+     */
     private $picture;
 
     /**
      * @var \ArrayAccess
      */
     private $articles;
+
+    /**
+     * Category constructor.
+     * @param UuidInterface $id
+
+     */
+    public function __construct(
+//        \ArrayAccess $benefits,
+//        \ArrayAccess $articles
+    ) {
+        $this->id = Uuid::uuid4();
+//        $this->benefits = $benefits;
+//        $this->articles = $articles;
+    }
+
 
     public function getId()
     {

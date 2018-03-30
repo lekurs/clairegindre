@@ -224,36 +224,14 @@ class User implements UserInterface, BaseUser
     }
 
     /**
-     * @return mixed
+     * @return \ArrayAccess
      */
-    public function getGallery()
+    public function getGalleries(): \ArrayAccess
     {
-        return $this->gallery;
+        return $this->galleries;
     }
 
     /**
-     * @param mixed $gallery
-     */
-    public function setGallery($gallery): void
-    {
-        $this->gallery = $gallery;
-    }
-
-
-    /**
-     * Returns the roles granted to the user.
-     *
-     * <code>
-     * public function getRoles()
-     * {
-     *     return array('ROLE_USER');
-     * }
-     * </code>
-     *
-     * Alternatively, the roles might be stored on a ``roles`` property,
-     * and populated in any number of different ways when the user object
-     * is created.
-     *
      * @return (Role|string)[] The user roles
      */
     public function getRoles()
@@ -285,9 +263,6 @@ class User implements UserInterface, BaseUser
 
 
     /**
-     * Returns the salt that was originally used to encode the password.
-     *
-     * This can return null if the password was not encoded using a salt.
      *
      * @return string|null The salt
      */

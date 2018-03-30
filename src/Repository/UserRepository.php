@@ -14,7 +14,7 @@ class UserRepository extends EntityRepository implements UserLoaderInterface
     public function loadUserByUsername($username)
     {
         return $this->createQueryBuilder('u')
-            ->where('u.username = :username')
+            ->where('u.email = :username')
             ->setParameter('username', $username)
             ->getQuery()
             ->getOneOrNullResult();
@@ -30,11 +30,6 @@ class UserRepository extends EntityRepository implements UserLoaderInterface
 
         return $qb->execute();
     }
-//
-//public function showAll()
-//{
-//
-//}
 
     public function showOne($id): User
     {
@@ -43,20 +38,5 @@ class UserRepository extends EntityRepository implements UserLoaderInterface
             ->setParameter('id', $id)
             ->getQuery()
             ->getOneOrNullResult();
-
-//        return $qb->execute();
     }
-
-    /*
-    public function findBySomething($value)
-    {
-        return $this->createQueryBuilder('u')
-            ->where('u.something = :value')->setParameter('value', $value)
-            ->orderBy('u.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
 }

@@ -9,6 +9,7 @@
 namespace App\Controller\Admin\Blog;
 
 use App\Builder\CategoryBuilder;
+use App\Builder\Interfaces\CategoryBuilderInterface;
 use App\Controller\InterfacesController\Admin\CategoryControllerInterface;
 use App\Entity\Category;
 use Doctrine\ORM\EntityManagerInterface;
@@ -26,7 +27,7 @@ class CategoryController implements CategoryControllerInterface
     private $twig;
 
     /**
-     * @var CategoryBuilder
+     * @var CategoryBuilderInterface
      */
     private $categoryBuilder;
 
@@ -43,12 +44,16 @@ class CategoryController implements CategoryControllerInterface
     /**
      * CategoryController constructor.
      * @param Environment $twig
-     * @param CategoryBuilder $categoryBuilder
+     * @param CategoryBuilderInterface $categoryBuilder
      * @param FormFactoryInterface $formFactory
      * @param EntityManagerInterface $manager
      */
-    public function __construct(Environment $twig, CategoryBuilder $categoryBuilder, FormFactoryInterface $formFactory, EntityManagerInterface $manager)
-    {
+    public function __construct(
+        Environment $twig,
+        CategoryBuilderInterface $categoryBuilder,
+        FormFactoryInterface $formFactory,
+        EntityManagerInterface $manager
+    ) {
         $this->twig = $twig;
         $this->categoryBuilder = $categoryBuilder;
         $this->formFactory = $formFactory;
@@ -69,7 +74,7 @@ class CategoryController implements CategoryControllerInterface
 
         $categories = $this->manager->getRepository(Category::class)->getAll();
 
-        $categoryType = $this->formFactory->create(Category::class, $this->categoryBuilder->getCategory())->handleRequest($request);
+        $categoryType = $this->formFactory->create('App\Type\CategoryType', $this->categoryBuilder->getCategory())->handleRequest($request);
 
         if($categoryType->isSubmitted() && $categoryType->isValid()) {
             //On récupère l'entité chargée

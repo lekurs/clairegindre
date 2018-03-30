@@ -37,11 +37,6 @@ class GalleryImageUploadSubscriber implements EventSubscriberInterface, GalleryI
     private $targetDir;
 
     /**
-     * @var User
-     */
-    private $user;
-
-    /**
      * GalleryImageUploadSubscriber constructor.
      * @param Filesystem $fileSystem
      * @param PictureUploaderHelper $pictureUploadHelper
@@ -60,20 +55,17 @@ class GalleryImageUploadSubscriber implements EventSubscriberInterface, GalleryI
         public static function getSubscribedEvents()
         {
             return [
-               FormEvents::SUBMIT => 'onGalleryUpload'
+               FormEvents::SUBMIT => 'onGalleryUpload',
             ];
         }
 
         public function onGalleryUpload(FormEvent $event)
         {
             foreach ($event->getData() as $image) {
-                dump($event->getData());
-                $this->pictureUploadHelper->move($image, $this->targetDir . '/gallery', $image->getClientOriginalName());
-                $picture = new Picture($image->getClientOriginalName(), $this->targetDir . '/gallery', $image->guessClientExtension());
-            dump($picture);
-                dump($event->getForm()->getParent()->getData());
-//            die();
-                $event->getForm()->getParent()->getData()->setPicture($picture);
+                $this->pictureUploadHelper->move($image, $this->targetDir . '/gallery/' . $event->getForm()->getParent()->getData()->getId(), $image->getClientOriginalName());
+                $picture = new Picture($image->getClientOriginalName(), $this->targetDir . '/gallery/' . $event->getForm()->getParent()->getData()->getId(), $image->guessClientExtension());
+
+                $event->getForm()->getParent()->getData()->setPictures($picture);
             }
         }
 }

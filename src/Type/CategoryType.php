@@ -24,10 +24,12 @@ class CategoryType extends AbstractType
     {
         $builder
             ->add('title', TextType::class)
-            ->add('category', TextareaType::class)
+            ->add('category', TextareaType::class, array(
+                'attr' => ['class' => 'categoryArea'],
+            ))
             ->add('date', DateType::class)
             ->add('online', CheckboxType::class)
-            ->add('benefit')
+//            ->add('benefit', BenefitType::class)
             ;
     }
 
