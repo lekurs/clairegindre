@@ -26,14 +26,14 @@ class GalleryRepository extends ServiceEntityRepository
         return $qb->execute();
     }
 
-    public function showGalleryByUser()
+    public function getWithPictures($id)
     {
-        $qb = $this->createQueryBuilder('gallery')
-            ->addSelect('user')
-            ->innerJoin('gallery.user', 'user', 'WHERE', 'gallery.user = user.id')
-            ->orderBy('gallery.user', 'ASC')
-            ->getQuery();
-
-        return $qb->execute();
-        }
+        return $this->createQueryBuilder('gallery')
+            ->where('gallery.id = :id')
+            ->setParameter('id', $id)
+            ->innerJoin('gallery.pictures', 'pictures')
+            ->getQuery()
+            ->getOneOrNullResult()
+            ;
+    }
 }

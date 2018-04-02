@@ -17,7 +17,7 @@ use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 
-class ProfileProfileImageUploadSubscriber implements EventSubscriberInterface, ProfileImageUploadSubscriberInterface
+class ProfileImageUploadSubscriber implements EventSubscriberInterface, ProfileImageUploadSubscriberInterface
 {
     /**
      * @var Filesystem
@@ -35,7 +35,7 @@ class ProfileProfileImageUploadSubscriber implements EventSubscriberInterface, P
     private $pictureUploaderHelper;
 
     /**
-     * ProfileProfileImageUploadSubscriber constructor.
+     * ProfileImageUploadSubscriber constructor.
      * @param Filesystem $fileSystem
      * @param string $targetDir
      * @param PictureUploaderHelper $pictureUploaderHelper

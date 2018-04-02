@@ -13,6 +13,18 @@ class PictureRepository extends ServiceEntityRepository
         parent::__construct($registry, Picture::class);
     }
 
+
+    public function showPicturesByGallery()
+    {
+        $qb = $this->createQueryBuilder('picture')
+            ->addSelect('gallery')
+            ->innerJoin('picture.gallery', 'gallery', 'WHERE', 'picture.gallery = gallery.id')
+            ->orderBy('picture.pictureName', 'ASC')
+            ->getQuery();
+
+        return $qb->execute();
+    }
+
     /*
     public function findBySomething($value)
     {

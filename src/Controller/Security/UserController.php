@@ -78,13 +78,10 @@ class UserController implements UserControllerInterface
     public function __invoke(Request $request)
     {
         $users = $this->entityManager->getRepository(User::class)
-            ->showAll();
-
-        $galleriesByUser = $this->entityManager->getRepository(Gallery::class)->showGalleryByUser();
+            ->showGalleryByUser();
 
         return new Response($this->twig->render('back/admin/users.html.twig', array(
             'users' => $users,
-            'galleriesByUser' => $galleriesByUser
         )));
     }
 }

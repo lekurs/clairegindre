@@ -34,7 +34,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Twig\Environment;
 
-class GalleryAddAddController implements GalleryAddControllerInterface
+class GalleryAddController implements GalleryAddControllerInterface
 {
     /**
      * @var Environment
@@ -82,7 +82,7 @@ class GalleryAddAddController implements GalleryAddControllerInterface
     private $urlGenerator;
 
     /**
-     * GalleryAddAddController constructor.
+     * GalleryAddController constructor.
      * @param Environment $twig
      * @param GalleryBuilder $galleryBuilder
      * @param PictureBuilder $pictureBuilder
@@ -124,20 +124,19 @@ class GalleryAddAddController implements GalleryAddControllerInterface
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    public function __invoke($id, Request $request)
+    public function __invoke(Request $request)
     {
         $this->galleryBuilder->create();
 
         $user = $this->entityManager->getRepository(User::class)
-            ->showOne($id);
+            ->showOne($request->get('id'));
 
         $gallery = $this->entityManager->getRepository(Gallery::class)
-            ->findOneBy(['user' => $id]);
+            ->findOneBy(['user' => $request->get('id')]);
 
         $gallery_form = $this->form->create(GalleryType::class, $this->galleryBuilder->getGallery())->handleRequest($request);
 
         if($gallery_form->isSubmitted() && $gallery_form->isValid()) {
-
             $this->galleryBuilder->withUser($user);
 
             //Ajout en bdd

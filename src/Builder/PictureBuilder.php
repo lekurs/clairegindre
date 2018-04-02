@@ -10,6 +10,7 @@ namespace App\Builder;
 
 use App\Builder\Interfaces\PictureBuilderInterface;
 use App\Builder\Interfaces\PictureInterface;
+use App\Entity\Gallery;
 use App\Entity\Picture;
 
 class PictureBuilder implements PictureBuilderInterface
@@ -50,6 +51,13 @@ class PictureBuilder implements PictureBuilderInterface
     public function withBenefit(string $benefit): PictureBuilderInterface
     {
         $this->picture->setBenefit($benefit);
+
+        return $this;
+    }
+
+    public function withGallery(Gallery $gallery): PictureBuilderInterface
+    {
+        $this->picture->setGallery($gallery);
 
         return $this;
     }

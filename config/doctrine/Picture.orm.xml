@@ -11,13 +11,7 @@
             <field name="extension" type="string" length="5" nullable="false" unique="false" />
             <field name="displayOrder" type="integer" nullable="true" unique="false" />
             <field name="favorite" type="boolean" nullable="false" unique="false" />
-            <many-to-one field="gallery" target-entity="App\Entity\Gallery" inversed-by="pictures">
-                <cascade>
-                    <cascade-persist/>
-                </cascade>
-                <join-column name="gallery_id" referenced-column-name="id" />
-            </many-to-one>
-
+            <many-to-one field="gallery" target-entity="App\Entity\Gallery" inversed-by="pictures" />
             <many-to-one field="article" target-entity="App\Entity\Article" inversed-by="images" />
     </entity>
 

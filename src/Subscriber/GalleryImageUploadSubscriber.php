@@ -63,8 +63,8 @@ class GalleryImageUploadSubscriber implements EventSubscriberInterface, GalleryI
         {
             foreach ($event->getData() as $image) {
                 $this->pictureUploadHelper->move($image, $this->targetDir . '/gallery/' . $event->getForm()->getParent()->getData()->getId(), $image->getClientOriginalName());
-                $picture = new Picture($image->getClientOriginalName(), $this->targetDir . '/gallery/' . $event->getForm()->getParent()->getData()->getId(), $image->guessClientExtension());
-
+                $picture = new Picture($image->getClientOriginalName(), 'images/upload/gallery/' . $event->getForm()->getParent()->getData()->getId(), $image->guessClientExtension());
+                $picture->setGallery($event->getForm()->getParent()->getData());
                 $event->getForm()->getParent()->getData()->setPictures($picture);
             }
         }

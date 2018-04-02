@@ -10,15 +10,19 @@ namespace App\Controller\Admin\Gallery;
 
 
 use App\Builder\Interfaces\GalleryBuilderInterface;
-use App\Controller\InterfacesController\Admin\EditGalleryControllerInterface;
+use App\Controller\InterfacesController\Admin\GalleryEditControllerInterface;
+use App\Entity\Gallery;
+use App\Entity\Picture;
+use App\Type\GalleryOrderType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Twig\Environment;
 
-class EditGalleryController implements EditGalleryControllerInterface
+class GalleryEditController implements GalleryEditControllerInterface
 {
     /**
      * @var Environment
@@ -46,7 +50,7 @@ class EditGalleryController implements EditGalleryControllerInterface
     private $url;
 
     /**
-     * EditGalleryController constructor.
+     * GalleryEditController constructor.
      * @param Environment $twig
      * @param FormFactoryInterface $form
      * @param GalleryBuilderInterface $galleryBuilder
@@ -69,12 +73,22 @@ class EditGalleryController implements EditGalleryControllerInterface
 
 
     /**
-     * @Route(name="adminEditGallery", path="admin/edit/gallery/{id}")
+     * @Route(name="adminGalleryEdit", path="admin/edit/gallery/{id}")
      * @param $id
      * @param Request $request
+     * @return Response
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
      */
-    public function __invoke($id, Request $request)
+    public function __invoke(Request $request)
     {
-        // TODO: Implement __invoke() method.
+        $gallery = $this->entityManager->getRepository(Gallery::class)->getWithPictures($request->attributes->get('id'));
+
+        $editType = $this->form->create(GalleryOrderType::class, $gallery)->handleRequest($request);
+
+        return new Response($this->twig->render('back/admin/gallery_edit.html.twig', array(
+            'form' => $editType->createView(),
+        )));
     }
 }

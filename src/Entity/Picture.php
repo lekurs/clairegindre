@@ -130,33 +130,33 @@ class Picture
     /**
      * @return mixed
      */
-    public function getPicture()
+    public function getPictureName()
     {
-        return $this->picture;
+        return $this->pictureName;
     }
 
     /**
      * @param mixed $pictureName
      */
-    public function setPicture($pictureName): void
+    public function setPictureName($pictureName): void
     {
-        $this->picture = $pictureName;
+        $this->pictureName = $pictureName;
     }
 
     /**
      * @return mixed
      */
-    public function getPicturePath()
+    public function getPublicPath()
     {
-        return $this->picturePath;
+        return $this->publicPath;
     }
 
     /**
-     * @param mixed $picturePath
+     * @param mixed $publicPath
      */
-    public function setPicturePath($picturePath): void
+    public function setPublicPath($publicPath): void
     {
-        $this->picturePath = $picturePath;
+        $this->publicPath = $publicPath;
     }
 
     /**
@@ -220,8 +220,40 @@ class Picture
     /**
      * @param mixed $gallery
      */
-    public function setGallery($gallery): void
+    public function setGallery(GalleryInterface $gallery): void
     {
         $this->gallery = $gallery;
+    }
+
+    /**
+     * @return int
+     */
+    public function getDisplayOrder(): int
+    {
+        return $this->displayOrder;
+    }
+
+    /**
+     * @param int $displayOrder
+     */
+    public function setDisplayOrder(int $displayOrder): void
+    {
+        $this->displayOrder = $displayOrder;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getFavorite(): bool
+    {
+        return $this->favorite;
+    }
+
+    /**
+     * @param bool $favorite
+     */
+    public function setFavorite(bool $favorite): void
+    {
+        $this->favorite = $favorite;
     }
 }

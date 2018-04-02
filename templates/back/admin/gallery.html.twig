@@ -19,7 +19,9 @@
 {% for gallery in galleryByUser %}
         <div class="row">
             <div class="col">{{ gallery.user.username }}</div>
-    {{ gallery.id }}
+            <div class="col">{{ gallery.title }}</div>
+            <div class="col"><a href="{{ path('adminGalleryEdit', {'id' : gallery.id}) }}"><i class="fa fa-edit"></i></a></div>
+            <div class="col"><i class="fa fa-trash"></i></div>
         </div>
 {% endfor %}
     </div>

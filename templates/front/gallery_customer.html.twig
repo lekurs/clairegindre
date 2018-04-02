@@ -1,0 +1,33 @@
+{% extends "layout.html.twig" %}
+
+{% block head %}
+{{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/styles/gallery.css') }}">
+
+    {% block title %}
+        <title>Galeries Clients</title>
+    {% endblock %}
+
+{% endblock %}
+
+{% block header %}
+{{ parent() }}
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row no-gutters">
+            <div class="col-12 gallery-customers-container">
+                {% for gallery in galleries %}
+                    <div class="gallery-customer-content">
+
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+{% endblock %}

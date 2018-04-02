@@ -73,17 +73,17 @@ adminDeleteUser:
 #adminGallery:
 #    path: /admin/gallery/{id}
 #    defaults:
-#        _controller: App\Controller\Admin\Gallery\GalleryAddAddController::show
+#        _controller: App\Controller\Admin\Gallery\GalleryAddController::show
 
 adminGalleryUpdate:
     path: /admin/gallery/update/{slug}
     defaults:
         _controller: App\Controller\GalleryController::update
 
-adminGalleryDelete:
-    path: /admin/gallery/delete/{slug}
-    defaults:
-        _controller: App\Controller\GalleryController::delete
+#adminGalleryDelete:
+#    path: /admin/gallery/delete/{slug}
+#    defaults:
+#        _controller: App\Controller\GalleryController::delete
 
 adminSite:
     path: /admin/interface

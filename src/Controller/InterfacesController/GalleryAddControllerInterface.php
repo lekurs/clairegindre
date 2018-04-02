@@ -22,7 +22,7 @@ use Twig\Environment;
 
 interface GalleryAddControllerInterface
 {
-    public function __invoke($id, Request $request);
+    public function __invoke(Request $request);
 
     public function __construct(
         GalleryBuilder $galleryBuilder,

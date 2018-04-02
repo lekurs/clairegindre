@@ -6,6 +6,7 @@
 
     <entity name="App\Entity\Gallery" table="clairegindre_gallery" repository-class="App\Repository\GalleryRepository">
         <id name="id" column="id" type="string"/>
+        <field name="title" type="string" length="255" nullable="false" unique="false" />
         <one-to-many field="pictures" target-entity="App\Entity\Picture" mapped-by="gallery">
             <cascade>
                 <cascade-persist/>

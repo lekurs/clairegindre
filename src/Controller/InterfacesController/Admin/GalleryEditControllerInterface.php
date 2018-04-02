@@ -16,10 +16,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Twig\Environment;
 
-interface EditGalleryControllerInterface
+interface GalleryEditControllerInterface
 {
     public function __construct(Environment $tiwg, FormFactoryInterface $form, GalleryBuilderInterface $galleryBuilder, EntityManagerInterface $entityManager, UrlGeneratorInterface $url);
 
-    public function __invoke($id, Request $request);
+    public function __invoke(Request $request);
 
 }

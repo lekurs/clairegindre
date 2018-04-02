@@ -39,4 +39,12 @@ class UserRepository extends EntityRepository implements UserLoaderInterface
             ->getQuery()
             ->getOneOrNullResult();
     }
+
+    public function showGalleryByUser()
+    {
+        return $this->createQueryBuilder('user')
+            ->innerJoin('user.galleries', 'galleries')
+            ->getQuery()
+            ->getResult();
+    }
 }

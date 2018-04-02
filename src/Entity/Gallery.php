@@ -18,6 +18,11 @@ class Gallery implements GalleryInterface
     private $user;
 
     /**
+     * @var string
+     */
+    private $title;
+
+    /**
      * @var BenefitInterface
      */
     private $benefit;
@@ -46,6 +51,22 @@ class Gallery implements GalleryInterface
     public function setId($id): void
     {
         $this->id = $id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * @param string $title
+     */
+    public function setTitle(string $title): void
+    {
+        $this->title = $title;
     }
 
     /**
@@ -95,6 +116,16 @@ class Gallery implements GalleryInterface
     {
         $this->pictures[] = $picture;
 
-        $picture->setPicture($this);
+        $picture->setGallery($this);
     }
+
+//    /**
+//     * @param Picture $picture
+//     */
+//    public function setPictures(\ArrayAccess $picture): void
+//    {
+//        $this->pictures = $picture;
+//
+////        $picture->setPicture($this);
+//    }
 }

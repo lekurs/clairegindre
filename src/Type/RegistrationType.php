@@ -11,7 +11,7 @@ namespace App\Type;
 use App\Entity\User;
 use App\Subscriber\Interfaces\ProfileImageUploadSubscriberInterface;
 use App\Subscriber\Interfaces\UserFolderSubscriberInterface;
-use App\Subscriber\ProfileProfileImageUploadSubscriber;
+use App\Subscriber\ProfileImageUploadSubscriber;
 use App\Subscriber\ReviewImageSubscriber;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -26,7 +26,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class RegistrationType extends AbstractType
 {
     /**
-     * @var ProfileProfileImageUploadSubscriber
+     * @var ProfileImageUploadSubscriber
      */
     private $profileImageUploadSubscriber;
 
@@ -37,10 +37,10 @@ class RegistrationType extends AbstractType
 
     /**
      * RegistrationType constructor.
-     * @param ProfileProfileImageUploadSubscriber $profileImageUploadSubscriber
+     * @param ProfileImageUploadSubscriber $profileImageUploadSubscriber
      * @param UserFolderSubscriberInterface $userFolderSubscriber
      */
-    public function __construct(ProfileProfileImageUploadSubscriber $profileImageUploadSubscriber, UserFolderSubscriberInterface $userFolderSubscriber)
+    public function __construct(ProfileImageUploadSubscriber $profileImageUploadSubscriber, UserFolderSubscriberInterface $userFolderSubscriber)
     {
         $this->profileImageUploadSubscriber = $profileImageUploadSubscriber;
         $this->userFolderSubscriber = $userFolderSubscriber;
