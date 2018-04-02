@@ -6,11 +6,18 @@
 
     <entity name="App\Entity\Article" table="clairegindre_article" repository-class="App\Repository\ArticleRepository">
         <id name="id" column="id" type="string"/>
+        <field name="prestation" type="string" length="10" nullable="false" unique="false" />
+        <field name="title" type="string" length="100" nullable="false" unique="true" />
+        <field name="content" type="text" nullable="false" unique="false" />
+        <field name="creationDate" type="integer" nullable="false" unique="true" />
+        <field name="modificationDate" type="integer" nullable="true" unique="true" />
 
         <many-to-one field="author" target-entity="App\Entity\User" inversed-by="articles" />
-        <one-to-many field="reviews" target-entity="App\Entity\Reviews" mapped-by="article" />
         <one-to-many field="images" target-entity="App\Entity\Picture" mapped-by="article" />
-        <many-to-one field="categories" target-entity="App\Entity\Category" inversed-by="articles" />
+        <one-to-many field="comments" target-entity="App\Entity\Comment" mapped-by="article" />
+        <one-to-one field="gallery" target-entity="App\Entity\Gallery">
+            <join-column name="gallery_id" referenced-column-name="id" />
+        </one-to-one>
     </entity>
 
 </doctrine-mapping>

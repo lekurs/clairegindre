@@ -19,7 +19,7 @@
             </cascade>
             <join-column name="picture_id" referenced-column-name="id" />
         </one-to-one>
-        <one-to-many field="reviews" target-entity="App\Entity\Reviews" mapped-by="author" />
+        <one-to-many field="comments" target-entity="App\Entity\Comment" mapped-by="author" />
         <one-to-many field="benefits" target-entity="App\Entity\Benefit" mapped-by="user" />
         <one-to-many field="galleries" target-entity="App\Entity\Gallery" mapped-by="user" />
         <one-to-many field="articles" target-entity="App\Entity\Article" mapped-by="author" />

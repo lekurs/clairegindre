@@ -10,37 +10,37 @@ namespace App\Builder;
 
 
 use App\Builder\Interfaces\CategoryBuilderInterface;
-use App\Entity\Category;
+use App\Entity\Comment;
 
 class CategoryBuilder implements CategoryBuilderInterface
 {
     /**
-     * @var Category
+     * @var Comment
      */
     private $category;
 
     public function create(): CategoryBuilderInterface
     {
-        $this->category = new Category();
+        $this->category = new Comment();
 
         return $this;
     }
 
-    public function withTitle(Category $category): CategoryBuilderInterface
+    public function withTitle(Comment $category): CategoryBuilderInterface
     {
         $this->category->setTitle($category);
 
         return $this;
     }
 
-    public function withOnline(Category $category): CategoryBuilderInterface
+    public function withOnline(Comment $category): CategoryBuilderInterface
     {
         $this->category->setOnline($category);
 
         return $this;
     }
 
-    public function getCategory(): Category
+    public function getCategory(): Comment
     {
         return $this->category;
     }

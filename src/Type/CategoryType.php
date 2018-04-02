@@ -9,7 +9,7 @@
 namespace App\Type;
 
 
-use App\Entity\Category;
+use App\Entity\Comment;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -36,7 +36,7 @@ class CategoryType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => Category::class,
+            'data_class' => Comment::class,
         ));
     }
 

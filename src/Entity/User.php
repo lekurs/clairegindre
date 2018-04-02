@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Interfaces\CommentInterface;
 use App\Entity\Interfaces\PictureInterface;
 use App\Entity\Interfaces\UserInterface as BaseUser;
 use Ramsey\Uuid\Uuid;
@@ -75,7 +76,7 @@ class User implements UserInterface, BaseUser
     /**
      * @var \ArrayAccess
      */
-    private $reviews;
+    private $comments;
 
     /**
      * User constructor.

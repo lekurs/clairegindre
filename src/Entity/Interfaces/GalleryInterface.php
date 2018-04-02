@@ -11,5 +11,14 @@ namespace App\Entity\Interfaces;
 
 interface GalleryInterface
 {
+    /**
+     * @return GalleryInterface
+     */
+    public function create(): GalleryInterface;
+
+    /**
+     * @return BenefitInterface
+     */
+    public function getBenefit(): BenefitInterface;
 
 }

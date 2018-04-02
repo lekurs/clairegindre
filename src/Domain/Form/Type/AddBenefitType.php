@@ -6,7 +6,7 @@
  * Time: 16:34
  */
 
-namespace App\Type;
+namespace App\Domain\Form\Type;
 
 
 use App\Entity\Benefit;

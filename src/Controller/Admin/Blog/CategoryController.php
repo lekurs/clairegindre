@@ -11,7 +11,7 @@ namespace App\Controller\Admin\Blog;
 use App\Builder\CategoryBuilder;
 use App\Builder\Interfaces\CategoryBuilderInterface;
 use App\Controller\InterfacesController\Admin\CategoryControllerInterface;
-use App\Entity\Category;
+use App\Entity\Comment;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -72,7 +72,7 @@ class CategoryController implements CategoryControllerInterface
     {
         $this->categoryBuilder->create();
 
-        $categories = $this->manager->getRepository(Category::class)->getAll();
+        $categories = $this->manager->getRepository(Comment::class)->getAll();
 
         $categoryType = $this->formFactory->create('App\Type\CategoryType', $this->categoryBuilder->getCategory())->handleRequest($request);
 

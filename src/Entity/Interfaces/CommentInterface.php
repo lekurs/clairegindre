@@ -9,7 +9,7 @@
 namespace App\Entity\Interfaces;
 
 
-interface ReviewInterface
+interface CommentInterface
 {
 
 }

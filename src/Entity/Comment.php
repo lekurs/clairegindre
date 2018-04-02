@@ -2,13 +2,15 @@
 
 namespace App\Entity;
 
+use App\Entity\Interfaces\ArticleInterface;
 use App\Entity\Interfaces\CategoryInterface;
+use App\Entity\Interfaces\UserInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 
 
-class Category implements CategoryInterface
+class Comment implements CategoryInterface
 {
 
     /**
@@ -47,12 +49,17 @@ class Category implements CategoryInterface
     private $picture;
 
     /**
-     * @var \ArrayAccess
+     * @var UserInterface
      */
-    private $articles;
+    private $author;
 
     /**
-     * Category constructor.
+     * @var ArticleInterface
+     */
+    private $article;
+
+    /**
+     * Comment constructor.
      * @param UuidInterface $id
 
      */

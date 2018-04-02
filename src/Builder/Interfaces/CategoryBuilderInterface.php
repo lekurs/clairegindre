@@ -9,15 +9,15 @@
 namespace App\Builder\Interfaces;
 
 
-use App\Entity\Category;
+use App\Entity\Comment;
 
 interface CategoryBuilderInterface
 {
     public function create(): CategoryBuilderInterface;
 
-    public function withTitle(Category $category): CategoryBuilderInterface;
+    public function withTitle(Comment $category): CategoryBuilderInterface;
 
-    public function withOnline(Category $category): CategoryBuilderInterface;
+    public function withOnline(Comment $category): CategoryBuilderInterface;
 
-    public function getCategory(): Category;
+    public function getCategory(): Comment;
 }

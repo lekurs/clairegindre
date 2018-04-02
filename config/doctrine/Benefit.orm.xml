@@ -13,7 +13,6 @@
                 <cascade-persist/>
             </cascade>
         </one-to-many>
-        <many-to-one field="category" target-entity="App\Entity\Category" inversed-by="benefits" />
         <many-to-one field="user" target-entity="App\Entity\User" inversed-by="benefits" />
     </entity>
 
