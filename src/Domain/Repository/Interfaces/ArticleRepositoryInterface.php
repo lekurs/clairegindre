@@ -8,8 +8,7 @@
 
 namespace App\Domain\Repository\Interfaces;
 
-
-use App\Entity\Interfaces\ArticleInterface;
+use App\Domain\Models\Interfaces\ArticleInterface;
 
 interface ArticleRepositoryInterface
 {

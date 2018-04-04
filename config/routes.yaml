@@ -2,10 +2,10 @@
 #    path: /
 #    controller: App\Controller\DefaultController::index
 
-index:
-    path: /
-    defaults:
-        _controller: App\Controller\MainController::index
+#index:
+#    path: /
+#    defaults:
+#        _controller: App\Controller\MainController::index
 
 aboutme:
     path: /aboutme
@@ -50,10 +50,10 @@ adminLogin:
     defaults:
         _controller: App\Controller\Security\SecurityController::login
 
-adminRegister:
-    path: /admin/register
-    defaults:
-       _controller: App\Controller\Security\RegisterController::register
+#adminRegister:
+#    path: /admin/register
+#    defaults:
+#       _controller: App\Controller\Security\RegisterController::register
 
 #adminUsers:
 #    path: /admin/users

@@ -17,14 +17,10 @@ services:
     # this creates a service per class whose id is the fully-qualified class name
     App\:
         resource: '../src/*'
-        exclude: '../src/{Entity,Migrations,Tests}'
-
-    # controllers are imported separately to make sure services can be injected
-    # as action arguments even if you don't extend any base controller class
-    App\Controller\:
-        resource: '../src/Controller'
+        exclude: '../src/{Models,Migrations,Tests}'
+#
+#    # controllers are imported separately to make sure services can be injected
+#    # as action arguments even if you don't extend any base controller class
+    App\UI\Action\:
+        resource: '../src/UI/Action'
         tags: ['controller.service_arguments']
-
-    App\Type\Extension\PictureTypeExtension:
-            tags:
-                - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\FileType }

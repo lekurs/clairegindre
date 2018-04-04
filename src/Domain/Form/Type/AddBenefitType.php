@@ -9,7 +9,7 @@
 namespace App\Domain\Form\Type;
 
 
-use App\Entity\Benefit;
+use App\Domain\DTO\BenefitCreationDTO;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -26,7 +26,7 @@ class AddBenefitType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => Benefit::class
+            'data_class' => BenefitCreationDTO::class
         ));
     }
 

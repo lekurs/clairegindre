@@ -4,7 +4,7 @@
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                           http://raw.github.com/doctrine/doctrine2/master/doctrine-mapping.xsd">
 
-    <entity name="App\Entity\User" table="clairegindre_user" repository-class="App\Repository\UserRepository">
+    <entity name="App\Domain\Models\User" table="clairegindre_user" repository-class="App\Domain\Repository\UserRepository">
         <id name="id" column="id" type="string"/>
         <field name="email" type="string" length="255" unique="true" nullable="false"/>
         <field name="username" type="string" length="100" nullable="false" unique="false" />
@@ -13,16 +13,16 @@
         <field name="dateWedding" type="date" nullable="true" unique="false" />
         <field name="roles" type="array" nullable="false" unique="false" />
 
-        <one-to-one field="picture" target-entity="App\Entity\Picture" >
+        <one-to-one field="picture" target-entity="App\Domain\Models\Picture" >
             <cascade>
                 <cascade-persist/>
             </cascade>
             <join-column name="picture_id" referenced-column-name="id" />
         </one-to-one>
-        <one-to-many field="comments" target-entity="App\Entity\Comment" mapped-by="author" />
-        <one-to-many field="benefits" target-entity="App\Entity\Benefit" mapped-by="user" />
-        <one-to-many field="galleries" target-entity="App\Entity\Gallery" mapped-by="user" />
-        <one-to-many field="articles" target-entity="App\Entity\Article" mapped-by="author" />
+        <one-to-many field="comments" target-entity="App\Domain\Models\Comment" mapped-by="author" />
+        <one-to-many field="benefits" target-entity="App\Domain\Models\Benefit" mapped-by="user" />
+        <one-to-many field="galleries" target-entity="App\Domain\Models\Gallery" mapped-by="user" />
+        <one-to-many field="articles" target-entity="App\Domain\Models\Article" mapped-by="author" />
     </entity>
 
 </doctrine-mapping>

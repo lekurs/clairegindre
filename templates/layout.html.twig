@@ -251,7 +251,7 @@
     {% block instagram_contact %}
     <section class="row no-gutters">
         <article class="col-12 col-sm-12 col-lg-6 col-xl-6 instagram insta-list">
-                {%  for instagram in json %}
+                {%  for instagram in insta %}
                     {#<a href="{{ instagram.link }}" class="instagram-link">#}
                         <img class="insta-img" src="{{ instagram.images.standard_resolution.url }}" alt="claire_gindre_photographe_{{ instagram.id }}" />
                     {#</a>#}

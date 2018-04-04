@@ -9,7 +9,9 @@
 namespace App\Domain\Repository\Interfaces;
 
 
+use App\Entity\Interfaces\GalleryInterface;
+
 interface GalleryRepositoryInterface
 {
-
+    public function save(GalleryInterface $gallery);
 }

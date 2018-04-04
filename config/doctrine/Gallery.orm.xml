@@ -4,17 +4,17 @@
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                           http://raw.github.com/doctrine/doctrine2/master/doctrine-mapping.xsd">
 
-    <entity name="App\Entity\Gallery" table="clairegindre_gallery" repository-class="App\Repository\GalleryRepository">
+    <entity name="App\Domain\Models\Gallery" table="clairegindre_gallery" repository-class="App\Domain\Repository\GalleryRepository">
         <id name="id" column="id" type="string"/>
         <field name="title" type="string" length="255" nullable="false" unique="false" />
 
-        <one-to-many field="pictures" target-entity="App\Entity\Picture" mapped-by="gallery">
+        <one-to-many field="pictures" target-entity="App\Domain\Models\Picture" mapped-by="gallery">
             <cascade>
                 <cascade-persist/>
             </cascade>
         </one-to-many>
-        <many-to-one field="user" target-entity="App\Entity\User" inversed-by="galleries" />
-        <many-to-one field="benefit" target-entity="App\Entity\Benefit" inversed-by="galleries">
+        <many-to-one field="user" target-entity="App\Domain\Models\User" inversed-by="galleries" />
+        <many-to-one field="benefit" target-entity="App\Domain\Models\Benefit" inversed-by="galleries">
             <join-column name="benefit_id" referenced-column-name="id"/>
         </many-to-one>
     </entity>

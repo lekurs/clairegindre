@@ -32,5 +32,4 @@ class ArticleBuilder implements ArticleBuilderInterface
     {
         return $this->article;
     }
-
 }
