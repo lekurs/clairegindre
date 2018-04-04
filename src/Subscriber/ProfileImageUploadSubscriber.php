@@ -9,7 +9,7 @@
 namespace App\Subscriber;
 
 
-use App\Entity\Picture;
+use App\Domain\Models\Picture;
 use App\Services\PictureUploaderHelper;
 use App\Subscriber\Interfaces\ProfileImageUploadSubscriberInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -65,10 +65,11 @@ class ProfileImageUploadSubscriber implements EventSubscriberInterface, ProfileI
         } catch (IOExceptionInterface $exception) {
             echo "une erreur est survenue durant la création du répertoire : ".$exception->getPath();
         }
+
         $this->pictureUploaderHelper->move($event->getData(), $this->targetDir . '/customers/', $event->getData()->getClientOriginalName());
         $picture = new Picture($event->getData()->getClientOriginalName(), '/images/upload/customers', $event->getData()->guessClientExtension());
-        dump($event->getForm()->getParent()->getData());
-        die();
-        $event->getForm()->getParent()->getData()->setPicture($picture);
+//        dump($event->getForm()->getParent()->getData());
+//        die();
+//        $event->getForm()->getParent()->getData()->setPicture($picture);
     }
 }

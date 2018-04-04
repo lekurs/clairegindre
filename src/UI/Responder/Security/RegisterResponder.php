@@ -9,13 +9,13 @@
 namespace App\UI\Responder\Security;
 
 
-use App\Domain\Repository\Interfaces\RegisterRepositoryInterface;
+use App\UI\Responder\Security\Interfaces\RegisterResponderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Twig\Environment;
 
-class RegisterResponder implements RegisterRepositoryInterface
+class RegisterResponder implements RegisterResponderInterface
 {
     /**
      * @var Environment
@@ -43,5 +43,6 @@ class RegisterResponder implements RegisterRepositoryInterface
         $redirect ? $response = new Response($this->urlGenerator->generate('/')) : $response = new Response($this->twig->render('back/admin/register.html.twig', [
             'register' => $form->createView(),
         ]));
+        return $response;
     }
 }

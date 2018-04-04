@@ -9,9 +9,8 @@
 namespace App\Subscriber;
 
 
-use App\Entity\Gallery;
-use App\Entity\Picture;
-use App\Entity\User;
+
+use App\Domain\Models\Picture;
 use App\Services\PictureUploaderHelper;
 use App\Subscriber\Interfaces\GalleryImageUploadSubscriberInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;

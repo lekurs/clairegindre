@@ -10,7 +10,7 @@ namespace App\Domain\DTO;
 
 
 use App\Domain\DTO\Interfaces\ArticleCreationDTOInterface;
-use App\Entity\Interfaces\GalleryInterface;
+use App\Domain\Models\Interfaces\GalleryInterface;
 
 class ArticleCreationDTO implements ArticleCreationDTOInterface
 {

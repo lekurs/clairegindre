@@ -10,9 +10,9 @@ namespace App\Domain\DTO;
 
 
 use App\Domain\DTO\Interfaces\RegistrationDTOInterface;
-use App\Entity\Interfaces\PictureInterface;
-use App\Entity\Interfaces\UserInterface;
-use App\Entity\User;
+use App\Domain\Models\Interfaces\PictureInterface;
+use App\Domain\Models\Interfaces\UserInterface;
+
 
 class RegistrationDTO implements RegistrationDTOInterface
 {
