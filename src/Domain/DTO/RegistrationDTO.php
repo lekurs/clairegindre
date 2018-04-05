@@ -12,6 +12,7 @@ namespace App\Domain\DTO;
 use App\Domain\DTO\Interfaces\RegistrationDTOInterface;
 use App\Domain\Models\Interfaces\PictureInterface;
 use App\Domain\Models\Interfaces\UserInterface;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 
 class RegistrationDTO implements RegistrationDTOInterface
@@ -37,19 +38,19 @@ class RegistrationDTO implements RegistrationDTOInterface
     public $plainPassword;
 
     /**
-     * @var int
+     * @var \DateTime
      */
     public $dateWedding;
 
     /**
-     * @var PictureInterface
+     * @var string
      */
     public $picture; //A vérifier
 
     /**
-     * @var UserInterface
+     * @var string
      */
-    public $user; //A vérifier
+    public $role;
 
     /**
      * RegistrationDTO constructor.
@@ -57,18 +58,17 @@ class RegistrationDTO implements RegistrationDTOInterface
      * @param string $username
      * @param string $lastName
      * @param string $plainPassword
-     * @param int $dateWedding
-     * @param PictureInterface $picture
-     * @param UserInterface $user
+     * @param \DateTime $dateWedding
+     * @param string $picture
      */
     public function __construct(
         string $email,
         string $username,
         string $lastName,
         string $plainPassword,
-        int $dateWedding,
-        PictureInterface $picture,
-        UserInterface $user
+        \DateTime $dateWedding,
+        string $picture,
+        string $role
     ) {
         $this->email = $email;
         $this->username = $username;
@@ -76,6 +76,24 @@ class RegistrationDTO implements RegistrationDTOInterface
         $this->plainPassword = $plainPassword;
         $this->dateWedding = $dateWedding;
         $this->picture = $picture;
-        $this->user = $user;
+        $this->role = $role;
     }
+
+    /**
+     * @return \DateTime
+     */
+    public function getDateWedding(): \DateTime
+    {
+        return $this->dateWedding;
+    }
+
+    /**
+     * @param \DateTime $dateWedding
+     */
+    public function setDateWedding(\DateTime $dateWedding): void
+    {
+        $this->dateWedding = $dateWedding;
+    }
+
+
 }

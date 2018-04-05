@@ -9,19 +9,17 @@
 namespace App\Domain\Form\Type;
 
 use App\Domain\DTO\Interfaces\RegistrationDTOInterface;
-use App\Entity\User;
-use App\Subscriber\Interfaces\ProfileImageUploadSubscriberInterface;
+use App\Domain\DTO\RegistrationDTO;
 use App\Subscriber\Interfaces\UserFolderSubscriberInterface;
 use App\Subscriber\ProfileImageUploadSubscriber;
-use App\Subscriber\ReviewImageSubscriber;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class RegistrationType extends AbstractType
@@ -89,6 +87,17 @@ class RegistrationType extends AbstractType
     {
         $resolver->setDefaults(array(
             'data_class' => RegistrationDTOInterface::class,
+            'empty_data' => function (FormInterface $form) {
+                            return new RegistrationDTO(
+                                $form->get('email')->getData(),
+                                $form->get('username')->getData(),
+                                $form->get('lastName')->getData(),
+                                $form->get('plainPassword')->getData(),
+                                $form->get('date_wedding')->getData(),
+                                $form->get('picture')->getData(),
+                                'ROLE_ADMIN'
+                            );
+                        }
         ));
     }
 }

@@ -87,24 +87,23 @@ class User implements UserInterface, BaseUser
      * @param array $roles
      */
     public function __construct(
-//        string $email,
-//        string $username,
-//        string $lastName,
+        string $email,
+        string $username,
+        string $lastName,
 //        string $password,
-//        string $plainPassword,
-//        \DateTime $dateWedding,
-//        PictureInterface $picture,
-//        array $roles
+        string $plainPassword,
+        \DateTime $dateWedding,
+        PictureInterface $picture,
+        string $roles
     ) {
         $this->id = Uuid::uuid4();
-//        $this->email = $email;
-//        $this->username = $username;
-//        $this->lastName = $lastName;
-//        $this->password = $password;
-//        $this->plainPassword = $plainPassword;
-//        $this->dateWedding = $dateWedding;
-//        $this->picture = $picture;
-//        $this->roles = $roles;
+        $this->email = $email;
+        $this->username = $username;
+        $this->lastName = $lastName;
+        $this->plainPassword = $plainPassword;
+        $this->dateWedding = $dateWedding;
+        $this->picture = $picture;
+        $this->roles = $roles;
     }
 
 

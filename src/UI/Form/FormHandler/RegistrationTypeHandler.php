@@ -10,6 +10,7 @@ namespace App\UI\Form\FormHandler;
 
 use App\Domain\Builder\Interfaces\UserBuilderInterface;
 use App\Domain\Models\Interfaces\UserInterface;
+use App\Domain\Repository\Interfaces\UserRepositoryInterface;
 use App\UI\Form\FormHandler\Interfaces\RegistrationTypeHandlerInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -18,7 +19,7 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 class RegistrationTypeHandler implements RegistrationTypeHandlerInterface
 {
     /**
-     * @var UserInterface
+     * @var UserRepositoryInterface
      */
     private $userRepository;
 
@@ -40,13 +41,13 @@ class RegistrationTypeHandler implements RegistrationTypeHandlerInterface
     /**
      * RegistrationTypeHandler constructor.
      *
-     * @param UserInterface $userRepository
+     * @param UserRepositoryInterface $userRepository
      * @param SessionInterface $session
      * @param ValidatorInterface $validator
      * @param UserBuilderInterface $userBuilder
      */
     public function __construct(
-        UserInterface $userRepository,
+        UserRepositoryInterface $userRepository,
         SessionInterface $session,
         ValidatorInterface $validator,
         UserBuilderInterface $userBuilder
@@ -64,16 +65,19 @@ class RegistrationTypeHandler implements RegistrationTypeHandlerInterface
                                                                             $form->getData()->email,
                                                                             $form->getData()->username,
                                                                             $form->getData()->lastName,
-                                                                            $form->getData()->password,
-                                                                            $form->getData()->wedding_date,
-                                                                            'ROLE_ADMIN'
+                                                                            $form->getData()->plainPassword,
+                                                                            $form->getData()->dateWedding,
+                                                                            $form->getData()->picture,
+//                                                                            'ROLE_ADMIN'
                                                                         );
 
             $this->validator->validate($user, [], [
                 'registration_creation'
             ]);
-
-            $this->userRepository->save($user);
+            dump($form->getData()->email);
+            dump($user);
+//            die();
+            $this->userRepository->save($this->userBuilder->getUser());
 
             $this->session->getFlashBag()->add('success', 'L\'utilisateur à bien été ajouté');
 

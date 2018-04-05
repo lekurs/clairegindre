@@ -9,6 +9,7 @@
 namespace App\Domain\Builder\Interfaces;
 
 
+use App\Domain\Models\Interfaces\PictureInterface;
 use App\Domain\Models\Picture;
 use App\Domain\Models\User;
 
@@ -20,10 +21,11 @@ interface UserBuilderInterface
      * @param string $lastName
      * @param string $password
      * @param \DateTime $dateTime
+     * @param PictureInterface $picture
      * @param $role
      * @return UserBuilderInterface
      */
-    public function create(string $email, string $username, string $lastName, string $password, \DateTime $dateTime, $role): UserBuilderInterface;
+    public function create(string $email, string $username, string $lastName, string $password, \DateTime $dateTime, PictureInterface $picture, $role): UserBuilderInterface;
 
     /**
      * @param int $user

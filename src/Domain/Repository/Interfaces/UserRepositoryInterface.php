@@ -9,6 +9,8 @@
 namespace App\Domain\Repository\Interfaces;
 
 
+use App\Domain\Models\Interfaces\UserInterface;
+
 interface UserRepositoryInterface
 {
     /**
@@ -21,4 +23,9 @@ interface UserRepositoryInterface
      * @return mixed
      */
     public function showGalleryByUser();
+
+    /**
+     * @param UserInterface $user
+     */
+    public function save(UserInterface $user): void;
 }

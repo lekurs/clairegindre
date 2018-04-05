@@ -24,3 +24,7 @@ services:
     App\UI\Action\:
         resource: '../src/UI/Action'
         tags: ['controller.service_arguments']
+
+#    App\Domain\Repository\:
+#        resource: '../src/Domain/Repository'
+#        tags: ['doctrine.repository_service']

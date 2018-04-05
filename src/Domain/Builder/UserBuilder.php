@@ -9,6 +9,7 @@
 namespace App\Domain\Builder;
 
 use App\Domain\Builder\Interfaces\UserBuilderInterface;
+use App\Domain\Models\Interfaces\PictureInterface;
 use App\Domain\Models\Picture;
 use App\Domain\Models\User;
 
@@ -20,9 +21,19 @@ class UserBuilder implements UserBuilderInterface
      */
     private $user;
 
-  public function create(string $email, string $username, string $lastName, string $password, \DateTime $dateTime, $role): UserBuilderInterface
+    /**
+     * @param string $email
+     * @param string $username
+     * @param string $lastName
+     * @param string $password
+     * @param \DateTime $dateTime
+     * @param PictureInterface $picture
+     * @param $role
+     * @return UserBuilderInterface
+     */
+  public function create(string $email, string $username, string $lastName, string $password, \DateTime $dateTime, PictureInterface $picture, $role): UserBuilderInterface
   {
-      $this->user = new User($email, $username, $lastName, $password, $dateTime, $role);
+      $this->user = new User($email, $username, $lastName, $password, $dateTime, $picture, $role);
 
       return $this;
   }
