@@ -9,7 +9,7 @@
         <field name="email" type="string" length="255" unique="true" nullable="false"/>
         <field name="username" type="string" length="100" nullable="false" unique="false" />
         <field name="lastName" type="string" length="100" nullable="false" unique="false" />
-        <field name="plainPassword" type="string" length="255" nullable="false" unique="false" />
+        <field name="password" type="string" length="255" nullable="false" unique="false" />
         <field name="dateWedding" type="date" nullable="true" unique="false" />
         <field name="roles" type="array" nullable="false" unique="false" />
 

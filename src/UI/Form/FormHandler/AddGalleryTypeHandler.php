@@ -9,7 +9,7 @@
 namespace App\UI\Form\FormHandler;
 
 
-use App\Builder\Interfaces\GalleryBuilderInterface;
+use App\Domain\Builder\Interfaces\GalleryBuilderInterface;
 use App\Domain\Repository\Interfaces\GalleryRepositoryInterface;
 use App\UI\Form\FormHandler\Interfaces\AddGalleryTypeHandlerInterface;
 use Symfony\Component\Form\FormInterface;
@@ -61,6 +61,7 @@ class AddGalleryTypeHandler implements AddGalleryTypeHandlerInterface
     public function handle(FormInterface $form): bool
     {
         if($form->isSubmitted() && $form->isSubmitted()) {
+            //boucle subscriber
             $gallery = $this->galleryBuilder->create(); //Créer le constructeur de gallery
 
             $this->validator->validate($gallery, [], [

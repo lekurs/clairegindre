@@ -1,12 +1,12 @@
 security:
     encoders:
-          App\Entity\User:
+          App\Domain\Models\User:
                 algorithm: bcrypt
 
     providers:
         our_db_provider:
                     entity:
-                        class: App\Entity\User
+                        class: App\Domain\Models\User
                         property: email
 
     firewalls:

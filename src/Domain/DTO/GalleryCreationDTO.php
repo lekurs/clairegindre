@@ -10,7 +10,7 @@ namespace App\Domain\DTO;
 
 
 use App\Domain\DTO\Interfaces\GalleryCreationDTOInterface;
-use App\Entity\Interfaces\BenefitInterface;
+use App\Domain\Models\Interfaces\BenefitInterface;
 
 class GalleryCreationDTO implements GalleryCreationDTOInterface
 {
@@ -24,6 +24,9 @@ class GalleryCreationDTO implements GalleryCreationDTOInterface
      */
     public $title;
 
+    /**
+     * @var \SplFileInfo[]
+     */
     public $pictures;
 
     /**
@@ -36,7 +39,7 @@ class GalleryCreationDTO implements GalleryCreationDTOInterface
     public function __construct(
         BenefitInterface $benefit,
         string $title,
-        $pictures
+        array $pictures
     ) {
         $this->benefit = $benefit;
         $this->title = $title;

@@ -12,6 +12,7 @@ use App\Domain\Builder\Interfaces\UserBuilderInterface;
 use App\Domain\Models\Interfaces\PictureInterface;
 use App\Domain\Models\Picture;
 use App\Domain\Models\User;
+use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 
 
 class UserBuilder implements UserBuilderInterface
@@ -20,6 +21,21 @@ class UserBuilder implements UserBuilderInterface
      * @var User
      */
     private $user;
+
+    /**
+     * @var EncoderFactoryInterface
+     */
+    private $encoderFactory;
+
+    /**
+     * UserBuilder constructor.
+     *
+     * @param EncoderFactoryInterface $encoderFactory
+     */
+    public function __construct(EncoderFactoryInterface $encoderFactory)
+    {
+        $this->encoderFactory = $encoderFactory;
+    }
 
     /**
      * @param string $email
@@ -33,7 +49,9 @@ class UserBuilder implements UserBuilderInterface
      */
   public function create(string $email, string $username, string $lastName, string $password, \DateTime $dateTime, PictureInterface $picture, $role): UserBuilderInterface
   {
-      $this->user = new User($email, $username, $lastName, $password, $dateTime, $picture, $role);
+      $encoder = $this->encoderFactory->getEncoder(User::class);
+
+      $this->user = new User($email, $username, $lastName, $password, \Closure::fromCallable([$encoder, 'encodePassword']),$dateTime, $picture, $role);
 
       return $this;
   }

@@ -12,6 +12,7 @@ namespace App\Domain\DTO;
 use App\Domain\DTO\Interfaces\RegistrationDTOInterface;
 use App\Domain\Models\Interfaces\PictureInterface;
 use App\Domain\Models\Interfaces\UserInterface;
+use Symfony\Component\Finder\SplFileInfo;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 
@@ -43,14 +44,10 @@ class RegistrationDTO implements RegistrationDTOInterface
     public $dateWedding;
 
     /**
-     * @var string
+     * @var \SplFileInfo
      */
     public $picture; //A vérifier
 
-    /**
-     * @var string
-     */
-    public $role;
 
     /**
      * RegistrationDTO constructor.
@@ -67,8 +64,7 @@ class RegistrationDTO implements RegistrationDTOInterface
         string $lastName,
         string $plainPassword,
         \DateTime $dateWedding,
-        string $picture,
-        string $role
+        \SplFileInfo $picture
     ) {
         $this->email = $email;
         $this->username = $username;
@@ -76,24 +72,5 @@ class RegistrationDTO implements RegistrationDTOInterface
         $this->plainPassword = $plainPassword;
         $this->dateWedding = $dateWedding;
         $this->picture = $picture;
-        $this->role = $role;
     }
-
-    /**
-     * @return \DateTime
-     */
-    public function getDateWedding(): \DateTime
-    {
-        return $this->dateWedding;
-    }
-
-    /**
-     * @param \DateTime $dateWedding
-     */
-    public function setDateWedding(\DateTime $dateWedding): void
-    {
-        $this->dateWedding = $dateWedding;
-    }
-
-
 }

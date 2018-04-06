@@ -90,8 +90,8 @@ class User implements UserInterface, BaseUser
         string $email,
         string $username,
         string $lastName,
-//        string $password,
         string $plainPassword,
+        callable $encoder,
         \DateTime $dateWedding,
         PictureInterface $picture,
         string $roles
@@ -100,10 +100,10 @@ class User implements UserInterface, BaseUser
         $this->email = $email;
         $this->username = $username;
         $this->lastName = $lastName;
-        $this->plainPassword = $plainPassword;
+        $this->password = $encoder($plainPassword, null);
         $this->dateWedding = $dateWedding;
         $this->picture = $picture;
-        $this->roles = $roles;
+        $this->roles[] = $roles;
     }
 
 

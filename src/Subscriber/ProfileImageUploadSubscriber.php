@@ -60,15 +60,15 @@ class ProfileImageUploadSubscriber implements EventSubscriberInterface, ProfileI
 
     public function onImageUpload(FormEvent $event)
     {
-        try {
-            $this->fileSystem->mkdir($this->targetDir . '/customers', 0777);
-        } catch (IOExceptionInterface $exception) {
-            echo "une erreur est survenue durant la création du répertoire : ".$exception->getPath();
-        }
-
-        $this->pictureUploaderHelper->move($event->getData(), $this->targetDir . '/customers/', $event->getData()->getClientOriginalName());
-        $picture = new Picture($event->getData()->getClientOriginalName(), '/images/upload/customers', $event->getData()->guessClientExtension());
-//        dump($event->getForm()->getParent()->getData());
+//        try {
+//            $this->fileSystem->mkdir($this->targetDir . '/customers', 0777);
+//        } catch (IOExceptionInterface $exception) {
+//            echo "une erreur est survenue durant la création du répertoire : ".$exception->getPath();
+//        }
+//
+//        $this->pictureUploaderHelper->move($event->getData(), $this->targetDir . '/customers/', $event->getData()->getClientOriginalName());
+//        $picture = new Picture($event->getData()->getClientOriginalName(), '/images/upload/customers', $event->getData()->guessClientExtension());
+//        dump($event->getForm()->getParent()->getData()->picture = $picture);
 //        die();
 //        $event->getForm()->getParent()->getData()->setPicture($picture);
     }

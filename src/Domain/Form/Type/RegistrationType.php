@@ -68,7 +68,7 @@ class RegistrationType extends AbstractType
                 'label' => 'Mot de passe',
                 'required' => true,
             ))
-            ->add('date_wedding', DateType::class, array(
+            ->add('dateWedding', DateType::class, array(
                 'label' => 'Date évèvement',
                 'widget' => 'single_text',
 //                'html5' => false,
@@ -76,11 +76,9 @@ class RegistrationType extends AbstractType
 //                'attr' => ['class' => 'js-datepicker'],
             ))
             ->add('picture', FileType::class, array(
-                'label' => 'Choisissez un fichier',
-                'mapped' => false,
+                'label' => 'Choisissez un fichier'
             ))
             ;
-        $builder->get('picture')->addEventSubscriber($this->profileImageUploadSubscriber);
     }
 
     public function configureOptions(OptionsResolver $resolver)
@@ -93,9 +91,8 @@ class RegistrationType extends AbstractType
                                 $form->get('username')->getData(),
                                 $form->get('lastName')->getData(),
                                 $form->get('plainPassword')->getData(),
-                                $form->get('date_wedding')->getData(),
-                                $form->get('picture')->getData(),
-                                'ROLE_ADMIN'
+                                $form->get('dateWedding')->getData(),
+                                $form->get('picture')->getData()
                             );
                         }
         ));

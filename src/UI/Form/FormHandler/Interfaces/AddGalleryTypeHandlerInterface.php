@@ -9,7 +9,7 @@
 namespace App\UI\Form\FormHandler\Interfaces;
 
 
-use App\Builder\Interfaces\GalleryBuilderInterface;
+use App\Domain\Builder\Interfaces\GalleryBuilderInterface;
 use App\Domain\Repository\Interfaces\GalleryRepositoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
