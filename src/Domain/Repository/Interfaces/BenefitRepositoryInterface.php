@@ -9,7 +9,7 @@
 namespace App\Domain\Repository\Interfaces;
 
 
-use App\Entity\Interfaces\BenefitInterface;
+use App\Domain\Models\Interfaces\BenefitInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 interface BenefitRepositoryInterface
@@ -22,8 +22,12 @@ interface BenefitRepositoryInterface
     public function __construct(RegistryInterface $registry);
 
     /**
+     * @return array
+     */
+    public function getAll(): array ;
+
+    /**
      * @param BenefitInterface $benefit
      */
     public function save(BenefitInterface $benefit): void;
-
 }

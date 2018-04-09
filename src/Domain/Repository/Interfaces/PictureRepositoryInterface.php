@@ -9,7 +9,22 @@
 namespace App\Domain\Repository\Interfaces;
 
 
+use App\Domain\Models\Interfaces\PictureInterface;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Symfony\Bridge\Doctrine\RegistryInterface;
+
 interface PictureRepositoryInterface
 {
-    public function save();
+    /**
+     * PictureRepositoryInterface constructor.
+     *
+     * @param RegistryInterface $registry
+     */
+    public function __construct(RegistryInterface $registry);
+
+    /**
+     * @param PictureInterface $picture
+     * @return mixed
+     */
+    public function save(PictureInterface $picture);
 }

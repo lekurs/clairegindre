@@ -9,6 +9,9 @@ use Ramsey\Uuid\Uuid;
 
 class Gallery implements GalleryInterface
 {
+    /**
+     * @var string
+     */
     private $id;
 
     /**
@@ -31,10 +34,25 @@ class Gallery implements GalleryInterface
      */
     private $pictures;
 
-    public function __construct()
-    {
+    /**
+     * Gallery constructor.
+     *
+     * @param UserInterface $user
+     * @param string $title
+     * @param BenefitInterface $benefit
+     */
+    public function __construct(
+        string $title,
+        UserInterface $user,
+        BenefitInterface $benefit
+    ) {
         $this->id = Uuid::uuid4();
+        $this->title = $title;
+        $this->user = $user;
+        $this->benefit = $benefit;
     }
+
+
     /**
      * @return mixed
      */

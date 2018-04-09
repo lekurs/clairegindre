@@ -51,6 +51,7 @@ adminLogin:
         _controller: App\Controller\Security\SecurityController::login
 
 #adminRegister:
+#adminRegister:
 #    path: /admin/register
 #    defaults:
 #       _controller: App\Controller\Security\RegisterController::register
@@ -75,10 +76,10 @@ adminDeleteUser:
 #    defaults:
 #        _controller: App\Controller\Admin\Gallery\GalleryAddController::show
 
-adminGalleryUpdate:
-    path: /admin/gallery/update/{slug}
-    defaults:
-        _controller: App\Controller\GalleryController::update
+#adminGalleryUpdate:
+#    path: /admin/gallery/update/{slug}
+#    defaults:
+#        _controller: App\Controller\GalleryController::update
 
 #adminGalleryDelete:
 #    path: /admin/gallery/delete/{slug}
@@ -95,7 +96,7 @@ adminSite:
 #    defaults:
 #      _controller: App\Controller\Admin\ReviewsController::addReviews
 
-#adminBenefit:
+#adminBenefitadminBenefit:
 #    path: /admin/configuration/benefit
 #    defaults:
 #      _controller: App\Controller\Configuration\BenefitController::show

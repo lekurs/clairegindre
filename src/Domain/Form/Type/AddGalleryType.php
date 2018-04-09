@@ -9,8 +9,11 @@
 namespace App\Domain\Form\Type;
 
 
-use App\Entity\Benefit;
-use App\Entity\Interfaces\GalleryInterface;
+use App\Domain\DTO\GalleryCreationDTO;
+use App\Domain\DTO\Interfaces\GalleryCreationDTOInterface;
+use App\Domain\Models\Benefit;
+use App\Domain\Models\Gallery;
+use App\Domain\Models\User;
 use App\Subscriber\GalleryImageUploadSubscriber;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -18,6 +21,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class AddGalleryType extends AbstractType
@@ -29,6 +33,7 @@ class AddGalleryType extends AbstractType
 
     /**
      * AddGalleryType constructor.
+     *
      * @param GalleryImageUploadSubscriber $galleryImageUploadSubscriber
      */
     public function __construct(GalleryImageUploadSubscriber $galleryImageUploadSubscriber)
@@ -53,14 +58,26 @@ class AddGalleryType extends AbstractType
                 'multiple' => true,
                 'mapped' => false,
             ))
+            ->add('user', EntityType::class, [
+                'class' => User::class,
+                'choice_label' => 'username'
+            ])
         ;
-        $builder->get('pictures')->addEventSubscriber($this->galleryImageUploadSubscriber);
+//        $builder->get('pictures')->addEventSubscriber($this->galleryImageUploadSubscriber);
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => GalleryInterface::class,
+            'data_class' => GalleryCreationDTOInterface::class,
+            'empty_data' => function (FormInterface $form) {
+                                return new GalleryCreationDTO(
+                                            $form->get('benefit')->getData(),
+                                            $form->get('title')->getData(),
+                                            $form->get('pictures')->getData(),
+                                            $form->get('user')->getData()
+                                );
+                        }
         ));
     }
 }

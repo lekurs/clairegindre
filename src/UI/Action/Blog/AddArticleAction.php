@@ -37,6 +37,7 @@ class AddArticleAction implements AddArticleActionInterface
 
     /**
      * AddArticleAction constructor.
+     *
      * @param FormFactoryInterface $formFactory
      * @param AddArticleTypeHandlerInterface $addArticleTypeHandler
      */

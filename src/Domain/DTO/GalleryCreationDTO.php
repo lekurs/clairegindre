@@ -11,6 +11,7 @@ namespace App\Domain\DTO;
 
 use App\Domain\DTO\Interfaces\GalleryCreationDTOInterface;
 use App\Domain\Models\Interfaces\BenefitInterface;
+use App\Domain\Models\Interfaces\UserInterface;
 
 class GalleryCreationDTO implements GalleryCreationDTOInterface
 {
@@ -30,6 +31,11 @@ class GalleryCreationDTO implements GalleryCreationDTOInterface
     public $pictures;
 
     /**
+     * @var UserInterface
+     */
+    public $user;
+
+    /**
      * GalleryCreationDTO constructor.
      *
      * @param BenefitInterface $benefit
@@ -40,9 +46,11 @@ class GalleryCreationDTO implements GalleryCreationDTOInterface
         BenefitInterface $benefit,
         string $title,
         array $pictures
+//        UserInterface $user
     ) {
         $this->benefit = $benefit;
         $this->title = $title;
         $this->pictures = $pictures;
+//        $this->user = $user;
     }
 }

@@ -8,10 +8,9 @@
 
 namespace App\Domain\Builder;
 
-use App\Builder\Interfaces\PictureBuilderInterface;
-use App\Builder\Interfaces\PictureInterface;
-use App\Entity\Gallery;
-use App\Entity\Picture;
+use App\Domain\Builder\Interfaces\PictureBuilderInterface;
+use App\Domain\Models\Picture;
+use App\Domain\Models\Gallery;
 
 class PictureBuilder implements PictureBuilderInterface
 {

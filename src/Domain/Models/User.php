@@ -80,11 +80,11 @@ class User implements UserInterface, BaseUser
      * @param string $email
      * @param string $username
      * @param string $lastName
-     * @param string $password
      * @param string $plainPassword
+     * @param callable $encoder
      * @param \DateTime $dateWedding
      * @param PictureInterface $picture
-     * @param array $roles
+     * @param string $roles
      */
     public function __construct(
         string $email,
@@ -256,8 +256,6 @@ class User implements UserInterface, BaseUser
     {
         $this->plainPassword = $plainPassword;
     }
-
-
 
     /**
      *

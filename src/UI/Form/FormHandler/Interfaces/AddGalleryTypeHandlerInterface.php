@@ -25,7 +25,7 @@ interface AddGalleryTypeHandlerInterface
      * @param ValidatorInterface $validator
      * @param GalleryBuilderInterface $galleryBuilder
      */
-    public function __construct(GalleryRepositoryInterface $galleryRepository, SessionInterface $session, ValidatorInterface $validator, GalleryBuilderInterface $galleryBuilder);
+//    public function __construct(GalleryRepositoryInterface $galleryRepository, SessionInterface $session, ValidatorInterface $validator, GalleryBuilderInterface $galleryBuilder, PictureUploaderHelper $pictureUploaderHelper, Filesystem $filesystem, string $targetDir);
 
     /**
      * @param FormInterface $form

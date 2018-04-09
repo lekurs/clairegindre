@@ -29,6 +29,7 @@ class UserResponder implements UserResponderInterface
 
     /**
      * UserResponder constructor.
+     *
      * @param Environment $twig
      * @param EntityManagerInterface $entityManager
      */
@@ -41,10 +42,11 @@ class UserResponder implements UserResponderInterface
 
     public function __invoke()
     {
-        $users = $this->entityManager->getRepository(User::class)->showGalleryByUser();
-
+        $usersByGallery = $this->entityManager->getRepository(User::class)->showGalleryByUser();
+        $users = $this->entityManager->getRepository(User::class)->showAll();
         return new Response($this->twig->render('back/admin/users.html.twig', [
             'users' => $users,
+            'usersByGalleri' => $usersByGallery
         ]));
     }
 

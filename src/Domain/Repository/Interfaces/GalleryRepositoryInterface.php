@@ -9,7 +9,7 @@
 namespace App\Domain\Repository\Interfaces;
 
 
-use App\Entity\Interfaces\GalleryInterface;
+use App\Domain\Models\Interfaces\GalleryInterface;
 
 interface GalleryRepositoryInterface
 {

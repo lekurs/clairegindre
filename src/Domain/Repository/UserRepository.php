@@ -56,13 +56,16 @@ class UserRepository extends ServiceEntityRepository implements UserLoaderInterf
      */
     public function showOne($id): User
     {
-        return $this->createQueryBuilder('u')
-            ->where('u.id = :id')
+        return $this->createQueryBuilder('user')
+            ->where('user.id = :id')
             ->setParameter('id', $id)
             ->getQuery()
             ->getOneOrNullResult();
     }
 
+    /**
+     * @return mixed
+     */
     public function showGalleryByUser()
     {
         return $this->createQueryBuilder('user')

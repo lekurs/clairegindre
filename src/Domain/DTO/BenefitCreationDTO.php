@@ -10,7 +10,7 @@ namespace App\Domain\DTO;
 
 
 use App\Domain\DTO\Interfaces\BenefitCreationDTOInterface;
-use App\Entity\Interfaces\BenefitInterface;
+use App\Domain\Models\Interfaces\BenefitInterface;
 
 class BenefitCreationDTO implements BenefitCreationDTOInterface
 {
@@ -20,21 +20,14 @@ class BenefitCreationDTO implements BenefitCreationDTOInterface
     public $name;
 
     /**
-     * @var BenefitInterface
-     */
-    public $benefit;
-
-    /**
      * BenefitCreationDTO constructor.
      *
      * @param string $name
      * @param BenefitInterface $benefit
      */
     public function __construct(
-        string $name,
-        BenefitInterface $benefit
+        string $name
     ) {
         $this->name = $name;
-        $this->benefit = $benefit;
     }
 }

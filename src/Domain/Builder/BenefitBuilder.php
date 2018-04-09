@@ -9,8 +9,8 @@
 namespace App\Domain\Builder;
 
 
-use App\Builder\Interfaces\BenefitBuilderInterface;
-use App\Entity\Benefit;
+use App\Domain\Builder\Interfaces\BenefitBuilderInterface;
+use App\Domain\Models\Benefit;
 
 class BenefitBuilder implements BenefitBuilderInterface
 {

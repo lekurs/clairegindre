@@ -59,14 +59,32 @@ class Comment implements CategoryInterface
 
     /**
      * Comment constructor.
-     * @param UuidInterface $id
-
+     *
+     * @param string $title
+     * @param string $category
+     * @param \DateTime $date
+     * @param bool $online
+     * @param string $picture
+     * @param UserInterface $author
+     * @param ArticleInterface $article
      */
     public function __construct(
-
+        string $title,
+        string $category,
+        \DateTime $date,
+        bool $online,
+        string $picture,
+        UserInterface $author,
+        ArticleInterface $article
     ) {
         $this->id = Uuid::uuid4();
-
+        $this->title = $title;
+        $this->category = $category;
+        $this->date = $date;
+        $this->online = $online;
+        $this->picture = $picture;
+        $this->author = $author;
+        $this->article = $article;
     }
 
 

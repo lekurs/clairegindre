@@ -2,7 +2,7 @@
 
 namespace App\Repository;
 
-use App\Entity\Benefit;
+use App\Domain\Models\Benefit;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -37,17 +37,4 @@ class BenefitRepository extends ServiceEntityRepository
 
         return $qb->execute();
     }
-
-    /*
-    public function findBySomething($value)
-    {
-        return $this->createQueryBuilder('b')
-            ->where('b.something = :value')->setParameter('value', $value)
-            ->orderBy('b.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
 }

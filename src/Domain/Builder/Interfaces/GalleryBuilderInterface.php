@@ -9,9 +9,9 @@
 namespace App\Domain\Builder\Interfaces;
 
 
-use App\Entity\Interfaces\BenefitInterface;
-use App\Entity\Interfaces\GalleryInterface;
-use App\Entity\Interfaces\UserInterface;
+use App\Domain\Models\Interfaces\BenefitInterface;
+use App\Domain\Models\Interfaces\GalleryInterface;
+use App\Domain\Models\Interfaces\UserInterface;
 
 interface GalleryBuilderInterface
 {

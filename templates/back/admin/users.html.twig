@@ -45,18 +45,18 @@
                     {#<p>{{ user.benefit }}</p>#}
                 {#</div>#}
                 <div class="col">
-                    {% if user.galleries is empty %}
+                    {#{% if user.galleries is empty %}#}
                     <p><a href="{{ path('adminAddGallery', {'id': user.id}) }}">Ajouter</a></p>
-                    {% endif %}
+                    {#{% endif %}#}
                     <p><i class="fa fa-chevron-down show-gallery"></i></p>
                             <div class="row">
-                                {% for gallery in user.galleries %}
+                                {#{% for gallery in user.galleries %}#}
                                 <div class="col show-gallery-details">
-                                    <a href="{{ path('adminGalleryEdit', {'id': gallery.id}) }}">{{ gallery.benefit.name }}</a>
+                                    {#<a href="{{ path('adminGalleryEdit', {'id': gallery.id}) }}">{{ gallery.benefit.name }}</a>#}
                                 </div>
-                                {% else %}
+                                {#{% else %}#}
                                 <p>Aucune galerie</p>
-                                {% endfor %}
+                                {#{% endfor %}#}
                             </div>
                 </div>
                 <div class="col">

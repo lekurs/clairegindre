@@ -9,7 +9,7 @@
 namespace App\UI\Form\FormHandler;
 
 
-use App\Builder\Interfaces\BenefitBuilderInterface;
+use App\Domain\Builder\Interfaces\BenefitBuilderInterface;
 use App\Domain\Repository\Interfaces\BenefitRepositoryInterface;
 use App\UI\Form\FormHandler\Interfaces\AddBenefitHandlerInterface;
 use Symfony\Component\Form\FormInterface;
@@ -61,13 +61,13 @@ class AddBenefitTypeHandler implements AddBenefitHandlerInterface
     public function handle(FormInterface $form):bool
     {
         if($form->isSubmitted() && $form->isValid()) {
-            $benefit = $this->benefitBuilder->create();//Passer les attributs de Benefits dans le constructeur
+            $benefit = $this->benefitBuilder->create($form->getData()->name);
 
             $this->validator->validate($benefit, [], [
                 'benefit_creation',
                 ]);
 
-            $this->benefitRepository->save($benefit);
+            $this->benefitRepository->save($this->benefitBuilder->getBenefit());
 
             $this->session->getFlashBag()->add('success', 'Une nouvelle prestation à été ajoutée');
 

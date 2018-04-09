@@ -8,6 +8,7 @@ use App\Domain\Models\Interfaces\GalleryInterface;
 use App\Domain\Models\Interfaces\UserInterface;
 use ArrayAccess;
 use Doctrine\ORM\Mapping as ORM;
+use Ramsey\Uuid\Uuid;
 
 /**
  * @ORM\Models(repositoryClass="ArticleRepository")
@@ -70,4 +71,102 @@ class Article implements ArticleInterface
      * @var string
      */
     private $prestation;
+
+    /**
+     * Article constructor.
+     *
+     * @param string $title
+     * @param string $content
+     * @param int $creationDate
+     * @param int $modificationDate
+     * @param bool $online
+     * @param UserInterface $author
+     * @param string $prestation
+     */
+    public function __construct(
+        string $title,
+        string $content,
+        int $creationDate,
+        int $modificationDate,
+        bool $online,
+        UserInterface $author,
+        string $prestation
+    )
+    {
+        $this->id = Uuid::uuid4();
+        $this->title = $title;
+        $this->content = $content;
+        $this->creationDate = $creationDate;
+        $this->modificationDate = $modificationDate;
+        $this->online = $online;
+        $this->author = $author;
+        $this->prestation = $prestation;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id): void
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @return ArrayAccess
+     */
+    public function getImages(): ArrayAccess
+    {
+        return $this->images;
+    }
+
+    /**
+     * @param ArrayAccess $images
+     */
+    public function setImages(ArrayAccess $images): void
+    {
+        $this->images = $images;
+    }
+
+    /**
+     * @return ArrayAccess
+     */
+    public function getComments(): ArrayAccess
+    {
+        return $this->comments;
+    }
+
+    /**
+     * @param ArrayAccess $comments
+     */
+    public function setComments(ArrayAccess $comments): void
+    {
+        $this->comments = $comments;
+    }
+
+    /**
+     * @return GalleryInterface
+     */
+    public function getGallery(): GalleryInterface
+    {
+        return $this->gallery;
+    }
+
+    /**
+     * @param GalleryInterface $gallery
+     */
+    public function setGallery(GalleryInterface $gallery): void
+    {
+        $this->gallery = $gallery;
+    }
+
+
+
 }

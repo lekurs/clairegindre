@@ -9,7 +9,7 @@
 namespace App\Domain\Builder\Interfaces;
 
 
-use App\Entity\Benefit;
+use App\Domain\Models\Benefit;
 
 interface BenefitBuilderInterface
 {

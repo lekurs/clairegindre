@@ -40,7 +40,7 @@ class RegisterResponder implements RegisterResponderInterface
 
     public function __invoke($redirect = false, FormInterface $form = null)
     {
-        $redirect ? $response = new Response($this->urlGenerator->generate('/')) : $response = new Response($this->twig->render('back/admin/register.html.twig', [
+        $redirect ? $response = new Response($this->urlGenerator->generate('/admin')) : $response = new Response($this->twig->render('back/admin/register.html.twig', [
             'register' => $form->createView(),
         ]));
         return $response;

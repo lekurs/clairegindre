@@ -36,9 +36,18 @@ class Benefit implements BenefitInterface
      */
     private $user;
 
-    public function __construct()
-    {
+    /**
+     * Benefit constructor.
+     *
+     * @param string $name
+     * @param CategoryInterface $category
+     * @param UserInterface $user
+     */
+    public function __construct(
+        string $name
+    ) {
         $this->id = Uuid::uuid4();
+        $this->name = $name;
     }
 
     /**
@@ -56,8 +65,6 @@ class Benefit implements BenefitInterface
     {
         $this->galleries = $galleries;
     }
-
-
 
     /**
      * @return mixed

@@ -2,6 +2,7 @@
 
 namespace App\Domain\Repository;
 
+use App\Domain\Models\Interfaces\PictureInterface;
 use App\Domain\Models\Picture;
 use App\Domain\Repository\Interfaces\PictureRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -26,21 +27,9 @@ class PictureRepository extends ServiceEntityRepository implements PictureReposi
         return $qb->execute();
     }
 
-    public function save()
+    public function save(PictureInterface $picture)
     {
-        // TODO: Implement save() method.
+        $this->getEntityManager()->persist($picture);
+        $this->getEntityManager()->flush();
     }
-
-    /*
-    public function findBySomething($value)
-    {
-        return $this->createQueryBuilder('p')
-            ->where('p.something = :value')->setParameter('value', $value)
-            ->orderBy('p.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
 }

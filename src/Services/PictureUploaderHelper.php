@@ -8,10 +8,6 @@
 
 namespace App\Services;
 
-
-
-use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
-use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class PictureUploaderHelper

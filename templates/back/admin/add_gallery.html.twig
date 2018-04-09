@@ -13,11 +13,11 @@
         <div class="col">
             <h1>Gallerie client : {{ user.username }}</h1>
         </div>
-        {{ form_start(gallery_form) }}
-        {{ form_widget(gallery_form) }}
+        {{ form_start(gallery) }}
+        {{ form_widget(gallery) }}
 
             <button type="submit" name="submit-gallery" class="btn btn-primary test-btn">Ajouter</button>
-            {{ form_end(gallery_form) }}
+            {{ form_end(gallery) }}
     </div>
 
 </section>
@@ -26,7 +26,4 @@
 {% block javascripts %}
     {{ parent() }}
     <script src="/js/back/dropfiles.js"></script>
-    <script>$('.dropfiles').dropfiles({
-            script:'{{ path('adminGallery', {'id': app.request.attributes.get('_route_params').id }) }}',
-        })</script>
 {% endblock %}

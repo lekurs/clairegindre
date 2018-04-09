@@ -40,11 +40,11 @@
             </div>
             <div class="row">
                 <div class="col benefit-form">
-                {{ form_start(benefitType) }}
-                        {{ form_row(benefitType.name) }}
+                {{ form_start(form) }}
+                        {{ form_row(form.name) }}
                         <button type="submit" class="btn btn-primary submit-form">Enregistrer</button>
                 </div>
-            {{ form_end(benefitType) }}
+            {{ form_end(form) }}
             </div>
         </div>
     </section>

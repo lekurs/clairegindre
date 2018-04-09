@@ -6,8 +6,6 @@ use App\Domain\Models\Interfaces\ArticleInterface;
 use App\Domain\Models\Interfaces\GalleryInterface;
 use App\Domain\Models\Interfaces\PictureInterface;
 use Ramsey\Uuid\Uuid;
-use Symfony\Component\Validator\Constraints as Assert;
-
 class Picture implements PictureInterface
 {
     /**

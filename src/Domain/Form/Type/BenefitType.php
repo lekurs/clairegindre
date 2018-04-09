@@ -9,7 +9,7 @@
 namespace App\Domain\Form\Type;
 
 
-use App\Entity\Benefit;
+use App\Domain\Models\Benefit;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;

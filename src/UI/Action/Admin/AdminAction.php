@@ -18,7 +18,7 @@ use Symfony\Component\Routing\Annotation\Route;
  *
  * @Route(
  *     name="admin",
- *     path="admin"
+ *     path="/admin"
  * )
  *
  * @package App\UI\Action\Admin

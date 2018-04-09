@@ -3,6 +3,7 @@
 namespace App\Domain\Repository;
 
 use App\Domain\Models\Comment;
+use App\Domain\Models\Interfaces\CommentInterface;
 use App\Domain\Repository\Interfaces\CommentRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
@@ -22,16 +23,9 @@ class CommentRepository extends ServiceEntityRepository implements CommentReposi
             ->getResult();
     }
 
-    /*
-    public function findBySomething($value)
+    public function save(CommentInterface $comment)
     {
-        return $this->createQueryBuilder('c')
-            ->where('c.something = :value')->setParameter('value', $value)
-            ->orderBy('c.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
+        $this->getEntityManager()->persist($comment);
+        $this->getEntityManager()->flush();
     }
-    */
 }

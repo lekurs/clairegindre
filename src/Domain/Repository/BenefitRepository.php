@@ -8,10 +8,9 @@
 
 namespace App\Domain\Repository;
 
-
 use App\Domain\Repository\Interfaces\BenefitRepositoryInterface;
-use App\Entity\Benefit;
-use App\Entity\Interfaces\BenefitInterface;
+use App\Domain\Models\Benefit;
+use App\Domain\Models\Interfaces\BenefitInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -32,9 +31,9 @@ class BenefitRepository extends ServiceEntityRepository implements BenefitReposi
      */
     public function getAll(): array
     {
-        $qb = $this->createQueryBuilder('b')
-            ->select('b.name')
-            ->orderBy('id')
+        $qb = $this->createQueryBuilder('benefit')
+            ->select('benefit.name')
+            ->orderBy('benefit.id')
             ->getQuery()
         ;
 

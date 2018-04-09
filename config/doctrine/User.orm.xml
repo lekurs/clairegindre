@@ -20,8 +20,16 @@
             <join-column name="picture_id" referenced-column-name="id" />
         </one-to-one>
         <one-to-many field="comments" target-entity="App\Domain\Models\Comment" mapped-by="author" />
-        <one-to-many field="benefits" target-entity="App\Domain\Models\Benefit" mapped-by="user" />
-        <one-to-many field="galleries" target-entity="App\Domain\Models\Gallery" mapped-by="user" />
+        <one-to-many field="benefits" target-entity="App\Domain\Models\Benefit" mapped-by="user">
+            <cascade>
+                <cascade-persist/>
+            </cascade>
+        </one-to-many>
+        <one-to-many field="galleries" target-entity="App\Domain\Models\Gallery" mapped-by="user">
+            <cascade>
+                <cascade-persist/>
+            </cascade>
+        </one-to-many>
         <one-to-many field="articles" target-entity="App\Domain\Models\Article" mapped-by="author" />
     </entity>
 
