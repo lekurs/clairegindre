@@ -15,8 +15,6 @@ interface BenefitInterface
      * BenefitInterface constructor.
      *
      * @param string $name
-     * @param CategoryInterface $category
-     * @param UserInterface $user
      */
-//    public function __construct(string $name);
+    public function __construct(string $name);
 }

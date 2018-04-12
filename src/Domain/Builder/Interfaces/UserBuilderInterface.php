@@ -22,10 +22,11 @@ interface UserBuilderInterface
      * @param string $password
      * @param \DateTime $dateTime
      * @param PictureInterface $picture
+     * @param bool $online
      * @param $role
      * @return UserBuilderInterface
      */
-    public function create(string $email, string $username, string $lastName, string $password, \DateTime $dateTime, PictureInterface $picture, $role): UserBuilderInterface;
+    public function create(string $email, string $username, string $lastName, string $password, \DateTime $dateTime, PictureInterface $picture, bool $online, $role): UserBuilderInterface;
 
     /**
      * @param int $user

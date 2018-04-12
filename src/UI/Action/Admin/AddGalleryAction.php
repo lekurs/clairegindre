@@ -67,7 +67,7 @@ class AddGalleryAction implements AddGalleryActionInterface
 
         if($this->galleryHandler->handle($addGalleryType)) {
 
-            return $responder(true);
+            return $responder(true, $addGalleryType, $user);
         }
         return $responder(false, $addGalleryType, $user);
     }

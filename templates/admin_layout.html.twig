@@ -12,6 +12,7 @@
             <link href="{{ asset('/css/styles/medium_styles.css') }}" rel="stylesheet" />
             <link href="{{ asset('/css/styles/small_styles.css') }}" rel="stylesheet" />
             <link href="{{ asset('/css/styles/gallery.css') }}" rel="stylesheet" />
+            <link href="{{ asset('/css/styles/admin.css') }}" rel="stylesheet" />
             <link href="{{ asset('/fonts/font-awesome.min.css') }}" rel="stylesheet">
             <link href="https://fonts.googleapis.com/css?family=Assistant:200,300,400,600,700,800|Quicksand:300,400,500,700" rel="stylesheet">
         {% endblock %}
@@ -50,7 +51,26 @@
 
 <body>
 {% block body %}
-    {% block content %}
+
+        {% block content %}
+                <div class="container">
+                {% block admin_menus %}
+                    <div class="row menus-admin">
+                        <div class="col-4 text-center">
+                            <a href="{{ path('adminUser') }}"><i class="fa fa-user fa-5x"></i></a>
+                            <p class="admin-menus-title">Gestion utilisateurs</p>
+                        </div>
+                        <div class="col-4 text-center">
+                            <a href="{{ path('adminGallery') }}"><i class="fa fa-camera-retro fa-5x"></i></a>
+                            <p class="admin-menus-title">Galeries</p>
+                        </div>
+                        <div class="col-4 text-center">
+                            <a href="{{ path('adminBlog') }}"><i class="fa fa-book fa-5x"></i></a>
+                            <p class="admin-menus-title">Blog</p>
+                        </div>
+                    </div>
+                {% endblock %}
+                </div>
         {% endblock %}
 {% endblock %}
 </body>

@@ -21,7 +21,7 @@ interface GalleryBuilderInterface
      * @param BenefitInterface $benefit
      * @return mixed
      */
-    public function create(string $title, UserInterface $user, BenefitInterface $benefit);
+//    public function create(string $title, UserInterface $user, BenefitInterface $benefit);
 
     /**
      * @return GalleryInterface

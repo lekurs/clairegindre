@@ -9,8 +9,10 @@
 namespace App\UI\Action\Security;
 
 
+use App\Domain\Models\User;
 use App\UI\Action\Security\Interfaces\UserActionInterface;
 use App\UI\Responder\Security\Interfaces\UserResponderInterface;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -25,9 +27,26 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class UserAction implements UserActionInterface
 {
+    /**
+     * @var EntityManagerInterface
+     */
+    private $entityManager;
+
+    /**
+     * UserAction constructor.
+     * @param EntityManagerInterface $entityManager
+     */
+    public function __construct(EntityManagerInterface $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
+
     public function __invoke(UserResponderInterface $responder)
     {
-        return $responder();
+        $users = $this->entityManager->getRepository(User::class)->showGalleryByUser();
+
+        return $responder($users);
     }
 
 }

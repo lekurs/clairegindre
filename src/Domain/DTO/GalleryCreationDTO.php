@@ -45,12 +45,12 @@ class GalleryCreationDTO implements GalleryCreationDTOInterface
     public function __construct(
         BenefitInterface $benefit,
         string $title,
-        array $pictures
-//        UserInterface $user
+        array $pictures,
+        UserInterface $user
     ) {
         $this->benefit = $benefit;
         $this->title = $title;
         $this->pictures = $pictures;
-//        $this->user = $user;
+        $this->user = $user;
     }
 }

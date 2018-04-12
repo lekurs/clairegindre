@@ -103,19 +103,21 @@ class AddGalleryTypeHandler implements AddGalleryTypeHandlerInterface
                 $benefit = new BenefitBuilder();
                 $benefit->create($form->getData()->benefit->getName());
 
+                dump($form->getData()->pictures);
+
                 $this->pictureUploaderHelper->move($pictures, $this->targetDir . '/gallery/' . $form->getData()->title, $pictures->getClientOriginalName());
                 $picture = new Picture($pictures->getClientOriginalName(), 'images/upload/gallery/' . $form->getData()->title, $pictures->guessClientExtension());
 
                 $gallery = $this->galleryBuilder->create($form->getData()->title, $form->getData()->user, $benefit->getBenefit());
-                dump($gallery);
-//                die();
-
 
 //                    $this->validator->validate($gallery, [], [
 //                        'gallery_creation'
 //                    ]);
             }
 
+            dump($this->galleryBuilder->getGallery());
+
+            die();
 
             $this->galleryRepository->save($this->galleryBuilder->getGallery());
 

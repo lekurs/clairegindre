@@ -8,10 +8,7 @@
 
 namespace App\UI\Responder\Security;
 
-
-use App\Domain\Models\User;
 use App\UI\Responder\Security\Interfaces\UserResponderInterface;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
 
@@ -23,30 +20,20 @@ class UserResponder implements UserResponderInterface
     private $twig;
 
     /**
-     * @var EntityManagerInterface
-     */
-    private $entityManager;
-
-    /**
      * UserResponder constructor.
      *
      * @param Environment $twig
-     * @param EntityManagerInterface $entityManager
      */
-    public function __construct(Environment $twig, EntityManagerInterface $entityManager)
+    public function __construct(Environment $twig)
     {
         $this->twig = $twig;
-        $this->entityManager = $entityManager;
     }
 
 
-    public function __invoke()
+    public function __invoke($users)
     {
-        $usersByGallery = $this->entityManager->getRepository(User::class)->showGalleryByUser();
-        $users = $this->entityManager->getRepository(User::class)->showAll();
         return new Response($this->twig->render('back/admin/users.html.twig', [
             'users' => $users,
-            'usersByGalleri' => $usersByGallery
         ]));
     }
 

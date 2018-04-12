@@ -44,6 +44,11 @@ class RegistrationDTO implements RegistrationDTOInterface
     public $dateWedding;
 
     /**
+     * @var bool
+     */
+    public $online;
+
+    /**
      * @var \SplFileInfo
      */
     public $picture; //A vérifier
@@ -51,11 +56,13 @@ class RegistrationDTO implements RegistrationDTOInterface
 
     /**
      * RegistrationDTO constructor.
+     *
      * @param string $email
      * @param string $username
      * @param string $lastName
      * @param string $plainPassword
      * @param \DateTime $dateWedding
+     * @param $online
      * @param string $picture
      */
     public function __construct(
@@ -64,7 +71,8 @@ class RegistrationDTO implements RegistrationDTOInterface
         string $lastName,
         string $plainPassword,
         \DateTime $dateWedding,
-        \SplFileInfo $picture
+        \SplFileInfo $picture,
+        bool $online
     ) {
         $this->email = $email;
         $this->username = $username;
@@ -72,5 +80,6 @@ class RegistrationDTO implements RegistrationDTOInterface
         $this->plainPassword = $plainPassword;
         $this->dateWedding = $dateWedding;
         $this->picture = $picture;
+        $this->online = $online;
     }
 }

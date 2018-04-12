@@ -44,7 +44,6 @@ class AddGalleryResponder implements AddGalleryResponderInterface
     public function __invoke($redirect = false, FormInterface $form = null, $user)
     {
         $redirect ? $response = new Response($this->urlGenerator->generate('/admin')) : $response = new Response($this->twig->render('back/admin/add_gallery.html.twig', [
-//            'user' => $user,
             'gallery' => $form->createView(),
             'user' => $user,
         ]));

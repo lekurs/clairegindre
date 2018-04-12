@@ -5,72 +5,62 @@
 {% endblock %}
 
 {% block content %}
-    <h1>Administration des utilisateurs</h1>
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <p>Nom</p>
+    <section>
+        <h1>Administration des utilisateurs</h1>
+        <div class="container users">
+            <div class="row">
+                <div class="col">
+                    <p class="text-uppercase font-weight-bold">Nom</p>
+                </div>
+                <div class="col">
+                    <p class="text-uppercase font-weight-bold">Prénoms</p>
+                </div>
+                <div class="col">
+                    <p class="text-uppercase font-weight-bold">Images</p>
+                </div>
+                <div class="col">
+                    <p class="text-uppercase font-weight-bold">Ajouter une gallerie</p>
+                </div>
+                <div class="col">
+                    <p class="text-uppercase font-weight-bold">Editer</p>
+                </div>
             </div>
-            <div class="col">
-                <p>Prénoms</p>
-            </div>
-            <div class="col">
-                <p>Images</p>
-            </div>
-            {#<div class="col">#}
-                {#<p>Prestation</p>#}
-            {#</div>#}
-            <div class="col">
-                <p>Ajouter une gallerie</p>
-            </div>
-            <div class="col">
-                <p>Editer</p>
-            </div>
-            <div class="col">
-                <p>Supprimer</p>
+            {% for user in users %}
+                <div class="row no-gutters">
+                    <div class="col">
+                        <p>{{ user.username }}</p>
+                    </div>
+                    <div class="col">
+                        <p>{{ user.lastName }}</p>
+                    </div>
+                    <div class="col">
+                        {#<p><img src="/images/upload/customers/{{ user.pictureName}}" /></p>#}
+                    </div>
+                    <div class="col">
+                        {% if user.galleries is empty %}
+                        <p><a href="{{ path('adminAddGallery', {'id': user.id}) }}">Ajouter</a></p>
+                        {% endif %}
+                        <p><i class="fa fa-chevron-down show-gallery"></i></p>
+                                    {% for gallery in user.galleries %}
+                                    <div class="col show-gallery-details">
+                                        <a href="{{ path('adminGalleryEdit', {'id': gallery.id}) }}">{{ gallery.benefit.name }}</a>
+                                    </div>
+                                    {% else %}
+                                        <div class="col show-galleries">
+                                            <p class="text-center">Aucune galerie</p>
+                                        </div>
+                                    {% endfor %}
+                    </div>
+                    <div class="col">
+                        <a href="{{ path('adminEditUser', {'id': user.id}) }}"><i class="fa fa-edit"></i></a>
+                    </div>
+                </div>
+            {% endfor %}
+            <div class="row">
+                <div class="col add_user">
+                    <a href="{{ path('adminRegister') }}">Ajouter un utilisateur</a>
+                </div>
             </div>
         </div>
-        {% for user in users %}
-            <div class="row no-gutters">
-                <div class="col">
-                    <p>{{ user.username }}</p>
-                </div>
-                <div class="col">
-                    <p>{{ user.lastName }}</p>
-                </div>
-                <div class="col">
-                    {#<p><img src="/images/upload/customers/{{ user.pictureName}}" /></p>#}
-                </div>
-                {#<div class="col">#}
-                    {#<p>{{ user.benefit }}</p>#}
-                {#</div>#}
-                <div class="col">
-                    {#{% if user.galleries is empty %}#}
-                    <p><a href="{{ path('adminAddGallery', {'id': user.id}) }}">Ajouter</a></p>
-                    {#{% endif %}#}
-                    <p><i class="fa fa-chevron-down show-gallery"></i></p>
-                            <div class="row">
-                                {#{% for gallery in user.galleries %}#}
-                                <div class="col show-gallery-details">
-                                    {#<a href="{{ path('adminGalleryEdit', {'id': gallery.id}) }}">{{ gallery.benefit.name }}</a>#}
-                                </div>
-                                {#{% else %}#}
-                                <p>Aucune galerie</p>
-                                {#{% endfor %}#}
-                            </div>
-                </div>
-                <div class="col">
-                    <a href="{{ path('adminEditUser', {'id': user.id}) }}"><i class="fa fa-edit"></i></a>
-                </div>
-                <div class="col">
-                    <a href="{{ path('adminDeleteUser', {'id': user.id}) }}" ><i class="fa fa-trash"></i></a>
-                </div>
-            </div>
-        {% endfor %}
-        <div class="row">
-            <div class="col add_user">
-                <a href="{{ path('adminRegister') }}">Ajouter un utilisateur</a>
-            </div>
-        </div>
-    </div>
+    </section>
 {% endblock %}

@@ -13,6 +13,7 @@ use App\Domain\DTO\RegistrationDTO;
 use App\Subscriber\Interfaces\UserFolderSubscriberInterface;
 use App\Subscriber\ProfileImageUploadSubscriber;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -78,6 +79,7 @@ class RegistrationType extends AbstractType
             ->add('picture', FileType::class, array(
                 'label' => 'Choisissez un fichier'
             ))
+            ->add('online', CheckboxType::class)
             ;
     }
 
@@ -92,7 +94,8 @@ class RegistrationType extends AbstractType
                                 $form->get('lastName')->getData(),
                                 $form->get('plainPassword')->getData(),
                                 $form->get('dateWedding')->getData(),
-                                $form->get('picture')->getData()
+                                $form->get('picture')->getData(),
+                                $form->get('online')->getData()
                             );
                         }
         ));

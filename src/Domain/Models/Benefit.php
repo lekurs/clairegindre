@@ -40,8 +40,6 @@ class Benefit implements BenefitInterface
      * Benefit constructor.
      *
      * @param string $name
-     * @param CategoryInterface $category
-     * @param UserInterface $user
      */
     public function __construct(
         string $name
@@ -56,14 +54,6 @@ class Benefit implements BenefitInterface
     public function getGalleries(): ArrayAccess
     {
         return $this->galleries;
-    }
-
-    /**
-     * @param ArrayAccess $galleries
-     */
-    public function setGalleries(ArrayAccess $galleries): void
-    {
-        $this->galleries = $galleries;
     }
 
     /**

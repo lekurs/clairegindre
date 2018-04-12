@@ -51,6 +51,11 @@ class User implements UserInterface, BaseUser
     private $picture;
 
     /**
+     * @var bool
+     */
+    private $online;
+
+    /**
      * @var array
      */
     private $roles;
@@ -77,6 +82,7 @@ class User implements UserInterface, BaseUser
 
     /**
      * User constructor.
+     *
      * @param string $email
      * @param string $username
      * @param string $lastName
@@ -84,6 +90,7 @@ class User implements UserInterface, BaseUser
      * @param callable $encoder
      * @param \DateTime $dateWedding
      * @param PictureInterface $picture
+     * @param bool $online
      * @param string $roles
      */
     public function __construct(
@@ -94,6 +101,7 @@ class User implements UserInterface, BaseUser
         callable $encoder,
         \DateTime $dateWedding,
         PictureInterface $picture,
+        bool $online,
         string $roles
     ) {
         $this->id = Uuid::uuid4();
@@ -103,6 +111,7 @@ class User implements UserInterface, BaseUser
         $this->password = $encoder($plainPassword, null);
         $this->dateWedding = $dateWedding;
         $this->picture = $picture;
+        $this->online = $online;
         $this->roles[] = $roles;
     }
 
@@ -211,6 +220,14 @@ class User implements UserInterface, BaseUser
     }
 
     /**
+     * @return bool
+     */
+    public function isOnline(): bool
+    {
+        return $this->online;
+    }
+
+    /**
      * @param Picture $picture
      */
     public function setPicture(Picture $picture)
@@ -226,6 +243,14 @@ class User implements UserInterface, BaseUser
     public function getGalleries(): \ArrayAccess
     {
         return $this->galleries;
+    }
+
+    /**
+     * @return \ArrayAccess
+     */
+    public function getBenefits(): \ArrayAccess
+    {
+        return $this->benefits;
     }
 
     /**

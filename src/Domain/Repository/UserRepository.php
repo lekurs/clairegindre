@@ -69,7 +69,7 @@ class UserRepository extends ServiceEntityRepository implements UserLoaderInterf
     public function showGalleryByUser()
     {
         return $this->createQueryBuilder('user')
-            ->innerJoin('user.galleries', 'galleries')
+            ->leftJoin('user.galleries', 'galleries')
             ->getQuery()
             ->getResult();
     }

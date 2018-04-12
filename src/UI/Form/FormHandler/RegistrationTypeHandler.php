@@ -105,7 +105,8 @@ class RegistrationTypeHandler implements RegistrationTypeHandlerInterface
                                                                             $form->getData()->plainPassword,
                                                                             $form->getData()->dateWedding,
                                                                             $picture,
-                                                                            'ROLE_ADMIN'
+                                                                            '1',
+                                                                            'ROLE_USER'
                                                                         );
 
             $this->validator->validate($user, [], [

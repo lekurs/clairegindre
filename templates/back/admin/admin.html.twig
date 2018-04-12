@@ -17,6 +17,36 @@
                 {{ flash_message }}
             </div>
         {% endfor %}
-        {% endblock %}
-<h1>Bienvenue sur l'admin</h1>
+    {% endblock %}
+
+    {% block title_admin %}
+        <h1>Bienvenue sur l'administration</h1>
+    {% endblock %}
+
+    {{ parent() }}
+
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-12 infos-admin-container">
+                    <div class="row">
+                        <div class="col">Total clients :</div>
+                        <div class="col">XX</div>
+                    </div>
+                    <div class="row">
+                        <div class="col">Total Galeries photos</div>
+                        <div class="col">XX</div>
+                    </div>
+                    <div class="row">
+                        <div class="col">Total messages postés sur le blog : </div>
+                        <div class="col">XX</div>
+                    </div>
+                    <div class="row">
+                        <div class="col">Galeries en ligne :</div>
+                        <div class="col">XX</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 {% endblock %}

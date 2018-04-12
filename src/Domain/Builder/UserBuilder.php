@@ -44,14 +44,15 @@ class UserBuilder implements UserBuilderInterface
      * @param string $password
      * @param \DateTime $dateTime
      * @param PictureInterface $picture
+     * @param bool $online
      * @param $role
      * @return UserBuilderInterface
      */
-  public function create(string $email, string $username, string $lastName, string $password, \DateTime $dateTime, PictureInterface $picture, $role): UserBuilderInterface
+  public function create(string $email, string $username, string $lastName, string $password, \DateTime $dateTime, PictureInterface $picture, bool $online, $role): UserBuilderInterface
   {
       $encoder = $this->encoderFactory->getEncoder(User::class);
 
-      $this->user = new User($email, $username, $lastName, $password, \Closure::fromCallable([$encoder, 'encodePassword']),$dateTime, $picture, $role);
+      $this->user = new User($email, $username, $lastName, $password, \Closure::fromCallable([$encoder, 'encodePassword']),$dateTime, $picture, $online, $role);
 
       return $this;
   }
