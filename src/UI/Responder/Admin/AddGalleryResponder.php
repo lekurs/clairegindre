@@ -50,5 +50,4 @@ class AddGalleryResponder implements AddGalleryResponderInterface
 
         return $response;
     }
-
 }

@@ -44,14 +44,12 @@ class Gallery implements GalleryInterface
     public function __construct(
         string $title,
         UserInterface $user,
-        BenefitInterface $benefit,
-        \ArrayAccess $pictures
+        BenefitInterface $benefit
     ) {
         $this->id = Uuid::uuid4();
         $this->title = $title;
         $this->user = $user;
         $this->benefit = $benefit;
-        $this->pictures = $pictures;
     }
 
 
@@ -135,14 +133,4 @@ class Gallery implements GalleryInterface
 
         $picture->setGallery($this);
     }
-
-//    /**
-//     * @param Picture $picture
-//     */
-//    public function setPictures(\ArrayAccess $picture): void
-//    {
-//        $this->pictures = $picture;
-//
-////        $picture->setPicture($this);
-//    }
 }
