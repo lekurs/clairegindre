@@ -2,21 +2,16 @@
 /**
  * Created by PhpStorm.
  * User: Bidule
- * Date: 03/04/2018
- * Time: 22:15
+ * Date: 12/04/2018
+ * Time: 14:12
  */
 
 namespace App\Domain\DTO;
 
 
-use App\Domain\DTO\Interfaces\RegistrationDTOInterface;
-use App\Domain\Models\Interfaces\PictureInterface;
-use App\Domain\Models\Interfaces\UserInterface;
-use Symfony\Component\Finder\SplFileInfo;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
+use App\Domain\DTO\Interfaces\EditUserDTOInterface;
 
-
-class RegistrationDTO implements RegistrationDTOInterface
+class EditUserDTO implements EditUserDTOInterface
 {
     /**
      * @var string
@@ -39,47 +34,47 @@ class RegistrationDTO implements RegistrationDTOInterface
     public $plainPassword;
 
     /**
-     * @var \DateTime
-     */
-    public $dateWedding;
-
-    /**
      * @var bool
      */
     public $online;
+
+    /**
+     * @var \DateTime
+     */
+    public $dateWedding;
 
     /**
      * @var \SplFileInfo
      */
     public $picture;
 
-
     /**
-     * RegistrationDTO constructor.
+     * EditUserDTO constructor.
      *
      * @param string $email
      * @param string $username
      * @param string $lastName
      * @param string $plainPassword
+     * @param bool $online
      * @param \DateTime $dateWedding
-     * @param $online
-     * @param string $picture
+     * @param \SplFileInfo $picture
      */
     public function __construct(
         string $email,
         string $username,
         string $lastName,
         string $plainPassword,
+        bool $online,
         \DateTime $dateWedding,
-        \SplFileInfo $picture,
-        bool $online
-    ) {
+        \SplFileInfo $picture
+    )
+    {
         $this->email = $email;
         $this->username = $username;
         $this->lastName = $lastName;
         $this->plainPassword = $plainPassword;
+        $this->online = $online;
         $this->dateWedding = $dateWedding;
         $this->picture = $picture;
-        $this->online = $online;
     }
 }

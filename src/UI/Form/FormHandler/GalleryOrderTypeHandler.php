@@ -9,7 +9,7 @@
 namespace App\UI\Form\FormHandler;
 
 
-use App\Builder\Interfaces\GalleryBuilderInterface;
+use App\Domain\Builder\Interfaces\GalleryBuilderInterface;
 use App\Domain\Repository\Interfaces\GalleryRepositoryInterface;
 use App\UI\Form\FormHandler\Interfaces\GalleryOrderTypeHandlerInterface;
 use Symfony\Component\Form\FormInterface;
@@ -75,5 +75,4 @@ class GalleryOrderTypeHandler implements GalleryOrderTypeHandlerInterface
         }
         return false;
     }
-
 }
