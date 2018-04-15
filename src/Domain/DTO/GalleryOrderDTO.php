@@ -9,7 +9,7 @@
 namespace App\Domain\DTO;
 
 
-use App\Builder\Interfaces\GalleryBuilderInterface;
+use App\Domain\Builder\Interfaces\GalleryBuilderInterface;
 use App\Domain\DTO\Interfaces\GalleryOrderDTOInterface;
 
 class GalleryOrderDTO implements GalleryOrderDTOInterface
@@ -26,6 +26,7 @@ class GalleryOrderDTO implements GalleryOrderDTOInterface
 
     /**
      * GalleryOrderDTO constructor.
+     *
      * @param array $pictures
      * @param GalleryBuilderInterface $galleryBuilder
      */

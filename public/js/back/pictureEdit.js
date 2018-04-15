@@ -4,14 +4,14 @@ $(document).ready(function() {
 
     if (index == 0) {
 
-        addUrl($container);
+        addImage($container);
 
     } else {
 
     }
-    function addUrl($container) {
+    function addImage($container) {
         var template = $container.attr('data-prototype')
-            .replace(/__name__label__/g, 'link n°' + (index+1))
+            .replace(/__name__label__/g, 'image n°' + (index+1))
             .replace(/__name__/g,        index)
         ;
 

@@ -12,16 +12,20 @@
 {% block content %}
 <div class="container">
     <div class="row">
-        <div class="col-12 picture-thumb-container">
-            <div class="row no-gutters">
+        {%  form_theme form 'form/fields.html.twig' %}
+            <div class="col-12 picture-thumb-container" data-sortable=".picture-thumb" id="sort1">
                 {{ form_start(form) }}
-                {% for images in form.pictures %}
-                    {{ form_row(images) }}
-                    <img src="{{ asset(images.vars.data.publicPath ~ '/' ~ images.vars.data.pictureName) }}" />
-                {% endfor %}
-                {{ form_end(form) }}
+                    {% for images in form.pictures %}
+                <div class="picture-thumb" data-position="{{ images.vars.data.displayOrder }}" data-id="1">
+                    <div class="content-thumb" >
+                        {{ form_row(images) }}
+                        <img src="{{ asset(images.vars.data.publicPath ~ '/' ~ images.vars.data.pictureName) }}" />
+                    </div>
+                </div>
+                    {% endfor %}
             </div>
-        </div>
+        <button type="submit" class="btn btn-primary sub-login">Mettre à jour</button>
+        {{ form_end(form) }}
     </div>
 </div>
 {% endblock %}
@@ -30,4 +34,9 @@
 {{ parent() }}
 <script src="{{ asset('js/back/editGallery.js') }}"></script>
 <script src="{{ asset('js/back/pictureEdit.js') }}"></script>
+<script>
+    sortable = new draggrable(
+        document.querySelector('#sort1'),
+    )
+</script>
 {% endblock %}

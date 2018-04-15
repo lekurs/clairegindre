@@ -17,7 +17,7 @@ interface PictureBuilderInterface
     /**
      * @return PictureBuilderInterface
      */
-    public function create(): PictureBuilderInterface;
+//    public function create(): PictureBuilderInterface;
 
     /**
      * @param string $name

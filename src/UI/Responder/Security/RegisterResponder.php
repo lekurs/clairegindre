@@ -11,6 +11,7 @@ namespace App\UI\Responder\Security;
 
 use App\UI\Responder\Security\Interfaces\RegisterResponderInterface;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Twig\Environment;
@@ -40,7 +41,7 @@ class RegisterResponder implements RegisterResponderInterface
 
     public function __invoke($redirect = false, FormInterface $form = null)
     {
-        $redirect ? $response = new Response($this->urlGenerator->generate('/admin')) : $response = new Response($this->twig->render('back/admin/register.html.twig', [
+        $redirect ? $response = new RedirectResponse($this->urlGenerator->generate('admin')) : $response = new Response($this->twig->render('back/admin/register.html.twig', [
             'register' => $form->createView(),
         ]));
         return $response;

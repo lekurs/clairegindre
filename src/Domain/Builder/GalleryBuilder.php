@@ -14,6 +14,7 @@ use App\Domain\Models\Benefit;
 use App\Domain\Models\Gallery;
 use App\Domain\Models\Interfaces\BenefitInterface;
 use App\Domain\Models\Interfaces\GalleryInterface;
+use App\Domain\Models\Interfaces\PictureInterface;
 use App\Domain\Models\Interfaces\UserInterface;
 
 class GalleryBuilder implements GalleryBuilderInterface
@@ -40,6 +41,13 @@ class GalleryBuilder implements GalleryBuilderInterface
     public function withBenefit(Benefit $benefit): GalleryBuilderInterface
     {
         $this->gallery->setBenefit($benefit);
+
+        return $this;
+    }
+
+    public function withPicture(PictureInterface $picture): GalleryBuilderInterface
+    {
+        $this->gallery->setPictures($picture);
 
         return $this;
     }

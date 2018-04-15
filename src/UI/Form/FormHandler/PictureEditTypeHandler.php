@@ -9,7 +9,7 @@
 namespace App\UI\Form\FormHandler;
 
 
-use App\Builder\Interfaces\PictureBuilderInterface;
+use App\Domain\Builder\Interfaces\PictureBuilderInterface;
 use App\Domain\Repository\Interfaces\PictureRepositoryInterface;
 use App\UI\Form\FormHandler\Interfaces\PictureEditTypeHandlerInterface;
 use Symfony\Component\Form\FormInterface;

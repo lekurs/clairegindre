@@ -65,9 +65,9 @@ class AddGalleryAction implements AddGalleryActionInterface
 
         $user = $this->entityManager->getRepository(UserEntity::class)->showOne($request->get('id'));
 
-        if($this->galleryHandler->handle($addGalleryType)) {
+        if($this->galleryHandler->handle($addGalleryType, $user)) {
 
-            return $responder(true, $addGalleryType, $user);
+            return $responder(true, null, $user);
         }
         return $responder(false, $addGalleryType, $user);
     }

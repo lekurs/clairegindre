@@ -9,10 +9,14 @@
 namespace App\Domain\Form\Type;
 
 
-use App\Entity\Gallery;
+use App\Domain\DTO\GalleryOrderDTO;
+use App\Domain\DTO\Interfaces\GalleryOrderDTOInterface;
+use App\Domain\DTO\PictureEditDTO;
+use App\Domain\Models\Gallery;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use App\Subscriber\Interfaces\PictureEditTypeSubscriberInterface;
 
@@ -33,7 +37,13 @@ class GalleryOrderType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Gallery::class,
+            'data_class' => Gallery::class
+//                GalleryOrderDTOInterface::class,
+//            'empty_data' => function (FormInterface $form) {
+//                    return new GalleryOrderDTO(
+//                            $form->get('pictures')->getData()
+//                    );
+//            }
         ]);
     }
 }

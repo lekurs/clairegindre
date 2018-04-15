@@ -11,6 +11,7 @@ namespace App\Domain\Builder\Interfaces;
 
 use App\Domain\Models\Interfaces\BenefitInterface;
 use App\Domain\Models\Interfaces\GalleryInterface;
+use App\Domain\Models\Interfaces\PictureInterface;
 use App\Domain\Models\Interfaces\UserInterface;
 
 interface GalleryBuilderInterface
@@ -22,6 +23,12 @@ interface GalleryBuilderInterface
      * @return mixed
      */
 //    public function create(string $title, UserInterface $user, BenefitInterface $benefit);
+
+    /**
+     * @param PictureInterface $picture
+     * @return GalleryBuilderInterface
+     */
+    public function withPicture(PictureInterface $picture): GalleryBuilderInterface;
 
     /**
      * @return GalleryInterface

@@ -10,11 +10,13 @@ namespace App\Domain\Form\Type;
 
 
 use App\Domain\DTO\Interfaces\PictureEditDTOInterface;
-use App\Subscriber\Interfaces\PictureEditTypeSubscriberInterface;
+use App\Domain\DTO\PictureEditDTO;
+use App\Domain\Models\Picture;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\RadioType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class PictureEditType extends AbstractType
@@ -22,7 +24,9 @@ class PictureEditType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('displayOrder', HiddenType::class)
+            ->add('displayOrder', HiddenType::class, [
+                'label_attr' => ['class' => 'sr-only'],
+                ])
             ->add('favorite', RadioType::class)
             ;
     }
@@ -31,7 +35,15 @@ class PictureEditType extends AbstractType
     {
         $resolver
             ->setDefaults([
-                'data_class' => PictureEditDTOInterface::class,
+                'data_class' => Picture::class
+
+//                    PictureEditDTOInterface::class,
+//                'empty_data' => function (FormInterface $form) {
+//                        return new PictureEditDTO(
+//                           $form->get('displayOrder')->getData(),
+//                           $form->get('favorite')->getData()
+//                        );
+//                }
             ]);
     }
 

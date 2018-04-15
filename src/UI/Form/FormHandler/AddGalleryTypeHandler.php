@@ -11,6 +11,7 @@ namespace App\UI\Form\FormHandler;
 
 use App\Domain\Builder\BenefitBuilder;
 use App\Domain\Builder\Interfaces\GalleryBuilderInterface;
+use App\Domain\Models\Interfaces\UserInterface;
 use App\Domain\Models\Picture;
 use App\Domain\Models\User;
 use App\Domain\Repository\Interfaces\GalleryRepositoryInterface;
@@ -89,7 +90,7 @@ class AddGalleryTypeHandler implements AddGalleryTypeHandlerInterface
     }
 
 
-    public function handle(FormInterface $form): bool
+    public function handle(FormInterface $form, UserInterface $user): bool
     {
         if($form->isSubmitted() && $form->isSubmitted()) {
 
@@ -99,25 +100,20 @@ class AddGalleryTypeHandler implements AddGalleryTypeHandlerInterface
                 echo "une erreur est survenue durant la création du répertoire : ".$exception->getPath();
             }
 
-            foreach ($form->getData()->pictures as $pictures) {
-                $benefit = new BenefitBuilder();
-                $benefit->create($form->getData()->benefit->getName());
+            $this->galleryBuilder->create($form->getData()->title, $user, $form->getData()->benefit);
 
-                dump($form->getData()->pictures);
+            foreach ($form->getData()->pictures as $pictures) {
 
                 $this->pictureUploaderHelper->move($pictures, $this->targetDir . '/gallery/' . $form->getData()->title, $pictures->getClientOriginalName());
-                $picture = new Picture($pictures->getClientOriginalName(), 'images/upload/gallery/' . $form->getData()->title, $pictures->guessClientExtension());
 
-                $gallery = $this->galleryBuilder->create($form->getData()->title, $form->getData()->user, $benefit->getBenefit());
+                $this->galleryBuilder->withPicture(
+                    new Picture($pictures->getClientOriginalName(), 'images/upload/gallery/' . $form->getData()->title, $pictures->guessClientExtension())
+                );
 
 //                    $this->validator->validate($gallery, [], [
 //                        'gallery_creation'
 //                    ]);
             }
-
-            dump($this->galleryBuilder->getGallery());
-
-            die();
 
             $this->galleryRepository->save($this->galleryBuilder->getGallery());
 

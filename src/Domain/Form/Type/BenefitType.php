@@ -24,7 +24,7 @@ class BenefitType extends AbstractType
             ->add('name', EntityType::class, array(
                 'class' => Benefit::class,
                 'choice_label' => 'name',
-                'label_attr' => ['class' => 'sr-only',],
+                'label_attr' => ['class' => 'sr-only'],
             ))
             ;
     }

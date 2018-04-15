@@ -19,6 +19,9 @@
         </many-to-one>
 
         <many-to-one field="benefit" target-entity="App\Domain\Models\Benefit" inversed-by="galleries">
+            <cascade>
+                <cascade-persist/>
+            </cascade>
             <join-column name="benefit_id" referenced-column-name="id"/>
         </many-to-one>
 

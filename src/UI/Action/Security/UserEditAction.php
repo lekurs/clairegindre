@@ -10,6 +10,7 @@ namespace App\UI\Action\Security;
 
 
 use App\Domain\Builder\Interfaces\UserBuilderInterface;
+use App\Domain\DTO\EditUserDTO;
 use App\Domain\Form\Type\EditUserType;
 use App\Domain\Models\User;
 use App\UI\Action\Security\Interfaces\UserEditActionInterface;
@@ -58,23 +59,29 @@ class UserEditAction implements UserEditActionInterface
      * @param EntityManagerInterface $entityManager
      * @param UserBuilderInterface $userBuilder
      * @param FormFactoryInterface $formFactory
+     * @param EditUserHandlerInterface $userEditTypeHandler
      */
     public function __construct(
         EntityManagerInterface $entityManager,
         UserBuilderInterface $userBuilder,
-        FormFactoryInterface $formFactory
+        FormFactoryInterface $formFactory,
+        EditUserHandlerInterface $userEditTypeHandler
     ) {
         $this->entityManager = $entityManager;
         $this->userBuilder = $userBuilder;
         $this->formFactory = $formFactory;
+        $this->userEditTypeHandler = $userEditTypeHandler;
     }
 
 
     public function __invoke(Request $request, UserEditResponderInterface $responder)
     {
-        $userEditType = $this->formFactory->create(EditUserType::class)->handleRequest($request);
-
         $user = $this->entityManager->getRepository(User::class)->showOne($request->get('id'));
+
+        $userDto = new EditUserDTO();//passer les valeurs
+
+        $userEditType = $this->formFactory->create(EditUserType::class, $userDto)->handleRequest($request);
+
 
         if($this->userEditTypeHandler->handle($userEditType)) {
             return $responder(true, null, $user);

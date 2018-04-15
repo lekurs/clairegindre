@@ -28,9 +28,11 @@ class AdminGalleryResponder implements AdminGalleryResponderInterface
         $this->twig = $twig;
     }
 
-    public function __invoke()
+    public function __invoke($gallery)
     {
-        return $this->twig->render('back/admin/gallery.html.twig');
+        return $this->twig->render('back/admin/gallery.html.twig', [
+            'gallery' => $gallery,
+        ]);
     }
 
 }

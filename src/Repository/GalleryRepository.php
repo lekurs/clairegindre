@@ -36,4 +36,12 @@ class GalleryRepository extends ServiceEntityRepository
             ->getOneOrNullResult()
             ;
     }
+
+    public function showAll()
+    {
+        return $this->createQueryBuilder('gallery')
+            ->orderBy('id', 'ASC')
+            ->getQuery()
+            ;
+    }
 }

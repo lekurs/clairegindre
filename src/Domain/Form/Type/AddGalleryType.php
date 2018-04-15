@@ -58,12 +58,7 @@ class AddGalleryType extends AbstractType
                 'multiple' => true,
                 'mapped' => false,
             ))
-            ->add('user', EntityType::class, [
-                'class' => User::class,
-                'choice_label' => 'username'
-            ])
-        ;
-//        $builder->get('pictures')->addEventSubscriber($this->galleryImageUploadSubscriber);
+            ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
@@ -74,8 +69,7 @@ class AddGalleryType extends AbstractType
                                 return new GalleryCreationDTO(
                                             $form->get('benefit')->getData(),
                                             $form->get('title')->getData(),
-                                            $form->get('pictures')->getData(),
-                                            $form->get('user')->getData()
+                                            $form->get('pictures')->getData()
                                 );
                         }
         ));

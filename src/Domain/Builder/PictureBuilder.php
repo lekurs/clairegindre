@@ -9,6 +9,8 @@
 namespace App\Domain\Builder;
 
 use App\Domain\Builder\Interfaces\PictureBuilderInterface;
+use App\Domain\Models\Interfaces\ArticleInterface;
+use App\Domain\Models\Interfaces\GalleryInterface;
 use App\Domain\Models\Picture;
 use App\Domain\Models\Gallery;
 
@@ -19,9 +21,9 @@ class PictureBuilder implements PictureBuilderInterface
      */
     private $picture;
 
-    public function create(): PictureBuilderInterface
+    public function create(string $pictureName, string $publicPath, string $extension, int $displayOrder, bool $favorite = false, GalleryInterface $gallery = null, ArticleInterface $article = null): PictureBuilderInterface
     {
-        $this->picture = new Picture();
+        $this->picture = new Picture($pictureName, $publicPath, $extension, $displayOrder, $favorite, $gallery, $article);
 
         return $this;
     }

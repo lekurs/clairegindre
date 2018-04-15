@@ -60,6 +60,15 @@ class GalleryRepository extends ServiceEntityRepository implements GalleryReposi
             ;
     }
 
+    public function testPicture()
+    {
+        return $this->createQueryBuilder('gallery')
+            ->leftJoin('gallery.pictures', 'pictures')
+            ->getQuery()
+            ->execute()
+            ;
+    }
+
     /**
      * @param GalleryInterface $gallery
      * @throws \Doctrine\ORM\ORMException
