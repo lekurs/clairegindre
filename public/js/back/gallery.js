@@ -1,6 +1,3 @@
-/**
- * Created by Emilien on 25/10/2017.
- */
 $(document).ready(function() {
     var $container = $('#story_urls');
     var index = $container.find(':input').length;

@@ -19,7 +19,7 @@
                 <div class="picture-thumb" data-position="{{ images.vars.data.displayOrder }}" data-id="">
                     <div class="content-thumb" >
                         {{ form_row(images) }}
-                        <img src="{{ asset(images.vars.data.publicPath ~ '/' ~ images.vars.data.pictureName) }}" />
+                        <img src="{{ asset(images.vars.data.publicPath ~ '/' ~ images.vars.data.pictureName) }}" class="imgCheck" alt="{{ images.vars.data.pictureName }}" />
                     </div>
                 </div>
                     {% endfor %}
@@ -34,6 +34,7 @@
 {{ parent() }}
 <script src="{{ asset('js/vendor/interactjs.js') }}"></script>
 <script src="{{ asset('js/back/editGallery.js') }}"></script>
+<script src="{{ asset('js/back/add_favorite.js') }}"></script>
 <script src="{{ asset('js/back/pictureEdit.js') }}"></script>
 <script>
     sortable = new Sortable(

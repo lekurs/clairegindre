@@ -70,6 +70,13 @@ class PictureBuilder implements PictureBuilderInterface
         return $this;
     }
 
+    public function withOrder(int $order): PictureBuilderInterface
+    {
+        $this->picture->setDisplayOrder($order);
+
+        return $this;
+    }
+
     public function getPicture(): Picture
     {
         return $this->picture;

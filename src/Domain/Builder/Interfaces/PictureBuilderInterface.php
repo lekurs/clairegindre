@@ -10,14 +10,23 @@ namespace App\Domain\Builder\Interfaces;
 
 
 
+use App\Domain\Models\Interfaces\ArticleInterface;
+use App\Domain\Models\Interfaces\GalleryInterface;
 use App\Domain\Models\Picture;
 
 interface PictureBuilderInterface
 {
     /**
+     * @param string $pictureName
+     * @param string $publicPath
+     * @param string $extension
+     * @param int $displayOrder
+     * @param bool $favorite
+     * @param GalleryInterface|null $gallery
+     * @param ArticleInterface|null $article
      * @return PictureBuilderInterface
      */
-//    public function create(): PictureBuilderInterface;
+    public function create(string $pictureName, string $publicPath, string $extension, int $displayOrder, bool $favorite = false, GalleryInterface $gallery = null, ArticleInterface $article = null): PictureBuilderInterface;
 
     /**
      * @param string $name
@@ -48,6 +57,12 @@ interface PictureBuilderInterface
      * @return PictureBuilderInterface
      */
     public function withBenefit(string $benefit): PictureBuilderInterface;
+
+    /**
+     * @param int $order
+     * @return PictureBuilderInterface
+     */
+    public function withOrder(int $order): PictureBuilderInterface;
 
     /**
      * @return Picture

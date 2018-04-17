@@ -84,9 +84,12 @@
 }
 
 .picture-thumb {
-    height: 140px;
+    height: 250px;
     width: 17%;
     transition: .5s;
+    border: 1px solid #000000;
+    padding: 20px;
+    margin: 5px;
 }
 
 /* Sortable */
@@ -145,6 +148,18 @@
     display: none;
 }
 
+/*.form-check-label {*/
+    /*display: none;*/
+/*}*/
+
+/*input[type="checkbox"] {*/
+    /*display: none;*/
+/*}*/
+
+/*.imgCheck input[type="checkbox"]:checked {*/
+    /*background: red;*/
+/*}*/
+
 .favorite-color {
     color: #ffff00;
 }
@@ -159,6 +174,6 @@ legend {
     display: none;
 }
 
-.form-check-label {
-    position: absolute;
-}
+/*.form-check-label {*/
+    /*position: absolute;*/
+/*}*/

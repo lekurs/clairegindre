@@ -13,6 +13,7 @@ use App\Domain\DTO\Interfaces\PictureEditDTOInterface;
 use App\Domain\DTO\PictureEditDTO;
 use App\Domain\Models\Picture;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\RadioType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -27,7 +28,9 @@ class PictureEditType extends AbstractType
             ->add('displayOrder', HiddenType::class, [
                 'label_attr' => ['class' => 'sr-only'],
                 ])
-            ->add('favorite', RadioType::class)
+            ->add('favorite', CheckboxType::class, [
+                'required' => false,
+            ])
             ;
     }
 
