@@ -82,8 +82,6 @@ class EditGalleryAction implements EditGalleryActionInterface
 
         $form = $this->formFactory->create(GalleryOrderType::class, $gallery);
 
-//        dump($form->getData());
-
         if($this->pictureEditTypeHandler->handle($form)) {
 
             return $responder(true, $form, $gallery);

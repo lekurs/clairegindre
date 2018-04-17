@@ -16,7 +16,7 @@
             <div class="col-12 picture-thumb-container" data-sortable=".picture-thumb" id="sort1">
                 {{ form_start(form) }}
                     {% for images in form.pictures %}
-                <div class="picture-thumb" data-position="{{ images.vars.data.displayOrder }}" data-id="1">
+                <div class="picture-thumb" data-position="{{ images.vars.data.displayOrder }}" data-id="">
                     <div class="content-thumb" >
                         {{ form_row(images) }}
                         <img src="{{ asset(images.vars.data.publicPath ~ '/' ~ images.vars.data.pictureName) }}" />
@@ -32,10 +32,11 @@
 
 {% block javascripts %}
 {{ parent() }}
+<script src="{{ asset('js/vendor/interactjs.js') }}"></script>
 <script src="{{ asset('js/back/editGallery.js') }}"></script>
 <script src="{{ asset('js/back/pictureEdit.js') }}"></script>
 <script>
-    sortable = new draggrable(
+    sortable = new Sortable(
         document.querySelector('#sort1'),
     )
 </script>
