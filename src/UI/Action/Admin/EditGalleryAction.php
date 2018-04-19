@@ -58,11 +58,6 @@ class EditGalleryAction implements EditGalleryActionInterface
     private $pictureEditTypeHandler;
 
     /**
-     * @var PictureBuilderInterface
-     */
-    private $pictureBuilder;
-
-    /**
      * EditGalleryAction constructor.
      *
      * @param EntityManagerInterface $entityManager
@@ -90,6 +85,7 @@ class EditGalleryAction implements EditGalleryActionInterface
         $form = $this->formFactory->create(GalleryOrderType::class, $gallery)->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
+
             foreach ($form->getData()->getPictures() as $pictures)
             {
                 $this->entityManager->persist($pictures);

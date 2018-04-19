@@ -77,8 +77,6 @@ class Article implements ArticleInterface
      *
      * @param string $title
      * @param string $content
-     * @param int $creationDate
-     * @param int $modificationDate
      * @param bool $online
      * @param UserInterface $author
      * @param string $prestation
@@ -86,18 +84,14 @@ class Article implements ArticleInterface
     public function __construct(
         string $title,
         string $content,
-        int $creationDate,
-        int $modificationDate,
         bool $online,
         UserInterface $author,
         string $prestation
-    )
-    {
+    ) {
         $this->id = Uuid::uuid4();
         $this->title = $title;
         $this->content = $content;
-        $this->creationDate = $creationDate;
-        $this->modificationDate = $modificationDate;
+        $this->creationDate = new \DateTime();
         $this->online = $online;
         $this->author = $author;
         $this->prestation = $prestation;

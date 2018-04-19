@@ -15,6 +15,7 @@ use App\Domain\DTO\PictureEditDTO;
 use App\Domain\Models\Gallery;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -30,6 +31,7 @@ class GalleryOrderType extends AbstractType
                 'allow_add' => true,
                 'allow_delete' => true
             ])
+            ->add('title', TextType::class)
         ;
 
     }

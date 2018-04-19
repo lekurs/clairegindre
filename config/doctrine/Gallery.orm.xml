@@ -8,9 +8,10 @@
         <id name="id" column="id" type="string"/>
         <field name="title" type="string" length="255" nullable="false" unique="false" />
 
-        <one-to-many field="pictures" target-entity="App\Domain\Models\Picture" mapped-by="gallery">
+        <one-to-many field="pictures" target-entity="App\Domain\Models\Picture" mapped-by="gallery" orphan-removal="true">
             <cascade>
                 <cascade-persist/>
+                <cascade-remove/>
             </cascade>
         </one-to-many>
 

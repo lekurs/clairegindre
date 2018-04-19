@@ -94,6 +94,8 @@ class AddGalleryTypeHandler implements AddGalleryTypeHandlerInterface
     {
         if($form->isSubmitted() && $form->isSubmitted()) {
 
+            $i = 0;
+
             try {
                 $this->fileSystem->mkdir($this->targetDir . '/gallery', 0777);
             } catch (IOExceptionInterface $exception) {
@@ -107,13 +109,15 @@ class AddGalleryTypeHandler implements AddGalleryTypeHandlerInterface
                 $this->pictureUploaderHelper->move($pictures, $this->targetDir . '/gallery/' . $form->getData()->title, $pictures->getClientOriginalName());
 
                 $this->galleryBuilder->withPicture(
-                    new Picture($pictures->getClientOriginalName(), 'images/upload/gallery/' . $form->getData()->title, $pictures->guessClientExtension())
+                    new Picture($pictures->getClientOriginalName(), 'images/upload/gallery/' . $form->getData()->title, $pictures->guessClientExtension(), $i++)
                 );
 
 //                    $this->validator->validate($gallery, [], [
 //                        'gallery_creation'
 //                    ]);
             }
+
+
 
             $this->galleryRepository->save($this->galleryBuilder->getGallery());
 

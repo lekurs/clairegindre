@@ -1,95 +1,43 @@
-.box_files {
-    display: none;
+.show-active{
+    transform: rotate(180deg);
+    transition: .5s;
 }
 
-.box.has-advanced-upload {
-    background-color: white;
-    outline: 2px dashed black;
-    outline-offset: -10px;
-    height: 540px;
-}
-.box .has-advanced-upload .box__dragndrop {
-    display: inline;
+.show-gallery {
+    transition: .5s;
 }
 
-.box.is_dragover {
-    background-color: grey;
+/* ************************************************** */
+/*                      Update Galleries                                        */
+/* ************************************************** */
+
+.container-form {
+    padding: 0 15px;
+    border: 1px solid #000000;
+    border-width: thin;
 }
 
-.box.is-uploading .box__input {
-    visibility: hidden;
+.parameters-container {
+    border-left: 1px solid #000000;
+    border-bottom: 1px solid #000000;
+    border-width: thin;
 }
-.box.is-uploading .box__uploading {
-    display: block;
-}
-
-.drop-container {
-    width: 100%;
-    min-height: 540px;
-    height: auto;
-}
-
-.dropfiles {
-
-}
-
-.messageUpload {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 150px;
-    text-align: center;
-    border: 1px dashed #000000;
-    margin-bottom: 30px;
-}
-
-.hover {
-    border-color: #0000F0;
-    color: #0000F0;
-    font-size: 2em;
-}
-
-.area-upload {
-    width: 70%;
-    height: 480px;
-    border: 1px solid #242424;
-    text-align: center;
-    overflow: auto;
-}
-
-.area-upload:hover {
-    cursor: pointer;
-}
-
-#file {
-    display: none;
-}
-
-.img_upload {
-    width: 20%;
-}
-
-.upload-img-container {
-    width: 100%;
-    background-size: cover;
-    height: 70vh;
-    overflow: auto;
-    border: 1px solid #242424;
-}
-
 
 .picture-thumb-container {
     width: 100%;
     position: relative;
+    border-bottom: 1px solid #000000;
+    border-width: thin;
 }
 
 .picture-thumb {
-    height: 250px;
+    height: 220px;
     width: 17%;
     transition: .5s;
-    border: 1px solid #000000;
     padding: 20px;
-    margin: 5px;
+    border-right: 1px solid #000000;
+    border-bottom: 1px solid #000000;
+    border-width: thin;
 }
 
 /* Sortable */
@@ -162,12 +110,6 @@
 
 .favorite-color {
     color: #ffff00;
-}
-
-.gallery-customers-container {
-    height: 60vh;
-    display: flex;
-    justify-content: space-between;
 }
 
 legend {

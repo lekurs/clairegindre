@@ -11,7 +11,7 @@ namespace App\Domain\Repository;
 
 use App\Domain\Models\Interfaces\ArticleInterface;
 use App\Domain\Repository\Interfaces\ArticleRepositoryInterface;
-use App\Entity\Article;
+use App\Domain\Models\Article;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 

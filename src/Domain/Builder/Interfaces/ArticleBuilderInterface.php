@@ -9,12 +9,13 @@
 namespace App\Domain\Builder\Interfaces;
 
 
-use App\Entity\Interfaces\ArticleInterface;
-use App\Entity\Interfaces\GalleryInterface;
+use App\Domain\Models\Interfaces\ArticleInterface;
+use App\Domain\Models\Interfaces\GalleryInterface;
+use App\Domain\Models\Interfaces\UserInterface;
 
 interface ArticleBuilderInterface
 {
-    public function create(string $title, string $content, GalleryInterface $gallery): ArticleBuilderInterface;
+    public function create(string $title, string $content, bool $online, UserInterface $author, string $prestation): ArticleBuilderInterface;
 
     public function getArticle():ArticleInterface;
 

@@ -9,13 +9,15 @@
 namespace App\Domain\Form\Type;
 
 
+use App\Domain\DTO\ArticleCreationDTO;
 use App\Domain\DTO\Interfaces\ArticleCreationDTOInterface;
-use App\Entity\Gallery;
+use App\Domain\Models\Gallery;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class AddArticleType extends AbstractType
@@ -24,7 +26,9 @@ class AddArticleType extends AbstractType
     {
         $builder
             ->add('title', TextType::class)
-            ->add('content', TextareaType::class)
+            ->add('content', TextareaType::class, [
+                'required' => false
+            ])
             ->add('gallery', EntityType::class, [
                 'class' => Gallery::class,
                 'choice_label' => 'title'
@@ -37,6 +41,13 @@ class AddArticleType extends AbstractType
         $resolver
             ->setDefaults([
                 'data_class' => ArticleCreationDTOInterface::class,
+                'empty_data' => function (FormInterface $form) {
+                                return new ArticleCreationDTO(
+                                    $form->get('title')->getData(),
+                                    $form->get('content')->getData(),
+                                    $form->get('gallery')->getData()
+                                );
+                }
             ]);
     }
 }

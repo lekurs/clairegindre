@@ -15,7 +15,7 @@
                     <p class="text-uppercase font-weight-bold">Images</p>
                 </div>
                 <div class="col">
-                    <p class="text-uppercase font-weight-bold">Ajouter une gallerie</p>
+                    <p class="text-uppercase font-weight-bold">Les galeries</p>
                 </div>
                 <div class="col">
                     <p class="text-uppercase font-weight-bold">Editer</p>
@@ -33,22 +33,23 @@
                         {#<p><img src="/images/upload/customers/{{ user.pictureName}}" /></p>#}
                     </div>
                     <div class="col">
-                        <p><a href="{{ path('adminAddGallery', {'id': user.id}) }}">Ajouter</a> ou <i class="fa fa-chevron-down show-gallery"></i></p>
-                            <div class="show-galleries">
-                                {% for gallery in user.galleries %}
-                                    <div class="col show-gallery-details">
-                                        <a href="{{ path('adminEditGallery', {'id': gallery.id}) }}">{{ gallery.benefit.name }}</a>
-                                    </div>
-                                {% else %}
-                                    <div class="col show-galleries">
-                                        <p class="text-center">Aucune galerie</p>
-                                    </div>
-                                {% endfor %}
-                            </div>
+                        <a href="{{ path('adminAddGallery', {'id': user.id}) }}"><i class="fa fa-plus"></i></a> ou <i class="fa fa-chevron-up show-gallery"></i>
                     </div>
                     <div class="col">
                         <a href="{{ path('adminUserEdit', {'id': user.id}) }}"><i class="fa fa-edit"></i></a>
                     </div>
+                </div>
+                <div class="show-galleries">
+                    <h3>Galeries</h3>
+                    {% for gallery in user.galleries %}
+                    <div class="col show-gallery-details">
+                        <a href="{{ path('adminEditGallery', {'id': gallery.id}) }}">{{ gallery.benefit.name }}</a>
+                    </div>
+                    {% else %}
+                    <div class="col show-galleries">
+                        <p class="text-center">Aucune galerie</p>
+                    </div>
+                    {% endfor %}
                 </div>
             {% endfor %}
             <div class="row">
@@ -58,4 +59,9 @@
             </div>
         </div>
     </section>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/back/show_galleries_users.js') }}"></script>
 {% endblock %}

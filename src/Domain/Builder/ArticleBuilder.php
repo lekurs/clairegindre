@@ -10,9 +10,10 @@ namespace App\Domain\Builder;
 
 
 use App\Domain\Builder\Interfaces\ArticleBuilderInterface;
-use App\Entity\Article;
-use App\Entity\Interfaces\ArticleInterface;
-use App\Entity\Interfaces\GalleryInterface;
+use App\Domain\Models\Article;
+use App\Domain\Models\Interfaces\ArticleInterface;
+use App\Domain\Models\Interfaces\GalleryInterface;
+use App\Domain\Models\Interfaces\UserInterface;
 
 class ArticleBuilder implements ArticleBuilderInterface
 {
@@ -21,9 +22,19 @@ class ArticleBuilder implements ArticleBuilderInterface
      */
     private $article;
 
-    public function create(string $title, string $content, GalleryInterface $gallery): ArticleBuilderInterface
+    /**
+     * @param string $title
+     * @param string $content
+     * @param int $creationDate
+     * @param int|null $modificationDate
+     * @param bool $online
+     * @param UserInterface $author
+     * @param string $prestation
+     * @return ArticleBuilderInterface
+     */
+    public function create(string $title, string $content, bool $online, UserInterface $author, string $prestation): ArticleBuilderInterface
     {
-        $this->article = new Article($title, $content, $gallery, $gallery->getBenefit());
+        $this->article = new Article($title, $content, $online, $author->getUsername(), $prestation);
 
         return $this;
     }

@@ -60,13 +60,13 @@ class GalleryRepository extends ServiceEntityRepository implements GalleryReposi
             ;
     }
 
-    public function testPicture()
+    public function getAllWithPictures()
     {
         return $this->createQueryBuilder('gallery')
-            ->leftJoin('gallery.pictures', 'pictures')
+            ->where('pictures.favorite = 1')
+            ->innerJoin('gallery.pictures', 'pictures')
             ->getQuery()
-            ->execute()
-            ;
+            ->getResult();
     }
 
     /**
@@ -77,6 +77,12 @@ class GalleryRepository extends ServiceEntityRepository implements GalleryReposi
     public function save(GalleryInterface $gallery)
     {
         $this->getEntityManager()->persist($gallery);
+        $this->getEntityManager()->flush();
+    }
+
+    public function delete(GalleryInterface $gallery)
+    {
+        $this->getEntityManager()->remove($gallery);
         $this->getEntityManager()->flush();
     }
 }

@@ -9,25 +9,55 @@
     {% endblock %}
 
 {% endblock %}
-
 {% block header %}
-{{ parent() }}
-{% endblock %}
+    <div class="row no-gutters">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+            <div class="row justify-content-center no-gutters">
+                {% block left_menu %}
+                    {{ parent() }}
+                {% endblock %}
 
-{% block content %}
-    <div class="container-fluid">
-        <div class="row no-gutters">
-            <div class="col-12 gallery-customers-container">
-                {% for gallery in galleries %}
-                    <div class="gallery-customer-content">
-
+                {% block logo %}
+                    <div class="col-lg-2 col-xl-2 logo-content">
+                        <h1><a href="#" class="logo-img-color"></a></h1>
                     </div>
-                {% endfor %}
+                {% endblock %}
+
+                {% block right_menu %}
+                    {{ parent() }}
+                {% endblock %}
             </div>
+        </div>
+    </div>
+    <div class="row no-gutters">
+        <div class="col-lg-12 col-xl-12 col-md-12 col-sm-12 col-12 gallery-customers-header">
+            <img src="{{ asset('images/background/nico_anlor_b&w.jpg') }}" />
+        </div>
+    </div>
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+                {% for gallery in galleries %}
+                        <div class="img-customers col-xl-3 col-lg-3 col-md-4 col-sm-6 col-12">
+                            <div class="box">
+                                <img src="{{ asset('images/upload/gallery/' ~ gallery.title ~ '/' ~ gallery.pictures.first.pictureName) }}" alt="{{ gallery.pictures.first.pictureName }}" />
+                                <a href="{{ path('galleryCustomerConnection',{'id': gallery.user.id } ) }}">
+                                    <div class="gallery-customers-informations">
+                                    <p><i class="fa fa-lock fa-2x"></i></p>
+                                    <h4>{{ gallery.title }}</h4>
+                                    <p>{{ gallery.user.dateWedding|date('d-m-Y') }}</p>
+                                </div>
+                                </a>
+                            </div>
+                        </div>
+                {% endfor %}
         </div>
     </div>
 {% endblock %}
 
 {% block javascripts %}
-{{ parent() }}
+    {{ parent() }}
+    <script src="{{ asset('/js/front/menu.js') }}"></script>
+    <script src="{{ asset('/js/front/galleries_customers.js') }}"></script>
 {% endblock %}

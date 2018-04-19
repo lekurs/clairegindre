@@ -1,32 +1,48 @@
-{% extends "back/admin/admin.html.twig" %}
-
-{% block head %}
-{{ parent() }}
+{% extends "admin_layout.html.twig" %}
 
     {% block title %}
     <title>Edition de la gallerie </title>
     {% endblock %}
 
-{% endblock %}
-
 {% block content %}
+    {{ parent() }}
+
 <div class="container">
     <div class="row">
         {%  form_theme form 'form/fields.html.twig' %}
-            <div class="col-12 picture-thumb-container" data-sortable=".picture-thumb" id="sort1">
-                {{ form_start(form) }}
+        <div class="col-12 container-form">
+            {{ form_start(form) }}
+            <div class="row">
+                <div class="col-8 picture-thumb-container" data-sortable=".picture-thumb" id="sort1">
                     {% for images in form.pictures %}
-                <div class="picture-thumb" data-position="{{ images.vars.data.displayOrder }}" data-id="">
-                    <div class="content-thumb" >
-                        {{ form_row(images) }}
-                        <img src="{{ asset(images.vars.data.publicPath ~ '/' ~ images.vars.data.pictureName) }}" class="imgCheck" alt="{{ images.vars.data.pictureName }}" />
+                    <div class="picture-thumb" data-position="{{ images.vars.data.displayOrder }}" data-id="">
+                        <div class="content-thumb" >
+                            {{ form_row(images) }}
+                            <img src="{{ asset(images.vars.data.publicPath ~ '/' ~ images.vars.data.pictureName) }}" class="imgCheck" alt="{{ images.vars.data.pictureName }}" />
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            <div class="col-4 parameters-container">
+                <div class="row">
+                    <div class="col-12">
+                        <h2>Paramètres</h2>
+                        <p>{{ form_row(form.title) }}</p>
                     </div>
                 </div>
-                    {% endfor %}
+                <div class="row">
+                    <div class="col-12">
+                        <a href="{{ path('adminDeleteGallery', {'id': form.vars.data.id}) }}" class="btn btn-primary">Supprimer</a>
+                    </div>
+                </div>
             </div>
-        <button type="submit" class="btn btn-primary sub-login">Mettre à jour</button>
-        {{ form_end(form) }}
+            <button type="submit" class="btn btn-primary sub-login">Mettre à jour</button>
+        </div>
+
+        </div>
+        {#</div>#}
     </div>
+        {{ form_end(form) }}
 </div>
 {% endblock %}
 
