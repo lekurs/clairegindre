@@ -25,16 +25,16 @@ class ArticleBuilder implements ArticleBuilderInterface
     /**
      * @param string $title
      * @param string $content
-     * @param int $creationDate
-     * @param int|null $modificationDate
+     * @param \DateTime $creationDate
      * @param bool $online
      * @param UserInterface $author
+     * @param GalleryInterface $gallery
      * @param string $prestation
      * @return ArticleBuilderInterface
      */
-    public function create(string $title, string $content, bool $online, UserInterface $author, string $prestation): ArticleBuilderInterface
+    public function create(string $title, string $content, \DateTime $creationDate, bool $online, UserInterface $author, GalleryInterface $gallery, string $prestation): ArticleBuilderInterface
     {
-        $this->article = new Article($title, $content, $online, $author->getUsername(), $prestation);
+        $this->article = new Article($title, $content, $creationDate = new \DateTime(), $online, $author->getUsername(), $gallery->getGallery(), $prestation);
 
         return $this;
     }

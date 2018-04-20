@@ -77,15 +77,19 @@ class Article implements ArticleInterface
      *
      * @param string $title
      * @param string $content
+     * @param \DateTime $creationDate
      * @param bool $online
      * @param UserInterface $author
+     * @param GalleryInterface $gallery
      * @param string $prestation
      */
     public function __construct(
         string $title,
         string $content,
+        \DateTime $creationDate,
         bool $online,
         UserInterface $author,
+        GalleryInterface $gallery,
         string $prestation
     ) {
         $this->id = Uuid::uuid4();
@@ -94,8 +98,10 @@ class Article implements ArticleInterface
         $this->creationDate = new \DateTime();
         $this->online = $online;
         $this->author = $author;
+        $this->gallery = $gallery;
         $this->prestation = $prestation;
     }
+
 
     /**
      * @return mixed
@@ -160,7 +166,4 @@ class Article implements ArticleInterface
     {
         $this->gallery = $gallery;
     }
-
-
-
 }

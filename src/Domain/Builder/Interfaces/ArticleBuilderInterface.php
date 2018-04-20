@@ -15,7 +15,17 @@ use App\Domain\Models\Interfaces\UserInterface;
 
 interface ArticleBuilderInterface
 {
-    public function create(string $title, string $content, bool $online, UserInterface $author, string $prestation): ArticleBuilderInterface;
+    /**
+     * @param string $title
+     * @param string $content
+     * @param \DateTime $creationDate
+     * @param bool $online
+     * @param UserInterface $author
+     * @param GalleryInterface $gallery
+     * @param string $prestation
+     * @return ArticleBuilderInterface
+     */
+    public function create(string $title, string $content, \DateTime $creationDate, bool $online, UserInterface $author, GalleryInterface $gallery, string $prestation): ArticleBuilderInterface;
 
     public function getArticle():ArticleInterface;
 

@@ -30,19 +30,27 @@ class ArticleCreationDTO implements ArticleCreationDTOInterface
     public $gallery;
 
     /**
+     * @var bool
+     */
+    public $online;
+
+    /**
      * ArticleCreationDTO constructor.
      *
      * @param string $title
      * @param string $content
      * @param GalleryInterface $gallery
+     * @param bool $online
      */
     public function __construct(
         string $title,
         string $content,
-        GalleryInterface $gallery
+        GalleryInterface $gallery,
+        bool $online
     ) {
         $this->title = $title;
         $this->content = $content;
         $this->gallery = $gallery;
+        $this->online = $online;
     }
 }
