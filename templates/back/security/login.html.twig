@@ -51,15 +51,15 @@
 {% block body %}
     {% block content %}
         <div class="container-fluid connection-container">
-            {% if error %}
-            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-            {% endif %}
+            {#{% if error %}#}
+            {#<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>#}
+            {#{% endif %}#}
                 <div class="form-group form-content">
                     <form action="{{ path('adminLogin') }}" method="post" class="form-connection">
                         <div class="row">
                             <div class="col login">
-                                <label for="username">Username</label>
-                                <input type="text" id="username" name="_username" value="{{ last_username }}" />
+                                <label for="email">Email</label>
+                                <input type="text" id="username" name="_username" />
                             </div>
                         </div>
                         <div class="row">
