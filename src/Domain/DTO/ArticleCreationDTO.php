@@ -53,14 +53,14 @@ class ArticleCreationDTO implements ArticleCreationDTOInterface
         string $title,
         string $content,
         GalleryInterface $gallery,
-        bool $online
-//        BenefitInterface $prestation
+        bool $online,
+        BenefitInterface $prestation
     )
     {
         $this->title = $title;
         $this->content = $content;
         $this->gallery = $gallery;
         $this->online = $online;
-//        $this->prestation = $prestation;
+        $this->prestation = $prestation;
     }
 }

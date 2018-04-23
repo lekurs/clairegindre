@@ -90,8 +90,8 @@ class Article implements ArticleInterface
         \DateTime $creationDate,
         bool $online,
 //        UserInterface $author,
-        GalleryInterface $gallery
-//        BenefitInterface $prestation
+        GalleryInterface $gallery,
+        BenefitInterface $prestation
     ) {
         $this->id = Uuid::uuid4();
         $this->title = $title;
@@ -100,7 +100,7 @@ class Article implements ArticleInterface
         $this->online = $online;
 //        $this->author = $author;
         $this->gallery = $gallery;
-//        $this->prestation = $prestation;
+        $this->prestation = $prestation;
     }
 
 

@@ -67,8 +67,8 @@ class AddArticleTypeHandler implements AddArticleTypeHandlerInterface
                                                                                     new \DateTime(),
                                                                                     $form->getData()->online,
 //                                                                                    $form->getData()->user,
-                                                                                    $form->getData()->gallery
-//                                                                                    $form->getData()->prestation
+                                                                                    $form->getData()->gallery,
+                                                                                    $form->getData()->prestation
             );
 
             $this->validator->validate($article, [], [

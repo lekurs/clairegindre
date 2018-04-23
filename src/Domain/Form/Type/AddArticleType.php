@@ -13,8 +13,8 @@ use App\Domain\DTO\ArticleCreationDTO;
 use App\Domain\DTO\Interfaces\ArticleCreationDTOInterface;
 use App\Domain\Models\Benefit;
 use App\Domain\Models\Gallery;
-use App\Domain\Models\Interfaces\BenefitInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -37,9 +37,14 @@ class AddArticleType extends AbstractType
                 'choice_label' => 'title'
             ])
             ->add('online', CheckboxType::class)
-//            ->add('prestation', EntityType::class, [
-//                'class' => Benefit::class
-//            ])
+            ->add('prestation', EntityType::class, [
+                'class' => Benefit::class,
+                'choice_label' => 'name',
+                'label_attr' => ['class' => 'sr-only',],
+                'constraints' => [
+                    new UniqueEntity(['fields' => 'id'])
+                    ]
+            ])
             ;
     }
 
@@ -53,8 +58,8 @@ class AddArticleType extends AbstractType
                                     $form->get('title')->getData(),
                                     $form->get('content')->getData(),
                                     $form->get('gallery')->getData(),
-                                    $form->get('online')->getData()
-//                                    $form->get('prestation')->getData()
+                                    $form->get('online')->getData(),
+                                    $form->get('prestation')->getData()
                                 );
                 }
             ]);

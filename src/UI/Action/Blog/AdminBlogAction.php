@@ -71,7 +71,7 @@ class AdminBlogAction implements AdminGalleryActionInterface
         $form = $this->formFactory->create(AddArticleType::class)->handleRequest($request);
 
         if($this->addArticleTypeHandler->handle($form)) {
-            return $responder(false, null, $categories);
+            return $responder(false, $form, $categories);
         }
 
         return $responder(false, $form, $categories);
