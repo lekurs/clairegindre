@@ -10,6 +10,7 @@ namespace App\Domain\DTO;
 
 
 use App\Domain\DTO\Interfaces\ArticleCreationDTOInterface;
+use App\Domain\Models\Interfaces\BenefitInterface;
 use App\Domain\Models\Interfaces\GalleryInterface;
 
 class ArticleCreationDTO implements ArticleCreationDTOInterface
@@ -35,22 +36,31 @@ class ArticleCreationDTO implements ArticleCreationDTOInterface
     public $online;
 
     /**
+     * @var BenefitInterface
+     */
+    public $prestation;
+
+    /**
      * ArticleCreationDTO constructor.
      *
      * @param string $title
      * @param string $content
      * @param GalleryInterface $gallery
      * @param bool $online
+     * @param BenefitInterface $prestation
      */
     public function __construct(
         string $title,
         string $content,
         GalleryInterface $gallery,
         bool $online
-    ) {
+//        BenefitInterface $prestation
+    )
+    {
         $this->title = $title;
         $this->content = $content;
         $this->gallery = $gallery;
         $this->online = $online;
+//        $this->prestation = $prestation;
     }
 }

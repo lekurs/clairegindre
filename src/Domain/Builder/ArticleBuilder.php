@@ -32,9 +32,9 @@ class ArticleBuilder implements ArticleBuilderInterface
      * @param string $prestation
      * @return ArticleBuilderInterface
      */
-    public function create(string $title, string $content, \DateTime $creationDate, bool $online, UserInterface $author, GalleryInterface $gallery, string $prestation): ArticleBuilderInterface
+    public function create(string $title, string $content, \DateTime $creationDate, bool $online, GalleryInterface $gallery): ArticleBuilderInterface
     {
-        $this->article = new Article($title, $content, $creationDate = new \DateTime(), $online, $author->getUsername(), $gallery->getGallery(), $prestation);
+        $this->article = new Article($title, $content, $creationDate = new \DateTime(), $online, $gallery);
 
         return $this;
     }

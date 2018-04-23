@@ -16,5 +16,10 @@
         <many-to-one field="user" target-entity="App\Domain\Models\User" inversed-by="benefits">
             <join-column name="user_id" referenced-column-name="id" />
         </many-to-one>
+        <one-to-many field="articles" target-entity="App\Domain\Models\Article" mapped-by="prestation">
+            <cascade>
+                <cascade-persist/>
+            </cascade>
+        </one-to-many>
     </entity>
 </doctrine-mapping>

@@ -6,10 +6,9 @@
 
     <entity name="App\Domain\Models\Article" table="clairegindre_article" repository-class="App\Domain\Repository\ArticleRepository">
         <id name="id" column="id" type="string"/>
-        <field name="prestation" type="string" length="10" nullable="false" unique="false" />
         <field name="title" type="string" length="100" nullable="false" unique="true" />
         <field name="content" type="text" nullable="false" unique="false" />
-        <field name="creationDate" type="integer" nullable="false" unique="true" />
+        <field name="creationDate" type="date" nullable="false" unique="true" />
         <field name="modificationDate" type="integer" nullable="true" unique="true" />
 
         <many-to-one field="author" target-entity="App\Domain\Models\User" inversed-by="articles" />
@@ -18,6 +17,7 @@
         <one-to-one field="gallery" target-entity="App\Domain\Models\Gallery">
             <join-column name="gallery_id" referenced-column-name="id" />
         </one-to-one>
+        <many-to-one field="prestation" target-entity="App\Domain\Models\Benefit" inversed-by="articles" />
     </entity>
 
 </doctrine-mapping>

@@ -25,7 +25,7 @@ interface ArticleBuilderInterface
      * @param string $prestation
      * @return ArticleBuilderInterface
      */
-    public function create(string $title, string $content, \DateTime $creationDate, bool $online, UserInterface $author, GalleryInterface $gallery, string $prestation): ArticleBuilderInterface;
+//    public function create(string $title, string $content, \DateTime $creationDate, bool $online, UserInterface $author, GalleryInterface $gallery, string $prestation): ArticleBuilderInterface;
 
     public function getArticle():ArticleInterface;
 

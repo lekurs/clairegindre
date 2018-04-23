@@ -37,6 +37,11 @@ class Benefit implements BenefitInterface
     private $user;
 
     /**
+     * @var ArrayAccess
+     */
+    private $articles;
+
+    /**
      * Benefit constructor.
      *
      * @param string $name

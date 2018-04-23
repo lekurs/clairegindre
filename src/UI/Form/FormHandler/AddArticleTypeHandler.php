@@ -61,15 +61,21 @@ class AddArticleTypeHandler implements AddArticleTypeHandlerInterface
     public function handle(FormInterface $form): bool
     {
         if($form->isSubmitted() && $form->isValid()) {
-            dump($form->getData());
-            die();
-            $article = $this->articleBuilder->create($form->getData()->title, $form->getData()->content, new \DateTime(), $form->getData()->online, $form->getData()->user, $form->getData()->gallery);
+            $article = $this->articleBuilder->create(
+                                                                                    $form->getData()->title,
+                                                                                    $form->getData()->content,
+                                                                                    new \DateTime(),
+                                                                                    $form->getData()->online,
+//                                                                                    $form->getData()->user,
+                                                                                    $form->getData()->gallery
+//                                                                                    $form->getData()->prestation
+            );
 
             $this->validator->validate($article, [], [
                 'article_creation'
             ]);
 
-            $this->articleRepository->save($article);
+            $this->articleRepository->save($this->articleBuilder->getArticle());
 
             $this->session->getFlashBag()->add('success', 'Article bien ajouté');
 

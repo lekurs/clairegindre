@@ -74,6 +74,6 @@ class AdminBlogAction implements AdminGalleryActionInterface
             return $responder(false, null, $categories);
         }
 
-        return $responder(false, $categories, $form);
+        return $responder(false, $form, $categories);
     }
 }

@@ -43,7 +43,7 @@ class AdminBlogResponder implements AdminBlogResponderInterface
     }
 
 
-    public function __invoke($redirect = false, $categories, FormInterface $form = null)
+    public function __invoke($redirect = false, FormInterface $form = null, $categories)
     {
         $redirect ? $response = new RedirectResponse($this->urlGenerator->generate('admin')) : $response = new Response($this->twig->render('back/admin/blog.html.twig', [
             'categories' => $categories,

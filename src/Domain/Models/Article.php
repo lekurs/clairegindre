@@ -4,6 +4,7 @@ namespace App\Domain\Models;
 
 
 use App\Domain\Models\Interfaces\ArticleInterface;
+use App\Domain\Models\Interfaces\BenefitInterface;
 use App\Domain\Models\Interfaces\GalleryInterface;
 use App\Domain\Models\Interfaces\UserInterface;
 use ArrayAccess;
@@ -33,7 +34,7 @@ class Article implements ArticleInterface
     private $content;
 
     /**
-     * @var int
+     * @var \DateTime
      */
     private $creationDate;
 
@@ -68,7 +69,7 @@ class Article implements ArticleInterface
     private $gallery;
 
     /**
-     * @var string
+     * @var BenefitInterface
      */
     private $prestation;
 
@@ -81,25 +82,25 @@ class Article implements ArticleInterface
      * @param bool $online
      * @param UserInterface $author
      * @param GalleryInterface $gallery
-     * @param string $prestation
+     * @param BenefitInterface $prestation
      */
     public function __construct(
         string $title,
         string $content,
         \DateTime $creationDate,
         bool $online,
-        UserInterface $author,
-        GalleryInterface $gallery,
-        string $prestation
+//        UserInterface $author,
+        GalleryInterface $gallery
+//        BenefitInterface $prestation
     ) {
         $this->id = Uuid::uuid4();
         $this->title = $title;
         $this->content = $content;
         $this->creationDate = new \DateTime();
         $this->online = $online;
-        $this->author = $author;
+//        $this->author = $author;
         $this->gallery = $gallery;
-        $this->prestation = $prestation;
+//        $this->prestation = $prestation;
     }
 
 
@@ -117,6 +118,62 @@ class Article implements ArticleInterface
     public function setId($id): void
     {
         $this->id = $id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTitle(): string
+    {
+        return $this->title;
+    }
+
+    /**
+     * @return string
+     */
+    public function getContent(): string
+    {
+        return $this->content;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getCreationDate(): \DateTime
+    {
+        return $this->creationDate;
+    }
+
+    /**
+     * @return int
+     */
+    public function getModificationDate(): int
+    {
+        return $this->modificationDate;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isOnline(): bool
+    {
+        return $this->online;
+    }
+
+    /**
+     * @return UserInterface
+     */
+    public function getAuthor(): UserInterface
+    {
+        return $this->author;
+    }
+
+    /**
+     * @return BenefitInterface
+     */
+    public function getPrestation(): BenefitInterface
+    {
+        return $this->prestation;
     }
 
     /**
