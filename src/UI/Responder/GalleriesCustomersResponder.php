@@ -9,14 +9,14 @@
 namespace App\UI\Responder;
 
 
-use App\UI\Responder\Interfaces\GalleryCustomersResponderInterface;
+use App\UI\Responder\Interfaces\GalleriesCustomersResponderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Twig\Environment;
 
-class GalleryCustomersResponder implements GalleryCustomersResponderInterface
+class GalleriesCustomersResponder implements GalleriesCustomersResponderInterface
 {
     /**
      * @var Environment
@@ -29,7 +29,7 @@ class GalleryCustomersResponder implements GalleryCustomersResponderInterface
     private $urlGenerator;
 
     /**
-     * GalleryCustomersResponder constructor.
+     * GalleriesCustomersResponder constructor.
      * @param Environment $twig
      * @param UrlGeneratorInterface $urlGenerator
      */
@@ -42,7 +42,7 @@ class GalleryCustomersResponder implements GalleryCustomersResponderInterface
 
     public function __invoke($redirect = false, FormInterface $form = null, $galleries, $insta)
     {
-        $redirect ? $response = new RedirectResponse('/') : $response = new Response($this->twig->render('front/gallery_customer.html.twig', [
+        $redirect ? $response = new RedirectResponse('/') : $response = new Response($this->twig->render('front/galleries_customer.html.twig', [
             'galleries' => $galleries,
             'contact' => $form->createView(),
             'insta' => $insta

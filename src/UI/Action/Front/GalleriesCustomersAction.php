@@ -13,8 +13,8 @@ use App\Domain\Builder\Interfaces\GalleryBuilderInterface;
 use App\Domain\Form\Type\ContactType;
 use App\Domain\Lib\InstagramLib;
 use App\Domain\Models\Gallery;
-use App\UI\Action\Front\Interfaces\GalleryCustomersActionInterface;
-use App\UI\Responder\Interfaces\GalleryCustomersResponderInterface;
+use App\UI\Action\Front\Interfaces\GalleriesCustomersActionInterface;
+use App\UI\Responder\Interfaces\GalleriesCustomersResponderInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
@@ -22,7 +22,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * Class GalleryCustomersAction
+ * Class GalleriesCustomersAction
  *
  * @Route(
  *     name="galleriesCustomers",
@@ -31,7 +31,7 @@ use Symfony\Component\Routing\Annotation\Route;
  *
  * @package App\UI\Action\Front
  */
-class GalleryCustomersAction implements GalleryCustomersActionInterface
+class GalleriesCustomersAction implements GalleriesCustomersActionInterface
 {
     /**
      * @var EntityManagerInterface
@@ -54,7 +54,7 @@ class GalleryCustomersAction implements GalleryCustomersActionInterface
     private $insta;
 
     /**
-     * GalleryCustomersAction constructor.
+     * GalleriesCustomersAction constructor.
      * @param EntityManagerInterface $entityManager
      * @param GalleryBuilderInterface $galleryBuilder
      * @param FormFactoryInterface $formFactory
@@ -69,15 +69,9 @@ class GalleryCustomersAction implements GalleryCustomersActionInterface
     }
 
 
-    public function __invoke(Request $request, GalleryCustomersResponderInterface $responder)
+    public function __invoke(Request $request, GalleriesCustomersResponderInterface $responder)
     {
         $galleries = $this->entityManager->getRepository(Gallery::class)->getAllWithPictures();
-
-        foreach ($galleries as $gallery)
-        {
-//            dump($gallery->getPictures()->offsetGet(0));
-        }
-//        die();
 
         $contact = $this->formFactory->create(ContactType::class)->handleRequest($request);
 

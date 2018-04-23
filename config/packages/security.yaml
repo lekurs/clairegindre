@@ -23,8 +23,8 @@ security:
             logout_on_user_change: true
             provider: our_db_provider
             form_login:
-                login_path: adminLogin #Route vers le responder qui renvoie le login form
-                check_path: adminLogin # Route qui verifie le username et le password
+                login_path: userConnection #Route vers le responder qui renvoie le login form
+                check_path: userConnection # Route qui verifie le username et le password
                 default_target_path: index
             logout:
                 path: logout

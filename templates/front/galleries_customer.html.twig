@@ -1,0 +1,82 @@
+{% extends "layout.html.twig" %}
+
+{% block head %}
+{{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/styles/gallery.css') }}">
+
+    {% block title %}
+        <title>Galeries Clients</title>
+    {% endblock %}
+
+{% endblock %}
+{% block header %}
+    <div class="row no-gutters">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+            <div class="row justify-content-center no-gutters">
+                {% block left_menu %}
+                    {{ parent() }}
+                {% endblock %}
+
+                {% block logo %}
+                    <div class="col-lg-2 col-xl-2 logo-content">
+                        <h1><a href="#" class="logo-img-color"></a></h1>
+                    </div>
+                {% endblock %}
+
+                {% block right_menu %}
+                    {{ parent() }}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+    <div class="row no-gutters">
+        <div class="col-lg-12 col-xl-12 col-md-12 col-sm-12 col-12 gallery-customers-header">
+            <img src="{{ asset('images/background/nico_anlor_b&w.jpg') }}" />
+        </div>
+    </div>
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+                {% for gallery in galleries %}
+                        <div class="img-customers col-xl-3 col-lg-3 col-md-4 col-sm-6 col-12">
+                            <div class="box">
+                                <img src="{{ asset('images/upload/gallery/' ~ gallery.title ~ '/' ~ gallery.pictures.first.pictureName) }}" alt="{{ gallery.pictures.first.pictureName }}" />
+                                <a href="#">
+                                    <div class="gallery-customers-informations">
+                                    <p><i class="fa fa-lock fa-2x"></i></p>
+                                    <h4>{{ gallery.title }}</h4>
+                                    <p>{{ gallery.user.dateWedding|date('d-m-Y') }}</p>
+                                </div>
+                                <form action="{{ path('userConnection') }}" method="post" class="form-connection">
+                                <div class="modal show" tabindex="-1" role="dialog">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5>Connexion</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <input type="hidden" id="username" name="_username" value="{{ gallery.user.username }}" />
+                                                <input type="password" name="password" required placeholder="password">
+                                                <button type="submit" name="connexion_customer" class="btn btn-primary">Connexion</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                </form>
+                                </a>
+                            </div>
+                        </div>
+                {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('/js/front/menu.js') }}"></script>
+    <script src="{{ asset('/js/front/galleries_customers.js') }}"></script>
+{% endblock %}

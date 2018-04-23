@@ -9,7 +9,7 @@
 namespace App\UI\Action\Front\Interfaces;
 
 
-interface GalleryCustomersActionInterface
+interface GalleriesCustomersActionInterface
 {
 
 }

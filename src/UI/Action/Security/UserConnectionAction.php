@@ -26,7 +26,7 @@ use Symfony\Component\Security\Guard\Authenticator\AbstractFormLoginAuthenticato
  * Class UserConnectionAction
  *
  * @Route(
- *     name="adminLogin",
+ *     name="userConnection",
  *     path="login"
  * )
  *
@@ -121,7 +121,7 @@ class UserConnectionAction extends AbstractFormLoginAuthenticator
      */
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
-        return null;
+        $token->getUser();
     }
 
     /**
