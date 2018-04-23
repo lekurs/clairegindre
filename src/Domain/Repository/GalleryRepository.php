@@ -60,6 +60,9 @@ class GalleryRepository extends ServiceEntityRepository implements GalleryReposi
             ;
     }
 
+    /**
+     * @return mixed
+     */
     public function getAllWithPictures()
     {
         return $this->createQueryBuilder('gallery')

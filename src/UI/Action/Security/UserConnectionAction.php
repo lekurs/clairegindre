@@ -15,8 +15,11 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
+use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
+use Symfony\Component\Security\Csrf\CsrfToken;
+use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Component\Security\Guard\Authenticator\AbstractFormLoginAuthenticator;
 
 /**
@@ -33,6 +36,22 @@ use Symfony\Component\Security\Guard\Authenticator\AbstractFormLoginAuthenticato
 class UserConnectionAction extends AbstractFormLoginAuthenticator
 {
     /**
+     * @var CsrfTokenManagerInterface
+     */
+    private $csrfToken;
+
+    /**
+     * UserConnectionAction constructor.
+     *
+     * @param CsrfTokenManagerInterface $csrfToken
+     */
+    public function __construct(
+        CsrfTokenManagerInterface $csrfToken
+    ) {
+        $this->csrfToken = $csrfToken;
+    }
+
+    /**
      * @param Request $request
      * @return bool|void
      */
@@ -47,9 +66,11 @@ class UserConnectionAction extends AbstractFormLoginAuthenticator
      */
     public function getCredentials(Request $request)
     {
-        return array(
-            'email' => $request->get('email'),
-        );
+        $csrfToken = $request->request->get('_csrf_token');
+
+        if(false === $this->csrfToken->isTokenValid(new CsrfToken('authenticate', $csrfToken))) {
+            throw new InvalidCsrfTokenException('Token invalide');
+        }
     }
 
     /**
