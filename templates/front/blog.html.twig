@@ -2,6 +2,7 @@
 
 {% block head %}
 {{ parent() }}
+    <link href="{{ asset('/css/styles/blog.css') }}" rel="stylesheet" />
     <title>Blog</title>
 {% endblock %}
 
@@ -28,7 +29,35 @@
 {% endblock %}
 
 {% block content %}
-<h2>test</h2>
+    <div class="container-fluid">
+        <div class="row no-gutters">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <h2>Vos belles histoires</h2>
+                <div class="btn-group col-xl-6 col-lg-6 col-md-6 col-sm-2 col-6 offset-3">
+                    <button class="btn btn-default filter-button text-center" data-filter="all">Tout voir</button>
+                {% for benefit in benefits %}
+                    <span class="icon-benefit"><img src="{{ asset('/images/interface/pictos/' ~ benefit.name|lower ~ '.png' ) }}" alt="{{ benefit.name }}"></span> <button class="btn btn-default filter-button-dynamique" data-filter="{{ benefit.name }}">{{ benefit.name }}</button>
+                {% endfor %}
+                </div>
+                <div class="articles-container col-xl-10 col-lg-10 col-md-10 col-sm-10 col-10 offset-1">
+                    {% for article in articles %}
+                    <div class="row no-gutters">
+                        <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-12 article-img-container">
+                            <p>{{ article.gallery.title }}</p>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 article-txt-container">
+                            <h2>{{ article.gallery.title }}</h2>
+                            <p>{{ article.creationDate | date('d M Y') }}</p>
+                            <p>{{ article.title }}</p>
+                            <a href="{{ path('', {'id': article.gallery.id}) }}" class="link_to_gallery">Voir la galerie</a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
 {% endblock %}
 
 {% block contact %}

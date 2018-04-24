@@ -20,7 +20,10 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * Class AddArticleAction.
  *
- * @Route(name="adminAddArticle", path="/admin/article/create")
+ * @Route(
+ *     name="adminAddArticle",
+ *     path="/admin/article/create"
+ * )
  */
 class AddArticleAction implements AddArticleActionInterface
 {

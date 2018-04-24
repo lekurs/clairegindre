@@ -12,6 +12,7 @@ namespace App\Domain\Builder;
 use App\Domain\Builder\Interfaces\GalleryBuilderInterface;
 use App\Domain\Models\Benefit;
 use App\Domain\Models\Gallery;
+use App\Domain\Models\Interfaces\ArticleInterface;
 use App\Domain\Models\Interfaces\BenefitInterface;
 use App\Domain\Models\Interfaces\GalleryInterface;
 use App\Domain\Models\Interfaces\PictureInterface;
@@ -24,9 +25,9 @@ class GalleryBuilder implements GalleryBuilderInterface
      */
     private $gallery;
 
-    public function create(string $title, UserInterface $user, BenefitInterface $benefit)
+    public function create(string $title, UserInterface $user, BenefitInterface $benefit, ArticleInterface $article = null): GalleryBuilderInterface
     {
-        $this->gallery = new Gallery($title, $user, $benefit);
+        $this->gallery = new Gallery($title, $user, $benefit, $article);
 
         return $this;
     }
@@ -48,6 +49,13 @@ class GalleryBuilder implements GalleryBuilderInterface
     public function withPicture(PictureInterface $picture): GalleryBuilderInterface
     {
         $this->gallery->setPictures($picture);
+
+        return $this;
+    }
+
+    public function withArticle(ArticleInterface $article): GalleryBuilderInterface
+    {
+        $this->gallery->setArticle($article);
 
         return $this;
     }

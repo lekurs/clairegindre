@@ -1,0 +1,333 @@
+/* Blog CSS */
+
+.filter-button {
+    background-color: #363636;
+    color: #FFFFFF;
+    text-transform: uppercase;
+    position: relative;
+    font-size: 1.2em;
+}
+
+.filter-button-dynamique {
+    background-color: #363636;
+    color: #FFFFFF;
+    text-transform: uppercase;
+    position: relative;
+    text-align: right;
+    padding-right: 3%;
+    font-size: 1.2em;
+}
+
+.icon-benefit {
+    position: relative;
+    width: 24px;
+    height: 24px;
+    top: 14px;
+    left: 6%;
+    z-index: 9999;
+}
+
+.icon-benefit img {
+    background-color: #363636;
+    width: 24px;
+    height: 24px;
+}
+
+.link_to_gallery {
+    display: block;
+    background-color: #363636;
+    color: #FFFFFF;
+    width: 30%;
+    height: 3%;
+    text-align: center;
+    padding-top: 1%;
+    text-decoration: none;
+    transition: all .3s ease-in-out;
+}
+
+.link_to_gallery:hover {
+    color: #363636;
+    background-color: #FFFFFF;
+    border: 1px solid #363636;
+    text-decoration: none;
+}
+
+.circle-container {
+    display: flex;
+    justify-content: center;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+    position: relative;
+    top: -20px;
+}
+
+li {
+    display: block;
+    width: 35px;
+    height: 35px;
+    float: left;
+    background-color: #363636;
+    border-radius: 50%;
+    text-align: center;
+    color: #FFFFFF;
+    margin: 50px;
+}
+li:before {
+    content: "";
+    display: block;
+    width: 8px;
+    height: 8px;
+    background: #0b2e13;
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    top: 10px;
+    left: 10px;
+    z-index: 10;
+}
+
+.line:before {
+    content: "";
+    border-bottom: 1px solid #363636;
+    height: 0;
+    width: 26%;
+    position: absolute;
+    top: 50%;
+    left: 37%;
+    z-index: -999;
+}
+
+.cercle.active {
+    background-color: #363636;
+    color: #FFFFFF;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    border: 1px solid #363636;
+    margin: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cercle {
+    background-color: #FFFFFF;
+    color: #363636;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    border: 1px solid #363636;
+    margin: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+a.next-add-article-link {
+     display: flex;
+     justify-content: center;
+     /*width: 100%;*/
+}
+
+a.next-add-article-link:hover {
+    display: flex;
+    justify-content: center;
+    /*width: 100%;*/
+    text-decoration: none;
+}
+
+i.link-article {
+    color: #363636;
+    text-decoration: none;
+}
+
+i.link-article:hover {
+    color: #363636;
+    text-decoration: none;
+}
+
+
+/*****************************************************************/
+/*                                   BUILDER ARTICLE                                           */
+/*****************************************************************/
+
+.builder-container {
+    width: 100%;
+    height: 60vh;
+    border: 1px solid #363636;
+    overflow: auto;
+}
+
+.pictures-container {
+    width: 100%;
+    height: 60vh;
+    border: 1px solid #363636;
+    margin: 0 30px;
+}
+
+.construct-container {
+    width: 100%;
+    height: 60vh;
+    border: 1px solid #363636;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+a.add-landscape-picture {
+    display: flex;
+    height: 10vh;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+}
+
+a.add-landscape-picture:hover {
+    text-decoration: none;
+}
+
+span#landscape {
+    width: 80%;
+    height: 50%;
+    text-align: center;
+    border: 1px solid #363636;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #363636;
+    transition: all .3s ease-in-out;
+}
+
+span#landscape:hover {
+    background-color: #363636;
+    color: #FFFFFF;
+}
+
+a.add-portrait-picture {
+    display: flex;
+    height: 15vh;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+}
+
+a.add-portrait-picture:hover {
+    text-decoration: none;
+}
+
+span#portrait {
+    width: 40%;
+    height: 100%;
+    text-align: center;
+    border: 1px solid #363636;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #363636;
+    transition: all .3s ease-in-out;
+}
+
+span#portrait:hover {
+    background-color: #363636;
+    color: #FFFFFF;
+}
+
+a.add-landscape-pictures {
+    display: flex;
+    height: 10vh;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+}
+
+a.add-landscape-pictures:hover {
+    text-decoration: none;
+}
+
+span.landscapes {
+    width: 40%;
+    height: 50%;
+    text-align: center;
+    border: 1px solid #363636;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #363636;
+    transition: all .3s ease-in-out;
+}
+
+span.landscapes:hover {
+    background-color: #363636;
+    color: #FFFFFF;
+}
+
+
+a.add-portrait-pictures {
+    display: flex;
+    height: 15vh;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+}
+
+a.add-portrait-pictures:hover {
+    text-decoration: none;
+}
+
+span.portraits {
+    width: 20%;
+    height: 100%;
+    text-align: center;
+    border: 1px solid #363636;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #363636;
+    transition: all .3s ease-in-out;
+}
+
+span.portraits:hover {
+    background-color: #363636;
+    color: #FFFFFF;
+}
+
+.wait-landscape {
+    width: 100%;
+    height: 200px;
+    border: 1px solid #363636;
+    margin: 15px auto;
+}
+
+.wait-landscapes {
+    height: 200px;
+    border: 1px solid #363636;
+    display: flex;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.wait-portrait {
+    height: 800px;
+    border: 1px solid #363636;
+    margin: 15px auto;
+}
+
+.wait-portraits{
+    height: 800px;
+    border: 1px solid #363636;
+    display: flex;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.picture-thumb-article {
+    height: 220px;
+    width: 33.33%;
+    transition: .5s;
+    padding: 20px;
+    border-right: 1px solid #000000;
+    border-bottom: 1px solid #000000;
+    border-width: thin;}

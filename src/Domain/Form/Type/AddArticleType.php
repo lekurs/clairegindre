@@ -17,6 +17,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -29,12 +30,12 @@ class AddArticleType extends AbstractType
     {
         $builder
             ->add('title', TextType::class)
-            ->add('content', TextareaType::class, [
-                'required' => false
-            ])
             ->add('gallery', EntityType::class, [
                 'class' => Gallery::class,
                 'choice_label' => 'title'
+            ])
+            ->add('content', TextareaType::class, [
+                'required' => false
             ])
             ->add('online', CheckboxType::class)
             ->add('prestation', EntityType::class, [
@@ -45,6 +46,11 @@ class AddArticleType extends AbstractType
                     new UniqueEntity(['fields' => 'id'])
                     ]
             ])
+//            ->add('images', CollectionType::class, [
+//                'entry_type' => PictureEditType::class,
+//                'allow_add'=> true,
+//                'allow_delete' => true
+//            ])
             ;
     }
 

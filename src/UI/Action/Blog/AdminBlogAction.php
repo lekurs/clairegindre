@@ -10,6 +10,7 @@ namespace App\UI\Action\Blog;
 
 use App\Domain\Form\Type\AddArticleType;
 use App\Domain\Models\Article;
+use App\Domain\Models\Gallery;
 use App\Domain\Repository\ArticleRepository;
 use App\UI\Action\Admin\Interfaces\AdminGalleryActionInterface;
 use App\UI\Form\FormHandler\Interfaces\AddArticleTypeHandlerInterface;
@@ -67,6 +68,11 @@ class AdminBlogAction implements AdminGalleryActionInterface
     public function __invoke(Request $request, AdminBlogResponderInterface $responder)
     {
         $categories = $this->entityManager->getRepository(Article::class)->findAll();
+
+        $test = $this->entityManager->getRepository(Gallery::class)->getGalleryWithoutArticle();
+//
+//        dump($test);
+//        die();
 
         $form = $this->formFactory->create(AddArticleType::class)->handleRequest($request);
 

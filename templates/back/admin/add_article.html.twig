@@ -1,0 +1,71 @@
+{% extends "admin_layout.html.twig" %}
+
+{%  block head %}
+    {{ parent() }}
+    <title>Administration</title>
+{% endblock %}
+
+{% block content %}
+
+    {% block FlashMessage %}
+        {% for flash_message in app.flashes('register_success') %}
+            <div class="alert alert-success">
+                {{ flash_message }}
+            </div>
+        {% endfor %}
+        {% for flash_message in app.flashes('user_delete_success') %}
+            <div class="alert alert-success">
+                {{ flash_message }}
+            </div>
+        {% endfor %}
+    {% endblock %}
+
+    {% block showBlog %}
+        <div class="container">
+            <h1>Gestion du blog</h1>
+            <div class="row">
+                <div class="col">
+                    {% if categories is empty %}
+                        <h2>Aucun post créé pour le moment</h2>
+                    {% endif %}
+                    {% for category in categories %}
+                        <div class="row">
+                            <div class="col container-blog">
+                                <div class="row">
+                                    <div class="col-6"></div>
+                                </div>
+                            </div>
+                        </div>
+                        {{ category.title }}
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-lg-12 col-xl-12 col-md-12 col-sm-12 col12">
+                <h2>Créer un Article</h2>
+            </div>
+            <div class="row">
+                <div class="col">
+                    {{ form_start(categoryType) }}
+                    {{ form_widget(categoryType) }}
+                    <button type="submit" name="submit-category" class="btn btn-primary">Ajouter</button>
+                    {{ form_end(categoryType) }}
+                </div>
+            </div>
+        </div>
+    {% endblock %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
+    <script>
+        tinymce.init({
+            selector: 'textarea#add_article_content',
+            height: 300,
+            toolbar: [
+                'undo redo | styleselect | bold italic | link image',
+                'alignleft aligncenter alignright'
+            ]
+        });
+    </script>
+{% endblock %}

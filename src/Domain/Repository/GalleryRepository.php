@@ -72,6 +72,14 @@ class GalleryRepository extends ServiceEntityRepository implements GalleryReposi
             ->getResult();
     }
 
+    public function getGalleryWithoutArticle()
+    {
+        return $this->createQueryBuilder('gallery')
+            ->leftJoin('gallery.article', 'article', 'article_id = null')
+            ->getQuery()
+            ->getResult();
+    }
+
     /**
      * @param GalleryInterface $gallery
      * @throws \Doctrine\ORM\ORMException

@@ -9,6 +9,7 @@
 namespace App\Domain\Builder\Interfaces;
 
 
+use App\Domain\Models\Interfaces\ArticleInterface;
 use App\Domain\Models\Interfaces\BenefitInterface;
 use App\Domain\Models\Interfaces\GalleryInterface;
 use App\Domain\Models\Interfaces\PictureInterface;
@@ -20,15 +21,22 @@ interface GalleryBuilderInterface
      * @param string $title
      * @param UserInterface $user
      * @param BenefitInterface $benefit
-     * @return mixed
+     * @param ArticleInterface|null $article
+     * @return GalleryBuilderInterface
      */
-//    public function create(string $title, UserInterface $user, BenefitInterface $benefit);
+    public function create(string $title, UserInterface $user, BenefitInterface $benefit, ArticleInterface $article = null): GalleryBuilderInterface;
 
     /**
      * @param PictureInterface $picture
      * @return GalleryBuilderInterface
      */
     public function withPicture(PictureInterface $picture): GalleryBuilderInterface;
+
+    /**
+     * @param ArticleInterface $article
+     * @return GalleryBuilderInterface
+     */
+    public function withArticle(ArticleInterface $article): GalleryBuilderInterface;
 
     /**
      * @return GalleryInterface

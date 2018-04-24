@@ -2,6 +2,7 @@
 
 namespace App\Domain\Models;
 
+use App\Domain\Models\Interfaces\ArticleInterface;
 use App\Domain\Models\Interfaces\BenefitInterface;
 use App\Domain\Models\Interfaces\GalleryInterface;
 use App\Domain\Models\Interfaces\UserInterface;
@@ -35,21 +36,29 @@ class Gallery implements GalleryInterface
     private $pictures;
 
     /**
+     * @var ArticleInterface
+     */
+    private $article;
+
+    /**
      * Gallery constructor.
      *
      * @param UserInterface $user
      * @param string $title
      * @param BenefitInterface $benefit
+     * @param ArticleInterface $article
      */
     public function __construct(
         string $title,
         UserInterface $user,
-        BenefitInterface $benefit
+        BenefitInterface $benefit,
+        ArticleInterface $article
     ) {
         $this->id = Uuid::uuid4();
         $this->title = $title;
         $this->user = $user;
         $this->benefit = $benefit;
+        $this->article = $article;
     }
 
 
@@ -132,5 +141,21 @@ class Gallery implements GalleryInterface
         $this->pictures[] = $picture;
 
         $picture->setGallery($this);
+    }
+
+    /**
+     * @return ArticleInterface
+     */
+    public function getArticle(): ArticleInterface
+    {
+        return $this->article;
+    }
+
+    /**
+     * @param ArticleInterface $article
+     */
+    public function setArticle(ArticleInterface $article): void
+    {
+        $this->article = $article;
     }
 }
