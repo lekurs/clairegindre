@@ -81,6 +81,11 @@ class User implements UserInterface, BaseUser
     private $comments;
 
     /**
+     * @var \ArrayAccess
+     */
+    private $reviews;
+
+    /**
      * User constructor.
      *
      * @param string $email

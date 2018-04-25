@@ -32,6 +32,8 @@
             </cascade>
         </one-to-many>
         <one-to-many field="articles" target-entity="App\Domain\Models\Article" mapped-by="author" />
+        <one-to-many field="reviews" target-entity="App\Domain\Models\Reviews" mapped-by="author" />
+
     </entity>
 
 </doctrine-mapping>
