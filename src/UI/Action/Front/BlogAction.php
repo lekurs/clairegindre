@@ -82,7 +82,7 @@ class BlogAction implements BlogActionInterface
 
         $articles = $this->entityManager->getRepository(Article::class)->getArticlesWithFavoritePictureGallery();
 
-        dump($articles);
+//        dump($articles);
 
         $benefits = $this->entityManager->getRepository(Benefit::class)->findAll();
 

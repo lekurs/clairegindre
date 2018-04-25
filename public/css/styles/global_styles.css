@@ -7,6 +7,10 @@ html, body {
     letter-spacing: .2px;
 }
 
+nav {
+    margin-top: 3%;
+}
+
 input:focus, textarea:focus, select:focus, button:focus {
     border: none !important;
     box-shadow: none !important;

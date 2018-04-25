@@ -25,6 +25,11 @@
                 {% endblock %}
             </div>
         </div>
+        <div class="row no-gutters">
+            <div class="col-lg-12 col-xl-12 col-md-12 col-sm-12 col-12 gallery-customers-header">
+                <img src="{{ asset('/images/background/nico_anlor_b&w.jpg') }}" />
+            </div>
+        </div>
     </div>
 {% endblock %}
 
@@ -47,9 +52,10 @@
                         </div>
                         <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 article-txt-container">
                             <h2>{{ article.gallery.title }}</h2>
+                            <img src="{{ asset('/images/upload/gallery/' ~ article.gallery.title ~ '/' ~ article.id ~ '.jpg') }}" />
                             <p>{{ article.creationDate | date('d M Y') }}</p>
                             <p>{{ article.title }}</p>
-                            <a href="{{ path('', {'id': article.gallery.id}) }}" class="link_to_gallery">Voir la galerie</a>
+                            <a href="{{ path('showArticle', {'id': article.gallery.id}) }}" class="link_to_gallery">Voir la galerie</a>
                         </div>
                     </div>
                     {% endfor %}
