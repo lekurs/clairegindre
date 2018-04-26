@@ -29,32 +29,22 @@
                 </div>
 
                 <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12 pictures-container">
-                    {#{%  form_theme form 'form/fields.html.twig' %}#}
-                        {#<div class="col-12 container-form">#}
-                        {#{{ form_start(form) }}#}
-                            {#<div class="row">#}
-                                {#<div class="col-12 picture-thumb-container" data-sortable=".picture-thumb" id="sort1">#}
-                                    {#{% for images in form.pictures %}#}
-                                        {#<div class="picture-thumb-article" data-position="{{ images.vars.data.displayOrder }}" data-id="">#}
-                                            {#<div class="content-thumb" >#}
-                                                {#{{ form_row(images) }}#}
-                                                    {#<img src="{{ asset(images.vars.data.publicPath ~ '/' ~ images.vars.data.pictureName) }}" class="imgCheck" alt="{{ images.vars.data.pictureName }}" />#}
-                                            {#</div>#}
-                                        {#</div>#}
-                                    {#{% endfor %}#}
-                                {#</div>#}
-                                {#<button type="submit" class="btn btn-primary sub-login">Mettre à jour</button>#}
-                            {#</div>#}
+                    <div class="row">
+                        {% for picture in pictures %}
+                        <div class="picture-container col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">
+                            <img src="{{ asset(picture.publicPath ~ '/' ~ picture.pictureName) }}"  class="img-article">
+                            </div>
+                        {% endfor %}
+                    </div>
                     </div>
 
                 <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12 construct-container">
-                    <a href="#" class="add-landscape-picture"><span id="landscape">Paysage</span></a>
+                    <a href="#" class="add-landscape-picture "><span id="landscape">Paysage</span></a>
                     <a href="#" class="add-portrait-picture"><span id="portrait">Portrait</span></a>
                     <a href="#" class="add-landscape-pictures"><span class="landscapes">Paysage</span><span class="landscapes">Paysage</span></a>
                     <a href="#" class="add-portrait-pictures"><span class="portraits">Portrait</span><span class="portraits">Portrait</span></a>
                 </div>
             </div>
-            {{ form_end(form) }}
             <div class="row no-gutters">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 circle-container">
                     <div class="line"></div>

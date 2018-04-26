@@ -48,16 +48,12 @@ class AdminBlogChoosePicturesAction
         $this->entityManager = $entityManager;
     }
 
-
     public function __invoke(Request $request, AdminBlogChoosePicturesResponderInterface $responder)
     {
         $pictures = $this->entityManager->getRepository(Gallery::class)->getWithPictures($request->get('id'));
 
         $form = $this->formFactory->create(SelectPicturesForArticleType::class, $pictures)->handleRequest($request);
 
-//        dump($form);
-//        if();
-
-        return $responder(false, $form);
+        return $responder($pictures->getPictures());
     }
 }

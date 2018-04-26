@@ -135,9 +135,18 @@ i.link-article:hover {
 
 .pictures-container {
     width: 100%;
-    height: 60vh;
+    /*height: 60vh;*/
     border: 1px solid #363636;
     margin: 0 30px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.picture-container {
+    margin-bottom: 1.5em;
 }
 
 .construct-container {
@@ -302,4 +311,9 @@ span.portraits:hover {
     padding: 20px;
     border-right: 1px solid #000000;
     border-bottom: 1px solid #000000;
-    border-width: thin;}
+    border-width: thin;
+}
+
+.img-article {
+    width: 100%;
+}

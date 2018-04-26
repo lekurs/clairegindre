@@ -43,13 +43,11 @@ class AdminBlogChoosePicturesResponder implements AdminBlogChoosePicturesRespond
         $this->urlGenerator = $urlGenerator;
     }
 
-    public function __invoke($redirect = false, FormInterface $form = null)
+    public function __invoke($pictures)
     {
-        $redirect ? $response = new RedirectResponse($this->urlGenerator->generate('admin')) : $response = new Response($this->twig->render('back/admin/Article/add_article_select_pictures.html.twig', array(
-            'form' => $form->createView(),
+        return new Response($this->twig->render('back/admin/Article/add_article_select_pictures.html.twig', array(
+            'pictures' => $pictures
         )));
-
-        return $response;
     }
 
 }

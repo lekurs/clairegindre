@@ -115,7 +115,7 @@ class UserAuthenticationGuard extends AbstractFormLoginAuthenticator
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
     {
         $data = array(
-            'message' => 'toto'
+            'message' => 'Erreur d\'authentification',
         );
 
         return new Response($data, Response::HTTP_FORBIDDEN);
