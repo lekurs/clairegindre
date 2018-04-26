@@ -24,7 +24,9 @@ class AddReviewsType extends AbstractType
     {
         $builder
             ->add('title', TextType::class)
-            ->add('content', TextareaType::class)
+            ->add('content', TextareaType::class, [
+                'required' => false
+            ])
             ->add('image', FileType::class);
     }
 

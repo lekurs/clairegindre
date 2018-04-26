@@ -30,7 +30,8 @@ class ArticleRepository extends ServiceEntityRepository implements ArticleReposi
     public function getArticlesWithFavoritePictureGallery()
     {
         return $this->createQueryBuilder('article')
-                ->leftJoin('article.images', 'pictures')
+                ->leftJoin('article.gallery', 'gallery')
+                ->leftJoin('gallery.pictures', 'pictures')
                 ->getQuery()
                 ->getResult();
     }

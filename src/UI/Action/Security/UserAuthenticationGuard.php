@@ -10,9 +10,11 @@ namespace App\UI\Action\Security;
 
 use App\UI\Responder\Security\Interfaces\UserConnectionResponderInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
@@ -23,17 +25,11 @@ use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Component\Security\Guard\Authenticator\AbstractFormLoginAuthenticator;
 
 /**
- * Class UserConnectionAction
+ * Class UserAuthenticationGuard.
  *
- * @Route(
- *     name="userConnection",
- *     path="login"
- * )
- *
- * @package App\UI\Action\Security
- *
+ * @author GINDRE Maxime <gindre.maxime@gmail.com>
  */
-class UserConnectionAction extends AbstractFormLoginAuthenticator
+class UserAuthenticationGuard extends AbstractFormLoginAuthenticator
 {
     /**
      * @var CsrfTokenManagerInterface
@@ -41,15 +37,21 @@ class UserConnectionAction extends AbstractFormLoginAuthenticator
     private $csrfToken;
 
     /**
-     * UserConnectionAction constructor.
-     *
-     * @param CsrfTokenManagerInterface $csrfToken
+     * @var UrlGeneratorInterface
      */
-    public function __construct(
-        CsrfTokenManagerInterface $csrfToken
-    ) {
+    private $urlGenerator;
+
+    /**
+     * UserAuthenticationGuard constructor.
+     * @param CsrfTokenManagerInterface $csrfToken
+     * @param UrlGeneratorInterface $urlGenerator
+     */
+    public function __construct(CsrfTokenManagerInterface $csrfToken, UrlGeneratorInterface $urlGenerator)
+    {
         $this->csrfToken = $csrfToken;
+        $this->urlGenerator = $urlGenerator;
     }
+
 
     /**
      * @param Request $request
@@ -57,7 +59,11 @@ class UserConnectionAction extends AbstractFormLoginAuthenticator
      */
     public function supports(Request $request)
     {
-        // TODO: Implement supports() method.
+        if ('login' === $request->attributes->get('_route') && 'POST' === $request->getMethod()) {
+            return true;
+        }
+
+        return false;
     }
 
     /**
@@ -68,9 +74,13 @@ class UserConnectionAction extends AbstractFormLoginAuthenticator
     {
         $csrfToken = $request->request->get('_csrf_token');
 
-        if(false === $this->csrfToken->isTokenValid(new CsrfToken('authenticate', $csrfToken))) {
-            throw new InvalidCsrfTokenException('Token invalide');
-        }
+//        if (!$this->csrfToken->isTokenValid(new CsrfToken('authenticate', $csrfToken))) {
+//            throw new InvalidCsrfTokenException('Token invalide');
+//        }
+        return [
+           'username' => $request->request->get('login')['username'],
+            'password' => $request->request->get('login')['password'],
+        ];
     }
 
     /**
@@ -80,13 +90,11 @@ class UserConnectionAction extends AbstractFormLoginAuthenticator
      */
     public function getUser($credentials, UserProviderInterface $userProvider)
     {
-        $email = $credentials['email'];
-
-        if(null === $email) {
+        if (!$credentials['username'] || !$credentials['password']) {
             return;
         }
 
-        return $userProvider->loadUserByUsername($email);
+        return $userProvider->loadUserByUsername($credentials['username']);
     }
 
     /**
@@ -107,10 +115,10 @@ class UserConnectionAction extends AbstractFormLoginAuthenticator
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
     {
         $data = array(
-            'message' => strstr($exception->getMessageKey(), $exception->getMessageData())
+            'message' => 'toto'
         );
 
-        return new JsonResponse($data, Response::HTTP_FORBIDDEN);
+        return new Response($data, Response::HTTP_FORBIDDEN);
     }
 
     /**
@@ -121,6 +129,13 @@ class UserConnectionAction extends AbstractFormLoginAuthenticator
      */
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
+        if (in_array('ROLE_ADMIN', $token->getUser()->getRoles() )) {
+            return new RedirectResponse($this->urlGenerator->generate('admin'));
+        }
+        elseif (in_array('ROLE_USER', $token->getUser()->getRoles())) {
+
+            return new RedirectResponse($this->urlGenerator->generate('galleryCutomer', ['id' => $token->getUser()->getId()]));
+        }
         $token->getUser();
     }
 
@@ -137,7 +152,7 @@ class UserConnectionAction extends AbstractFormLoginAuthenticator
      */
     protected function getLoginUrl()
     {
-        // TODO: Implement getLoginUrl() method.
+        return $this->urlGenerator->generate('login');
     }
 
     /**
@@ -148,14 +163,5 @@ class UserConnectionAction extends AbstractFormLoginAuthenticator
     public function start(Request $request, AuthenticationException $authException = null)
     {
         return parent::start($request, $authException); // TODO: Change the autogenerated stub
-    }
-
-    /**
-     * @param UserConnectionResponderInterface $responder
-     * @return mixed
-     */
-    public function __invoke(UserConnectionResponderInterface $responder)
-    {
-        return $responder();
     }
 }

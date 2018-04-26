@@ -217,9 +217,9 @@ class User implements UserInterface, BaseUser
     }
 
     /**
-     * @return mixed
+     * @return PictureInterface
      */
-    public function getPicture()
+    public function getPicture(): PictureInterface
     {
         return $this->picture;
     }
@@ -259,7 +259,7 @@ class User implements UserInterface, BaseUser
     }
 
     /**
-     * @return (Role|string)[] The user roles
+     * @return array
      */
     public function getRoles()
     {

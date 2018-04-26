@@ -78,7 +78,7 @@ class UserEditAction implements UserEditActionInterface
     {
         $user = $this->entityManager->getRepository(User::class)->showOne($request->get('id'));
 
-        $userDto = new EditUserDTO();//passer les valeurs
+        $userDto = new EditUserDTO($user->getEmail(), $user->getUsername(), $user->getLastName(), $user->getPassword(), $user->isOnline(), $user->getDateWedding(), $user->getPicture());
 
         $userEditType = $this->formFactory->create(EditUserType::class, $userDto)->handleRequest($request);
 

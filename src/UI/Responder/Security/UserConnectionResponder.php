@@ -10,6 +10,7 @@ namespace App\UI\Responder\Security;
 
 
 use App\UI\Responder\Security\Interfaces\UserConnectionResponderInterface;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Twig\Environment;
@@ -40,10 +41,10 @@ class UserConnectionResponder implements UserConnectionResponderInterface
         $this->urlGenerator = $urlGenerator;
     }
 
-    public function __invoke()
+    public function __invoke(FormInterface $form)
     {
-        $response = new Response($this->twig->render('back/security/login.html.twig'));
-
-        return $response;
+        return new Response($this->twig->render('back/security/login.html.twig', [
+            'form' => $form->createView()
+        ]));
     }
 }

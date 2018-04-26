@@ -56,11 +56,6 @@ class Article implements ArticleInterface
     /**
      * @var ArrayAccess
      */
-    private $images;
-
-    /**
-     * @var ArrayAccess
-     */
     private $comments;
 
     /**
@@ -174,22 +169,6 @@ class Article implements ArticleInterface
     public function getPrestation(): BenefitInterface
     {
         return $this->prestation;
-    }
-
-    /**
-     * @return ArrayAccess
-     */
-    public function getImages(): ArrayAccess
-    {
-        return $this->images;
-    }
-
-    /**
-     * @param ArrayAccess $images
-     */
-    public function setImages(ArrayAccess $images): void
-    {
-        $this->images = $images;
     }
 
     /**
