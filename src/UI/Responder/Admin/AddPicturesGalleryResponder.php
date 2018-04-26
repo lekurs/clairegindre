@@ -2,20 +2,20 @@
 /**
  * Created by PhpStorm.
  * User: Bidule
- * Date: 04/04/2018
- * Time: 17:07
+ * Date: 26/04/2018
+ * Time: 17:06
  */
 
-namespace App\UI\Responder\Security;
+namespace App\UI\Responder\Admin;
 
-use App\UI\Responder\Security\Interfaces\UserResponderInterface;
-use Symfony\Component\Form\FormInterface;
+
+use App\UI\Responder\Admin\Interfaces\AddPicturesGalleryResponderInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Twig\Environment;
 
-class UserResponder implements UserResponderInterface
+class AddPicturesGalleryResponder implements AddPicturesGalleryResponderInterface
 {
     /**
      * @var Environment
@@ -28,7 +28,7 @@ class UserResponder implements UserResponderInterface
     private $urlGenerator;
 
     /**
-     * UserResponder constructor.
+     * AddPicturesGalleryResponder constructor.
      * @param Environment $twig
      * @param UrlGeneratorInterface $urlGenerator
      */
@@ -38,12 +38,12 @@ class UserResponder implements UserResponderInterface
         $this->urlGenerator = $urlGenerator;
     }
 
-    public function __invoke($redirect = false, FormInterface $form = null, $users)
+    public function __invoke($redirect = false)
     {
-        $redirect ? $response = new RedirectResponse($this->urlGenerator->generate('adminAddGallery')) : $response = new Response($this->twig->render('back/admin/users.html.twig', [
-            'users' => $users,
-            'form' => $form->createView()
+        $redirect ? $response = new RedirectResponse($this->urlGenerator->generate('adminUser')) : $response = new Response($this->twig->render('back/admin/add_gallery.html.twig', [
+
         ]));
+
         return $response;
     }
 

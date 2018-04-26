@@ -2,6 +2,7 @@
 
 {%  block head %}
     {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/styles/drop_pictures.css') }}" />
     {% block title %}
         <title>Administration des familles</title>
     {% endblock %}
@@ -11,13 +12,13 @@
 <section>
     <div class="container">
         <div class="col">
-            <h1>Gallerie client : {{ user.username }}</h1>
+            <h1>ajout images</h1>
         </div>
-        {{ form_start(gallery) }}
-        {{ form_widget(gallery) }}
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" id="drop-container">
 
-            <button type="submit" name="submit-gallery" class="btn btn-primary test-btn">Ajouter</button>
-            {{ form_end(gallery) }}
+            </div>
+        </div>
     </div>
 
 </section>
@@ -25,5 +26,11 @@
 
 {% block javascripts %}
     {{ parent() }}
-    <script src="/js/back/dropfiles.js"></script>
+    <script src="/js/back/dropPictures.js"></script>
+    <script>$(document).ready(function () {
+            $('#drop-container').dropPictures(
+
+            );
+        });
+    </script>
 {% endblock %}

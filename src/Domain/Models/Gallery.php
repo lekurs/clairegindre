@@ -52,7 +52,7 @@ class Gallery implements GalleryInterface
         string $title,
         UserInterface $user,
         BenefitInterface $benefit,
-        ArticleInterface $article
+        ArticleInterface $article = null
     ) {
         $this->id = Uuid::uuid4();
         $this->title = $title;

@@ -3,19 +3,23 @@
 $(document).ready(function () {
     var galleries = $('.show-galleries');
     var arrow = $('.show-gallery');
+    var add = $('span[data-toggle = "modal"]');
 
-    // galleries.hide();
-
-    $(arrow).each(function () {
-
-        for(var i =0; i< galleries.length; i++) {
-            $(galleries).each(function () {
-                $(this).attr('id', i++);
-            });
+    $(arrow).on('click', function () {
+        elt = $(this).closest('.gallery-container').find('.show-galleries');
+        if (elt.css('display') == 'none') {
+            elt.slideDown();
+            $(this).addClass('show-active');
         }
-        $(this).on('click', function () {
-            $(this).toggleClass('show-active');
-
-        });
+        else {
+            $(this).removeClass('show-active');
+            elt.slideUp();
+        }
     });
+
+    $(add).on('click', function () {
+        console.log("pui");
+        id = $(this).attr('data-id');
+       $('#add_gallery_user').val(id);
+    })
 })

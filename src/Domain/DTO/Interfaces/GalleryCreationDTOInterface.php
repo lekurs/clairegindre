@@ -18,10 +18,10 @@ interface GalleryCreationDTOInterface
      * @param string $title
      * @param array $pictures
      */
-    public function __construct(
-        BenefitInterface $benefit,
-        string $title,
-        array $pictures
-    );
+//    public function __construct(
+//        BenefitInterface $benefit,
+//        string $title,
+//        array $pictures
+//    );
 
 }

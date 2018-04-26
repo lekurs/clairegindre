@@ -19,6 +19,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
@@ -54,10 +55,7 @@ class AddGalleryType extends AbstractType
                     ]
                 ))
                 ->add('title', TextType::class)
-                ->add('pictures', FileType::class, array(
-                'multiple' => true,
-                'mapped' => false,
-            ))
+                ->add('user', HiddenType::class)
             ;
     }
 
@@ -69,7 +67,7 @@ class AddGalleryType extends AbstractType
                                 return new GalleryCreationDTO(
                                             $form->get('benefit')->getData(),
                                             $form->get('title')->getData(),
-                                            $form->get('pictures')->getData()
+                                            $form->get('user')->getData()
                                 );
                         }
         ));

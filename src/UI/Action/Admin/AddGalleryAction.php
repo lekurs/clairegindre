@@ -11,6 +11,7 @@ namespace App\UI\Action\Admin;
 
 use App\Domain\Form\Type\AddGalleryType;
 use App\Domain\Models\User as UserEntity;
+use App\Domain\Models\User;
 use App\UI\Action\Admin\Interfaces\AddGalleryActionInterface;
 use App\UI\Form\FormHandler\Interfaces\AddGalleryTypeHandlerInterface;
 use App\UI\Responder\Admin\Interfaces\AddGalleryResponderInterface;
@@ -24,7 +25,8 @@ use Symfony\Component\Routing\Annotation\Route;
  *
  * @Route(
  *     name="adminAddGallery",
- *     path="admin/gallery/{id}"
+ *     path="admin/users",
+ *     methods={"POST"}
  * )
  *
  * @package App\UI\Action\Admin
@@ -61,14 +63,15 @@ class AddGalleryAction implements AddGalleryActionInterface
 
     public function __invoke(Request $request, AddGalleryResponderInterface $responder)
     {
-        $addGalleryType = $this->formFactory->create(AddGalleryType::class)->handleRequest($request);
+        $form = $this->formFactory->create(AddGalleryType::class)->handleRequest($request);
 
-        $user = $this->entityManager->getRepository(UserEntity::class)->showOne($request->get('id'));
+        $user = $this->entityManager->getRepository(User::class)->find($request->request->get('add_gallery')['user']);
+        //
+        if ($this->galleryHandler->handle($form, $user)) {
 
-        if($this->galleryHandler->handle($addGalleryType, $user)) {
-
-            return $responder(true, null, $user);
+            return $responder(true, $form, $user);
         }
+
         return $responder(false, $addGalleryType, $user);
     }
 }

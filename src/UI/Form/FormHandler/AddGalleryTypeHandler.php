@@ -90,7 +90,7 @@ class AddGalleryTypeHandler implements AddGalleryTypeHandlerInterface
     }
 
 
-    public function handle(FormInterface $form, UserInterface $user): bool
+    public function handle(FormInterface $form, $user): bool
     {
         if($form->isSubmitted() && $form->isSubmitted()) {
 
@@ -103,19 +103,19 @@ class AddGalleryTypeHandler implements AddGalleryTypeHandlerInterface
             }
 
             $this->galleryBuilder->create($form->getData()->title, $user, $form->getData()->benefit);
-
-            foreach ($form->getData()->pictures as $pictures) {
-
-                $this->pictureUploaderHelper->move($pictures, $this->targetDir . '/gallery/' . $form->getData()->title, $pictures->getClientOriginalName());
-
-                $this->galleryBuilder->withPicture(
-                    new Picture($pictures->getClientOriginalName(), 'images/upload/gallery/' . $form->getData()->title, $pictures->guessClientExtension(), $i++)
-                );
+//
+//            foreach ($form->getData()->pictures as $pictures) {
+//
+//                $this->pictureUploaderHelper->move($pictures, $this->targetDir . '/gallery/' . $form->getData()->title, $pictures->getClientOriginalName());
+//
+//                $this->galleryBuilder->withPicture(
+//                    new Picture($pictures->getClientOriginalName(), 'images/upload/gallery/' . $form->getData()->title, $pictures->guessClientExtension(), $i++)
+//                );
 
 //                    $this->validator->validate($gallery, [], [
 //                        'gallery_creation'
 //                    ]);
-            }
+//            }
 
 
 
