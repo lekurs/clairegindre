@@ -29,7 +29,11 @@
     <script src="/js/back/dropPictures.js"></script>
     <script>$(document).ready(function () {
             $('#drop-container').dropPictures(
-
+                {
+                    'script' : '/admin/gallery/pictures/upload',
+                    'target': '{{ gallery.title }}',
+                    'gallery': '{{ gallery.id }}'
+                }
             );
         });
     </script>

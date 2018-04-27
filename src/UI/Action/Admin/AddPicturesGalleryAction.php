@@ -9,6 +9,7 @@
 namespace App\UI\Action\Admin;
 
 
+use App\Domain\Models\Gallery;
 use App\UI\Action\Admin\Interfaces\AddPicturesGalleryActionInterface;
 use App\UI\Responder\Admin\Interfaces\AddPicturesGalleryResponderInterface;
 use Doctrine\ORM\EntityManagerInterface;
@@ -43,7 +44,9 @@ class AddPicturesGalleryAction implements AddPicturesGalleryActionInterface
 
     public function __invoke(Request $request, AddPicturesGalleryResponderInterface $responder)
     {
-        return $responder();
+        $gallery = $this->entityManager->getRepository(Gallery::class)->find($request->get('id'));
+
+        return $responder(false, $gallery);
     }
 
 }

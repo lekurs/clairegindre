@@ -10,3 +10,30 @@
 .drop_pictures_button {
     margin-left: 10px;
 }
+
+.drop_pictures_line {
+    border-top: 1px solid #DDDDDD;
+    border-width: thin;
+    padding: 15px 0;
+}
+
+.drop_pictures_line:first-child {
+    margin-top: 1.5em;
+}
+
+.drop_pictures_previews {
+    width: 70%;
+}
+
+.grey-line {
+    background-color: #f9f9f9;
+}
+
+.colProgressBar {
+    display: flex;
+    align-items: center;
+}
+
+.progress {
+    width: 100%;
+}
