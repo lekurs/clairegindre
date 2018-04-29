@@ -1,5 +1,9 @@
 /* Adminstration */
 
+/**************************************************/
+/*                                  ADMIN INDEX                                                */
+/**************************************************/
+
 .menus-admin  {
     color: #5f6b67;
 }
@@ -8,6 +12,139 @@
     color: #5f6b67;
 }
 
+.admin-button {
+    margin: 1em auto;
+    width: 100%;
+}
+
+.admin-block {
+    margin: 5em auto;
+    /*height: 40vh;*/
+}
+
+.admin-users-block {
+    border-bottom: 1px solid #5f6b67;
+    border-width: thin;
+    align-items: center;
+    margin: 1em auto;
+}
+
+.admin-block-title {
+    font-weight: bold;
+    text-align: left;
+    text-transform: capitalize;
+}
+
+.admin-users-block-content {
+    height: 30vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.admin-users-block  p {
+    margin: 0;
+}
+
+.admin-gallery-block-content {
+    height: 30vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.header-infos-admin-thumb {
+    background-color: #5f6b67;
+    color: #ffffff;
+    height: 2.5em;
+    text-align: center;
+    margin: 0;
+    align-items: center;
+}
+
+.header-infos-admin-thumb h5 {
+    height: 1.5em;
+    margin: 0;
+    padding: 0;
+}
+
+.arrow-title-admin {
+    position: relative;
+    left: 35%;
+    right: 0;
+}
+
+.admin-users-block a, .admin-gallery-block-content a, .admin-benefits-part a {
+    color: #BBBBBB;
+    transition: all .2s ease-in-out;
+}
+
+.admin-users-block a:hover, .admin-gallery-block-content a:hover, .admin-benefits-part a:hover {
+    color: #000000;
+    font-size: 1.5em;
+}
+
+/**************************************************/
+/*                                      USERS VIEW                                               */
+/**************************************************/
+
 .users {
     text-align: center;
+}
+
+.user-information-container {
+    margin-bottom: 2em;
+}
+
+.info-user-image > img {
+    width: 50%;
+}
+
+.show-galleries {
+    margin-bottom: 2em;
+}
+
+.add-gallery {
+    text-align: center;
+    width: 100%;
+    border: 1px solid #32383e;
+    border-width: thin;
+    border-top: none;
+}
+
+.btn-add-gallery {
+    width: 15%;
+}
+
+.new-user {
+    width: 100%;
+}
+
+.infos-gallery-title-container {
+    border-bottom: 1px solid #32383e;
+    border-width: thin;
+}
+
+.favorite-picture {
+    border-left: 1px solid #32383e;
+    border-width: thin;
+}
+
+.infos-gallery-title {
+    background-color: #DDDDDD;
+    font-size: 1.1em;
+    font-weight: bold;
+    padding: 5px 0;
+    border-right: 1px solid #32383e;
+    border-top: 1px solid#32383e;
+    border-width: thin;
+}
+
+.infos-gallery {
+    margin: 0;
+    border-right: 1px solid #32383e;
+    border-bottom: 1px solid #32383e;
+    border-width: thin;
+}
+
+.infos-gallery p {
+    margin: 0;
 }
