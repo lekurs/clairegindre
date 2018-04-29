@@ -26,25 +26,337 @@
     {{ parent() }}
 
     <section>
-        <div class="container">
-            <div class="row">
-                <div class="col-12 infos-admin-container">
-                    <div class="row">
-                        <div class="col">Total clients :</div>
-                        <div class="col">XX</div>
+        <div class="container-fluid">
+            <div class="row admin-block">
+                {%  block users %}
+                    <div class="col-xl-5 col-lg-5 col-md-12 col-sm-12 col-12 offset-xl-1 offset-lg-1">
+                        <div class="row no-gutters admin-part-container">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                <div class="row no-gutters header-infos-admin-thumb">
+                                    <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1">
+                                        <i class="fa fa-user"></i>
+                                    </div>
+                                    <div class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-md-10 col-10">
+                                        <h5 class="text-uppercase text-center">Utilisateurs</h5>
+                                    </div>
+                                    <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1">
+                                        <i class="fa fa-angle-double-down"></i>
+                                    </div>
+                                </div>
+                                <div class="row no-gutters justify-content-center admin-users-block">
+                                    <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5 col-5">
+                                        <p class="admin-block-title">Titre</p>
+                                    </div>
+                                    <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5 col-5">
+                                        <p class="admin-block-title">Galeries</p>
+                                    </div>
+                                    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
+                                        <div class="row no-gutters">
+                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
+                                                <i class="fa fa-edit"></i>
+                                            </div>
+                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
+                                                <i class="fa fa-trash"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row no-gutters admin-users-block-content">
+                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                        {% for user in users %}
+                                            <div class="row no-gutters admin-users-block">
+                                                <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5 col-5">
+                                                    <p>{{ user.username ~ ' - ' ~ user.lastName }}</p>
+                                                </div>
+                                                <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5 col-5">
+                                                    {% for gallery in user.galleries %}
+                                                        <p>{{ gallery.title }}</p>
+                                                    {% endfor %}
+                                                </div>
+                                                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
+                                                    <div class="row">
+                                                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
+                                                            <a href=""><i class="fa fa-edit"></i></a>
+                                                        </div>
+                                                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
+                                                            <a href=""><i class="fa fa-trash"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                        <span data-toggle="modal" data-target="#createUserModal" ><button type="button" class="btn btn-dark admin-button"><i class="fa fa-plus"></i></button></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="row">
-                        <div class="col">Total Galeries photos</div>
-                        <div class="col">XX</div>
+                {% endblock %}
+
+                {% block galleries %}
+                    <div class="col-xl-5 col-lg-5 col-md-12 col-sm-12 col-12">
+                        <div class="row no-gutters admin-galleries-part">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                <div class="row no-gutters header-infos-admin-thumb">
+                                    <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1">
+                                        <i class="fa fa-photo"></i>
+                                    </div>
+                                    <div class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-10">
+                                        <h5 class="text-uppercase text-center header-infos-admin-thumb">Galeries </h5>
+                                    </div>
+                                    <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1">
+                                        <i class="fa fa-angle-double-down"></i>
+                                    </div>
+                                </div>
+                                <div class="row no-gutters justify-content-center admin-users-block">
+                                    <div class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-10">
+                                        <p>Nom - prénom</p>
+                                    </div>
+                                    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
+                                        <div class="row no-gutters">
+                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
+                                                <i class="fa fa-edit"></i>
+                                            </div>
+                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
+                                                <i class="fa fa-trash"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row no-gutters admin-gallery-block-content">
+                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                        {% for gallery in galleries %}
+                                            <div class="row no-gutters justify-content-center admin-users-block">
+                                                <div class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-10">
+                                                    <p>{{ gallery.title }}</p>
+                                                </div>
+                                                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
+                                                    <div class="row no-gutters">
+                                                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
+                                                            <a href="#"><i class="fa fa-edit"></i></a>
+                                                        </div>
+                                                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
+                                                            <a href="{{ path('adminDeleteGallery', { 'id': gallery.id }) }}"><i class="fa fa-trash"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                        <button type="button" class="btn btn-dark admin-button"><i class="fa fa-plus"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="row">
-                        <div class="col">Total messages postés sur le blog : </div>
-                        <div class="col">XX</div>
+                {% endblock %}
+            </div>
+
+            <div class="row admin-block">
+                {% block benefits %}
+                    <div class="col-xl-5 col-lg-5 col-md-12 col-sm-12 col-12 offset-1">
+                        <div class="row no-gutters admin-benefits-part">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                <div class="row no-gutters header-infos-admin-thumb">
+                                    <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1">
+                                        <i class="fa fa-pencil"></i>
+                                    </div>
+                                    <div class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-10">
+                                        <h5 class="text-uppercase text-center header-infos-admin-thumb">Prestations </h5>
+                                    </div>
+                                    <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1">
+                                        <i class="fa fa-angle-double-down"></i>
+                                    </div>
+                                </div>
+                                <div class="row no-gutters justify-content-center admin-users-block">
+                                    <div class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-10">
+                                        <p class="admin-block-title">Type</p>
+                                    </div>
+                                    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
+                                        <div class="row no-gutters">
+                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
+                                                <i class="fa fa-edit"></i>
+                                            </div>
+                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
+                                                <i class="fa fa-trash"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row no-gutters admin-gallery-block-content">
+                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                        {% for benefit in benefits %}
+                                            <div class="row no-gutters justify-content-center admin-users-block">
+                                                <div class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-10">
+                                                    <p>{{ benefit.name }}</p>
+                                                </div>
+                                                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
+                                                    <div class="row no-gutters">
+                                                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
+                                                            <a href="#"><i class="fa fa-edit"></i></a>
+                                                        </div>
+                                                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
+                                                            <a href="{{ path('adminDeleteBenefit', { 'id' : benefit.id}) }}"><i class="fa fa-trash"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                        <span data-toggle="modal" data-target="#createBenefitModal" ><button type="button" class="btn btn-dark admin-button"><i class="fa fa-plus"></i></button></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="row">
-                        <div class="col">Galeries en ligne :</div>
-                        <div class="col">XX</div>
+                {% endblock %}
+
+                {% block blogs %}
+                    <div class="col-xl-5 col-lg-5 col-md-12 col-sm-12 col-12">
+                        <div class="row no-gutters admin-blog-part">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                <div class="row no-gutters header-infos-admin-thumb">
+                                    <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1">
+                                        <i class="fa fa-mobile-phone"></i>
+                                    </div>
+                                    <div class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-10">
+                                        <h5 class="text-uppercase text-center header-infos-admin-thumb">Blog</h5>
+                                    </div>
+                                    <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1">
+                                        <i class="fa fa-angle-double-down"></i>
+                                    </div>
+                                </div>
+                                <div class="row no-gutters justify-content-center admin-users-block">
+                                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
+                                        <p class="admin-block-title">Titre</p>
+                                    </div>
+                                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">
+                                        <p class="admin-block-title">Commentaires</p>
+                                    </div>
+                                    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
+                                        <div class="row no-gutters">
+                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
+                                                <i class="fa fa-edit"></i>
+                                            </div>
+                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
+                                                <i class="fa fa-trash"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row no-gutters admin-gallery-block-content">
+                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                        {% for article in articles %}
+                                            <div class="row no-gutters justify-content-center admin-users-block">
+                                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
+                                                    <p>{{ article.title }}</p>
+                                                </div>
+                                                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">
+                                                    <p>Nb comm</p>
+                                                </div>
+                                                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
+                                                    <div class="row no-gutters">
+                                                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
+                                                            <a href="#"><i class="fa fa-edit"></i></a>
+                                                        </div>
+                                                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
+                                                            <a href="#"><i class="fa fa-trash"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                        <span data-toggle="modal" data-target="#createArticleModal" ><button type="button" class="btn btn-dark admin-button"><i class="fa fa-plus"></i></button></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                {% endblock %}
+            </div>
+        </div>
+
+        <!-- MODAL -->
+        <!-- MODAL + USER -->
+        <div class="modal fade" id="createUserModal" tabindex="-1" role="dialog" aria-labelledby="createUserModalTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="createUserModalTitle">Enregistrer un client</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    {{ form_start(formRegistration) }}
+                    <div class="modal-body">
+                        {{ form_widget(formRegistration) }}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                        <button type="submit"  class="btn btn-primary">Enregistrer</button>
+                    </div>
+                    {{ form_end(formRegistration) }}
+                </div>
+            </div>
+        </div>
+
+        <!-- MODAL + BENEFIT -->
+        <div class="modal fade" id="createBenefitModal" tabindex="-1" role="dialog" aria-labelledby="createBenefitModalTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="createBenefitModalTitle">Enregistrer une prestation</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    {{ form_start(formBenefit) }}
+                    <div class="modal-body">
+                        {{ form_label(formBenefit.name, 'Titre de prestation', { 'attr': { 'class': 'none' } }) }}
+                        {{ form_row(formBenefit.name, { 'attr' :  { 'class' : '' }}) }}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                        <button type="submit"  class="btn btn-primary">Enregistrer</button>
+                    </div>
+                    {{ form_end(formBenefit) }}
+                </div>
+            </div>
+        </div>
+
+        <!-- MODAL + ARTICLE -->
+        <div class="modal fade" id="createArticleModal" tabindex="-1" role="dialog" aria-labelledby="createArticleModalTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="createArticleModalTitle">Enregistrer un article</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    {{ form_start(formArticle) }}
+                    <div class="modal-body">
+                        {{ form_widget(formArticle) }}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                        <button type="submit"  class="btn btn-primary">Enregistrer</button>
+                    </div>
+                    {{ form_end(formArticle) }}
                 </div>
             </div>
         </div>

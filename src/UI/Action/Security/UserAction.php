@@ -67,7 +67,10 @@ class UserAction implements UserActionInterface
 
         $form = $this->formFactory->create(AddGalleryType::class);
 
+        if ($this->addGalleryTypeHandler->handle($form, $users)) {
+            return $responder(true, $form, $users);
+        }
+
         return $responder(false, $form, $users);
     }
-
 }

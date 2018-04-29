@@ -6,64 +6,95 @@
         <div class="container users">
             <div class="row">
                 <div class="col">
-                    <p class="text-uppercase font-weight-bold">Nom</p>
+                    <p class="text-uppercase font-weight-bold">Image utilisateur</p>
                 </div>
                 <div class="col">
-                    <p class="text-uppercase font-weight-bold">Prénoms</p>
+                    <p class="text-uppercase font-weight-bold">Utilisateur</p>
                 </div>
                 <div class="col">
-                    <p class="text-uppercase font-weight-bold">Images</p>
+                    <p class="text-uppercase font-weight-bold">Modifier Utilisateur</p>
                 </div>
                 <div class="col">
-                    <p class="text-uppercase font-weight-bold">Les galeries</p>
-                </div>
-                <div class="col">
-                    <p class="text-uppercase font-weight-bold">Editer</p>
+                    <p class="text-uppercase font-weight-bold">Galeries Photos</p>
                 </div>
             </div>
             {% for user in users %}
                 <div class="row no-gutters gallery-container">
                     <div class="col">
-                        <div class="row no-gutters">
-                            <div class="col">
-                                <p>{{ user.username }}</p>
+                        <div class="row no-gutters user-information-container">
+                            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3 info-user-image">
+                                <img src="{{ user.picture.publicPath ~ '/' ~ user.picture.pictureName }}" alt="{{ user.picture.pictureName }}" />
                             </div>
-                            <div class="col">
-                                <p>{{ user.lastName }}</p>
+                            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
+                                <p>{{ user.username }} - {{ user.lastName }}</p>
                             </div>
-                            <div class="col">
-                                {#<p><img src="/images/upload/customers/{{ user.pictureName}}" /></p>#}
-                            </div>
-                            <div class="col">
-                                {#<a href="{{ path('adminAddGallery', {'id': user.id}) }}"></a>#}
-                                <span data-toggle="modal" data-target="#createGalleryModal" data-id="{{ user.id }}"><i class="fa fa-plus"></i></span> ou <i class="fa fa-chevron-up show-gallery"></i>
-                            </div>
-                            <div class="col">
+                            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
                                 <a href="{{ path('adminUserEdit', {'id': user.id}) }}"><i class="fa fa-edit"></i></a>
+                            </div>
+                            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
+                                <i class="fa fa-search show-gallery"></i>
                             </div>
                         </div>
                         <div class="row no-gutters">
                             <div class="col show-galleries">
-                                <h3>Galeries</h3>
-                                {% for gallery in user.galleries %}
-                                    <div class="col show-gallery-details">
-                                        <a href="{{ path('adminPictures', {'id': gallery.id}) }}">{{ gallery.benefit.name }}</a>
+                                <h3>Détails Galeries</h3>
+                                <div class="row no-gutters infos-gallery-title-container">
+                                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3 infos-gallery-title favorite-picture">
+                                        <p class="text-uppercase">Favorite</p>
                                     </div>
-                                {% else %}
-                                    <div class="col show-galleries">
-                                        <p class="text-center">Aucune galerie</p>
+                                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3 infos-gallery-title">
+                                        <p class="text-uppercase">Titre</p>
                                     </div>
-                            {% endfor %}
+                                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3 infos-gallery-title">
+                                        <p class="text-uppercase">Prestation</p>
+                                    </div>
+                                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3 infos-gallery-title">
+                                        <p class="text-uppercase">Modifier | Supprimer</p>
+                                    </div>
+                                </div>
+                                <div class="row no-gutters">
+                                    {% for gallery in user.galleries %}
+                                        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3 infos-gallery favorite-picture">
+                                            <p>favorite</p>
+                                        </div>
+                                        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3 infos-gallery">
+                                            <p>{{ gallery.title }}</p>
+                                        </div>
+                                        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3 show-gallery-details infos-gallery">
+                                            <p>{{ gallery.benefit.name }}</p>
+                                        </div>
+                                        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3 show-gallery-details">
+                                            <div class="row no-gutters">
+                                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 infos-gallery">
+                                                    <a href="{{ path('adminPictures', {'id': gallery.id}) }}"><i class="fa fa-edit"></i></a>
+                                                </div>
+                                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 no-gutters infos-gallery">
+                                                    <a href="{{ path('adminDeleteGallery', {'id': gallery.id}) }}"><i class="fa fa-trash"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% else %}
+                                        <div class="col show-galleries">
+                                            <p class="text-center">Aucune galerie</p>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                                <div class="row no-gutters  add-gallery">
+                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                        <span data-toggle="modal" data-target="#createGalleryModal" data-id="{{ user.id }}"><button type="button" class="btn btn-success btn-add-gallery">+</button> </span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             {% endfor %}
-            <div class="row">
-                <div class="col add_user">
-                    <a href="{{ path('adminRegister') }}">Ajouter un utilisateur</a>
-                </div>
+        </div>
+        <div class="row no-gutters new-user">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 add_user">
+                <a href="{{ path('adminRegister') }}">Ajouter un utilisateur</a>
             </div>
+        </div>
         </div>
     </section>
 

@@ -14,6 +14,7 @@ use App\Domain\Repository\Interfaces\ArticleRepositoryInterface;
 use App\UI\Form\FormHandler\Interfaces\AddArticleTypeHandlerInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class AddArticleTypeHandler implements AddArticleTypeHandlerInterface
@@ -39,36 +40,44 @@ class AddArticleTypeHandler implements AddArticleTypeHandlerInterface
     private $articleBuilder;
 
     /**
+     * @var TokenStorageInterface
+     */
+    private $tokenStorage;
+
+    /**
      * AddArticleTypeHandler constructor.
      *
      * @param ArticleRepositoryInterface $articleRepository
      * @param SessionInterface $session
      * @param ValidatorInterface $validator
      * @param ArticleBuilderInterface $articleBuilder
+     * @param TokenStorageInterface $tokenStorage
      */
     public function __construct(
         ArticleRepositoryInterface $articleRepository,
         SessionInterface $session,
         ValidatorInterface $validator,
-        ArticleBuilderInterface $articleBuilder
+        ArticleBuilderInterface $articleBuilder,
+        TokenStorageInterface $tokenStorage
     ) {
         $this->articleRepository = $articleRepository;
         $this->session = $session;
         $this->validator = $validator;
         $this->articleBuilder = $articleBuilder;
+        $this->tokenStorage = $tokenStorage;
     }
 
     public function handle(FormInterface $form): bool
     {
         if($form->isSubmitted() && $form->isValid()) {
             $article = $this->articleBuilder->create(
-                                                                                    $form->getData()->title,
-                                                                                    $form->getData()->content,
-                                                                                    new \DateTime(),
-                                                                                    $form->getData()->online,
-//                                                                                    $form->getData()->user,
-                                                                                    $form->getData()->gallery,
-                                                                                    $form->getData()->prestation
+                $form->getData()->title,
+                $form->getData()->content,
+                new \DateTime(),
+                $form->getData()->online,
+                $this->tokenStorage->getToken()->getUser(),
+                $form->getData()->gallery,
+                $form->getData()->prestation
             );
 
             $this->validator->validate($article, [], [

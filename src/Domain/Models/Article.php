@@ -84,7 +84,7 @@ class Article implements ArticleInterface
         string $content,
         \DateTime $creationDate,
         bool $online,
-//        UserInterface $author,
+        UserInterface $author,
         GalleryInterface $gallery,
         BenefitInterface $prestation
     ) {
@@ -93,7 +93,7 @@ class Article implements ArticleInterface
         $this->content = $content;
         $this->creationDate = new \DateTime();
         $this->online = $online;
-//        $this->author = $author;
+        $this->author = $author;
         $this->gallery = $gallery;
         $this->prestation = $prestation;
     }
