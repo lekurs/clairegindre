@@ -12,8 +12,23 @@
 <section>
     <div class="container">
         <div class="col">
-            <h1>ajout images</h1>
+            <h1>Gestion de la galerie : {{ gallery.title }}</h1>
         </div>
+
+        {% if gallery is not empty %}
+            <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <ul id="sortable">
+                        {% for pictures in gallery.pictures %}
+                            <li class="ui-state-default">
+                                <img src="{{ asset(pictures.publicPath ~ '/' ~ pictures.pictureName) }}" alt="{{ pictures.pictureName }}" />
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        {% endif %}
+
         <div class="row">
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" id="drop-container">
 
@@ -26,6 +41,11 @@
 
 {% block javascripts %}
     {{ parent() }}
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>$ (function () {
+            $('#sortable').sortable();
+            $ ('#sortable').disableSelection();
+        });</script>
     <script src="/js/back/dropPictures.js"></script>
     <script>$(document).ready(function () {
             $('#drop-container').dropPictures(

@@ -44,7 +44,7 @@ class AddPicturesGalleryAction implements AddPicturesGalleryActionInterface
 
     public function __invoke(Request $request, AddPicturesGalleryResponderInterface $responder)
     {
-        $gallery = $this->entityManager->getRepository(Gallery::class)->find($request->get('id'));
+        $gallery = $this->entityManager->getRepository(Gallery::class)->getWithPictures($request->get('id'));
 
         return $responder(false, $gallery);
     }
