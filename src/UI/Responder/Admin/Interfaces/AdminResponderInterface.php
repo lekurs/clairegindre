@@ -24,14 +24,14 @@ interface AdminResponderInterface
 
     /**
      * @param bool $redirect
-     * @param FormInterface|null $form
-     * @param FormInterface $form2
-     * @param FormInterface $form3
+     * @param FormInterface|null $registrationType
+     * @param FormInterface $addBenefitType
+     * @param FormInterface $addArticleType
      * @param $users
      * @param $galleries
      * @param $benefits
      * @param $articles
      * @return mixed
      */
-    public function __invoke($redirect = false, FormInterface $form = null, FormInterface $form2, FormInterface $form3, $users, $galleries, $benefits, $articles);
+    public function __invoke($redirect = false, FormInterface $registrationType = null, FormInterface $addBenefitType, FormInterface $addArticleType, $users, $galleries, $benefits, $articles);
 }

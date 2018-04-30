@@ -17,7 +17,7 @@
         init(elt, o);
 
         function init(elt, o) {
-            barAction = $('<div>').addClass('row').addClass('no-gutters').appendTo(elt);
+            barAction = $('<div>').addClass('row').addClass('no-gutters').addClass('drop_pictures_action_bars').appendTo(elt);
             addFiles = $('<input type="button">').addClass('btn').addClass('btn-success').addClass('drop_pictures_button').attr('id', 'addFiles').val('Ajouter fichiers');
             startUpload = $('<input type="button">').addClass('btn').addClass('btn-primary').addClass('drop_pictures_button').attr('id', 'startUpload').val('Uploader');
             deleteAll = $('<input type="button">').addClass('btn').addClass('btn-danger').addClass('drop_pictures_button').attr('id', 'deleteAll').val('Supprimer');
@@ -35,6 +35,14 @@
                 if (!isNaN(index)) {
                     modulo = index % 2;
                     line = $('<div>').addClass('row').addClass('no-gutters').addClass('drop_pictures_line').addClass((modulo == 1) ? "grey-line" : 'white-line').attr('data-displayOrder', index).attr('id', 'row_' + index).appendTo(uploadAreaContent);
+                    // eltCardsContent = $('<div>').addClass('row').addClass('no-gutters').addClass('cards-content'); //conteneur des images
+                    // eltImg = $('<img>').addClass('img-fluid');
+                    // eltInfosImgContent = $('<div>').addClass('row').addClass('no-gutters').addClass('cards-pictos');
+                    // eltFavorite = $('<div>').addClass('col-xl-6').addClass('col-lg-6').addClass('col-md-6').addClass('col-sm-6').addClass('col-6');
+                    // eltDelete = $('<div>').addClass('col-xl-6').addClass('col-lg-6').addClass('col-md-6').addClass('col-sm-6').addClass('col-6');
+                    // eltProgressBarContent = $('<div>').addClass('row').addClass('no-gutters');
+                    // eltProgressBar = $('<div>').addClass('col-xl-12').addClass('col-lg-12').addClass('col-md-12').addClass('col-sm-12').addClass('col-12');
+                    //
                     colImage = $('<div>').addClass('col-xl-2').addClass('col-lg-2').addClass('col-md-2').addClass('col-sm-2').addClass('col-2').addClass('colImage');
                     colNom = $('<div>').addClass('col-xl-2').addClass('col-lg-2').addClass('col-md-2').addClass('col-sm-2').addClass('col-2').addClass('colNom').html(files[index].name);
                     colSize = $('<div>').addClass('col-xl-2').addClass('col-lg-2').addClass('col-md-2').addClass('col-sm-2').addClass('col-2').addClass('colSize').html(files[index].size);
@@ -45,6 +53,8 @@
                     favoriteType = $('<input type="radio">').addClass('check_box_favorite').attr('id', 'favorite_' + increment_id).val('1').attr('name', 'favorite').appendTo(colDelete);
                     progressBar = $('<div>').addClass('progress').appendTo(colProgressBar);
                     progresseBarContent = $('<div>').addClass('progress-bar').attr('role', 'progressbar').css('width', '0%').attr('aria-valuenow', '0').attr('aria-valuemin', '0').attr('aria-valuemax', '100').attr('id', 'bar_'+ index).html('en&nbsp;attente');
+
+                    // imgContent = $('.drop_pictures_action_bars').appendTo(eltCardsContent);
 
                     progressBar.append(progresseBarContent);
                     line.append(colImage).append(colNom).append(colSize).append(colProgressBar).append(colDelete);

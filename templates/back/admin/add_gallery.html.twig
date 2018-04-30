@@ -15,27 +15,35 @@
             <h1>Gestion de la galerie : {{ gallery.title }}</h1>
         </div>
 
-        {% if gallery is not empty %}
-            <div class="row">
-                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                    <ul id="sortable">
-                        {% for pictures in gallery.pictures %}
-                            <li class="ui-state-default">
-                                <img src="{{ asset(pictures.publicPath ~ '/' ~ pictures.pictureName) }}" alt="{{ pictures.pictureName }}" />
-                            </li>
-                        {% endfor %}
-                    </ul>
-                </div>
-            </div>
-        {% endif %}
-
         <div class="row">
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" id="drop-container">
 
             </div>
         </div>
+        {% if gallery is not empty %}
+            <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class="row no-gutters cards" id="sortable">
+                        {% for pictures in gallery.pictures %}
+                            <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12">
+                                <div class="row no-gutters cards-content">
+                                    <img src="{{ asset(pictures.publicPath ~ '/' ~ pictures.pictureName) }}" alt="{{ pictures.pictureName }}"  class="img-fluid" data-position="{{ pictures.displayOrder }}"/>
+                                </div>
+                                <div class="row no-gutters cards-pictos">
+                                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
+                                        <i class="fa fa-star"></i>
+                                    </div>
+                                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
+                                        <i class="fa fa-trash"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        {% endif %}
     </div>
-
 </section>
 {% endblock %}
 
