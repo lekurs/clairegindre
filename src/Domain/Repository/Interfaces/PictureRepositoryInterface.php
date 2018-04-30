@@ -27,4 +27,10 @@ interface PictureRepositoryInterface
      * @return mixed
      */
     public function save(PictureInterface $picture);
+
+    /**
+     * @param PictureInterface $picture
+     * @return mixed
+     */
+    public function delete(PictureInterface $picture);
 }

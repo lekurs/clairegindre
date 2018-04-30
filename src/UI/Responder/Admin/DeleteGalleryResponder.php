@@ -23,6 +23,7 @@ class DeleteGalleryResponder implements DeleteGalleryResponderInterface
 
     /**
      * DeleteGalleryResponder constructor.
+     *
      * @param UrlGeneratorInterface $urlGenerator
      */
     public function __construct(UrlGeneratorInterface $urlGenerator)
@@ -32,9 +33,6 @@ class DeleteGalleryResponder implements DeleteGalleryResponderInterface
 
     public function __invoke()
     {
-        $response = new RedirectResponse($this->urlGenerator->generate('admin'));
-
-        return $response;
+        return new RedirectResponse($this->urlGenerator->generate('admin'));
     }
-
 }

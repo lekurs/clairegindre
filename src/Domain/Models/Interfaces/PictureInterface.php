@@ -8,17 +8,21 @@
 
 namespace App\Domain\Models\Interfaces;
 
+use App\Domain\Models\Interfaces\GalleryInterface;
+use App\Domain\Models\Interfaces\ArticleInterface;
+
 interface PictureInterface
 {
     /**
      * PictureInterface constructor.
+     *
      * @param string $pictureName
-     * @param string $picturePath
+     * @param string $publicPath
      * @param string $extension
      * @param int $displayOrder
      * @param bool $favorite
-     * @param GalleryInterface $gallery
-     * @param ArticleInterface $article
+     * @param \App\Domain\Models\Interfaces\GalleryInterface|null $gallery
+     * @param \App\Domain\Models\Interfaces\ArticleInterface|null $article
      */
-//    public function __construct(string $pictureName, string $picturePath, string $extension, int $displayOrder, bool $favorite, GalleryInterface $gallery, ArticleInterface $article);
+    public function __construct(string $pictureName, string $publicPath, string $extension, int $displayOrder = 0, bool $favorite = false, GalleryInterface $gallery = null, ArticleInterface $article = null);
 }

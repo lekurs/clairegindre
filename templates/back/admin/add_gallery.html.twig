@@ -11,9 +11,16 @@
 {% block content %}
 <section>
     <div class="container">
-        <div class="col">
-            <h1>Gestion de la galerie : {{ gallery.title }}</h1>
+        <div class="row no-gutters">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                {% block title_admin %}
+                <h1>Gestion de la galerie : {{ gallery.title }}</h1>
+                {% endblock %}
+            </div>
         </div>
+        {% block admin_menus %}
+        {{ parent() }}
+        {% endblock %}
 
         <div class="row">
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" id="drop-container">

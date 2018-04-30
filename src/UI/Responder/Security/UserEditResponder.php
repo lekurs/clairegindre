@@ -43,7 +43,7 @@ class UserEditResponder implements UserEditResponderInterface
 
     public function __invoke($redirect = false, FormInterface $form = null, $user)
     {
-        $redirect ? $response = new Response($this->urlGenerator->generate('/admin')) : $response = new Response($this->twig->render('user_edit.html.twig', [
+        $redirect ? $response = new Response($this->urlGenerator->generate('/admin')) : $response = new Response($this->twig->render('back/security/edit_user.html.twig', [
             'user' => $user,
             'form' => $form->createView(),
     ]));

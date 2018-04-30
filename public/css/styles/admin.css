@@ -82,16 +82,32 @@
     font-size: 1.5em;
 }
 
-/**************************************************/
-/*                                      USERS VIEW                                               */
-/**************************************************/
+/*****************************************************************/
+/*                                      USERS VIEW                                                   */
+/*****************************************************************/
 
-.users {
+.container.users {
     text-align: center;
+    margin-top: 5em;
+}
+
+.admin-infos-users-title {
+    margin: 1em auto;
 }
 
 .user-information-container {
     margin-bottom: 2em;
+    padding-bottom: 2em;
+    border-bottom: 1px solid #5f6b67;
+    border-width: thin;
+}
+
+.admin-user-online {
+    color: green;
+}
+
+.admin-user-offline {
+    color: red;
 }
 
 .info-user-image > img {

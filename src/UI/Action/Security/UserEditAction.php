@@ -77,14 +77,20 @@ class UserEditAction implements UserEditActionInterface
     public function __invoke(Request $request, UserEditResponderInterface $responder)
     {
         $user = $this->entityManager->getRepository(User::class)->showOne($request->get('id'));
+//        dump($user->getPassword());
+//        $security = new TokenStorage();
+//        $security->setToken($this->token->getUser()->getPassword());
+//        dump($this->token);
 
-        $userDto = new EditUserDTO($user->getEmail(), $user->getUsername(), $user->getLastName(), $user->getPassword(), $user->isOnline(), $user->getDateWedding(), $user->getPicture());
+//        die();
+
+        $userDto = new EditUserDTO($user->getEmail(), $user->getUsername(), $user->getLastName(), $user->getPassword(), $user->isOnline(), $user->getDateWedding(), null);
 
         $userEditType = $this->formFactory->create(EditUserType::class, $userDto)->handleRequest($request);
 
 
         if($this->userEditTypeHandler->handle($userEditType)) {
-            return $responder(true, null, $user);
+            return $responder(true, $userEditType, $user);
         }
 
         return $responder(false, $userEditType, $user);

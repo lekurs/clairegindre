@@ -32,4 +32,10 @@ class PictureRepository extends ServiceEntityRepository implements PictureReposi
         $this->getEntityManager()->persist($picture);
         $this->getEntityManager()->flush();
     }
+
+    public function delete(PictureInterface $picture)
+    {
+        $this->getEntityManager()->remove($picture);
+        $this->getEntityManager()->flush();
+    }
 }

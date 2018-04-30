@@ -29,22 +29,27 @@ class UserResponder implements UserResponderInterface
 
     /**
      * UserResponder constructor.
+     *
      * @param Environment $twig
      * @param UrlGeneratorInterface $urlGenerator
      */
-    public function __construct(Environment $twig, UrlGeneratorInterface $urlGenerator)
-    {
+    public function __construct(
+        Environment $twig,
+        UrlGeneratorInterface $urlGenerator
+    ) {
         $this->twig = $twig;
         $this->urlGenerator = $urlGenerator;
     }
 
-    public function __invoke($redirect = false, FormInterface $form = null, $users)
+    public function __invoke($redirect = false, FormInterface $addGalleryType = null, FormInterface $registrationType = null, $users, $pages)
     {
-        $redirect ? $response = new RedirectResponse($this->urlGenerator->generate('adminAddGallery')) : $response = new Response($this->twig->render('back/admin/users.html.twig', [
+        $redirect ? $response = new RedirectResponse($this->urlGenerator->generate('adminUser')) : $response = new Response($this->twig->render('back/admin/users.html.twig', [
             'users' => $users,
-            'form' => $form->createView()
+            'addGalleryType' => $addGalleryType->createView(),
+            'formRegistration' => $registrationType->createView(),
+            'pages' => $pages
         ]));
+
         return $response;
     }
-
 }

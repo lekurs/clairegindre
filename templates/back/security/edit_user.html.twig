@@ -1,0 +1,23 @@
+{% extends "admin_layout.html.twig" %}
+
+{%  block head %}
+    {{ parent() }}
+    {% block title %}
+    <title>Modification de l'utilsateur {{ user.username }}</title>
+    {% endblock %}
+{% endblock %}
+
+{% block content %}
+
+    {% block title_admin %}
+    <h1>Modification de l'utilisateur {{ user.username }}</h1>
+    {% endblock %}
+
+    {{ parent() }}
+<section>
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button type="submit" class="btn btn-primary">Mettre à jour</button>
+    {{ form_end(form) }}
+</section>
+{% endblock %}

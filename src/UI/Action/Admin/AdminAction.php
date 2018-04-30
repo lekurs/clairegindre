@@ -134,7 +134,7 @@ class AdminAction implements AdminActionInterface
 
         if ($this->registrationTypeHandler->handle($registration)) {
 
-            return $responder(true, $registration, $benefitsType, $users, $galleries, $benefits, $articles);
+            return $responder(true, $registration, $benefitsType, $addArticleType, $users, $galleries, $benefits, $articles);
         }
 
         if ($this->addBenefitTypeHandler->handle($benefitsType)) {

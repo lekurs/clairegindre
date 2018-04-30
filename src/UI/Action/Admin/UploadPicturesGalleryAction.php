@@ -87,9 +87,7 @@ class UploadPicturesGalleryAction implements UploadPicturesGalleryActionInterfac
 
         $pathInfo = pathinfo($_FILES['picture']['name']);
 
-            $i = 0;
-
-                $this->pictureBuilder->create($_FILES['picture']['name'], 'images/upload/gallery/' . $request->request->get('destination'), $pathInfo['extension'], $request->request->get('order'), $request->request->get('favorite'), $gallery);
+        $this->pictureBuilder->create($_FILES['picture']['name'], 'images/upload/gallery/' . $request->request->get('destination'), $pathInfo['extension'], $request->request->get('order'), $request->request->get('favorite'), $gallery);
 
         $this->pictureRepository->save($this->pictureBuilder->getPicture());
 

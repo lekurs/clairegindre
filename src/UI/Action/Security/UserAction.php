@@ -10,21 +10,25 @@ namespace App\UI\Action\Security;
 
 
 use App\Domain\Form\Type\AddGalleryType;
+use App\Domain\Form\Type\RegistrationType;
 use App\Domain\Models\User;
 use App\UI\Action\Security\Interfaces\UserActionInterface;
 use App\UI\Form\FormHandler\Interfaces\AddGalleryTypeHandlerInterface;
+use App\UI\Form\FormHandler\Interfaces\RegistrationTypeHandlerInterface;
 use App\UI\Responder\Security\Interfaces\UserResponderInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 /**
  * Class UserAction
  *
  * @Route(
  *     name="adminUser",
- *     path="admin/users",
+ *     path="admin/users/{page}",
+ *     defaults={"page"=1},
  *     methods={"GET"}
  * )
  *
@@ -48,29 +52,61 @@ class UserAction implements UserActionInterface
     private $addGalleryTypeHandler;
 
     /**
+     * @var RegistrationTypeHandlerInterface
+     */
+    private $registrationTypeHandler;
+
+    /**
+     * @var AuthorizationCheckerInterface
+     */
+    private $authorizationChecker;
+
+    /**
      * UserAction constructor.
+     *
      * @param EntityManagerInterface $entityManager
      * @param FormFactoryInterface $formFactory
      * @param AddGalleryTypeHandlerInterface $addGalleryTypeHandler
+     * @param RegistrationTypeHandlerInterface $registrationTypeHandler
+     * @param AuthorizationCheckerInterface $authorizationChecker
      */
-    public function __construct(EntityManagerInterface $entityManager, FormFactoryInterface $formFactory, AddGalleryTypeHandlerInterface $addGalleryTypeHandler)
-    {
+    public function __construct(
+        EntityManagerInterface $entityManager,
+        FormFactoryInterface $formFactory,
+        AddGalleryTypeHandlerInterface $addGalleryTypeHandler,
+        RegistrationTypeHandlerInterface $registrationTypeHandler,
+        AuthorizationCheckerInterface $authorizationChecker
+    ) {
         $this->entityManager = $entityManager;
         $this->formFactory = $formFactory;
         $this->addGalleryTypeHandler = $addGalleryTypeHandler;
+        $this->registrationTypeHandler = $registrationTypeHandler;
+        $this->authorizationChecker = $authorizationChecker;
     }
 
 
-    public function __invoke(Request $request, UserResponderInterface $responder)
+    public function __invoke(Request $request, UserResponderInterface $responder, int $page)
     {
-        $users = $this->entityManager->getRepository(User::class)->showGalleryByUser();
+        $addGalleryType = $this->formFactory->create(AddGalleryType::class);
+        $registrationType = $this->formFactory->create(RegistrationType::class);
 
-        $form = $this->formFactory->create(AddGalleryType::class);
+        $users= $this->entityManager->getRepository(User::class)->showGalleryByUserWithPagination($page, 5);
 
-        if ($this->addGalleryTypeHandler->handle($form, $users)) {
-            return $responder(true, $form, $users);
+        $pagination = [
+            'page' => $page,
+            'nbPages' => ceil(count($users) / 5)
+        ];
+
+        if ($this->addGalleryTypeHandler->handle($addGalleryType, $users)) {
+
+            return $responder(true, null, null, $users, $pagination);
         }
 
-        return $responder(false, $form, $users);
+        if ($this->registrationTypeHandler->handle($registrationType)) {
+
+            return $responder(true, null, null, $users, $pagination);
+        }
+
+        return $responder(false, $addGalleryType, $registrationType, $users, $pagination);
     }
 }

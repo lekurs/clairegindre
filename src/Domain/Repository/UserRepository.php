@@ -6,6 +6,7 @@ use App\Domain\Models\Interfaces\UserInterface;
 use App\Domain\Models\User;
 use App\Domain\Repository\Interfaces\UserRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Bridge\Doctrine\Security\User\UserLoaderInterface;
 
@@ -64,14 +65,28 @@ class UserRepository extends ServiceEntityRepository implements UserLoaderInterf
     }
 
     /**
-     * @return mixed
+     * @param $first
+     * @param $max
+     * @return Paginator|mixed
      */
+    public function showGalleryByUserWithPagination(int $first, int $max)
+    {
+        $premierePage = ($first - 1) * $max;
+
+        $qb = $this->createQueryBuilder('user')
+            ->leftJoin('user.galleries', 'galleries')
+            ->setFirstResult($premierePage)
+            ->setMaxResults($max);
+
+        return new Paginator($qb);
+    }
+
     public function showGalleryByUser()
     {
         return $this->createQueryBuilder('user')
-            ->leftJoin('user.galleries', 'galleries')
-            ->getQuery()
-            ->getResult();
+                            ->leftJoin('user.galleries', 'galleries')
+                            ->getQuery()
+                            ->getResult();
     }
 
     /**

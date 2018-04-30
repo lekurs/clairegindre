@@ -25,6 +25,13 @@ interface UserRepositoryInterface
     public function showGalleryByUser();
 
     /**
+     * @param int $first
+     * @param int $max
+     * @return mixed
+     */
+    public function showGalleryByUserWithPagination(int $first, int $max);
+
+    /**
      * @param UserInterface $user
      */
     public function save(UserInterface $user): void;

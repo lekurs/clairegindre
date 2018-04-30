@@ -30,11 +30,15 @@ class EditUserType extends AbstractType
             ->add('username', TextType::class)
             ->add('lastName', TextType::class)
             ->add('email', EmailType::class)
-            ->add('plainPassword', PasswordType::class)
-            ->add('dateWedding', DateType::class, [
+            ->add('plainPassword', PasswordType::class, [
+                'required' => false
+            ])
+            ->add('weddingDate', DateType::class, [
                 'widget' => 'single_text',
             ])
-            ->add('picture', FileType::class)
+            ->add('picture', FileType::class, [
+                'required' => false
+            ])
             ->add('online', CheckboxType::class)
             ;
     }
@@ -49,7 +53,7 @@ class EditUserType extends AbstractType
                                                 $form->get('lastName')->getData(),
                                                 $form->get('email')->getData(),
                                                 $form->get('plainPassword')->getData(),
-                                                $form->get('dateWedding')->getData(),
+                                                $form->get('weddingDate')->getData(),
                                                 $form->get('picture')->getData(),
                                                 $form->get('online')->getData()
                                             );
