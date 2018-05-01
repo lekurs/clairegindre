@@ -10,6 +10,7 @@ namespace App\Domain\Repository\Interfaces;
 
 
 use App\Domain\Models\Interfaces\PictureInterface;
+use App\Domain\Models\Interfaces\UserInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 

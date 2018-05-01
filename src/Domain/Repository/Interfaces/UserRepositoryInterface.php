@@ -10,6 +10,7 @@ namespace App\Domain\Repository\Interfaces;
 
 
 use App\Domain\Models\Interfaces\UserInterface;
+use App\Domain\Models\User;
 
 interface UserRepositoryInterface
 {
@@ -18,6 +19,12 @@ interface UserRepositoryInterface
      * @return mixed
      */
     public function loadUserByUsername($username);
+
+    /**
+     * @param $id
+     * @return User
+     */
+    public function showOne($id): User;
 
     /**
      * @return mixed

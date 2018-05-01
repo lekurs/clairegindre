@@ -13,5 +13,27 @@ use App\Domain\Models\Interfaces\GalleryInterface;
 
 interface GalleryRepositoryInterface
 {
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function getOne($id);
+
+    /**
+     * @return mixed
+     */
+    public function getAllWithPictures();
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function getGalleryByUser($id);
+
+    /**
+     * @param GalleryInterface $gallery
+     * @return mixed
+     */
     public function save(GalleryInterface $gallery);
+
 }

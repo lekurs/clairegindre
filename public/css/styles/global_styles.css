@@ -457,7 +457,6 @@ footer ul li a{
 /* *************************************** */
 
 .gallery-customers-header {
-    /*background: url("/images/background/nico_anlor_b&w.jpg") no-repeat center;*/
     height: 45vh;
     width: 100%;
     object-fit: cover;
@@ -470,8 +469,10 @@ footer ul li a{
 }
 
 .box {
-    height: 180px;
+    height: 12em;
     overflow: hidden;
+    position: relative;
+    margin: 0 1.2em;
 }
 
 .img-customers {
@@ -488,8 +489,8 @@ footer ul li a{
     background-color: rgba(0, 0, 0, .75);
     position: absolute;
     top: 0;
-    left: 15px;
-    right: 15px;
+    left: 0;
+    right: 0;
     bottom: 0;
     text-align: center;
     color: #FFFFFF;
@@ -502,6 +503,6 @@ footer ul li a{
     padding: 0 5px;
 }
 
-.box a:hover:after {
-    opacity: 1;
-}
+/*.box:hover:after {*/
+    /*opacity: 1;*/
+/*}*/

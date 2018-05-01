@@ -125,3 +125,51 @@ legend {
 /*.form-check-label {*/
     /*position: absolute;*/
 /*}*/
+
+/* ************************************************** */
+/*                      Galleries Customer                                    */
+/* ************************************************** */
+
+.cards-container {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: auto;
+}
+
+.cards-content {
+    align-items: flex-start;
+    justify-content: center;
+    position: relative;
+    cursor: pointer;
+}
+
+.cards-content:hover {
+    opacity: 1;
+}
+
+.cards-content img {
+    height: 8em;
+}
+
+.gallery-content-img {
+    margin: 1em;
+}
+
+.infos-gallery-img {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .3);
+    opacity: 0;
+    transition: all .5s ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.infos-gallery-img > i {
+    color: #FFFFFF;
+}

@@ -24,5 +24,5 @@ interface PictureInterface
      * @param \App\Domain\Models\Interfaces\GalleryInterface|null $gallery
      * @param \App\Domain\Models\Interfaces\ArticleInterface|null $article
      */
-    public function __construct(string $pictureName, string $publicPath, string $extension, int $displayOrder = 0, bool $favorite = false, GalleryInterface $gallery = null, ArticleInterface $article = null);
+//    public function __construct(string $pictureName, string $publicPath, string $extension, int $displayOrder = 0, bool $favorite = false, GalleryInterface $gallery = null, ArticleInterface $article = null);
 }

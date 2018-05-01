@@ -10,9 +10,14 @@ namespace App\UI\Action\Front;
 
 
 use App\Domain\Builder\Interfaces\GalleryBuilderInterface;
+use App\Domain\DTO\UserLoginDTO;
+use App\Domain\Form\LoginType;
 use App\Domain\Form\Type\ContactType;
+use App\Domain\Form\Type\CustomerLoginType;
 use App\Domain\Lib\InstagramLib;
 use App\Domain\Models\Gallery;
+use App\Domain\Repository\Interfaces\GalleryRepositoryInterface;
+use App\Domain\Repository\Interfaces\UserRepositoryInterface;
 use App\UI\Action\Front\Interfaces\GalleriesCustomersActionInterface;
 use App\UI\Responder\Interfaces\GalleriesCustomersResponderInterface;
 use Doctrine\ORM\EntityManagerInterface;
@@ -34,9 +39,9 @@ use Symfony\Component\Routing\Annotation\Route;
 class GalleriesCustomersAction implements GalleriesCustomersActionInterface
 {
     /**
-     * @var EntityManagerInterface
+     * @var GalleryRepositoryInterface
      */
-    private $entityManager;
+    private $galleryRepository;
 
     /**
      * @var GalleryBuilderInterface
@@ -49,37 +54,53 @@ class GalleriesCustomersAction implements GalleriesCustomersActionInterface
     private $formFactory;
 
     /**
+     * @var UserRepositoryInterface
+     */
+    private $userRepository;
+
+    /**
      * @var InstagramLib
      */
     private $insta;
 
     /**
      * GalleriesCustomersAction constructor.
-     * @param EntityManagerInterface $entityManager
+     *
+     * @param GalleryRepositoryInterface $galleryRepository
      * @param GalleryBuilderInterface $galleryBuilder
      * @param FormFactoryInterface $formFactory
+     * @param UserRepositoryInterface $userRepository
      * @param InstagramLib $insta
      */
-    public function __construct(EntityManagerInterface $entityManager, GalleryBuilderInterface $galleryBuilder, FormFactoryInterface $formFactory, InstagramLib $insta)
-    {
-        $this->entityManager = $entityManager;
+    public function __construct(
+        GalleryRepositoryInterface $galleryRepository,
+        GalleryBuilderInterface $galleryBuilder,
+        FormFactoryInterface $formFactory,
+        UserRepositoryInterface $userRepository,
+        InstagramLib $insta
+    ) {
+        $this->galleryRepository = $galleryRepository;
         $this->galleryBuilder = $galleryBuilder;
         $this->formFactory = $formFactory;
+        $this->userRepository = $userRepository;
         $this->insta = $insta;
     }
 
 
     public function __invoke(Request $request, GalleriesCustomersResponderInterface $responder)
     {
-        $galleries = $this->entityManager->getRepository(Gallery::class)->getAllWithPictures();
+        $galleries = $this->galleryRepository->getAllWithPictures();
 
         $contact = $this->formFactory->create(ContactType::class)->handleRequest($request);
 
+        $customerLoginType = $this->formFactory->create(LoginType::class)->handleRequest($request);
+
         if($contact->isSubmitted() && $contact->isValid()) {
 
-            return $responder(true, null, $galleries, $this->insta->show());
+            return $responder(false, $contact, $customerLoginType, $galleries, $this->insta->show());
         }
-        return $responder(false, $contact, $galleries, $this->insta->show());
+
+        return $responder(false, $contact, $customerLoginType, $galleries, $this->insta->show());
     }
 
 }

@@ -44,6 +44,15 @@ class GalleryRepository extends ServiceEntityRepository implements GalleryReposi
         return $qb->execute();
     }
 
+    public function getOne($id)
+    {
+        return $this->createQueryBuilder('gallery')
+                                ->where('gallery.id = :id')
+                                ->setParameter('id', $id)
+                                ->getQuery()
+                                ->getOneOrNullResult();
+    }
+
     /**
      * @param $id
      * @return mixed
@@ -58,6 +67,16 @@ class GalleryRepository extends ServiceEntityRepository implements GalleryReposi
             ->getQuery()
             ->getOneOrNullResult()
             ;
+    }
+
+    public function getGalleryByUser($id)
+    {
+        return $this->createQueryBuilder('gallery')
+                            ->where('gallery.user = :id')
+                            ->setParameter('id', $id)
+                            ->innerJoin('gallery.pictures', 'pictures')
+                            ->getQuery()
+                            ->getResult();
     }
 
     /**

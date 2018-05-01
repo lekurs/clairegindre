@@ -40,11 +40,12 @@ class GalleriesCustomersResponder implements GalleriesCustomersResponderInterfac
     }
 
 
-    public function __invoke($redirect = false, FormInterface $form = null, $galleries, $insta)
+    public function __invoke($redirect = false, FormInterface $contact = null, FormInterface $customerConnectionType, $galleries, $insta)
     {
         $redirect ? $response = new RedirectResponse('/') : $response = new Response($this->twig->render('front/galleries_customer.html.twig', [
             'galleries' => $galleries,
-            'contact' => $form->createView(),
+            'contact' => $contact->createView(),
+            'customerConnectionType' => $customerConnectionType->createView(),
             'insta' => $insta
         ]));
 

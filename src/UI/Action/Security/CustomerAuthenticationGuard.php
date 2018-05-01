@@ -15,11 +15,11 @@ use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Component\Security\Guard\Authenticator\AbstractFormLoginAuthenticator;
 
 /**
- * Class UserAuthenticationGuard.
+ * Class CustomerAuthenticationGuard.
  *
  * @author GINDRE Maxime <gindre.maxime@gmail.com>
  */
-class UserAuthenticationGuard extends AbstractFormLoginAuthenticator
+class CustomerAuthenticationGuard extends AbstractFormLoginAuthenticator
 {
     /**
      * @var CsrfTokenManagerInterface
@@ -68,7 +68,7 @@ class UserAuthenticationGuard extends AbstractFormLoginAuthenticator
 //            throw new InvalidCsrfTokenException('Token invalide');
 //        }
         return [
-           'username' => $request->request->get('login')['username'],
+            'username' => $request->request->get('login')['username'],
             'password' => $request->request->get('login')['password'],
         ];
     }
@@ -142,7 +142,7 @@ class UserAuthenticationGuard extends AbstractFormLoginAuthenticator
      */
     protected function getLoginUrl()
     {
-        return $this->urlGenerator->generate('login');
+        return $this->urlGenerator->generate('galleriesCustomers');
     }
 
     /**
