@@ -73,8 +73,8 @@
                                             <div class="row no-gutters">
                                                 <div class="col-lg-12 col-xl-12">
                                                     <ul class="nav justify-content-between">
-                                                        <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
-                                                        <li class="nav-item"><a class="nav-link" href="#">Hello</a></li>
+                                                        <li class="nav-item"><a class="nav-link" href="{{ path('index') }}">Home</a></li>
+                                                        <li class="nav-item"><a class="nav-link" href="#hello">Hello</a></li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -82,7 +82,7 @@
                                             <div class="row no-gutters">
                                                 <div class="col-lg-12 col-xl-12">
                                                     <ul class="nav justify-content-center">
-                                                        <li class="nav-item"><a class="nav-link" href="#">Blog</a></li>
+                                                        <li class="nav-item"><a class="nav-link" href="{{ path('blog') }}">Blog</a></li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -105,8 +105,8 @@
                                         <div class="row no-gutters">
                                             <div class="col-lg-12 col-xl-12">
                                                 <ul class="nav justify-content-between">
-                                                    <li class="nav-item"><a class="nav-link" href="#">informations</a></li>
-                                                    <li class="nav-item"><a class="nav-link" href="#">clients</a></li>
+                                                    <li class="nav-item"><a class="nav-link" href="{{ path('faq') }}">informations</a></li>
+                                                    <li class="nav-item"><a class="nav-link" href="{{ path('galleriesCustomers') }}">clients</a></li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -114,7 +114,7 @@
                                         <div class="row no-gutters">
                                             <div class="col-lg-12 col-xl-12">
                                                 <ul class="nav justify-content-center">
-                                                    <li class="nav-item"><a class="nav-link" href="#">contact</a></li>
+                                                    <li class="nav-item"><a class="nav-link" href="#contact">contact</a></li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -136,7 +136,7 @@
     {% endblock %}
 
     {% block contact %}
-        <section class="contact">
+        <section class="contact" id="contact">
             </div>
             <div class="row no-gutters">
                 <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 contact-article">
@@ -233,6 +233,26 @@
                     {{ form_end(contact) }}
 
                 </div>
+            </div>
+        </section>
+    {% endblock %}
+
+    {% block presentation %}
+        <section class="presentations" id="hello">
+            <div class="row no-gutters height-pres">
+                <div class="col-12 col-sm-12 col-md-12 offset-lg-3 offset-xl-3 col-lg-6 col-xl-6 hello-container align-items-center justify-content-center">
+                    <div class="row no-gutters">
+                        <div class="offset-lg-3 offset-xl-3 col-lg-9 col-xl-9">
+                            <p class="triple-triangle text-center"><img src="{{ asset('/images/interface/pictos/trois-triangle.png') }}" alt="presentation-clairegindre"></p>
+                            <h2 class="text-center text-uppercase">hello</h2>
+                            <p>Je s'appelle Groot, photographe en région parisienne ....</p>
+
+                        </div>
+                    </div>
+                    <div class="col-12 photo-presentations"></div>
+                </div>
+            </div>
+            <div class="col-12 bg-presentations"></div>
             </div>
         </section>
     {% endblock %}

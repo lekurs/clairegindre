@@ -36,6 +36,11 @@ class ArticleCreationDTO implements ArticleCreationDTOInterface
     public $online;
 
     /**
+     * @var string
+     */
+    public $personnalButton;
+
+    /**
      * @var BenefitInterface
      */
     public $prestation;
@@ -47,11 +52,13 @@ class ArticleCreationDTO implements ArticleCreationDTOInterface
      * @param string $content
      * @param GalleryInterface $gallery
      * @param bool $online
+     * @param string $personnalButton
      * @param BenefitInterface $prestation
      */
     public function __construct(
         string $title,
         string $content,
+        string $personnalButton,
         GalleryInterface $gallery,
         bool $online,
         BenefitInterface $prestation
@@ -59,6 +66,7 @@ class ArticleCreationDTO implements ArticleCreationDTOInterface
     {
         $this->title = $title;
         $this->content = $content;
+        $this->personnalButton = $personnalButton;
         $this->gallery = $gallery;
         $this->online = $online;
         $this->prestation = $prestation;

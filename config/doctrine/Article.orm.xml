@@ -6,10 +6,11 @@
 
     <entity name="App\Domain\Models\Article" table="clairegindre_article" repository-class="App\Domain\Repository\ArticleRepository">
         <id name="id" column="id" type="string"/>
-        <field name="title" type="string" length="100" nullable="false" unique="true" />
+        <field name="title" type="string" length="100" nullable="false" unique="false" />
         <field name="content" type="text" nullable="false" unique="false" />
         <field name="creationDate" type="date" nullable="false" unique="false" />
-        <field name="modificationDate" type="integer" nullable="true" unique="true" />
+        <field name="modificationDate" type="integer" nullable="true" unique="false" />
+        <field name="personnalButton" type="string" nullable="true" unique="false" />
 
         <many-to-one field="author" target-entity="App\Domain\Models\User" inversed-by="articles" />
         <one-to-many field="comments" target-entity="App\Domain\Models\Comment" mapped-by="article" />

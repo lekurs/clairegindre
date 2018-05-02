@@ -11,17 +11,13 @@ namespace App\UI\Action\Admin;
 
 use App\Domain\Builder\Interfaces\GalleryBuilderInterface;
 use App\Domain\Builder\Interfaces\PictureBuilderInterface;
-use App\Domain\Form\Type\AddPictureType;
 use App\Domain\Models\Gallery;
-use App\Domain\Models\Picture;
-use App\Domain\Repository\Interfaces\GalleryRepositoryInterface;
 use App\Domain\Repository\Interfaces\PictureRepositoryInterface;
 use App\UI\Action\Admin\Interfaces\UploadPicturesGalleryActionInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -63,14 +59,20 @@ class UploadPicturesGalleryAction implements UploadPicturesGalleryActionInterfac
 
     /**
      * UploadPicturesGalleryAction constructor.
+     *
      * @param EntityManagerInterface $entityManager
      * @param FormFactoryInterface $formFactory
      * @param PictureBuilderInterface $pictureBuilder
      * @param GalleryBuilderInterface $galleryBuilder
      * @param PictureRepositoryInterface $pictureRepository
      */
-    public function __construct(EntityManagerInterface $entityManager, FormFactoryInterface $formFactory, PictureBuilderInterface $pictureBuilder, GalleryBuilderInterface $galleryBuilder, PictureRepositoryInterface $pictureRepository)
-    {
+    public function __construct(
+        EntityManagerInterface $entityManager,
+        FormFactoryInterface $formFactory,
+        PictureBuilderInterface $pictureBuilder,
+        GalleryBuilderInterface $galleryBuilder,
+        PictureRepositoryInterface $pictureRepository
+    ) {
         $this->entityManager = $entityManager;
         $this->formFactory = $formFactory;
         $this->pictureBuilder = $pictureBuilder;

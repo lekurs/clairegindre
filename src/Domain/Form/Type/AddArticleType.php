@@ -37,6 +37,7 @@ class AddArticleType extends AbstractType
             ->add('content', TextareaType::class, [
                 'required' => false
             ])
+            ->add('personnalButton', TextType::class)
             ->add('online', CheckboxType::class)
             ->add('prestation', EntityType::class, [
                 'class' => Benefit::class,
@@ -63,6 +64,7 @@ class AddArticleType extends AbstractType
                                 return new ArticleCreationDTO(
                                     $form->get('title')->getData(),
                                     $form->get('content')->getData(),
+                                    $form->get('personnalButton')->getData(),
                                     $form->get('gallery')->getData(),
                                     $form->get('online')->getData(),
                                     $form->get('prestation')->getData()

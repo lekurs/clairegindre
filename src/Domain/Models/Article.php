@@ -54,6 +54,11 @@ class Article implements ArticleInterface
     private $author;
 
     /**
+     * @var string
+     */
+    private $personnalButton;
+
+    /**
      * @var ArrayAccess
      */
     private $comments;
@@ -76,6 +81,7 @@ class Article implements ArticleInterface
      * @param \DateTime $creationDate
      * @param bool $online
      * @param UserInterface $author
+     * @param string $personnalButton
      * @param GalleryInterface $gallery
      * @param BenefitInterface $prestation
      */
@@ -85,6 +91,7 @@ class Article implements ArticleInterface
         \DateTime $creationDate,
         bool $online,
         UserInterface $author,
+        string $personnalButton,
         GalleryInterface $gallery,
         BenefitInterface $prestation
     ) {
@@ -94,6 +101,7 @@ class Article implements ArticleInterface
         $this->creationDate = new \DateTime();
         $this->online = $online;
         $this->author = $author;
+        $this->personnalButton = $personnalButton;
         $this->gallery = $gallery;
         $this->prestation = $prestation;
     }
@@ -201,5 +209,13 @@ class Article implements ArticleInterface
     public function setGallery(GalleryInterface $gallery): void
     {
         $this->gallery = $gallery;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPersonnalButton(): string
+    {
+        return $this->personnalButton;
     }
 }

@@ -50,6 +50,7 @@ class UserAuthenticationGuard extends AbstractFormLoginAuthenticator
     public function supports(Request $request)
     {
         if ('login' === $request->attributes->get('_route') && 'POST' === $request->getMethod()) {
+
             return true;
         }
 

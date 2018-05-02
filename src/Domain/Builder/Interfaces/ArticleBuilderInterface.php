@@ -20,12 +20,13 @@ interface ArticleBuilderInterface
      * @param string $content
      * @param \DateTime $creationDate
      * @param bool $online
-     * @param UserInterface $author
+     * @param UserInterface $user
+     * @param string $personnalButton
      * @param GalleryInterface $gallery
-     * @param string $prestation
-     * @return ArticleBuilderInterface
+     * @param BenefitInterface $prestation
+     * @return mixed
      */
-//    public function create(string $title, string $content, \DateTime $creationDate, bool $online, UserInterface $author, GalleryInterface $gallery, string $prestation): ArticleBuilderInterface;
+//    public function create(string $title, string $content, \DateTime $creationDate, bool $online, UserInterface $user, string $personnalButton, GalleryInterface $gallery, BenefitInterface $prestation);
 
     public function getArticle():ArticleInterface;
 

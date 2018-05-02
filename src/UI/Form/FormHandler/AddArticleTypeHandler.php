@@ -71,14 +71,15 @@ class AddArticleTypeHandler implements AddArticleTypeHandlerInterface
     {
         if($form->isSubmitted() && $form->isValid()) {
             $article = $this->articleBuilder->create(
-                $form->getData()->title,
-                $form->getData()->content,
-                new \DateTime(),
-                $form->getData()->online,
-                $this->tokenStorage->getToken()->getUser(),
-                $form->getData()->gallery,
-                $form->getData()->prestation
-            );
+                                                                                    $form->getData()->title,
+                                                                                    $form->getData()->content,
+                                                                                    new \DateTime(),
+                                                                                    $form->getData()->online,
+                                                                                    $this->tokenStorage->getToken()->getUser(),
+                                                                                    $form->getData()->personnalButton,
+                                                                                    $form->getData()->gallery,
+                                                                                    $form->getData()->prestation
+                                                                                );
 
             $this->validator->validate($article, [], [
                 'article_creation'
