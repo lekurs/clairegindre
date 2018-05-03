@@ -26,6 +26,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Finder\Exception\AccessDeniedException;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
@@ -78,6 +79,11 @@ class AdminAction implements AdminActionInterface
     private $addBenefitTypeHandler;
 
     /**
+     * @var Session
+     */
+    private $session;
+
+    /**
      * AdminAction constructor.
      *
      * @param TokenStorageInterface $tokenStorage
@@ -87,6 +93,7 @@ class AdminAction implements AdminActionInterface
      * @param RegistrationTypeHandlerInterface $registrationTypeHandler
      * @param AddArticleTypeHandlerInterface $addArticleTypeHandler
      * @param AddBenefitHandlerInterface $addBenefitTypeHandler
+     * @param Session $session
      */
     public function __construct(
         TokenStorageInterface $tokenStorage,
@@ -95,9 +102,9 @@ class AdminAction implements AdminActionInterface
         FormFactoryInterface $formFactory,
         RegistrationTypeHandlerInterface $registrationTypeHandler,
         AddArticleTypeHandlerInterface $addArticleTypeHandler,
-        AddBenefitHandlerInterface $addBenefitTypeHandler
-    )
-    {
+        AddBenefitHandlerInterface $addBenefitTypeHandler,
+        Session $session
+    ) {
         $this->tokenStorage = $tokenStorage;
         $this->authorizationChecker = $authorizationChecker;
         $this->entityManager = $entityManager;
@@ -105,6 +112,7 @@ class AdminAction implements AdminActionInterface
         $this->registrationTypeHandler = $registrationTypeHandler;
         $this->addArticleTypeHandler = $addArticleTypeHandler;
         $this->addBenefitTypeHandler = $addBenefitTypeHandler;
+        $this->session = $session;
     }
 
 
@@ -144,7 +152,9 @@ class AdminAction implements AdminActionInterface
 
         if ($this->addArticleTypeHandler->handle($addArticleType)) {
 
-            return $responder(true, $registration, $benefitsType, $addArticleType, $users, $galleries, $benefits, $articles);
+            $this->session->set('gallery', $request->request->get('add_article'));
+
+            return $responder(true, $registration, $benefitsType, $addArticleType, $users, $galleries, $benefits, $articles, 'adminAddArticleSelectPictures');
         }
 
         return $responder(false, $registration, $benefitsType, $addArticleType, $users, $galleries, $benefits, $articles);

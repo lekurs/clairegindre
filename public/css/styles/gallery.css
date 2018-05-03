@@ -102,18 +102,6 @@
     display: none;
 }
 
-/*.form-check-label {*/
-    /*display: none;*/
-/*}*/
-
-/*input[type="checkbox"] {*/
-    /*display: none;*/
-/*}*/
-
-/*.imgCheck input[type="checkbox"]:checked {*/
-    /*background: red;*/
-/*}*/
-
 .favorite-color {
     color: #ffff00;
 }
@@ -150,6 +138,12 @@ legend {
 
 .cards-content img {
     height: 8em;
+}
+
+.gallery-container-customer {
+    height: 30vh;
+    align-items: center;
+    justify-content: center;
 }
 
 .gallery-content-img {

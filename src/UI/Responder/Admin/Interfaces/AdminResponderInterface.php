@@ -31,7 +31,8 @@ interface AdminResponderInterface
      * @param $galleries
      * @param $benefits
      * @param $articles
+     * @param string $redirectUrl
      * @return mixed
      */
-    public function __invoke($redirect = false, FormInterface $registrationType = null, FormInterface $addBenefitType, FormInterface $addArticleType, $users, $galleries, $benefits, $articles);
+    public function __invoke($redirect = false, FormInterface $registrationType = null, FormInterface $addBenefitType, FormInterface $addArticleType, $users, $galleries, $benefits, $articles, $redirectUrl = 'admin');
 }

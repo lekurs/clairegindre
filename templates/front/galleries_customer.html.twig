@@ -47,12 +47,6 @@
                                         <h4>{{ gallery.title }}</h4>
                                         <p id="prestation-date">{{ gallery.user.dateWedding|date('d-m-Y') }}</p>
                                         <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#loginFormModal"><i class="fa fa-user-o"></i></button>
-                                        {#<a href="{{ path('galleryCutomer', {'id': gallery.id}) }}">Lien</a>#}
-                                        {#<form action="{{ path('login') }}" name="loginForm">#}
-                                            {#<input type="text" value="{{ gallery.user.email }}">#}
-                                            {#<input type="password" >#}
-                                            {#<button type="submit">valider</button>#}
-                                        </form>
                                     </div>
                             </div>
                         </div>
@@ -72,6 +66,7 @@
                 </div>
                 <div class="modal-body">
                     {{ form_start(customerConnectionType) }}
+                    <input type="hidden" value="id de lagalerie" name="galleries"/>
                     {{ form_widget(customerConnectionType) }}
                 </div>
                 <div class="modal-footer">

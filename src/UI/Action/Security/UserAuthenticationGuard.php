@@ -2,6 +2,7 @@
 
 namespace App\UI\Action\Security;
 
+use App\Domain\Repository\Interfaces\GalleryRepositoryInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,6 +22,7 @@ use Symfony\Component\Security\Guard\Authenticator\AbstractFormLoginAuthenticato
  */
 class UserAuthenticationGuard extends AbstractFormLoginAuthenticator
 {
+    const ALLOWED_URL = ['login', 'galleriesCustomers'];
     /**
      * @var CsrfTokenManagerInterface
      */
@@ -32,14 +34,24 @@ class UserAuthenticationGuard extends AbstractFormLoginAuthenticator
     private $urlGenerator;
 
     /**
+     * @var GalleryRepositoryInterface
+     */
+    private $galleryRepository;
+
+    /**
      * UserAuthenticationGuard constructor.
      * @param CsrfTokenManagerInterface $csrfToken
      * @param UrlGeneratorInterface $urlGenerator
+     * @param GalleryRepositoryInterface $galleryRepository
      */
-    public function __construct(CsrfTokenManagerInterface $csrfToken, UrlGeneratorInterface $urlGenerator)
-    {
+    public function __construct(
+        CsrfTokenManagerInterface $csrfToken,
+        UrlGeneratorInterface $urlGenerator,
+        GalleryRepositoryInterface $galleryRepository
+    ) {
         $this->csrfToken = $csrfToken;
         $this->urlGenerator = $urlGenerator;
+        $this->galleryRepository = $galleryRepository;
     }
 
 
@@ -49,7 +61,7 @@ class UserAuthenticationGuard extends AbstractFormLoginAuthenticator
      */
     public function supports(Request $request)
     {
-        if ('login' === $request->attributes->get('_route') && 'POST' === $request->getMethod()) {
+        if (in_array($request->attributes->get('_route'), static::ALLOWED_URL) && 'POST' === $request->getMethod()) {
 
             return true;
         }
@@ -124,8 +136,15 @@ class UserAuthenticationGuard extends AbstractFormLoginAuthenticator
             return new RedirectResponse($this->urlGenerator->generate('admin'));
         }
         elseif (in_array('ROLE_USER', $token->getUser()->getRoles())) {
+            $galleries = $this->galleryRepository->getGalleryByUser($token->getUser()->getId());
 
-            return new RedirectResponse($this->urlGenerator->generate('galleryCutomer', ['id' => $token->getUser()->getId()]));
+            if (count($galleries) > 1) {
+
+                return new RedirectResponse($this->urlGenerator->generate('galleriesForCustomer', ['id' => $token->getUser()->getId()]));
+            } else {
+
+                return new RedirectResponse($this->urlGenerator->generate('galleryCutomer', ['id' => $token->getUser()->getId()]));
+            }
         }
         $token->getUser();
     }

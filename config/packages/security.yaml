@@ -15,6 +15,7 @@ security:
             security: false
 
         main:
+            pattern: ^/
             guard:
                 authenticators:
                     - App\UI\Action\Security\UserAuthenticationGuard

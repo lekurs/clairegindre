@@ -15,6 +15,7 @@ use App\Domain\Models\Gallery;
 use App\Domain\Repository\Interfaces\PictureRepositoryInterface;
 use App\UI\Action\Admin\Interfaces\UploadPicturesGalleryActionInterface;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -58,6 +59,11 @@ class UploadPicturesGalleryAction implements UploadPicturesGalleryActionInterfac
     private $pictureRepository;
 
     /**
+     * @var Filesystem
+     */
+    private $fileSystem;
+
+    /**
      * UploadPicturesGalleryAction constructor.
      *
      * @param EntityManagerInterface $entityManager
@@ -65,19 +71,22 @@ class UploadPicturesGalleryAction implements UploadPicturesGalleryActionInterfac
      * @param PictureBuilderInterface $pictureBuilder
      * @param GalleryBuilderInterface $galleryBuilder
      * @param PictureRepositoryInterface $pictureRepository
+     * @param Filesystem $filesystem
      */
     public function __construct(
         EntityManagerInterface $entityManager,
         FormFactoryInterface $formFactory,
         PictureBuilderInterface $pictureBuilder,
         GalleryBuilderInterface $galleryBuilder,
-        PictureRepositoryInterface $pictureRepository
+        PictureRepositoryInterface $pictureRepository,
+        Filesystem $filesystem
     ) {
         $this->entityManager = $entityManager;
         $this->formFactory = $formFactory;
         $this->pictureBuilder = $pictureBuilder;
         $this->galleryBuilder = $galleryBuilder;
         $this->pictureRepository = $pictureRepository;
+        $this->fileSystem = $filesystem;
     }
 
 

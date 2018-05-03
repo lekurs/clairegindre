@@ -42,8 +42,7 @@
                 <div class="btn-group col-xl-6 col-lg-6 col-md-6 col-sm-2 col-6 offset-3">
                     <button class="btn btn-default filter-button text-center" data-filter="all">Tout voir</button>
                 {% for benefit in benefits %}
-                    <span class="icon-benefit"><img src="{{ asset('/images/interface/pictos/' ~ benefit.name|lower ~ '.png' ) }}" alt="{{ benefit.name }}"></span>
-                        <button class="btn btn-default filter-button-dynamique" data-filter="{{ benefit.name }}">{{ benefit.name }}</button>
+                    <button class="btn btn-default filter-button-dynamique" data-filter="{{ benefit.name }}"><img src="{{ asset('/images/interface/pictos/' ~ benefit.name|lower ~ '.png' ) }}" alt="{{ benefit.name }}" class="blog-pictos-filter"> {{ benefit.name }}</button>
                 {% endfor %}
                 </div>
                 <div class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-10 offset-1">

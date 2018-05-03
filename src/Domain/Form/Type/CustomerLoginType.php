@@ -36,7 +36,8 @@ class CustomerLoginType extends AbstractType
                                     $form->get('username')->getData(),
                                     $form->get('password')->getData()
                                 );
-                    }
+                    },
+            'allow_extra_fields' => true
         ]);
     }
 }

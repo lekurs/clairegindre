@@ -34,5 +34,4 @@ class AddPictureType extends AbstractType
             'data_class' => PictureCreationDTOInterface::class,
         ));
     }
-
 }
