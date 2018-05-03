@@ -36,4 +36,6 @@ interface GalleryRepositoryInterface
      */
     public function save(GalleryInterface $gallery);
 
+    public function delete(GalleryInterface $gallery);
+
 }

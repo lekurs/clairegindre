@@ -27,6 +27,12 @@ interface BenefitRepositoryInterface
     public function getAll(): array ;
 
     /**
+     * @param $id
+     * @return array
+     */
+    public function getOne($id): array;
+
+    /**
      * @param BenefitInterface $benefit
      */
     public function save(BenefitInterface $benefit): void;

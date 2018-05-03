@@ -23,8 +23,6 @@
         <h1>Bienvenue sur l'administration</h1>
     {% endblock %}
 
-    {{ parent() }}
-
     <section>
         <div class="container-fluid">
             <div class="row admin-block">
@@ -148,11 +146,6 @@
                                         {% endfor %}
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                        <button type="button" class="btn btn-dark admin-button"><i class="fa fa-plus"></i></button>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -200,7 +193,7 @@
                                                 <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
                                                     <div class="row no-gutters">
                                                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
-                                                            <a href="#"><i class="fa fa-edit"></i></a>
+                                                            <a href="{{ path('adminEditBenefit', { 'id': benefit.id }) }}"><i class="fa fa-edit"></i></a>
                                                         </div>
                                                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
                                                             <a href="{{ path('adminDeleteBenefit', { 'id' : benefit.id}) }}"><i class="fa fa-trash"></i></a>
@@ -290,7 +283,8 @@
             </div>
         </div>
 
-        <!-- MODAL -->
+        <!-- MODALS -->
+
         <!-- MODAL + USER -->
         <div class="modal fade" id="createUserModal" tabindex="-1" role="dialog" aria-labelledby="createUserModalTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">

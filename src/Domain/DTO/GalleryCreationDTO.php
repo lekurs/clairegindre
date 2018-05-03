@@ -47,11 +47,9 @@ class GalleryCreationDTO implements GalleryCreationDTOInterface
         BenefitInterface $benefit,
         string $title,
         string  $user
-//        array $pictures
     ) {
         $this->benefit = $benefit;
         $this->title = $title;
         $this->user;
-//        $this->pictures = $pictures;
     }
 }

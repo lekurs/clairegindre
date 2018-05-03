@@ -1,26 +1,22 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: Bidule
- * Date: 24/04/2018
- * Time: 11:17
+ * User: Maxime GINDRE
+ * Date: 03/05/2018
+ * Time: 22:36
  */
 
-namespace App\UI\Responder\Blog;
+namespace App\UI\Responder\Admin;
 
 
-use App\UI\Responder\Interfaces\AdminBlogChoosePicturesResponderInterface;
+use App\UI\Responder\Admin\Interfaces\EditBenefitResponderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Twig\Environment;
 
-/**
- * Class AdminBlogChoosePicturesResponder
- * @package App\UI\Responder\Blog
- */
-class AdminBlogChoosePicturesResponder implements AdminBlogChoosePicturesResponderInterface
+class EditBenefitResponder implements EditBenefitResponderInterface
 {
     /**
      * @var Environment
@@ -33,8 +29,7 @@ class AdminBlogChoosePicturesResponder implements AdminBlogChoosePicturesRespond
     private $urlGenerator;
 
     /**
-     * AdminBlogChoosePicturesResponder constructor.
-     *
+     * EditBenefitResponder constructor.
      * @param Environment $twig
      * @param UrlGeneratorInterface $urlGenerator
      */
@@ -46,17 +41,19 @@ class AdminBlogChoosePicturesResponder implements AdminBlogChoosePicturesRespond
 
     /**
      * @param bool $redirect
-     * @param null $gallery
+     * @param FormInterface|null $form
+     * @param null $benefit
      * @return mixed|RedirectResponse|Response
      * @throws \Twig_Error_Loader
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    public function __invoke($redirect = false, $gallery = null)
+    public function __invoke($redirect = false, FormInterface $form = null, $benefit = null)
     {
-        $redirect ? $response = new RedirectResponse('admin') : $response = new Response($this->twig->render('back/admin/Article/add_article_select_pictures.html.twig', array(
-            'gallery' => $gallery
-        )));
+        $redirect ? $response = new RedirectResponse($this->urlGenerator->generate('admin')) : $response = new Response($this->twig->render('back/admin/benefit_edit.html.twig', [
+            'benefit' => $benefit,
+            'benefitType' => $form->createView()
+        ]));
 
         return $response;
     }

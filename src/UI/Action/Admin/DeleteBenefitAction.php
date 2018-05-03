@@ -9,6 +9,7 @@
 namespace App\UI\Action\Admin;
 
 use App\Domain\Models\Benefit;
+use App\Domain\Repository\Interfaces\BenefitRepositoryInterface;
 use App\UI\Action\Admin\Interfaces\DeleteBenefitActionInterface;
 use App\UI\Responder\Admin\Interfaces\DeleteBenefitResponderInterface;
 use Doctrine\ORM\EntityManagerInterface;
@@ -30,9 +31,9 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 class DeleteBenefitAction implements DeleteBenefitActionInterface
 {
     /**
-     * @var EntityManagerInterface
+     * @var BenefitRepositoryInterface
      */
-    private $entityManager;
+    private $benefitRepository;
 
     /**
      * @var TokenStorageInterface
@@ -47,16 +48,16 @@ class DeleteBenefitAction implements DeleteBenefitActionInterface
     /**
      * DeleteBenefitAction constructor.
      *
-     * @param EntityManagerInterface $entityManager
+     * @param BenefitRepositoryInterface $benefitRepository
      * @param TokenStorageInterface $tokenStorage
      * @param AuthorizationCheckerInterface $authorization
      */
     public function __construct(
-        EntityManagerInterface $entityManager,
+        BenefitRepositoryInterface $benefitRepository,
         TokenStorageInterface $tokenStorage,
         AuthorizationCheckerInterface $authorization
     ) {
-        $this->entityManager = $entityManager;
+        $this->benefitRepository = $benefitRepository;
         $this->tokenStorage = $tokenStorage;
         $this->authorization = $authorization;
     }
@@ -64,7 +65,7 @@ class DeleteBenefitAction implements DeleteBenefitActionInterface
 
     public function __invoke(Request $request, DeleteBenefitResponderInterface $responder)
     {
-        $benefit = $this->entityManager->getRepository(Benefit::class)->find($request->get('id'));
+        $benefit = $this->benefitRepository->getOne($request->get('id'));
 
         $this->entityManager->remove($benefit);
         $this->entityManager->flush();

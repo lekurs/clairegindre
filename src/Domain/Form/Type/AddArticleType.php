@@ -13,6 +13,7 @@ use App\Domain\DTO\ArticleCreationDTO;
 use App\Domain\DTO\Interfaces\ArticleCreationDTOInterface;
 use App\Domain\Models\Benefit;
 use App\Domain\Models\Gallery;
+use App\Domain\Repository\GalleryRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Form\AbstractType;
@@ -32,7 +33,14 @@ class AddArticleType extends AbstractType
             ->add('title', TextType::class)
             ->add('gallery', EntityType::class, [
                 'class' => Gallery::class,
-                'choice_label' => 'title'
+                'choice_label' => 'title',
+                'query_builder' => function (GalleryRepository $er) {
+                return $er->createQueryBuilder('gallery')
+                    ->leftJoin('gallery.article', 'article')
+                    ->leftJoin('gallery.pictures', 'pictures')
+                    ->where('gallery.article IS NULL')
+                    ;
+                }
             ])
             ->add('content', TextareaType::class, [
                 'required' => false
@@ -46,13 +54,7 @@ class AddArticleType extends AbstractType
                 'constraints' => [
                     new UniqueEntity(['fields' => 'id'])
                     ]
-            ])
-//            ->add('images', CollectionType::class, [
-//                'entry_type' => PictureEditType::class,
-//                'allow_add'=> true,
-//                'allow_delete' => true
-//            ])
-            ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

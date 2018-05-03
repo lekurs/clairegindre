@@ -10,7 +10,6 @@ namespace App\Domain\DTO;
 
 
 use App\Domain\DTO\Interfaces\BenefitCreationDTOInterface;
-use App\Domain\Models\Interfaces\BenefitInterface;
 
 class BenefitCreationDTO implements BenefitCreationDTOInterface
 {
@@ -23,7 +22,6 @@ class BenefitCreationDTO implements BenefitCreationDTOInterface
      * BenefitCreationDTO constructor.
      *
      * @param string $name
-     * @param BenefitInterface $benefit
      */
     public function __construct(
         string $name

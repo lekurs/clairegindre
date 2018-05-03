@@ -8,25 +8,22 @@
 
 namespace App\UI\Action\Admin;
 
-
+use App\Domain\DTO\GallerySessionDTO;
 use App\Domain\Form\Type\AddArticleType;
 use App\Domain\Form\Type\AddBenefitType;
 use App\Domain\Form\Type\RegistrationType;
-use App\Domain\Models\Article;
-use App\Domain\Models\Benefit;
-use App\Domain\Models\Gallery;
-use App\Domain\Models\User;
+use App\Domain\Repository\Interfaces\ArticleRepositoryInterface;
+use App\Domain\Repository\Interfaces\BenefitRepositoryInterface;
+use App\Domain\Repository\Interfaces\GalleryRepositoryInterface;
+use App\Domain\Repository\Interfaces\UserRepositoryInterface;
 use App\UI\Action\Admin\Interfaces\AdminActionInterface;
 use App\UI\Form\FormHandler\Interfaces\AddArticleTypeHandlerInterface;
 use App\UI\Form\FormHandler\Interfaces\AddBenefitHandlerInterface;
 use App\UI\Form\FormHandler\Interfaces\RegistrationTypeHandlerInterface;
 use App\UI\Responder\Admin\Interfaces\AdminResponderInterface;
-use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\Finder\Exception\AccessDeniedException;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
@@ -54,9 +51,24 @@ class AdminAction implements AdminActionInterface
     private $authorizationChecker;
 
     /**
-     * @var EntityManagerInterface
+     * @var GalleryRepositoryInterface
      */
-    private $entityManager;
+    private $galleryRepository;
+
+    /**
+     * @var UserRepositoryInterface
+     */
+    private $userRepository;
+
+    /**
+     * @var BenefitRepositoryInterface
+     */
+    private $benefitRepository;
+
+    /**
+     * @var ArticleRepositoryInterface
+     */
+    private $articleRepository;
 
     /**
      * @var FormFactoryInterface
@@ -79,7 +91,7 @@ class AdminAction implements AdminActionInterface
     private $addBenefitTypeHandler;
 
     /**
-     * @var Session
+     * @var SessionInterface
      */
     private $session;
 
@@ -88,26 +100,35 @@ class AdminAction implements AdminActionInterface
      *
      * @param TokenStorageInterface $tokenStorage
      * @param AuthorizationCheckerInterface $authorizationChecker
-     * @param EntityManagerInterface $entityManager
+     * @param GalleryRepositoryInterface $galleryRepository
+     * @param UserRepositoryInterface $userRepository
+     * @param BenefitRepositoryInterface $benefitRepository
+     * @param ArticleRepositoryInterface $articleRepository
      * @param FormFactoryInterface $formFactory
      * @param RegistrationTypeHandlerInterface $registrationTypeHandler
      * @param AddArticleTypeHandlerInterface $addArticleTypeHandler
      * @param AddBenefitHandlerInterface $addBenefitTypeHandler
-     * @param Session $session
+     * @param SessionInterface $session
      */
     public function __construct(
         TokenStorageInterface $tokenStorage,
         AuthorizationCheckerInterface $authorizationChecker,
-        EntityManagerInterface $entityManager,
+        GalleryRepositoryInterface $galleryRepository,
+        UserRepositoryInterface $userRepository,
+        BenefitRepositoryInterface $benefitRepository,
+        ArticleRepositoryInterface $articleRepository,
         FormFactoryInterface $formFactory,
         RegistrationTypeHandlerInterface $registrationTypeHandler,
         AddArticleTypeHandlerInterface $addArticleTypeHandler,
         AddBenefitHandlerInterface $addBenefitTypeHandler,
-        Session $session
+        SessionInterface $session = null
     ) {
         $this->tokenStorage = $tokenStorage;
         $this->authorizationChecker = $authorizationChecker;
-        $this->entityManager = $entityManager;
+        $this->galleryRepository = $galleryRepository;
+        $this->userRepository = $userRepository;
+        $this->benefitRepository = $benefitRepository;
+        $this->articleRepository = $articleRepository;
         $this->formFactory = $formFactory;
         $this->registrationTypeHandler = $registrationTypeHandler;
         $this->addArticleTypeHandler = $addArticleTypeHandler;
@@ -126,13 +147,13 @@ class AdminAction implements AdminActionInterface
 //            throw new AccessDeniedException('pas accès !');
 //        }
 
-        $users = $this->entityManager->getRepository(User::class)->showGalleryByUser();
+        $users = $this->userRepository->showGalleryByUser();
 
-        $galleries = $this->entityManager->getRepository(Gallery::class)->getAllWithPictures();
+        $galleries = $this->galleryRepository->getAllWithPictures();
 
-        $benefits = $this->entityManager->getRepository(Benefit::class)->findAll();
+        $benefits = $this->benefitRepository->getAll();
 
-        $articles = $this->entityManager->getRepository(Article::class)->findAll();
+        $articles = $this->articleRepository->findAll();
 
         $registration = $this->formFactory->create(RegistrationType::class)->handleRequest($request);
 
@@ -152,7 +173,9 @@ class AdminAction implements AdminActionInterface
 
         if ($this->addArticleTypeHandler->handle($addArticleType)) {
 
-            $this->session->set('gallery', $request->request->get('add_article'));
+            $galleryDTO = new GallerySessionDTO($request->request->get('add_article')['gallery']);
+
+            $this->session->set('gallery', $galleryDTO);
 
             return $responder(true, $registration, $benefitsType, $addArticleType, $users, $galleries, $benefits, $articles, 'adminAddArticleSelectPictures');
         }

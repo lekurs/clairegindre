@@ -31,28 +31,27 @@ class BenefitRepository extends ServiceEntityRepository implements BenefitReposi
      */
     public function getAll(): array
     {
-        $qb = $this->createQueryBuilder('benefit')
-            ->select('benefit.name')
+        return $this->createQueryBuilder('benefit')
             ->orderBy('benefit.id')
             ->getQuery()
+            ->getResult()
         ;
-
-        return $qb->execute();
     }
 
     /**
      * @param $id
      * @return array
+     * @throws \Doctrine\ORM\NonUniqueResultException
      */
     public function getOne($id): array
     {
-        $qb = $this->createQueryBuilder('b')
-            ->select('b.name')
-            ->where('id='.$id)
+        return $this->createQueryBuilder('benefit')
+            ->select('benefit.name')
+            ->where('benefit.id= :id')
+            ->setParameter('id', $id)
             ->getQuery()
+            ->getOneOrNullResult()
         ;
-
-        return $qb->execute();
     }
 
     /**
@@ -65,4 +64,10 @@ class BenefitRepository extends ServiceEntityRepository implements BenefitReposi
         $this->getEntityManager()->persist($benefit);
         $this->getEntityManager()->flush();
     }
+
+    public function edit(BenefitInterface $benefit): void
+    {
+        $this->getEntityManager()->flush();
+    }
+
 }

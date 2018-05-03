@@ -69,6 +69,10 @@ class GalleryRepository extends ServiceEntityRepository implements GalleryReposi
             ;
     }
 
+    /**
+     * @param $id
+     * @return mixed
+     */
     public function getGalleryByUser($id)
     {
         return $this->createQueryBuilder('gallery')
@@ -91,6 +95,9 @@ class GalleryRepository extends ServiceEntityRepository implements GalleryReposi
             ->getResult();
     }
 
+    /**
+     * @return mixed
+     */
     public function getGalleryWithoutArticle()
     {
         return $this->createQueryBuilder('gallery')

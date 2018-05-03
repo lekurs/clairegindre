@@ -82,8 +82,6 @@ class BlogAction implements BlogActionInterface
 
         $articles = $this->entityManager->getRepository(Article::class)->getArticlesWithFavoritePictureGallery();
 
-//        dump($articles);
-
         $benefits = $this->entityManager->getRepository(Benefit::class)->findAll();
 
         return $response($contact, $insta, $articles, $benefits);

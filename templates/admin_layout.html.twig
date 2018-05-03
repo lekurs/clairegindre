@@ -56,51 +56,51 @@
 
 {% block body %}
 
-    {% block content %}
-        {#<div class="container">#}
-        {% block admin_menus %}
-            <div class="row no-gutters justify-content-center">
-                <ul class="nav nav-tabs">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button">Utilisateurs</a>
-                        <div class="dropdown-menu">
-                            {#<a href="#" class="dropdown-item">Ajouter</a>#}
-                            <a href="{{ path('adminUser') }}" class="dropdown-item">Voir tous</a>
-                        </div>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button">Galeries</a>
-                        <div class="dropdown-menu">
-                            <a href="#" class="dropdown-item">Ajouter</a>
-                            <a href="#" class="dropdown-item">Modifier</a>
-                        </div>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button">Blog</a>
-                        <div class="dropdown-menu">
-                            <a href="#" class="dropdown-item">Ajouter</a>
-                            <a href="#" class="dropdown-item">Modifier</a>
-                        </div>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button">Prestations</a>
-                        <div class="dropdown-menu">
-                            <a href="#" class="dropdown-item">Ajouter</a>
-                            <a href="#" class="dropdown-item">Modifier</a>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        {% endblock %}
-        {#</div>#}
+    {% block admin_menus %}
+        <div class="row no-gutters justify-content-center">
+            <ul class="nav nav-tabs">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button">Utilisateurs</a>
+                    <div class="dropdown-menu">
+                        {#<a href="#" class="dropdown-item">Ajouter</a>#}
+                        <a href="{{ path('adminUser') }}" class="dropdown-item">Voir tous</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button">Galeries</a>
+                    <div class="dropdown-menu">
+                        <a href="#" class="dropdown-item">Ajouter</a>
+                        <a href="#" class="dropdown-item">Modifier</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button">Blog</a>
+                    <div class="dropdown-menu">
+                        <a href="#" class="dropdown-item">Ajouter</a>
+                        <a href="#" class="dropdown-item">Modifier</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button">Prestations</a>
+                    <div class="dropdown-menu">
+                        <a href="#" class="dropdown-item">Ajouter</a>
+                        <a href="#" class="dropdown-item">Modifier</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
     {% endblock %}
+
+    {% block content %}
+
+    {% endblock %}
+
 {% endblock %}
 </body>
 
 {% block javascripts %}
     <script src="/js/vendor/jquery-min.js"></script>
     <script src="/js/vendor/bootstrap.bundle.js"></script>
-    {#<script src="/js/back/datepicker.js"></script>#}
 {% endblock %}
 
 </html>

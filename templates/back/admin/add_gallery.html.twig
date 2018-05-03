@@ -11,6 +11,7 @@
 {% block content %}
 <section>
     <div class="container">
+
         <div class="row no-gutters">
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                 {% block title_admin %}
@@ -18,17 +19,14 @@
                 {% endblock %}
             </div>
         </div>
-        {% block admin_menus %}
-        {{ parent() }}
-        {% endblock %}
 
-        <div class="row">
+        <div class="row no-gutters">
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" id="drop-container">
 
             </div>
         </div>
         {% if gallery is not empty %}
-            <div class="row">
+            <div class="row no-gutters">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                     <div class="row no-gutters cards" id="sortable">
                         {% for pictures in gallery.pictures %}

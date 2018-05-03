@@ -11,5 +11,10 @@ namespace App\Domain\DTO\Interfaces;
 
 interface BenefitCreationDTOInterface
 {
-
+    /**
+     * BenefitCreationDTOInterface constructor.
+     *
+     * @param string $name
+     */
+    public function __construct(string $name);
 }

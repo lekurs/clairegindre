@@ -9,13 +9,17 @@
 namespace App\UI\Action\Blog;
 use App\Domain\Form\Type\SelectPicturesForArticleType;
 use App\Domain\Models\Gallery;
+use App\Domain\Repository\Interfaces\GalleryRepositoryInterface;
 use App\UI\Action\Blog\Interfaces\AdminBlogChoosePicturesActionInterface;
 use App\UI\Responder\Interfaces\AdminBlogChoosePicturesResponderInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\HttpFoundation\File\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 
 /**
@@ -35,39 +39,55 @@ class AdminBlogChoosePicturesAction implements AdminBlogChoosePicturesActionInte
     private $formFactory;
 
     /**
-     * @var EntityManagerInterface
+     * @var GalleryRepositoryInterface
      */
-    private $entityManager;
+    private $galleryRepository;
 
     /**
-     * @var Session
+     * @var SessionInterface
      */
     private $session;
+
+    /**
+     * @var AuthorizationCheckerInterface
+     */
+    private $authorizationChecker;
 
     /**
      * AdminBlogChoosePicturesAction constructor.
      *
      * @param FormFactoryInterface $formFactory
-     * @param EntityManagerInterface $entityManager
-     * @param Session $session
+     * @param GalleryRepositoryInterface $galleryRepository
+     * @param SessionInterface $session
+     * @param AuthorizationCheckerInterface $authorizationChecker
      */
     public function __construct(
         FormFactoryInterface $formFactory,
-        EntityManagerInterface $entityManager,
-        Session $session
+        GalleryRepositoryInterface $galleryRepository,
+        SessionInterface $session = null,
+        AuthorizationCheckerInterface $authorizationChecker
     ) {
         $this->formFactory = $formFactory;
-        $this->entityManager = $entityManager;
+        $this->galleryRepository = $galleryRepository;
         $this->session = $session;
+        $this->authorizationChecker = $authorizationChecker;
     }
 
 
     public function __invoke(Request $request, AdminBlogChoosePicturesResponderInterface $responder)
     {
-        $pictures = $this->entityManager->getRepository(Gallery::class)->getWithPictures($this->session->get('gallery')['gallery']);
+        if (false === $this->authorizationChecker->isGranted('ROLE_ADMIN')) {
+            throw new AccessDeniedException('Vous n\'avez pas les droits d\'accès Administrateur');
+        }
 
-        $form = $this->formFactory->create(SelectPicturesForArticleType::class, $pictures)->handleRequest($request);
+        if ($this->session->has('gallery') && is_string($this->session->get('gallery')->id)) {
 
-        return $responder($pictures->getPictures());
+            $gallery = $this->galleryRepository->getWithPictures($this->session->get('gallery')->id);
+
+            $form = $this->formFactory->create(SelectPicturesForArticleType::class, $gallery)->handleRequest($request);
+
+            return $responder(false, $gallery);
+        }
+            return $responder(true, null);
     }
 }
