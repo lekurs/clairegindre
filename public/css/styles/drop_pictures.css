@@ -16,7 +16,6 @@
 }
 
 .drop_pictures_action_bars {
-    position: fixed;
     z-index: 999;
     margin-bottom: 2em;
 }
@@ -36,7 +35,7 @@
 }
 
 .drop_pictures_previews {
-    width: 70%;
+    width: 100%;
 }
 
 .grey-line {
@@ -50,6 +49,14 @@
 
 .progress {
     width: 100%;
+}
+
+.colDelete .fa {
+    cursor: pointer;
+}
+
+.check_box_favorite.selected, favorite-image.selected {
+    color: gold !important;
 }
 
 /*****************************************************************/

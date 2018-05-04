@@ -20,6 +20,12 @@ interface GalleryRepositoryInterface
     public function getOne($id);
 
     /**
+     * @param $id
+     * @return mixed
+     */
+    public function getWithPictures($id);
+
+    /**
      * @return mixed
      */
     public function getAllWithPictures();

@@ -24,6 +24,12 @@ interface PictureRepositoryInterface
     public function __construct(RegistryInterface $registry);
 
     /**
+     * @param $id
+     * @return mixed
+     */
+    public function getOne($id);
+
+    /**
      * @param PictureInterface $picture
      * @return mixed
      */

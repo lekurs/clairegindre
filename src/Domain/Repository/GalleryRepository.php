@@ -31,18 +31,17 @@ class GalleryRepository extends ServiceEntityRepository implements GalleryReposi
     /**
      * @param $id
      * @return mixed
+     * @throws \Doctrine\ORM\NonUniqueResultException
      */
     public function showOne($id)
     {
-        $qb = $this->createQueryBuilder()
+        return $this->createQueryBuilder()
             ->select('*')
             ->from('gallery')
             ->where('user_id = :userId')
             ->setParameter('user_id', $id)
             ->getQuery()
-            ;
-
-        return $qb->execute();
+            ->getOneOrNullResult();
     }
 
     public function getOne($id)
@@ -133,6 +132,11 @@ class GalleryRepository extends ServiceEntityRepository implements GalleryReposi
     public function save(GalleryInterface $gallery)
     {
         $this->getEntityManager()->persist($gallery);
+        $this->getEntityManager()->flush();
+    }
+
+    public function update(Gallery $gallery)
+    {
         $this->getEntityManager()->flush();
     }
 
