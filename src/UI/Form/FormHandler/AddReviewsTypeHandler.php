@@ -10,7 +10,6 @@ namespace App\UI\Form\FormHandler;
 
 
 use App\Domain\Builder\Interfaces\ReviewsBuilderInterface;
-use App\Domain\Models\Interfaces\UserInterface;
 use App\Domain\Models\Picture;
 use App\Domain\Repository\Interfaces\ReviewsRepositoryInterface;
 use App\Services\PictureUploaderHelper;
@@ -19,6 +18,8 @@ use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Validator\Constraints\DateTime;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class AddReviewsTypeHandler implements AddReviewsTypeHandlerInterface
@@ -59,8 +60,12 @@ class AddReviewsTypeHandler implements AddReviewsTypeHandlerInterface
     private $fileSystem;
 
     /**
+     * @var TokenStorageInterface
+     */
+    private $tokenStorage;
+
+    /**
      * AddReviewsTypeHandler constructor.
-     *
      * @param ReviewsRepositoryInterface $reviewsRepository
      * @param SessionInterface $session
      * @param ValidatorInterface $validator
@@ -68,6 +73,7 @@ class AddReviewsTypeHandler implements AddReviewsTypeHandlerInterface
      * @param PictureUploaderHelper $pictureUploaderHelper
      * @param string $targetDir
      * @param Filesystem $fileSystem
+     * @param TokenStorageInterface $tokenStorage
      */
     public function __construct(
         ReviewsRepositoryInterface $reviewsRepository,
@@ -76,16 +82,19 @@ class AddReviewsTypeHandler implements AddReviewsTypeHandlerInterface
         ReviewsBuilderInterface $reviewsBuilder,
         PictureUploaderHelper $pictureUploaderHelper,
         string $targetDir,
-        Filesystem $fileSystem
+        Filesystem $fileSystem,
+        TokenStorageInterface $tokenStorage
     ) {
         $this->reviewsRepository = $reviewsRepository;
         $this->session = $session;
-        $this->validtor = $validator;
+        $this->validator = $validator;
         $this->reviewsBuilder = $reviewsBuilder;
         $this->pictureUploaderHelper = $pictureUploaderHelper;
         $this->targetDir = $targetDir;
         $this->fileSystem = $fileSystem;
+        $this->tokenStorage = $tokenStorage;
     }
+
 
     public function handle(FormInterface $form)
     {
@@ -96,20 +105,23 @@ class AddReviewsTypeHandler implements AddReviewsTypeHandlerInterface
                 echo "une erreur est survenue durant la création du répertoire : " . $exception->getPath();
             }
 
-            $this->pictureUploaderHelper->move($form->getData()->image, $this->targetDir . '/reviews/' . $form->getData()->title);
+            $this->pictureUploaderHelper->move($form->getData()->image, $this->targetDir . '/reviews/' . str_replace(' ', '_', strtolower($form->getData()->title)), $form->getData()->image->getClientOriginalName());
 
-            $picture = new Picture($form->getData()->image->getClientOriginalName(), '/images/upload/reviews', $form->getData()->image->getClientExtension());
+            $picture = new Picture($form->getData()->image->getClientOriginalName(), '/images/upload/reviews/' .$form->getData()->title , $form->getData()->image->guessClientExtension());
 
             $reviews = $this->reviewsBuilder->create(
-                $form->getData()->title,
-                $form->getData()->content,
-                new \DateTime(),
-                'tata',
-                '/images/upload/reviews',
-                $form->getData()->picture->getClientOriginalName()
-            );
+                                                                                        $form->getData()->title,
+                                                                                        $form->getData()->content,
+                                                                                        new \DateTime(),
+                                                                                        $this->tokenStorage->getToken()->getUser(),
+                                                                                        '/images/upload/reviews/'. str_replace(' ', '_', strtolower($form->getData()->title)),
+                                                                                        $form->getData()->image->getClientOriginalName(),
+                                                                                        $form->getData()->online
+                                                                                    );
+
             $this->validator->validate($reviews, [], [
-                'reviews_creation']);
+                'reviews_creation'
+            ]);
 
             $this->reviewsRepository->save($this->reviewsBuilder->getReviews());
 

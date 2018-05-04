@@ -52,15 +52,20 @@ class Reviews implements ReviewsInterface
     private $imageName;
 
     /**
+     * @var bool
+     */
+    private $online;
+
+    /**
      * Reviews constructor.
      *
-     * @param string $id
      * @param string $title
      * @param string $content
      * @param \DateTime $creationDate
      * @param UserInterface $author
      * @param string $imagePath
      * @param string $imageName
+     * @param bool $online;
      */
     public function __construct(
         string $title,
@@ -68,15 +73,25 @@ class Reviews implements ReviewsInterface
         \DateTime $creationDate,
         UserInterface $author,
         string $imagePath,
-        string $imageName
+        string $imageName,
+        bool $online
     ) {
         $this->id = Uuid::uuid4();
         $this->title = $title;
         $this->content = $content;
-        $this->creationDate = new DateTime();
+        $this->creationDate = new \DateTime();
         $this->author = $author;
         $this->imagePath = $imagePath;
         $this->imageName = $imageName;
+        $this->online = $online;
+    }
+
+    /**
+     * @return string
+     */
+    public function getId(): string
+    {
+        return $this->id;
     }
 
     /**
@@ -125,5 +140,13 @@ class Reviews implements ReviewsInterface
     public function getImageName(): string
     {
         return $this->imageName;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isOnline(): bool
+    {
+        return $this->online;
     }
 }

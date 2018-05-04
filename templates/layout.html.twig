@@ -259,7 +259,7 @@
 
     {% block instagram_contact %}
     <section class="row no-gutters">
-        <article class="col-12 col-sm-12 col-lg-6 col-xl-6 instagram insta-list">
+        <article class="col-lg-6 col-xl-6 col-md-12 col-sm-12 col-12 instagram insta-list">
                 {%  for instagram in insta %}
                     {#<a href="{{ instagram.link }}" class="instagram-link">#}
                         <img class="insta-img" src="{{ instagram.images.standard_resolution.url }}" alt="claire_gindre_photographe_{{ instagram.id }}" />
@@ -278,13 +278,15 @@
                             <p>test de paragraphe test de paragraphe test de paragraphe test de paragraphe test de paragraphe test de paragraphe</p>
                         </div>
                     </div>
+                    {% for review in reviews %}
                     <div class="carousel-item carousel-img">
-                        <img src="{{ asset('/images/mariage-home.jpg') }}" class="d-block w-100 img-carousel" alt="test_slider" />
+                        <img src="{{ asset(review.imagePath ~ '/' ~ review.imageName) }}" class="d-block w-100 img-carousel" alt="test_slider" />
                         <div class="infos-carousel">
-                            <h3>test</h3>
-                            <p>test de paragraphe</p>
+                            <h3>{{ review.title }}</h3>
+                            {{ review.content }}
                         </div>
                     </div>
+                    {% endfor %}
                 </div>
             </div>
         </article>

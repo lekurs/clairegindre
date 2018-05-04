@@ -9,6 +9,7 @@
 namespace App\UI\Action\Front;
 use App\Domain\Form\Type\ContactType;
 use App\Domain\Lib\InstagramLib;
+use App\Domain\Repository\Interfaces\ReviewsRepositoryInterface;
 use App\UI\Action\Front\Interfaces\IndexActionInterface;
 use App\UI\Form\FormHandler\Interfaces\ContactTypeHandlerInterface;
 use App\UI\Responder\Interfaces\IndexResponderInterface;
@@ -36,20 +37,35 @@ class IndexAction implements IndexActionInterface
     /**
      * @var ContactTypeHandlerInterface
      */
-    private $contactHandler;
+    private $contactTypeHandler;
+
+    /**
+     * @var InstagramLib
+     */
+    private $instagram;
+
+    /**
+     * @var ReviewsRepositoryInterface
+     */
+    private $reviewsRepository;
 
     /**
      * IndexAction constructor.
-     *
      * @param FormFactoryInterface $formFactory
-     * @param ContactTypeHandlerInterface $contactHandler
+     * @param ContactTypeHandlerInterface $contactTypeHandler
+     * @param InstagramLib $instagram
+     * @param ReviewsRepositoryInterface $reviewsRepository
      */
     public function __construct(
         FormFactoryInterface $formFactory,
-        ContactTypeHandlerInterface $contactHandler
+        ContactTypeHandlerInterface $contactTypeHandler,
+        InstagramLib $instagram,
+        ReviewsRepositoryInterface $reviewsRepository
     ) {
         $this->formFactory = $formFactory;
-        $this->contactHandler = $contactHandler;
+        $this->contactTypeHandler = $contactTypeHandler;
+        $this->instagram = $instagram;
+        $this->reviewsRepository = $reviewsRepository;
     }
 
     /**
@@ -59,12 +75,18 @@ class IndexAction implements IndexActionInterface
      */
     public function __invoke(Request $request, IndexResponderInterface $responder)
     {
+        $reviews = $this->reviewsRepository->getAll();
+
+        $instagram = $this->instagram->show();
+
         $contactType = $this->formFactory->create(ContactType::class)
                                                                         ->handleRequest($request);
 
-        if($this->contactHandler->handle($contactType)) {
-            return $responder(true);
+        if($this->contactTypeHandler->handle($contactType)) {
+
+            return $responder(true, $contactType, $instagram, $reviews);
         }
-        return $responder(false, $contactType);
+
+        return $responder(false, $contactType, $instagram, $reviews);
     }
 }

@@ -11,6 +11,7 @@ namespace App\Domain\Form\Type;
 
 use App\Domain\DTO\AddReviewsDTO;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -27,7 +28,11 @@ class AddReviewsType extends AbstractType
             ->add('content', TextareaType::class, [
                 'required' => false
             ])
-            ->add('image', FileType::class);
+            ->add('online', CheckboxType::class, [
+                'required' => false
+            ])
+            ->add('image', FileType::class)
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
@@ -36,9 +41,10 @@ class AddReviewsType extends AbstractType
             'data_class' => AddReviewsDTO::class,
             'empty_data' =>  function (FormInterface $form) {
                             return new AddReviewsDTO(
-                                $form->getData()->title,
-                                $form->getData()->content,
-                                $form->getData()->image
+                                $form->get('title')->getData(),
+                                $form->get('content')->getData(),
+                                $form->get('online')->getData(),
+                                $form->get('image')->getData()
                             );
                     }
         ]);

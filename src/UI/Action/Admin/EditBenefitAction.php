@@ -90,7 +90,7 @@ class EditBenefitAction implements EditBenefitActionInterface
 
         $benefit = $this->benefitRepository->getOne($request->get('id'));
 
-        $benefitDTO = new EditBenefitDTO($benefit['name']);
+        $benefitDTO = new EditBenefitDTO($benefit->getName());
 
         $editBenefitType = $this->formFactory->create(EditBenefitType::class, $benefitDTO)->handleRequest($request);
 

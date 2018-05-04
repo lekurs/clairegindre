@@ -1,0 +1,58 @@
+/** REVIEWS ADMIN PAGE **/
+
+.reviews-container {
+    height: 40vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.reviews-content {
+    margin-bottom: 1.5em;
+    height: 8em;
+    border-bottom: 1px solid #363636;
+    border-width: thin;
+}
+
+/** TOGGLE SWITCH **/
+.switch {
+    width: 40%;
+    height: 2em;
+}
+
+.switch-checkbox {
+    display: none;
+}
+
+.switch-label {
+    width: 100%;
+    height: 100%;
+    background-color: #dc3545;
+    display: block;
+    padding: 5px;
+    border-radius: 54px;
+}
+
+.switch-toggle {
+    float: left;
+    width: 50%;
+    height: 100%;
+    background-color: #FFFFFF;
+    border-radius: 50%;
+    position: relative;
+}
+
+.switch-checkbox:checked ~ .switch-label {
+    background-color: #28a745;
+}
+
+.switch-checkbox:checked ~ .switch-label .switch-toggle {
+    float: right
+}
+
+.switch-rectangle .switch-label {
+    border-radius: 0;
+}
+
+.switch-rectangle .switch-toggle {
+    border-radius: 0;
+}

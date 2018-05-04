@@ -1,22 +1,22 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: Bidule
- * Date: 25/04/2018
- * Time: 13:59
+ * User: Maxime GINDRE
+ * Date: 04/05/2018
+ * Time: 14:51
  */
 
 namespace App\UI\Responder\Reviews;
 
 
-use App\UI\Responder\Interfaces\AddReviewsResponderInterface;
+use App\UI\Responder\Interfaces\EditReviewsResponderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Twig\Environment;
 
-class AddReviewsResponder implements AddReviewsResponderInterface
+class EditReviewsResponder implements EditReviewsResponderInterface
 {
     /**
      * @var Environment
@@ -29,7 +29,7 @@ class AddReviewsResponder implements AddReviewsResponderInterface
     private $urlGenerator;
 
     /**
-     * AddReviewsResponder constructor.
+     * EditReviewsResponder constructor.
      * @param Environment $twig
      * @param UrlGeneratorInterface $urlGenerator
      */
@@ -39,11 +39,10 @@ class AddReviewsResponder implements AddReviewsResponderInterface
         $this->urlGenerator = $urlGenerator;
     }
 
-    public function __invoke($redirect = false, FormInterface $form = null, $reviews)
+    public function __invoke($redirect = false, FormInterface $form = null)
     {
-        $redirect ? $response = new RedirectResponse($this->urlGenerator->generate('admin')) : $response = new Response($this->twig->render('back/admin/Reviews/reviews.html.twig', [
-            'form' => $form->createView(),
-            'reviews' => $reviews
+        $redirect ? $response = new RedirectResponse($this->urlGenerator->generate('adminAddReviews')) : $response = new Response($this->twig->render('back/admin/Reviews/edit_reviews.html.twig', [
+            'form' => $form->createView()
         ]));
 
         return $response;

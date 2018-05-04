@@ -1,0 +1,75 @@
+{% extends "admin_layout.html.twig" %}
+
+{%  block head %}
+    {{ parent() }}
+    {% block title %}
+        <title>Administration</title>
+    {% endblock %}
+{% endblock %}
+
+{% block content %}
+    <section>
+        {% block showBlog %}
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        {% block title_admin %}
+                            <h1>Gestion des avis clients</h1>
+                        {% endblock %}
+                    </div>
+                </div>
+                {#{% for review in reviews %}#}
+                    {#<div class="row reviews-container">#}
+                        {#<div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12">#}
+                            {#<img src="{{ asset(review.imagePath ~ '/' ~ review.imageName) }}" class="img-fluid" />#}
+                        {#</div>#}
+                        {#<div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12">#}
+                            {#{{ review.title }}#}
+                        {#</div>#}
+                        {#<div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12">#}
+                            {#{{ review.content }}#}
+                        {#</div>#}
+                        {#<div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12">#}
+                            {#{{ review.online }}#}
+                        {#</div>#}
+                        {#<div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12">#}
+                            {#<a href="{{ path('adminDeleteReview', { 'id': review.id }) }}"><i class="fa fa-edit"></i></a>#}
+                        {#</div>#}
+                        {#<div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12">#}
+                            {#<a href="{{ path('adminDeleteReview', { 'id': review.id }) }}"><i class="fa fa-trash"></i></a>#}
+                        {#</div>#}
+                    {#</div>#}
+                {#{% endfor %}#}
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <h1>Ajout d'un avis client</h1>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        {{ form_start(form) }}
+                        {{ form_widget(form) }}
+                        {#{{ form_row(form.content)| raw  }}#}
+                        <button type="submit" name="submit-category" class="btn btn-primary">Ajouter</button>
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+        {% endblock %}
+    </section>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=7g8w49lzy5eyqt1o7hle0gzlmm3c84veiyraf1nwtm9eur9t"></script>
+    <script>
+        tinymce.init({
+            selector: 'textarea#edit_review_content',
+            height: 300,
+            toolbar: [
+                'undo redo | styleselect | bold italic | link image',
+                'alignleft aligncenter alignright'
+            ]
+        });
+    </script>
+{% endblock %}

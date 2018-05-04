@@ -143,9 +143,9 @@ class AdminAction implements AdminActionInterface
      */
     public function __invoke(Request $request, AdminResponderInterface $responder)
     {
-//        if(false === $this->authorizationChecker->isGranted('ROLE_ADMIN')) {
-//            throw new AccessDeniedException('pas accès !');
-//        }
+        if(false === $this->authorizationChecker->isGranted('ROLE_ADMIN')) {
+            throw new AccessDeniedException('Merci de vous connecter comme Administrateur sur ce site !');
+        }
 
         $users = $this->userRepository->showGalleryByUser();
 

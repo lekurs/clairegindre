@@ -9,6 +9,8 @@
 namespace App\UI\Action\Front\Interfaces;
 
 
+use App\Domain\Lib\InstagramLib;
+use App\Domain\Repository\Interfaces\ReviewsRepositoryInterface;
 use App\UI\Form\FormHandler\Interfaces\ContactTypeHandlerInterface;
 use App\UI\Responder\Interfaces\IndexResponderInterface;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -21,8 +23,10 @@ interface IndexActionInterface
      *
      * @param FormFactoryInterface $formFactory
      * @param ContactTypeHandlerInterface $contactTypeHandler
+     * @param InstagramLib $instagram
+     * @param ReviewsRepositoryInterface $reviewsRepository
      */
-    public function __construct(FormFactoryInterface $formFactory, ContactTypeHandlerInterface $contactTypeHandler);
+    public function __construct(FormFactoryInterface $formFactory, ContactTypeHandlerInterface $contactTypeHandler, InstagramLib $instagram, ReviewsRepositoryInterface $reviewsRepository);
 
     /**
      * @param Request $request

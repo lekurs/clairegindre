@@ -10,6 +10,7 @@
             <field name="creationDate" type="date" nullable="false" unique="false" />
             <field name="imageName" type="string" nullable="false" unique="true" />
             <field name="imagePath" type="string" nullable="false" unique="false" />
+            <field name="online" type="boolean" nullable="false" />
 
             <many-to-one field="author" target-entity="App\Domain\Models\User" inversed-by="reviews" />
     </entity>

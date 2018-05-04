@@ -30,11 +30,6 @@ class IndexResponder implements IndexResponderInterface
     private $urlGenerator;
 
     /**
-     * @var InstagramLib
-     */
-    private $instagram;
-
-    /**
      * IndexResponder constructor.
      *
      * @param Environment $twig
@@ -42,19 +37,18 @@ class IndexResponder implements IndexResponderInterface
      */
     public function __construct(
         Environment $twig,
-        UrlGeneratorInterface $urlGenerator,
-        InstagramLib $instagram
+        UrlGeneratorInterface $urlGenerator
     ) {
         $this->twig = $twig;
         $this->urlGenerator = $urlGenerator;
-        $this->instagram = $instagram;
     }
 
-    public function __invoke($redirect = false, FormInterface $form = null)
+    public function __invoke($redirect = false, FormInterface $form = null, $instagram, $reviews)
     {
         $redirect ? $response = new RedirectResponse($this->urlGenerator->generate('/')) : $response = new Response($this->twig->render('front/index.html.twig', array(
             'contact' => $form->createView(),
-            'insta' => $this->instagram->show(),
+            'insta' => $instagram,
+            'reviews' => $reviews
         )));
 
         return $response;

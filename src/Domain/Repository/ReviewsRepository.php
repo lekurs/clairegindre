@@ -27,6 +27,18 @@ class ReviewsRepository extends ServiceEntityRepository implements ReviewsReposi
         parent::__construct($registry, Reviews::class);
     }
 
+    public function getOne($id)
+{
+    return $this->createQueryBuilder('reviews')
+        ->where('reviews.id = :id')
+        ->setParameter('id', $id)
+        ->getQuery()
+        ->getOneOrNullResult();
+}
+
+    /**
+     * @return mixed
+     */
     public function getAll()
     {
         return $this->createQueryBuilder('reviews')
@@ -35,9 +47,39 @@ class ReviewsRepository extends ServiceEntityRepository implements ReviewsReposi
             ->getResult();
     }
 
+    /**
+     * @return mixed
+     */
+    public function getAllOnline()
+    {
+        return $this->createQueryBuilder('reviews')
+                            ->where('reviews.online = true')
+                            ->orderBy('reviews.creationDate', 'DESC')
+                            ->getQuery()
+                            ->getResult();
+    }
+
+    /**
+     * @param ReviewsInterface $reviews
+     * @return mixed|void
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
     public function save(ReviewsInterface $reviews)
     {
         $this->getEntityManager()->persist($reviews);
+        $this->getEntityManager()->flush();
+    }
+
+    /**
+     * @param ReviewsInterface $reviews
+     * @return mixed|void
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function delete(ReviewsInterface $reviews)
+    {
+        $this->getEntityManager()->remove($reviews);
         $this->getEntityManager()->flush();
     }
 }

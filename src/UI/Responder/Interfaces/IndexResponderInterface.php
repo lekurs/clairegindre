@@ -21,13 +21,15 @@ interface IndexResponderInterface
      * @param Environment $twid
      * @param UrlGeneratorInterface $urlGenerator
      */
-    public function __construct(Environment $twid, UrlGeneratorInterface $urlGenerator, InstagramLib $intagram);
+    public function __construct(Environment $twid, UrlGeneratorInterface $urlGenerator);
 
     /**
      * @param bool $redirect
      * @param FormInterface|null $form
+     * @param $instagram
+     * @param $reviews
      * @return mixed
      */
-    public function __invoke($redirect = false, FormInterface $form = null);
+    public function __invoke($redirect = false, FormInterface $form = null, $instagram, $reviews);
 
 }

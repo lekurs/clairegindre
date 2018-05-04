@@ -1,17 +1,17 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: Bidule
- * Date: 25/04/2018
- * Time: 14:09
+ * User: Maxime GINDRE
+ * Date: 04/05/2018
+ * Time: 16:14
  */
 
 namespace App\Domain\DTO;
 
 
-use App\Domain\DTO\Interfaces\AddReviewsDTOInterface;
+use App\Domain\DTO\Interfaces\EditReviewsDTOInterface;
 
-class AddReviewsDTO implements AddReviewsDTOInterface
+class EditReviewsDTO implements EditReviewsDTOInterface
 {
     /**
      * @var string
@@ -24,32 +24,34 @@ class AddReviewsDTO implements AddReviewsDTOInterface
     public $content;
 
     /**
-     * @var string
-     */
-    public $image;
-
-    /**
      * @var bool
      */
     public $online;
 
     /**
-     * AddReviewsDTO constructor.
+     * @var string
+     */
+    public $image;
+
+    /**
+     * EditReviewsDTO constructor.
      *
      * @param string $title
      * @param string $content
-     * @param string $image
      * @param bool $online
+     * @param string $image
      */
     public function __construct(
         string $title,
         string $content,
-        bool $online,
-        string $image
+        bool $online
+//        string $image
     ) {
         $this->title = $title;
         $this->content = $content;
         $this->online = $online;
-        $this->image = $image;
+//        $this->image = $image;
     }
+
+
 }

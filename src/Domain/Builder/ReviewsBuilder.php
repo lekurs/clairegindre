@@ -28,11 +28,12 @@ class ReviewsBuilder implements ReviewsBuilderInterface
      * @param UserInterface $user
      * @param string $imagePath
      * @param string $imageName
+     * @param bool $online
      * @return ReviewsBuilderInterface
      */
-    public function create(string $title, string $content, \DateTime $creationDate, UserInterface $user, string $imagePath, string $imageName): ReviewsBuilderInterface
+    public function create(string $title, string $content, \DateTime $creationDate, UserInterface $user, string $imagePath, string $imageName, bool $online): ReviewsBuilderInterface
     {
-        $this->reviews = new Reviews($title, $content, $creationDate, $user, $imagePath, $imageName);
+        $this->reviews = new Reviews($title, $content, $creationDate, $user, $imagePath, $imageName, $online);
 
         return $this;
     }
