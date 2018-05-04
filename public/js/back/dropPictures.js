@@ -24,10 +24,8 @@
             inputFile = $('<input type="file" multiple>').addClass('browse').attr('id', 'drop_pictures_files');
 
             uploadArea = $('<div>').addClass('row').addClass('no-gutters').addClass('upload-container').attr('id', 'upload-container').appendTo(elt);
-            // uploadAreaContent = $('<div>').addClass('col-xl-12').addClass('col-lg-12').addClass('col-md-12').addClass('col-sm-12').addClass('col-12').addClass('upload-content').attr('id', 'upload-content');
             barAction.append(addFiles).append(startUpload).append(deleteAll).append(inputFile);
             elt.before(barAction);
-            // uploadArea.append(uploadAreaContent);
         }
 
         function showPictures(files) {
@@ -71,12 +69,12 @@
             var formData = new FormData();
 
             favorite = $('#favorite_' + index).hasClass('selected');
-            order = $('#row_' + index).attr('data-displayOrder');
+            order = $('.drop_pictures_line' + index).attr('data-displayOrder');
 
             formData.append("picture", file);
             formData.append('destination', o.target);
             formData.append('gallery', o.gallery);
-            formData.append('order', order);
+            formData.append('order', index);
             formData.append('favorite', ((favorite == false) ? 0 : 1));
 
             var xhr = new XMLHttpRequest();

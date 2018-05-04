@@ -12,7 +12,9 @@ namespace App\UI\Action\Admin;
 use App\Domain\Builder\Interfaces\GalleryBuilderInterface;
 use App\Domain\Builder\Interfaces\PictureBuilderInterface;
 use App\Domain\Models\Gallery;
+use App\Domain\Repository\Interfaces\GalleryRepositoryInterface;
 use App\Domain\Repository\Interfaces\PictureRepositoryInterface;
+use App\Services\PictureUploaderHelper;
 use App\UI\Action\Admin\Interfaces\UploadPicturesGalleryActionInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Filesystem\Filesystem;
@@ -34,9 +36,9 @@ use Symfony\Component\Routing\Annotation\Route;
 class UploadPicturesGalleryAction implements UploadPicturesGalleryActionInterface
 {
     /**
-     * @var EntityManagerInterface
+     * @var GalleryRepositoryInterface
      */
-    private $entityManager;
+    private $galleryRepository;
 
     /**
      * @var FormFactoryInterface
@@ -59,46 +61,61 @@ class UploadPicturesGalleryAction implements UploadPicturesGalleryActionInterfac
     private $pictureRepository;
 
     /**
+     * @var PictureUploaderHelper
+     */
+    private $pictureUploaderHelper;
+
+    /**
      * @var Filesystem
      */
     private $fileSystem;
 
     /**
+     * @var string
+     */
+    private $targetDir;
+
+    /**
      * UploadPicturesGalleryAction constructor.
-     *
-     * @param EntityManagerInterface $entityManager
+     * @param GalleryRepositoryInterface $galleryRepository
      * @param FormFactoryInterface $formFactory
      * @param PictureBuilderInterface $pictureBuilder
      * @param GalleryBuilderInterface $galleryBuilder
      * @param PictureRepositoryInterface $pictureRepository
-     * @param Filesystem $filesystem
+     * @param PictureUploaderHelper $pictureUploaderHelper
+     * @param Filesystem $fileSystem
+     * @param string $targetDir
      */
-    public function __construct(
-        EntityManagerInterface $entityManager,
-        FormFactoryInterface $formFactory,
-        PictureBuilderInterface $pictureBuilder,
-        GalleryBuilderInterface $galleryBuilder,
-        PictureRepositoryInterface $pictureRepository,
-        Filesystem $filesystem
-    ) {
-        $this->entityManager = $entityManager;
+    public function __construct(GalleryRepositoryInterface $galleryRepository, FormFactoryInterface $formFactory, PictureBuilderInterface $pictureBuilder, GalleryBuilderInterface $galleryBuilder, PictureRepositoryInterface $pictureRepository, PictureUploaderHelper $pictureUploaderHelper, Filesystem $fileSystem, string $targetDir)
+    {
+        $this->galleryRepository = $galleryRepository;
         $this->formFactory = $formFactory;
         $this->pictureBuilder = $pictureBuilder;
         $this->galleryBuilder = $galleryBuilder;
         $this->pictureRepository = $pictureRepository;
-        $this->fileSystem = $filesystem;
+        $this->pictureUploaderHelper = $pictureUploaderHelper;
+        $this->fileSystem = $fileSystem;
+        $this->targetDir = $targetDir;
     }
 
 
     public function __invoke(Request $request)
     {
-        $gallery = $this->entityManager->getRepository(Gallery::class)->find($request->request->get('gallery'));
+        $gallery = $this->galleryRepository->getOne($request->request->get('gallery'));
 
-        move_uploaded_file($_FILES['picture']['tmp_name'],  'images/upload/gallery/' .$request->request->get('destination') . '/' .$_FILES['picture']['name']);
+        $this->pictureUploaderHelper->move($request->files->get('picture'),  $this->targetDir . '/gallery/' . str_replace(' ', '_', strtolower($request->request->get('destination'))), $request->files->get('picture')->getClientOriginalName());
 
-        $pathInfo = pathinfo($_FILES['picture']['name']);
+//        move_uploaded_file($_FILES['picture']['tmp_name'],  'images/upload/gallery/' .$request->request->get('destination') . '/' .$_FILES['picture']['name']); //move
 
-        $this->pictureBuilder->create($_FILES['picture']['name'], 'images/upload/gallery/' . $request->request->get('destination'), $pathInfo['extension'], $request->request->get('order'), $request->request->get('favorite'), $gallery);
+//        $pathInfo = pathinfo($_FILES['picture']['name']); //plus besoin
+
+        $this->pictureBuilder->create(
+                                                                $request->files->get('picture')->getClientOriginalName(),
+                                                                'images/upload/gallery/' . $request->request->get('destination'),
+                                                                $request->files->get('picture')->guessClientExtension(),
+                                                                $request->request->get('order'),
+                                                                $request->request->get('favorite'), $gallery
+                                                            );
 
         $this->pictureRepository->save($this->pictureBuilder->getPicture());
 

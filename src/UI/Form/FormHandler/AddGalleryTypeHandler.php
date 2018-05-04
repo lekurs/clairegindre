@@ -103,17 +103,9 @@ class AddGalleryTypeHandler implements AddGalleryTypeHandlerInterface
 //
             $this->galleryBuilder->create($form->getData()->title, $user, $form->getData()->benefit);
 
-            if(!file_exists('images/upload/gallery/'.$form->getData()->title)) {
-                mkdir('images/upload/gallery/'.$form->getData()->title, 0755);
+            if(!$this->fileSystem->exists('images/upload/gallery/'.$form->getData()->title)) {
+                $this->fileSystem->mkdir(strtolower(str_replace(' ', '_', 'images/upload/gallery/'.$form->getData()->title)), 0755);
             }
-//
-//            foreach ($form->getData()->pictures as $pictures) {
-//
-//                $this->pictureUploaderHelper->move($pictures, $this->targetDir . '/gallery/' . $form->getData()->title, $pictures->getClientOriginalName());
-//
-//                $this->galleryBuilder->withPicture(
-//                    new Picture($pictures->getClientOriginalName(), 'images/upload/gallery/' . $form->getData()->title, $pictures->guessClientExtension(), $i++)
-//                );
 //
 //                    $this->validator->validate($gallery, [], [
 //                        'gallery_creation'
