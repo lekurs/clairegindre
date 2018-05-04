@@ -1,4 +1,6 @@
 $(document).ready(function ($) {
+    $('.cards').css('visibility', 'hidden');
+
     $('.delete-image').on('click', function () {
         id = $(this).attr('data-id');
         elt = $(this);
@@ -19,4 +21,9 @@ $(document).ready(function ($) {
             }
         });
     });
+    
+    $('.down-gallery').on('click', function () {
+        $('.down-gallery').addClass('active');
+        $('.cards').css('visibility', 'visible');
+    })
 });

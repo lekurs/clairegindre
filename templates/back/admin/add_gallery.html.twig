@@ -11,7 +11,6 @@
 {% block content %}
 <section>
     <div class="container">
-
         <div class="row no-gutters">
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                 {% block title_admin %}
@@ -27,11 +26,16 @@
         </div>
         {% if gallery is not empty %}
             <div class="row no-gutters">
-                <h2>Les images de la galerie</h2>
+                <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12">
+                    <h2 class="text-center text-uppercase">Les images de la galerie</h2>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12">
+                    <i class="fa fa-angle-double-down fa-2x down-gallery"></i>
+                </div>
             </div>
             <div class="row no-gutters">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                    <div class="row no-gutters cards" id="sortable">
+                    <div class="row no-gutters cards cards-gallery-down" id="sortable">
                         {% for pictures in gallery.pictures %}
                             <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12 box-picture">
                                 <div class="row no-gutters cards-content">

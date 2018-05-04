@@ -103,11 +103,11 @@ class UploadPicturesGalleryAction implements UploadPicturesGalleryActionInterfac
     {
         $gallery = $this->galleryRepository->getOne($request->request->get('gallery'));
 
-        $this->pictureUploaderHelper->move($request->files->get('picture'),  $this->targetDir . '/gallery/' . str_replace(' ', '_', strtolower($request->request->get('destination'))), $request->files->get('picture')->getClientOriginalName());
-
-//        move_uploaded_file($_FILES['picture']['tmp_name'],  'images/upload/gallery/' .$request->request->get('destination') . '/' .$_FILES['picture']['name']); //move
-
-//        $pathInfo = pathinfo($_FILES['picture']['name']); //plus besoin
+        $this->pictureUploaderHelper->move(
+                                                                            $request->files->get('picture'),
+                                                                            $this->targetDir . '/gallery/' . str_replace(' ', '_', strtolower($request->request->get('destination'))),
+                                                                            $request->files->get('picture')->getClientOriginalName()
+                                                                        );
 
         $this->pictureBuilder->create(
                                                                 $request->files->get('picture')->getClientOriginalName(),

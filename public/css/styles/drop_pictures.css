@@ -9,7 +9,7 @@
 
 #drop-container {
     height: 50vh;
-    border: 1px solid #DDDDDD;
+    border: 1px solid #363636;
     border-width: thin;
     margin-bottom: 2em;
     overflow: auto;
@@ -97,4 +97,18 @@
 
 .cards-pictos {
     text-align: center;
+}
+
+
+.down-gallery {
+    animation: bounce 0.7s ease infinite;
+}
+
+@keyframes bounce {
+    rom {transform: translateY(0);} to {transform: translateY(-10px);}
+}
+
+.down-gallery.active {
+    transform: rotate(180deg);
+    transition: all .5s ease-in-out;
 }

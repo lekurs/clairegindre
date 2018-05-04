@@ -23,6 +23,7 @@
     border-width: thin;
 }
 
+
 .parameters-container {
     border-left: 1px solid #000000;
     border-bottom: 1px solid #000000;
@@ -110,10 +111,6 @@ legend {
     display: none;
 }
 
-/*.form-check-label {*/
-    /*position: absolute;*/
-/*}*/
-
 /* ************************************************** */
 /*                      Galleries Customer                                    */
 /* ************************************************** */
@@ -138,6 +135,14 @@ legend {
 
 .cards-content img {
     height: 8em;
+}
+
+.cards-gallery-down {
+    height: 40vh !important;
+    border: 1px solid #363636;
+    border-width: thin;
+    margin: 3em auto !important;
+    padding: 3em 0 !important;
 }
 
 .gallery-container-customer {
