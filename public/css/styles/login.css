@@ -1,0 +1,57 @@
+/*****************************************************************/
+/*                                        LOGIN PAGE                                                  */
+/*****************************************************************/
+
+.connection-container {
+    background: url("/images/interface/connection/back-connect.jpg") no-repeat center;
+    background-size: cover;
+    height: 100vh;
+}
+
+.form-content {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-connection {
+    width: 30%;
+}
+
+.form-connection input,label, button {
+    width: 90%;
+    margin: 10px;
+    background-color: transparent;
+}
+
+.form-connection input {
+    border: none;
+    border-bottom: 1px solid #5f6b67;
+}
+
+.form-connection input:focus {
+    outline: none;
+}
+
+.login {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.password {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.sub-login {
+    width: 90%;
+    border: none;
+    background-color: #8d9693;
+    color: #fff;
+}
