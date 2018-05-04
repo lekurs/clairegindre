@@ -17,6 +17,7 @@ use App\Domain\Form\Type\CustomerLoginType;
 use App\Domain\Lib\InstagramLib;
 use App\Domain\Models\Gallery;
 use App\Domain\Repository\Interfaces\GalleryRepositoryInterface;
+use App\Domain\Repository\Interfaces\ReviewsRepositoryInterface;
 use App\Domain\Repository\Interfaces\UserRepositoryInterface;
 use App\UI\Action\Front\Interfaces\GalleriesCustomersActionInterface;
 use App\UI\Responder\Interfaces\GalleriesCustomersResponderInterface;
@@ -31,7 +32,8 @@ use Symfony\Component\Routing\Annotation\Route;
  *
  * @Route(
  *     name="galleriesCustomers",
- *     path="galleries"
+ *     path="galleries/{page}",
+ *     defaults={"page"=1},
  * )
  *
  * @package App\UI\Action\Front
@@ -64,6 +66,11 @@ class GalleriesCustomersAction implements GalleriesCustomersActionInterface
     private $insta;
 
     /**
+     * @var ReviewsRepositoryInterface
+     */
+    private $reviewsRepository;
+
+    /**
      * GalleriesCustomersAction constructor.
      *
      * @param GalleryRepositoryInterface $galleryRepository
@@ -71,25 +78,35 @@ class GalleriesCustomersAction implements GalleriesCustomersActionInterface
      * @param FormFactoryInterface $formFactory
      * @param UserRepositoryInterface $userRepository
      * @param InstagramLib $insta
+     * @param ReviewsRepositoryInterface $reviewsRepository
      */
     public function __construct(
         GalleryRepositoryInterface $galleryRepository,
         GalleryBuilderInterface $galleryBuilder,
         FormFactoryInterface $formFactory,
         UserRepositoryInterface $userRepository,
-        InstagramLib $insta
+        InstagramLib $insta,
+        ReviewsRepositoryInterface $reviewsRepository
     ) {
         $this->galleryRepository = $galleryRepository;
         $this->galleryBuilder = $galleryBuilder;
         $this->formFactory = $formFactory;
         $this->userRepository = $userRepository;
         $this->insta = $insta;
+        $this->reviewsRepository = $reviewsRepository;
     }
 
 
-    public function __invoke(Request $request, GalleriesCustomersResponderInterface $responder)
+    public function __invoke(Request $request, GalleriesCustomersResponderInterface $responder, int $page)
     {
-        $galleries = $this->galleryRepository->getAllWithPictures();
+        $galleries = $this->galleryRepository->getAllWithPaginator($page, 16);
+
+        $reviews = $this->reviewsRepository->getAllOnline();
+
+        $pagination = [
+           'page' => $page,
+           'nbPages' => ceil(count($galleries) / 16)
+        ];
 
         $contact = $this->formFactory->create(ContactType::class)->handleRequest($request);
 
@@ -97,10 +114,10 @@ class GalleriesCustomersAction implements GalleriesCustomersActionInterface
 
         if($contact->isSubmitted() && $contact->isValid()) {
 
-            return $responder(false, $contact, $customerLoginType, $galleries, $this->insta->show());
+            return $responder(false, $contact, $customerLoginType, $galleries, $this->insta->show(), $reviews, $pagination);
         }
 
-        return $responder(false, $contact, $customerLoginType, $galleries, $this->insta->show());
+        return $responder(false, $contact, $customerLoginType, $galleries, $this->insta->show(), $reviews, $pagination);
     }
 
 }

@@ -75,7 +75,7 @@ class IndexAction implements IndexActionInterface
      */
     public function __invoke(Request $request, IndexResponderInterface $responder)
     {
-        $reviews = $this->reviewsRepository->getAll();
+        $reviews = $this->reviewsRepository->getAllOnline();
 
         $instagram = $this->instagram->show();
 

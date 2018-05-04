@@ -39,14 +39,27 @@ class GalleriesCustomersResponder implements GalleriesCustomersResponderInterfac
         $this->urlGenerator = $urlGenerator;
     }
 
-
-    public function __invoke($redirect = false, FormInterface $contact = null, FormInterface $customerConnectionType, $galleries, $insta)
+    /**
+     * @param bool $redirect
+     * @param FormInterface|null $contact
+     * @param FormInterface $customerConnectionType
+     * @param $galleries
+     * @param $insta
+     * @param $reviews
+     * @return RedirectResponse|Response
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     */
+    public function __invoke($redirect = false, FormInterface $contact = null, FormInterface $customerConnectionType, $galleries, $insta, $reviews, $pagination)
     {
         $redirect ? $response = new RedirectResponse('/') : $response = new Response($this->twig->render('front/galleries_customer.html.twig', [
             'galleries' => $galleries,
             'contact' => $contact->createView(),
             'customerConnectionType' => $customerConnectionType->createView(),
-            'insta' => $insta
+            'insta' => $insta,
+            'reviews' => $reviews,
+            'pages' => $pagination
         ]));
 
         return $response;

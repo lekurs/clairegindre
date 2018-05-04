@@ -31,11 +31,22 @@ interface GalleryRepositoryInterface
     public function getGalleryByUser($id);
 
     /**
+     * @param int $first
+     * @param int $max
+     * @return mixed
+     */
+    public function getAllWithPaginator(int $first, int $max);
+
+    /**
      * @param GalleryInterface $gallery
      * @return mixed
      */
     public function save(GalleryInterface $gallery);
 
+    /**
+     * @param GalleryInterface $gallery
+     * @return mixed
+     */
     public function delete(GalleryInterface $gallery);
 
 }

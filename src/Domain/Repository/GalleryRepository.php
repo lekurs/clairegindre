@@ -13,6 +13,7 @@ use App\Domain\Repository\Interfaces\GalleryRepositoryInterface;
 use App\Domain\Models\Gallery;
 use App\Domain\Models\Interfaces\GalleryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 class GalleryRepository extends ServiceEntityRepository implements GalleryRepositoryInterface
@@ -93,6 +94,24 @@ class GalleryRepository extends ServiceEntityRepository implements GalleryReposi
             ->innerJoin('gallery.pictures', 'pictures')
             ->getQuery()
             ->getResult();
+    }
+
+    /**
+     * @param int $first
+     * @param int $max
+     * @return Paginator|mixed
+     */
+    public function getAllWithPaginator(int $first, int $max)
+    {
+        $premierePage = ($first -1) * $max;
+
+        $qb = $this->createQueryBuilder('gallery')
+                            ->innerJoin('gallery.pictures', 'pictures')
+                            ->where('pictures.favorite = 1')
+                            ->setFirstResult($premierePage)
+                            ->setMaxResults($max);
+
+        return new Paginator($qb);
     }
 
     /**
