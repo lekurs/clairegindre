@@ -140,10 +140,10 @@ class UserAuthenticationGuard extends AbstractFormLoginAuthenticator
 
             if (count($galleries) > 1) {
 
-                return new RedirectResponse($this->urlGenerator->generate('galleriesForCustomer', ['id' => $token->getUser()->getId()]));
+                return new RedirectResponse($this->urlGenerator->generate('galleriesForCustomer', ['user' => strtolower($token->getUser()->getUsername()), 'id' => $token->getUser()->getId()]));
             } else {
 
-                return new RedirectResponse($this->urlGenerator->generate('galleryCutomer', ['id' => $token->getUser()->getId()]));
+                return new RedirectResponse($this->urlGenerator->generate('galleryCustomer', ['id' => $token->getUser()->getId()]));
             }
         }
         $token->getUser();

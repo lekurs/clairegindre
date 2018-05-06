@@ -37,6 +37,13 @@ interface GalleryRepositoryInterface
     public function getGalleryByUser($id);
 
     /**
+     * @param $idUser
+     * @param $idGallery
+     * @return mixed
+     */
+    public function getGalleryByUserAndId($idUser, $idGallery);
+
+    /**
      * @param int $first
      * @param int $max
      * @return mixed

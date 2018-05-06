@@ -19,8 +19,9 @@ use Symfony\Component\Routing\Annotation\Route;
  * Class GalleryCustomerAction
  *
  * @Route(
- *     name="galleryCutomer",
- *     path="/gallery/{id}"
+ *     name="galleryCustomer",
+ *     path="/gallery/{id}/{galleryId}",
+ *     defaults={"galleryId" = null}
  * )
  *
  * @package App\UI\Action\Security
@@ -58,8 +59,16 @@ class GalleryCustomerAction
 
     public function __invoke(Request $request, GalleryCustomerResponderInterface $response)
     {
-        $gallery = $this->galleryRepository->getOne($request->get('id'));
+        if ($request->get('galleryId') != null)
+        {
+            $galleries = $this->galleryRepository->getGalleryByUserAndId($request->get('id'), $request->get('galleryId'));
 
-        return $response($gallery);
+            return $response($galleries);
+        } else {
+
+            $galleries = $this->galleryRepository->getGalleryByUser($request->get('id'));
+
+            return $response($galleries);
+        }
     }
 }

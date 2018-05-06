@@ -29,10 +29,10 @@ class GalleryCustomerResponder implements GalleryCustomerResponderInterface
         $this->twig = $twig;
     }
 
-    public function __invoke($gallery)
+    public function __invoke($galleries)
     {
         return new Response($this->twig->render('front/gallery_customer.html.twig', [
-            'gallery' => $gallery
+            'galleries' => $galleries
         ]));
     }
 

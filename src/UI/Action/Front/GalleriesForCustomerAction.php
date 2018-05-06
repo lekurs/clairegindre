@@ -23,7 +23,7 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
  *
  * @Route(
  *     name="galleriesForCustomer",
- *     path="galleries/{id}"
+ *     path="galleries/{user}/{id}"
  * )
  *
  */

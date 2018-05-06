@@ -39,6 +39,7 @@
 {% block content %}
 <section>
     <div class="container">
+        {% for gallery in galleries %}
         <div class="row no-gutters">
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                 <h1 class="text-center text-uppercase">{{ gallery.title }}</h1>
@@ -107,6 +108,8 @@
                 </div>
             </div>
         </div>
+    {% endfor %}
+
     </div>
 
 </section>
