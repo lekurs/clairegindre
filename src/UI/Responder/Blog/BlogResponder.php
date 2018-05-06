@@ -30,13 +30,14 @@ class BlogResponder implements BlogResponderInterface
         $this->twig = $twig;
     }
 
-    public function __invoke(FormInterface $form = null, $instagram, $articles, $benefits)
+    public function __invoke(FormInterface $form = null, $instagram, $articles, $benefits, $reviews)
     {
         return new Response($this->twig->render('front/blog.html.twig', [
             'articles' => $articles,
             'contact' => $form->createView(),
             'insta' => $instagram,
-            'benefits' => $benefits
+            'benefits' => $benefits,
+            'reviews' => $reviews
         ]));
     }
 

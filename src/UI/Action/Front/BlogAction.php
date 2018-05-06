@@ -14,6 +14,9 @@ use App\Domain\Form\Type\ContactType;
 use App\Domain\Lib\InstagramLib;
 use App\Domain\Models\Article;
 use App\Domain\Models\Benefit;
+use App\Domain\Repository\Interfaces\ArticleRepositoryInterface;
+use App\Domain\Repository\Interfaces\BenefitRepositoryInterface;
+use App\Domain\Repository\Interfaces\ReviewsRepositoryInterface;
 use App\UI\Action\Front\Interfaces\BlogActionInterface;
 use App\UI\Form\FormHandler\Interfaces\ContactTypeHandlerInterface;
 use App\UI\Responder\Interfaces\BlogResponderInterface;
@@ -38,10 +41,16 @@ class BlogAction implements BlogActionInterface
      * @var FormFactoryInterface
      */
     private $formFactory;
+
     /**
-     * @var EntityManagerInterface
+     * @var ArticleRepositoryInterface
      */
-    private $entityManager;
+    private $articleRepository;
+
+    /**
+     * @var BenefitRepositoryInterface
+     */
+    private $benefitRepository;
 
     /**
      * @var InstagramLib
@@ -54,23 +63,33 @@ class BlogAction implements BlogActionInterface
     private $articleBuilder;
 
     /**
+     * @var ReviewsRepositoryInterface
+     */
+    private $reviewsRepository;
+
+    /**
      * BlogAction constructor.
-     *
      * @param FormFactoryInterface $formFactory
-     * @param EntityManagerInterface $entityManager
+     * @param ArticleRepositoryInterface $articleRepository
+     * @param BenefitRepositoryInterface $benefitRepository
      * @param InstagramLib $instagram
      * @param ArticleBuilderInterface $articleBuilder
+     * @param ReviewsRepositoryInterface $reviewsRepository
      */
     public function __construct(
         FormFactoryInterface $formFactory,
-        EntityManagerInterface $entityManager,
+        ArticleRepositoryInterface $articleRepository,
+        BenefitRepositoryInterface $benefitRepository,
         InstagramLib $instagram,
-        ArticleBuilderInterface $articleBuilder
+        ArticleBuilderInterface $articleBuilder,
+        ReviewsRepositoryInterface $reviewsRepository
     ) {
         $this->formFactory = $formFactory;
-        $this->entityManager = $entityManager;
+        $this->articleRepository = $articleRepository;
+        $this->benefitRepository = $benefitRepository;
         $this->instagram = $instagram;
         $this->articleBuilder = $articleBuilder;
+        $this->reviewsRepository = $reviewsRepository;
     }
 
 
@@ -80,10 +99,12 @@ class BlogAction implements BlogActionInterface
 
         $insta = $this->instagram->show();
 
-        $articles = $this->entityManager->getRepository(Article::class)->getArticlesWithFavoritePictureGallery();
+        $articles = $this->articleRepository->getArticlesWithFavoritePictureGallery();
 
-        $benefits = $this->entityManager->getRepository(Benefit::class)->findAll();
+        $benefits = $this->benefitRepository->getAll();
 
-        return $response($contact, $insta, $articles, $benefits);
+        $reviews = $this->reviewsRepository->getAll();
+
+        return $response($contact, $insta, $articles, $benefits, $reviews);
     }
 }

@@ -3,54 +3,42 @@
 namespace App\Domain\Models;
 
 use App\Domain\Models\Interfaces\ArticleInterface;
-use App\Domain\Models\Interfaces\CategoryInterface;
+use App\Domain\Models\Interfaces\CommentInterface;
 use App\Domain\Models\Interfaces\UserInterface;
 use Ramsey\Uuid\Uuid;
-use Ramsey\Uuid\UuidInterface;
 
 
-class Comment implements CategoryInterface
+class Comment implements CommentInterface
 {
-
     /**
-     * @var UuidInterface
+     * @var string
      */
     private $id;
-
-    /**
-     * @var string
-     */
-    private $title;
-
-    /**
-     * @var string
-     */
-    private $category;
-
-    /**
-     * @var \DateTime
-     */
-    private $date;
-
-    /**
-     * @var boolean
-     */
-    private $online;
-
-    /**
-     * @var \ArrayAccess
-     */
-    private $benefits;
-
-    /**
-     * @var string
-     */
-    private $picture;
 
     /**
      * @var UserInterface
      */
     private $author;
+
+    /**
+     * @var string
+     */
+    private $lastName;
+
+    /**
+     * @var string
+     */
+    private $email;
+
+    /**
+     * @var string
+     */
+    private $content;
+
+    /**
+     * @var \DateTime
+     */
+    private $date;
 
     /**
      * @var ArticleInterface
@@ -60,147 +48,83 @@ class Comment implements CategoryInterface
     /**
      * Comment constructor.
      *
-     * @param string $title
-     * @param string $category
-     * @param \DateTime $date
-     * @param bool $online
-     * @param string $picture
      * @param UserInterface $author
+     * @param string $lastName
+     * @param string $email
+     * @param string $content
+     * @param \DateTime $date
      * @param ArticleInterface $article
      */
     public function __construct(
-        string $title,
-        string $category,
-        \DateTime $date,
-        bool $online,
-        string $picture,
         UserInterface $author,
+        string $lastName,
+        string $email,
+        string $content,
+        \DateTime $date,
         ArticleInterface $article
     ) {
         $this->id = Uuid::uuid4();
-        $this->title = $title;
-        $this->category = $category;
-        $this->date = $date;
-        $this->online = $online;
-        $this->picture = $picture;
         $this->author = $author;
+        $this->lastName = $lastName;
+        $this->email = $email;
+        $this->content = $content;
+        $this->date = $date;
         $this->article = $article;
     }
 
-
-    public function getId()
+    /**
+     * @return UuidInterface
+     */
+    public function getId(): string
     {
         return $this->id;
     }
 
     /**
-     * @param mixed $id
+     * @return string
      */
-    public function setId($id): void
+    public function getEmail(): string
     {
-        $this->id = $id;
+        return $this->email;
     }
 
     /**
-     * @return mixed
+     * @return \DateTime
      */
-    public function getTitle()
-    {
-        return $this->title;
-    }
-
-    /**
-     * @param mixed $title
-     */
-    public function setTitle($title): void
-    {
-        $this->title = $title;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getCategory()
-    {
-        return $this->category;
-    }
-
-    /**
-     * @param mixed $category
-     */
-    public function setCategory($category): void
-    {
-        $this->category = $category;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getDate()
+    public function getDate(): \DateTime
     {
         return $this->date;
     }
 
     /**
-     * @param mixed $date
+     * @return string
      */
-    public function setDate($date): void
+    public function getLastName(): string
     {
-        $this->date = $date;
+        return $this->lastName;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getOnline()
+    public function getContent(): string
     {
-        return $this->online;
+        return $this->content;
     }
 
     /**
-     * @param mixed $online
+     * @return UserInterface
      */
-    public function setOnline($online): void
+    public function getAuthor(): UserInterface
     {
-        $this->online = $online;
+        return $this->author;
     }
 
     /**
-     * @return mixed
+     * @return ArticleInterface
      */
-    public function getBenefit()
+    public function getArticle(): ArticleInterface
     {
-        return $this->benefit;
+        return $this->article;
     }
-
-    /**
-     * @param Benefit $benefit
-     * @return $this
-     */
-    public function setBenefit(Benefit $benefit)
-    {
-        $this->benefit = $benefit;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getPicture()
-    {
-        return $this->picture;
-    }
-
-    /**
-     * @param Picture $picture
-     * @return $this
-     */
-    public function setPicture(Picture $picture)
-    {
-        $this->picture = $picture;
-
-        return $this;
-    }
-
 }

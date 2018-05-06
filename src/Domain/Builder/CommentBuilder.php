@@ -9,9 +9,10 @@
 namespace App\Domain\Builder;
 
 
-use App\Builder\Interfaces\CategoryBuilderInterface;
 use App\Domain\Builder\Interfaces\CommentBuilderInterface;
-use App\Entity\Comment;
+use App\Domain\Models\Comment;
+use App\Domain\Models\Interfaces\ArticleInterface;
+use App\Domain\Models\Interfaces\UserInterface;
 
 class CommentBuilder implements CommentBuilderInterface
 {
@@ -21,35 +22,17 @@ class CommentBuilder implements CommentBuilderInterface
     private $category;
 
     /**
-     * @param string $title
-     * @param int $online
+     * @param UserInterface $author
+     * @param string $lastName
+     * @param string $email
+     * @param string $content
+     * @param \DateTime $date
+     * @param ArticleInterface $article
      * @return CommentBuilderInterface
      */
-    public function create(string $title, $online = 0): CommentBuilderInterface
+    public function create(UserInterface $author, string $lastName, string $email, string $content, \DateTime $date, ArticleInterface $article): CommentBuilderInterface
     {
-        $this->category = new Comment($title, $online);
-
-        return $this;
-    }
-
-    /**
-     * @param Comment $category
-     * @return CommentBuilderInterface
-     */
-    public function withTitle(Comment $category): CommentBuilderInterface
-    {
-        $this->category->setTitle($category);
-
-        return $this;
-    }
-
-    /**
-     * @param Comment $category
-     * @return CommentBuilderInterface
-     */
-    public function withOnline(Comment $category): CommentBuilderInterface
-    {
-        $this->category->setOnline($category);
+        $this->category = new Comment($author, $lastName, $email, $content, $date, $article);
 
         return $this;
     }

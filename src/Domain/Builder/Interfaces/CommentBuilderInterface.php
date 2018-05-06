@@ -9,15 +9,25 @@
 namespace App\Domain\Builder\Interfaces;
 
 
-use App\Entity\Comment;
+use App\Domain\Models\Comment;
+use App\Domain\Models\Interfaces\ArticleInterface;
+use App\Domain\Models\Interfaces\UserInterface;
 
 interface CommentBuilderInterface
 {
-    public function create(string $title, $online = 0): CommentBuilderInterface;
+    /**
+     * @param UserInterface $author
+     * @param string $lastName
+     * @param string $email
+     * @param string $content
+     * @param \DateTime $date
+     * @param ArticleInterface $article
+     * @return CommentBuilderInterface
+     */
+    public function create(UserInterface $author, string $lastName, string $email, string $content, \DateTime $date, ArticleInterface $article): CommentBuilderInterface;
 
-    public function withTitle(Comment $category): CommentBuilderInterface;
-
-    public function withOnline(Comment $category): CommentBuilderInterface;
-
+    /**
+     * @return Comment
+     */
     public function getComment(): Comment;
 }

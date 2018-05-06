@@ -7,8 +7,9 @@
     <entity name="App\Domain\Models\Comment" table="clairegindre_comment" repository-class="App\Domain\Repository\CommentRepository">
         <id name="id" column="id" type="string"/>
         <field name="date" type="date" nullable="false" unique="false" />
-        <field name="title" type="string" length="150" nullable="false" unique="false" />
-        <field name="online" type="boolean" nullable="false" unique="false" />
+        <field name="content" type="text" length="150" nullable="false" unique="false" />
+        <field name="lastName" type="string" nullable="false" unique="false" />
+        <field name="email" type="string" nullable="false" unique="false" />
 
         <many-to-one field="author" target-entity="App\Domain\Models\User" inversed-by="comments" />
         <many-to-one field="article" target-entity="App\Domain\Models\Article" inversed-by="comments" />

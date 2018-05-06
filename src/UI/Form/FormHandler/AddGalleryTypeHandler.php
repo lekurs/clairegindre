@@ -94,23 +94,21 @@ class AddGalleryTypeHandler implements AddGalleryTypeHandlerInterface
     {
         if($form->isSubmitted() && $form->isSubmitted()) {
 
-//
-//            try {
-//                $this->fileSystem->mkdir($this->targetDir . '/gallery', 0777);
-//            } catch (IOExceptionInterface $exception) {
-//                echo "une erreur est survenue durant la création du répertoire : ".$exception->getPath();
-//            }
-//
-            $this->galleryBuilder->create($form->getData()->title, $user, $form->getData()->benefit);
+            try {
+                $this->fileSystem->mkdir($this->targetDir . '/gallery', 0777);
+            } catch (IOExceptionInterface $exception) {
+                echo "une erreur est survenue durant la création du répertoire : ".$exception->getPath();
+            }
+
+            $gallery = $this->galleryBuilder->create($form->getData()->title, $user, $form->getData()->benefit);
 
             if(!$this->fileSystem->exists('images/upload/gallery/'.$form->getData()->title)) {
                 $this->fileSystem->mkdir(strtolower(str_replace(' ', '_', 'images/upload/gallery/'.$form->getData()->title)), 0755);
             }
-//
-//                    $this->validator->validate($gallery, [], [
-//                        'gallery_creation'
-//                    ]);
-//            }
+
+            $this->validator->validate($gallery, [], [
+                'gallery_creation'
+            ]);
 
             $this->galleryRepository->save($this->galleryBuilder->getGallery());
 

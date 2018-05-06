@@ -9,7 +9,18 @@
 namespace App\Domain\Repository\Interfaces;
 
 
+use App\Domain\Models\Interfaces\CommentInterface;
+
 interface CommentRepositoryInterface
 {
+    /**
+     * @return mixed
+     */
+    public function getAll();
 
+    /**
+     * @param CommentInterface $comment
+     * @return mixed
+     */
+    public function save(CommentInterface $comment);
 }

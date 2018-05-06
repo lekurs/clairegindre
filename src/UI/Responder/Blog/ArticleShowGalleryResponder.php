@@ -41,20 +41,26 @@ class ArticleShowGalleryResponder implements ArticleShowGalleryResponderInterfac
 
     /**
      * @param bool $redirect
-     * @param FormInterface $form
-     * @param $instagram
+     * @param FormInterface|null $form
+     * @param FormInterface|null $commentType
      * @param $gallery
-     * @return Response
+     * @param $comments
+     * @param $instagram
+     * @param $reviews
+     * @return RedirectResponse|Response
      * @throws \Twig_Error_Loader
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    public function __invoke($redirect = false, FormInterface $form, $instagram, $gallery)
+    public function __invoke($redirect = false, FormInterface $form = null, FormInterface $commentType = null, $gallery, $comments, $instagram, $reviews)
     {
-        $redirect ? $response = new RedirectResponse($this->urlGenerator->generate('index')) : $response = new Response($this->twig->render('front/ArticleShowGallery.html.twig', array(
+        $redirect ? $response = new RedirectResponse($this->urlGenerator->generate('blog')) : $response = new Response($this->twig->render('front/ArticleShowGallery.html.twig', array(
             'galleries' => $gallery,
             'contact' => $form->createView(),
-            'insta' => $instagram
+            'insta' => $instagram,
+            'reviews' => $reviews,
+            'commentType' => $commentType->createView(),
+            'comments' => $comments
         )));
 
         return $response;
