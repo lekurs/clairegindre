@@ -28,13 +28,13 @@ class ReviewsRepository extends ServiceEntityRepository implements ReviewsReposi
     }
 
     public function getOne($id)
-{
-    return $this->createQueryBuilder('reviews')
-        ->where('reviews.id = :id')
-        ->setParameter('id', $id)
-        ->getQuery()
-        ->getOneOrNullResult();
-}
+    {
+        return $this->createQueryBuilder('reviews')
+            ->where('reviews.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
 
     /**
      * @return mixed

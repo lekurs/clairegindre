@@ -9,7 +9,7 @@
 namespace App\UI\Form\FormHandler\Interfaces;
 
 
-interface AddCommentArticleNotLoggedTypeHandlerInterface
+interface AddCommentArticleUserNotConnectedTypeHandlerInterface
 {
 
 }

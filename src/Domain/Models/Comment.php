@@ -56,7 +56,7 @@ class Comment implements CommentInterface
      * @param ArticleInterface $article
      */
     public function __construct(
-        UserInterface $author,
+        UserInterface $author = null,
         string $lastName,
         string $email,
         string $content,

@@ -81,8 +81,9 @@ class AdminBlogChoosePicturesAction implements AdminBlogChoosePicturesActionInte
         }
 
         if ($this->session->has('gallery') && is_string($this->session->get('gallery')->id)) {
+            dump($this->session->get('gallery'));
 
-            $gallery = $this->galleryRepository->getWithPictures($this->session->get('gallery')->id);
+            $gallery = $this->galleryRepository->getWithPicturesById($this->session->get('gallery')->id);
 
             $form = $this->formFactory->create(SelectPicturesForArticleType::class, $gallery)->handleRequest($request);
 

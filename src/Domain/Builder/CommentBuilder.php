@@ -32,7 +32,7 @@ class CommentBuilder implements CommentBuilderInterface
      */
     public function create(UserInterface $author, string $lastName, string $email, string $content, \DateTime $date, ArticleInterface $article): CommentBuilderInterface
     {
-        $this->category = new Comment($author, $lastName, $email, $content, $date, $article);
+        $this->category = new Comment($author = null, $lastName, $email, $content, $date, $article);
 
         return $this;
     }

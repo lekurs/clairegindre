@@ -9,9 +9,10 @@
 namespace App\Domain\Form\Type;
 
 
-use App\Domain\DTO\AddCommentArticleNotLoggedDTO;
+use App\Domain\DTO\AddCommentArticleUserUserNotConnectedDTO;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -19,7 +20,7 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
-class AddCommentArticleNotLoggedType extends AbstractType
+class AddCommentArticleUserNotConnectedType extends AbstractType
 {
     /**
      * @var TokenStorageInterface
@@ -27,7 +28,7 @@ class AddCommentArticleNotLoggedType extends AbstractType
     private $tokenStorage;
 
     /**
-     * AddCommentArticleNotLoggedType constructor.
+     * AddCommentArticleUserNotConnectedType constructor.
      *
      * @param TokenStorageInterface $tokenStorage
      */
@@ -45,20 +46,22 @@ class AddCommentArticleNotLoggedType extends AbstractType
             ->add('content', TextareaType::class, [
                 'required' => false
             ])
+            ->add('article', HiddenType::class)
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => AddCommentArticleNotLoggedDTO::class,
+            'data_class' => AddCommentArticleUserUserNotConnectedDTO::class,
             'empty_data' => function(FormInterface $form) {
-                            return new AddCommentArticleNotLoggedDTO(
+                            return new AddCommentArticleUserUserNotConnectedDTO(
                                $form->get('lastName')->getData(),
                                $form->get('email')->getData(),
-                               $form->get('content')->getData()
+                               $form->get('content')->getData(),
+                               $form->get('article')->getData()
                             );
-            }
+                    }
         ]);
     }
 

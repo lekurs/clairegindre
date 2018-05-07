@@ -142,7 +142,7 @@ i.link-article:hover {
     flex-wrap: wrap;
     justify-content: flex-start;
     align-items: flex-start;
-    overflow-y: auto;
+    /*overflow-y: auto;*/
 }
 
 .picture-container {
@@ -277,29 +277,27 @@ span.portraits:hover {
 
 .wait-landscape {
     width: 100%;
-    height: 200px;
+    min-height: 200px;
     border: 1px solid #363636;
     margin: 15px auto;
 }
 
 .wait-landscapes {
-    height: 200px;
+    min-height: 200px;
     border: 1px solid #363636;
-    display: flex;
     margin-top: 15px;
     margin-bottom: 15px;
 }
 
 .wait-portrait {
-    height: 800px;
+    min-height: 800px;
     border: 1px solid #363636;
     margin: 15px auto;
 }
 
 .wait-portraits{
-    height: 800px;
+    min-height: 800px;
     border: 1px solid #363636;
-    display: flex;
     margin-top: 15px;
     margin-bottom: 15px;
 }
@@ -316,6 +314,22 @@ span.portraits:hover {
 
 .img-article {
     width: 100%;
+}
+
+.bar-actions {
+    background: #CCCCCC;
+    border-bottom: 1px solid #363636;
+    text-align: right;
+    padding: .5em;
+}
+
+.delete-elem {
+    color: red;
+    padding-left: .5em;
+}
+
+.wait {
+    position: relative;
 }
 
 /*****************************************************************/

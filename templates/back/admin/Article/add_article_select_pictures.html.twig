@@ -31,11 +31,7 @@
 
                 <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
                     <div class="row no-gutters pictures-container">
-                        {% for picture in gallery.pictures %}
-                        <div class="picture-container col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">
-                            <img src="{{ asset(picture.publicPath ~ '/' ~ picture.pictureName) }}"  class="img-article">
-                            </div>
-                        {% endfor %}
+
                     </div>
                     </div>
 
@@ -49,18 +45,39 @@
             </div>
         </div>
     {% endblock %}
+    <!-- MODAL PICTURES -->
+    <div class="modal fade" id="createImgModal" tabindex="-1" role="dialog" aria-labelledby="createImgModalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="createImgModalTitle">Enregistrer un article</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                    {% for picture in gallery.pictures %}
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                            <img src="{{ asset(picture.publicPath ~ '/' ~ picture.pictureName) }}"  class="img-article">
+                        </div>
+                    {% endfor %}
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                    <button type="submit"  class="btn btn-primary">Enregistrer</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 {% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     {#<script src="{{ asset('js/vendor/interactjs.js') }}"></script>#}
-    <script src="{{ asset('js/back/add_pictures_articles.js') }}"></script>
+    {#<script src="{{ asset('js/back/add_pictures_articles.js') }}"></script>#}
     <script src="{{ asset('js/back/builder-pictures-article.js') }}"></script>
-    {#<script src="{{ asset('js/back/editGallery.js') }}"></script>#}
-    {#<script>#}
-        {#sortable = new Sortable(#}
-            {#document.querySelector('#sort1'),#}
-        {#)#}
-    {#</script>#}
 {% endblock %}

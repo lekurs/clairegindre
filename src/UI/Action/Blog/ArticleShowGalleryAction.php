@@ -9,14 +9,16 @@
 namespace App\UI\Action\Blog;
 
 
-use App\Domain\Form\Type\AddCommentArticleNotLoggedType;
+use App\Domain\Form\Type\AddCommentArticleUserNotConnectedType;
 use App\Domain\Form\Type\ContactType;
 use App\Domain\Lib\InstagramLib;
+use App\Domain\Repository\ArticleRepository;
+use App\Domain\Repository\Interfaces\ArticleRepositoryInterface;
 use App\Domain\Repository\Interfaces\CommentRepositoryInterface;
 use App\Domain\Repository\Interfaces\GalleryRepositoryInterface;
 use App\Domain\Repository\Interfaces\ReviewsRepositoryInterface;
 use App\UI\Action\Blog\Interfaces\ArticleShowGalleryActionInterface;
-use App\UI\Form\FormHandler\Interfaces\AddCommentArticleNotLoggedTypeHandlerInterface;
+use App\UI\Form\FormHandler\Interfaces\AddCommentArticleUserNotConnectedTypeHandlerInterface;
 use App\UI\Responder\Interfaces\ArticleShowGalleryResponderInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -51,12 +53,17 @@ class ArticleShowGalleryAction implements ArticleShowGalleryActionInterface
     private $commentRepository;
 
     /**
+     * @var ArticleRepositoryInterface
+     */
+    private $articleRepository;
+
+    /**
      * @var FormFactoryInterface
      */
     private $formFactory;
 
     /**
-     * @var AddCommentArticleNotLoggedTypeHandlerInterface
+     * @var AddCommentArticleUserNotConnectedTypeHandlerInterface
      */
     private $addCommentHandler;
 
@@ -75,16 +82,18 @@ class ArticleShowGalleryAction implements ArticleShowGalleryActionInterface
      * @param GalleryRepositoryInterface $galleryRepository
      * @param ReviewsRepositoryInterface $reviewsRepository
      * @param CommentRepositoryInterface $commentRepository
+     * @param ArticleRepositoryInterface $articleRepository
      * @param FormFactoryInterface $formFactory
-     * @param AddCommentArticleNotLoggedTypeHandlerInterface $addCommentHandler
+     * @param AddCommentArticleUserNotConnectedTypeHandlerInterface $addCommentHandler
      * @param InstagramLib $instagram
      * @param TokenStorageInterface $tokenStorage
      */
-    public function __construct(GalleryRepositoryInterface $galleryRepository, ReviewsRepositoryInterface $reviewsRepository, CommentRepositoryInterface $commentRepository, FormFactoryInterface $formFactory, AddCommentArticleNotLoggedTypeHandlerInterface $addCommentHandler, InstagramLib $instagram, TokenStorageInterface $tokenStorage)
+    public function __construct(GalleryRepositoryInterface $galleryRepository, ReviewsRepositoryInterface $reviewsRepository, CommentRepositoryInterface $commentRepository, ArticleRepositoryInterface $articleRepository, FormFactoryInterface $formFactory, AddCommentArticleUserNotConnectedTypeHandlerInterface $addCommentHandler, InstagramLib $instagram, TokenStorageInterface $tokenStorage)
     {
         $this->galleryRepository = $galleryRepository;
         $this->reviewsRepository = $reviewsRepository;
         $this->commentRepository = $commentRepository;
+        $this->articleRepository = $articleRepository;
         $this->formFactory = $formFactory;
         $this->addCommentHandler = $addCommentHandler;
         $this->instagram = $instagram;
@@ -94,11 +103,13 @@ class ArticleShowGalleryAction implements ArticleShowGalleryActionInterface
 
     public function __invoke(Request $request, ArticleShowGalleryResponderInterface $responder)
     {
-        $gallery = $this->galleryRepository->getWithPictures(strtolower(str_replace([' ', '\''], '_', $request->get('galleryTitle'))));
+        $gallery = $this->galleryRepository->getWithPictures(strtolower(str_replace(['-', '_', '&'], [' ', '\'\'', '-'], $request->get('galleryTitle'))));
 
         $comments = $this->commentRepository->getAll();
 
         $reviews = $this->reviewsRepository->getAll();
+
+        $article = $this->articleRepository->getOne(strtolower(str_replace(['-', '_', '&'], [' ', '\'\'', '-'], $request->get('titleArticle'))));
 
         $form = $this->formFactory->create(ContactType::class);
 
@@ -106,13 +117,13 @@ class ArticleShowGalleryAction implements ArticleShowGalleryActionInterface
         {
 //            $commentType = $this->formFactory->create()->handleRequest($request);
         } else {
-            $commentType = $this->formFactory->create(AddCommentArticleNotLoggedType::class)->handleRequest($request);
+            $commentType = $this->formFactory->create(AddCommentArticleUserNotConnectedType::class)->handleRequest($request);
         }
 
 
         $instagram = $this->instagram->show();
 
-        if ($this->addCommentHandler->handle($commentType)) {
+        if ($this->addCommentHandler->handle($commentType, $article)) {
 
             return $responder(true, $form, $commentType, $gallery, $comments, $instagram, $reviews);
         }

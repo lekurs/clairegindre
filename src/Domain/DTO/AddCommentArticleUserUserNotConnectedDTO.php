@@ -9,9 +9,10 @@
 namespace App\Domain\DTO;
 
 
-use App\Domain\DTO\Interfaces\AddCommentArticleNotLoggedDTOInterface;
+use App\Domain\DTO\Interfaces\AddCommentArticleUserNotConnectedDTOInterface;
+use App\Domain\Models\Interfaces\ArticleInterface;
 
-class AddCommentArticleNotLoggedDTO implements AddCommentArticleNotLoggedDTOInterface
+class AddCommentArticleUserUserNotConnectedDTO implements AddCommentArticleUserNotConnectedDTOInterface
 {
     /**
      * @var string
@@ -29,19 +30,27 @@ class AddCommentArticleNotLoggedDTO implements AddCommentArticleNotLoggedDTOInte
     public $content;
 
     /**
-     * AddCommentArticleNotLoggedDTO constructor.
+     * @var string
+     */
+    public $article;
+
+    /**
+     * AddCommentArticleUserUserNotConnectedDTO constructor.
      *
      * @param string $email
      * @param string $lastName
      * @param string $content
+     * @param ArticleInterface $article
      */
     public function __construct(
-        string $lastName,
         string $email,
+        string $lastName,
         string $content
+//        ArticleInterface $article
     ) {
         $this->email = $email;
-        $this->content = $content;
         $this->lastName = $lastName;
+        $this->content = $content;
+//        $this->article = $article;
     }
 }

@@ -12,7 +12,15 @@ use App\Domain\Models\Interfaces\ArticleInterface;
 
 interface ArticleRepositoryInterface
 {
+    /**
+     * @param $articleTitle
+     * @return mixed
+     */
+    public function getOne($articleTitle);
 
+    /**
+     * @param ArticleInterface $article
+     */
     public function save(ArticleInterface $article): void;
 
 }

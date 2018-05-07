@@ -27,6 +27,20 @@ class ArticleRepository extends ServiceEntityRepository implements ArticleReposi
         parent::__construct($registry, Article::class);
     }
 
+    /**
+     * @param $articleTitle
+     * @return mixed
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function getOne($articleTitle)
+    {
+         return $this->createQueryBuilder('article')
+                            ->where('article.title = :articleTitle')
+                            ->setParameter('articleTitle', $articleTitle)
+                            ->getQuery()
+                            ->getOneOrNullResult();
+    }
+
     public function getArticlesWithFavoritePictureGallery()
     {
         return $this->createQueryBuilder('article')
