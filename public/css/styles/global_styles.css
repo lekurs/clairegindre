@@ -1,7 +1,7 @@
 /* CSS GLOBAL clairegindre */
 
 html, body {
-    font-family: 'Assistant';
+    font-family: 'Assistant', serif;
     font-weight: 200;
     margin: 0 auto;
     letter-spacing: .2px;

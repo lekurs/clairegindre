@@ -80,7 +80,7 @@ class EditGalleryAction implements EditGalleryActionInterface
 
     public function __invoke(Request $request, EditGalleryResponderInterface $responder)
     {
-        $gallery = $this->entityManager->getRepository(Gallery::class)->getWithPictures($request->get('id'));
+        $gallery = $this->entityManager->getRepository(Gallery::class)->getWithPictures($request->get('id')); // a modifier avec le titre de la galerie
 
         $form = $this->formFactory->create(GalleryOrderType::class, $gallery)->handleRequest($request);
 

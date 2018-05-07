@@ -367,3 +367,11 @@ span.portraits:hover {
     cursor: pointer;
     padding: 0 5px;
 }
+
+.comment-title {
+     text-transform: uppercase;
+     font-weight: bold;
+     font-size: 2em;
+    font-family: 'Playfair';
+    letter-spacing: .1rem;
+ }

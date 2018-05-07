@@ -12,14 +12,12 @@ namespace App\UI\Action\Blog;
 use App\Domain\Form\Type\AddCommentArticleNotLoggedType;
 use App\Domain\Form\Type\ContactType;
 use App\Domain\Lib\InstagramLib;
-use App\Domain\Models\Gallery;
 use App\Domain\Repository\Interfaces\CommentRepositoryInterface;
 use App\Domain\Repository\Interfaces\GalleryRepositoryInterface;
 use App\Domain\Repository\Interfaces\ReviewsRepositoryInterface;
 use App\UI\Action\Blog\Interfaces\ArticleShowGalleryActionInterface;
 use App\UI\Form\FormHandler\Interfaces\AddCommentArticleNotLoggedTypeHandlerInterface;
 use App\UI\Responder\Interfaces\ArticleShowGalleryResponderInterface;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -30,7 +28,7 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
  *
  * @Route(
  *     name="showArticle",
- *     path="blog/{idArticle}/{idGallery}"
+ *     path="blog/{titleArticle}/{galleryTitle}"
  * )
  *
  * @package App\UI\Action\Blog
@@ -96,7 +94,7 @@ class ArticleShowGalleryAction implements ArticleShowGalleryActionInterface
 
     public function __invoke(Request $request, ArticleShowGalleryResponderInterface $responder)
     {
-        $gallery = $this->galleryRepository->getWithPictures($request->get('idGallery'));
+        $gallery = $this->galleryRepository->getWithPictures(strtolower(str_replace([' ', '\''], '_', $request->get('galleryTitle'))));
 
         $comments = $this->commentRepository->getAll();
 
