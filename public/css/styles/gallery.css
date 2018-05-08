@@ -174,3 +174,60 @@ legend {
 }
 
 
+/*****************************************************************/
+/*                                      BLOG/ARTICLE/DETAIL                             */
+/*****************************************************************/
+
+.gallery-customers-header {
+    height: 45vh;
+    width: 100%;
+}
+
+.gallery-customers-header img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.box {
+    height: 12em;
+    overflow: hidden;
+    position: relative;
+    margin: 0 1.2em;
+}
+
+.img-customers {
+    margin: 20px 0;
+}
+
+.box img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.gallery-customers-informations {
+    background-color: rgba(0, 0, 0, .75);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    text-align: center;
+    color: #FFFFFF;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    opacity: 0;
+    transition: all .5s ease-in-out;
+    cursor: pointer;
+    padding: 0 5px;
+}
+
+.comment-title {
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 2em;
+    font-family: 'Playfair';
+    letter-spacing: .1rem;
+}

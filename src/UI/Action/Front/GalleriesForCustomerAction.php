@@ -88,6 +88,4 @@ class GalleriesForCustomerAction implements GalleriesForCustomerActionInterface
         return $responder($galleries, $this->instagram->show());
 
     }
-
-
 }
