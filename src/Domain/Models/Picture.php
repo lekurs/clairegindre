@@ -4,6 +4,7 @@ namespace App\Domain\Models;
 
 use App\Domain\Models\Interfaces\ArticleInterface;
 use App\Domain\Models\Interfaces\GalleryInterface;
+use App\Domain\Models\Interfaces\GalleryPageInterface;
 use App\Domain\Models\Interfaces\PictureInterface;
 use Ramsey\Uuid\Uuid;
 class Picture implements PictureInterface
@@ -49,14 +50,21 @@ class Picture implements PictureInterface
     private $article;
 
     /**
+     * @var GalleryPageInterface
+     */
+    private $galleryPage;
+
+    /**
      * Picture constructor.
+     *
      * @param string $pictureName
      * @param string $publicPath
      * @param string $extension
      * @param int $displayOrder
      * @param bool $favorite
-     * @param GalleryInterface $gallery
-     * @param ArticleInterface $article
+     * @param GalleryInterface|null $gallery
+     * @param ArticleInterface|null $article
+     * @param GalleryPageInterface|null $galleryPage
      */
     public function __construct(
         string $pictureName,
@@ -65,7 +73,8 @@ class Picture implements PictureInterface
         int $displayOrder = 0,
         bool $favorite = false,
         GalleryInterface $gallery = null,
-        ArticleInterface $article = null
+        ArticleInterface $article = null,
+        GalleryPageInterface $galleryPage = null
     ) {
         $this->id = Uuid::uuid4();
         $this->pictureName = $pictureName;
@@ -75,6 +84,7 @@ class Picture implements PictureInterface
         $this->favorite = $favorite;
         $this->gallery = $gallery;
         $this->article = $article;
+        $this->galleryPage = $galleryPage;
     }
 
 
@@ -254,5 +264,13 @@ class Picture implements PictureInterface
     public function setFavorite(bool $favorite): void
     {
         $this->favorite = $favorite;
+    }
+
+    /**
+     * @return GalleryPageInterface
+     */
+    public function getGalleryPage(): GalleryPageInterface
+    {
+        return $this->galleryPage;
     }
 }

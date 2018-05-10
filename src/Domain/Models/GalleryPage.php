@@ -9,7 +9,9 @@
 namespace App\Domain\Models;
 
 
+use App\Domain\Models\Interfaces\ArticleInterface;
 use App\Domain\Models\Interfaces\GalleryPageInterface;
+use App\Domain\Models\Interfaces\PictureInterface;
 use Ramsey\Uuid\Uuid;
 
 class GalleryPage implements GalleryPageInterface
@@ -20,36 +22,65 @@ class GalleryPage implements GalleryPageInterface
     private $id;
 
     /**
+     * @var ArticleInterface
+     */
+    private $article;
+
+    /**
+     * @var string
+     */
+    private $line;
+
+    /**
+     * @var \ArrayAccess
+     */
+    private $images;
+
+    /**
      * @var int
      */
     private $displayOrder;
 
     /**
-     * @var string
-     */
-    private $images;
-
-    /**
      * GalleryPage constructor.
      *
+     * @param ArticleInterface $article
+     * @param string $line
      * @param int $displayOrder
-     * @param string $images
      */
     public function __construct(
-        int $displayOrder,
-        string $images
-    ){
+        ArticleInterface $article,
+        string $line,
+        int $displayOrder
+    ) {
         $this->id = Uuid::uuid4();
+        $this->article = $article;
+        $this->line = $line;
         $this->displayOrder = $displayOrder;
-        $this->images = $images;
+    }
+
+    /**
+     * @return ArticleInterface
+     */
+    public function getArticle(): ArticleInterface
+    {
+        return $this->article;
     }
 
     /**
      * @return string
      */
-    public function getId(): string
+    public function getLine(): string
     {
-        return $this->id;
+        return $this->line;
+    }
+
+    /**
+     * @return \ArrayAccess
+     */
+    public function getImages(): \ArrayAccess
+    {
+        return $this->images;
     }
 
     /**
@@ -58,13 +89,5 @@ class GalleryPage implements GalleryPageInterface
     public function getDisplayOrder(): int
     {
         return $this->displayOrder;
-    }
-
-    /**
-     * @return string
-     */
-    public function getImages(): string
-    {
-        return $this->images;
     }
 }

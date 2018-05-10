@@ -6,6 +6,7 @@ namespace App\Domain\Models;
 use App\Domain\Models\Interfaces\ArticleInterface;
 use App\Domain\Models\Interfaces\BenefitInterface;
 use App\Domain\Models\Interfaces\GalleryInterface;
+use App\Domain\Models\Interfaces\GalleryPageInterface;
 use App\Domain\Models\Interfaces\UserInterface;
 use ArrayAccess;
 use Doctrine\ORM\Mapping as ORM;
@@ -74,6 +75,11 @@ class Article implements ArticleInterface
     private $prestation;
 
     /**
+     * @var GalleryPageInterface
+     */
+    private $galleryPages;
+
+    /**
      * Article constructor.
      *
      * @param string $title
@@ -84,6 +90,7 @@ class Article implements ArticleInterface
      * @param string $personnalButton
      * @param GalleryInterface $gallery
      * @param BenefitInterface $prestation
+     * @param GalleryPageInterface|null $galleryPages
      */
     public function __construct(
         string $title,
@@ -93,7 +100,8 @@ class Article implements ArticleInterface
         UserInterface $author,
         string $personnalButton,
         GalleryInterface $gallery,
-        BenefitInterface $prestation
+        BenefitInterface $prestation,
+        GalleryPageInterface $galleryPages = null
     ) {
         $this->id = Uuid::uuid4();
         $this->title = $title;
@@ -104,6 +112,7 @@ class Article implements ArticleInterface
         $this->personnalButton = $personnalButton;
         $this->gallery = $gallery;
         $this->prestation = $prestation;
+        $this->galleryPages = $galleryPages;
     }
 
 
@@ -217,5 +226,13 @@ class Article implements ArticleInterface
     public function getPersonnalButton(): string
     {
         return $this->personnalButton;
+    }
+
+    /**
+     * @return GalleryPageInterface
+     */
+    public function getGalleryPages(): GalleryPageInterface
+    {
+        return $this->galleryPages;
     }
 }
