@@ -8,32 +8,35 @@
 
 namespace App\Services;
 
-
+use \Transliterator;
 final class StringReplaceUrlHelper
 {
 
 //    /**
-//     * @var \Transliterator
+//     * @var Transliterator
 //     */
 //    private $transliterator;
 //
 //    /**
 //     * StringReplaceUrlHelper constructor.
-//     * @param \Transliterator $transliterator
+//     * @param Transliterator $transliterator
 //     */
-//    public function __construct(\Transliterator $transliterator)
+//    public function __construct(Transliterator $transliterator)
 //    {
 //        $this->transliterator = $transliterator;
 //    }
-//
-//    /**
-//     * @param $url
-//     * @return string
-//     */
-//    public function replace($url)
-//    {
-//        $this->transliterator->createFromRules("::Latin-ASCII; ::Lower; [^[:L:][:N:]]+ > '-';");
-//
-//        return $this->transliterator->transliterate($url, '-');
-//    }
+
+    /**
+     * @param $url
+     * @return string
+     */
+    public function replace($url)
+    {
+        \Transliterator::createFromRules("::Latin-ASCII; ::Lower; [^[:L:][:N:]]+ > '-';");
+//        $this->transliterator->createFromRules();
+
+//        $result =
+//$this->transliterator->transliterate($url, '-');
+        return \Transliterator::translirate($url, '-');
+    }
 }
