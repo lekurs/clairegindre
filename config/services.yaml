@@ -14,6 +14,12 @@ services:
                 $targetDir: '%kernel.project_dir%/public/images/upload'
                 $targetDirPublic: '%kernel.project_dir%/public'
 
+    App\Services\StringReplaceUrlHelper:
+        autowire: true
+        public: false
+        bind:
+            $transliterator : \Transliterator
+
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
     App\:

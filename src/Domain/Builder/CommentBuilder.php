@@ -30,7 +30,7 @@ class CommentBuilder implements CommentBuilderInterface
      * @param ArticleInterface $article
      * @return CommentBuilderInterface
      */
-    public function create(UserInterface $author, string $lastName, string $email, string $content, \DateTime $date, ArticleInterface $article): CommentBuilderInterface
+    public function create(UserInterface $author, string $lastName, string $email, string $content, \DateTime $date, ArticleInterface $article): CommentBuilderInterface //a refaire
     {
         $this->category = new Comment($author = null, $lastName, $email, $content, $date, $article);
 

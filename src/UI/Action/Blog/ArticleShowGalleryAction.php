@@ -17,6 +17,7 @@ use App\Domain\Repository\Interfaces\ArticleRepositoryInterface;
 use App\Domain\Repository\Interfaces\CommentRepositoryInterface;
 use App\Domain\Repository\Interfaces\GalleryRepositoryInterface;
 use App\Domain\Repository\Interfaces\ReviewsRepositoryInterface;
+use App\Services\StringReplaceUrlHelper;
 use App\UI\Action\Blog\Interfaces\ArticleShowGalleryActionInterface;
 use App\UI\Form\FormHandler\Interfaces\AddCommentArticleUserNotConnectedTypeHandlerInterface;
 use App\UI\Responder\Interfaces\ArticleShowGalleryResponderInterface;
@@ -78,6 +79,11 @@ class ArticleShowGalleryAction implements ArticleShowGalleryActionInterface
     private $tokenStorage;
 
     /**
+     * @var StringReplaceUrlHelper
+     */
+    private $stringReplace;
+
+    /**
      * ArticleShowGalleryAction constructor.
      * @param GalleryRepositoryInterface $galleryRepository
      * @param ReviewsRepositoryInterface $reviewsRepository
@@ -87,8 +93,9 @@ class ArticleShowGalleryAction implements ArticleShowGalleryActionInterface
      * @param AddCommentArticleUserNotConnectedTypeHandlerInterface $addCommentHandler
      * @param InstagramLib $instagram
      * @param TokenStorageInterface $tokenStorage
+     * @param StringReplaceUrlHelper $stringReplace
      */
-    public function __construct(GalleryRepositoryInterface $galleryRepository, ReviewsRepositoryInterface $reviewsRepository, CommentRepositoryInterface $commentRepository, ArticleRepositoryInterface $articleRepository, FormFactoryInterface $formFactory, AddCommentArticleUserNotConnectedTypeHandlerInterface $addCommentHandler, InstagramLib $instagram, TokenStorageInterface $tokenStorage)
+    public function __construct(GalleryRepositoryInterface $galleryRepository, ReviewsRepositoryInterface $reviewsRepository, CommentRepositoryInterface $commentRepository, ArticleRepositoryInterface $articleRepository, FormFactoryInterface $formFactory, AddCommentArticleUserNotConnectedTypeHandlerInterface $addCommentHandler, InstagramLib $instagram, TokenStorageInterface $tokenStorage, StringReplaceUrlHelper $stringReplace)
     {
         $this->galleryRepository = $galleryRepository;
         $this->reviewsRepository = $reviewsRepository;
@@ -98,18 +105,20 @@ class ArticleShowGalleryAction implements ArticleShowGalleryActionInterface
         $this->addCommentHandler = $addCommentHandler;
         $this->instagram = $instagram;
         $this->tokenStorage = $tokenStorage;
+        $this->stringReplace = $stringReplace;
     }
 
 
     public function __invoke(Request $request, ArticleShowGalleryResponderInterface $responder)
     {
-        $gallery = $this->galleryRepository->getWithPictures(strtolower(str_replace(['-', '_', '&'], [' ', '\'\'', '-'], $request->get('galleryTitle'))));
+        $gallery = $this->galleryRepository->getWithPictures($this->stringReplace->replace($request->get('galleryTitle')));
 
         $comments = $this->commentRepository->getAll();
 
         $reviews = $this->reviewsRepository->getAll();
 
-        $article = $this->articleRepository->getOne(strtolower(str_replace(['-', '_', '&'], [' ', '\'\'', '-'], $request->get('titleArticle'))));
+        $article = $this->articleRepository->getOne($this->stringReplace->replace($request->get('titleArticle')));
+        dump($this->stringReplace->replace($request->get('titleArticle')));
 
         $form = $this->formFactory->create(ContactType::class);
 

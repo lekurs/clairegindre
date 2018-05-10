@@ -163,7 +163,7 @@ class GalleryRepository extends ServiceEntityRepository implements GalleryReposi
         $this->getEntityManager()->flush();
     }
 
-    public function update(Gallery $gallery)
+    public function update()
     {
         $this->getEntityManager()->flush();
     }

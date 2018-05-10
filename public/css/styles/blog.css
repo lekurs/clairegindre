@@ -1,5 +1,16 @@
 /* Blog CSS */
 
+.gallery-customers-header {
+    height: 45vh;
+    width: 100%;
+}
+
+.gallery-customers-header img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
 .filter-button {
     background-color: #363636;
     color: #FFFFFF;

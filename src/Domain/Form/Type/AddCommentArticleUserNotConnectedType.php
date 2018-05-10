@@ -46,7 +46,7 @@ class AddCommentArticleUserNotConnectedType extends AbstractType
             ->add('content', TextareaType::class, [
                 'required' => false
             ])
-            ->add('article', HiddenType::class)
+//            ->add('article', HiddenType::class)
         ;
     }
 

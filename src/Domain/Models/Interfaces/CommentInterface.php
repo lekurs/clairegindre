@@ -24,7 +24,7 @@ interface CommentInterface
      * @param \DateTime $date
      * @param \App\Domain\Models\Interfaces\ArticleInterface $article
      */
-    public function __construct(UserInterface $author, string $lastName, string $email, string $content, \DateTime $date, ArticleInterface $article);
+//    public function __construct(UserInterface $author, string $lastName, string $email, string $content, \DateTime $date, ArticleInterface $article);
     /**
      * @return string
      */
