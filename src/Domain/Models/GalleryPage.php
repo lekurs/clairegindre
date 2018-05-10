@@ -27,7 +27,7 @@ class GalleryPage implements GalleryPageInterface
     private $article;
 
     /**
-     * @var string
+     * @var int
      */
     private $line;
 
@@ -50,7 +50,7 @@ class GalleryPage implements GalleryPageInterface
      */
     public function __construct(
         ArticleInterface $article,
-        string $line,
+        int $line,
         int $displayOrder
     ) {
         $this->id = Uuid::uuid4();
@@ -68,9 +68,9 @@ class GalleryPage implements GalleryPageInterface
     }
 
     /**
-     * @return string
+     * @return int
      */
-    public function getLine(): string
+    public function getLine(): int
     {
         return $this->line;
     }

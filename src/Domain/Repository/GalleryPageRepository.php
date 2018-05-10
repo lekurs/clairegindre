@@ -10,6 +10,7 @@ namespace App\Domain\Repository;
 
 
 use App\Domain\Models\GalleryPage;
+use App\Domain\Models\Interfaces\GalleryPageInterface;
 use App\Domain\Repository\Interfaces\GalleryPageRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
@@ -17,9 +18,59 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
 
 class GalleryPageRepository extends ServiceEntityRepository implements GalleryPageRepositoryInterface
 {
+    /**
+     * GalleryPageRepository constructor.
+     *
+     * @param RegistryInterface $registry
+     */
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, GalleryPage::class);
     }
 
+    /**
+     * @return mixed
+     */
+    public function getAll()
+    {
+        return $this->createQueryBuilder('gallery_page')
+                            ->orderBy('gallery_page.line', 'ASC')
+                            ->addOrderBy('gallery_page.displayOrder', 'ASC')
+                            ->getQuery()
+                            ->getResult();
+    }
+
+    /**
+     * @param $idArticle
+     * @return mixed
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function getOne($idArticle)
+    {
+        return $this->createQueryBuilder('gallery_page')
+                            ->where('gallery_page.article = :idArticle')
+                            ->setParameter('idArticle', $idArticle)
+                            ->getQuery()
+                            ->getOneOrNullResult();
+    }
+
+    /**
+     * @param GalleryPageInterface $galleryPage
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function save(GalleryPageInterface $galleryPage)
+    {
+        $this->getEntityManager()->persist($galleryPage);
+        $this->getEntityManager()->flush();
+    }
+
+    /**
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function update()
+    {
+        $this->getEntityManager()->flush();
+    }
 }

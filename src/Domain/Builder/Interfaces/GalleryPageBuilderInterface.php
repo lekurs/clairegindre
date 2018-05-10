@@ -18,7 +18,7 @@ interface GalleryPageBuilderInterface
      * @param string $images
      * @return GalleryPageInterface
      */
-    public function create(int $displayOrder, string $images): GalleryPageInterface;
+//    public function create(int $displayOrder, string $images): GalleryPageInterface;
 
     /**
      * @return GalleryPageInterface

@@ -20,13 +20,22 @@ class GalleryPageBuilder implements GalleryPageBuilderInterface
      */
     private $galleryPageBuilder;
 
-    public function create(int $displayOrder, string $images): GalleryPageInterface
+    /**
+     * @param ArticleInterface $article
+     * @param int $line
+     * @param int $displayOrder
+     * @return GalleryPageInterface
+     */
+    public function create(ArticleInterface $article, int $line, int $displayOrder): GalleryPageInterface
     {
-        $this->galleryPageBuilder =  new GalleryPage($displayOrder, $images);
+        $this->galleryPageBuilder =  new GalleryPage($article, $line, $displayOrder);
 
         return $this;
     }
 
+    /**
+     * @return GalleryPageInterface
+     */
     public function getGalleryBuilder(): GalleryPageInterface
     {
         return $this->galleryPageBuilder;
