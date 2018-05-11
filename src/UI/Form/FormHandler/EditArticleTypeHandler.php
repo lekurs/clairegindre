@@ -10,6 +10,7 @@ namespace App\UI\Form\FormHandler;
 
 
 use App\Domain\Builder\Interfaces\ArticleBuilderInterface;
+use App\Domain\Models\Interfaces\ArticleInterface;
 use App\Domain\Repository\Interfaces\ArticleRepositoryInterface;
 use App\Services\StringReplaceUrlHelper;
 use App\UI\Form\FormHandler\Interfaces\EditArticleTypeHandlerInterface;
@@ -31,11 +32,6 @@ class EditArticleTypeHandler implements EditArticleTypeHandlerInterface
     private $validator;
 
     /**
-     * @var ArticleBuilderInterface
-     */
-    private $articleBuilder;
-
-    /**
      * @var ArticleRepositoryInterface
      */
     private $articleRepository;
@@ -55,7 +51,6 @@ class EditArticleTypeHandler implements EditArticleTypeHandlerInterface
      *
      * @param SessionInterface $session
      * @param ValidatorInterface $validator
-     * @param ArticleBuilderInterface $articleBuilder
      * @param ArticleRepositoryInterface $articleRepository
      * @param TokenStorageInterface $tokenStorage
      * @param StringReplaceUrlHelper $stringReplaceHelper
@@ -63,19 +58,16 @@ class EditArticleTypeHandler implements EditArticleTypeHandlerInterface
     public function __construct(
         SessionInterface $session,
         ValidatorInterface $validator,
-        ArticleBuilderInterface $articleBuilder,
         ArticleRepositoryInterface $articleRepository,
         TokenStorageInterface $tokenStorage,
         StringReplaceUrlHelper $stringReplaceHelper
     ) {
         $this->session = $session;
         $this->validator = $validator;
-        $this->articleBuilder = $articleBuilder;
         $this->articleRepository = $articleRepository;
         $this->tokenStorage = $tokenStorage;
         $this->stringReplaceHelper = $stringReplaceHelper;
     }
-
 
     /**
      * @param FormInterface $form
@@ -86,28 +78,15 @@ class EditArticleTypeHandler implements EditArticleTypeHandlerInterface
     {
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $articleEdit = $this->articleBuilder->create(
-                                                                    $form->getData()->title,
-                                                                    $form->getData()->content,
-                                                                    $article->getCreationDate(),
-                                                                    $form->getData()->online,
-                                                                    $this->tokenStorage->getToken()->getUser(),
-                                                                    $form->getData()->personnalButton,
-                                                                    $this->stringReplaceHelper->replace($form->getData()->title),
-                                                                    $article->getGallery(),
-                                                                    $form->getData()->prestation
-            );
+            $article->updateArticle($form->getData());
 
-            $this->validator->validate($articleEdit, [], [
-                'article_edit'
-            ]);
-
-            dump($this->articleBuilder->getArticle());
-//            die();
+//            $this->validator->validate($articleEdit, [], [
+//                'article_edit'
+//            ]);
 
             $this->articleRepository->update();
 
-            die();
+//            die();
 
             $this->session->getFlashBag()->add('success', 'L\'article à été modifié');
 

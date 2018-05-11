@@ -11,10 +11,10 @@ namespace App\Domain\Form\Type;
 
 use App\Domain\DTO\EditArticleTypeDTO;
 use App\Domain\Models\Benefit;
+use App\Subscriber\EditSlug;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -39,12 +39,9 @@ class EditArticleType extends AbstractType
             ->add('prestation', EntityType::class, [
                 'class' => Benefit::class,
                 'choice_label' => 'name'
-            ]);
-//        ->add('creationDate', DateType::class, [
-//            'required' => false,
-//            'disabled' => true,
-//            'widget' => 'single_text'
-//        ]);
+            ])
+        ->addEventSubscriber(new EditSlug());
+        ;
     }
 
     /**
@@ -56,13 +53,12 @@ class EditArticleType extends AbstractType
             'data_class' => EditArticleTypeDTO::class,
             'empty_data' => function(FormInterface $form) {
                             return new EditArticleTypeDTO(
-                               $form->get('title')->getData(),
-                               $form->get('content')->getData(),
-                               $form->get('online')->getData(),
-                               $form->get('personnalButton')->getData(),
-                               $form->get('prestation')->getData()
-//                               $form->get('creationDate')->getData()
-                            );
+                                       $form->get('title')->getData(),
+                                       $form->get('content')->getData(),
+                                       $form->get('online')->getData(),
+                                       $form->get('personnalButton')->getData(),
+                                       $form->get('prestation')->getData()
+                                    );
                     }
         ]);
     }

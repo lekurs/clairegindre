@@ -3,6 +3,7 @@
 namespace App\Domain\Models;
 
 
+use App\Domain\DTO\EditArticleTypeDTO;
 use App\Domain\Models\Interfaces\ArticleInterface;
 use App\Domain\Models\Interfaces\BenefitInterface;
 use App\Domain\Models\Interfaces\GalleryInterface;
@@ -249,5 +250,14 @@ class Article implements ArticleInterface
     public function setGallery(GalleryInterface $gallery): void
     {
         $this->gallery = $gallery;
+    }
+
+    public function updateArticle(EditArticleTypeDTO $dto)
+    {
+        $this->title = $dto->title;
+        $this->content = $dto->content;
+        $this->personnalButton = $dto->personnalButton;
+        $this->prestation = $dto->prestation;
+        $this->slug = $dto->title;
     }
 }

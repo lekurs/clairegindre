@@ -40,11 +40,6 @@ final class EditArticleTypeDTO implements EditArticleTypeDTOInterface
     public $prestation;
 
     /**
-     * @var \DateTime
-     */
-    public $creationDate;
-
-    /**
      * EditArticleTypeDTO constructor.
      *
      * @param string $title
@@ -52,7 +47,6 @@ final class EditArticleTypeDTO implements EditArticleTypeDTOInterface
      * @param bool $online
      * @param string $personnalButton
      * @param BenefitInterface $prestation
-     * @param \DateTime $creationDate
      */
     public function __construct(
         string $title,
@@ -60,13 +54,11 @@ final class EditArticleTypeDTO implements EditArticleTypeDTOInterface
         bool $online,
         string $personnalButton,
         BenefitInterface $prestation
-//        \DateTime $creationDate
     ) {
         $this->title = $title;
         $this->content = $content;
         $this->online = $online;
         $this->personnalButton = $personnalButton;
         $this->prestation = $prestation;
-//        $this->creationDate = $creationDate;
     }
 }
