@@ -46,13 +46,18 @@ class Gallery implements GalleryInterface
     private $slug;
 
     /**
+     * @var \DateTime
+     */
+    private $creationDate;
+
+    /**
      * Gallery constructor.
      *
-     * @param UserInterface $user
      * @param string $title
+     * @param UserInterface $user
      * @param BenefitInterface $benefit
      * @param string $slug
-     * @param ArticleInterface $article
+     * @param ArticleInterface|null $article
      */
     public function __construct(
         string $title,
@@ -66,6 +71,7 @@ class Gallery implements GalleryInterface
         $this->user = $user;
         $this->benefit = $benefit;
         $this->slug = $slug;
+        $this->creationDate = new \DateTime();
         $this->article = $article;
     }
 

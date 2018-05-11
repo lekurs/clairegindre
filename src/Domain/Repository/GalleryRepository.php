@@ -29,28 +29,25 @@ class GalleryRepository extends ServiceEntityRepository implements GalleryReposi
     }
 
     /**
-     * @param $id
+     * @param $slug
      * @return mixed
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
-    public function showOne($id)
-    {
-        return $this->createQueryBuilder()
-            ->select('*')
-            ->from('gallery')
-            ->where('user_id = :userId')
-            ->setParameter('user_id', $id)
-            ->getQuery()
-            ->getOneOrNullResult();
-    }
-
-    public function getOne($id)
+    public function getOne($slug)
     {
         return $this->createQueryBuilder('gallery')
-                                ->where('gallery.id = :id')
-                                ->setParameter('id', $id)
+                                ->where('gallery.slug = :slug')
+                                ->setParameter('slug', $slug)
                                 ->getQuery()
                                 ->getOneOrNullResult();
+    }
+
+    public function getAll()
+    {
+        return $this->createQueryBuilder('gallery')
+                            ->orderBy('gallery.creationDate', 'DESC')
+                            ->getQuery()
+                            ->getResult();
     }
 
     /**

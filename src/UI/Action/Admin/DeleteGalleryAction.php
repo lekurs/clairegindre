@@ -11,6 +11,8 @@ namespace App\UI\Action\Admin;
 
 use App\Domain\Builder\Interfaces\GalleryBuilderInterface;
 use App\Domain\Models\Gallery;
+use App\Domain\Repository\Interfaces\GalleryRepositoryInterface;
+use App\Services\PictureUploaderHelper;
 use App\UI\Action\Admin\Interfaces\DeleteGalleryActionInterface;
 use App\UI\Responder\Admin\Interfaces\DeleteGalleryResponderInterface;
 use Doctrine\ORM\EntityManagerInterface;
@@ -22,7 +24,7 @@ use Symfony\Component\Routing\Annotation\Route;
  *
  * @Route(
  *     name="adminDeleteGallery",
- *     path="admin/gallery/del/{id}"
+ *     path="admin/gallery/del/{slug}"
  * )
  *
  * @package App\UI\Action\Admin
@@ -30,9 +32,9 @@ use Symfony\Component\Routing\Annotation\Route;
 class DeleteGalleryAction implements DeleteGalleryActionInterface
 {
     /**
-     * @var EntityManagerInterface
+     * @var GalleryRepositoryInterface
      */
-    private $entityManager;
+    private $galleryRepository;
 
     /**
      * @var GalleryBuilderInterface
@@ -41,18 +43,22 @@ class DeleteGalleryAction implements DeleteGalleryActionInterface
 
     /**
      * DeleteGalleryAction constructor.
-     * @param EntityManagerInterface $entityManager
+     *
+     * @param GalleryRepositoryInterface $galleryRepository
      * @param GalleryBuilderInterface $galleryBuilder
      */
-    public function __construct(EntityManagerInterface $entityManager, GalleryBuilderInterface $galleryBuilder)
-    {
-        $this->entityManager = $entityManager;
+    public function __construct(
+        GalleryRepositoryInterface $galleryRepository,
+        GalleryBuilderInterface $galleryBuilder
+    ) {
+        $this->galleryRepository = $galleryRepository;
         $this->galleryBuilder = $galleryBuilder;
     }
 
+
     public function __invoke(Request $request, DeleteGalleryResponderInterface $responder)
     {
-        $gallery = $this->entityManager->getRepository(Gallery::class)->find($request->get('id'));
+        $gallery = $this->galleryRepository->getOne($request->get('slug'));
 
         foreach($gallery->getPictures() as $picture) {
             $gallery->getPictures()->removeElement($picture);

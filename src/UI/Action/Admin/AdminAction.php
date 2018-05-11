@@ -149,7 +149,7 @@ class AdminAction implements AdminActionInterface
 
         $users = $this->userRepository->showGalleryByUser();
 
-        $galleries = $this->galleryRepository->getAllWithPictures();
+        $galleries = $this->galleryRepository->getAll();
 
         $benefits = $this->benefitRepository->getAll();
 

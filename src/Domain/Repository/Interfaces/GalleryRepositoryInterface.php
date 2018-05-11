@@ -14,10 +14,10 @@ use App\Domain\Models\Interfaces\GalleryInterface;
 interface GalleryRepositoryInterface
 {
     /**
-     * @param $id
+     * @param $slug
      * @return mixed
      */
-    public function getOne($id);
+    public function getOne($slug);
 
     /**
      * @param $slug

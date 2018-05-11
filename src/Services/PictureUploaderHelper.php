@@ -10,7 +10,7 @@ namespace App\Services;
 
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-class PictureUploaderHelper
+final class PictureUploaderHelper
 {
     /**
      * @param UploadedFile $uploadedFile
