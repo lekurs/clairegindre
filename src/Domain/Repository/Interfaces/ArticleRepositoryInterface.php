@@ -28,4 +28,14 @@ interface ArticleRepositoryInterface
      */
     public function save(ArticleInterface $article): void;
 
+    /**
+     * @return mixed
+     */
+    public function update();
+
+    /**
+     * @param ArticleInterface $article
+     */
+    public function delete(ArticleInterface $article): void;
+
 }

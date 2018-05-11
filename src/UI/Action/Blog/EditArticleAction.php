@@ -9,9 +9,13 @@
 namespace App\UI\Action\Blog;
 
 
+use App\Domain\DTO\EditArticleTypeDTO;
+use App\Domain\Form\Type\EditArticleType;
 use App\Domain\Repository\Interfaces\ArticleRepositoryInterface;
 use App\UI\Action\Blog\Interfaces\EditArticleActionInterface;
+use App\UI\Form\FormHandler\Interfaces\EditArticleTypeHandlerInterface;
 use App\UI\Responder\Interfaces\EditArticleResponderInterface;
+use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
@@ -34,27 +38,40 @@ class EditArticleAction implements EditArticleActionInterface
     private $articleRepository;
 
     /**
+     * @var EditArticleTypeHandlerInterface
+     */
+    private $editArticleTypeHandler;
+
+    /**
      * @var AuthorizationCheckerInterface
      */
     private $authorizationChecker;
 
     /**
-     * @var TokenStorageInterface
+     * @var FormFactoryInterface
      */
-    private $tokenStorage;
+    private $formFactory;
 
     /**
      * EditArticleAction constructor.
+     *
      * @param ArticleRepositoryInterface $articleRepository
+     * @param EditArticleTypeHandlerInterface $editArticleTypeHandler
      * @param AuthorizationCheckerInterface $authorizationChecker
-     * @param TokenStorageInterface $tokenStorage
+     * @param FormFactoryInterface $formFactory
      */
-    public function __construct(ArticleRepositoryInterface $articleRepository, AuthorizationCheckerInterface $authorizationChecker, TokenStorageInterface $tokenStorage)
-    {
+    public function __construct(
+        ArticleRepositoryInterface $articleRepository,
+        EditArticleTypeHandlerInterface $editArticleTypeHandler,
+        AuthorizationCheckerInterface $authorizationChecker,
+        FormFactoryInterface $formFactory
+    ) {
         $this->articleRepository = $articleRepository;
+        $this->editArticleTypeHandler = $editArticleTypeHandler;
         $this->authorizationChecker = $authorizationChecker;
-        $this->tokenStorage = $tokenStorage;
+        $this->formFactory = $formFactory;
     }
+
 
     public function __invoke(Request $request, EditArticleResponderInterface $responder)
     {
@@ -63,8 +80,23 @@ class EditArticleAction implements EditArticleActionInterface
         }
 
         $article = $this->articleRepository->getOne($request->get('slug'));
-        dump($article);
 
-        return $responder(false, $article);
+        $articleDTO = new EditArticleTypeDTO(
+                                                                                    $article->getTitle(),
+                                                                                    $article->getContent(),
+                                                                                    $article->isOnline(),
+                                                                                    $article->getPersonnalButton(),
+                                                                                    $article->getPrestation()
+//                                                                                    $article->getCreationDate()
+            );
+
+        $editArticleType = $this->formFactory->create(EditArticleType::class, $articleDTO)->handleRequest($request);
+
+        if ($this->editArticleTypeHandler->handle($editArticleType, $article))
+        {
+            return $responder(true, null, $article);
+        }
+
+        return $responder(false, $editArticleType, $article);
     }
 }

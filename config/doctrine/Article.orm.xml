@@ -8,6 +8,7 @@
         <id name="id" column="id" type="string"/>
         <field name="title" type="string" length="100" nullable="false" unique="false" />
         <field name="content" type="text" nullable="false" unique="false" />
+        <field name="online" type="boolean" nullable="false" unique="false" />
         <field name="creationDate" type="date" nullable="false" unique="false" />
         <field name="modificationDate" type="integer" nullable="true" unique="false" />
         <field name="personnalButton" type="string" nullable="true" unique="false" />

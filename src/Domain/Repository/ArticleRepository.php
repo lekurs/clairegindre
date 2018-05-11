@@ -86,4 +86,24 @@ class ArticleRepository extends ServiceEntityRepository implements ArticleReposi
         $this->getEntityManager()->persist($article);
         $this->getEntityManager()->flush();
     }
+
+    /**
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function update()
+    {
+        $this->getEntityManager()->flush();
+    }
+
+    /**
+     * @param ArticleInterface $article
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function delete(ArticleInterface $article): void
+    {
+        $this->getEntityManager()->remove($article);
+        $this->getEntityManager()->flush();
+    }
 }

@@ -10,6 +10,7 @@ namespace App\UI\Responder\Blog;
 
 
 use App\UI\Responder\Interfaces\EditArticleResponderInterface;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -38,10 +39,11 @@ class EditArticleResponder implements EditArticleResponderInterface
         $this->urlGenerator = $urlGenerator;
     }
 
-    public function __invoke($redirect = false, $articles)
+    public function __invoke($redirect = false, FormInterface $form = null, $articles)
     {
         $redirect ? $response = new RedirectResponse($this->urlGenerator->generate('admin')) : $response = new Response($this->twig->render('back/admin/Article/edit_article.html.twig', [
-            'articles' => $articles
+            'articles' => $articles,
+            'editArticleType' => $form->createView(),
         ]));
 
         return $response;
