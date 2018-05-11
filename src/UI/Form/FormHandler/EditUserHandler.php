@@ -80,9 +80,7 @@ class EditUserHandler implements EditUserHandlerInterface
 
             if(is_null($form->getData()->plainPassword)) {
                 $password = $this->tokenStorage->getToken()->getUser()->getPassword();
-                dump('toto');
             } else {
-                    dump('tata');
                     $password = $form->getData()->plainPassword;
                 }
 
@@ -93,7 +91,6 @@ class EditUserHandler implements EditUserHandlerInterface
                                                                 $form->getData()->username,
                                                                 $form->getData()->lastName,
                                                                 $password,
-//                                                                $form->getData()->plainPassword,
                                                                 $form->getData()->weddingDate,
                                                                 $picture,
                                                                 $form->getData()->online, 'ROLE_USER',

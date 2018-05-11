@@ -35,9 +35,9 @@ class ArticleBuilder implements ArticleBuilderInterface
      * @param BenefitInterface $prestation
      * @return ArticleBuilderInterface
      */
-    public function create(string $title, string $content, \DateTime $creationDate, bool $online, UserInterface $user, string $personnalButton, GalleryInterface $gallery, BenefitInterface $prestation): ArticleBuilderInterface
+    public function create(string $title, string $content, \DateTime $creationDate, bool $online, UserInterface $user, string $personnalButton, string $slug, GalleryInterface $gallery, BenefitInterface $prestation): ArticleBuilderInterface
     {
-        $this->article = new Article($title, $content, $creationDate = new \DateTime(), $online, $user, $personnalButton, $gallery, $prestation);
+        $this->article = new Article($title, $content, $creationDate = new \DateTime(), $online, $user, $personnalButton, $slug, $gallery, $prestation);
 
         return $this;
     }

@@ -164,3 +164,11 @@
 .infos-gallery p {
     margin: 0;
 }
+
+.fa.fa-user.connected {
+    color: green;
+}
+
+.fa.fa-user.not-connected {
+    color: red;
+}

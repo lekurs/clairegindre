@@ -60,6 +60,11 @@ class Article implements ArticleInterface
     private $personnalButton;
 
     /**
+     * @var string
+     */
+    private $slug;
+
+    /**
      * @var ArrayAccess
      */
     private $comments;
@@ -88,6 +93,7 @@ class Article implements ArticleInterface
      * @param bool $online
      * @param UserInterface $author
      * @param string $personnalButton
+     * @param string $slug
      * @param GalleryInterface $gallery
      * @param BenefitInterface $prestation
      * @param GalleryPageInterface|null $galleryPages
@@ -99,6 +105,7 @@ class Article implements ArticleInterface
         bool $online,
         UserInterface $author,
         string $personnalButton,
+        string  $slug,
         GalleryInterface $gallery,
         BenefitInterface $prestation,
         GalleryPageInterface $galleryPages = null
@@ -110,11 +117,11 @@ class Article implements ArticleInterface
         $this->online = $online;
         $this->author = $author;
         $this->personnalButton = $personnalButton;
+        $this->slug = $slug;
         $this->gallery = $gallery;
         $this->prestation = $prestation;
         $this->galleryPages = $galleryPages;
     }
-
 
     /**
      * @return mixed
@@ -165,6 +172,14 @@ class Article implements ArticleInterface
     }
 
     /**
+     * @return string
+     */
+    public function getSlug(): string
+    {
+        return $this->slug;
+    }
+
+    /**
      * @return bool
      */
     public function isOnline(): bool
@@ -197,27 +212,11 @@ class Article implements ArticleInterface
     }
 
     /**
-     * @param ArrayAccess $comments
-     */
-    public function setComments(ArrayAccess $comments): void
-    {
-        $this->comments = $comments;
-    }
-
-    /**
      * @return GalleryInterface
      */
     public function getGallery(): GalleryInterface
     {
         return $this->gallery;
-    }
-
-    /**
-     * @param GalleryInterface $gallery
-     */
-    public function setGallery(GalleryInterface $gallery): void
-    {
-        $this->gallery = $gallery;
     }
 
     /**
@@ -234,5 +233,21 @@ class Article implements ArticleInterface
     public function getGalleryPages(): GalleryPageInterface
     {
         return $this->galleryPages;
+    }
+
+    /**
+     * @param ArrayAccess $comments
+     */
+    public function setComments(ArrayAccess $comments): void
+    {
+        $this->comments = $comments;
+    }
+
+    /**
+     * @param GalleryInterface $gallery
+     */
+    public function setGallery(GalleryInterface $gallery): void
+    {
+        $this->gallery = $gallery;
     }
 }

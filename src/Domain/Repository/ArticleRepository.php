@@ -28,18 +28,36 @@ class ArticleRepository extends ServiceEntityRepository implements ArticleReposi
     }
 
     /**
-     * @param $articleTitle
+     * @param $slug
      * @return mixed
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
-    public function getOne($articleTitle)
+    public function getOne($slug)
     {
          return $this->createQueryBuilder('article')
-                            ->where('article.title = :articleTitle')
-                            ->setParameter('articleTitle', $articleTitle)
+                            ->where('article.slug = :slug')
+                            ->setParameter('slug', $slug)
                             ->getQuery()
                             ->getOneOrNullResult();
     }
+
+    public function getAll()
+    {
+        return $this->createQueryBuilder('article')
+                                ->orderBy('article.creationDate', 'DESC')
+                                ->getQuery()
+                                ->getResult();
+    }
+
+//    public function getOneWithGallery($slug)
+//    {
+//        return $this->createQueryBuilder('article')
+//                              ->where('article.slug = :slug')
+//                                ->setParameter('slug', $slug)
+//                              ->leftJoin('article.gallery', 'gallery')
+//                                ->getQuery()
+//                                ->getOneOrNullResult();
+//    }
 
     public function getArticlesWithFavoritePictureGallery()
     {

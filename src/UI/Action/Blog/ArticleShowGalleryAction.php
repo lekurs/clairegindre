@@ -31,7 +31,7 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
  *
  * @Route(
  *     name="showArticle",
- *     path="blog/{titleArticle}/{galleryTitle}"
+ *     path="blog/{slugArticle}/{slugGallery}"
  * )
  *
  * @package App\UI\Action\Blog
@@ -39,19 +39,9 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 class ArticleShowGalleryAction implements ArticleShowGalleryActionInterface
 {
     /**
-     * @var GalleryRepositoryInterface
-     */
-    private $galleryRepository;
-
-    /**
      * @var ReviewsRepositoryInterface
      */
     private $reviewsRepository;
-
-    /**
-     * @var CommentRepositoryInterface
-     */
-    private $commentRepository;
 
     /**
      * @var ArticleRepositoryInterface
@@ -85,9 +75,7 @@ class ArticleShowGalleryAction implements ArticleShowGalleryActionInterface
 
     /**
      * ArticleShowGalleryAction constructor.
-     * @param GalleryRepositoryInterface $galleryRepository
      * @param ReviewsRepositoryInterface $reviewsRepository
-     * @param CommentRepositoryInterface $commentRepository
      * @param ArticleRepositoryInterface $articleRepository
      * @param FormFactoryInterface $formFactory
      * @param AddCommentArticleUserNotConnectedTypeHandlerInterface $addCommentHandler
@@ -95,11 +83,9 @@ class ArticleShowGalleryAction implements ArticleShowGalleryActionInterface
      * @param TokenStorageInterface $tokenStorage
      * @param StringReplaceUrlHelper $stringReplace
      */
-    public function __construct(GalleryRepositoryInterface $galleryRepository, ReviewsRepositoryInterface $reviewsRepository, CommentRepositoryInterface $commentRepository, ArticleRepositoryInterface $articleRepository, FormFactoryInterface $formFactory, AddCommentArticleUserNotConnectedTypeHandlerInterface $addCommentHandler, InstagramLib $instagram, TokenStorageInterface $tokenStorage, StringReplaceUrlHelper $stringReplace)
+    public function __construct(ReviewsRepositoryInterface $reviewsRepository, ArticleRepositoryInterface $articleRepository, FormFactoryInterface $formFactory, AddCommentArticleUserNotConnectedTypeHandlerInterface $addCommentHandler, InstagramLib $instagram, TokenStorageInterface $tokenStorage, StringReplaceUrlHelper $stringReplace)
     {
-        $this->galleryRepository = $galleryRepository;
         $this->reviewsRepository = $reviewsRepository;
-        $this->commentRepository = $commentRepository;
         $this->articleRepository = $articleRepository;
         $this->formFactory = $formFactory;
         $this->addCommentHandler = $addCommentHandler;
@@ -111,15 +97,13 @@ class ArticleShowGalleryAction implements ArticleShowGalleryActionInterface
 
     public function __invoke(Request $request, ArticleShowGalleryResponderInterface $responder)
     {
-        $gallery = $this->galleryRepository->getWithPictures($this->stringReplace->replace($request->get('galleryTitle')));
-
-        $comments = $this->commentRepository->getAll();
+//        $gallery = $this->galleryRepository->getWithPictures($request->get('slugGallery'));
+//
+//        dump($gallery);
 
         $reviews = $this->reviewsRepository->getAll();
 
-        $article = $this->articleRepository->getOne($this->stringReplace->replace($request->get('titleArticle')));
-
-        dump($this->stringReplace->replace($request->get('titleArticle')) .'/'.$this->stringReplace->replace($request->get('galleryTitle')));
+        $articles = $this->articleRepository->getOne($request->get('slugArticle'));
 
         $form = $this->formFactory->create(ContactType::class);
 
@@ -133,12 +117,12 @@ class ArticleShowGalleryAction implements ArticleShowGalleryActionInterface
 
         $instagram = $this->instagram->show();
 
-        if ($this->addCommentHandler->handle($commentType, $article)) {
+        if ($this->addCommentHandler->handle($commentType, $articles)) {
 
-            return $responder(true, $form, $commentType, $gallery, $comments, $instagram, $reviews);
+            return $responder(true, $form, $commentType, $articles, $instagram, $reviews);
         }
 
-        return $responder(false,$form, $commentType, $gallery, $comments, $instagram, $reviews);
+        return $responder(false,$form, $commentType, $articles, $instagram, $reviews);
     }
 
 }

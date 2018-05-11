@@ -153,7 +153,7 @@ class AdminAction implements AdminActionInterface
 
         $benefits = $this->benefitRepository->getAll();
 
-        $articles = $this->articleRepository->findAll();
+        $articles = $this->articleRepository->getAll();
 
         $registration = $this->formFactory->create(RegistrationType::class)->handleRequest($request);
 

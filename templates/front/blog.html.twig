@@ -55,7 +55,7 @@
                                 <p>{{ article.creationDate | date('d M Y') }}</p>
                                 <p>{{ article.title }}</p>
                                 {#|lower|replace({' ' : '-', '\'' : '_', '-': '&'})#}
-                                <a href="{{ path('showArticle', { 'titleArticle': article.title, 'galleryTitle': article.gallery.title}) }}" class="link_to_gallery">{{ article.personnalButton }}</a>
+                                <a href="{{ path('showArticle', { 'slugArticle': article.slug, 'slugGallery': article.gallery.slug}) }}" class="link_to_gallery">{{ article.personnalButton }}</a>
                             </div>
                             <div class="col-xl-7 col-lg-7 col-md-12 col-sm-12 col-12 {% if loop.index is divisible by(2) %} offset-1{% endif %}">
                                 <div class="row no-gutters">

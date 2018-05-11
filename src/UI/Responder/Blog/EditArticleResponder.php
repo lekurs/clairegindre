@@ -38,11 +38,13 @@ class EditArticleResponder implements EditArticleResponderInterface
         $this->urlGenerator = $urlGenerator;
     }
 
-    public function __invoke($redirect = false)
+    public function __invoke($redirect = false, $articles)
     {
-        $redirect ? $response = new RedirectResponse($this->urlGenerator->generate('admin')) : $response = new Response($this->twig->render('back/admin/Article/edit-article.html.twig', [
-
+        $redirect ? $response = new RedirectResponse($this->urlGenerator->generate('admin')) : $response = new Response($this->twig->render('back/admin/Article/edit_article.html.twig', [
+            'articles' => $articles
         ]));
+
+        return $response;
     }
 
 

@@ -22,7 +22,7 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
  *
  * @Route(
  *     name="adminEditArticle",
- *     path="admin/article/edit/{articleTitle}"
+ *     path="admin/article/edit/{slug}"
  * )
  *
  */
@@ -58,13 +58,13 @@ class EditArticleAction implements EditArticleActionInterface
 
     public function __invoke(Request $request, EditArticleResponderInterface $responder)
     {
-        if (!false === $this->authorizationChecker->isGranted('ROLE_ADMIN')) {
-
+        if(false === $this->authorizationChecker->isGranted('ROLE_ADMIN')) {
+            throw new AccessDeniedException('Merci de vous connecter comme Administrateur sur ce site !');
         }
 
-//        $article = $this->articleRepository->
+        $article = $this->articleRepository->getOne($request->get('slug'));
+        dump($article);
 
-        return $responder($article);
+        return $responder(false, $article);
     }
-
 }

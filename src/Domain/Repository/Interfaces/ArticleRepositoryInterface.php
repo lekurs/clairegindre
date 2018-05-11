@@ -13,10 +13,15 @@ use App\Domain\Models\Interfaces\ArticleInterface;
 interface ArticleRepositoryInterface
 {
     /**
-     * @param $articleTitle
+     * @param $slug
      * @return mixed
      */
-    public function getOne($articleTitle);
+    public function getOne($slug);
+
+    /**
+     * @return mixed
+     */
+    public function getAll();
 
     /**
      * @param ArticleInterface $article

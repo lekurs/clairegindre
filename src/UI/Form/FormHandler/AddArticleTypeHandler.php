@@ -11,6 +11,7 @@ namespace App\UI\Form\FormHandler;
 
 use App\Domain\Builder\Interfaces\ArticleBuilderInterface;
 use App\Domain\Repository\Interfaces\ArticleRepositoryInterface;
+use App\Services\StringReplaceUrlHelper;
 use App\UI\Form\FormHandler\Interfaces\AddArticleTypeHandlerInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -45,6 +46,11 @@ class AddArticleTypeHandler implements AddArticleTypeHandlerInterface
     private $tokenStorage;
 
     /**
+     * @var StringReplaceUrlHelper
+     */
+    private $stringReplaceHelper;
+
+    /**
      * AddArticleTypeHandler constructor.
      *
      * @param ArticleRepositoryInterface $articleRepository
@@ -52,21 +58,28 @@ class AddArticleTypeHandler implements AddArticleTypeHandlerInterface
      * @param ValidatorInterface $validator
      * @param ArticleBuilderInterface $articleBuilder
      * @param TokenStorageInterface $tokenStorage
+     * @param StringReplaceUrlHelper $stringReplaceHelper
      */
     public function __construct(
         ArticleRepositoryInterface $articleRepository,
         SessionInterface $session,
         ValidatorInterface $validator,
         ArticleBuilderInterface $articleBuilder,
-        TokenStorageInterface $tokenStorage
+        TokenStorageInterface $tokenStorage,
+        StringReplaceUrlHelper $stringReplaceHelper
     ) {
         $this->articleRepository = $articleRepository;
         $this->session = $session;
         $this->validator = $validator;
         $this->articleBuilder = $articleBuilder;
         $this->tokenStorage = $tokenStorage;
+        $this->stringReplaceHelper = $stringReplaceHelper;
     }
 
+    /**
+     * @param FormInterface $form
+     * @return bool
+     */
     public function handle(FormInterface $form): bool
     {
         if($form->isSubmitted() && $form->isValid()) {
@@ -77,6 +90,7 @@ class AddArticleTypeHandler implements AddArticleTypeHandlerInterface
                                                                                     $form->getData()->online,
                                                                                     $this->tokenStorage->getToken()->getUser(),
                                                                                     $form->getData()->personnalButton,
+                                                                                    $this->stringReplaceHelper->replace($form->getData()->title),
                                                                                     $form->getData()->gallery,
                                                                                     $form->getData()->prestation
                                                                                 );

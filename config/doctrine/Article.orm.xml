@@ -11,6 +11,7 @@
         <field name="creationDate" type="date" nullable="false" unique="false" />
         <field name="modificationDate" type="integer" nullable="true" unique="false" />
         <field name="personnalButton" type="string" nullable="true" unique="false" />
+        <field name="slug" type="string" nullable="false" unique="false" />
 
         <many-to-one field="author" target-entity="App\Domain\Models\User" inversed-by="articles" />
         <one-to-many field="comments" target-entity="App\Domain\Models\Comment" mapped-by="article" />

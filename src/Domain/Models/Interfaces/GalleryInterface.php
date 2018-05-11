@@ -21,5 +21,5 @@ interface GalleryInterface
      * @param \DateTime $creationDate
      * @param ArticleInterface|null $article
      */
-    public function __construct(string $title, UserInterface $user, BenefitInterface $benefit, string $slug, \DateTime $creationDate, ArticleInterface $article = null);
+//    public function __construct(string $title, UserInterface $user, BenefitInterface $benefit, string $slug, \DateTime $creationDate, ArticleInterface $article = null);
 }

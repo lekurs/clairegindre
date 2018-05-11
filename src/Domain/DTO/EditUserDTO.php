@@ -57,7 +57,6 @@ class EditUserDTO implements EditUserDTOInterface
      * @param string $plainPassword
      * @param bool $online
      * @param \DateTime $dateWedding
-     * @param \SplFileInfo $picture
      */
     public function __construct(
         string $email,
@@ -66,15 +65,12 @@ class EditUserDTO implements EditUserDTOInterface
         string $plainPassword,
         bool $online,
         \DateTime $dateWedding
-//        \SplFileInfo $picture = null
-    )
-    {
+    ) {
         $this->email = $email;
         $this->username = $username;
         $this->lastName = $lastName;
         $this->plainPassword = $plainPassword;
         $this->online = $online;
         $this->weddingDate = $dateWedding;
-//        $this->picture = $picture;
     }
 }

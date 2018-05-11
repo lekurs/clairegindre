@@ -36,9 +36,6 @@ class EditUserType extends AbstractType
             ->add('weddingDate', DateType::class, [
                 'widget' => 'single_text',
             ])
-//            ->add('picture', FileType::class, [
-//                'required' => false
-//            ])
             ->add('online', CheckboxType::class, [
                 'required' => false
             ])
@@ -56,7 +53,6 @@ class EditUserType extends AbstractType
                                                 $form->get('email')->getData(),
                                                 $form->get('plainPassword')->getData(),
                                                 $form->get('weddingDate')->getData(),
-//                                                $form->get('picture')->getData(),
                                                 $form->get('online')->getData()
                                             );
                                             }

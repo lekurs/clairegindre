@@ -1,0 +1,29 @@
+{% extends "admin_layout.html.twig" %}
+
+{%  block head %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/styles/blog.css') }}" />
+
+    {% block title %}
+        <title>Admin | Article</title>
+    {% endblock %}
+
+{% endblock %}
+
+{% block content %}
+
+    {% block showBlog %}
+        <section>
+            <div class="container-fluid">
+                {% block title_admin %}
+                    <div class="row no-gutters">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                            <h1>Article de blog pour la galerie : {{ articles.gallery.title }}</h1>
+                        </div>
+                    </div>
+                {% endblock %}
+            </div>
+        </section>
+    {% endblock %}
+
+{% endblock %}

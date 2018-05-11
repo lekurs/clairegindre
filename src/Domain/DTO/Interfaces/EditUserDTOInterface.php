@@ -11,5 +11,16 @@ namespace App\Domain\DTO\Interfaces;
 
 interface EditUserDTOInterface
 {
+    /**
+     * EditUserDTOInterface constructor.
+     * 
+     * @param string $email
+     * @param string $username
+     * @param string $lastName
+     * @param string $plainPassword
+     * @param bool $online
+     * @param \DateTime $dateWedding
+     */
+    public function __construct(string $email, string $username, string $lastName, string $plainPassword, bool $online, \DateTime $dateWedding);
 
 }
