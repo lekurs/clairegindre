@@ -16,6 +16,7 @@ use App\Services\PictureUploaderHelper;
 use App\UI\Action\Admin\Interfaces\DeleteGalleryActionInterface;
 use App\UI\Responder\Admin\Interfaces\DeleteGalleryResponderInterface;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -42,17 +43,35 @@ class DeleteGalleryAction implements DeleteGalleryActionInterface
     private $galleryBuilder;
 
     /**
+     * @var Filesystem
+     */
+    private $fileSystem;
+
+    /**
+     * @var string
+     */
+    private $dirGallery;
+
+    /**
+     * @var string
+     */
+    private $dirPicture;
+
+    /**
      * DeleteGalleryAction constructor.
-     *
      * @param GalleryRepositoryInterface $galleryRepository
      * @param GalleryBuilderInterface $galleryBuilder
+     * @param Filesystem $fileSystem
+     * @param string $dirGallery
+     * @param string $dirPicture
      */
-    public function __construct(
-        GalleryRepositoryInterface $galleryRepository,
-        GalleryBuilderInterface $galleryBuilder
-    ) {
+    public function __construct(GalleryRepositoryInterface $galleryRepository, GalleryBuilderInterface $galleryBuilder, Filesystem $fileSystem, string $dirGallery, string $dirPicture)
+    {
         $this->galleryRepository = $galleryRepository;
         $this->galleryBuilder = $galleryBuilder;
+        $this->fileSystem = $fileSystem;
+        $this->dirGallery = $dirGallery;
+        $this->dirPicture = $dirPicture;
     }
 
 
@@ -65,6 +84,8 @@ class DeleteGalleryAction implements DeleteGalleryActionInterface
             $gallery->getPictures()->removeElement($picture);
 
         }
+
+        $this->fileSystem->remove($this->dirGallery .  $gallery->getSlug());
 
         $this->galleryRepository->delete($gallery);
 

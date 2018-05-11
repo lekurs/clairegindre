@@ -88,7 +88,7 @@ class UploadPicturesGalleryAction implements UploadPicturesGalleryActionInterfac
 
     /**
      * UploadPicturesGalleryAction constructor.
-     * 
+     *
      * @param GalleryRepositoryInterface $galleryRepository
      * @param FormFactoryInterface $formFactory
      * @param PictureBuilderInterface $pictureBuilder

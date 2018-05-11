@@ -44,6 +44,7 @@ class AddPicturesGalleryAction implements AddPicturesGalleryActionInterface
      * AddPicturesGalleryAction constructor.
      *
      * @param GalleryRepositoryInterface $galleryRepository
+     * @param StringReplaceUrlHelper $replaceService
      */
     public function __construct(
         GalleryRepositoryInterface $galleryRepository,
