@@ -16,6 +16,7 @@ use App\Domain\Models\Picture;
 use App\Domain\Models\User;
 use App\Domain\Repository\Interfaces\GalleryRepositoryInterface;
 use App\Services\PictureUploaderHelper;
+use App\Services\StringReplaceUrlHelper;
 use App\UI\Form\FormHandler\Interfaces\AddGalleryTypeHandlerInterface;
 use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 use Symfony\Component\Filesystem\Filesystem;
@@ -56,9 +57,14 @@ class AddGalleryTypeHandler implements AddGalleryTypeHandlerInterface
     private $fileSystem;
 
     /**
+     * @var StringReplaceUrlHelper
+     */
+    private $replaceService;
+
+    /**
      * @var string
      */
-    private $targetDir;
+    private $dirGallery;
 
     /**
      * AddGalleryTypeHandler constructor.
@@ -69,7 +75,8 @@ class AddGalleryTypeHandler implements AddGalleryTypeHandlerInterface
      * @param GalleryBuilderInterface $galleryBuilder
      * @param PictureUploaderHelper $pictureUploaderHelper
      * @param Filesystem $fileSystem
-     * @param string $targetDir
+     * @param StringReplaceUrlHelper $replaceService
+     * @param string $dirGallery
      */
     public function __construct(
         GalleryRepositoryInterface $galleryRepository,
@@ -78,7 +85,8 @@ class AddGalleryTypeHandler implements AddGalleryTypeHandlerInterface
         GalleryBuilderInterface $galleryBuilder,
         PictureUploaderHelper $pictureUploaderHelper,
         Filesystem $fileSystem,
-        string $targetDir
+        StringReplaceUrlHelper $replaceService,
+        string $dirGallery
     ) {
         $this->galleryRepository = $galleryRepository;
         $this->session = $session;
@@ -86,16 +94,21 @@ class AddGalleryTypeHandler implements AddGalleryTypeHandlerInterface
         $this->galleryBuilder = $galleryBuilder;
         $this->pictureUploaderHelper = $pictureUploaderHelper;
         $this->fileSystem = $fileSystem;
-        $this->targetDir = $targetDir;
+        $this->replaceService = $replaceService;
+        $this->dirGallery = $dirGallery;
     }
 
-
+    /**
+     * @param FormInterface $form
+     * @param $user
+     * @return bool
+     */
     public function handle(FormInterface $form, $user): bool
     {
         if($form->isSubmitted() && $form->isSubmitted()) {
 
             try {
-                $this->fileSystem->mkdir($this->targetDir . '/gallery', 0777);
+                $this->fileSystem->mkdir($this->dirGallery, 0777);
             } catch (IOExceptionInterface $exception) {
                 echo "une erreur est survenue durant la création du répertoire : ".$exception->getPath();
             }
@@ -103,7 +116,7 @@ class AddGalleryTypeHandler implements AddGalleryTypeHandlerInterface
             $gallery = $this->galleryBuilder->create($form->getData()->title, $user, $form->getData()->benefit);
 
             if(!$this->fileSystem->exists('images/upload/gallery/'.$form->getData()->title)) {
-                $this->fileSystem->mkdir(strtolower(str_replace(' ', '_', 'images/upload/gallery/'.$form->getData()->title)), 0755);
+                $this->fileSystem->mkdir($this->replaceService->replace($this->dirGallery . $form->getData()->title), 0755);
             }
 
             $this->validator->validate($gallery, [], [

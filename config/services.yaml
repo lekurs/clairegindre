@@ -13,6 +13,7 @@ services:
         bind:
                 $targetDir: '%kernel.project_dir%/public/images/upload'
                 $targetDirPublic: '%kernel.project_dir%/public'
+                $dirGallery: '%kernel.project_dir%/public/images/upload/gallery'
 
     App\Services\StringReplaceUrlHelper:
         autowire: true
