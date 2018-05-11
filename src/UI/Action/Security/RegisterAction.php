@@ -63,8 +63,7 @@ class RegisterAction
         UserPasswordEncoderInterface $userPasswordEncoder,
         RegistrationTypeHandlerInterface $registrationTypeHandler,
         UserBuilderInterface $userBuilder
-    )
-    {
+    ) {
         $this->formFactory = $formFactory;
         $this->userPasswordEncoder = $userPasswordEncoder;
         $this->registrationTypeHandler = $registrationTypeHandler;

@@ -51,7 +51,7 @@ class UserRepository extends ServiceEntityRepository implements UserLoaderInterf
     }
 
     /**
-     * @param $id
+     * @param $slug
      * @return User
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
@@ -97,6 +97,11 @@ class UserRepository extends ServiceEntityRepository implements UserLoaderInterf
     public function save(UserInterface $user): void
     {
         $this->getEntityManager()->persist($user);
+        $this->getEntityManager()->flush();
+    }
+
+    public function update()
+    {
         $this->getEntityManager()->flush();
     }
 }

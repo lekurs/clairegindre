@@ -65,8 +65,8 @@ class EditUserDTO implements EditUserDTOInterface
         string $lastName,
         string $plainPassword,
         bool $online,
-        \DateTime $dateWedding,
-        \SplFileInfo $picture = null
+        \DateTime $dateWedding
+//        \SplFileInfo $picture = null
     )
     {
         $this->email = $email;
@@ -75,6 +75,6 @@ class EditUserDTO implements EditUserDTOInterface
         $this->plainPassword = $plainPassword;
         $this->online = $online;
         $this->weddingDate = $dateWedding;
-        $this->picture = $picture;
+//        $this->picture = $picture;
     }
 }

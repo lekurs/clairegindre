@@ -75,11 +75,6 @@ class UserAuthenticationGuard extends AbstractFormLoginAuthenticator
      */
     public function getCredentials(Request $request)
     {
-        $csrfToken = $request->request->get('_csrf_token');
-
-//        if (!$this->csrfToken->isTokenValid(new CsrfToken('authenticate', $csrfToken))) {
-//            throw new InvalidCsrfTokenException('Token invalide');
-//        }
         return [
            'username' => $request->request->get('login')['username'],
             'password' => $request->request->get('login')['password'],
@@ -107,6 +102,11 @@ class UserAuthenticationGuard extends AbstractFormLoginAuthenticator
      */
     public function checkCredentials($credentials, UserInterface $user)
     {
+//        dump($user->getPassword(), $credentials['password']);
+//        die();
+//        if ($user->getEmail() != $credentials['username'] || $user->getPassword() != $credentials['password']) {
+//            return false;
+//        }
         return true;
     }
 
@@ -121,7 +121,7 @@ class UserAuthenticationGuard extends AbstractFormLoginAuthenticator
             'message' => 'Erreur d\'authentification',
         );
 
-        return new Response($data, Response::HTTP_FORBIDDEN);
+        return new Response($data['message'], Response::HTTP_FORBIDDEN);
     }
 
     /**

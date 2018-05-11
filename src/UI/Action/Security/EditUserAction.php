@@ -19,6 +19,9 @@ use App\UI\Responder\Security\Interfaces\UserEditResponderInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 /**
  * Class EditUserAction
@@ -53,28 +56,33 @@ class EditUserAction implements EditUserActionInterface
     private $userEditTypeHandler;
 
     /**
+     * @var TokenStorageInterface
+     */
+    private $tokenStorage;
+
+    /**
      * EditUserAction constructor.
      * @param UserRepositoryInterface $userRepository
      * @param UserBuilderInterface $userBuilder
      * @param FormFactoryInterface $formFactory
      * @param EditUserHandlerInterface $userEditTypeHandler
+     * @param TokenStorageInterface $tokenStorage
      */
-    public function __construct(UserRepositoryInterface $userRepository, UserBuilderInterface $userBuilder, FormFactoryInterface $formFactory, EditUserHandlerInterface $userEditTypeHandler)
+    public function __construct(UserRepositoryInterface $userRepository, UserBuilderInterface $userBuilder, FormFactoryInterface $formFactory, EditUserHandlerInterface $userEditTypeHandler, TokenStorageInterface $tokenStorage)
     {
         $this->userRepository = $userRepository;
         $this->userBuilder = $userBuilder;
         $this->formFactory = $formFactory;
         $this->userEditTypeHandler = $userEditTypeHandler;
+        $this->tokenStorage = $tokenStorage;
     }
 
 
     public function __invoke(Request $request, UserEditResponderInterface $responder)
     {
-        $user = $this->userRepository->showOne($request->get('slug'));
-//        dump($user->getPassword());
-//        $security = new TokenStorage();
-//        $security->setToken($this->token->getUser()->getPassword());
-//        dump($this->token);
+        $user = $this->userRepository->getOne($request->get('slug'));
+//        dump($user->getPassword());$this->tokenStorage->setToken();
+        dump($this->tokenStorage->getToken()->getUser()->getPassword());
 
 //        die();
 
