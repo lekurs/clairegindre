@@ -72,7 +72,8 @@
                 {
                     'script' : '/admin/gallery/pictures/upload',
                     'target': '{{ gallery.title }}',
-                    'gallery': '{{ gallery.id }}'
+                    'gallery': '{{ gallery.slug }}',
+                    'direction': '{{ gallery.slug }}'
                 }
             );
         });

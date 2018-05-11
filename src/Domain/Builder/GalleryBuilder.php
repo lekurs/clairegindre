@@ -25,7 +25,7 @@ class GalleryBuilder implements GalleryBuilderInterface
      */
     private $gallery;
 
-    public function create(string $title, UserInterface $user, BenefitInterface $benefit, string $slug, \DateTime $creationDate, ArticleInterface $article = null): GalleryBuilderInterface
+    public function create(string $title, UserInterface $user, BenefitInterface $benefit, string $slug, \Datetime $creationDate, ArticleInterface $article = null): GalleryBuilderInterface
     {
         $this->gallery = new Gallery($title, $user, $benefit, $slug, $creationDate = new \DateTime(), $article);
 

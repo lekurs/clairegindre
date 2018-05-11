@@ -11,9 +11,10 @@ services:
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
         public: false       # Allows optimizing the container by removing unused services; this also means
         bind:
-                $targetDir: '%kernel.project_dir%/public/images/upload'
-                $targetDirPublic: '%kernel.project_dir%/public'
+                $targetDir: '%kernel.project_dir%/public/images/upload/'
+                $targetDirPublic: '%kernel.project_dir%/public/'
                 $dirGallery: '%kernel.project_dir%/public/images/upload/gallery/'
+                $dirPicture: '/images/upload/gallery/'
 
     App\Services\StringReplaceUrlHelper:
         autowire: true

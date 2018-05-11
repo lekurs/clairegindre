@@ -15,6 +15,7 @@ use App\Domain\Models\Gallery;
 use App\Domain\Repository\Interfaces\GalleryRepositoryInterface;
 use App\Domain\Repository\Interfaces\PictureRepositoryInterface;
 use App\Services\PictureUploaderHelper;
+use App\Services\StringReplaceUrlHelper;
 use App\UI\Action\Admin\Interfaces\UploadPicturesGalleryActionInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Filesystem\Filesystem;
@@ -73,10 +74,21 @@ class UploadPicturesGalleryAction implements UploadPicturesGalleryActionInterfac
     /**
      * @var string
      */
-    private $targetDir;
+    private $dirGallery;
+
+    /**
+     * @var StringReplaceUrlHelper
+     */
+    private $stringReplaceService;
+
+    /**
+     * @var string
+     */
+    private $dirPicture;
 
     /**
      * UploadPicturesGalleryAction constructor.
+     * 
      * @param GalleryRepositoryInterface $galleryRepository
      * @param FormFactoryInterface $formFactory
      * @param PictureBuilderInterface $pictureBuilder
@@ -84,10 +96,22 @@ class UploadPicturesGalleryAction implements UploadPicturesGalleryActionInterfac
      * @param PictureRepositoryInterface $pictureRepository
      * @param PictureUploaderHelper $pictureUploaderHelper
      * @param Filesystem $fileSystem
-     * @param string $targetDir
+     * @param string $dirGallery
+     * @param StringReplaceUrlHelper $stringReplaceService
+     * @param string $dirPicture
      */
-    public function __construct(GalleryRepositoryInterface $galleryRepository, FormFactoryInterface $formFactory, PictureBuilderInterface $pictureBuilder, GalleryBuilderInterface $galleryBuilder, PictureRepositoryInterface $pictureRepository, PictureUploaderHelper $pictureUploaderHelper, Filesystem $fileSystem, string $targetDir)
-    {
+    public function __construct(
+        GalleryRepositoryInterface $galleryRepository,
+        FormFactoryInterface $formFactory,
+        PictureBuilderInterface $pictureBuilder,
+        GalleryBuilderInterface $galleryBuilder,
+        PictureRepositoryInterface $pictureRepository,
+        PictureUploaderHelper $pictureUploaderHelper,
+        Filesystem $fileSystem,
+        string $dirGallery,
+        StringReplaceUrlHelper $stringReplaceService,
+        string  $dirPicture
+    ) {
         $this->galleryRepository = $galleryRepository;
         $this->formFactory = $formFactory;
         $this->pictureBuilder = $pictureBuilder;
@@ -95,7 +119,9 @@ class UploadPicturesGalleryAction implements UploadPicturesGalleryActionInterfac
         $this->pictureRepository = $pictureRepository;
         $this->pictureUploaderHelper = $pictureUploaderHelper;
         $this->fileSystem = $fileSystem;
-        $this->targetDir = $targetDir;
+        $this->dirGallery = $dirGallery;
+        $this->stringReplaceService = $stringReplaceService;
+        $this->dirPicture = $dirPicture;
     }
 
 
@@ -105,13 +131,12 @@ class UploadPicturesGalleryAction implements UploadPicturesGalleryActionInterfac
 
         $this->pictureUploaderHelper->move(
                                                                             $request->files->get('picture'),
-                                                                            $this->targetDir . '/gallery/' . str_replace(' ', '_', strtolower($request->request->get('destination'))),
+                                                                            $this->dirGallery . $this->stringReplaceService->replace($request->request->get('destination')),//
                                                                             $request->files->get('picture')->getClientOriginalName()
                                                                         );
-
         $this->pictureBuilder->create(
                                                                 $request->files->get('picture')->getClientOriginalName(),
-                                                                'images/upload/gallery/' . $request->request->get('destination'),
+                                                                $this->dirPicture . $this->stringReplaceService->replace($request->request->get('destination')),
                                                                 $request->files->get('picture')->guessClientExtension(),
                                                                 $request->request->get('order'),
                                                                 $request->request->get('favorite'), $gallery

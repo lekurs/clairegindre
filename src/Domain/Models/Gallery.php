@@ -64,6 +64,7 @@ class Gallery implements GalleryInterface
         UserInterface $user,
         BenefitInterface $benefit,
         string $slug,
+        \DateTime $creationDate,
         ArticleInterface $article = null
     ) {
         $this->id = Uuid::uuid4();

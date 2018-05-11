@@ -61,11 +61,12 @@ class DeleteGalleryAction implements DeleteGalleryActionInterface
         $gallery = $this->galleryRepository->getOne($request->get('slug'));
 
         foreach($gallery->getPictures() as $picture) {
+
             $gallery->getPictures()->removeElement($picture);
+
         }
 
-        $this->entityManager->remove($gallery);
-        $this->entityManager->flush();
+        $this->galleryRepository->delete($gallery);
 
         return $responder();
     }
