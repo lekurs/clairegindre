@@ -9,7 +9,7 @@
 namespace App\UI\Action\Security\Interfaces;
 
 
-interface UserEditActionInterface
+interface EditUserActionInterface
 {
 
 }

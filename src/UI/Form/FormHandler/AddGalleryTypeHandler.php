@@ -115,6 +115,7 @@ class AddGalleryTypeHandler implements AddGalleryTypeHandlerInterface
             $gallery = $this->galleryBuilder->create($form->getData()->title, $user, $form->getData()->benefit, $this->replaceService->replace($form->getData()->title), new \DateTime());
 
             if(!$this->fileSystem->exists($this->dirGallery . $this->replaceService->replace($form->getData()->title))) {
+
                 $this->fileSystem->mkdir($this->dirGallery . $this->replaceService->replace($form->getData()->title), 0755);
             }
 

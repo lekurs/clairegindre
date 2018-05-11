@@ -24,7 +24,7 @@ interface UserRepositoryInterface
      * @param $id
      * @return User
      */
-    public function showOne($id): User;
+    public function getOne($id): User;
 
     /**
      * @return mixed

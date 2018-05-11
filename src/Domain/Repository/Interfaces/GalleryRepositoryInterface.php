@@ -25,23 +25,23 @@ interface GalleryRepositoryInterface
      */
     public function getWithPictures($slug);
 
-    /**
-     * @return mixed
-     */
-    public function getAllWithPictures();
-
-    /**
-     * @param $id
-     * @return mixed
-     */
-    public function getGalleryByUser($id);
-
-    /**
-     * @param $idUser
-     * @param $idGallery
-     * @return mixed
-     */
-    public function getGalleryByUserAndId($idUser, $idGallery);
+//    /**
+//     * @return mixed
+//     */
+//    public function getAllWithPictures();
+//
+//    /**
+//     * @param $id
+//     * @return mixed
+//     */
+//    public function getGalleryByUser($id);
+//
+//    /**
+//     * @param $idUser
+//     * @param $idGallery
+//     * @return mixed
+//     */
+//    public function getGalleryByUserAndId($idUser, $idGallery);
 
     /**
      * @param int $first

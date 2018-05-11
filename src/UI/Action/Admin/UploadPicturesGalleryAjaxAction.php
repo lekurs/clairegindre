@@ -25,7 +25,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * Class UploadPicturesGalleryAction
+ * Class UploadPicturesGalleryAjaxAction
  *
  * @Route(
  *     name="uploadImages",
@@ -34,7 +34,7 @@ use Symfony\Component\Routing\Annotation\Route;
  * )
  *
  */
-class UploadPicturesGalleryAction implements UploadPicturesGalleryActionInterface
+class UploadPicturesGalleryAjaxAction implements UploadPicturesGalleryActionInterface
 {
     /**
      * @var GalleryRepositoryInterface
@@ -87,7 +87,7 @@ class UploadPicturesGalleryAction implements UploadPicturesGalleryActionInterfac
     private $dirPicture;
 
     /**
-     * UploadPicturesGalleryAction constructor.
+     * UploadPicturesGalleryAjaxAction constructor.
      *
      * @param GalleryRepositoryInterface $galleryRepository
      * @param FormFactoryInterface $formFactory
@@ -129,9 +129,12 @@ class UploadPicturesGalleryAction implements UploadPicturesGalleryActionInterfac
     {
         $gallery = $this->galleryRepository->getOne($request->request->get('gallery'));
 
+        dump($this->dirGallery . $this->stringReplaceService->replace($request->request->get('destination')));
+        die();
+
         $this->pictureUploaderHelper->move(
                                                                             $request->files->get('picture'),
-                                                                            $this->dirGallery . $this->stringReplaceService->replace($request->request->get('destination')),//
+                                                                            $this->dirGallery . $this->stringReplaceService->replace($request->request->get('destination')),
                                                                             $request->files->get('picture')->getClientOriginalName()
                                                                         );
         $this->pictureBuilder->create(

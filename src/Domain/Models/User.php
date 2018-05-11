@@ -9,7 +9,6 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 class User implements UserInterface, BaseUser
 {
-
     /**
      * @var string
      */
@@ -61,6 +60,11 @@ class User implements UserInterface, BaseUser
     private $roles;
 
     /**
+     * @var string
+     */
+    private $slug;
+
+    /**
      * @var \ArrayAccess
      */
     private $galleries;
@@ -107,7 +111,8 @@ class User implements UserInterface, BaseUser
         \DateTime $dateWedding,
         PictureInterface $picture,
         bool $online,
-        string $roles
+        string $roles,
+        string $slug
     ) {
         $this->id = Uuid::uuid4();
         $this->email = $email;
@@ -118,6 +123,7 @@ class User implements UserInterface, BaseUser
         $this->picture = $picture;
         $this->online = $online;
         $this->roles[] = $roles;
+        $this->slug = $slug;
     }
 
 
@@ -130,27 +136,11 @@ class User implements UserInterface, BaseUser
     }
 
     /**
-     * @param mixed $id
-     */
-    public function setId($id): void
-    {
-        $this->id = $id;
-    }
-
-    /**
      * @return mixed
      */
     public function getEmail()
     {
         return $this->email;
-    }
-
-    /**
-     * @param mixed $email
-     */
-    public function setEmail($email): void
-    {
-        $this->email = $email;
     }
 
     /**
@@ -162,14 +152,6 @@ class User implements UserInterface, BaseUser
     }
 
     /**
-     * @param mixed $name
-     */
-    public function setUsername($name): void
-    {
-        $this->username = $name;
-    }
-
-    /**
      * @return mixed
      */
     public function getLastName()
@@ -177,13 +159,6 @@ class User implements UserInterface, BaseUser
         return $this->lastName;
     }
 
-    /**
-     * @param mixed $lastName
-     */
-    public function setLastName($lastName): void
-    {
-        $this->lastName = $lastName;
-    }
     /**
      * @return mixed
      */
@@ -193,27 +168,11 @@ class User implements UserInterface, BaseUser
     }
 
     /**
-     * @param mixed $password
-     */
-    public function setPassword($password): void
-    {
-        $this->password = $password;
-    }
-
-    /**
      * @return mixed
      */
     public function getDateWedding()
     {
         return $this->dateWedding;
-    }
-
-    /**
-     * @param mixed $dateWedding
-     */
-    public function setDateWedding($dateWedding): void
-    {
-        $this->dateWedding = $dateWedding;
     }
 
     /**
@@ -266,10 +225,39 @@ class User implements UserInterface, BaseUser
         return $this->roles;
     }
 
-    public function setRoles($roles)
+    /**
+     * @return string
+     */
+    public function getSlug(): string
     {
-        $this->roles[] = $roles;
+        return $this->slug;
     }
+
+    /**
+     * @return \ArrayAccess
+     */
+    public function getArticles(): \ArrayAccess
+    {
+        return $this->articles;
+    }
+
+    /**
+     * @return \ArrayAccess
+     */
+    public function getComments(): \ArrayAccess
+    {
+        return $this->comments;
+    }
+
+    /**
+     * @return \ArrayAccess
+     */
+    public function getReviews(): \ArrayAccess
+    {
+        return $this->reviews;
+    }
+
+
 
     /**
      * @return string

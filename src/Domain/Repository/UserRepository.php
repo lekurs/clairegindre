@@ -55,11 +55,11 @@ class UserRepository extends ServiceEntityRepository implements UserLoaderInterf
      * @return User
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
-    public function showOne($id): User
+    public function getOne($slug): User
     {
         return $this->createQueryBuilder('user')
-            ->where('user.id = :id')
-            ->setParameter('id', $id)
+            ->where('user.slug = :slug')
+            ->setParameter('slug', $slug)
             ->getQuery()
             ->getOneOrNullResult();
     }

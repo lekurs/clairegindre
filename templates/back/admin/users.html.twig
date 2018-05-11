@@ -40,7 +40,7 @@
                                 <p>{{ user.username }} - {{ user.lastName }}</p>
                             </div>
                             <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
-                                <a href="{{ path('adminUserEdit', {'id': user.id}) }}"><i class="fa fa-edit"></i></a>
+                                <a href="{{ path('adminUserEdit', {'slug': user.slug}) }}"><i class="fa fa-edit"></i></a>
                             </div>
                             <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
                                 {% if user.online == 1 %}

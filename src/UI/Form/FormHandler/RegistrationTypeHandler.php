@@ -13,6 +13,7 @@ use App\Domain\Models\Interfaces\UserInterface;
 use App\Domain\Models\Picture;
 use App\Domain\Repository\Interfaces\UserRepositoryInterface;
 use App\Services\PictureUploaderHelper;
+use App\Services\StringReplaceUrlHelper;
 use App\UI\Form\FormHandler\Interfaces\RegistrationTypeHandlerInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Form\FormInterface;
@@ -57,8 +58,12 @@ class RegistrationTypeHandler implements RegistrationTypeHandlerInterface
     private $targetDir;
 
     /**
+     * @var StringReplaceUrlHelper
+     */
+    private $stringReplaceHelper;
+
+    /**
      * RegistrationTypeHandler constructor.
-     *
      * @param UserRepositoryInterface $userRepository
      * @param SessionInterface $session
      * @param ValidatorInterface $validator
@@ -66,6 +71,7 @@ class RegistrationTypeHandler implements RegistrationTypeHandlerInterface
      * @param Filesystem $fileSystem
      * @param PictureUploaderHelper $pictureUploaderHelper
      * @param string $targetDir
+     * @param StringReplaceUrlHelper $stringReplaceHelper
      */
     public function __construct(
         UserRepositoryInterface $userRepository,
@@ -74,7 +80,8 @@ class RegistrationTypeHandler implements RegistrationTypeHandlerInterface
         UserBuilderInterface $userBuilder,
         Filesystem $fileSystem,
         PictureUploaderHelper $pictureUploaderHelper,
-        string $targetDir
+        string $targetDir,
+        StringReplaceUrlHelper $stringReplaceHelper
     ) {
         $this->userRepository = $userRepository;
         $this->session = $session;
@@ -83,6 +90,7 @@ class RegistrationTypeHandler implements RegistrationTypeHandlerInterface
         $this->fileSystem = $fileSystem;
         $this->pictureUploaderHelper = $pictureUploaderHelper;
         $this->targetDir = $targetDir;
+        $this->stringReplaceHelper = $stringReplaceHelper;
     }
 
 
@@ -106,7 +114,8 @@ class RegistrationTypeHandler implements RegistrationTypeHandlerInterface
                                                                             $form->getData()->dateWedding,
                                                                             $picture,
                                                                             '1',
-                                                                            'ROLE_USER'
+                                                                            'ROLE_USER',
+                                                                            $this->stringReplaceHelper->replace($form->getData()->username . '-' . $form->getData()->lastName)
                                                                         );
 
             $this->validator->validate($user, [], [

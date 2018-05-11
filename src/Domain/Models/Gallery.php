@@ -57,6 +57,7 @@ class Gallery implements GalleryInterface
      * @param UserInterface $user
      * @param BenefitInterface $benefit
      * @param string $slug
+     * @param \DateTime $creationDate
      * @param ArticleInterface|null $article
      */
     public function __construct(

@@ -13,6 +13,7 @@
         <field name="dateWedding" type="date" nullable="true" unique="false" />
         <field name="online" type="boolean" nullable="false" unique="false" />
         <field name="roles" type="array" nullable="false" unique="false" />
+        <field name="slug" type="string" length="200" nullable="false" unique="false" />
 
         <one-to-one field="picture" target-entity="App\Domain\Models\Picture" >
             <cascade>

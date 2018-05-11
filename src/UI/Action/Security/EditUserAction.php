@@ -12,31 +12,30 @@ namespace App\UI\Action\Security;
 use App\Domain\Builder\Interfaces\UserBuilderInterface;
 use App\Domain\DTO\EditUserDTO;
 use App\Domain\Form\Type\EditUserType;
-use App\Domain\Models\User;
-use App\UI\Action\Security\Interfaces\UserEditActionInterface;
+use App\Domain\Repository\Interfaces\UserRepositoryInterface;
+use App\UI\Action\Security\Interfaces\EditUserActionInterface;
 use App\UI\Form\FormHandler\Interfaces\EditUserHandlerInterface;
 use App\UI\Responder\Security\Interfaces\UserEditResponderInterface;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * Class UserEditAction
+ * Class EditUserAction
  *
  * @Route(
  *     name="adminUserEdit",
- *     path="admin/users/edit/{id}"
+ *     path="admin/users/edit/{slug}"
  * )
  *
  * @package App\UI\Action\Security
  */
-class UserEditAction implements UserEditActionInterface
+class EditUserAction implements EditUserActionInterface
 {
     /**
-     * @var EntityManagerInterface
+     * @var UserRepositoryInterface
      */
-    private $entityManager;
+    private $userRepository;
 
     /**
      * @var UserBuilderInterface
@@ -54,20 +53,15 @@ class UserEditAction implements UserEditActionInterface
     private $userEditTypeHandler;
 
     /**
-     * UserEditAction constructor.
-     *
-     * @param EntityManagerInterface $entityManager
+     * EditUserAction constructor.
+     * @param UserRepositoryInterface $userRepository
      * @param UserBuilderInterface $userBuilder
      * @param FormFactoryInterface $formFactory
      * @param EditUserHandlerInterface $userEditTypeHandler
      */
-    public function __construct(
-        EntityManagerInterface $entityManager,
-        UserBuilderInterface $userBuilder,
-        FormFactoryInterface $formFactory,
-        EditUserHandlerInterface $userEditTypeHandler
-    ) {
-        $this->entityManager = $entityManager;
+    public function __construct(UserRepositoryInterface $userRepository, UserBuilderInterface $userBuilder, FormFactoryInterface $formFactory, EditUserHandlerInterface $userEditTypeHandler)
+    {
+        $this->userRepository = $userRepository;
         $this->userBuilder = $userBuilder;
         $this->formFactory = $formFactory;
         $this->userEditTypeHandler = $userEditTypeHandler;
@@ -76,7 +70,7 @@ class UserEditAction implements UserEditActionInterface
 
     public function __invoke(Request $request, UserEditResponderInterface $responder)
     {
-        $user = $this->entityManager->getRepository(User::class)->showOne($request->get('id'));
+        $user = $this->userRepository->showOne($request->get('slug'));
 //        dump($user->getPassword());
 //        $security = new TokenStorage();
 //        $security->setToken($this->token->getUser()->getPassword());

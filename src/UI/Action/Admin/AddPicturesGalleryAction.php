@@ -9,12 +9,10 @@
 namespace App\UI\Action\Admin;
 
 
-use App\Domain\Models\Gallery;
 use App\Domain\Repository\Interfaces\GalleryRepositoryInterface;
 use App\Services\StringReplaceUrlHelper;
 use App\UI\Action\Admin\Interfaces\AddPicturesGalleryActionInterface;
 use App\UI\Responder\Admin\Interfaces\AddPicturesGalleryResponderInterface;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 

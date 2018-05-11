@@ -9,7 +9,28 @@
 namespace App\UI\Action\Admin\Interfaces;
 
 
+use App\Domain\Repository\Interfaces\GalleryRepositoryInterface;
+use App\UI\Responder\Admin\Interfaces\DeleteGalleryResponderInterface;
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\HttpFoundation\Request;
+
 interface DeleteGalleryActionInterface
 {
+    /**
+     * DeleteGalleryActionInterface constructor.
+     *
+     * @param GalleryRepositoryInterface $galleryRepository
+     * @param Filesystem $fileSystem
+     * @param string $dirGallery
+     * @param string $dirPicture
+     */
+    public function __construct(GalleryRepositoryInterface $galleryRepository, Filesystem $fileSystem, string $dirGallery, string $dirPicture);
+
+    /**
+     * @param Request $request
+     * @param DeleteGalleryResponderInterface $responder
+     * @return mixed
+     */
+    public function __invoke(Request $request, DeleteGalleryResponderInterface $responder);
 
 }

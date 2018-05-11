@@ -46,44 +46,45 @@ class UserBuilder implements UserBuilderInterface
      * @param PictureInterface $picture
      * @param bool $online
      * @param $role
+     * @param string $slug
      * @return UserBuilderInterface
      */
-  public function create(string $email, string $username, string $lastName, string $password, \DateTime $dateTime, PictureInterface $picture, bool $online, $role): UserBuilderInterface
+  public function create(string $email, string $username, string $lastName, string $password, \DateTime $dateTime, PictureInterface $picture, bool $online, $role, string $slug): UserBuilderInterface
   {
       $encoder = $this->encoderFactory->getEncoder(User::class);
 
-      $this->user = new User($email, $username, $lastName, $password, \Closure::fromCallable([$encoder, 'encodePassword']),$dateTime, $picture, $online, $role);
+      $this->user = new User($email, $username, $lastName, $password, \Closure::fromCallable([$encoder, 'encodePassword']),$dateTime, $picture, $online, $role, $slug);
 
       return $this;
   }
-
-    public function withId(int $user): UserBuilderInterface
-    {
-        $this->user->setId($user);
-
-        return $this;
-    }
-
-    public function withPassword(string $password): UserBuilderInterface
-    {
-        $this->user->setPlainPassword($password);
-
-        return $this;
-    }
-
-    public function withPicture(Picture $picture): UserBuilderInterface
-    {
-        $this->user->setPicture($picture);
-
-        return $this;
-    }
-
-    public function withRole($role): UserBuilderInterface
-    {
-        $this->user->setRoles($role);
-
-        return $this;
-    }
+//
+//    public function withId(int $user): UserBuilderInterface
+//    {
+//        $this->user->setId($user);
+//
+//        return $this;
+//    }
+//
+//    public function withPassword(string $password): UserBuilderInterface
+//    {
+//        $this->user->setPlainPassword($password);
+//
+//        return $this;
+//    }
+//
+//    public function withPicture(Picture $picture): UserBuilderInterface
+//    {
+//        $this->user->setPicture($picture);
+//
+//        return $this;
+//    }
+//
+//    public function withRole($role): UserBuilderInterface
+//    {
+//        $this->user->setRoles($role);
+//
+//        return $this;
+//    }
 
     public function getUser(): User
     {
