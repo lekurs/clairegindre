@@ -27,16 +27,13 @@ final class StringReplaceUrlHelper
 //    }
 
     /**
-     * @param $url
+     * @param $string
      * @return string
      */
-    public function replace($url)
+    public function replace($string)
     {
-        \Transliterator::createFromRules("::Latin-ASCII; ::Lower; [^[:L:][:N:]]+ > '-';");
-//        $this->transliterator->createFromRules();
-
-//        $result =
-//$this->transliterator->transliterate($url, '-');
-        return \Transliterator::translirate($url, '-');
+        $string = transliterator_transliterate("Any-Latin; NFD; [:Nonspacing Mark:] Remove; NFC; [:Punctuation:] Remove; Lower();", $string);
+        $string = preg_replace('/[-\s]+/', '-', $string);
+        return trim($string, '-');
     }
 }

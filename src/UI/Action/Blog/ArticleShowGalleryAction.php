@@ -118,7 +118,8 @@ class ArticleShowGalleryAction implements ArticleShowGalleryActionInterface
         $reviews = $this->reviewsRepository->getAll();
 
         $article = $this->articleRepository->getOne($this->stringReplace->replace($request->get('titleArticle')));
-        dump($this->stringReplace->replace($request->get('titleArticle')));
+
+        dump($this->stringReplace->replace($request->get('titleArticle')) .'/'.$this->stringReplace->replace($request->get('galleryTitle')));
 
         $form = $this->formFactory->create(ContactType::class);
 

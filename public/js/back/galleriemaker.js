@@ -3,7 +3,7 @@
     var o = {
         class : 'galleriemaker',
         nbcell : 3,
-        modal : '#exampleModal',
+        modal : '#createImgModal',
         script : 'upload.php'
     }
 
@@ -50,7 +50,7 @@
                 for(i=1; i<=nb; i++)
                 {
                     cell = $("<div>").addClass("col").addClass(o.class+"-content-img");
-                    $("<div>").addClass(o.class+"-content-img-action").attr("data-toggle", "modal").attr("data-target", o.modal).html('<i class="fas fa-camera-retro fa-10x"></i>').appendTo(cell);
+                    $("<div>").addClass(o.class+"-content-img-action").attr("data-toggle", "modal").attr("data-target", o.modal).html('<i class="fa fa-camera-retro fa-5x"></i>').appendTo(cell);
                     $(cell).appendTo(line_img);
                 }
                 $(col_capsule).append(line_img);
