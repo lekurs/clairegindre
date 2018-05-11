@@ -7,8 +7,9 @@
     <entity name="App\Domain\Models\Gallery" table="clairegindre_gallery" repository-class="App\Domain\Repository\GalleryRepository">
         <id name="id" column="id" type="string"/>
         <field name="title" type="string" length="255" nullable="false" unique="true" />
+        <field name="slug" type="string" length="200" nullable="false" unique="false" />
 
-        <one-to-one field="article" target-entity="App\Domain\Models\Article" />
+        <one-to-one field="article" target-entity="App\Domain\Models\Article" orphan-removal="true" />
 
         <one-to-many field="pictures" target-entity="App\Domain\Models\Picture" mapped-by="gallery" orphan-removal="true">
             <cascade>

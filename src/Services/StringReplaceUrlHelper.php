@@ -11,30 +11,25 @@ namespace App\Services;
 use \Transliterator;
 final class StringReplaceUrlHelper
 {
+    function replace($desi)
+    {
+        $transliterator = \Transliterator::createFromRules("::Latin-ASCII; ::Lower; [^[:L:][:N:]]+ > '-';");
 
-//    /**
-//     * @var Transliterator
-//     */
-//    private $transliterator;
+        $value = trim($transliterator->transliterate($desi), '-');
+
+
+        return $value;
+    }
 //
 //    /**
-//     * StringReplaceUrlHelper constructor.
-//     * @param Transliterator $transliterator
+//     * @param $string
+//     * @return string
 //     */
-//    public function __construct(Transliterator $transliterator)
+//    public function replace($string)
 //    {
-//        $this->transliterator = $transliterator;
+//        $string = transliterator_transliterate("Any-Latin; NFD; [:Nonspacing Mark:] Remove; NFC; [:Punctuation:] Remove; Lower();", $string);
+//        $string = preg_replace('/[-\s]+/', '-', $string);
+//
+//        return trim($string, '-');
 //    }
-
-    /**
-     * @param $string
-     * @return string
-     */
-    public function replace($string)
-    {
-        $string = transliterator_transliterate("Any-Latin; NFD; [:Nonspacing Mark:] Remove; NFC; [:Punctuation:] Remove; Lower();", $string);
-        $string = preg_replace('/[-\s]+/', '-', $string);
-
-        return trim($string, '-');
-    }
 }

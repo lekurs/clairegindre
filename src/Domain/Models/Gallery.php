@@ -41,40 +41,40 @@ class Gallery implements GalleryInterface
     private $article;
 
     /**
+     * @var string
+     */
+    private $slug;
+
+    /**
      * Gallery constructor.
      *
      * @param UserInterface $user
      * @param string $title
      * @param BenefitInterface $benefit
+     * @param string $slug
      * @param ArticleInterface $article
      */
     public function __construct(
         string $title,
         UserInterface $user,
         BenefitInterface $benefit,
+        string $slug,
         ArticleInterface $article = null
     ) {
         $this->id = Uuid::uuid4();
         $this->title = $title;
         $this->user = $user;
         $this->benefit = $benefit;
+        $this->slug = $slug;
         $this->article = $article;
     }
 
-
     /**
-     * @return mixed
+     * @return string
      */
-    public function getId()
+    public function getId(): string
     {
         return $this->id;
-    }
-    /**
-     * @param mixed $id
-     */
-    public function setId($id): void
-    {
-        $this->id = $id;
     }
 
     /**
@@ -86,14 +86,6 @@ class Gallery implements GalleryInterface
     }
 
     /**
-     * @param string $title
-     */
-    public function setTitle(string $title): void
-    {
-        $this->title = $title;
-    }
-
-    /**
      * @return mixed
      */
     public function getUser()
@@ -102,27 +94,11 @@ class Gallery implements GalleryInterface
     }
 
     /**
-     * @param $user
-     */
-    public function setUser(User $user)
-    {
-        $this->user = $user;
-    }
-
-    /**
      * @return mixed
      */
     public function getBenefit()
     {
         return $this->benefit;
-    }
-
-    /**
-     * @param $benefit
-     */
-    public function setBenefit(BenefitInterface $benefit): void
-    {
-        $this->benefit = $benefit;
     }
 
     /**
@@ -152,10 +128,10 @@ class Gallery implements GalleryInterface
     }
 
     /**
-     * @param ArticleInterface $article
+     * @return string
      */
-    public function setArticle(ArticleInterface $article): void
+    public function getSlug(): string
     {
-        $this->article = $article;
+        return $this->slug;
     }
 }

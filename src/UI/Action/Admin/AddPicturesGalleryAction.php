@@ -10,6 +10,8 @@ namespace App\UI\Action\Admin;
 
 
 use App\Domain\Models\Gallery;
+use App\Domain\Repository\Interfaces\GalleryRepositoryInterface;
+use App\Services\StringReplaceUrlHelper;
 use App\UI\Action\Admin\Interfaces\AddPicturesGalleryActionInterface;
 use App\UI\Responder\Admin\Interfaces\AddPicturesGalleryResponderInterface;
 use Doctrine\ORM\EntityManagerInterface;
@@ -20,8 +22,8 @@ use Symfony\Component\Routing\Annotation\Route;
  * Class AddPicturesGalleryAction
  *
  * @Route(
- *     name="adminPictures",
- *     path="admin/gallery/{id}/pictures",
+ *     name="adminAddPicturesGallery",
+ *     path="admin/gallery/pictures/{slug}",
  *     methods={"GET"}
  * )
  *
@@ -29,22 +31,37 @@ use Symfony\Component\Routing\Annotation\Route;
 class AddPicturesGalleryAction implements AddPicturesGalleryActionInterface
 {
     /**
-     * @var EntityManagerInterface
+     * @var GalleryRepositoryInterface
      */
-    private $entityManager;
+    private $galleryRepository;
+
+    /**
+     * @var StringReplaceUrlHelper
+     */
+    private $replaceService;
 
     /**
      * AddPicturesGalleryAction constructor.
-     * @param EntityManagerInterface $entityManager
+     *
+     * @param GalleryRepositoryInterface $galleryRepository
      */
-    public function __construct(EntityManagerInterface $entityManager)
-    {
-        $this->entityManager = $entityManager;
+    public function __construct(
+        GalleryRepositoryInterface $galleryRepository,
+        StringReplaceUrlHelper $replaceService
+    ) {
+        $this->galleryRepository = $galleryRepository;
+        $this->replaceService = $replaceService;
     }
+
 
     public function __invoke(Request $request, AddPicturesGalleryResponderInterface $responder)
     {
-        $gallery = $this->entityManager->getRepository(Gallery::class)->getWithPictures($request->get('id'));
+        dump($this->replaceService->replace($request->get('slug')));
+        $gallery = $this->galleryRepository->test($request->get('slug'));
+//        dump($gallerytest);
+
+//        $gallery = $this->galleryRepository->getWithPictures($request->get('slug'));
+        dump($gallery);
 
         return $responder(false, $gallery);
     }

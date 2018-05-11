@@ -54,19 +54,28 @@ class GalleryRepository extends ServiceEntityRepository implements GalleryReposi
     }
 
     /**
-     * @param $titleGallery
+     * @param $slug
      * @return mixed
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
-    public function getWithPictures($titleGallery)
+    public function getWithPictures($slug)
     {
         return $this->createQueryBuilder('gallery')
-            ->where('gallery.title = :titleGallery')
-            ->setParameter('titleGallery', $titleGallery)
+            ->where('gallery.slug = :slug')
+            ->setParameter('slug', $slug)
             ->innerJoin('gallery.pictures', 'pictures')
             ->getQuery()
             ->getOneOrNullResult()
             ;
+    }
+
+    public function test($slug)
+    {
+        return $this->createQueryBuilder('gallery')
+                            ->where('gallery.slug = :slug')
+                            ->setParameter('slug', $slug)
+            ->getQuery()
+            ->getOneOrNullResult();
     }
 
     public function getWithPicturesById($idGallery)

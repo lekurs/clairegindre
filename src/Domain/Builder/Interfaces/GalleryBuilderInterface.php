@@ -21,10 +21,11 @@ interface GalleryBuilderInterface
      * @param string $title
      * @param UserInterface $user
      * @param BenefitInterface $benefit
+     * @param string $slug
      * @param ArticleInterface|null $article
      * @return GalleryBuilderInterface
      */
-    public function create(string $title, UserInterface $user, BenefitInterface $benefit, ArticleInterface $article = null): GalleryBuilderInterface;
+    public function create(string $title, UserInterface $user, BenefitInterface $benefit, string $slug, ArticleInterface $article = null): GalleryBuilderInterface;
 
     /**
      * @param PictureInterface $picture

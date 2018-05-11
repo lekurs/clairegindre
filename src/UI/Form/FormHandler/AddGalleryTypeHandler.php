@@ -67,6 +67,11 @@ class AddGalleryTypeHandler implements AddGalleryTypeHandlerInterface
     private $dirGallery;
 
     /**
+     * @var string
+     */
+    private $targetDir;
+
+    /**
      * AddGalleryTypeHandler constructor.
      *
      * @param GalleryRepositoryInterface $galleryRepository
@@ -86,7 +91,8 @@ class AddGalleryTypeHandler implements AddGalleryTypeHandlerInterface
         PictureUploaderHelper $pictureUploaderHelper,
         Filesystem $fileSystem,
         StringReplaceUrlHelper $replaceService,
-        string $dirGallery
+        string $dirGallery,
+    string $targetDir
     ) {
         $this->galleryRepository = $galleryRepository;
         $this->session = $session;
@@ -96,6 +102,7 @@ class AddGalleryTypeHandler implements AddGalleryTypeHandlerInterface
         $this->fileSystem = $fileSystem;
         $this->replaceService = $replaceService;
         $this->dirGallery = $dirGallery;
+        $this->targetDir = $targetDir;
     }
 
     /**
@@ -113,10 +120,10 @@ class AddGalleryTypeHandler implements AddGalleryTypeHandlerInterface
                 echo "une erreur est survenue durant la création du répertoire : ".$exception->getPath();
             }
 
-            $gallery = $this->galleryBuilder->create($form->getData()->title, $user, $form->getData()->benefit);
+            $gallery = $this->galleryBuilder->create($form->getData()->title, $user, $form->getData()->benefit, $this->replaceService->replace($form->getData()->title));
 
-            if(!$this->fileSystem->exists('images/upload/gallery/'.$form->getData()->title)) {
-                $this->fileSystem->mkdir($this->replaceService->replace($this->dirGallery . $form->getData()->title), 0755);
+            if(!$this->fileSystem->exists($this->dirGallery . $form->getData()->title)) {
+                $this->fileSystem->mkdir($this->dirGallery . $this->replaceService->replace($form->getData()->title), 0755);
             }
 
             $this->validator->validate($gallery, [], [

@@ -14,7 +14,7 @@
 
         <many-to-one field="author" target-entity="App\Domain\Models\User" inversed-by="articles" />
         <one-to-many field="comments" target-entity="App\Domain\Models\Comment" mapped-by="article" />
-        <one-to-one field="gallery" target-entity="App\Domain\Models\Gallery">
+        <one-to-one field="gallery" target-entity="App\Domain\Models\Gallery" orphan-removal="true">
             <join-column name="gallery_id" referenced-column-name="id" />
         </one-to-one>
         <many-to-one field="prestation" target-entity="App\Domain\Models\Benefit" inversed-by="articles" />
