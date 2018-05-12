@@ -16,7 +16,7 @@ services:
                 $dirGallery: '%kernel.project_dir%/public/images/upload/gallery/'
                 $dirPicture: '/images/upload/gallery/'
 
-    App\Services\StringReplaceUrlHelper:
+    App\Services\SlugHelper:
         autowire: true
         public: false
 

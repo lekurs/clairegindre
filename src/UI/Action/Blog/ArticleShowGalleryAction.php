@@ -17,7 +17,7 @@ use App\Domain\Repository\Interfaces\ArticleRepositoryInterface;
 use App\Domain\Repository\Interfaces\CommentRepositoryInterface;
 use App\Domain\Repository\Interfaces\GalleryRepositoryInterface;
 use App\Domain\Repository\Interfaces\ReviewsRepositoryInterface;
-use App\Services\StringReplaceUrlHelper;
+use App\Services\SlugHelper;
 use App\UI\Action\Blog\Interfaces\ArticleShowGalleryActionInterface;
 use App\UI\Form\FormHandler\Interfaces\AddCommentArticleUserNotConnectedTypeHandlerInterface;
 use App\UI\Responder\Interfaces\ArticleShowGalleryResponderInterface;
@@ -69,7 +69,7 @@ class ArticleShowGalleryAction implements ArticleShowGalleryActionInterface
     private $tokenStorage;
 
     /**
-     * @var StringReplaceUrlHelper
+     * @var SlugHelper
      */
     private $stringReplace;
 
@@ -81,9 +81,9 @@ class ArticleShowGalleryAction implements ArticleShowGalleryActionInterface
      * @param AddCommentArticleUserNotConnectedTypeHandlerInterface $addCommentHandler
      * @param InstagramLib $instagram
      * @param TokenStorageInterface $tokenStorage
-     * @param StringReplaceUrlHelper $stringReplace
+     * @param SlugHelper $stringReplace
      */
-    public function __construct(ReviewsRepositoryInterface $reviewsRepository, ArticleRepositoryInterface $articleRepository, FormFactoryInterface $formFactory, AddCommentArticleUserNotConnectedTypeHandlerInterface $addCommentHandler, InstagramLib $instagram, TokenStorageInterface $tokenStorage, StringReplaceUrlHelper $stringReplace)
+    public function __construct(ReviewsRepositoryInterface $reviewsRepository, ArticleRepositoryInterface $articleRepository, FormFactoryInterface $formFactory, AddCommentArticleUserNotConnectedTypeHandlerInterface $addCommentHandler, InstagramLib $instagram, TokenStorageInterface $tokenStorage, SlugHelper $stringReplace)
     {
         $this->reviewsRepository = $reviewsRepository;
         $this->articleRepository = $articleRepository;

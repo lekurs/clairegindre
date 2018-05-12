@@ -11,7 +11,7 @@ namespace App\Domain\Form\Type;
 
 use App\Domain\DTO\EditArticleTypeDTO;
 use App\Domain\Models\Benefit;
-use App\Subscriber\EditSlug;
+use App\Subscriber\EditSlugSubscriber;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -40,7 +40,7 @@ class EditArticleType extends AbstractType
                 'class' => Benefit::class,
                 'choice_label' => 'name'
             ])
-        ->addEventSubscriber(new EditSlug());
+        ->addEventSubscriber(new EditSlugSubscriber());
         ;
     }
 

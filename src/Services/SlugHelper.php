@@ -9,7 +9,7 @@
 namespace App\Services;
 
 use \Transliterator;
-final class StringReplaceUrlHelper
+final class SlugHelper
 {
     function replace($desi)
     {

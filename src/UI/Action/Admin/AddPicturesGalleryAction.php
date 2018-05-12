@@ -10,7 +10,7 @@ namespace App\UI\Action\Admin;
 
 
 use App\Domain\Repository\Interfaces\GalleryRepositoryInterface;
-use App\Services\StringReplaceUrlHelper;
+use App\Services\SlugHelper;
 use App\UI\Action\Admin\Interfaces\AddPicturesGalleryActionInterface;
 use App\UI\Responder\Admin\Interfaces\AddPicturesGalleryResponderInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -34,7 +34,7 @@ class AddPicturesGalleryAction implements AddPicturesGalleryActionInterface
     private $galleryRepository;
 
     /**
-     * @var StringReplaceUrlHelper
+     * @var SlugHelper
      */
     private $replaceService;
 
@@ -42,11 +42,11 @@ class AddPicturesGalleryAction implements AddPicturesGalleryActionInterface
      * AddPicturesGalleryAction constructor.
      *
      * @param GalleryRepositoryInterface $galleryRepository
-     * @param StringReplaceUrlHelper $replaceService
+     * @param SlugHelper $replaceService
      */
     public function __construct(
         GalleryRepositoryInterface $galleryRepository,
-        StringReplaceUrlHelper $replaceService
+        SlugHelper $replaceService
     ) {
         $this->galleryRepository = $galleryRepository;
         $this->replaceService = $replaceService;

@@ -11,7 +11,7 @@ namespace App\UI\Form\FormHandler;
 
 use App\Domain\Builder\Interfaces\UserBuilderInterface;
 use App\Domain\Repository\Interfaces\UserRepositoryInterface;
-use App\Services\StringReplaceUrlHelper;
+use App\Services\SlugHelper;
 use App\UI\Form\FormHandler\Interfaces\EditUserHandlerInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -41,7 +41,7 @@ class EditUserHandler implements EditUserHandlerInterface
     private $userBuilder;
 
     /**
-     * @var StringReplaceUrlHelper
+     * @var SlugHelper
      */
     private $stringReplaceHelper;
 
@@ -56,10 +56,10 @@ class EditUserHandler implements EditUserHandlerInterface
      * @param SessionInterface $session
      * @param ValidatorInterface $validator
      * @param UserBuilderInterface $userBuilder
-     * @param StringReplaceUrlHelper $stringReplaceHelper
+     * @param SlugHelper $stringReplaceHelper
      * @param TokenStorageInterface $tokenStorage
      */
-    public function __construct(UserRepositoryInterface $userRepository, SessionInterface $session, ValidatorInterface $validator, UserBuilderInterface $userBuilder, StringReplaceUrlHelper $stringReplaceHelper, TokenStorageInterface $tokenStorage)
+    public function __construct(UserRepositoryInterface $userRepository, SessionInterface $session, ValidatorInterface $validator, UserBuilderInterface $userBuilder, SlugHelper $stringReplaceHelper, TokenStorageInterface $tokenStorage)
     {
         $this->userRepository = $userRepository;
         $this->session = $session;

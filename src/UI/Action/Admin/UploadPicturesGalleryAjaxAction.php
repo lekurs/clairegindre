@@ -15,7 +15,7 @@ use App\Domain\Models\Gallery;
 use App\Domain\Repository\Interfaces\GalleryRepositoryInterface;
 use App\Domain\Repository\Interfaces\PictureRepositoryInterface;
 use App\Services\PictureUploaderHelper;
-use App\Services\StringReplaceUrlHelper;
+use App\Services\SlugHelper;
 use App\UI\Action\Admin\Interfaces\UploadPicturesGalleryActionInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Filesystem\Filesystem;
@@ -77,7 +77,7 @@ class UploadPicturesGalleryAjaxAction implements UploadPicturesGalleryActionInte
     private $dirGallery;
 
     /**
-     * @var StringReplaceUrlHelper
+     * @var SlugHelper
      */
     private $stringReplaceService;
 
@@ -97,7 +97,7 @@ class UploadPicturesGalleryAjaxAction implements UploadPicturesGalleryActionInte
      * @param PictureUploaderHelper $pictureUploaderHelper
      * @param Filesystem $fileSystem
      * @param string $dirGallery
-     * @param StringReplaceUrlHelper $stringReplaceService
+     * @param SlugHelper $stringReplaceService
      * @param string $dirPicture
      */
     public function __construct(
@@ -109,7 +109,7 @@ class UploadPicturesGalleryAjaxAction implements UploadPicturesGalleryActionInte
         PictureUploaderHelper $pictureUploaderHelper,
         Filesystem $fileSystem,
         string $dirGallery,
-        StringReplaceUrlHelper $stringReplaceService,
+        SlugHelper $stringReplaceService,
         string  $dirPicture
     ) {
         $this->galleryRepository = $galleryRepository;

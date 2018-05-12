@@ -12,7 +12,7 @@ namespace App\UI\Form\FormHandler;
 use App\Domain\Builder\Interfaces\ArticleBuilderInterface;
 use App\Domain\Models\Interfaces\ArticleInterface;
 use App\Domain\Repository\Interfaces\ArticleRepositoryInterface;
-use App\Services\StringReplaceUrlHelper;
+use App\Services\SlugHelper;
 use App\UI\Form\FormHandler\Interfaces\EditArticleTypeHandlerInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -42,7 +42,7 @@ class EditArticleTypeHandler implements EditArticleTypeHandlerInterface
     private $tokenStorage;
 
     /**
-     * @var StringReplaceUrlHelper
+     * @var SlugHelper
      */
     private $stringReplaceHelper;
 
@@ -53,14 +53,14 @@ class EditArticleTypeHandler implements EditArticleTypeHandlerInterface
      * @param ValidatorInterface $validator
      * @param ArticleRepositoryInterface $articleRepository
      * @param TokenStorageInterface $tokenStorage
-     * @param StringReplaceUrlHelper $stringReplaceHelper
+     * @param SlugHelper $stringReplaceHelper
      */
     public function __construct(
         SessionInterface $session,
         ValidatorInterface $validator,
         ArticleRepositoryInterface $articleRepository,
         TokenStorageInterface $tokenStorage,
-        StringReplaceUrlHelper $stringReplaceHelper
+        SlugHelper $stringReplaceHelper
     ) {
         $this->session = $session;
         $this->validator = $validator;
@@ -78,7 +78,7 @@ class EditArticleTypeHandler implements EditArticleTypeHandlerInterface
     {
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $article->updateArticle($form->getData());
+//            $article->updateArticle($form->getData());
 
 //            $this->validator->validate($articleEdit, [], [
 //                'article_edit'

@@ -13,7 +13,7 @@ use App\Domain\Models\Interfaces\UserInterface;
 use App\Domain\Models\Picture;
 use App\Domain\Repository\Interfaces\UserRepositoryInterface;
 use App\Services\PictureUploaderHelper;
-use App\Services\StringReplaceUrlHelper;
+use App\Services\SlugHelper;
 use App\UI\Form\FormHandler\Interfaces\RegistrationTypeHandlerInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Form\FormInterface;
@@ -58,7 +58,7 @@ class RegistrationTypeHandler implements RegistrationTypeHandlerInterface
     private $targetDir;
 
     /**
-     * @var StringReplaceUrlHelper
+     * @var SlugHelper
      */
     private $stringReplaceHelper;
 
@@ -71,7 +71,7 @@ class RegistrationTypeHandler implements RegistrationTypeHandlerInterface
      * @param Filesystem $fileSystem
      * @param PictureUploaderHelper $pictureUploaderHelper
      * @param string $targetDir
-     * @param StringReplaceUrlHelper $stringReplaceHelper
+     * @param SlugHelper $stringReplaceHelper
      */
     public function __construct(
         UserRepositoryInterface $userRepository,
@@ -81,7 +81,7 @@ class RegistrationTypeHandler implements RegistrationTypeHandlerInterface
         Filesystem $fileSystem,
         PictureUploaderHelper $pictureUploaderHelper,
         string $targetDir,
-        StringReplaceUrlHelper $stringReplaceHelper
+        SlugHelper $stringReplaceHelper
     ) {
         $this->userRepository = $userRepository;
         $this->session = $session;

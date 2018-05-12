@@ -16,7 +16,7 @@ use App\Domain\Models\Picture;
 use App\Domain\Models\User;
 use App\Domain\Repository\Interfaces\GalleryRepositoryInterface;
 use App\Services\PictureUploaderHelper;
-use App\Services\StringReplaceUrlHelper;
+use App\Services\SlugHelper;
 use App\UI\Form\FormHandler\Interfaces\AddGalleryTypeHandlerInterface;
 use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 use Symfony\Component\Filesystem\Filesystem;
@@ -57,7 +57,7 @@ class AddGalleryTypeHandler implements AddGalleryTypeHandlerInterface
     private $fileSystem;
 
     /**
-     * @var StringReplaceUrlHelper
+     * @var SlugHelper
      */
     private $replaceService;
 
@@ -75,7 +75,7 @@ class AddGalleryTypeHandler implements AddGalleryTypeHandlerInterface
      * @param GalleryBuilderInterface $galleryBuilder
      * @param PictureUploaderHelper $pictureUploaderHelper
      * @param Filesystem $fileSystem
-     * @param StringReplaceUrlHelper $replaceService
+     * @param SlugHelper $replaceService
      * @param string $dirGallery
      */
     public function __construct(
@@ -85,7 +85,7 @@ class AddGalleryTypeHandler implements AddGalleryTypeHandlerInterface
         GalleryBuilderInterface $galleryBuilder,
         PictureUploaderHelper $pictureUploaderHelper,
         Filesystem $fileSystem,
-        StringReplaceUrlHelper $replaceService,
+        SlugHelper $replaceService,
         string $dirGallery
     ) {
         $this->galleryRepository = $galleryRepository;

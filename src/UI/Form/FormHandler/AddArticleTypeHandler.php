@@ -11,7 +11,7 @@ namespace App\UI\Form\FormHandler;
 
 use App\Domain\Builder\Interfaces\ArticleBuilderInterface;
 use App\Domain\Repository\Interfaces\ArticleRepositoryInterface;
-use App\Services\StringReplaceUrlHelper;
+use App\Services\SlugHelper;
 use App\UI\Form\FormHandler\Interfaces\AddArticleTypeHandlerInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -46,7 +46,7 @@ class AddArticleTypeHandler implements AddArticleTypeHandlerInterface
     private $tokenStorage;
 
     /**
-     * @var StringReplaceUrlHelper
+     * @var SlugHelper
      */
     private $stringReplaceHelper;
 
@@ -58,7 +58,7 @@ class AddArticleTypeHandler implements AddArticleTypeHandlerInterface
      * @param ValidatorInterface $validator
      * @param ArticleBuilderInterface $articleBuilder
      * @param TokenStorageInterface $tokenStorage
-     * @param StringReplaceUrlHelper $stringReplaceHelper
+     * @param SlugHelper $stringReplaceHelper
      */
     public function __construct(
         ArticleRepositoryInterface $articleRepository,
@@ -66,7 +66,7 @@ class AddArticleTypeHandler implements AddArticleTypeHandlerInterface
         ValidatorInterface $validator,
         ArticleBuilderInterface $articleBuilder,
         TokenStorageInterface $tokenStorage,
-        StringReplaceUrlHelper $stringReplaceHelper
+        SlugHelper $stringReplaceHelper
     ) {
         $this->articleRepository = $articleRepository;
         $this->session = $session;

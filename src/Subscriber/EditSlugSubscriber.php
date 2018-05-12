@@ -9,13 +9,12 @@
 namespace App\Subscriber;
 
 
-use App\Domain\Builder\ArticleBuilder;
-use App\Services\StringReplaceUrlHelper;
+use App\Services\SlugHelper;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 
-class EditSlug implements EventSubscriberInterface
+class EditSlugSubscriber implements EventSubscriberInterface
 {
     public static function getSubscribedEvents()
     {
@@ -26,7 +25,10 @@ class EditSlug implements EventSubscriberInterface
 
     public function onSubmit(FormEvent $event)
     {
-        $slugHelper = new StringReplaceUrlHelper();
+        $slugHelper = new SlugHelper();
+
+        dump($event->getForm());
+        die();
 
         $event->setData($slugHelper->replace($event->getData()->title));
     }

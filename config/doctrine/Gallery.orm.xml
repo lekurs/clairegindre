@@ -10,7 +10,13 @@
         <field name="slug" type="string" length="200" nullable="false" unique="false" />
         <field name="creationDate" type="date" nullable="true" unique="false" />
 
-        <one-to-one field="article" target-entity="App\Domain\Models\Article" orphan-removal="true" />
+        <one-to-one field="article" target-entity="App\Domain\Models\Article" orphan-removal="true">
+            <cascade>
+                <cascade-persist/>
+                <cascade-remove/>
+            </cascade>
+            <join-column name="article_id" referenced-column-name="id" />
+        </one-to-one>
 
         <one-to-many field="pictures" target-entity="App\Domain\Models\Picture" mapped-by="gallery" orphan-removal="true">
             <cascade>
