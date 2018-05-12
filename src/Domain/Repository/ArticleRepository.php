@@ -10,6 +10,7 @@ namespace App\Domain\Repository;
 
 
 use App\Domain\Models\Interfaces\ArticleInterface;
+use App\Domain\Models\Interfaces\GalleryInterface;
 use App\Domain\Repository\Interfaces\ArticleRepositoryInterface;
 use App\Domain\Models\Article;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -81,8 +82,11 @@ class ArticleRepository extends ServiceEntityRepository implements ArticleReposi
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function save(ArticleInterface $article): void
+    public function save(ArticleInterface $article, GalleryInterface $gallery): void
     {
+        $gallery->setArticle($article);
+//        dump($gallery);
+//        die();
         $this->getEntityManager()->persist($article);
         $this->getEntityManager()->flush();
     }

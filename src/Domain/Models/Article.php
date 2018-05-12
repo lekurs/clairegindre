@@ -252,6 +252,9 @@ class Article implements ArticleInterface
         $this->gallery = $gallery;
     }
 
+    /**
+     * @param EditArticleTypeDTO $dto
+     */
     public function updateArticle(EditArticleTypeDTO $dto)
     {
         $this->title = $dto->title;

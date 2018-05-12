@@ -38,7 +38,7 @@ class Gallery implements GalleryInterface
     /**
      * @var ArticleInterface
      */
-    private $articles;
+    private $article;
 
     /**
      * @var string
@@ -58,7 +58,7 @@ class Gallery implements GalleryInterface
      * @param BenefitInterface $benefit
      * @param string $slug
      * @param \DateTime $creationDate
-     * @param ArticleInterface|null $articles
+     * @param ArticleInterface|null $article
      */
     public function __construct(
         string $title,
@@ -66,7 +66,7 @@ class Gallery implements GalleryInterface
         BenefitInterface $benefit,
         string $slug,
         \DateTime $creationDate,
-        ArticleInterface $articles = null
+        ArticleInterface $article = null
     ) {
         $this->id = Uuid::uuid4();
         $this->title = $title;
@@ -74,7 +74,7 @@ class Gallery implements GalleryInterface
         $this->benefit = $benefit;
         $this->slug = $slug;
         $this->creationDate = new \DateTime();
-        $this->articles = $articles;
+        $this->article = $article;
     }
 
     /**
@@ -130,17 +130,17 @@ class Gallery implements GalleryInterface
     /**
      * @return ArticleInterface
      */
-    public function getArticles(): ArticleInterface
+    public function getArticle(): ArticleInterface
     {
-        return $this->articles;
+        return $this->article;
     }
 
     /**
-     * @param ArticleInterface $articles
+     * @param ArticleInterface $article
      */
-    public function setArticles(ArticleInterface $articles = null): void
+    public function setArticle(ArticleInterface $article = null): void
     {
-        $this->articles = $articles;
+        $this->article = $article;
     }
 
     /**

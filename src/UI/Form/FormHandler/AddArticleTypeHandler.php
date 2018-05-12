@@ -100,7 +100,7 @@ class AddArticleTypeHandler implements AddArticleTypeHandlerInterface
                 'article_creation'
             ]);
 
-            $this->articleRepository->save($this->articleBuilder->getArticle());
+            $this->articleRepository->save($this->articleBuilder->getArticle(), $form->getData()->gallery);
 
             $this->session->getFlashBag()->add('success', 'Article bien ajouté');
 

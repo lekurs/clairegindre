@@ -52,12 +52,18 @@ class DeleteArticleAction implements DeleteArticleActionInterface
         $this->galleryRepository = $galleryRepository;
     }
 
-
+    /**
+     * @param Request $request
+     * @param DeleteArticleResponderInterface $responder
+     * @return mixed
+     */
     public function __invoke(Request $request, DeleteArticleResponderInterface $responder)
     {
         $article = $this->articleRepository->getOne($request->get('slug'));
 
-        $this->galleryRepository->removeArticle($article, $article->getGallery());
+        $gallery = $this->galleryRepository->findArticle($article->getId());
+
+        $this->galleryRepository->removeArticle($article, $gallery);
 
         return $responder();
     }

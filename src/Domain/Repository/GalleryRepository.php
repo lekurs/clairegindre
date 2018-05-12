@@ -147,6 +147,20 @@ class GalleryRepository extends ServiceEntityRepository implements GalleryReposi
     }
 
     /**
+     * @param $idArticle
+     * @return mixed
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function findArticle($idArticle)
+    {
+        return $this->createQueryBuilder('gallery')
+                            ->where('gallery.article = :idArticle')
+                            ->setParameter('idArticle', $idArticle)
+                            ->getQuery()
+                            ->getOneOrNullResult();
+    }
+
+    /**
      * @param GalleryInterface $gallery
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
@@ -170,7 +184,7 @@ class GalleryRepository extends ServiceEntityRepository implements GalleryReposi
 
     public function removeArticle(ArticleInterface $article, GalleryInterface $gallery)
     {
-        $gallery->setArticles(null);
+        $gallery->setArticle(null);
         $this->getEntityManager()->remove($article);
         $this->getEntityManager()->flush();
     }

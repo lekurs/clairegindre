@@ -26,7 +26,7 @@ interface ArticleRepositoryInterface
     /**
      * @param ArticleInterface $article
      */
-    public function save(ArticleInterface $article): void;
+//    public function save(ArticleInterface $article): void;
 
     /**
      * @return mixed
