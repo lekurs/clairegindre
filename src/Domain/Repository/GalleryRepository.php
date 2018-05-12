@@ -9,6 +9,7 @@
 namespace App\Domain\Repository;
 
 
+use App\Domain\Models\Interfaces\ArticleInterface;
 use App\Domain\Repository\Interfaces\GalleryRepositoryInterface;
 use App\Domain\Models\Gallery;
 use App\Domain\Models\Interfaces\GalleryInterface;
@@ -66,30 +67,13 @@ class GalleryRepository extends ServiceEntityRepository implements GalleryReposi
             ;
     }
 
-    public function getWithPicturesById($idGallery)
+    public function getAllWithArticle()
     {
         return $this->createQueryBuilder('gallery')
-            ->where('gallery.id = :idGallery')
-            ->setParameter('idGallery', $idGallery)
-            ->innerJoin('gallery.pictures', 'pictures')
-            ->getQuery()
-            ->getOneOrNullResult()
-            ;
+                            ->where('gallery.articles IS NOT NULL')
+                            ->getQuery()
+                            ->getResult();
     }
-
-//    /**
-//     * @param $id
-//     * @return mixed
-//     */
-//    public function getGalleryByUser($id)
-//    {
-//        return $this->createQueryBuilder('gallery')
-//                            ->where('gallery.user = :id')
-//                            ->setParameter('id', $id)
-//                            ->innerJoin('gallery.pictures', 'pictures')
-//                            ->getQuery()
-//                            ->getResult();
-//    }
 
     /**
      * @param $idUser
@@ -107,18 +91,6 @@ class GalleryRepository extends ServiceEntityRepository implements GalleryReposi
                                 ->getQuery()
                                 ->getResult();
     }
-
-//    /**
-//     * @return mixed
-//     */
-//    public function getAllWithPictures()
-//    {
-//        return $this->createQueryBuilder('gallery')
-//            ->where('pictures.favorite = 1')
-//            ->innerJoin('gallery.pictures', 'pictures')
-//            ->getQuery()
-//            ->getResult();
-//    }
 
     /**
      * @param int $first
@@ -168,6 +140,13 @@ class GalleryRepository extends ServiceEntityRepository implements GalleryReposi
     public function delete(GalleryInterface $gallery)
     {
         $this->getEntityManager()->remove($gallery);
+        $this->getEntityManager()->flush();
+    }
+
+    public function removeArticle(ArticleInterface $article, GalleryInterface $gallery)
+    {
+        $this->getEntityManager()->remove($article);
+        $gallery->setArticles(null);
         $this->getEntityManager()->flush();
     }
 }

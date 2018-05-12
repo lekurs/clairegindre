@@ -54,7 +54,7 @@ class AdminBlogChoosePicturesResponder implements AdminBlogChoosePicturesRespond
      */
     public function __invoke($redirect = false, $gallery = null)
     {
-        $redirect ? $response = new RedirectResponse('admin') : $response = new Response($this->twig->render('back/admin/Article/add_article_select_pictures.html.twig', array(
+        $redirect ? $response = new RedirectResponse('admin') : $response = new Response($this->twig->render('add_article.html.twig', array(
             'gallery' => $gallery
         )));
 

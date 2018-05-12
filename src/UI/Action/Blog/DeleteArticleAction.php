@@ -10,6 +10,7 @@ namespace App\UI\Action\Blog;
 
 
 use App\Domain\Repository\Interfaces\ArticleRepositoryInterface;
+use App\Domain\Repository\Interfaces\GalleryRepositoryInterface;
 use App\UI\Action\Blog\Interfaces\DeleteArticleActionInterface;
 use App\UI\Responder\Interfaces\DeleteArticleResponderInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -33,22 +34,29 @@ class DeleteArticleAction implements DeleteArticleActionInterface
     private $articleRepository;
 
     /**
+     * @var GalleryRepositoryInterface
+     */
+    private $galleryRepository;
+
+    /**
      * DeleteArticleAction constructor.
      * @param ArticleRepositoryInterface $articleRepository
+     * @param GalleryRepositoryInterface $galleryRepository
      */
-    public function __construct(ArticleRepositoryInterface $articleRepository)
+    public function __construct(ArticleRepositoryInterface $articleRepository, GalleryRepositoryInterface $galleryRepository)
     {
         $this->articleRepository = $articleRepository;
+        $this->galleryRepository = $galleryRepository;
     }
+
 
     public function __invoke(Request $request, DeleteArticleResponderInterface $responder)
     {
         $article = $this->articleRepository->getOne($request->get('slug'));
 //        65dee3bb-49b3-45d1-9d49-157c36676a79
         dump($article);
-//        die();
 
-        $this->articleRepository->delete($article);
+        $this->galleryRepository->removeArticle($article, $article->getGallery());
 
         return $responder();
     }

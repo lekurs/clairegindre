@@ -3,7 +3,7 @@
 {%  block head %}
     {{ parent() }}
     <link rel="stylesheet" href="{{ asset('css/styles/blog.css') }}" />
-
+    <link rel="stylesheet" href="{{ asset('css/styles/galleriemaker.css') }}" />
     {% block title %}
         <title>Admin | Article</title>
     {% endblock %}
@@ -31,7 +31,38 @@
                         {{ form_end(editArticleType) }}
                     </div>
                 </div>
+                {# GALLERIE MAKER #}
+                <div class="row no-gutters">
+                    <div class="maker container no-gutters" data-id="article_{{ articles.gallery.title }}"></div>
+                </div>
             </div>
+
+            <div class="modal fade" id="createImgModal" tabindex="-1" role="dialog" aria-labelledby="createImgModalTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="createImgModalTitle">Selectionner vos images</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                {% for picture in articles.gallery.pictures %}
+                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                        <img src="{{ asset(picture.publicPath ~ '/' ~ picture.pictureName) }}"  class="img-thumbnail rounded float-left" id="img_{{ picture.id }}">
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                            <button type="submit"  class="btn btn-primary">Enregistrer</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </section>
     {% endblock %}
 
@@ -40,6 +71,16 @@
 {% block javascripts %}
     {{ parent() }}
 <script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=7g8w49lzy5eyqt1o7hle0gzlmm3c84veiyraf1nwtm9eur9t"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="{{ asset('js/back/galleriemaker.js') }}"></script>
+<script>
+    $(document).ready(function(){
+        $(".maker").galleriemaker({
+            nbcell:3,
+            script: '{{ path('adminGallerieMaker', { 'slugArticle': articles.slug }) }}'
+        });
+    });
+</script>
 <script>
     tinymce.init({
         selector: 'textarea#edit_article_content',

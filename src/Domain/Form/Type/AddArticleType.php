@@ -36,9 +36,8 @@ class AddArticleType extends AbstractType
                 'choice_label' => 'title',
                 'query_builder' => function (GalleryRepository $er) {
                 return $er->createQueryBuilder('gallery')
-                    ->leftJoin('gallery.article', 'article')
                     ->leftJoin('gallery.pictures', 'pictures')
-                    ->where('gallery.article IS NULL')
+                    ->where('gallery.articles IS NULL')
                     ;
                 }
             ])

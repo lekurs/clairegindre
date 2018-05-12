@@ -18,13 +18,7 @@
 
         <one-to-many field="comments" target-entity="App\Domain\Models\Comment" mapped-by="article" />
 
-        <one-to-one field="gallery" target-entity="App\Domain\Models\Gallery" orphan-removal="true">
-            <cascade>
-                <cascade-persist/>
-                <cascade-remove/>
-            </cascade>
-            <join-column name="gallery_id" referenced-column-name="id" />
-        </one-to-one>
+        <one-to-one field="gallery" target-entity="App\Domain\Models\Gallery" mapped-by="articles" />
 
         <many-to-one field="prestation" target-entity="App\Domain\Models\Benefit" inversed-by="articles" />
 
