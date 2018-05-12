@@ -9,7 +9,11 @@
 namespace App\UI\Action\Blog;
 
 
+use App\Domain\Builder\Interfaces\GalleryMakerBuilderInterface;
+use App\Domain\Repository\Interfaces\GalleryPageRepositoryInterface;
 use App\UI\Action\Blog\Interfaces\GallerieMakerAjaxActionInterface;
+use App\UI\Responder\Interfaces\GallerieMakerAjaxResponderInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -17,17 +21,40 @@ use Symfony\Component\Routing\Annotation\Route;
  *
  * @Route(
  *     name="adminGallerieMaker",
- *     path="admin/article/edit/{slugArticle}",
+ *     path="admin/blog/create/article/{slugGallery}",
  *     methods={"POST"}
  * )
  *
  */
 class GallerieMakerAjaxAction implements GallerieMakerAjaxActionInterface
 {
-    public function __invoke()
+    /**
+     * @var GalleryMakerBuilderInterface
+     */
+    private $galleryPageBuilder;
+
+    /**
+     * @var GalleryPageRepositoryInterface
+     */
+    private $galleryPageRepository;
+
+    /**
+     * GallerieMakerAjaxAction constructor.
+     * @param GalleryMakerBuilderInterface $galleryPageBuilder
+     * @param GalleryPageRepositoryInterface $galleryPageRepository
+     */
+    public function __construct(GalleryMakerBuilderInterface $galleryPageBuilder, GalleryPageRepositoryInterface $galleryPageRepository)
     {
-        dump('ok');
-        die();
+        $this->galleryPageBuilder = $galleryPageBuilder;
+        $this->galleryPageRepository = $galleryPageRepository;
     }
 
+
+    public function __invoke(Request $request, GallerieMakerAjaxResponderInterface $responder)
+    {
+        $builder = $this->galleryPageBuilder->create();
+        dump($request->request);
+        die();
+        return $responder();
+    }
 }

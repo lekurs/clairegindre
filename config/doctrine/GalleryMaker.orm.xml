@@ -4,12 +4,12 @@
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                           http://raw.github.com/doctrine/doctrine2/master/doctrine-mapping.xsd">
 
-    <entity name="App\Domain\Models\GalleryPage" table="clairegindre_gallery_page" repository-class="App\Domain\Repository\GalleryPageRepository">
+    <entity name="App\Domain\Models\GalleryMaker" table="clairegindre_gallery_maker" repository-class="App\Domain\Repository\GalleryPageRepository">
             <id name="id" type="string" column="id" />
                 <field name="line" type="integer" nullable="false" unique="false" />
                 <field name="displayOrder" type="integer" nullable="false" unique="false" />
 
-        <one-to-many field="images" target-entity="App\Domain\Models\Picture" mapped-by="galleryPage" orphan-removal="true">
+        <one-to-many field="images" target-entity="App\Domain\Models\Picture" mapped-by="galleryMaker" orphan-removal="true">
             <cascade>
                 <cascade-persist/>
                 <cascade-remove/>

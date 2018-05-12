@@ -11,13 +11,15 @@
             <field name="extension" type="string" length="5" nullable="false" unique="false" />
             <field name="displayOrder" type="integer" nullable="true" unique="false" />
             <field name="favorite" type="boolean" nullable="false" unique="false" />
+
             <many-to-one field="gallery" target-entity="App\Domain\Models\Gallery" inversed-by="pictures">
                 <join-column name="gallery_id" referenced-column-name="id" />
             </many-to-one>
 
-            <many-to-one field="galleryPage" target-entity="App\Domain\Models\GalleryPage" inversed-by="images">
-                <join-column name="galley_page_id" referenced-column-name="id" />
+            <many-to-one field="galleryMaker" target-entity="App\Domain\Models\GalleryMaker" inversed-by="images">
+                <join-column name="gallery_maker_id" referenced-column-name="id" />
             </many-to-one>
+
     </entity>
 
 </doctrine-mapping>

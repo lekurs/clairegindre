@@ -7,7 +7,7 @@ use App\Domain\DTO\EditArticleTypeDTO;
 use App\Domain\Models\Interfaces\ArticleInterface;
 use App\Domain\Models\Interfaces\BenefitInterface;
 use App\Domain\Models\Interfaces\GalleryInterface;
-use App\Domain\Models\Interfaces\GalleryPageInterface;
+use App\Domain\Models\Interfaces\GalleryMakerInterface;
 use App\Domain\Models\Interfaces\UserInterface;
 use ArrayAccess;
 use Doctrine\ORM\Mapping as ORM;
@@ -81,9 +81,9 @@ class Article implements ArticleInterface
     private $prestation;
 
     /**
-     * @var GalleryPageInterface
+     * @var GalleryMakerInterface
      */
-    private $galleryPages;
+    private $galleryMaker;
 
     /**
      * Article constructor.
@@ -97,7 +97,7 @@ class Article implements ArticleInterface
      * @param string $slug
      * @param GalleryInterface $gallery
      * @param BenefitInterface $prestation
-     * @param GalleryPageInterface|null $galleryPages
+     * @param GalleryMakerInterface|null $galleryMaker
      */
     public function __construct(
         string $title,
@@ -109,7 +109,7 @@ class Article implements ArticleInterface
         string  $slug,
         GalleryInterface $gallery,
         BenefitInterface $prestation,
-        GalleryPageInterface $galleryPages = null
+        GalleryMakerInterface $galleryMaker = null
     ) {
         $this->id = Uuid::uuid4();
         $this->title = $title;
@@ -121,7 +121,7 @@ class Article implements ArticleInterface
         $this->slug = $slug;
         $this->gallery = $gallery;
         $this->prestation = $prestation;
-        $this->galleryPages = $galleryPages;
+        $this->galleryMaker = $galleryMaker;
     }
 
     /**
@@ -229,11 +229,11 @@ class Article implements ArticleInterface
     }
 
     /**
-     * @return GalleryPageInterface
+     * @return GalleryMakerInterface
      */
-    public function getGalleryPages(): GalleryPageInterface
+    public function getGalleryMaker(): GalleryMakerInterface
     {
-        return $this->galleryPages;
+        return $this->galleryMaker;
     }
 
     /**

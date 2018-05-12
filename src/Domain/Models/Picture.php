@@ -4,7 +4,7 @@ namespace App\Domain\Models;
 
 use App\Domain\Models\Interfaces\ArticleInterface;
 use App\Domain\Models\Interfaces\GalleryInterface;
-use App\Domain\Models\Interfaces\GalleryPageInterface;
+use App\Domain\Models\Interfaces\GalleryMakerInterface;
 use App\Domain\Models\Interfaces\PictureInterface;
 use Ramsey\Uuid\Uuid;
 class Picture implements PictureInterface
@@ -50,9 +50,9 @@ class Picture implements PictureInterface
     private $article;
 
     /**
-     * @var GalleryPageInterface
+     * @var GalleryMakerInterface
      */
-    private $galleryPage;
+    private $galleryMaker;
 
     /**
      * Picture constructor.
@@ -64,7 +64,7 @@ class Picture implements PictureInterface
      * @param bool $favorite
      * @param GalleryInterface|null $gallery
      * @param ArticleInterface|null $article
-     * @param GalleryPageInterface|null $galleryPage
+     * @param GalleryMakerInterface|null $galleryPage
      */
     public function __construct(
         string $pictureName,
@@ -74,7 +74,7 @@ class Picture implements PictureInterface
         bool $favorite = false,
         GalleryInterface $gallery = null,
         ArticleInterface $article = null,
-        GalleryPageInterface $galleryPage = null
+        GalleryMakerInterface $galleryPage = null
     ) {
         $this->id = Uuid::uuid4();
         $this->pictureName = $pictureName;
@@ -84,7 +84,7 @@ class Picture implements PictureInterface
         $this->favorite = $favorite;
         $this->gallery = $gallery;
         $this->article = $article;
-        $this->galleryPage = $galleryPage;
+        $this->galleryMaker = $galleryPage;
     }
 
 
@@ -267,10 +267,10 @@ class Picture implements PictureInterface
     }
 
     /**
-     * @return GalleryPageInterface
+     * @return GalleryMakerInterface
      */
-    public function getGalleryPage(): GalleryPageInterface
+    public function getGalleryMaker(): GalleryMakerInterface
     {
-        return $this->galleryPage;
+        return $this->galleryMaker;
     }
 }

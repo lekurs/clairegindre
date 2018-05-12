@@ -10,11 +10,11 @@ namespace App\Domain\Models;
 
 
 use App\Domain\Models\Interfaces\ArticleInterface;
-use App\Domain\Models\Interfaces\GalleryPageInterface;
+use App\Domain\Models\Interfaces\GalleryMakerInterface;
 use App\Domain\Models\Interfaces\PictureInterface;
 use Ramsey\Uuid\Uuid;
 
-class GalleryPage implements GalleryPageInterface
+class GalleryMaker implements GalleryMakerInterface
 {
     /**
      * @var string
@@ -42,7 +42,7 @@ class GalleryPage implements GalleryPageInterface
     private $displayOrder;
 
     /**
-     * GalleryPage constructor.
+     * GalleryMaker constructor.
      *
      * @param ArticleInterface $article
      * @param string $line

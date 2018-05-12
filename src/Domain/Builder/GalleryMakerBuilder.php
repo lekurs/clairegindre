@@ -1,0 +1,43 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: Bidule
+ * Date: 26/04/2018
+ * Time: 12:33
+ */
+
+namespace App\Domain\Builder;
+
+
+use App\Domain\Builder\Interfaces\GalleryMakerBuilderInterface;
+use App\Domain\Models\GalleryMaker;
+use App\Domain\Models\Interfaces\GalleryMakerInterface;
+
+class GalleryMakerBuilder implements GalleryMakerBuilderInterface
+{
+    /**
+     * @var GalleryMakerInterface
+     */
+    private $galleryPageBuilder;
+
+    /**
+     * @param ArticleInterface $article
+     * @param int $line
+     * @param int $displayOrder
+     * @return GalleryMakerInterface
+     */
+    public function create(ArticleInterface $article, int $line, int $displayOrder): GalleryMakerInterface
+    {
+        $this->galleryPageBuilder =  new GalleryMaker($article, $line, $displayOrder);
+
+        return $this;
+    }
+
+    /**
+     * @return GalleryMakerInterface
+     */
+    public function getGalleryBuilder(): GalleryMakerInterface
+    {
+        return $this->galleryPageBuilder;
+    }
+}

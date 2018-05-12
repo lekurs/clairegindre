@@ -40,11 +40,14 @@ class DeleteArticleAction implements DeleteArticleActionInterface
 
     /**
      * DeleteArticleAction constructor.
+     *
      * @param ArticleRepositoryInterface $articleRepository
      * @param GalleryRepositoryInterface $galleryRepository
      */
-    public function __construct(ArticleRepositoryInterface $articleRepository, GalleryRepositoryInterface $galleryRepository)
-    {
+    public function __construct(
+        ArticleRepositoryInterface $articleRepository,
+        GalleryRepositoryInterface $galleryRepository
+    ) {
         $this->articleRepository = $articleRepository;
         $this->galleryRepository = $galleryRepository;
     }
@@ -53,8 +56,6 @@ class DeleteArticleAction implements DeleteArticleActionInterface
     public function __invoke(Request $request, DeleteArticleResponderInterface $responder)
     {
         $article = $this->articleRepository->getOne($request->get('slug'));
-//        65dee3bb-49b3-45d1-9d49-157c36676a79
-        dump($article);
 
         $this->galleryRepository->removeArticle($article, $article->getGallery());
 

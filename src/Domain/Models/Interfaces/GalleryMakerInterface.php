@@ -9,7 +9,7 @@
 namespace App\Domain\Models\Interfaces;
 
 
-interface GalleryPageInterface
+interface GalleryMakerInterface
 {
 
 }

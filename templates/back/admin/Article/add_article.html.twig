@@ -16,11 +16,11 @@
 
     {% block showBlog %}
     <section>
-        <div class="container-fluid">
+        <div class="container">
             {% block title_admin %}
                 <div class="row no-gutters">
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                        {#<h1>Article de blog pour la galerie : {{ gallery.title }}</h1>#}
+                        <h1>Article de blog pour la galerie : {{ gallery.title }}</h1>
                     </div>
                 </div>
             {% endblock %}
@@ -65,7 +65,10 @@
     <script src="{{ asset('js/back/galleriemaker.js') }}"></script>
     <script>
         $(document).ready(function(){
-            $(".maker").galleriemaker({nbcell:3});
+            $(".maker").galleriemaker({
+                nbcell:3,
+                script: '{{ path('adminGallerieMaker', { 'slugGallery': gallery.slug }) }}'
+            });
         });
     </script>
 {% endblock %}
