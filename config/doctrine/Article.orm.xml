@@ -28,6 +28,8 @@
 
         <many-to-one field="prestation" target-entity="App\Domain\Models\Benefit" inversed-by="articles" />
 
+        <one-to-one field="galleryPages" target-entity="App\Domain\Models\GalleryPage" />
+
     </entity>
 
 </doctrine-mapping>

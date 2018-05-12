@@ -13,6 +13,7 @@ use App\Domain\Repository\Interfaces\GalleryRepositoryInterface;
 use App\UI\Action\Blog\Interfaces\AdminBlogChoosePicturesActionInterface;
 use App\UI\Responder\Interfaces\AdminBlogChoosePicturesResponderInterface;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\File\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Request;
@@ -81,14 +82,16 @@ class AdminBlogChoosePicturesAction implements AdminBlogChoosePicturesActionInte
         }
 
         if ($this->session->has('gallery') && is_string($this->session->get('gallery')->id)) {
-            dump($this->session->get('gallery'));
 
             $gallery = $this->galleryRepository->getWithPicturesById($this->session->get('gallery')->id);
+
+            if (is_null($gallery)) {
+                throw new Exception('Ajouter des images dans la galerie avant de créer le blog');
+            }
 
             $form = $this->formFactory->create(SelectPicturesForArticleType::class, $gallery)->handleRequest($request);
 
             return $responder(false, $gallery);
         }
-            return $responder(true, null);
     }
 }
