@@ -22,7 +22,7 @@ interface AddArticleActionInterface
      * @param FormFactoryInterface $formFactory
      * @param AddArticleTypeHandlerInterface $addArticleTypeHandler
      */
-    public function __construct(FormFactoryInterface $formFactory, AddArticleTypeHandlerInterface $addArticleTypeHandler);
+//    public function __construct(FormFactoryInterface $formFactory, AddArticleTypeHandlerInterface $addArticleTypeHandler);
 
     /**
      * @param Request $request

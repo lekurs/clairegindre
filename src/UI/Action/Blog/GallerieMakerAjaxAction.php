@@ -76,9 +76,7 @@ class GallerieMakerAjaxAction implements GallerieMakerAjaxActionInterface
 
     public function __invoke(Request $request, GallerieMakerAjaxResponderInterface $responder)
     {
-        dump($this->session->get('gallery')->id);
-
-        $article = $this->galleryRepository->find($this->session->get('gallery')->id);
+        $article = $this->galleryRepository->getOne($request->get('slug'));
         dump($article);
         die;
         $builder = $this->galleryPageBuilder->create();

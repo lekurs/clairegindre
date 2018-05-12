@@ -12,6 +12,7 @@ use App\Domain\DTO\GallerySessionDTO;
 use App\Domain\Form\Type\AddArticleType;
 use App\Domain\Form\Type\AddBenefitType;
 use App\Domain\Form\Type\RegistrationType;
+use App\Domain\Form\Type\SelectGalleryForArticleType;
 use App\Domain\Repository\Interfaces\ArticleRepositoryInterface;
 use App\Domain\Repository\Interfaces\BenefitRepositoryInterface;
 use App\Domain\Repository\Interfaces\GalleryRepositoryInterface;
@@ -20,11 +21,14 @@ use App\UI\Action\Admin\Interfaces\AdminActionInterface;
 use App\UI\Form\FormHandler\Interfaces\AddArticleTypeHandlerInterface;
 use App\UI\Form\FormHandler\Interfaces\AddBenefitHandlerInterface;
 use App\UI\Form\FormHandler\Interfaces\RegistrationTypeHandlerInterface;
+use App\UI\Form\FormHandler\SelectGalleryTypeHandler;
 use App\UI\Responder\Admin\Interfaces\AdminResponderInterface;
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
@@ -40,11 +44,6 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
  */
 class AdminAction implements AdminActionInterface
 {
-    /**
-     * @var TokenStorageInterface
-     */
-    private $tokenStorage;
-
     /**
      * @var AuthorizationCheckerInterface
      */
@@ -91,14 +90,14 @@ class AdminAction implements AdminActionInterface
     private $addBenefitTypeHandler;
 
     /**
-     * @var SessionInterface
+     * @var UrlGeneratorInterface
      */
-    private $session;
+    private $urlGenerator;
+
 
     /**
      * AdminAction constructor.
      *
-     * @param TokenStorageInterface $tokenStorage
      * @param AuthorizationCheckerInterface $authorizationChecker
      * @param GalleryRepositoryInterface $galleryRepository
      * @param UserRepositoryInterface $userRepository
@@ -108,10 +107,9 @@ class AdminAction implements AdminActionInterface
      * @param RegistrationTypeHandlerInterface $registrationTypeHandler
      * @param AddArticleTypeHandlerInterface $addArticleTypeHandler
      * @param AddBenefitHandlerInterface $addBenefitTypeHandler
-     * @param SessionInterface $session
+     * @param UrlGeneratorInterface $urlGenerator
      */
     public function __construct(
-        TokenStorageInterface $tokenStorage,
         AuthorizationCheckerInterface $authorizationChecker,
         GalleryRepositoryInterface $galleryRepository,
         UserRepositoryInterface $userRepository,
@@ -121,9 +119,8 @@ class AdminAction implements AdminActionInterface
         RegistrationTypeHandlerInterface $registrationTypeHandler,
         AddArticleTypeHandlerInterface $addArticleTypeHandler,
         AddBenefitHandlerInterface $addBenefitTypeHandler,
-        SessionInterface $session = null
+        UrlGeneratorInterface $urlGenerator
     ) {
-        $this->tokenStorage = $tokenStorage;
         $this->authorizationChecker = $authorizationChecker;
         $this->galleryRepository = $galleryRepository;
         $this->userRepository = $userRepository;
@@ -133,13 +130,13 @@ class AdminAction implements AdminActionInterface
         $this->registrationTypeHandler = $registrationTypeHandler;
         $this->addArticleTypeHandler = $addArticleTypeHandler;
         $this->addBenefitTypeHandler = $addBenefitTypeHandler;
-        $this->session = $session;
+        $this->urlGenerator = $urlGenerator;
     }
 
-
     /**
+     * @param Request $request
      * @param AdminResponderInterface $responder
-     * @return mixed
+     * @return mixed|RedirectResponse
      */
     public function __invoke(Request $request, AdminResponderInterface $responder)
     {
@@ -159,27 +156,23 @@ class AdminAction implements AdminActionInterface
 
         $benefitsType = $this->formFactory->create(AddBenefitType::class)->handleRequest($request);
 
-        $addArticleType = $this->formFactory->create(AddArticleType::class)->handleRequest($request);
+        $selectArticle = $this->formFactory->create(SelectGalleryForArticleType::class)->handleRequest($request);
 
         if ($this->registrationTypeHandler->handle($registration)) {
 
-            return $responder(true, $registration, $benefitsType, $addArticleType, $users, $galleries, $benefits, $articles);
+            return $responder(true, $registration, $benefitsType, $selectArticle, $users, $galleries, $benefits, $articles);
         }
 
         if ($this->addBenefitTypeHandler->handle($benefitsType)) {
 
-            return $responder(true, $registration, $benefitsType, $addArticleType,  $users, $galleries, $benefits, $articles);
+            return $responder(true, $registration, $benefitsType, $selectArticle,  $users, $galleries, $benefits, $articles);
         }
 
-        if ($this->addArticleTypeHandler->handle($addArticleType)) {
+        if ($selectArticle->isSubmitted() && $selectArticle->isValid()) {
 
-            $galleryDTO = new GallerySessionDTO($request->request->get('add_article')['gallery']);
-
-            $this->session->set('gallery', $galleryDTO);
-
-            return $responder(true, $registration, $benefitsType, $addArticleType, $users, $galleries, $benefits, $articles, 'adminAddArticleSelectPictures');
+            return new RedirectResponse($this->urlGenerator->generate('adminAddArticle', ['slug' => $selectArticle->getData()['title']->getSlug()]));
         }
 
-        return $responder(false, $registration, $benefitsType, $addArticleType, $users, $galleries, $benefits, $articles);
+        return $responder(false, $registration, $benefitsType, $selectArticle, $users, $galleries, $benefits, $articles);
     }
 }

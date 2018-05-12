@@ -350,32 +350,17 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    {{ form_start(formArticle) }}
+                    {{ form_start(selectArticle) }}
                     <div class="modal-body">
-                        {{ form_widget(formArticle) }}
+                        {{ form_widget(selectArticle) }}
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-                        <button type="submit"  class="btn btn-primary">Enregistrer</button>
+                        <button type="submit"  class="btn btn-primary" id="galleryId">Enregistrer</button></a>
                     </div>
-                    {{ form_end(formArticle) }}
+                    {{ form_end(selectArticle) }}
                 </div>
             </div>
         </div>
     </section>
-{% endblock %}
-
-{% block javascripts %}
-    {{ parent() }}
-    <script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=7g8w49lzy5eyqt1o7hle0gzlmm3c84veiyraf1nwtm9eur9t"></script>
-    <script>
-        tinymce.init({
-            selector: 'textarea#add_article_content',
-            height: 300,
-            toolbar: [
-                'undo redo | styleselect | bold italic | link image',
-                'alignleft aligncenter alignright'
-            ]
-        });
-    </script>
 {% endblock %}

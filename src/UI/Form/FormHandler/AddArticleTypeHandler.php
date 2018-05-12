@@ -11,6 +11,7 @@ namespace App\UI\Form\FormHandler;
 
 use App\Domain\Builder\Interfaces\ArticleBuilderInterface;
 use App\Domain\Repository\Interfaces\ArticleRepositoryInterface;
+use App\Domain\Repository\Interfaces\GalleryRepositoryInterface;
 use App\Services\SlugHelper;
 use App\UI\Form\FormHandler\Interfaces\AddArticleTypeHandlerInterface;
 use Symfony\Component\Form\FormInterface;
@@ -21,9 +22,9 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 class AddArticleTypeHandler implements AddArticleTypeHandlerInterface
 {
     /**
-     * @var ArticleRepositoryInterface
+     * @var GalleryRepositoryInterface
      */
-    private $articleRepository;
+    private $galleryRepository;
 
     /**
      * @var SessionInterface
@@ -52,29 +53,23 @@ class AddArticleTypeHandler implements AddArticleTypeHandlerInterface
 
     /**
      * AddArticleTypeHandler constructor.
-     *
-     * @param ArticleRepositoryInterface $articleRepository
+     * @param GalleryRepositoryInterface $galleryRepository
      * @param SessionInterface $session
      * @param ValidatorInterface $validator
      * @param ArticleBuilderInterface $articleBuilder
      * @param TokenStorageInterface $tokenStorage
      * @param SlugHelper $stringReplaceHelper
      */
-    public function __construct(
-        ArticleRepositoryInterface $articleRepository,
-        SessionInterface $session,
-        ValidatorInterface $validator,
-        ArticleBuilderInterface $articleBuilder,
-        TokenStorageInterface $tokenStorage,
-        SlugHelper $stringReplaceHelper
-    ) {
-        $this->articleRepository = $articleRepository;
+    public function __construct(GalleryRepositoryInterface $galleryRepository, SessionInterface $session, ValidatorInterface $validator, ArticleBuilderInterface $articleBuilder, TokenStorageInterface $tokenStorage, SlugHelper $stringReplaceHelper)
+    {
+        $this->galleryRepository = $galleryRepository;
         $this->session = $session;
         $this->validator = $validator;
         $this->articleBuilder = $articleBuilder;
         $this->tokenStorage = $tokenStorage;
         $this->stringReplaceHelper = $stringReplaceHelper;
     }
+
 
     /**
      * @param FormInterface $form

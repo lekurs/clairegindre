@@ -41,10 +41,11 @@ class AddArticleResponder implements AddArticleResponderInterface
         $this->urlGenerator = $rulGenerator;
     }
 
-    public function __invoke($redirect = false, FormInterface $form = null)
+    public function __invoke($redirect = false, FormInterface $form = null, $gallery)
     {
-        $redirect ? $response = new RedirectResponse($this->urlGenerator->generate('admin')) : $response = new Response($this->twig->render('back/admin/add_article.html.twig', [
+        $redirect ? $response = new RedirectResponse($this->urlGenerator->generate('admin')) : $response = new Response($this->twig->render('back/admin/Article/add_article.html.twig', [
             'form' => $form->createView(),
+            'gallery' => $gallery
         ]));
 
         return $response;

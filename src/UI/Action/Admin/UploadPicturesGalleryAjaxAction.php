@@ -124,7 +124,10 @@ class UploadPicturesGalleryAjaxAction implements UploadPicturesGalleryActionInte
         $this->dirPicture = $dirPicture;
     }
 
-
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
     public function __invoke(Request $request)
     {
         $gallery = $this->galleryRepository->getOne($request->request->get('gallery'));

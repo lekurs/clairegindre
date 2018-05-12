@@ -24,6 +24,14 @@
                     </div>
                 </div>
             {% endblock %}
+            <div class="row">
+                <div class="col-xl-12 col-lg-12 col-sm-12 col-md-12 col-12">
+                    {{ form_start(form) }}
+                    {{ form_widget(form) }}
+                    <button type="submit" class="btn btn-dark">Enregistrer</button>
+                    {{ form_end(form) }}
+                </div>
+            </div>
 
             <div class="row no-gutters">
                 <div class="maker container no-gutters" data-id="article_{{ gallery.title }}"></div>
@@ -62,6 +70,17 @@
 {% block javascripts %}
     {{ parent() }}
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=7g8w49lzy5eyqt1o7hle0gzlmm3c84veiyraf1nwtm9eur9t"></script>
+    <script>
+        tinymce.init({
+            selector: 'textarea#add_article_content',
+            height: 300,
+            toolbar: [
+                'undo redo | styleselect | bold italic | link image',
+                'alignleft aligncenter alignright'
+            ]
+        });
+    </script>
     <script src="{{ asset('js/back/galleriemaker.js') }}"></script>
     <script>
         $(document).ready(function(){

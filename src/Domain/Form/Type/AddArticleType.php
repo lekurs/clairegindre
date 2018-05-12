@@ -31,16 +31,16 @@ class AddArticleType extends AbstractType
     {
         $builder
             ->add('title', TextType::class)
-            ->add('gallery', EntityType::class, [
-                'class' => Gallery::class,
-                'choice_label' => 'title',
-                'query_builder' => function (GalleryRepository $er) {
-                return $er->createQueryBuilder('gallery')
-                    ->leftJoin('gallery.pictures', 'pictures')
-                    ->where('gallery.article IS NULL')
-                    ;
-                }
-            ])
+//            ->add('gallery', EntityType::class, [
+//                'class' => Gallery::class,
+//                'choice_label' => 'title',
+//                'query_builder' => function (GalleryRepository $er) {
+//                return $er->createQueryBuilder('gallery')
+//                    ->leftJoin('gallery.pictures', 'pictures')
+//                    ->where('gallery.article IS NULL')
+//                    ;
+//                }
+//            ])
             ->add('content', TextareaType::class, [
                 'required' => false
             ])
@@ -66,7 +66,7 @@ class AddArticleType extends AbstractType
                                     $form->get('title')->getData(),
                                     $form->get('content')->getData(),
                                     $form->get('personnalButton')->getData(),
-                                    $form->get('gallery')->getData(),
+//                                    $form->get('gallery')->getData(),
                                     $form->get('online')->getData(),
                                     $form->get('prestation')->getData()
                                 );
