@@ -88,8 +88,8 @@ class AdminBlogChoosePicturesAction implements AdminBlogChoosePicturesActionInte
             if (is_null($gallery)) {
                 throw new Exception('Ajouter des images dans la galerie avant de créer le blog');
             }
-
-            dump($gallery);
+//
+//            dump($gallery);
 
             $form = $this->formFactory->create(SelectPicturesForArticleType::class, $gallery)->handleRequest($request);
 

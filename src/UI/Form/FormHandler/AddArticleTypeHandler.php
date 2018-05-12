@@ -83,6 +83,7 @@ class AddArticleTypeHandler implements AddArticleTypeHandlerInterface
     public function handle(FormInterface $form): bool
     {
         if($form->isSubmitted() && $form->isValid()) {
+            
             $article = $this->articleBuilder->create(
                                                                                     $form->getData()->title,
                                                                                     $form->getData()->content,

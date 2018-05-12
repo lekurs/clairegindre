@@ -170,8 +170,8 @@ class GalleryRepository extends ServiceEntityRepository implements GalleryReposi
 
     public function removeArticle(ArticleInterface $article, GalleryInterface $gallery)
     {
-        $this->getEntityManager()->remove($article);
         $gallery->setArticles(null);
+        $this->getEntityManager()->remove($article);
         $this->getEntityManager()->flush();
     }
 }
