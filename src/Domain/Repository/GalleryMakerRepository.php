@@ -14,12 +14,12 @@ use App\Domain\Models\Interfaces\ArticleInterface;
 use App\Domain\Models\Interfaces\GalleryMakerInterface;
 use App\Domain\Models\Interfaces\PictureInterface;
 use App\Domain\Models\Picture;
-use App\Domain\Repository\Interfaces\GalleryPageRepositoryInterface;
+use App\Domain\Repository\Interfaces\GalleryMakerRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
-class GalleryMakerRepository extends ServiceEntityRepository implements GalleryPageRepositoryInterface
+class GalleryMakerRepository extends ServiceEntityRepository implements GalleryMakerRepositoryInterface
 {
     /**
      * GalleryMakerRepository constructor.
@@ -46,19 +46,21 @@ class GalleryMakerRepository extends ServiceEntityRepository implements GalleryP
     /**
      * @param $idArticle
      * @return mixed
-     * @throws \Doctrine\ORM\NonUniqueResultException
      */
-    public function getOne($idArticle)
+    public function getByArticle($idArticle)
     {
         return $this->createQueryBuilder('gallery_page')
                             ->where('gallery_page.article = :idArticle')
                             ->setParameter('idArticle', $idArticle)
+                            ->orderBy('gallery_page.line', 'ASC')
+                            ->addOrderBy('gallery_page.displayOrder', 'ASC')
                             ->getQuery()
-                            ->getOneOrNullResult();
+                            ->getResult();
     }
 
     /**
      * @param GalleryMakerInterface $galleryMaker
+     * @param PictureInterface $picture
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */

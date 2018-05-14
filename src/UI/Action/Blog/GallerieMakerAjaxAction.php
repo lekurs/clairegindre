@@ -11,7 +11,7 @@ namespace App\UI\Action\Blog;
 
 use App\Domain\Builder\Interfaces\GalleryMakerBuilderInterface;
 use App\Domain\Repository\Interfaces\ArticleRepositoryInterface;
-use App\Domain\Repository\Interfaces\GalleryPageRepositoryInterface;
+use App\Domain\Repository\Interfaces\GalleryMakerRepositoryInterface;
 use App\Domain\Repository\Interfaces\GalleryRepositoryInterface;
 use App\UI\Action\Blog\Interfaces\GallerieMakerAjaxActionInterface;
 use App\UI\Responder\Interfaces\GallerieMakerAjaxResponderInterface;
@@ -38,7 +38,7 @@ class GallerieMakerAjaxAction implements GallerieMakerAjaxActionInterface
     private $galleryPageBuilder;
 
     /**
-     * @var GalleryPageRepositoryInterface
+     * @var GalleryMakerRepositoryInterface
      */
     private $galleryPageRepository;
 
@@ -65,13 +65,13 @@ class GallerieMakerAjaxAction implements GallerieMakerAjaxActionInterface
     /**
      * GallerieMakerAjaxAction constructor.
      * @param GalleryMakerBuilderInterface $galleryPageBuilder
-     * @param GalleryPageRepositoryInterface $galleryPageRepository
+     * @param GalleryMakerRepositoryInterface $galleryPageRepository
      * @param GalleryRepositoryInterface $galleryRepository
      * @param ArticleRepositoryInterface $articleRepository
      * @param AuthorizationCheckerInterface $authorizationChecker
      * @param SessionInterface $session
      */
-    public function __construct(GalleryMakerBuilderInterface $galleryPageBuilder, GalleryPageRepositoryInterface $galleryPageRepository, GalleryRepositoryInterface $galleryRepository, ArticleRepositoryInterface $articleRepository, AuthorizationCheckerInterface $authorizationChecker, SessionInterface $session)
+    public function __construct(GalleryMakerBuilderInterface $galleryPageBuilder, GalleryMakerRepositoryInterface $galleryPageRepository, GalleryRepositoryInterface $galleryRepository, ArticleRepositoryInterface $articleRepository, AuthorizationCheckerInterface $authorizationChecker, SessionInterface $session)
     {
         $this->galleryPageBuilder = $galleryPageBuilder;
         $this->galleryPageRepository = $galleryPageRepository;
