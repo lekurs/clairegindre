@@ -70,7 +70,7 @@ class GalleryRepository extends ServiceEntityRepository implements GalleryReposi
     public function getAllWithArticle()
     {
         return $this->createQueryBuilder('gallery')
-                            ->where('gallery.articles IS NOT NULL')
+                            ->where('gallery.article IS NOT NULL')
                             ->getQuery()
                             ->getResult();
     }

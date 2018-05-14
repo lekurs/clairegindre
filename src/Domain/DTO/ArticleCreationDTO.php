@@ -13,7 +13,7 @@ use App\Domain\DTO\Interfaces\ArticleCreationDTOInterface;
 use App\Domain\Models\Interfaces\BenefitInterface;
 use App\Domain\Models\Interfaces\GalleryInterface;
 
-class ArticleCreationDTO implements ArticleCreationDTOInterface
+final class ArticleCreationDTO implements ArticleCreationDTOInterface
 {
     /**
      * @var string
@@ -50,7 +50,6 @@ class ArticleCreationDTO implements ArticleCreationDTOInterface
      *
      * @param string $title
      * @param string $content
-     * @param GalleryInterface $gallery
      * @param bool $online
      * @param string $personnalButton
      * @param BenefitInterface $prestation
@@ -59,15 +58,12 @@ class ArticleCreationDTO implements ArticleCreationDTOInterface
         string $title,
         string $content,
         string $personnalButton,
-        GalleryInterface $gallery,
         bool $online,
         BenefitInterface $prestation
-    )
-    {
+    ) {
         $this->title = $title;
         $this->content = $content;
         $this->personnalButton = $personnalButton;
-        $this->gallery = $gallery;
         $this->online = $online;
         $this->prestation = $prestation;
     }

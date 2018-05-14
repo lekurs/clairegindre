@@ -23,7 +23,7 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
  * Class GallerieMakerAjaxAction
  *
  * @Route(
- *     name="adminGallerieMaker",
+ *     name="adminGallerieMakerPostAjax",
  *     path="admin/blog/create/article/{slugGallery}",
  *     methods={"POST"}
  * )

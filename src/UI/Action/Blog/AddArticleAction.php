@@ -44,17 +44,20 @@ class AddArticleAction implements AddArticleActionInterface
 
     /**
      * AddArticleAction constructor.
+     *
      * @param GalleryRepositoryInterface $galleryRepository
      * @param FormFactoryInterface $formFactory
      * @param AddArticleTypeHandlerInterface $addArticleTypeHandler
      */
-    public function __construct(GalleryRepositoryInterface $galleryRepository, FormFactoryInterface $formFactory, AddArticleTypeHandlerInterface $addArticleTypeHandler)
-    {
+    public function __construct(
+        GalleryRepositoryInterface $galleryRepository,
+        FormFactoryInterface $formFactory,
+        AddArticleTypeHandlerInterface $addArticleTypeHandler
+    ) {
         $this->galleryRepository = $galleryRepository;
         $this->formFactory = $formFactory;
         $this->addArticleTypeHandler = $addArticleTypeHandler;
     }
-
 
     /**
      * @param Request $request
@@ -63,11 +66,11 @@ class AddArticleAction implements AddArticleActionInterface
      */
     public function __invoke(Request $request, AddArticleResponderInterface $responder)
     {
-        $gallery = $this->galleryRepository->getOne($request->get('slug'));
+        $gallery = $this->galleryRepository->getOne($request->attributes->get('slug'));
 
         $addArticleType = $this->formFactory->create(AddArticleType::class)->handleRequest($request);
 
-        if($this->addArticleTypeHandler->handle($addArticleType)) {
+        if($this->addArticleTypeHandler->handle($addArticleType, $gallery)) {
 
             return $responder(true, null, $gallery);
         }

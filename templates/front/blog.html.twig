@@ -48,18 +48,18 @@
                 <div class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-10 offset-1">
                     <div class="row no-gutters articles-container">
                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                    {% for article in articles %}
+                    {% for gallery in galleries %}
                         <div class="row no-gutters article-container{% if loop.index is divisible by(2) %}-reverse{% endif %}">
                             <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12{% if loop.index is divisible by(2) %} offset-0 {% else %} offset-1{% endif %} article-txt-container">
-                                <h2>{{ article.gallery.title }}</h2>
-                                <p>{{ article.creationDate | date('d M Y') }}</p>
-                                <p>{{ article.title }}</p>
+                                <h2>{{ gallery.article.title }}</h2>
+                                <p>{{ gallery.article.creationDate | date('d M Y') }}</p>
+                                <p>{{ gallery.article.title }}</p>
                                 {#|lower|replace({' ' : '-', '\'' : '_', '-': '&'})#}
-                                <a href="{{ path('showArticle', { 'slugArticle': article.slug, 'slugGallery': article.gallery.slug}) }}" class="link_to_gallery">{{ article.personnalButton }}</a>
+                                <a href="{{ path('showArticle', { 'slugArticle': gallery.article.slug, 'slugGallery': gallery.slug}) }}" class="link_to_gallery">{{ gallery.article.personnalButton }}</a>
                             </div>
                             <div class="col-xl-7 col-lg-7 col-md-12 col-sm-12 col-12 {% if loop.index is divisible by(2) %} offset-1{% endif %}">
                                 <div class="row no-gutters">
-                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 article-img-container" style="background: url('{{ asset('/images/upload/gallery/' ~ article.gallery.title ~ '/' ~ article.gallery.pictures.first.pictureName) }}') center center; background-size: cover;"></div>
+                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 article-img-container" style="background: url('{{ asset('/images/upload/gallery/' ~ gallery.title ~ '/' ~ gallery.pictures.first.pictureName) }}') center center; background-size: cover;"></div>
                                 </div>
                             </div>
                         </div>

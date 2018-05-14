@@ -17,5 +17,5 @@ interface AddArticleTypeHandlerInterface
      * @param FormInterface $form
      * @return bool
      */
-    public function handle(FormInterface $form): bool;
+    public function handle(FormInterface $form, $gallery): bool;
 }

@@ -27,6 +27,11 @@ class AddArticleTypeHandler implements AddArticleTypeHandlerInterface
     private $galleryRepository;
 
     /**
+     * @var ArticleRepositoryInterface
+     */
+    private $articleRepository;
+
+    /**
      * @var SessionInterface
      */
     private $session;
@@ -53,16 +58,26 @@ class AddArticleTypeHandler implements AddArticleTypeHandlerInterface
 
     /**
      * AddArticleTypeHandler constructor.
+     *
      * @param GalleryRepositoryInterface $galleryRepository
+     * @param ArticleRepositoryInterface $articleRepository
      * @param SessionInterface $session
      * @param ValidatorInterface $validator
      * @param ArticleBuilderInterface $articleBuilder
      * @param TokenStorageInterface $tokenStorage
      * @param SlugHelper $stringReplaceHelper
      */
-    public function __construct(GalleryRepositoryInterface $galleryRepository, SessionInterface $session, ValidatorInterface $validator, ArticleBuilderInterface $articleBuilder, TokenStorageInterface $tokenStorage, SlugHelper $stringReplaceHelper)
-    {
+    public function __construct(
+        GalleryRepositoryInterface $galleryRepository,
+        ArticleRepositoryInterface $articleRepository,
+        SessionInterface $session,
+        ValidatorInterface $validator,
+        ArticleBuilderInterface $articleBuilder,
+        TokenStorageInterface $tokenStorage,
+        SlugHelper $stringReplaceHelper
+    ) {
         $this->galleryRepository = $galleryRepository;
+        $this->articleRepository = $articleRepository;
         $this->session = $session;
         $this->validator = $validator;
         $this->articleBuilder = $articleBuilder;
@@ -70,12 +85,12 @@ class AddArticleTypeHandler implements AddArticleTypeHandlerInterface
         $this->stringReplaceHelper = $stringReplaceHelper;
     }
 
-
     /**
      * @param FormInterface $form
+     * @param $gallery
      * @return bool
      */
-    public function handle(FormInterface $form): bool
+    public function handle(FormInterface $form, $gallery): bool
     {
         if($form->isSubmitted() && $form->isValid()) {
             
@@ -87,7 +102,6 @@ class AddArticleTypeHandler implements AddArticleTypeHandlerInterface
                                                                                     $this->tokenStorage->getToken()->getUser(),
                                                                                     $form->getData()->personnalButton,
                                                                                     $this->stringReplaceHelper->replace($form->getData()->title),
-                                                                                    $form->getData()->gallery,
                                                                                     $form->getData()->prestation
                                                                                 );
 
@@ -95,7 +109,7 @@ class AddArticleTypeHandler implements AddArticleTypeHandlerInterface
                 'article_creation'
             ]);
 
-            $this->articleRepository->save($this->articleBuilder->getArticle(), $form->getData()->gallery);
+            $this->articleRepository->save($this->articleBuilder->getArticle(), $gallery);
 
             $this->session->getFlashBag()->add('success', 'Article bien ajouté');
 

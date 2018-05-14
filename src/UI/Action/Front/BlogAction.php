@@ -16,6 +16,7 @@ use App\Domain\Models\Article;
 use App\Domain\Models\Benefit;
 use App\Domain\Repository\Interfaces\ArticleRepositoryInterface;
 use App\Domain\Repository\Interfaces\BenefitRepositoryInterface;
+use App\Domain\Repository\Interfaces\GalleryRepositoryInterface;
 use App\Domain\Repository\Interfaces\ReviewsRepositoryInterface;
 use App\UI\Action\Front\Interfaces\BlogActionInterface;
 use App\UI\Form\FormHandler\Interfaces\ContactTypeHandlerInterface;
@@ -43,9 +44,9 @@ class BlogAction implements BlogActionInterface
     private $formFactory;
 
     /**
-     * @var ArticleRepositoryInterface
+     * @var GalleryRepositoryInterface
      */
-    private $articleRepository;
+    private $galleryRepository;
 
     /**
      * @var BenefitRepositoryInterface
@@ -70,7 +71,6 @@ class BlogAction implements BlogActionInterface
     /**
      * BlogAction constructor.
      * @param FormFactoryInterface $formFactory
-     * @param ArticleRepositoryInterface $articleRepository
      * @param BenefitRepositoryInterface $benefitRepository
      * @param InstagramLib $instagram
      * @param ArticleBuilderInterface $articleBuilder
@@ -78,14 +78,14 @@ class BlogAction implements BlogActionInterface
      */
     public function __construct(
         FormFactoryInterface $formFactory,
-        ArticleRepositoryInterface $articleRepository,
+        GalleryRepositoryInterface $galleryRepository,
         BenefitRepositoryInterface $benefitRepository,
         InstagramLib $instagram,
         ArticleBuilderInterface $articleBuilder,
         ReviewsRepositoryInterface $reviewsRepository
     ) {
         $this->formFactory = $formFactory;
-        $this->articleRepository = $articleRepository;
+        $this->galleryRepository = $galleryRepository;
         $this->benefitRepository = $benefitRepository;
         $this->instagram = $instagram;
         $this->articleBuilder = $articleBuilder;
@@ -99,12 +99,12 @@ class BlogAction implements BlogActionInterface
 
         $insta = $this->instagram->show();
 
-        $articles = $this->articleRepository->getArticlesWithFavoritePictureGallery();
+        $galleries = $this->galleryRepository->getAllWithArticle();
 
         $benefits = $this->benefitRepository->getAll();
 
         $reviews = $this->reviewsRepository->getAll();
 
-        return $response($contact, $insta, $articles, $benefits, $reviews);
+        return $response($contact, $insta, $galleries, $benefits, $reviews);
     }
 }

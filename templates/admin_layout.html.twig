@@ -51,44 +51,117 @@
 
 <body>
 {% block header %}
+    <header>
+        <div class="row no-gutters">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                <div class="row justify-content-center no-gutters">
+                    {% block left_menu %}
+                        {# LEFT MENU #}
+                        <nav class="col-lg-5 col-xl-5 d-none d-md-none d-sm-none d-lg-block d-xl-block">
+                            <div class="row no-gutters justify-content-center align-items-center">
+                                <div class="col-lg-6 col-xl-6">
+                                    {#ROW RIGHT#}
+                                    <div class="row no-gutters">
+                                        <div class="col-lg-12 col-xl-12">
+                                            <ul class="nav justify-content-between">
+                                                <li class="nav-item"><a class="nav-link menus-admin" href="{{ path('admin') }}">Accueil</a></li>
+                                                <li class="nav-item"><a class="nav-link menus-admin" href="{{ path('adminUser', {'page': '1'}) }}">Clients</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    {# ROW RIGHT2#}
+                                    <div class="row no-gutters">
+                                        <div class="col-lg-12 col-xl-12">
+                                            <ul class="nav justify-content-center">
+                                                <li class="nav-item"><a class="nav-link menus-admin" href="{{ path('blog') }}">Galeries</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </nav>
+                    {% endblock %}
+                    {# LOGO#}
+                    {% block logo %}
+                        <div class="col-lg-2 col-xl-2 logo-content">
+                            <h1><a href="#" class="logo-img-color"></a></h1>
+                        </div>
+                    {% endblock %}
+                    {# RIGHT MENU #}
+                    {% block right_menu %}
+                        <nav class="col-lg-5 col-xl-5 d-none d-md-none d-sm-none d-lg-block d-xl-block">
+                            <div class="row no-gutters justify-content-center align-items-center">
+                                <div class="col-lg-6 col-xl-6">
+                                    {#ROW RIGHT#}
+                                    <div class="row no-gutters">
+                                        <div class="col-lg-12 col-xl-12">
+                                            <ul class="nav justify-content-between">
+                                                <li class="nav-item"><a class="nav-link menus-admin" href="{{ path('faq') }}">Blog</a></li>
+                                                <li class="nav-item"><a class="nav-link menus-admin" href="{{ path('adminAddReviews') }}">Avis Clients</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    {# ROW RIGHT2#}
+                                    <div class="row no-gutters">
+                                        <div class="col-lg-12 col-xl-12">
+                                            <ul class="nav justify-content-center">
+                                                <li class="nav-item"><a class="nav-link menus-admin" href="#contact">contact</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </nav>
+                    {% endblock %}
+                    <div class="row no-gutters">
+                        <div class="col-lg-12 col-xl-12 col-md-12 col-sm-12 col-12 gallery-customers-header">
+                            <img src="{{ asset('/images/background/nico_anlor_b&w.jpg') }}" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
+        <div class="scroll-down"><i class="fa fa-angle-down angle-bounce-layout fa-4x"></i> </div>
+
+    </header>
 {% endblock %}
 
 {% block body %}
 
-    {% block admin_menus %}
-        <div class="row no-gutters justify-content-center">
-            <ul class="nav nav-tabs">
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ path('admin') }}">Accueil</a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ path('adminUser') }}" class="nav-link">Utilisateurs</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button">Galeries</a>
-                    <div class="dropdown-menu">
-                        <a href="#" class="dropdown-item">Ajouter</a>
-                        <a href="#" class="dropdown-item">Voir tous</a>
-                    </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button">Blog</a>
-                    <div class="dropdown-menu">
-                        <a href="#" class="dropdown-item">Ajouter</a>
-                        <a href="#" class="dropdown-item">Voir tous</a>
-                    </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button">Avis client</a>
-                    <div class="dropdown-menu">
-                        <a href="{{ path('adminAddReviews') }}" class="dropdown-item">Ajouter</a>
-                        <a href="#" class="dropdown-item">Voir tous</a>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    {% endblock %}
+    {#{% block admin_menus %}#}
+        {#<div class="row no-gutters justify-content-center">#}
+            {#<ul class="nav nav-tabs">#}
+                {#<li class="nav-item">#}
+                    {#<a class="nav-link" href="{{ path('admin') }}">Accueil</a>#}
+                {#</li>#}
+                {#<li class="nav-item">#}
+                    {#<a href="{{ path('adminUser') }}" class="nav-link">Utilisateurs</a>#}
+                {#</li>#}
+                {#<li class="nav-item dropdown">#}
+                    {#<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button">Galeries</a>#}
+                    {#<div class="dropdown-menu">#}
+                        {#<a href="#" class="dropdown-item">Ajouter</a>#}
+                        {#<a href="#" class="dropdown-item">Voir tous</a>#}
+                    {#</div>#}
+                {#</li>#}
+                {#<li class="nav-item dropdown">#}
+                    {#<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button">Blog</a>#}
+                    {#<div class="dropdown-menu">#}
+                        {#<a href="#" class="dropdown-item">Ajouter</a>#}
+                        {#<a href="#" class="dropdown-item">Voir tous</a>#}
+                    {#</div>#}
+                {#</li>#}
+                {#<li class="nav-item dropdown">#}
+                    {#<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button">Avis client</a>#}
+                    {#<div class="dropdown-menu">#}
+                        {#<a href="{{ path('adminAddReviews') }}" class="dropdown-item">Ajouter</a>#}
+                        {#<a href="#" class="dropdown-item">Voir tous</a>#}
+                    {#</div>#}
+                {#</li>#}
+            {#</ul>#}
+        {#</div>#}
+    {#{% endblock %}#}
 
     {% block content %}
 
@@ -99,7 +172,9 @@
 
 {% block javascripts %}
     <script src="/js/vendor/jquery-min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="/js/vendor/bootstrap.bundle.js"></script>
+    <script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=7g8w49lzy5eyqt1o7hle0gzlmm3c84veiyraf1nwtm9eur9t"></script>
 {% endblock %}
 
 </html>

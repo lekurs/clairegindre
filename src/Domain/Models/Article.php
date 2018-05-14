@@ -71,11 +71,6 @@ class Article implements ArticleInterface
     private $comments;
 
     /**
-     * @var GalleryInterface
-     */
-    private $gallery;
-
-    /**
      * @var BenefitInterface
      */
     private $prestation;
@@ -95,7 +90,6 @@ class Article implements ArticleInterface
      * @param UserInterface $author
      * @param string $personnalButton
      * @param string $slug
-     * @param GalleryInterface $gallery
      * @param BenefitInterface $prestation
      * @param GalleryMakerInterface|null $galleryMaker
      */
@@ -107,7 +101,6 @@ class Article implements ArticleInterface
         UserInterface $author,
         string $personnalButton,
         string  $slug,
-        GalleryInterface $gallery,
         BenefitInterface $prestation,
         GalleryMakerInterface $galleryMaker = null
     ) {
@@ -119,7 +112,6 @@ class Article implements ArticleInterface
         $this->author = $author;
         $this->personnalButton = $personnalButton;
         $this->slug = $slug;
-        $this->gallery = $gallery;
         $this->prestation = $prestation;
         $this->galleryMaker = $galleryMaker;
     }
@@ -213,14 +205,6 @@ class Article implements ArticleInterface
     }
 
     /**
-     * @return GalleryInterface
-     */
-    public function getGallery(): GalleryInterface
-    {
-        return $this->gallery;
-    }
-
-    /**
      * @return string
      */
     public function getPersonnalButton(): string
@@ -242,14 +226,6 @@ class Article implements ArticleInterface
     public function setComments(ArrayAccess $comments): void
     {
         $this->comments = $comments;
-    }
-
-    /**
-     * @param GalleryInterface $gallery
-     */
-    public function setGallery(GalleryInterface $gallery): void
-    {
-        $this->gallery = $gallery;
     }
 
     /**
