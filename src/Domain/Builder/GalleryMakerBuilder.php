@@ -11,6 +11,7 @@ namespace App\Domain\Builder;
 
 use App\Domain\Builder\Interfaces\GalleryMakerBuilderInterface;
 use App\Domain\Models\GalleryMaker;
+use App\Domain\Models\Interfaces\ArticleInterface;
 use App\Domain\Models\Interfaces\GalleryMakerInterface;
 
 class GalleryMakerBuilder implements GalleryMakerBuilderInterface
@@ -18,7 +19,7 @@ class GalleryMakerBuilder implements GalleryMakerBuilderInterface
     /**
      * @var GalleryMakerInterface
      */
-    private $galleryPageBuilder;
+    private $galleryMaker;
 
     /**
      * @param ArticleInterface $article
@@ -26,9 +27,9 @@ class GalleryMakerBuilder implements GalleryMakerBuilderInterface
      * @param int $displayOrder
      * @return GalleryMakerInterface
      */
-    public function create(ArticleInterface $article, int $line, int $displayOrder): GalleryMakerInterface
+    public function create(int $line, int $displayOrder): GalleryMakerBuilderInterface
     {
-        $this->galleryPageBuilder =  new GalleryMaker($article, $line, $displayOrder);
+        $this->galleryMaker =  new GalleryMaker($line, $displayOrder);
 
         return $this;
     }
@@ -38,6 +39,6 @@ class GalleryMakerBuilder implements GalleryMakerBuilderInterface
      */
     public function getGalleryBuilder(): GalleryMakerInterface
     {
-        return $this->galleryPageBuilder;
+        return $this->galleryMaker;
     }
 }

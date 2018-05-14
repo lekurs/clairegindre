@@ -229,6 +229,14 @@ class Article implements ArticleInterface
     }
 
     /**
+     * @param GalleryMakerInterface $galleryMaker
+     */
+    public function setGalleryMaker(GalleryMakerInterface $galleryMaker): void
+    {
+        $this->galleryMaker = $galleryMaker;
+    }
+
+    /**
      * @param EditArticleTypeDTO $dto
      */
     public function updateArticle(EditArticleTypeDTO $dto)

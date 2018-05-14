@@ -10,7 +10,10 @@ namespace App\Domain\Repository;
 
 
 use App\Domain\Models\GalleryMaker;
+use App\Domain\Models\Interfaces\ArticleInterface;
 use App\Domain\Models\Interfaces\GalleryMakerInterface;
+use App\Domain\Models\Interfaces\PictureInterface;
+use App\Domain\Models\Picture;
 use App\Domain\Repository\Interfaces\GalleryPageRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
@@ -55,13 +58,16 @@ class GalleryPageRepository extends ServiceEntityRepository implements GalleryPa
     }
 
     /**
-     * @param GalleryMakerInterface $galleryPage
+     * @param GalleryMakerInterface $galleryMaker
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function save(GalleryMakerInterface $galleryPage)
+    public function save(GalleryMakerInterface $galleryMaker, PictureInterface $picture, ArticleInterface $article)
     {
-        $this->getEntityManager()->persist($galleryPage);
+        $picture->setGalleryMaker($galleryMaker);
+        $article->setGalleryMaker($galleryMaker);
+
+        $this->getEntityManager()->persist($galleryMaker);
         $this->getEntityManager()->flush();
     }
 

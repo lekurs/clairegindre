@@ -26,7 +26,7 @@
             {% endblock %}
 
             <div class="row no-gutters">
-                <div class="maker container no-gutters" data-id="article_{{ gallery.title }}"></div>
+                <div class="maker container no-gutters" data-id="article_{{ gallery.slug }}"></div>
             </div>
         </div>
     {% endblock %}
@@ -44,7 +44,7 @@
                     <div class="row">
                         {% for picture in gallery.pictures %}
                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                <img src="{{ asset(picture.publicPath ~ '/' ~ picture.pictureName) }}"  class="img-thumbnail rounded float-left" id="img_{{ picture.id }}">
+                                <img src="{{ asset(picture.publicPath ~ '/' ~ picture.pictureName) }}"  class="img-thumbnail rounded float-left" id="{{ picture.id }}">
                             </div>
                         {% endfor %}
                     </div>
@@ -76,7 +76,7 @@
         $(document).ready(function(){
             $(".maker").galleriemaker({
                 nbcell:3,
-                script: '{{ path('adminGallerieMakerPostAjax', { 'slugGallery': gallery.slug }) }}'
+                script: '{{ path('adminGallerieMakerPostAjax', { 'slugGallery': gallery.slug, 'slugArticle': gallery.article.slug }) }}'
             });
         });
     </script>

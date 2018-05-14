@@ -10,6 +10,7 @@ namespace App\UI\Action\Blog;
 
 
 use App\Domain\Builder\Interfaces\GalleryMakerBuilderInterface;
+use App\Domain\Repository\Interfaces\ArticleRepositoryInterface;
 use App\Domain\Repository\Interfaces\GalleryPageRepositoryInterface;
 use App\Domain\Repository\Interfaces\GalleryRepositoryInterface;
 use App\UI\Action\Blog\Interfaces\GallerieMakerAjaxActionInterface;
@@ -24,7 +25,7 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
  *
  * @Route(
  *     name="adminGallerieMakerPostAjax",
- *     path="admin/blog/create/article/{slugGallery}",
+ *     path="admin/blog/create/article/{slugGallery}/{slugArticle}",
  *     methods={"POST"}
  * )
  *
@@ -47,6 +48,11 @@ class GallerieMakerAjaxAction implements GallerieMakerAjaxActionInterface
     private $galleryRepository;
 
     /**
+     * @var ArticleRepositoryInterface
+     */
+    private $articleRepository;
+
+    /**
      * @var AuthorizationCheckerInterface
      */
     private $authorizationChecker;
@@ -61,14 +67,16 @@ class GallerieMakerAjaxAction implements GallerieMakerAjaxActionInterface
      * @param GalleryMakerBuilderInterface $galleryPageBuilder
      * @param GalleryPageRepositoryInterface $galleryPageRepository
      * @param GalleryRepositoryInterface $galleryRepository
+     * @param ArticleRepositoryInterface $articleRepository
      * @param AuthorizationCheckerInterface $authorizationChecker
      * @param SessionInterface $session
      */
-    public function __construct(GalleryMakerBuilderInterface $galleryPageBuilder, GalleryPageRepositoryInterface $galleryPageRepository, GalleryRepositoryInterface $galleryRepository, AuthorizationCheckerInterface $authorizationChecker, SessionInterface $session)
+    public function __construct(GalleryMakerBuilderInterface $galleryPageBuilder, GalleryPageRepositoryInterface $galleryPageRepository, GalleryRepositoryInterface $galleryRepository, ArticleRepositoryInterface $articleRepository, AuthorizationCheckerInterface $authorizationChecker, SessionInterface $session)
     {
         $this->galleryPageBuilder = $galleryPageBuilder;
         $this->galleryPageRepository = $galleryPageRepository;
         $this->galleryRepository = $galleryRepository;
+        $this->articleRepository = $articleRepository;
         $this->authorizationChecker = $authorizationChecker;
         $this->session = $session;
     }
@@ -76,12 +84,28 @@ class GallerieMakerAjaxAction implements GallerieMakerAjaxActionInterface
 
     public function __invoke(Request $request, GallerieMakerAjaxResponderInterface $responder)
     {
-        $article = $this->galleryRepository->getOne($request->get('slug'));
-        dump($article);
+//        $article = $this->articleRepository->getOne($request->get('slugArticle'));
+
+        $gallery = $this->galleryRepository->getOne($request->attributes->get('slugGallery'));
+
+
+        $pictures = $gallery->getPictures();
+
+        foreach($request->request->get('line') as $key => $line) {
+            foreach ($line as $imageKey => $image) {
+                foreach ($pictures as $picture) {
+                    if ($picture->getId() === $image) {
+                        $this->galleryPageBuilder->create($key, $imageKey, $image);
+                    }
+                    $this->galleryPageRepository->save($this->galleryPageBuilder->getGalleryBuilder(), $picture, $gallery->getArticle());
+                }
+            }
+        }
+
         die;
-        $builder = $this->galleryPageBuilder->create();
-        dump($request->request);
-        die();
+
+//        $this->galleryPageRepository->save($this->galleryPageBuilder->getGalleryBuilder(), $image);
+
         return $responder();
     }
 }

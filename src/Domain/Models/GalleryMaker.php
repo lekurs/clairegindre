@@ -22,11 +22,6 @@ class GalleryMaker implements GalleryMakerInterface
     private $id;
 
     /**
-     * @var ArticleInterface
-     */
-    private $article;
-
-    /**
      * @var int
      */
     private $line;
@@ -42,29 +37,23 @@ class GalleryMaker implements GalleryMakerInterface
     private $displayOrder;
 
     /**
+     * @var \ArrayAccess
+     */
+    private $articles;
+
+    /**
      * GalleryMaker constructor.
      *
-     * @param ArticleInterface $article
-     * @param string $line
+     * @param int $line
      * @param int $displayOrder
      */
     public function __construct(
-        ArticleInterface $article,
         int $line,
         int $displayOrder
     ) {
         $this->id = Uuid::uuid4();
-        $this->article = $article;
         $this->line = $line;
         $this->displayOrder = $displayOrder;
-    }
-
-    /**
-     * @return ArticleInterface
-     */
-    public function getArticle(): ArticleInterface
-    {
-        return $this->article;
     }
 
     /**
@@ -89,5 +78,23 @@ class GalleryMaker implements GalleryMakerInterface
     public function getDisplayOrder(): int
     {
         return $this->displayOrder;
+    }
+
+    /**
+     * @return \ArrayAccess
+     */
+    public function getArticles(): \ArrayAccess
+    {
+        return $this->articles;
+    }
+
+    /**
+     * @param ArticleInterface $article
+     */
+    public function setArticles(ArticleInterface $article): void
+    {
+        $this->articles[] = $article;
+
+        $article->setGalleryMaker($this);
     }
 }
