@@ -95,9 +95,9 @@ class GallerieMakerAjaxAction implements GallerieMakerAjaxActionInterface
             foreach ($line as $imageKey => $image) {
                 foreach ($pictures as $picture) {
                     if ($picture->getId() === $image) {
-                        $this->galleryPageBuilder->create($key, $imageKey, $image);
+                        $this->galleryPageBuilder->create($gallery->getArticle(), $key, $imageKey, $image);
                     }
-                    $this->galleryPageRepository->save($this->galleryPageBuilder->getGalleryBuilder(), $picture, $gallery->getArticle());
+                    $this->galleryPageRepository->save($this->galleryPageBuilder->getGalleryBuilder(), $picture);
                 }
             }
         }

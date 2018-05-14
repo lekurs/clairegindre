@@ -37,12 +37,12 @@
     <div class="container">
         <div class="row no-gutters">
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                <h2 class="text-center">{{ articles.gallery.title }}</h2>
+                <h2 class="text-center">{{ gallery.title }}</h2>
             </div>
         </div>
             <div class="row no-gutters">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                    <h3>Ici seront les images de la galerie == attente pageBuilder</h3>
+                        {{ gallery.article.galleryMaker.id }}
                 </div>
             </div>
         <div class="row no-gutters">
@@ -61,12 +61,12 @@
             </div>
             <div class="row no-gutters comments-container">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                    {% if articles.comments is empty %}
+                    {% if gallery.article.comments is empty %}
                         <div class="row">
                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">Aucun commentaire</div>
                         </div>
                     {% endif %}
-                    {% for comment in articles.comments %}
+                    {% for comment in gallery.article.comments %}
                         <div class="row comments-contain">
                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">{{ comment.lastName }}</div>
                         </div>

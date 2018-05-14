@@ -76,9 +76,9 @@ class Article implements ArticleInterface
     private $prestation;
 
     /**
-     * @var GalleryMakerInterface
+     * @var \ArrayAccess
      */
-    private $galleryMaker;
+    private $galleriesMakers;
 
     /**
      * Article constructor.
@@ -101,8 +101,7 @@ class Article implements ArticleInterface
         UserInterface $author,
         string $personnalButton,
         string  $slug,
-        BenefitInterface $prestation,
-        GalleryMakerInterface $galleryMaker = null
+        BenefitInterface $prestation
     ) {
         $this->id = Uuid::uuid4();
         $this->title = $title;
@@ -113,7 +112,6 @@ class Article implements ArticleInterface
         $this->personnalButton = $personnalButton;
         $this->slug = $slug;
         $this->prestation = $prestation;
-        $this->galleryMaker = $galleryMaker;
     }
 
     /**
@@ -213,14 +211,6 @@ class Article implements ArticleInterface
     }
 
     /**
-     * @return GalleryMakerInterface
-     */
-    public function getGalleryMaker(): GalleryMakerInterface
-    {
-        return $this->galleryMaker;
-    }
-
-    /**
      * @param ArrayAccess $comments
      */
     public function setComments(ArrayAccess $comments): void
@@ -229,12 +219,24 @@ class Article implements ArticleInterface
     }
 
     /**
-     * @param GalleryMakerInterface $galleryMaker
+     * @return ArrayAccess
      */
-    public function setGalleryMaker(GalleryMakerInterface $galleryMaker): void
+    public function getGalleriesMakers(): ArrayAccess
     {
-        $this->galleryMaker = $galleryMaker;
+        return $this->galleriesMakers;
     }
+
+    /**
+     * @param ArrayAccess $galleriesMakers
+     */
+    public function setGalleriesMakers(GalleryMakerInterface $galleriesMakers): void
+    {
+        $this->galleriesMakers[] = $galleriesMakers;
+
+        $galleriesMakers->setArticle($this);
+    }
+
+
 
     /**
      * @param EditArticleTypeDTO $dto

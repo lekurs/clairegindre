@@ -27,9 +27,9 @@ class GalleryMakerBuilder implements GalleryMakerBuilderInterface
      * @param int $displayOrder
      * @return GalleryMakerInterface
      */
-    public function create(int $line, int $displayOrder): GalleryMakerBuilderInterface
+    public function create(ArticleInterface $article, int $line, int $displayOrder): GalleryMakerBuilderInterface
     {
-        $this->galleryMaker =  new GalleryMaker($line, $displayOrder);
+        $this->galleryMaker =  new GalleryMaker($article, $line, $displayOrder);
 
         return $this;
     }

@@ -44,9 +44,9 @@ class ArticleShowGalleryAction implements ArticleShowGalleryActionInterface
     private $reviewsRepository;
 
     /**
-     * @var ArticleRepositoryInterface
+     * @var GalleryRepositoryInterface
      */
-    private $articleRepository;
+    private $galleryRepository;
 
     /**
      * @var FormFactoryInterface
@@ -76,17 +76,17 @@ class ArticleShowGalleryAction implements ArticleShowGalleryActionInterface
     /**
      * ArticleShowGalleryAction constructor.
      * @param ReviewsRepositoryInterface $reviewsRepository
-     * @param ArticleRepositoryInterface $articleRepository
+     * @param GalleryRepositoryInterface $galleryRepository
      * @param FormFactoryInterface $formFactory
      * @param AddCommentArticleUserNotConnectedTypeHandlerInterface $addCommentHandler
      * @param InstagramLib $instagram
      * @param TokenStorageInterface $tokenStorage
      * @param SlugHelper $stringReplace
      */
-    public function __construct(ReviewsRepositoryInterface $reviewsRepository, ArticleRepositoryInterface $articleRepository, FormFactoryInterface $formFactory, AddCommentArticleUserNotConnectedTypeHandlerInterface $addCommentHandler, InstagramLib $instagram, TokenStorageInterface $tokenStorage, SlugHelper $stringReplace)
+    public function __construct(ReviewsRepositoryInterface $reviewsRepository, GalleryRepositoryInterface $galleryRepository, FormFactoryInterface $formFactory, AddCommentArticleUserNotConnectedTypeHandlerInterface $addCommentHandler, InstagramLib $instagram, TokenStorageInterface $tokenStorage, SlugHelper $stringReplace)
     {
         $this->reviewsRepository = $reviewsRepository;
-        $this->articleRepository = $articleRepository;
+        $this->galleryRepository = $galleryRepository;
         $this->formFactory = $formFactory;
         $this->addCommentHandler = $addCommentHandler;
         $this->instagram = $instagram;
@@ -97,13 +97,9 @@ class ArticleShowGalleryAction implements ArticleShowGalleryActionInterface
 
     public function __invoke(Request $request, ArticleShowGalleryResponderInterface $responder)
     {
-//        $gallery = $this->galleryRepository->getWithPictures($request->get('slugGallery'));
-//
-//        dump($gallery);
-
         $reviews = $this->reviewsRepository->getAll();
 
-        $articles = $this->articleRepository->getOne($request->get('slugArticle'));
+        $gallery = $this->galleryRepository->getOne($request->get('slugGallery'));
 
         $form = $this->formFactory->create(ContactType::class);
 
@@ -117,12 +113,12 @@ class ArticleShowGalleryAction implements ArticleShowGalleryActionInterface
 
         $instagram = $this->instagram->show();
 
-        if ($this->addCommentHandler->handle($commentType, $articles)) {
+        if ($this->addCommentHandler->handle($commentType, $gallery)) {
 
-            return $responder(true, $form, $commentType, $articles, $instagram, $reviews);
+            return $responder(true, $form, $commentType, $gallery, $instagram, $reviews);
         }
 
-        return $responder(false,$form, $commentType, $articles, $instagram, $reviews);
+        return $responder(false,$form, $commentType, $gallery, $instagram, $reviews);
     }
 
 }

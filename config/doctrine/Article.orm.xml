@@ -20,9 +20,12 @@
 
         <many-to-one field="prestation" target-entity="App\Domain\Models\Benefit" inversed-by="articles" />
 
-        <many-to-one field="galleryMaker" target-entity="App\Domain\Models\GalleryMaker" inversed-by="articles">
-            <join-column referenced-column-name="id" name="gallery_maker_id" />
-        </many-to-one>
+        <one-to-many field="galleriesMakers" target-entity="App\Domain\Models\GalleryMaker" mapped-by="article">
+            <cascade>
+                <cascade-persist/>
+                <cascade-remove/>
+            </cascade>
+        </one-to-many>
 
     </entity>
 

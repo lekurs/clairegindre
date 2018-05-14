@@ -19,10 +19,10 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
-class GalleryPageRepository extends ServiceEntityRepository implements GalleryPageRepositoryInterface
+class GalleryMakerRepository extends ServiceEntityRepository implements GalleryPageRepositoryInterface
 {
     /**
-     * GalleryPageRepository constructor.
+     * GalleryMakerRepository constructor.
      *
      * @param RegistryInterface $registry
      */
@@ -62,10 +62,9 @@ class GalleryPageRepository extends ServiceEntityRepository implements GalleryPa
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function save(GalleryMakerInterface $galleryMaker, PictureInterface $picture, ArticleInterface $article)
+    public function save(GalleryMakerInterface $galleryMaker, PictureInterface $picture)
     {
         $picture->setGalleryMaker($galleryMaker);
-        $article->setGalleryMaker($galleryMaker);
 
         $this->getEntityManager()->persist($galleryMaker);
         $this->getEntityManager()->flush();
