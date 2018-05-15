@@ -42,12 +42,20 @@
         </div>
         <div class="row no-gutters">
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                {% for gallery in galleryMaker %}
-                    {% for lines in data %}
-                        {% for image in gallery.images %}
-                            <img src="{{ asset(image.publicPath ~ '/' ~ image.pictureName) }}" alt="{{ image.pictureName }}">
-                        {% endfor %}
+                {% for lines, order in data %}
+                    <div class="row">
+                    {% for display, order in order %}
+                        {% if loop.length > 1 %}
+                            {% for image, images in order %}
+                            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12"><img src="{{ asset(images) }}" class="img-gallery" /></div>
+                                {% endfor %}
+                        {% else %}
+                            {% for image, images in order %}
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12"><img src="{{ asset(images) }}" class="img-gallery" /></div>
+                            {% endfor %}
+                        {% endif %}
                     {% endfor %}
+                    </div>
                 {% endfor %}
                 </div>
             </div>

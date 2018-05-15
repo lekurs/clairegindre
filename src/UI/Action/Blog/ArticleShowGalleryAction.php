@@ -55,6 +55,11 @@ class ArticleShowGalleryAction implements ArticleShowGalleryActionInterface
     private $galleryMakerRepository;
 
     /**
+     * @var GalleryRepositoryInterface
+     */
+    private $galleryRepository;
+
+    /**
      * @var FormFactoryInterface
      */
     private $formFactory;
@@ -84,17 +89,19 @@ class ArticleShowGalleryAction implements ArticleShowGalleryActionInterface
      * @param ReviewsRepositoryInterface $reviewsRepository
      * @param ArticleRepositoryInterface $articleRepository
      * @param GalleryMakerRepository $galleryMakerRepository
+     * @param GalleryRepositoryInterface $galleryRepository
      * @param FormFactoryInterface $formFactory
      * @param AddCommentArticleUserNotConnectedTypeHandlerInterface $addCommentHandler
      * @param InstagramLib $instagram
      * @param TokenStorageInterface $tokenStorage
      * @param SlugHelper $stringReplace
      */
-    public function __construct(ReviewsRepositoryInterface $reviewsRepository, ArticleRepositoryInterface $articleRepository, GalleryMakerRepository $galleryMakerRepository, FormFactoryInterface $formFactory, AddCommentArticleUserNotConnectedTypeHandlerInterface $addCommentHandler, InstagramLib $instagram, TokenStorageInterface $tokenStorage, SlugHelper $stringReplace)
+    public function __construct(ReviewsRepositoryInterface $reviewsRepository, ArticleRepositoryInterface $articleRepository, GalleryMakerRepository $galleryMakerRepository, GalleryRepositoryInterface $galleryRepository, FormFactoryInterface $formFactory, AddCommentArticleUserNotConnectedTypeHandlerInterface $addCommentHandler, InstagramLib $instagram, TokenStorageInterface $tokenStorage, SlugHelper $stringReplace)
     {
         $this->reviewsRepository = $reviewsRepository;
         $this->articleRepository = $articleRepository;
         $this->galleryMakerRepository = $galleryMakerRepository;
+        $this->galleryRepository = $galleryRepository;
         $this->formFactory = $formFactory;
         $this->addCommentHandler = $addCommentHandler;
         $this->instagram = $instagram;
@@ -109,14 +116,23 @@ class ArticleShowGalleryAction implements ArticleShowGalleryActionInterface
 
         $article = $this->articleRepository->getOne($request->get('slugArticle'));
 
-        $galleryMaker = $this->galleryMakerRepository->getByArticle($article->getid());
+//        $galleryMaker = $this->galleryMakerRepository->getByArticle($article->getid());
+
+        $gallerys = $this->galleryRepository->getOne($request->attributes->get('slugGallery'));
+
+//        dump($gallerys);
+//        die;
+        $data[] = array();
+
+        $gallerys = $this->galleryRepository->getOne($request->attributes->get('slugGallery'));
 
         $data[] = array();
-        foreach($galleryMaker as $line) {
-            $data[$line->getLine()][] = $line->getDisplayOrder();
+
+        foreach($gallerys->getPictures() as $key => $images) {
+            $data[$images->getGalleryMaker()->getLine()][$images->getGalleryMaker()->getDisplayOrder()][] = $images->getPublicPath() . '/' . $images->getPictureName();
         }
 
-        dump($data);
+//        dump($data);
 
         $form = $this->formFactory->create(ContactType::class);
 
@@ -132,10 +148,10 @@ class ArticleShowGalleryAction implements ArticleShowGalleryActionInterface
 
         if ($this->addCommentHandler->handle($commentType, $article)) {
 
-            return $responder(true, $form, $commentType, $article, $galleryMaker, $data, $instagram, $reviews);
+            return $responder(true, $form, $commentType, $article, $data, $instagram, $reviews);
         }
 
-        return $responder(false,$form, $commentType, $article, $galleryMaker, $data, $instagram, $reviews);
+        return $responder(false,$form, $commentType, $article, $data, $instagram, $reviews);
     }
 
 }
