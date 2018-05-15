@@ -39,10 +39,11 @@ class FaqResponder implements FaqResponderInterface
         $this->urlGenerator = $urlGenerator;
     }
 
-    public function __invoke($redirect = false, FormInterface $form = null, $instagram)
+    public function __invoke($redirect = false, FormInterface $form = null, $reviews, $instagram)
     {
         $redirect ? $response = new RedirectResponse($this->urlGenerator->generate('index')) : $response = new Response($this->twig->render('front/faq.html.twig', [
             'contact' => $form->createView(),
+            'reviews' => $reviews,
             'insta' => $instagram
         ]));
 
