@@ -367,6 +367,7 @@ input.sub-contact, button.sub-contact {
     align-self: stretch;
     justify-self: stretch;
     object-fit: cover;
+    height: 50%;
 }
 
 .insta-logo {

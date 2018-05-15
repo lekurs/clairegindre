@@ -24,7 +24,7 @@ interface CommentBuilderInterface
      * @param ArticleInterface $article
      * @return CommentBuilderInterface
      */
-    public function create(UserInterface $author, string $lastName, string $email, string $content, \DateTime $date, ArticleInterface $article): CommentBuilderInterface;
+//    public function create(string $content, ArticleInterface $article, string $email, string $lastName, UserInterface $author, \DateTime $date): CommentBuilderInterface;
 
     /**
      * @return Comment

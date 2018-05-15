@@ -83,7 +83,7 @@
                     {% endif %}
                     {% for comment in article.comments %}
                         <div class="row comments-contain">
-                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">{{ comment.lastName }}</div>
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">{{ comment.author.username ~ ' - '  ~ comment.author.lastName}}</div>
                         </div>
                         <div class="row comments-contain">
                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">{{ comment.content | raw }}</div>

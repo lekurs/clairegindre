@@ -11,10 +11,10 @@ namespace App\Domain\DTO\Interfaces;
 
 use App\Domain\Models\Interfaces\ArticleInterface;
 
-interface AddCommentArticleUserNotConnectedDTOInterface
+interface AddCommentOnArticleDTOInterface
 {
     /**
-     * AddCommentArticleUserNotConnectedDTOInterface constructor.
+     * AddCommentOnArticleDTOInterface constructor.
      *
      * @param string $email
      * @param string $lastName

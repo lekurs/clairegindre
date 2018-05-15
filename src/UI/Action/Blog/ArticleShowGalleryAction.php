@@ -9,7 +9,7 @@
 namespace App\UI\Action\Blog;
 
 
-use App\Domain\Form\Type\AddCommentArticleUserNotConnectedType;
+use App\Domain\Form\Type\AddCommentOnArticleType;
 use App\Domain\Form\Type\ContactType;
 use App\Domain\Lib\InstagramLib;
 use App\Domain\Repository\ArticleRepository;
@@ -20,7 +20,7 @@ use App\Domain\Repository\Interfaces\GalleryRepositoryInterface;
 use App\Domain\Repository\Interfaces\ReviewsRepositoryInterface;
 use App\Services\SlugHelper;
 use App\UI\Action\Blog\Interfaces\ArticleShowGalleryActionInterface;
-use App\UI\Form\FormHandler\Interfaces\AddCommentArticleUserNotConnectedTypeHandlerInterface;
+use App\UI\Form\FormHandler\Interfaces\AddCommentOnArticleTypeHandlerInterface;
 use App\UI\Responder\Interfaces\ArticleShowGalleryResponderInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -65,7 +65,7 @@ class ArticleShowGalleryAction implements ArticleShowGalleryActionInterface
     private $formFactory;
 
     /**
-     * @var AddCommentArticleUserNotConnectedTypeHandlerInterface
+     * @var AddCommentOnArticleTypeHandlerInterface
      */
     private $addCommentHandler;
 
@@ -91,12 +91,12 @@ class ArticleShowGalleryAction implements ArticleShowGalleryActionInterface
      * @param GalleryMakerRepository $galleryMakerRepository
      * @param GalleryRepositoryInterface $galleryRepository
      * @param FormFactoryInterface $formFactory
-     * @param AddCommentArticleUserNotConnectedTypeHandlerInterface $addCommentHandler
+     * @param AddCommentOnArticleTypeHandlerInterface $addCommentHandler
      * @param InstagramLib $instagram
      * @param TokenStorageInterface $tokenStorage
      * @param SlugHelper $stringReplace
      */
-    public function __construct(ReviewsRepositoryInterface $reviewsRepository, ArticleRepositoryInterface $articleRepository, GalleryMakerRepository $galleryMakerRepository, GalleryRepositoryInterface $galleryRepository, FormFactoryInterface $formFactory, AddCommentArticleUserNotConnectedTypeHandlerInterface $addCommentHandler, InstagramLib $instagram, TokenStorageInterface $tokenStorage, SlugHelper $stringReplace)
+    public function __construct(ReviewsRepositoryInterface $reviewsRepository, ArticleRepositoryInterface $articleRepository, GalleryMakerRepository $galleryMakerRepository, GalleryRepositoryInterface $galleryRepository, FormFactoryInterface $formFactory, AddCommentOnArticleTypeHandlerInterface $addCommentHandler, InstagramLib $instagram, TokenStorageInterface $tokenStorage, SlugHelper $stringReplace)
     {
         $this->reviewsRepository = $reviewsRepository;
         $this->articleRepository = $articleRepository;
@@ -116,14 +116,6 @@ class ArticleShowGalleryAction implements ArticleShowGalleryActionInterface
 
         $article = $this->articleRepository->getOne($request->get('slugArticle'));
 
-//        $galleryMaker = $this->galleryMakerRepository->getByArticle($article->getid());
-
-        $gallerys = $this->galleryRepository->getOne($request->attributes->get('slugGallery'));
-
-//        dump($gallerys);
-//        die;
-        $data[] = array();
-
         $gallerys = $this->galleryRepository->getOne($request->attributes->get('slugGallery'));
 
         $data[] = array();
@@ -132,16 +124,9 @@ class ArticleShowGalleryAction implements ArticleShowGalleryActionInterface
             $data[$images->getGalleryMaker()->getLine()][$images->getGalleryMaker()->getDisplayOrder()][] = $images->getPublicPath() . '/' . $images->getPictureName();
         }
 
-//        dump($data);
-
         $form = $this->formFactory->create(ContactType::class);
 
-        if (!$this->tokenStorage->getToken())
-        {
-//            $commentType = $this->formFactory->create()->handleRequest($request);
-        } else {
-            $commentType = $this->formFactory->create(AddCommentArticleUserNotConnectedType::class)->handleRequest($request);
-        }
+        $commentType = $this->formFactory->create(AddCommentOnArticleType::class)->handleRequest($request);
 
 
         $instagram = $this->instagram->show();

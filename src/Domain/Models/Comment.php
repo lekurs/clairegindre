@@ -48,27 +48,26 @@ class Comment implements CommentInterface
     /**
      * Comment constructor.
      *
-     * @param UserInterface $author
-     * @param string $lastName
-     * @param string $email
      * @param string $content
-     * @param \DateTime $date
      * @param ArticleInterface $article
+     * @param string|null $email
+     * @param string|null $lastName
+     * @param UserInterface|null $author
      */
     public function __construct(
-        UserInterface $author = null,
-        string $lastName = null,
-        string $email = null,
         string $content,
-        ArticleInterface $article
+        ArticleInterface $article,
+//        string $email = null,
+//        string $lastName = null,
+        UserInterface $author = null
     ) {
         $this->id = Uuid::uuid4();
-        $this->author = $author;
-        $this->lastName = $lastName;
-        $this->email = $email;
         $this->content = $content;
-        $this->date = new \DateTime();
         $this->article = $article;
+//        $this->email = $email;
+//        $this->lastName = $lastName;
+        $this->author = $author;
+        $this->date = new \DateTime();
     }
 
     /**

@@ -11,13 +11,14 @@ namespace App\UI\Form\FormHandler;
 use App\Domain\Builder\Interfaces\CommentBuilderInterface;
 use App\Domain\Repository\Interfaces\ArticleRepositoryInterface;
 use App\Domain\Repository\Interfaces\CommentRepositoryInterface;
-use App\UI\Form\FormHandler\Interfaces\AddCommentArticleUserNotConnectedTypeHandlerInterface;
+use App\UI\Form\FormHandler\Interfaces\AddCommentOnArticleTypeHandlerInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
-class AddCommentArticleUserNotConnectedTypeHandler implements AddCommentArticleUserNotConnectedTypeHandlerInterface
+class AddCommentOnOnArticleTypeHandler implements AddCommentOnArticleTypeHandlerInterface
 {
     /**
      * @var ValidatorInterface
@@ -30,6 +31,11 @@ class AddCommentArticleUserNotConnectedTypeHandler implements AddCommentArticleU
     private $session;
 
     /**
+     * @var TokenStorageInterface
+     */
+    private $tokenStorage;
+
+    /**
      * @var CommentBuilderInterface
      */
     private $commentBuilder;
@@ -40,16 +46,18 @@ class AddCommentArticleUserNotConnectedTypeHandler implements AddCommentArticleU
     private $commentRepository;
 
     /**
-     * AddCommentArticleUserNotConnectedTypeHandler constructor.
+     * AddCommentOnOnArticleTypeHandler constructor.
      * @param ValidatorInterface $validator
      * @param SessionInterface $session
+     * @param TokenStorageInterface $tokenStorage
      * @param CommentBuilderInterface $commentBuilder
      * @param CommentRepositoryInterface $commentRepository
      */
-    public function __construct(ValidatorInterface $validator, SessionInterface $session, CommentBuilderInterface $commentBuilder, CommentRepositoryInterface $commentRepository)
+    public function __construct(ValidatorInterface $validator, SessionInterface $session, TokenStorageInterface $tokenStorage, CommentBuilderInterface $commentBuilder, CommentRepositoryInterface $commentRepository)
     {
         $this->validator = $validator;
         $this->session = $session;
+        $this->tokenStorage = $tokenStorage;
         $this->commentBuilder = $commentBuilder;
         $this->commentRepository = $commentRepository;
     }
@@ -59,17 +67,18 @@ class AddCommentArticleUserNotConnectedTypeHandler implements AddCommentArticleU
     {
         if ($form->isSubmitted() && $form->isValid()) {
 
-            dump($form->getData(),$article);
-            die();
+//            dump($form->getData(),$article, $this->tokenStorage->getToken()->getUser());
 
-            $comment = $this->commentBuilder->create(
-                                                                                null,
-                                                                                $form->getData()->email,
-                                                                                $form->getData()->lastName,
+            $this->commentBuilder->create(
                                                                                 $form->getData()->content,
-                                                                                $article
-//                                                                                new \DateTime(),
+                                                                                $article,
+//                                                                                $form->getData()->email,
+//                                                                                $form->getData()->lastName,
+                                                                                $this->tokenStorage->getToken()->getUser(),
+                                                                                new \DateTime()
                                                                             );
+
+            $this->commentRepository->save($this->commentBuilder->getComment());
 
             return true;
         }
