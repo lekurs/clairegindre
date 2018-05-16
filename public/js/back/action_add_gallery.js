@@ -25,5 +25,6 @@ $(document).ready(function ($) {
     $('.down-gallery').on('click', function () {
         $('.down-gallery').addClass('active');
         $('.cards').css('visibility', 'visible');
-    })
+        $(this).removeClass('down-gallery');
+    });
 });

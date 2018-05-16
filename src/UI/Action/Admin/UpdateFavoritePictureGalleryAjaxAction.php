@@ -87,8 +87,6 @@ class UpdateFavoritePictureGalleryAjaxAction implements UpdateFavoritePictureGal
 
         $pictureInGallery = $this->galleryRepository->getWithPictures($picture->getGallery()->getid()); //TODO
 
-//        $this->pictureBuilder->
-
         $this->galleryRepository->update($pictureInGallery);
 
         //remettre à 0 les images avec un favori à 1

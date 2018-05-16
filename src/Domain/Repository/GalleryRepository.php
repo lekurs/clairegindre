@@ -86,20 +86,6 @@ class GalleryRepository extends ServiceEntityRepository implements GalleryReposi
             ;
     }
 
-//    /**
-//     * @param $id
-//     * @return mixed
-//     */
-//    public function getGalleryByUser($id)
-//    {
-//        return $this->createQueryBuilder('gallery')
-//                            ->where('gallery.user = :id')
-//                            ->setParameter('id', $id)
-//                            ->innerJoin('gallery.pictures', 'pictures')
-//                            ->getQuery()
-//                            ->getResult();
-//    }
-
     /**
      * @param $idUser
      * @param $idGallery

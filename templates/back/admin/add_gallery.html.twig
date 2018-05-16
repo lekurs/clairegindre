@@ -33,7 +33,7 @@
                     <i class="fa fa-angle-double-down fa-2x down-gallery"></i>
                 </div>
             </div>
-            <div class="row no-gutters">
+            <div class="row no-gutters pictures-gallery-container">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                     <div class="row no-gutters cards cards-gallery-down" id="sortable">
                         {% for pictures in gallery.pictures %}
@@ -43,7 +43,7 @@
                                 </div>
                                 <div class="row no-gutters cards-pictos">
                                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
-                                        <i class="fa fa-star favorite-image" data-id="{{ pictures.id }}"></i>
+                                        <i class="fa fa-star {% if pictures.favorite > 0 %}favorite-image{% endif %}" data-id="{{ pictures.id }}"></i>
                                     </div>
                                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
                                         <i class="fa fa-trash delete-image" data-id="{{ pictures.id }}"></i>
@@ -52,6 +52,11 @@
                             </div>
                         {% endfor %}
                     </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <a href="{{ path('admin') }}"><button type="button" class="btn btn-dark back-admin">Retour à l'administration</button></a>
                 </div>
             </div>
         {% endif %}

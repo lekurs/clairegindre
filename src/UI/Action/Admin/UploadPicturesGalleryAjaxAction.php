@@ -132,22 +132,22 @@ class UploadPicturesGalleryAjaxAction implements UploadPicturesGalleryActionInte
     {
         $gallery = $this->galleryRepository->getOne($request->request->get('gallery'));
 
-        dump($this->dirGallery . $this->stringReplaceService->replace($request->request->get('destination')));
-        die();
+        dump($this->dirGallery . $gallery->getSlug());
+//        die();
 
         $this->pictureUploaderHelper->move(
                                                                             $request->files->get('picture'),
-                                                                            $this->dirGallery . $this->stringReplaceService->replace($request->request->get('destination')),
+                                                                            $this->dirGallery . $gallery->getSlug(),
                                                                             $request->files->get('picture')->getClientOriginalName()
                                                                         );
         $this->pictureBuilder->create(
                                                                 $request->files->get('picture')->getClientOriginalName(),
-                                                                $this->dirPicture . $this->stringReplaceService->replace($request->request->get('destination')),
+                                                                $this->dirPicture . $gallery->getSlug(),
                                                                 $request->files->get('picture')->guessClientExtension(),
                                                                 $request->request->get('order'),
                                                                 $request->request->get('favorite'), $gallery
                                                             );
-
+//die;
         $this->pictureRepository->save($this->pictureBuilder->getPicture());
 
         return new JsonResponse([], 201);
