@@ -50,16 +50,6 @@ class ArticleRepository extends ServiceEntityRepository implements ArticleReposi
                                 ->getResult();
     }
 
-//    public function getOneWithGallery($slug)
-//    {
-//        return $this->createQueryBuilder('article')
-//                              ->where('article.slug = :slug')
-//                                ->setParameter('slug', $slug)
-//                              ->leftJoin('article.gallery', 'gallery')
-//                                ->getQuery()
-//                                ->getOneOrNullResult();
-//    }
-
     public function getArticlesWithFavoritePictureGallery()
     {
         return $this->createQueryBuilder('article')

@@ -38,6 +38,16 @@ class PictureRepository extends ServiceEntityRepository implements PictureReposi
             ->getResult();
     }
 
+    public function getFavorite($galleryId)
+    {
+        return $this->createQueryBuilder('picture')
+                            ->where('picture.favorite = 1')
+                            ->andWhere('picture.gallery = :galleryId')
+                            ->setParameter('galleryId', $galleryId)
+                            ->getQuery()
+                            ->getOneOrNullResult();
+    }
+
     /**
      * @param PictureInterface $picture
      * @return mixed|void
@@ -59,6 +69,13 @@ class PictureRepository extends ServiceEntityRepository implements PictureReposi
     public function delete(PictureInterface $picture)
     {
         $this->getEntityManager()->remove($picture);
+        $this->getEntityManager()->flush();
+    }
+
+    public function updateFavorite($oldPicture, $pictureFavorite)
+    {
+        $oldPicture->setFavorite(0);
+        $pictureFavorite->setFavorite(true);
         $this->getEntityManager()->flush();
     }
 }

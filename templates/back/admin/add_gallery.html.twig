@@ -42,8 +42,8 @@
                                     <img src="{{ asset(pictures.publicPath ~ '/' ~ pictures.pictureName) }}" alt="{{ pictures.pictureName }}"  class="img-fluid" data-position="{{ pictures.displayOrder }}"/>
                                 </div>
                                 <div class="row no-gutters cards-pictos">
-                                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
-                                        <i class="fa fa-star {% if pictures.favorite > 0 %}favorite-image{% endif %}" data-id="{{ pictures.id }}"></i>
+                                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 favorite-icone-container">
+                                        <i class="fa fa-star favorite-icone {% if pictures.favorite > 0 %}favorite-image{% endif %}" data-id="{{ pictures.id }}"></i>
                                     </div>
                                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
                                         <i class="fa fa-trash delete-image" data-id="{{ pictures.id }}"></i>
@@ -66,7 +66,6 @@
 
 {% block javascripts %}
     {{ parent() }}
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>$ (function () {
             $('#sortable').sortable();
             $ ('#sortable').disableSelection();
@@ -75,7 +74,7 @@
     <script>$(document).ready(function () {
             $('#drop-container').dropPictures(
                 {
-                    'script' : '/admin/gallery/pictures/upload',
+                    'script' : '{{ path('uploadImages', { 'slugGallery': gallery.slug }) }}',
                     'target': '{{ gallery.title }}',
                     'gallery': '{{ gallery.slug }}',
                     'direction': '{{ gallery.slug }}'
@@ -84,4 +83,13 @@
         });
     </script>
     <script src="{{ asset('js/back/action_add_gallery.js') }}"></script>
+    <script src="{{ asset('js/back/add_favorite.js') }}"></script>
+    <script>$(document).ready(function() {
+            $('.favorite-icone-container').favoritePicture(
+                {
+                    'script': '{{ path('adminEditFavoritePicture', { 'gallerySlug' : gallery.slug}) }}'
+                }
+            ) ;
+        });
+    </script>
 {% endblock %}

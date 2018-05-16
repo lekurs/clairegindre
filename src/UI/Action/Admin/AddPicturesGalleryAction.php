@@ -55,7 +55,7 @@ class AddPicturesGalleryAction implements AddPicturesGalleryActionInterface
 
     public function __invoke(Request $request, AddPicturesGalleryResponderInterface $responder)
     {
-        $gallery = $this->galleryRepository->getOne($request->get('slug'));
+        $gallery = $this->galleryRepository->getOne($request->attributes->get('slug'));
 
         return $responder(false, $gallery);
     }

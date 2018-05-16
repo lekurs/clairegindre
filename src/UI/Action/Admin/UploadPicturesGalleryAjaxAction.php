@@ -29,7 +29,7 @@ use Symfony\Component\Routing\Annotation\Route;
  *
  * @Route(
  *     name="uploadImages",
- *     path="admin/gallery/pictures/upload",
+ *     path="admin/gallery/pictures/{slugGallery}",
  *     methods={"POST"}
  * )
  *
@@ -130,10 +130,7 @@ class UploadPicturesGalleryAjaxAction implements UploadPicturesGalleryActionInte
      */
     public function __invoke(Request $request)
     {
-        $gallery = $this->galleryRepository->getOne($request->request->get('gallery'));
-
-        dump($this->dirGallery . $gallery->getSlug());
-//        die();
+        $gallery = $this->galleryRepository->getOne($request->attributes->get('slugGallery'));
 
         $this->pictureUploaderHelper->move(
                                                                             $request->files->get('picture'),
@@ -147,7 +144,6 @@ class UploadPicturesGalleryAjaxAction implements UploadPicturesGalleryActionInte
                                                                 $request->request->get('order'),
                                                                 $request->request->get('favorite'), $gallery
                                                             );
-//die;
         $this->pictureRepository->save($this->pictureBuilder->getPicture());
 
         return new JsonResponse([], 201);

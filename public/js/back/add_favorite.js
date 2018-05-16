@@ -1,12 +1,29 @@
-$(document).ready(function () {
-    var checked = $('input:checkbox');
+(function ($) {
+    var o = {
+        auto: true,
+        script: '',
+    }
 
-    checked.each(function () {
-        $(this).on('click', function () {
-            if(checked.is(':checked')) {
-                checked.removeAttr('checked');
-                $(this).attr('checked');
-            }
-        })
-    })
-})
+    $.fn.favoritePicture = function (oo) {
+        if(oo) {
+            $.extend(o, oo); //merge les options
+        }
+
+        function update(index) {
+
+        }
+
+        $('.favorite-icone').on('click', function () {
+            favorite = $(this).attr('data-id');
+
+            $('.favorite-icone').removeClass('favorite-image');
+
+            $(this).addClass('favorite-image')
+
+            $.post( o.script, {id: favorite}, function(data){
+                console.log(data);
+                // TODO injecter en bdd
+            });
+        });
+    }
+}) (jQuery);

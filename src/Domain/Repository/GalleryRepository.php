@@ -30,15 +30,15 @@ class GalleryRepository extends ServiceEntityRepository implements GalleryReposi
     }
 
     /**
-     * @param $slug
+     * @param $slugGallery
      * @return mixed
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
-    public function getOne($slug)
+    public function getOne($slugGallery)
     {
         return $this->createQueryBuilder('gallery')
-                                ->where('gallery.slug = :slug')
-                                ->setParameter('slug', $slug)
+                                ->where('gallery.slug = :slugGallery')
+                                ->setParameter('slugGallery', $slugGallery)
                                 ->getQuery()
                                 ->getOneOrNullResult();
     }

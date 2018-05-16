@@ -24,7 +24,7 @@ use Symfony\Component\Routing\Annotation\Route;
  *
  * @Route(
  *     name="adminEditFavoritePicture",
- *     path="admin/gallery/pictures/favorite",
+ *     path="admin/gallery/pictures/{gallerySlug}/favorite",
  *     methods={"POST"}
  * )
  *
@@ -37,59 +37,28 @@ class UpdateFavoritePictureGalleryAjaxAction implements UpdateFavoritePictureGal
     private $pictureRepository;
 
     /**
-     * @var GalleryRepositoryInterface
-     */
-    private $galleryRepository;
-
-    /**
-     * @var PictureBuilderInterface
-     */
-    private $pictureBuilder;
-
-    /**
-     * @var GalleryBuilderInterface
-     */
-    private $galleryBuilder;
-
-    /**
-     * @var Filesystem
-     */
-    private $fileSystem;
-
-    /**
-     * @var string
-     */
-    private $targetDirPublic;
-
-    /**
      * UpdateFavoritePictureGalleryAjaxAction constructor.
+     *
      * @param PictureRepositoryInterface $pictureRepository
-     * @param GalleryRepositoryInterface $galleryRepository
-     * @param PictureBuilderInterface $pictureBuilder
-     * @param GalleryBuilderInterface $galleryBuilder
-     * @param Filesystem $fileSystem
-     * @param string $targetDirPublic
      */
-    public function __construct(PictureRepositoryInterface $pictureRepository, GalleryRepositoryInterface $galleryRepository, PictureBuilderInterface $pictureBuilder, GalleryBuilderInterface $galleryBuilder, Filesystem $fileSystem, string $targetDirPublic)
+    public function __construct(PictureRepositoryInterface $pictureRepository)
     {
         $this->pictureRepository = $pictureRepository;
-        $this->galleryRepository = $galleryRepository;
-        $this->pictureBuilder = $pictureBuilder;
-        $this->galleryBuilder = $galleryBuilder;
-        $this->fileSystem = $fileSystem;
-        $this->targetDirPublic = $targetDirPublic;
     }
 
-
+    /**
+     * @param Request $request
+     * @param UpdateFavoritePictureGalleryResponderInterface $responder
+     * @return mixed
+     */
     public function __invoke(Request $request, UpdateFavoritePictureGalleryResponderInterface $responder)
     {
-        $picture = $this->pictureRepository->getOne($request->request->get('id'));
+        $pictureToFavorite = $this->pictureRepository->getOne($request->request->get('id'));
 
-        $pictureInGallery = $this->galleryRepository->getWithPictures($picture->getGallery()->getid()); //TODO
+        $oldPictureFavorite = $this->pictureRepository->getFavorite($pictureToFavorite->getGallery());
 
-        $this->galleryRepository->update($pictureInGallery);
+        $this->pictureRepository->updateFavorite($oldPictureFavorite, $pictureToFavorite);
 
-        //remettre à 0 les images avec un favori à 1
-
+        return $responder();
     }
 }
