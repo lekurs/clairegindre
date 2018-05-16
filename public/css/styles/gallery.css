@@ -173,6 +173,16 @@ legend {
     color: #FFFFFF;
 }
 
+.fa.fa-download.serving {
+    margin: 1em auto;
+    transition: all .5s ease-in-out;
+    cursor: pointer;
+}
+
+.fa.fa-download.serving:hover {
+    transform: scale(1.2);
+    color: #363636;
+}
 
 /*****************************************************************/
 /*                                      BLOG/ARTICLE/DETAIL                             */
