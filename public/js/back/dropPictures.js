@@ -45,7 +45,7 @@
                     deleteButton = $('<i class="fa fa-trash">').addClass('drop_pictures_button').attr('id', increment_id).val('Supprimer').appendTo(zoneDeleteButton);
                     favoriteType = $('<i class="fa fa-star">').addClass('check_box_favorite').attr('id', 'favorite_' + increment_id).val('1').attr('name', 'favorite').appendTo(zoneFavoriteType);
                     progressBar = $('<div>').addClass('progress').appendTo(colProgressBar);
-                    progresseBarContent = $('<div>').addClass('progress-bar').attr('role', 'progressbar').css('width', '0%').attr('aria-valuenow', '0').attr('aria-valuemin', '0').attr('aria-valuemax', '100').attr('id', 'bar_'+ index).html('en&nbsp;attente');
+                    progresseBarContent = $('<div>').addClass('progress-bar').attr('role', 'progressbar').addClass('progress-bar').addClass('progress-bar-striped').addClass('bg-info').css('width', '0%').attr('aria-valuenow', '0').attr('aria-valuemin', '0').attr('aria-valuemax', '100').attr('id', 'bar_'+ index).html('en&nbsp;attente');
 
                     progressBar.append(progresseBarContent);
                     line.append(colImage).append(colNom).append(colSize).append(colProgressBar).append(colDelete);
