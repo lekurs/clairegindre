@@ -30,6 +30,17 @@ interface PictureRepositoryInterface
     public function getOne($id);
 
     /**
+     * @return mixed
+     */
+    public function showPicturesByGallery();
+
+    /**
+     * @param $galleryId
+     * @return mixed
+     */
+    public function getFavorite($galleryId);
+
+    /**
      * @param PictureInterface $picture
      * @return mixed
      */
@@ -40,4 +51,11 @@ interface PictureRepositoryInterface
      * @return mixed
      */
     public function delete(PictureInterface $picture);
+
+    /**
+     * @param $oldPicture
+     * @param $pictureFavorite
+     * @return mixed
+     */
+    public function updateFavorite($oldPicture, $pictureFavorite);
 }

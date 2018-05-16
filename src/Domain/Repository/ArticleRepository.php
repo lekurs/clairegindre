@@ -84,8 +84,6 @@ class ArticleRepository extends ServiceEntityRepository implements ArticleReposi
     public function save(ArticleInterface $article, GalleryInterface $gallery): void
     {
         $gallery->setArticle($article);
-//        dump($gallery);
-//        die();
         $this->getEntityManager()->persist($article);
         $this->getEntityManager()->flush();
     }

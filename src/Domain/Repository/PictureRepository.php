@@ -16,6 +16,11 @@ class PictureRepository extends ServiceEntityRepository implements PictureReposi
         parent::__construct($registry, Picture::class);
     }
 
+    /**
+     * @param $id
+     * @return mixed
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
     public function getOne($id)
     {
         return $this->createQueryBuilder('picture')
@@ -38,6 +43,11 @@ class PictureRepository extends ServiceEntityRepository implements PictureReposi
             ->getResult();
     }
 
+    /**
+     * @param $galleryId
+     * @return mixed
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
     public function getFavorite($galleryId)
     {
         return $this->createQueryBuilder('picture')
@@ -72,6 +82,13 @@ class PictureRepository extends ServiceEntityRepository implements PictureReposi
         $this->getEntityManager()->flush();
     }
 
+    /**
+     * @param $oldPicture
+     * @param $pictureFavorite
+     * @return mixed|void
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
     public function updateFavorite($oldPicture, $pictureFavorite)
     {
         $oldPicture->setFavorite(0);
