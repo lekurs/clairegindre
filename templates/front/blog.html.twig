@@ -40,25 +40,26 @@
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                 <h2>Vos belles histoires</h2>
                 <div class="btn-group col-xl-6 col-lg-6 col-md-6 col-sm-2 col-6 offset-xl-3 offset-lg-3 select-portfolio">
-                    <button class="btn btn-default filter-button text-center" data-filter="all">Tout voir</button>
+                    <button class="btn btn-default filter-button-dynamique text-center" data-filter="all">Tout voir</button>
                 {% for benefit in benefits %}
-                    <button class="btn btn-default filter-button-dynamique" data-filter="{{ benefit.name }}"><img src="{{ asset('/images/interface/pictos/' ~ benefit.name|lower ~ '.png' ) }}" alt="{{ benefit.name }}" class="blog-pictos-filter"> {{ benefit.name }}</button>
+                    <button class="btn btn-default filter-button-dynamique" data-filter="{{ benefit.name |lower }}"><img src="{{ asset('/images/interface/pictos/' ~ benefit.name|lower ~ '.png' ) }}" alt="{{ benefit.name }}" class="blog-pictos-filter"> {{ benefit.name }}</button>
                 {% endfor %}
                 </div>
                 <div class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-10 offset-1">
                     <div class="row no-gutters articles-container">
                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                     {% for gallery in galleries %}
-                        <div class="row no-gutters article-container{% if loop.index is divisible by(2) %}-reverse{% endif %}">
+                        <div class="row no-gutters article-container{% if loop.index is divisible by(2) %}-reverse{% endif %} filter {{ gallery.benefit.name |lower }}" data-filter="{{ gallery.benefit.name | lower}}">
                             <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12{% if loop.index is divisible by(2) %} offset-0 {% else %} offset-1{% endif %} article-txt-container">
                                 <h2>{{ gallery.article.title }}</h2>
+                                <h3>{{ gallery.benefit.name }}</h3>
                                 <p>{{ gallery.article.creationDate | date('d M Y') }}</p>
                                 <p>{{ gallery.article.title }}</p>
                                 <a href="{{ path('showArticle', { 'slugArticle': gallery.article.slug, 'slugGallery': gallery.slug}) }}" class="link_to_gallery">{{ gallery.article.personnalButton }}</a>
                             </div>
                             <div class="col-xl-7 col-lg-7 col-md-12 col-sm-12 col-12 {% if loop.index is divisible by(2) %} offset-1{% endif %}">
                                 <div class="row no-gutters">
-                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 article-img-container" style="background: url('{{ asset('/images/upload/gallery/' ~ gallery.title ~ '/' ~ gallery.pictures.first.pictureName) }}') center center; background-size: cover;"></div>
+                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 article-img-container" style="background: url('{{ asset('/images/upload/gallery/' ~ gallery.slug ~ '/' ~ gallery.pictures.first.pictureName) }}') center center; background-size: cover;"></div>
                                 </div>
                             </div>
                         </div>
@@ -75,4 +76,5 @@
 {% block javascripts %}
     {{ parent() }}
     <script src="{{ asset('/js/front/menu.js') }}"></script>
+    <script src="{{ asset('js/front/portfolio_blog.js') }}"></script>
 {% endblock %}

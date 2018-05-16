@@ -21,6 +21,7 @@
 
 .select-portfolio {
     justify-content: center;
+    margin-bottom: 2em;
 }
 
 .blog-pictos-filter {
@@ -95,6 +96,7 @@
 .articles-container {
     justify-content: center;
     align-items: center;
+    margin: 2em auto;
 }
 
 .article-container {
