@@ -23,7 +23,7 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
  *
  * @Route(
  *     name="galleriesForCustomer",
- *     path="galleries/{user}/{id}"
+ *     path="galleries/{user}/{slugGallery}"
  * )
  *
  */
@@ -75,15 +75,7 @@ class GalleriesForCustomerAction implements GalleriesForCustomerActionInterface
      */
     public function __invoke(GalleriesForCustomerResponderInterface $responder)
     {
-        $galleries = $this->galleryRepository->getGalleryByUser($this->tokenStorage->getToken()->getUser()->getId());
-
-//        foreach($galleries as $gallery) {
-//            dump($gallery->getUser()->getUsername(), $this->tokenStorage->getToken()->getUser()->getUsername());
-//
-//            if (false === $this->authorizationChecker->isGranted($gallery->getUser()->getUsername(), $this->tokenStorage->getToken()->getUser()->getUsername())) {
-//                throw new AccessDeniedException('pas d\'accès');
-//            }
-//        }
+        $galleries = $this->galleryRepository->getAllByUser($this->tokenStorage->getToken()->getUser()->getId());
 
         return $responder($galleries, $this->instagram->show());
 

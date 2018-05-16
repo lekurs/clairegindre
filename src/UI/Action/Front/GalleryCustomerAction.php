@@ -20,8 +20,7 @@ use Symfony\Component\Routing\Annotation\Route;
  *
  * @Route(
  *     name="galleryCustomer",
- *     path="/gallery/{id}/{galleryId}",
- *     defaults={"galleryId" = null}
+ *     path="/gallery/{slugUser}/{slugGallery}"
  * )
  *
  * @package App\UI\Action\Security
@@ -29,46 +28,24 @@ use Symfony\Component\Routing\Annotation\Route;
 class GalleryCustomerAction
 {
     /**
-     * @var UserRepositoryInterface
-     */
-    private $userRepository;
-
-    /**
      * @var GalleryRepositoryInterface
      */
     private $galleryRepository;
 
     /**
-     * @var FormFactoryInterface
-     */
-    private $formFactory;
-
-    /**
      * GalleryCustomerAction constructor.
-     * @param UserRepositoryInterface $userRepository
      * @param GalleryRepositoryInterface $galleryRepository
-     * @param FormFactoryInterface $formFactory
      */
-    public function __construct(UserRepositoryInterface $userRepository, GalleryRepositoryInterface $galleryRepository, FormFactoryInterface $formFactory)
+    public function __construct(GalleryRepositoryInterface $galleryRepository)
     {
-        $this->userRepository = $userRepository;
         $this->galleryRepository = $galleryRepository;
-        $this->formFactory = $formFactory;
     }
 
 
-    public function __invoke(Request $request, GalleryCustomerResponderInterface $response)
+    public function __invoke(Request $request, GalleryCustomerResponderInterface $responder)
     {
-        if ($request->get('galleryId') != null)
-        {
-            $galleries = $this->galleryRepository->getGalleryByUserAndId($request->get('id'), $request->get('galleryId'));
+            $gallery = $this->galleryRepository->getWithPictures($request->attributes->get('slugGallery'));
 
-            return $response($galleries);
-        } else {
-
-            $galleries = $this->galleryRepository->getGalleryByUser($request->get('id'));
-
-            return $response($galleries);
-        }
+            return $responder($gallery);
     }
 }

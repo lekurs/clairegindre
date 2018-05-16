@@ -39,14 +39,13 @@
 {% block content %}
 <section>
     <div class="container">
-        {% for gallery in galleries %}
         <div class="row no-gutters">
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                 <h1 class="text-center text-uppercase">{{ gallery.title }}</h1>
             </div>
         </div>
             <div class="row no-gutters cards-container">
-                    {% for pictures in gallery.pictures %}
+                {% for pictures in gallery.pictures %}
                 <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12 gallery-content-img">
                     <div class="row no-gutters cards-content">
                         <img src="{{ asset(pictures.publicPath ~ '/' ~ pictures.pictureName) }}" alt="{{ pictures.pictureName }}"  class="img-fluid" data-position="{{ pictures.displayOrder }}" data-id="{{ pictures.displayOrder }} "/>
@@ -55,7 +54,7 @@
                             </div>
                     </div>
                 </div>
-                    {% endfor %}
+                {% endfor %}
                 </div>
 
     {% block contact %}
@@ -108,8 +107,6 @@
                 </div>
             </div>
         </div>
-    {% endfor %}
-
     </div>
 
 </section>

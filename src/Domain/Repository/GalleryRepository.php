@@ -87,6 +87,29 @@ class GalleryRepository extends ServiceEntityRepository implements GalleryReposi
     }
 
     /**
+     * @param $slugUser
+     * @return mixed
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function getGalleryByUser($slugUser)
+    {
+        return $this->createQueryBuilder('gallery')
+                            ->where('gallery.user = :slugUser')
+                            ->setParameter('slugUser', $slugUser)
+                            ->getQuery()
+                            ->getOneOrNullResult();
+    }
+
+    public function getAllByUser($idUser)
+    {
+        return $this->createQueryBuilder('gallery')
+                            ->where('gallery.user = :idUser')
+                            ->setParameter('idUser', $idUser)
+                            ->getQuery()
+                            ->getResult();
+    }
+
+    /**
      * @param $idUser
      * @param $idGallery
      * @return mixed
