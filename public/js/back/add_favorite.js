@@ -9,10 +9,6 @@
             $.extend(o, oo); //merge les options
         }
 
-        function update(index) {
-
-        }
-
         $('.favorite-icone').on('click', function () {
             favorite = $(this).attr('data-id');
 

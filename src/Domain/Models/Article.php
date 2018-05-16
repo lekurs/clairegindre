@@ -236,7 +236,13 @@ class Article implements ArticleInterface
         $galleriesMakers->setArticle($this);
     }
 
-
+    /**
+     * @param bool $online
+     */
+    public function setOnline(bool $online): void
+    {
+        $this->online = $online;
+    }
 
     /**
      * @param EditArticleTypeDTO $dto

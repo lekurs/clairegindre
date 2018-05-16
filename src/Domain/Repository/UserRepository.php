@@ -64,6 +64,15 @@ class UserRepository extends ServiceEntityRepository implements UserLoaderInterf
             ->getOneOrNullResult();
     }
 
+    public function getOneById($id): User
+    {
+        return $this->createQueryBuilder('user')
+                            ->where('user.id = :id')
+                            ->setParameter('id', $id)
+                            ->getQuery()
+                            ->getOneOrNullResult();
+    }
+
     /**
      * @param $first
      * @param $max
@@ -102,6 +111,16 @@ class UserRepository extends ServiceEntityRepository implements UserLoaderInterf
 
     public function update()
     {
+        $this->getEntityManager()->flush();
+    }
+
+    public function updateOnline(UserInterface $user)
+    {
+        if ($user->isOnline() === true) {
+            $user->setOnline(false);
+        } else {
+            $user->setOnline(true);
+        }
         $this->getEntityManager()->flush();
     }
 }

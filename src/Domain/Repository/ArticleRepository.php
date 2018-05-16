@@ -50,6 +50,15 @@ class ArticleRepository extends ServiceEntityRepository implements ArticleReposi
                                 ->getResult();
     }
 
+    public function getOneById($id)
+    {
+        return $this->createQueryBuilder('article')
+                            ->where('article.id = :id')
+                            ->setParameter('id', $id)
+                            ->getQuery()
+                            ->getOneOrNullResult();
+    }
+
     public function getArticlesWithFavoritePictureGallery()
     {
         return $this->createQueryBuilder('article')
@@ -87,6 +96,16 @@ class ArticleRepository extends ServiceEntityRepository implements ArticleReposi
      */
     public function update()
     {
+        $this->getEntityManager()->flush();
+    }
+
+    public function updateOnline(ArticleInterface $article)
+    {
+        if ($article->isOnline() == true) {
+            $article->setOnline(false);
+        } else {
+            $article->setOnline(true);
+        }
         $this->getEntityManager()->flush();
     }
 

@@ -257,8 +257,6 @@ class User implements UserInterface, BaseUser
         return $this->reviews;
     }
 
-
-
     /**
      * @return string
      */
@@ -273,6 +271,14 @@ class User implements UserInterface, BaseUser
     public function setPlainPassword(string $plainPassword): void
     {
         $this->plainPassword = $plainPassword;
+    }
+
+    /**
+     * @param bool $online
+     */
+    public function setOnline(bool $online): void
+    {
+        $this->online = $online;
     }
 
     /**

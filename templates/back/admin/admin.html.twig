@@ -77,7 +77,7 @@
                                                             <a href="{{ path('adminUserEdit', { 'slug': user.slug }) }}"><i class="fa fa-edit"></i></a>
                                                         </div>
                                                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
-                                                            <i class="fa fa-user {% if  user.online > 0 %}connected {% else %}not-connected{% endif %}"></i>
+                                                            <i class="fa fa-user log {% if  user.online > 0 %}connected {% else %}not-connected{% endif %}" data-id="{{ user.id }}"></i>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -236,11 +236,14 @@
                                     </div>
                                 </div>
                                 <div class="row no-gutters justify-content-center admin-users-block">
-                                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
+                                    <div class="col-xl-5 col-lg-5 col-md-6 col-sm-6 col-6">
                                         <p class="admin-block-title">Titre</p>
                                     </div>
-                                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">
+                                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-4 col-4">
                                         <p class="admin-block-title">Commentaires</p>
+                                    </div>
+                                    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
+                                        <p class="admin-block-title text-center">Etat</p>
                                     </div>
                                     <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
                                         <div class="row no-gutters">
@@ -257,13 +260,16 @@
                                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                         {% for article in articles %}
                                             <div class="row no-gutters justify-content-center admin-users-block">
-                                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
+                                                <div class="col-xl-5 col-lg-5 col-md-6 col-sm-6 col-6">
                                                     <p>{{ article.title }}</p>
                                                 </div>
-                                                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">
+                                                <div class="col-xl-3 col-lg-3 col-md-4 col-sm-4 col-4">
                                                     {% for comment in article.comments %}
                                                         <p>{{ comment | length }}</p>
                                                     {% endfor %}
+                                                </div>
+                                                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2 text-center">
+                                                    <p><i class="fa fa-circle statement {% if article.online > 0 %}online {% else %}offline{% endif %}" data-id="{{ article.id }}"></i></p>
                                                 </div>
                                                 <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
                                                     <div class="row no-gutters">
@@ -363,4 +369,24 @@
             </div>
         </div>
     </section>
+{% endblock %}
+
+{% block javascripts %}
+<script src="/js/vendor/jquery-min.js"></script>
+<script src="{{ asset('js/back/update_online_article.js') }}"></script>
+<script>
+    $(document).ready(function() {
+        $('.fa.statement').updateOnline({
+                script: '{{ path('adminUpdateOnlineArticle') }}'
+            });
+    });
+</script>
+<script src="{{ asset('js/back/update_online_user.js') }}"></script>
+<script>
+    $(document).ready(function () {
+        $('.fa.fa-user.statement').updateUser({
+            script: '{{ path('adminUpdateOnlineUser') }}'
+        });
+    });
+</script>
 {% endblock %}
