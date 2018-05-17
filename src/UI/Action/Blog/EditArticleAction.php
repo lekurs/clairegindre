@@ -81,6 +81,8 @@ class EditArticleAction implements EditArticleActionInterface
 
         $article = $this->articleRepository->getOne($request->get('slug'));
 
+        dump($article);
+
         $articleDTO = new EditArticleTypeDTO(
                                                                                     $article->getTitle(),
                                                                                     $article->getContent(),

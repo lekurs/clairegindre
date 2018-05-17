@@ -76,6 +76,11 @@ class Article implements ArticleInterface
     private $prestation;
 
     /**
+     * @var GalleryInterface
+     */
+    private $gallery;
+
+    /**
      * @var \ArrayAccess
      */
     private $galleriesMakers;
@@ -184,6 +189,22 @@ class Article implements ArticleInterface
     public function getAuthor(): UserInterface
     {
         return $this->author;
+    }
+
+    /**
+     * @return GalleryInterface
+     */
+    public function getGallery(): GalleryInterface
+    {
+        return $this->gallery;
+    }
+
+    /**
+     * @param GalleryInterface $gallery
+     */
+    public function setGallery(GalleryInterface $gallery): void
+    {
+        $this->gallery = $gallery;
     }
 
     /**

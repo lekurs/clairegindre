@@ -18,7 +18,7 @@
                 {% block title_admin %}
                     <div class="row no-gutters">
                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                            {#<h1>Article de blog pour la galerie : {{ articles.gallery.title }}</h1>#}
+                            <h1>Article de blog pour la galerie : {{ articles.gallery.title }}</h1>
                         </div>
                     </div>
                 {% endblock %}
@@ -33,7 +33,7 @@
                 </div>
                 {# GALLERIE MAKER #}
                 <div class="row no-gutters">
-                    {#<div class="maker container no-gutters" data-id="article_{{ articles.gallery.title }}"></div>#}
+                    <div class="maker container no-gutters" data-id="article_{{ articles.gallery.title }}"></div>
                 </div>
             </div>
 
@@ -48,11 +48,11 @@
                         </div>
                         <div class="modal-body">
                             <div class="row">
-                                {#{% for picture in articles.gallery.pictures %}#}
-                                    {#<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">#}
-                                        {#<img src="{{ asset(picture.publicPath ~ '/' ~ picture.pictureName) }}"  class="img-thumbnail rounded float-left" id="img_{{ picture.id }}">#}
-                                    {#</div>#}
-                                {#{% endfor %}#}
+                                {% for picture in articles.gallery.pictures %}
+                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                        <img src="{{ asset(picture.publicPath ~ '/' ~ picture.pictureName) }}"  class="img-thumbnail rounded float-left" id="img_{{ picture.id }}">
+                                    </div>
+                                {% endfor %}
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -77,7 +77,7 @@
     $(document).ready(function(){
         $(".maker").galleriemaker({
             nbcell:3,
-            {#script: '{{ path('adminGallerieMaker', { 'slugArticle': articles.slug }) }}'#}
+            script: '{{ path('adminGallerieMaker', { 'slugArticle': articles.slug, 'slugGallery': articles.gallery.slug }) }}'
         });
     });
 </script>
