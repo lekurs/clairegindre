@@ -86,7 +86,8 @@ class EditArticleAction implements EditArticleActionInterface
                                                                                     $article->getContent(),
                                                                                     $article->isOnline(),
                                                                                     $article->getPersonnalButton(),
-                                                                                    $article->getPrestation()
+                                                                                    $article->getPrestation(),
+                                                                                    $article->getSlug()
             );
 
         $editArticleType = $this->formFactory->create(EditArticleType::class, $articleDTO)->handleRequest($request);

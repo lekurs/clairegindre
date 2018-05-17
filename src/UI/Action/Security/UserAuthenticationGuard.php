@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
@@ -39,19 +40,23 @@ class UserAuthenticationGuard extends AbstractFormLoginAuthenticator
     private $galleryRepository;
 
     /**
+     * @var UserPasswordEncoderInterface
+     */
+    private $passwordEncoder;
+
+    /**
      * UserAuthenticationGuard constructor.
      * @param CsrfTokenManagerInterface $csrfToken
      * @param UrlGeneratorInterface $urlGenerator
      * @param GalleryRepositoryInterface $galleryRepository
+     * @param UserPasswordEncoderInterface $passwordEncoder
      */
-    public function __construct(
-        CsrfTokenManagerInterface $csrfToken,
-        UrlGeneratorInterface $urlGenerator,
-        GalleryRepositoryInterface $galleryRepository
-    ) {
+    public function __construct(CsrfTokenManagerInterface $csrfToken, UrlGeneratorInterface $urlGenerator, GalleryRepositoryInterface $galleryRepository, UserPasswordEncoderInterface $passwordEncoder)
+    {
         $this->csrfToken = $csrfToken;
         $this->urlGenerator = $urlGenerator;
         $this->galleryRepository = $galleryRepository;
+        $this->passwordEncoder = $passwordEncoder;
     }
 
 
@@ -102,12 +107,7 @@ class UserAuthenticationGuard extends AbstractFormLoginAuthenticator
      */
     public function checkCredentials($credentials, UserInterface $user)
     {
-//        dump($user->getPassword(), $credentials['password']);
-//        die();
-//        if ($user->getEmail() != $credentials['username'] || $user->getPassword() != $credentials['password']) {
-//            return false;
-//        }
-        return true;
+        return $this->passwordEncoder->isPasswordValid($user, $credentials['password']);
     }
 
     /**

@@ -10,6 +10,7 @@ namespace App\Domain\Form\Type;
 
 
 use App\Domain\DTO\AddCommentOnArticleDTO;
+use App\Subscriber\CommentPostSubscriber;
 use App\Subscriber\AddCommentArticleTypeSubscriber;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -21,23 +22,21 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class AddCommentOnArticleType extends AbstractType
 {
     /**
-     * @var TokenStorageInterface
+     * @var CommentPostSubscriber
      */
-    private $tokenStorage;
+    private $commentPostListener;
 
     /**
      * AddCommentOnArticleType constructor.
-     * @param TokenStorageInterface $tokenStorage
+     * @param CommentPostSubscriber $commentPostListener
      */
-    public function __construct(TokenStorageInterface $tokenStorage)
+    public function __construct(CommentPostSubscriber $commentPostListener)
     {
-        $this->tokenStorage = $tokenStorage;
+        $this->commentPostListener = $commentPostListener;
     }
 
 
@@ -52,33 +51,8 @@ class AddCommentOnArticleType extends AbstractType
                 'required' => false
             ])
 
-            ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
-                $user = $this->tokenStorage->getToken()->getUser();
-//                $email = $event->getData()->get('email');
-//                $lastName = $event->getData()->get('lastName');
-                $form = $event->getForm();
+            ->addEventSubscriber($this->commentPostListener);
 
-                if (!$user) {
-                    return;
-                }
-
-                if (true === $user) {
-                    $form
-                        ->add('lastName', TextType::class, [
-                        'data' => $event->setData()
-                    ])
-                        ->add('email', EmailType::class, [
-                            'data' => $event->setData()
-                        ]);
-                }
-                else {
-                    $form
-                        ->add('author', HiddenType::class);
-                }
-            });
-
-//            ->add('lastName', TextType::class)
-//            ->add('email', EmailType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)
@@ -87,11 +61,7 @@ class AddCommentOnArticleType extends AbstractType
             'data_class' => AddCommentOnArticleDTO::class,
             'empty_data' => function(FormInterface $form) {
                             return new AddCommentOnArticleDTO(
-                               $form->get('content')->getData(),
-//                               $form->get('article')->getData(),
-                               $this->tokenStorage->getToken()->getUser()
-//                               $form->get('email')->getData(),
-//                               $form->get('lastName')->getData()
+                               $form->get('content')->getData()
                             );
                     }
         ]);

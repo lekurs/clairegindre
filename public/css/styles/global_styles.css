@@ -7,6 +7,45 @@ html, body {
     letter-spacing: .2px;
 }
 
+/*****************************************************************/
+/*                                          MOBILE NAV                                               */
+/*****************************************************************/
+.mobile-nav {
+    height: 100%;
+    width: 50%;
+    position: fixed;
+    background-color: #363636;
+    color: #FFFFFF;
+    transition: all .5s ease-in-out;
+    z-index: 999999;
+    margin: 0;
+}
+
+nav.mobile-nav > ul {
+    margin: 0;
+    padding: 4px 0;
+    list-style: none;
+    position: relative;
+}
+
+.nav-item {
+    color: #FFFFFF;
+    margin: 1.2em auto;
+    text-transform: uppercase;
+    font-family: Playfair;
+}
+
+.close-button {
+    position: absolute;
+    top: 0;
+    left: 9em;
+    font-size: 2em;
+}
+
+/*****************************************************************/
+/*                                          DESKTOP                                                    */
+/*****************************************************************/
+
 nav {
     margin-top: 3%;
 }

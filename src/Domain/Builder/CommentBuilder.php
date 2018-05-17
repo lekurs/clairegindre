@@ -24,18 +24,15 @@ class CommentBuilder implements CommentBuilderInterface
     /**
      * @param string $content
      * @param ArticleInterface $article
-     * @param string $email
-     * @param string $lastName
-     * @param UserInterface $author
-     * @param \DateTime $date
+     * @param string|null $email
+     * @param string|null $lastName
+     * @param UserInterface|null $author
      * @return CommentBuilderInterface
      */
 
-//string $email, string $lastName,
-//$lastName, $email,
-    public function create(string $content, ArticleInterface $article, UserInterface $author, \DateTime $date): CommentBuilderInterface //a refaire
+    public function create(string $content, ArticleInterface $article, string $email = null, string $lastName = null, UserInterface $author = null): CommentBuilderInterface
     {
-        $this->category = new Comment($content, $article, $author, $date);
+        $this->category = new Comment($content, $article, $email, $lastName, $author, new\DateTime());
 
         return $this;
     }

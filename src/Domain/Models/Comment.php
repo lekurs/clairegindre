@@ -57,15 +57,15 @@ class Comment implements CommentInterface
     public function __construct(
         string $content,
         ArticleInterface $article,
-//        string $email = null,
-//        string $lastName = null,
+        string $email = null,
+        string $lastName = null,
         UserInterface $author = null
     ) {
         $this->id = Uuid::uuid4();
         $this->content = $content;
         $this->article = $article;
-//        $this->email = $email;
-//        $this->lastName = $lastName;
+        $this->email = $email;
+        $this->lastName = $lastName;
         $this->author = $author;
         $this->date = new \DateTime();
     }
@@ -81,7 +81,7 @@ class Comment implements CommentInterface
     /**
      * @return string
      */
-    public function getEmail(): string
+    public function getEmail()
     {
         return $this->email;
     }

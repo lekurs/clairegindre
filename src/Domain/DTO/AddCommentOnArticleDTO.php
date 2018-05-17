@@ -31,11 +31,6 @@ class AddCommentOnArticleDTO implements AddCommentOnArticleDTOInterface
     public $content;
 
     /**
-     * @var ArticleInterface
-     */
-    public $article;
-
-    /**
      * @var UserInterface
      */
     public $author;
@@ -46,20 +41,18 @@ class AddCommentOnArticleDTO implements AddCommentOnArticleDTOInterface
      * @param string $email
      * @param string $lastName
      * @param string $content
-     * @param ArticleInterface $article
      * @param UserInterface $author
      */
     public function __construct(
         string $content,
 //        ArticleInterface $article,
-//        string $email = null,
-//        string $lastName = null,
+        string $email = null,
+        string $lastName = null,
         UserInterface $author = null
     )    {
-//        $this->email = $email;
-//        $this->lastName = $lastName;
+        $this->email = $email;
+        $this->lastName = $lastName;
         $this->content = $content;
-//        $this->article = $article;
         $this->author = $author;
     }
 }

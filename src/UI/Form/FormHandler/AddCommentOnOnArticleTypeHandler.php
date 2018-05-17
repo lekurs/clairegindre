@@ -72,10 +72,10 @@ class AddCommentOnOnArticleTypeHandler implements AddCommentOnArticleTypeHandler
             $this->commentBuilder->create(
                                                                                 $form->getData()->content,
                                                                                 $article,
-//                                                                                $form->getData()->email,
-//                                                                                $form->getData()->lastName,
-                                                                                $this->tokenStorage->getToken()->getUser(),
-                                                                                new \DateTime()
+                                                                                $form->getData()->email ?? null,
+                                                                                $form->getData()->lastName ?? null,
+                                                                                $form->getData()->author ?? null
+
                                                                             );
 
             $this->commentRepository->save($this->commentBuilder->getComment());

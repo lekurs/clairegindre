@@ -9,6 +9,7 @@
 namespace App\UI\Action\Blog;
 
 
+use App\Domain\DTO\AddCommentOnArticleDTO;
 use App\Domain\Form\Type\AddCommentOnArticleType;
 use App\Domain\Form\Type\ContactType;
 use App\Domain\Lib\InstagramLib;
@@ -127,7 +128,6 @@ class ArticleShowGalleryAction implements ArticleShowGalleryActionInterface
         $form = $this->formFactory->create(ContactType::class);
 
         $commentType = $this->formFactory->create(AddCommentOnArticleType::class)->handleRequest($request);
-
 
         $instagram = $this->instagram->show();
 

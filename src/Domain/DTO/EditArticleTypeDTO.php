@@ -40,25 +40,26 @@ final class EditArticleTypeDTO implements EditArticleTypeDTOInterface
     public $prestation;
 
     /**
+     * @var string
+     */
+    public $slug;
+
+    /**
      * EditArticleTypeDTO constructor.
-     *
      * @param string $title
      * @param string $content
      * @param bool $online
      * @param string $personnalButton
      * @param BenefitInterface $prestation
+     * @param string $slug
      */
-    public function __construct(
-        string $title,
-        string $content,
-        bool $online,
-        string $personnalButton,
-        BenefitInterface $prestation
-    ) {
+    public function __construct(string $title, string $content, bool $online, string $personnalButton, BenefitInterface $prestation, string $slug)
+    {
         $this->title = $title;
         $this->content = $content;
         $this->online = $online;
         $this->personnalButton = $personnalButton;
         $this->prestation = $prestation;
+        $this->slug = $slug;
     }
 }

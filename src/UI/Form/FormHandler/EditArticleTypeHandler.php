@@ -78,7 +78,10 @@ class EditArticleTypeHandler implements EditArticleTypeHandlerInterface
     {
         if ($form->isSubmitted() && $form->isValid()) {
 
-//            $article->updateArticle($form->getData());
+            $article->updateArticle($form->getData());
+
+//            dump($form->getData(), $article);
+//            die;
 
 //            $this->validator->validate($articleEdit, [], [
 //                'article_edit'

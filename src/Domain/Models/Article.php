@@ -253,6 +253,6 @@ class Article implements ArticleInterface
         $this->content = $dto->content;
         $this->personnalButton = $dto->personnalButton;
         $this->prestation = $dto->prestation;
-        $this->slug = $dto->title;
+        $this->slug = $dto->slug;
     }
 }

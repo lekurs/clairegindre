@@ -16,6 +16,21 @@ use Symfony\Component\Form\FormEvents;
 
 class EditSlugSubscriber implements EventSubscriberInterface
 {
+    /**
+     * @var SlugHelper
+     */
+    private $slugHelper;
+
+    /**
+     * EditSlugSubscriber constructor.
+     * @param SlugHelper $slugHelper
+     */
+    public function __construct(SlugHelper $slugHelper)
+    {
+        $this->slugHelper = $slugHelper;
+    }
+
+
     public static function getSubscribedEvents()
     {
         return [
@@ -25,11 +40,6 @@ class EditSlugSubscriber implements EventSubscriberInterface
 
     public function onSubmit(FormEvent $event)
     {
-        $slugHelper = new SlugHelper();
-
-        dump($event->getForm());
-        die();
-
-        $event->setData($slugHelper->replace($event->getData()->title));
+        $event->getData()->slug = $this->slugHelper->replace($event->getData()->title);
     }
 }

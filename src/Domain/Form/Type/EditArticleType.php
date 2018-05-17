@@ -24,6 +24,21 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class EditArticleType extends AbstractType
 {
     /**
+     * @var EditSlugSubscriber
+     */
+    private $editSlugSubscriber;
+
+    /**
+     * EditArticleType constructor.
+     * @param EditSlugSubscriber $editSlugSubscriber
+     */
+    public function __construct(EditSlugSubscriber $editSlugSubscriber)
+    {
+        $this->editSlugSubscriber = $editSlugSubscriber;
+    }
+
+
+    /**
      * @param FormBuilderInterface $builder
      * @param array $options
      */
@@ -40,7 +55,7 @@ class EditArticleType extends AbstractType
                 'class' => Benefit::class,
                 'choice_label' => 'name'
             ])
-        ->addEventSubscriber(new EditSlugSubscriber());
+        ->addEventSubscriber($this->editSlugSubscriber);
         ;
     }
 
