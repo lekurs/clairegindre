@@ -62,8 +62,6 @@ class ServingFilesPictureAction implements ServingFilesPictureActionInterface
 
         $filePath = str_replace('\\', '/', $this->targetDirPublic) . $picture->getPublicPath() . '/' . $picture->getPictureName();
 
-        dump($filePath);
-
         return $responder($filePath);
     }
 }

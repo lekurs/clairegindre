@@ -19,18 +19,23 @@ class ServingFilesPictureResponder implements ServingFilesPictureResponderInterf
 {
     public function __invoke($file)
     {
-        $stream = new Stream($file);
+//        $stream = new Stream($file);
 
-//        $response = new Response($file);
+//        $response = new BinaryFileResponse($file);
 
-        $response = new BinaryFileResponse($stream);
+        $response = new Response($file);
 
-//        $header = $response->headers->makeDisposition(ResponseHeaderBag::DISPOSITION_ATTACHMENT, $file);
+        $header = $response->headers->makeDisposition(ResponseHeaderBag::DISPOSITION_ATTACHMENT, $file);
 //
 //        dump($response);
+//        BinaryFileResponse::trustXSendfileTypeHeader();
 
-        $response->setContentDisposition(ResponseHeaderBag::DISPOSITION_ATTACHMENT, $file, null);
+//        $response->setContentDisposition(ResponseHeaderBag::DISPOSITION_ATTACHMENT, $file);
 
-//        return $response->headers->set('Content-header', $header);
+//        dump($response);
+//        die;
+        $response->headers->set('Content-header', $header);
+
+        return $response;
     }
 }
