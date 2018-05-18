@@ -62,28 +62,26 @@
         {% block header %}
             <header>
                 {# NAV MOBILE#}
-                <nav class="col-md-12 col-sm-12 col-12 d-xl-none d-lg-none mobile-nav" role="navigation">
-                    <ul>
-                        <li class="nav-item">
-                            <h3>Home</h3>
-                        </li>
-                        <li class="nav-item">
-                            <h3>Hello</h3>
-                        </li>
-                        <li class="nav-item">
-                            <h3>Blog</h3>
-                        </li>
-                        <li class="nav-item">
-                            <h3>Informations</h3>
-                        </li>
-                        <li class="nav-item">
-                            <h3>Clients</h3>
-                        </li>
-                        <li class="nav-item">
-                            <h3>Contact</h3>
-                        </li>
-                        <div class="close-button"><i class="fa fa-close"></i></div>
-                    </ul>
+                <nav class="d-xl-none d-lg-none mobile-nav" role="navigation">
+                    <div class="menu">
+                        <span class="menu-circle"></span>
+                        <a href="#" class="menu-link">
+                            <span class="menu-icon">
+                                <span class="menu-line menu-line-1"></span>
+                                <span class="menu-line menu-line-2"></span>
+                                <span class="menu-line menu-line-3"></span>
+                            </span>
+                        </a>
+                    </div>
+
+                    <div class="menu-overlay">
+                        <a href="#">home</a>
+                        <a href="#">hello</a>
+                        <a href="#">blog</a>
+                        <a href="#">Informations</a>
+                        <a href="#">Contact</a>
+                        <a href="#">Clients</a>
+                    </div>
                 </nav>
                 {# END NAV MOBILE #}
                 <div class="row no-gutters">
@@ -378,6 +376,7 @@
     <script src="/js/vendor/jquery-min.js"></script>
     <script src="/js/vendor/bootstrap.bundle.js"></script>
     <script src="{{ asset('/js/front/types.js') }}"></script>
+    <script src="{{ asset('js/front/nav-mobile.js') }}"></script>
 {% endblock %}
 
 {% endblock %}

@@ -11,36 +11,140 @@ html, body {
 /*                                          MOBILE NAV                                               */
 /*****************************************************************/
 .mobile-nav {
-    height: 100%;
-    width: 50%;
-    position: fixed;
-    background-color: #363636;
-    color: #FFFFFF;
-    transition: all .5s ease-in-out;
-    z-index: 999999;
     margin: 0;
 }
 
-nav.mobile-nav > ul {
-    margin: 0;
-    padding: 4px 0;
-    list-style: none;
+.menu {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    height: 46px;
+    width: 46px;
+}
+
+.menu-circle {
+    background-color: #ffffff;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    border-radius: 50%;
+    transition: all .5s cubic-bezier(0.19, 1, .22, 1);
+    z-index: 1000;
+}
+
+.menu:hover .menu-circle {
+    transform: scale(1.5);
+}
+
+.menu-link {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 1002;
+}
+
+.menu-icon {
+    position: absolute;
+    width: 20px;
+    height: 14px;
+    margin: auto;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 1px;
+}
+
+.menu-line {
+    background-color: #333;
+    height: 2px;
+    width: 100%;
+    border-radius: 2px;
+    position: absolute;
+    left: 0;
+    transition: all .25s cubic-bezier(.175, .885, .32, 1.275);
+}
+
+.menu-line-1 {
+    top: 0;
+}
+
+.menu-line-2 {
+    top: 0;
+    bottom: 0;
+    margin: auto;
+}
+
+.menu-line-3 {
+    bottom: 0;
+}
+
+.menu.open .menu-line-1 {
+    transform: translateY(7px) translateY(-50%) rotate(-135deg);
+}
+
+.menu.open .menu-line-2 {
+    opacity: 0;
+}
+
+.menu.open .menu-line-3 {
+    transform: translateY(-7px) translateY(50%) rotate(135deg);
+}
+
+.menu-overlay {
+    background-color: #ffffff;
+    color: #333;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    opacity: 0;
+    visibility: hidden;
+    text-align: center;
+    transition: opacity .2s ease-in-out;
+    z-index: 1001;
+}
+
+.menu-overlay.open {
+    opacity: 1;
+    visibility: visible;
+    transition-delay: .03s;
+}
+
+.menu-overlay a {
+    color: #333;
+    font-weight: bold;
+    font-size: 2em;
+    padding: 1em;
+    margin: 5% 1% 0;
+    display: block;
+    text-decoration: none;
     position: relative;
 }
 
-.nav-item {
-    color: #FFFFFF;
-    margin: 1.2em auto;
-    text-transform: uppercase;
-    font-family: Playfair;
+.menu-overlay a:hover {
+    color: #000000;
 }
 
-.close-button {
+.menu-overlay a:before {
+    content: "";
     position: absolute;
-    top: 0;
-    left: 9em;
-    font-size: 2em;
+    width: 20%;
+    height: 2px;
+    bottom: 22%;
+    left: 40%;
+    background-color: #000000;
+    visibility: hidden;
+    transform: scaleX(0);
+    -webkit-transform: scaleX(0);
+    transition: all .3s ease-in-out 0s;
+    -webkit-transition: all .3s ease-in-out 0s;
 }
+
+.menu-overlay a:hover:before {
+    visibility: visible;
+    -webkit-transform: scaleX(1);
+    transform: scaleX(1);
+}
+
 
 /*****************************************************************/
 /*                                          DESKTOP                                                    */
