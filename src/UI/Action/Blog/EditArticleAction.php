@@ -79,7 +79,7 @@ class EditArticleAction implements EditArticleActionInterface
             throw new AccessDeniedException('Merci de vous connecter comme Administrateur sur ce site !');
         }
 
-        $article = $this->articleRepository->getOne($request->get('slug'));
+        $article = $this->articleRepository->getOne($request->attributes->get('slug'));
 
         $articleDTO = new EditArticleTypeDTO(
                                                                                     $article->getTitle(),

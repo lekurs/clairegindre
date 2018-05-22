@@ -372,7 +372,7 @@
 {% endblock %}
 
 {% block javascripts %}
-<script src="/js/vendor/jquery-min.js"></script>
+    {{ parent() }}
 <script src="{{ asset('js/back/update_online_article.js') }}"></script>
 <script>
     $(document).ready(function() {

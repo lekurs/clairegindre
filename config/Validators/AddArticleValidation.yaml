@@ -1,0 +1,5 @@
+App\Domain\DTO\ArticleCreationDTO:
+    properties:
+        title:
+            - Length: { min: 7, max: 30, groups: [article_creation] }
+#            - NotBlank: { groups: [article_creation] }

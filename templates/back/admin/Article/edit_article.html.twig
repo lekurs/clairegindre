@@ -31,6 +31,13 @@
                         {{ form_end(editArticleType) }}
                     </div>
                 </div>
+                <div class="row no-gutters">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        {%  for galleryMaker in articles.galleriesMakers %}
+                            <p>{{ galleryMaker.line.first }}</p>
+                        {% endfor %}
+                    </div>
+                </div>
                 {# GALLERIE MAKER #}
                 <div class="row no-gutters">
                     <div class="maker container no-gutters" data-id="article_{{ articles.gallery.title }}"></div>
