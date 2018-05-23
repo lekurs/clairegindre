@@ -11,8 +11,7 @@ namespace App\UI\Responder\ServingFiles;
 
 use App\UI\Responder\ServingFiles\Interfaces\ServingFilesPictureResponderInterface;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
-use Symfony\Component\HttpFoundation\File\Stream;
-use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\File\MimeType\FileinfoMimeTypeGuesser;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
 class ServingFilesPictureResponder implements ServingFilesPictureResponderInterface
@@ -21,20 +20,20 @@ class ServingFilesPictureResponder implements ServingFilesPictureResponderInterf
     {
 //        $stream = new Stream($file);
 
-//        $response = new BinaryFileResponse($file);
+        $response = new BinaryFileResponse($file);
 
-        $response = new Response($file);
+        $mime = new FileinfoMimeTypeGuesser();
 
-        $header = $response->headers->makeDisposition(ResponseHeaderBag::DISPOSITION_ATTACHMENT, $file);
-//
-//        dump($response);
-//        BinaryFileResponse::trustXSendfileTypeHeader();
+        if ($mime->isSupported()) {
+            $response->headers->set('Content-type', $mime->guess($file));
+            dump('ok');
+        }
 
-//        $response->setContentDisposition(ResponseHeaderBag::DISPOSITION_ATTACHMENT, $file);
+        BinaryFileResponse::trustXSendfileTypeHeader();
 
-//        dump($response);
-//        die;
-        $response->headers->set('Content-header', $header);
+        $response->setContentDisposition(ResponseHeaderBag::DISPOSITION_ATTACHMENT, $file);
+
+        dump($response);
 
         return $response;
     }

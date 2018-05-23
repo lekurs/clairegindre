@@ -13,6 +13,7 @@ use App\Domain\Repository\Interfaces\PictureRepositoryInterface;
 use App\Services\SlugHelper;
 use App\UI\Action\Front\Interfaces\ServingFilesPictureActionInterface;
 use App\UI\Responder\ServingFiles\ServingFilesPictureResponder;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -59,9 +60,14 @@ class ServingFilesPictureAction implements ServingFilesPictureActionInterface
     public function __invoke(Request $request, ServingFilesPictureResponder $responder)
     {
         $picture = $this->pictureRepository->getOne($request->request->get('id'));
+//        str_replace('\\', '/', $this->targetDirPublic) . $picture->getPublicPath() . '/' . $picture->getPictureName();
+        $filePath = $this->targetDirPublic . $picture->getPublicPath() . '/' . $picture->getPictureName();
 
-        $filePath = str_replace('\\', '/', $this->targetDirPublic) . $picture->getPublicPath() . '/' . $picture->getPictureName();
+        $file = new File($filePath);
 
-        return $responder($filePath);
+        dump($file->getRealPath());
+//        die;
+
+        return $responder($file);
     }
 }
