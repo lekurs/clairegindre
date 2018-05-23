@@ -14,13 +14,13 @@
             console.log(imgOTop, winHeight + winScrollTop);
 
             if(imgOTop > (winHeight + winScrollTop)){
-                $(this).fadeOut();
+                $(this).fadeOut(0);
                     // .attr('src', $(this).data('src'))
                     // .removeClass('lazy')
                     // .removeAttr('data-src')
                     ;
             } else {
-                $(this).fadeIn();
+                $(this).fadeIn(200);
             }
         });
     }
