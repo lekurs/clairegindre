@@ -64,13 +64,6 @@ class AddPicturesGalleryAction implements AddPicturesGalleryActionInterface
 
         $pictures = $this->pictureRepository->getAllByGallery($gallery);
 
-        dump($pictures);
-
-//        dump($gallery);
-//        foreach ($gallery->getPictures() as $picture) {
-//            dump($picture->getDisplayOrder());
-//        }
-
         return $responder(false, $gallery, $pictures);
     }
 }

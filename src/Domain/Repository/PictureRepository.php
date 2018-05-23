@@ -82,6 +82,11 @@ class PictureRepository extends ServiceEntityRepository implements PictureReposi
         $this->getEntityManager()->flush();
     }
 
+    public function update()
+    {
+        $this->getEntityManager()->flush();
+    }
+
     /**
      * @param PictureInterface $picture
      * @return mixed|void

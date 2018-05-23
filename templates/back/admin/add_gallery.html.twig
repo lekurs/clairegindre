@@ -4,7 +4,7 @@
     {{ parent() }}
     <link rel="stylesheet" href="{{ asset('css/styles/drop_pictures.css') }}" />
     {% block title %}
-        <title>Administration des familles</title>
+        <title>Ajout d'une galerie photos</title>
     {% endblock %}
 {% endblock %}
 
@@ -39,7 +39,6 @@
                         {% for picture in pictures %}
                             <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12 box-picture">
                                 <div class="row no-gutters cards-content">
-                                    {{ picture.displayOrder }}
                                     <img src="{{ asset(picture.publicPath ~ '/' ~ picture.pictureName) }}" alt="{{ picture.pictureName }}"  class="img-fluid" data-position="{{ picture.displayOrder }}"/>
                                 </div>
                                 <div class="row no-gutters cards-pictos">

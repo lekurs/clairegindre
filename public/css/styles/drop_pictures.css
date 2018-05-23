@@ -130,3 +130,7 @@
     margin-bottom: 3em;
     text-transform: uppercase;
 }
+
+.drop-container-edit {
+    margin: 3em auto;
+}

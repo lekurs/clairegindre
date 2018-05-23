@@ -1,13 +1,21 @@
 {% extends "admin_layout.html.twig" %}
 
-    {% block title %}
-    <title>Edition de la gallerie </title>
+    {%  block head %}
+        {{ parent() }}
+        <link rel="stylesheet" href="{{ asset('css/styles/drop_pictures.css') }}" />
+        {% block title %}
+            <title>Edition de la galerie : {{ gallery.title }}</title>
+        {% endblock %}
     {% endblock %}
-
 {% block content %}
     {{ parent() }}
 
 <div class="container">
+    <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <h2>Mise à jour de la galerie : {{ gallery.title }}</h2>
+        </div>
+    </div>
     <div class="row">
         {%  form_theme form 'form/fields.html.twig' %}
         <div class="col-12 container-form">
@@ -32,17 +40,22 @@
                 </div>
                 <div class="row">
                     <div class="col-12">
-                        <a href="{{ path('adminDeleteGallery', {'id': form.vars.data.id}) }}" class="btn btn-primary">Supprimer</a>
+                        <a href="{{ path('adminDeleteGallery', {'slug': form.vars.data.slug}) }}" class="btn btn-primary">Supprimer</a>
                     </div>
                 </div>
             </div>
             <button type="submit" class="btn btn-primary sub-login">Mettre à jour</button>
         </div>
-
-        </div>
-        {#</div>#}
+    </div>
     </div>
         {{ form_end(form) }}
+
+    <div class="row no-gutters drop-container-edit">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" id="drop-container">
+
+        </div>
+    </div>
+
 </div>
 {% endblock %}
 
@@ -52,6 +65,18 @@
 <script src="{{ asset('js/back/editGallery.js') }}"></script>
 <script src="{{ asset('js/back/add_favorite.js') }}"></script>
 <script src="{{ asset('js/back/pictureEdit.js') }}"></script>
+<script src="/js/back/dropPictures.js"></script>
+<script>$(document).ready(function () {
+        $('#drop-container').dropPictures(
+            {
+                'script' : '{{ path('uploadImages', { 'slugGallery': gallery.slug }) }}',
+                'target': '{{ gallery.title }}',
+                'gallery': '{{ gallery.slug }}',
+                'direction': '{{ gallery.slug }}'
+            }
+        );
+    });
+</script>
 <script>
     sortable = new Sortable(
         document.querySelector('#sort1'),

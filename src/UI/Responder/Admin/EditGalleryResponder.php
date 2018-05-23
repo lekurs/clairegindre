@@ -58,7 +58,7 @@ class EditGalleryResponder implements EditGalleryResponderInterface
     public function __invoke($redirect = false, FormInterface $form = null, $gallery)
     {
         $redirect ? $response = new RedirectResponse($this->urlGenerator->generate('admin')) : $response = new Response($this->twig->render('back/admin/gallery_edit.html.twig', [
-            'galleryByUser' => $gallery,
+            'gallery' => $gallery,
             'form' => $form->createView(),
         ]));
 
