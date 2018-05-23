@@ -2,6 +2,7 @@
 
 namespace App\Domain\Repository;
 
+use App\Domain\Models\Gallery;
 use App\Domain\Models\Interfaces\PictureInterface;
 use App\Domain\Models\Interfaces\UserInterface;
 use App\Domain\Models\Picture;
@@ -28,6 +29,17 @@ class PictureRepository extends ServiceEntityRepository implements PictureReposi
                             ->setParameter('id', $id)
                             ->getQuery()
                             ->getOneOrNullResult();
+    }
+
+    public function getAllByGallery(Gallery $gallery)
+    {
+        return $this->createQueryBuilder('picture')
+                            ->innerJoin('picture.gallery', 'gallery')
+                            ->where('picture.gallery = :gallery')
+                            ->setParameter('gallery', $gallery->getId())
+                            ->orderBy('picture.displayOrder', 'ASC')
+                            ->getQuery()
+                            ->getResult();
     }
 
     /**
@@ -89,9 +101,11 @@ class PictureRepository extends ServiceEntityRepository implements PictureReposi
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function updateFavorite($oldPicture, $pictureFavorite)
+    public function updateFavorite($pictureFavorite, $oldPicture = null)
     {
-        $oldPicture->setFavorite(0);
+        if (!is_null($oldPicture)) {
+            $oldPicture->setFavorite(0);
+        }
         $pictureFavorite->setFavorite(true);
         $this->getEntityManager()->flush();
     }

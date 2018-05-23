@@ -38,10 +38,11 @@ class AddPicturesGalleryResponder implements AddPicturesGalleryResponderInterfac
         $this->urlGenerator = $urlGenerator;
     }
 
-    public function __invoke($redirect = false, $gallery)
+    public function __invoke($redirect = false, $gallery, $pictures)
     {
         $redirect ? $response = new RedirectResponse($this->urlGenerator->generate('adminUser')) : $response = new Response($this->twig->render('back/admin/add_gallery.html.twig', [
-            'gallery' => $gallery
+            'gallery' => $gallery,
+            'pictures' => $pictures
         ]));
 
         return $response;

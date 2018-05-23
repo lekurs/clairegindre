@@ -57,7 +57,11 @@ class UpdateFavoritePictureGalleryAjaxAction implements UpdateFavoritePictureGal
 
         $oldPictureFavorite = $this->pictureRepository->getFavorite($pictureToFavorite->getGallery());
 
-        $this->pictureRepository->updateFavorite($oldPictureFavorite, $pictureToFavorite);
+        if (!is_null($oldPictureFavorite)) {
+            $this->pictureRepository->updateFavorite($pictureToFavorite, $oldPictureFavorite);
+        } else {
+            $this->pictureRepository->updateFavorite($pictureToFavorite);
+        }
 
         return $responder();
     }

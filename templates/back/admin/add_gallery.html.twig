@@ -36,17 +36,18 @@
             <div class="row no-gutters pictures-gallery-container">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                     <div class="row no-gutters cards cards-gallery-down" id="sortable">
-                        {% for pictures in gallery.pictures %}
+                        {% for picture in pictures %}
                             <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12 box-picture">
                                 <div class="row no-gutters cards-content">
-                                    <img src="{{ asset(pictures.publicPath ~ '/' ~ pictures.pictureName) }}" alt="{{ pictures.pictureName }}"  class="img-fluid" data-position="{{ pictures.displayOrder }}"/>
+                                    {{ picture.displayOrder }}
+                                    <img src="{{ asset(picture.publicPath ~ '/' ~ picture.pictureName) }}" alt="{{ picture.pictureName }}"  class="img-fluid" data-position="{{ picture.displayOrder }}"/>
                                 </div>
                                 <div class="row no-gutters cards-pictos">
                                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 favorite-icone-container">
-                                        <i class="fa fa-star favorite-icone {% if pictures.favorite > 0 %}favorite-image{% endif %}" data-id="{{ pictures.id }}"></i>
+                                        <i class="fa fa-star favorite-icone {% if picture.favorite > 0 %}favorite-image{% endif %}" data-id="{{ picture.id }}"></i>
                                     </div>
                                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
-                                        <i class="fa fa-trash delete-image" data-id="{{ pictures.id }}"></i>
+                                        <i class="fa fa-trash delete-image" data-id="{{ picture.id }}"></i>
                                     </div>
                                 </div>
                             </div>

@@ -10,6 +10,7 @@ namespace App\UI\Action\Admin;
 
 
 use App\Domain\Repository\Interfaces\GalleryRepositoryInterface;
+use App\Domain\Repository\Interfaces\PictureRepositoryInterface;
 use App\Services\SlugHelper;
 use App\UI\Action\Admin\Interfaces\AddPicturesGalleryActionInterface;
 use App\UI\Responder\Admin\Interfaces\AddPicturesGalleryResponderInterface;
@@ -34,30 +35,42 @@ class AddPicturesGalleryAction implements AddPicturesGalleryActionInterface
     private $galleryRepository;
 
     /**
+     * @var PictureRepositoryInterface
+     */
+    private $pictureRepository;
+
+    /**
      * @var SlugHelper
      */
     private $replaceService;
 
     /**
      * AddPicturesGalleryAction constructor.
-     *
      * @param GalleryRepositoryInterface $galleryRepository
+     * @param PictureRepositoryInterface $pictureRepository
      * @param SlugHelper $replaceService
      */
-    public function __construct(
-        GalleryRepositoryInterface $galleryRepository,
-        SlugHelper $replaceService
-    ) {
+    public function __construct(GalleryRepositoryInterface $galleryRepository, PictureRepositoryInterface $pictureRepository, SlugHelper $replaceService)
+    {
         $this->galleryRepository = $galleryRepository;
+        $this->pictureRepository = $pictureRepository;
         $this->replaceService = $replaceService;
     }
 
 
     public function __invoke(Request $request, AddPicturesGalleryResponderInterface $responder)
     {
-        $gallery = $this->galleryRepository->getOne($request->attributes->get('slug'));
+        $gallery = $this->galleryRepository->getWithPictures($request->attributes->get('slug'));
 
-        return $responder(false, $gallery);
+        $pictures = $this->pictureRepository->getAllByGallery($gallery);
+
+        dump($pictures);
+
+//        dump($gallery);
+//        foreach ($gallery->getPictures() as $picture) {
+//            dump($picture->getDisplayOrder());
+//        }
+
+        return $responder(false, $gallery, $pictures);
     }
-
 }
