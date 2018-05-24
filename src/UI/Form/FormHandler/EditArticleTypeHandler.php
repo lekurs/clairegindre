@@ -80,16 +80,11 @@ class EditArticleTypeHandler implements EditArticleTypeHandlerInterface
 
             $article->updateArticle($form->getData());
 
-//            dump($form->getData(), $article);
-//            die;
-
 //            $this->validator->validate($articleEdit, [], [
 //                'article_edit'
 //            ]);
 
             $this->articleRepository->update();
-
-//            die();
 
             $this->session->getFlashBag()->add('success', 'L\'article à été modifié');
 

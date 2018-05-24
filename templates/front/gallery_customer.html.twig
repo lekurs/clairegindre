@@ -57,7 +57,7 @@
                     </div>
                     <div class="row no-gutters text-center">
                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                            <i class="fa fa-download serving" data-id="{{ picture.id }}"></i>
+                            <a href="{{ asset(picture.publicPath ~ '/' ~ picture.pictureName) }}"><i class="fa fa-download"></i></a>
                         </div>
                     </div>
                 </div>
@@ -117,12 +117,4 @@
     {{ parent() }}
     <script src="{{ asset('/js/front/menu.js') }}"></script>
     <script src="{{ asset('/js/front/gallery_customers.js') }}"></script>
-    <script src="{{ asset('js/front/serving_files.js') }}"></script>
-    <script>
-        $(document).ready(function () {
-            $('.fa.fa-download.serving').servingFiles({
-                script: '{{ path('servingFile') }}'
-            });
-        });
-    </script>
 {% endblock %}

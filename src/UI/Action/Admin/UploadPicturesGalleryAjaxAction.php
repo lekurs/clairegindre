@@ -130,7 +130,11 @@ class UploadPicturesGalleryAjaxAction implements UploadPicturesGalleryActionInte
      */
     public function __invoke(Request $request)
     {
-        $gallery = $this->galleryRepository->getOne($request->attributes->get('slugGallery'));
+        $gallery = $this->galleryRepository->getWithPictures($request->attributes->get('slugGallery'));
+//
+//        foreach ($)
+//        dump($gallery);
+//        die;
 
         $this->pictureUploaderHelper->move(
                                                                             $request->files->get('picture'),
@@ -144,6 +148,7 @@ class UploadPicturesGalleryAjaxAction implements UploadPicturesGalleryActionInte
                                                                 $request->request->get('order'),
                                                                 $request->request->get('favorite'), $gallery
                                                             );
+
         $this->pictureRepository->save($this->pictureBuilder->getPicture());
 
         return new JsonResponse([], 201);

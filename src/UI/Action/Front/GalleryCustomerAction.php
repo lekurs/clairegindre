@@ -41,7 +41,11 @@ class GalleryCustomerAction
         $this->galleryRepository = $galleryRepository;
     }
 
-
+    /**
+     * @param Request $request
+     * @param GalleryCustomerResponderInterface $responder
+     * @return mixed
+     */
     public function __invoke(Request $request, GalleryCustomerResponderInterface $responder)
     {
             $gallery = $this->galleryRepository->getWithPictures($request->attributes->get('slugGallery'));

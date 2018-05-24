@@ -28,9 +28,9 @@ class PictureEditType extends AbstractType
             ->add('displayOrder', HiddenType::class, [
                 'label_attr' => ['class' => 'sr-only'],
                 ])
-            ->add('favorite', CheckboxType::class, [
-                'required' => false,
-            ])
+//            ->add('favorite', CheckboxType::class, [
+//                'required' => false,
+//            ])
             ;
     }
 
