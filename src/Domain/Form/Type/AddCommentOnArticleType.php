@@ -66,5 +66,4 @@ class AddCommentOnArticleType extends AbstractType
                     }
         ]);
     }
-
 }
