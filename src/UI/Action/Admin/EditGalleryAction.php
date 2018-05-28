@@ -11,7 +11,7 @@ namespace App\UI\Action\Admin;
 
 use App\Domain\Builder\Interfaces\GalleryBuilderInterface;
 use App\Domain\Builder\Interfaces\PictureBuilderInterface;
-use App\Domain\DTO\GalleryOrderDTO;
+use App\Domain\DTO\EditGalleryDTO;
 use App\Domain\Form\Type\GalleryOrderType;
 use App\Domain\Form\Type\PictureEditType;
 use App\Domain\Models\Gallery;
