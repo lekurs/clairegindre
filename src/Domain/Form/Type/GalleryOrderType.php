@@ -38,7 +38,7 @@ class GalleryOrderType extends AbstractType
             'data_class' => Gallery::class
 //                GalleryOrderDTOInterface::class,
 //            'empty_data' => function (FormInterface $form) {
-//                    return new GalleryOrderDTO(
+//                    return new EditGalleryDTO(
 //                            $form->get('pictures')->getData()
 //                    );
 //            }
