@@ -162,7 +162,18 @@ input:focus, textarea:focus, select:focus, button:focus {
     padding: 0;
 }
 
-/* GLOBALS CSS RULES */
+.sticky {
+    z-index: 99999;
+    background-color: #242424;
+    width: 100%;
+    position: fixed;
+    transition: all .8s ease-in-out;
+}
+
+/*****************************************************************/
+/*                                          GLOBALS CSS RULES                                */
+/*****************************************************************/
+
 .header-img {
     background: url("/images/anlor-nico-header-photo.jpg") no-repeat center;
     min-height: 100vh;

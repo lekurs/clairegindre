@@ -84,9 +84,10 @@
                     </div>
                 </nav>
                 {# END NAV MOBILE #}
+
                 <div class="row no-gutters">
                     <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 header-img">
-                        <div class="row justify-content-center no-gutters">
+                        <div class="row justify-content-center no-gutters nav-desktop">
                             {% block left_menu %}
                             {# LEFT MENU #}
                                 <nav class="col-lg-5 col-xl-5 right-menu d-none d-md-none d-sm-none d-lg-block d-xl-block">
@@ -144,6 +145,7 @@
                                     </div>
                                 </div>
                             </nav>
+                            <div id="end-nav"></div>
                             {% endblock %}
                         </div>
                 </div>
@@ -373,10 +375,11 @@
 </body>
 
 {% block javascripts %}
-    <script src="/js/vendor/jquery-min.js"></script>
-    <script src="/js/vendor/bootstrap.bundle.js"></script>
+    <script src="{{ asset('js/vendor/jquery-min.js') }}"></script>
+    <script src="{{ asset('js/vendor/bootstrap.bundle.js') }}"></script>
     <script src="{{ asset('/js/front/types.js') }}"></script>
     <script src="{{ asset('js/front/nav-mobile.js') }}"></script>
+    <script src="{{ asset('js/front/menu_layout.js') }}"></script>
 {% endblock %}
 
 {% endblock %}
