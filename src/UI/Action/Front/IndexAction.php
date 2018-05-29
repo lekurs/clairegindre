@@ -84,14 +84,6 @@ class IndexAction implements IndexActionInterface
 
         $galleries = $this->galleryRepository->getLastNine();
 
-        foreach ($galleries as $gallery) {
-            foreach($gallery->getPictures() as $favorite) {
-            }
-                dump($favorite);
-        }
-
-//        dump($galleries);
-
         $instagram = $this->instagram->show();
 
         $contactType = $this->formFactory->create(ContactType::class)

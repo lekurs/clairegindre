@@ -14,91 +14,20 @@
 
         <div class="gallery">
             {% for gallery in galleries %}
-                {#{% for favoritePicture in gallery.pictures %}#}
-                <div class="portfolio-pres thumb">
-                    <a href="#" class="portfolio_link">
-                        {#{{ favoritePicture.pictureName }}#}
-                        <div class="link_hover">
-                            <h2>{{ gallery.title }}</h2>
-                            <p>{{ gallery.eventDate | date('d-m-Y') }}</p>
-                            <p>{{ gallery.eventPlace }}</p>
+                {% for favoritePicture in gallery.pictures %}
+                    {% if favoritePicture.favorite > 0 %}
+                        <div class="portfolio-pres thumb" style="background: url({{ asset(favoritePicture.publicPath ~ '/' ~ favoritePicture.pictureName) }}) center center no-repeat; background-size: cover">
+                            <a href="#" class="portfolio_link">
+                                <div class="link_hover">
+                                    <h2>{{ gallery.title }}</h2>
+                                    <p>{{ gallery.eventDate | date('d-m-Y') }}</p>
+                                    <p>{{ gallery.eventPlace }}</p>
+                                </div>
+                            </a>
                         </div>
-                    </a>
-                </div>
-                {#{% endfor %}#}
+                    {% endif %}
+                {% endfor %}
             {% endfor %}
-            {#<div class="portfolio-pres thumb">#}
-                {#<a href="#" class="portfolio_link">#}
-                    {#<div class="link_hover">#}
-                        {#<h2>ANLOR + NICO</h2>#}
-                        {#<p>Coucou je m'appelle Claire, je suis photographe et c'est cool !!!!</p>#}
-                    {#</div>#}
-                {#</a>#}
-            {#</div>#}
-            {#<div class="portfolio-pres thumb">#}
-                {#<a href="#" class="portfolio_link">#}
-                    {#<div class="link_hover">#}
-                        {#<h2>ANLOR + NICO</h2>#}
-                        {#<p>Coucou je m'appelle Claire, je suis photographe et c'est cool !!!!</p>#}
-                    {#</div>#}
-                {#</a>#}
-            {#</div>#}
-            {#<div class="portfolio-pres thumb">#}
-                {#<a href="#" class="portfolio_link">#}
-                    {#<div class="link_hover">#}
-                        {#<h2>ANLOR + NICO</h2>#}
-                        {#<p>Coucou je m'appelle Claire, je suis photographe et c'est cool !!!!</p>#}
-                    {#</div>#}
-                {#</a>#}
-            {#</div>#}
-            {#<div class="portfolio-pres thumb">#}
-                {#<a href="#" class="portfolio_link">#}
-                    {#<div class="link_hover">#}
-                        {#<h2>ANLOR + NICO</h2>#}
-                        {#<p>Coucou je m'appelle Claire, je suis photographe et c'est cool !!!!</p>#}
-                    {#</div>#}
-                {#</a>#}
-            {#</div>#}
-            {#<div class="portfolio-pres thumb">#}
-                {#<a href="#" class="portfolio_link">#}
-                    {#<div class="link_hover">#}
-                        {#<h2>ANLOR + NICO</h2>#}
-                        {#<p>Coucou je m'appelle Claire, je suis photographe et c'est cool !!!!</p>#}
-                    {#</div>#}
-                {#</a>#}
-            {#</div>#}
-            {#<div class="portfolio-pres thumb">#}
-                {#<a href="#" class="portfolio_link">#}
-                    {#<div class="link_hover">#}
-                        {#<h2>ANLOR + NICO</h2>#}
-                        {#<p>Coucou je m'appelle Claire, je suis photographe et c'est cool !!!!</p>#}
-                    {#</div>#}
-                {#</a>#}
-            {#</div>#}
-            {#<div class="portfolio-pres thumb">#}
-                {#<a href="#" class="portfolio_link">#}
-                    {#<div class="link_hover">#}
-                        {#<h2>ANLOR + NICO</h2>#}
-                        {#<p>Coucou je m'appelle Claire, je suis photographe et c'est cool !!!!</p>#}
-                    {#</div>#}
-                {#</a>#}
-            {#</div>#}
-            {#<div class="portfolio-pres thumb">#}
-                {#<a href="#" class="portfolio_link">#}
-                    {#<div class="link_hover">#}
-                        {#<h2>ANLOR + NICO</h2>#}
-                        {#<p>Coucou je m'appelle Claire, je suis photographe et c'est cool !!!!</p>#}
-                    {#</div>#}
-                {#</a>#}
-            {#</div>#}
-            {#<div class="portfolio-pres thumb">#}
-                {#<a href="#" class="portfolio_link">#}
-                    {#<div class="link_hover">#}
-                        {#<h2>ANLOR + NICO</h2>#}
-                        {#<p>Coucou je m'appelle Claire, je suis photographe et c'est cool !!!!</p>#}
-                    {#</div>#}
-                {#</a>#}
-            {#</div>#}
         </div>
 
         </div>
