@@ -122,7 +122,7 @@
                             {% endblock %}
                             {# RIGHT MENU #}
                             {% block right_menu %}
-                            <nav class="col-lg-5 col-xl-5 right-menu d-none d-md-none d-sm-none d-lg-block d-xl-block">
+                            <nav class="col-lg-5 col-xl-5 right-menu d-none d-md-none d-sm-none d-lg-block d-xl-block" id="end-nav">
                                 <div class="row no-gutters justify-content-center align-items-center">
                                     <div class="col-lg-6 col-xl-6">
                                         {#ROW RIGHT#}
@@ -145,7 +145,7 @@
                                     </div>
                                 </div>
                             </nav>
-                            <div id="end-nav"></div>
+                            {#<div id="end-nav"></div>#}
                             {% endblock %}
                         </div>
                 </div>
@@ -379,7 +379,6 @@
     <script src="{{ asset('js/vendor/bootstrap.bundle.js') }}"></script>
     <script src="{{ asset('/js/front/types.js') }}"></script>
     <script src="{{ asset('js/front/nav-mobile.js') }}"></script>
-    <script src="{{ asset('js/front/menu_layout.js') }}"></script>
 {% endblock %}
 
 {% endblock %}

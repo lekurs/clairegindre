@@ -170,6 +170,14 @@ input:focus, textarea:focus, select:focus, button:focus {
     transition: all .8s ease-in-out;
 }
 
+.sticky-white {
+    z-index: 99999;
+    background-color: #ffffff;
+    width: 100%;
+    position: fixed;
+    transition: all .8s ease-in-out;
+}
+
 /*****************************************************************/
 /*                                          GLOBALS CSS RULES                                */
 /*****************************************************************/
