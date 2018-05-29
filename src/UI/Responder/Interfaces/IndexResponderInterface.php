@@ -18,18 +18,19 @@ interface IndexResponderInterface
 {
     /**
      * IndexResponderInterface constructor.
-     * @param Environment $twid
+     * @param Environment $twig
      * @param UrlGeneratorInterface $urlGenerator
      */
-    public function __construct(Environment $twid, UrlGeneratorInterface $urlGenerator);
+    public function __construct(Environment $twig, UrlGeneratorInterface $urlGenerator);
 
     /**
      * @param bool $redirect
      * @param FormInterface|null $form
      * @param $instagram
      * @param $reviews
+     * @param $galleries
      * @return mixed
      */
-    public function __invoke($redirect = false, FormInterface $form = null, $instagram, $reviews);
+    public function __invoke($redirect = false, FormInterface $form = null, $instagram, $reviews, $galleries);
 
 }

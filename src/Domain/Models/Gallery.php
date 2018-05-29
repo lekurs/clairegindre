@@ -26,6 +26,16 @@ class Gallery implements GalleryInterface
     private $title;
 
     /**
+     * @var \DateTime
+     */
+    private $eventDate;
+
+    /**
+     * @var string
+     */
+    private $eventPlace;
+
+    /**
      * @var BenefitInterface
      */
     private $benefit;
@@ -63,6 +73,8 @@ class Gallery implements GalleryInterface
     public function __construct(
         string $title,
         UserInterface $user,
+        \DateTime $eventDate,
+        string $eventPlace,
         BenefitInterface $benefit,
         string $slug,
         \DateTime $creationDate,
@@ -71,6 +83,8 @@ class Gallery implements GalleryInterface
         $this->id = Uuid::uuid4();
         $this->title = $title;
         $this->user = $user;
+        $this->eventDate = $eventDate;
+        $this->eventPlace = $eventPlace;
         $this->benefit = $benefit;
         $this->slug = $slug;
         $this->creationDate = new \DateTime();
@@ -99,6 +113,22 @@ class Gallery implements GalleryInterface
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getEventDate(): \DateTime
+    {
+        return $this->eventDate;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEventPlace(): string
+    {
+        return $this->eventPlace;
     }
 
     /**

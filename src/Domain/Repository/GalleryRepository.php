@@ -51,6 +51,17 @@ class GalleryRepository extends ServiceEntityRepository implements GalleryReposi
                             ->getResult();
     }
 
+    public function getLastNine()
+    {
+        return $this->createQueryBuilder('gallery')
+                            ->leftJoin('gallery.pictures', 'pictures')
+                            ->where('pictures.favorite = 1')
+                            ->orderBy('gallery.eventDate', 'DESC')
+                            ->setMaxResults(9)
+                            ->getQuery()
+                            ->getResult();
+    }
+
     /**
      * @param $slug
      * @return mixed

@@ -9,6 +9,7 @@
 namespace App\UI\Action\Front;
 use App\Domain\Form\Type\ContactType;
 use App\Domain\Lib\InstagramLib;
+use App\Domain\Repository\Interfaces\GalleryRepositoryInterface;
 use App\Domain\Repository\Interfaces\ReviewsRepositoryInterface;
 use App\UI\Action\Front\Interfaces\IndexActionInterface;
 use App\UI\Form\FormHandler\Interfaces\ContactTypeHandlerInterface;
@@ -35,6 +36,11 @@ class IndexAction implements IndexActionInterface
     private $formFactory;
 
     /**
+     * @var GalleryRepositoryInterface
+     */
+    private $galleryRepository;
+
+    /**
      * @var ContactTypeHandlerInterface
      */
     private $contactTypeHandler;
@@ -52,21 +58,20 @@ class IndexAction implements IndexActionInterface
     /**
      * IndexAction constructor.
      * @param FormFactoryInterface $formFactory
+     * @param GalleryRepositoryInterface $galleryRepository
      * @param ContactTypeHandlerInterface $contactTypeHandler
      * @param InstagramLib $instagram
      * @param ReviewsRepositoryInterface $reviewsRepository
      */
-    public function __construct(
-        FormFactoryInterface $formFactory,
-        ContactTypeHandlerInterface $contactTypeHandler,
-        InstagramLib $instagram,
-        ReviewsRepositoryInterface $reviewsRepository
-    ) {
+    public function __construct(FormFactoryInterface $formFactory, GalleryRepositoryInterface $galleryRepository, ContactTypeHandlerInterface $contactTypeHandler, InstagramLib $instagram, ReviewsRepositoryInterface $reviewsRepository)
+    {
         $this->formFactory = $formFactory;
+        $this->galleryRepository = $galleryRepository;
         $this->contactTypeHandler = $contactTypeHandler;
         $this->instagram = $instagram;
         $this->reviewsRepository = $reviewsRepository;
     }
+
 
     /**
      * @param Request $request
@@ -77,6 +82,16 @@ class IndexAction implements IndexActionInterface
     {
         $reviews = $this->reviewsRepository->getAllOnline();
 
+        $galleries = $this->galleryRepository->getLastNine();
+
+        foreach ($galleries as $gallery) {
+            foreach($gallery->getPictures() as $favorite) {
+            }
+                dump($favorite);
+        }
+
+//        dump($galleries);
+
         $instagram = $this->instagram->show();
 
         $contactType = $this->formFactory->create(ContactType::class)
@@ -84,9 +99,9 @@ class IndexAction implements IndexActionInterface
 
         if($this->contactTypeHandler->handle($contactType)) {
 
-            return $responder(true, $contactType, $instagram, $reviews);
+            return $responder(true, $contactType, $instagram, $reviews, $galleries);
         }
 
-        return $responder(false, $contactType, $instagram, $reviews);
+        return $responder(false, $contactType, $instagram, $reviews, $galleries);
     }
 }

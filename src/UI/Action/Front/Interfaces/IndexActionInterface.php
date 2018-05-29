@@ -26,7 +26,7 @@ interface IndexActionInterface
      * @param InstagramLib $instagram
      * @param ReviewsRepositoryInterface $reviewsRepository
      */
-    public function __construct(FormFactoryInterface $formFactory, ContactTypeHandlerInterface $contactTypeHandler, InstagramLib $instagram, ReviewsRepositoryInterface $reviewsRepository);
+//    public function __construct(FormFactoryInterface $formFactory, ContactTypeHandlerInterface $contactTypeHandler, InstagramLib $instagram, ReviewsRepositoryInterface $reviewsRepository);
 
     /**
      * @param Request $request

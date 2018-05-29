@@ -43,12 +43,13 @@ class IndexResponder implements IndexResponderInterface
         $this->urlGenerator = $urlGenerator;
     }
 
-    public function __invoke($redirect = false, FormInterface $form = null, $instagram, $reviews)
+    public function __invoke($redirect = false, FormInterface $form = null, $instagram, $reviews, $galleries)
     {
         $redirect ? $response = new RedirectResponse($this->urlGenerator->generate('/')) : $response = new Response($this->twig->render('front/index.html.twig', array(
             'contact' => $form->createView(),
             'insta' => $instagram,
-            'reviews' => $reviews
+            'reviews' => $reviews,
+            'galleries' => $galleries
         )));
 
         return $response;

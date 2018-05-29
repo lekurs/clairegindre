@@ -18,6 +18,7 @@ use App\Subscriber\GalleryImageUploadSubscriber;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -56,6 +57,8 @@ class AddGalleryType extends AbstractType
                 ))
                 ->add('title', TextType::class)
                 ->add('user', HiddenType::class)
+                ->add('eventDate', DateType::class)
+                ->add('eventPlace', TextType::class)
             ;
     }
 
@@ -67,7 +70,9 @@ class AddGalleryType extends AbstractType
                                 return new GalleryCreationDTO(
                                             $form->get('benefit')->getData(),
                                             $form->get('title')->getData(),
-                                            $form->get('user')->getData()
+                                            $form->get('user')->getData(),
+                                            $form->get('eventDate')->getData(),
+                                            $form->get('eventPlace')->getData()
                                 );
                         }
         ));

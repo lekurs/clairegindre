@@ -35,21 +35,36 @@ class GalleryCreationDTO implements GalleryCreationDTOInterface
      */
     public $user;
 
+    /**
+     * @var \DateTime
+     */
+    public $eventDate;
+
+    /**
+     * @var string
+     */
+    public $eventPlace;
 
     /**
      * GalleryCreationDTO constructor.
      *
      * @param BenefitInterface $benefit
      * @param string $title
-     * @param $pictures
+     * @param string $user
+     * @param \DateTime $eventDate
+     * @param string $eventPlace
      */
     public function __construct(
         BenefitInterface $benefit,
         string $title,
-        string  $user
+        string $user,
+        \DateTime $eventDate,
+        string $eventPlace
     ) {
         $this->benefit = $benefit;
         $this->title = $title;
-        $this->user;
+        $this->user = $user;
+        $this->eventDate = $eventDate;
+        $this->eventPlace = $eventPlace;
     }
 }

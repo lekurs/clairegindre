@@ -26,7 +26,7 @@ interface GalleryBuilderInterface
      * @param ArticleInterface|null $article
      * @return GalleryBuilderInterface
      */
-    public function create(string $title, UserInterface $user, BenefitInterface $benefit, string $slug, \DateTime $creationDate, ArticleInterface $article = null): GalleryBuilderInterface;
+//    public function create(string $title, UserInterface $user, BenefitInterface $benefit, string $slug, \DateTime $creationDate, ArticleInterface $article = null): GalleryBuilderInterface;
 
     /**
      * @param PictureInterface $picture

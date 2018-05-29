@@ -112,7 +112,7 @@ class AddGalleryTypeHandler implements AddGalleryTypeHandlerInterface
                 echo "une erreur est survenue durant la création du répertoire : ".$exception->getPath();
             }
 
-            $gallery = $this->galleryBuilder->create($form->getData()->title, $user, $form->getData()->benefit, $this->replaceService->replace($form->getData()->title), new \DateTime());
+            $gallery = $this->galleryBuilder->create($form->getData()->title, $user, $form->getData()->eventDate, $form->getData()->eventPlace, $form->getData()->benefit, $this->replaceService->replace($form->getData()->title), new \DateTime());
 
             if(!$this->fileSystem->exists($this->dirGallery . $this->replaceService->replace($form->getData()->title))) {
 
