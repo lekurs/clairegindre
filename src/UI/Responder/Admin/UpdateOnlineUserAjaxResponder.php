@@ -21,5 +21,4 @@ class UpdateOnlineUserAjaxResponder implements UpdateOnlineUserAjaxResponderInte
     {
         return new JsonResponse('success', 200);
     }
-
 }

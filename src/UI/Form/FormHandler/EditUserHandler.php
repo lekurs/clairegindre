@@ -16,6 +16,7 @@ use App\UI\Form\FormHandler\Interfaces\EditUserHandlerInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class EditUserHandler implements EditUserHandlerInterface
@@ -51,6 +52,11 @@ class EditUserHandler implements EditUserHandlerInterface
     private $tokenStorage;
 
     /**
+     * @var UserPasswordEncoderInterface
+     */
+    private $encoder;
+
+    /**
      * EditUserHandler constructor.
      * @param UserRepositoryInterface $userRepository
      * @param SessionInterface $session
@@ -58,8 +64,9 @@ class EditUserHandler implements EditUserHandlerInterface
      * @param UserBuilderInterface $userBuilder
      * @param SlugHelper $stringReplaceHelper
      * @param TokenStorageInterface $tokenStorage
+     * @param UserPasswordEncoderInterface $encoder
      */
-    public function __construct(UserRepositoryInterface $userRepository, SessionInterface $session, ValidatorInterface $validator, UserBuilderInterface $userBuilder, SlugHelper $stringReplaceHelper, TokenStorageInterface $tokenStorage)
+    public function __construct(UserRepositoryInterface $userRepository, SessionInterface $session, ValidatorInterface $validator, UserBuilderInterface $userBuilder, SlugHelper $stringReplaceHelper, TokenStorageInterface $tokenStorage, UserPasswordEncoderInterface $encoder)
     {
         $this->userRepository = $userRepository;
         $this->session = $session;
@@ -67,35 +74,26 @@ class EditUserHandler implements EditUserHandlerInterface
         $this->userBuilder = $userBuilder;
         $this->stringReplaceHelper = $stringReplaceHelper;
         $this->tokenStorage = $tokenStorage;
+        $this->encoder = $encoder;
     }
 
 
-    public function handle(FormInterface $form): bool
+    public function handle(FormInterface $form, $user): bool
     {
         if($form->isSubmitted() && $form->isValid()) {
 
-            dump($this->tokenStorage->getToken()->getUser()->getPassword());
-
-            $user = $this->userRepository->getOne($this->stringReplaceHelper->replace($form->getData()->username . '-' . $form->getData()->lastName));
-
             if(is_null($form->getData()->plainPassword)) {
-                $password = $this->tokenStorage->getToken()->getUser()->getPassword();
+                $form->getData()->plainPassword = $this->tokenStorage->getToken()->getUser()->getPassword();
             } else {
-                    $password = $form->getData()->plainPassword;
+                $form->getData()->plainPassword = $this->encoder->encodePassword($user, $form->getData()->plainPassword);
                 }
 
-                $picture = $user->getPicture();
+                dump($user, $form->getData()->plainPassword);
 
-            $user = $this->userBuilder->create(
-                                                                $form->getData()->email,
-                                                                $form->getData()->username,
-                                                                $form->getData()->lastName,
-                                                                $password,
-                                                                $form->getData()->weddingDate,
-                                                                $picture,
-                                                                $form->getData()->online, 'ROLE_USER',
-                                                                $this->stringReplaceHelper->replace($form->getData()->username . '-' . $form->getData()->lastName)
-                                                            );
+            $user->updateUser($form->getData());
+
+            dump($user);
+            die;
 
             $this->validator->validate($user, [
 
@@ -103,7 +101,7 @@ class EditUserHandler implements EditUserHandlerInterface
 
             $this->session->getFlashBag()->add('success', 'Utilisateur mis à jour');
 
-            $this->userRepository->update($this->userBuilder->getUser());
+            $this->userRepository->update();
 
             return true;
         }

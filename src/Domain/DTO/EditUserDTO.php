@@ -49,6 +49,11 @@ class EditUserDTO implements EditUserDTOInterface
     public $picture;
 
     /**
+     * @var string
+     */
+    public $slug;
+
+    /**
      * EditUserDTO constructor.
      *
      * @param string $email
@@ -57,6 +62,7 @@ class EditUserDTO implements EditUserDTOInterface
      * @param string $plainPassword
      * @param bool $online
      * @param \DateTime $dateWedding
+     * @param string slug
      */
     public function __construct(
         string $email,
@@ -64,7 +70,8 @@ class EditUserDTO implements EditUserDTOInterface
         string $lastName,
         string $plainPassword,
         bool $online,
-        \DateTime $dateWedding
+        \DateTime $dateWedding,
+        string $slug
     ) {
         $this->email = $email;
         $this->username = $username;
@@ -72,5 +79,6 @@ class EditUserDTO implements EditUserDTOInterface
         $this->plainPassword = $plainPassword;
         $this->online = $online;
         $this->weddingDate = $dateWedding;
+        $this->slug = $slug;
     }
 }

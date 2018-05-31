@@ -2,6 +2,7 @@
 
 namespace App\Domain\Models;
 
+use App\Domain\DTO\EditUserDTO;
 use App\Domain\Models\Interfaces\PictureInterface;
 use App\Domain\Models\Interfaces\UserInterface as BaseUser;
 use Ramsey\Uuid\Uuid;
@@ -101,6 +102,7 @@ class User implements UserInterface, BaseUser
      * @param PictureInterface $picture
      * @param bool $online
      * @param string $roles
+     * @param string $slug
      */
     public function __construct(
         string $email,
@@ -282,6 +284,14 @@ class User implements UserInterface, BaseUser
     }
 
     /**
+     * @param string $password
+     */
+    public function setPassword(string $password): void
+    {
+        $this->password = $password;
+    }
+
+    /**
      *
      * @return string|null The salt
      */
@@ -299,5 +309,18 @@ class User implements UserInterface, BaseUser
     public function eraseCredentials()
     {
         // TODO: Implement eraseCredentials() method.
+    }
+
+    /**
+     * @param EditUserDTO $userDTO
+     */
+    public function updateUser(EditUserDTO $userDTO)
+    {
+        $this->email = $userDTO->email;
+        $this->username = $userDTO->username;
+        $this->lastName = $userDTO->lastName;
+        $this->plainPassword = $userDTO->plainPassword;
+        $this->dateWedding = $userDTO->weddingDate;
+        $this->slug = $userDTO->slug;
     }
 }

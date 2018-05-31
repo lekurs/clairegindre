@@ -11,6 +11,7 @@ namespace App\Domain\Form\Type;
 
 use App\Domain\DTO\EditUserDTO;
 use App\Domain\DTO\Interfaces\EditUserDTOInterface;
+use App\Subscriber\Interfaces\EditUserSlugSubscriberInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -24,6 +25,24 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class EditUserType extends AbstractType
 {
+    /**
+     * @var EditUserSlugSubscriberInterface
+     */
+    private $editUserSlugSubscriber;
+
+    /**
+     * EditUserType constructor.
+     * @param EditUserSlugSubscriberInterface $editUserSlugSubscriber
+     */
+    public function __construct(EditUserSlugSubscriberInterface $editUserSlugSubscriber)
+    {
+        $this->editUserSlugSubscriber = $editUserSlugSubscriber;
+    }
+
+    /**
+     * @param FormBuilderInterface $builder
+     * @param array $options
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -34,11 +53,12 @@ class EditUserType extends AbstractType
                 'required' => false
             ])
             ->add('weddingDate', DateType::class, [
-                'widget' => 'single_text',
+//                'widget' => 'single_text',
             ])
             ->add('online', CheckboxType::class, [
                 'required' => false
             ])
+            ->addEventSubscriber($this->editUserSlugSubscriber)
             ;
     }
 
