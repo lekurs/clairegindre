@@ -2,6 +2,7 @@
 
 namespace App\Domain\Models;
 
+use App\Domain\DTO\EditGalleryDTO;
 use App\Domain\Models\Interfaces\ArticleInterface;
 use App\Domain\Models\Interfaces\BenefitInterface;
 use App\Domain\Models\Interfaces\GalleryInterface;
@@ -179,5 +180,13 @@ class Gallery implements GalleryInterface
     public function getSlug(): string
     {
         return $this->slug;
+    }
+
+    public function update(EditGalleryDTO $dto)
+    {
+        $this->title = $dto->title;
+        $this->eventDate = $dto->eventDate;
+        $this->eventPlace = $dto->eventPlace;
+//        $this->pictures = $dto->pictures;
     }
 }

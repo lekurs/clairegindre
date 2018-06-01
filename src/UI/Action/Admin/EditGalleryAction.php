@@ -20,6 +20,7 @@ use App\Domain\Models\Picture;
 use App\Domain\Repository\Interfaces\GalleryRepositoryInterface;
 use App\Domain\Repository\Interfaces\PictureRepositoryInterface;
 use App\UI\Action\Admin\Interfaces\EditGalleryActionInterface;
+use App\UI\Form\FormHandler\Interfaces\GalleryOrderTypeHandlerInterface;
 use App\UI\Form\FormHandler\Interfaces\PictureEditTypeHandlerInterface;
 use App\UI\Responder\Admin\Interfaces\EditGalleryResponderInterface;
 use Doctrine\ORM\EntityManagerInterface;
@@ -60,18 +61,25 @@ class EditGalleryAction implements EditGalleryActionInterface
     private $pictureEditTypeHandler;
 
     /**
+     * @var GalleryOrderTypeHandlerInterface
+     */
+    private $galleryEditTypeHandler;
+
+    /**
      * EditGalleryAction constructor.
      * @param GalleryRepositoryInterface $galleryRepository
      * @param PictureRepositoryInterface $pictureRepository
      * @param FormFactoryInterface $formFactory
      * @param PictureEditTypeHandlerInterface $pictureEditTypeHandler
+     * @param GalleryOrderTypeHandlerInterface $galleryEditTypeHandler
      */
-    public function __construct(GalleryRepositoryInterface $galleryRepository, PictureRepositoryInterface $pictureRepository, FormFactoryInterface $formFactory, PictureEditTypeHandlerInterface $pictureEditTypeHandler)
+    public function __construct(GalleryRepositoryInterface $galleryRepository, PictureRepositoryInterface $pictureRepository, FormFactoryInterface $formFactory, PictureEditTypeHandlerInterface $pictureEditTypeHandler, GalleryOrderTypeHandlerInterface $galleryEditTypeHandler)
     {
         $this->galleryRepository = $galleryRepository;
         $this->pictureRepository = $pictureRepository;
         $this->formFactory = $formFactory;
         $this->pictureEditTypeHandler = $pictureEditTypeHandler;
+        $this->galleryEditTypeHandler = $galleryEditTypeHandler;
     }
 
 
@@ -79,17 +87,26 @@ class EditGalleryAction implements EditGalleryActionInterface
     {
         $gallery = $this->galleryRepository->getWithPictures($request->attributes->get('slug'));
 
-        $form = $this->formFactory->create(GalleryOrderType::class, $gallery)->handleRequest($request);
+//        $form = $this->formFactory->create(GalleryOrderType::class, $gallery)->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()) {
+        $galleryDto = new EditGalleryDTO($gallery->getTitle(), $gallery->getEventDate(), $gallery->getEventPlace(), $gallery->getSlug());
 
-            foreach ($form->getData()->getPictures() as $pictures)
-            {
-                $this->pictureRepository->update();
-            }
-            return $responder(true, $form, $gallery);
+        $editGalleryType = $this->formFactory->create(GalleryOrderType::class, $galleryDto)->handleRequest($request);
+
+        if ($this->galleryEditTypeHandler->handle($editGalleryType, $galleryDto)) {
+
+            return $responder(true, $galleryDto, $gallery);
         }
 
-        return $responder(false, $form, $gallery);
+//        if($form->isSubmitted() && $form->isValid()) {
+//
+//            foreach ($form->getData()->getPictures() as $pictures)
+//            {
+//                $this->pictureRepository->update();
+//            }
+//            return $responder(true, $form, $gallery);
+//        }
+
+        return $responder(false, $galleryDto, $gallery);
     }
 }

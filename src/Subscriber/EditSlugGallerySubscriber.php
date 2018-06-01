@@ -3,19 +3,19 @@
  * Created by PhpStorm.
  * User: Maxime GINDRE
  * Date: 31/05/2018
- * Time: 14:42
+ * Time: 16:04
  */
 
 namespace App\Subscriber;
 
 
 use App\Services\SlugHelper;
-use App\Subscriber\Interfaces\EditUserSlugSubscriberInterface;
+use App\Subscriber\Interfaces\EditSlugGallerySubscriberInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 
-class EditUserSlugSubscriber implements EventSubscriberInterface, EditUserSlugSubscriberInterface
+class EditSlugGallerySubscriber implements EventSubscriberInterface, EditSlugGallerySubscriberInterface
 {
     /**
      * @var SlugHelper
@@ -23,7 +23,7 @@ class EditUserSlugSubscriber implements EventSubscriberInterface, EditUserSlugSu
     private $slugHelper;
 
     /**
-     * EditUserSlugSubscriber constructor.
+     * EditSlugGallerySubscriber constructor.
      * @param SlugHelper $slugHelper
      */
     public function __construct(SlugHelper $slugHelper)
@@ -34,12 +34,12 @@ class EditUserSlugSubscriber implements EventSubscriberInterface, EditUserSlugSu
     public static function getSubscribedEvents()
     {
         return [
-           FormEvents::SUBMIT => 'onSubmit'
+            FormEvents::SUBMIT => 'onSubmit'
         ];
     }
 
     public function onSubmit(FormEvent $event)
     {
-        $event->getData()->slug = $this->slugHelper->replace($event->getData()->username . '-' . $event->getData()->lastName);
+        $event->getData()->slug = $this->slugHelper->replace($event->getData()->title);
     }
 }

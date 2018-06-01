@@ -58,10 +58,11 @@ class GalleryOrderTypeHandler implements GalleryOrderTypeHandlerInterface
         $this->galleryBuilder = $galleryBuilder;
     }
 
-    public function handle(FormInterface $form): bool
+    public function handle(FormInterface $form, $gallery): bool
     {
         if($form->isSubmitted() && $form->isValid()) {
-            $gallery = $this->galleryBuilder->create(); //Passer les attributs dans le constructeur
+            dump($form->getData());
+            die;
 
             $this->validator->validate($gallery, [], [
                 'gallery_order',
