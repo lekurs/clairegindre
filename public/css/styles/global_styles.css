@@ -153,8 +153,13 @@ nav {
     margin-top: 3%;
 }
 
+.nav-border {
+    border-bottom: 1px solid #ffffff;
+    border-width: thin;
+}
+
 input:focus, textarea:focus, select:focus, button:focus {
-    border: none !important;
+    /*border: none !important;*/
     box-shadow: none !important;
 }
 
@@ -245,7 +250,8 @@ input:focus, textarea:focus, select:focus, button:focus {
     margin-top: 5%;
     text-transform: uppercase;
     color: #000000;
-    font-family: Playfair;
+    font-family: Assistant;
+    font-size: 1.1em;
 }
 
 .right-menu {
@@ -274,7 +280,18 @@ h2.last-report {
     text-transform: uppercase;
 }
 
-/*FAQ */
+.social-container {
+    position: absolute;
+    top: 20%;
+    color: #fff;
+    left: 97%;
+    font-size: 1.2em;
+}
+
+/*****************************************************************/
+/*                                              FAQ                                                           */
+/*****************************************************************/
+
 .infos-content {
     background: url("/images/interface/faq/nico_anlor_faq.jpg") no-repeat center;
     position: relative;
@@ -360,11 +377,47 @@ span.title-faq {
     font-weight: 600;
 }
 
+/*****************************************************************/
+/*                                            PORTFOLIO                                               */
+/*****************************************************************/
+
 section.portfolio {
     width: 80%;
-    margin: 80px auto 100px;
+    margin: 30px auto 100px;
 }
 
+h2.title-portfolio {
+    font-family: Assistant;
+    font-weight: lighter;
+    font-size: 2em;
+    margin-bottom: 30px;
+}
+
+/*****************************************************************/
+/*                                            CONTACT                                               */
+/*****************************************************************/
+
+section.contact h2 {
+    font-family: Assistant;
+    font-weight: lighter;
+    font-size: 2em;
+    margin-bottom: 30px;
+}
+
+.triple-triangle {
+    margin: 0;
+    padding: 0;
+}
+
+.triple-triangle > img {
+    width: 50px;
+    height: auto;
+}
+
+
+/*****************************************************************/
+/*                                            PRESENTATION                                       */
+/*****************************************************************/
 section.presentations {
     background: url('/images/background/presentation-full.jpg') no-repeat center;
     background-size: cover;
@@ -392,9 +445,25 @@ section.presentations {
     width: 50%;
     height: 70%;
     background-color: #fff;
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(24, 24, 24, .8);
     margin-top: auto;
     position: relative;
+    color: #ffffff;
+}
+
+.presentation-container {
+    margin-top: 2.5em;
+}
+
+.presentation-container >  h2 {
+    font-family: Playfair;
+    font-weight: lighter;
+    font-size: 7em;
+    margin: 0;
+}
+
+p#presentation-txt {
+    font-size: 1.2em;
 }
 
 .photo-presentations {
@@ -416,8 +485,6 @@ div.contact-triangle {
 div.polygon-absolute {
     -webkit-clip-path: polygon(0 0, 100% 0, 50% 50%);
     clip-path: polygon(0 0, 100% 0, 50% 50%);
-    /*background: url('/images/background/image-contact.jpg') no-repeat center;*/
-    /*background-size: cover;*/
     width: 100%;
     height: 100%;
     position: absolute;
@@ -433,16 +500,6 @@ div.polygon-triangle-absolute {
     position: absolute;
     top: 0;
     left: 0;
-}
-
-.triple-triangle {
-    margin: 0;
-    padding: 0;
-}
-
-.triple-triangle > img {
-    width: 100px;
-    height: auto;
 }
 
 .contact-form {
@@ -501,16 +558,38 @@ textarea.contact-form {
     height: 130px;
     width: 95%;
     border: 1px solid #8d9693;
-    margin: 15px 0;
+    border-width: thin;
+    margin: 35px 0;
 }
 
-input.sub-contact, button.sub-contact {
+input.sub-contact {
     width: 95%;
     margin: 15px 0 35px 0;
     border: none;
     background-color: #8d9693;
     color: #fff;
 }
+
+button.sub-contact {
+    background-color: #242424;
+    width: 8%;
+    color: #ffffff;
+    border-radius: 0 !important;
+    text-transform: uppercase;
+    font-family: Assistant;
+    font-weight: lighter;
+    letter-spacing: .2rem;
+}
+
+.btn-contact {
+    text-align: right;
+    padding-right: 3em !important;
+    margin-bottom: 2em;
+}
+
+    /*****************************************************************/
+/*                                              INSTAGRAM                                           */
+/*****************************************************************/
 
 .insta-list {
     display: grid;
@@ -549,18 +628,33 @@ input.sub-contact, button.sub-contact {
     object-position: left;
 }
 
+/*****************************************************************/
+/*                                              CAROUSEL                                               */
+/*****************************************************************/
+
 .infos-carousel {
     position: absolute;
     top: 15%;
     left: 15%;
     width: 70%;
     height: 70%;
-    background-color: rgba(255,255,255,.6);
+    background-color: rgba(24,24,24,.8);
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
     padding: 0 10%;
+    color: #ffffff;
+}
+
+.carousel-title {
+    font-family: Playfair;
+}
+
+.carousel-title ~ p {
+    font-family: Assistant;
+    font-weight: lighter;
+    margin: 0;
 }
 
 .comment-contain {
@@ -571,6 +665,10 @@ input.sub-contact, button.sub-contact {
     height: 80%;
 }
 
+/*****************************************************************/
+/*                                              FOOTER                                                    */
+/*****************************************************************/
+
 .footer-contain {
     min-height: 300px;
     background-color: #242424;
@@ -580,4 +678,17 @@ input.sub-contact, button.sub-contact {
 
 footer ul li a{
     color: #fff;
+}
+
+footer a {
+    display: block;
+    color: #ffffff;
+    text-transform: uppercase;
+    transition: all 1s ease-in-out;
+
+}
+
+footer a:hover {
+    text-decoration: underline;
+    color: #ffffff;
 }

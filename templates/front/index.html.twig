@@ -10,7 +10,7 @@
 
 {% block content %}
     <section class="portfolio">
-        <h2 class="text-center text-uppercase">love & fun</h2>
+        <h2 class="text-center text-uppercase title-portfolio">love & fun</h2>
 
         <div class="gallery">
             {% for gallery in galleries %}
@@ -19,9 +19,9 @@
                         <div class="portfolio-pres thumb" style="background: url({{ asset(favoritePicture.publicPath ~ '/' ~ favoritePicture.pictureName) }}) center center no-repeat; background-size: cover">
                             <a href="#" class="portfolio_link">
                                 <div class="link_hover">
-                                    <h2>{{ gallery.title }}</h2>
-                                    <p>{{ gallery.eventDate | date('d-m-Y') }}</p>
-                                    <p>{{ gallery.eventPlace }}</p>
+                                    <h2 class="title-portfolio-contain">{{ gallery.title }}</h2>
+                                    <p class="date-portfolio">{{ gallery.eventDate | date('d-m-Y') }}</p>
+                                    <p class="place">{{ gallery.eventPlace }}</p>
                                 </div>
                             </a>
                         </div>

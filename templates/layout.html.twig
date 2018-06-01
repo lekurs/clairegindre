@@ -94,7 +94,7 @@
                                     <div class="row no-gutters justify-content-center align-items-center">
                                         <div class="col-lg-6 col-xl-6">
                                             {#ROW RIGHT#}
-                                            <div class="row no-gutters">
+                                            <div class="row no-gutters nav-border">
                                                 <div class="col-lg-12 col-xl-12">
                                                     <ul class="nav justify-content-between">
                                                         <li class="nav-item"><a class="nav-link" href="{{ path('index') }}">Home</a></li>
@@ -126,7 +126,7 @@
                                 <div class="row no-gutters justify-content-center align-items-center">
                                     <div class="col-lg-6 col-xl-6">
                                         {#ROW RIGHT#}
-                                        <div class="row no-gutters">
+                                        <div class="row no-gutters nav-border">
                                             <div class="col-lg-12 col-xl-12">
                                                 <ul class="nav justify-content-between">
                                                     <li class="nav-item"><a class="nav-link" href="{{ path('faq') }}">informations</a></li>
@@ -145,7 +145,13 @@
                                     </div>
                                 </div>
                             </nav>
-                            {#<div id="end-nav"></div>#}
+                            <div class="row no-gutters social-container">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                    <p><i class="fa fa-instagram"></i></p>
+                                    <p><i class="fa fa-facebook-f"></i></p>
+                                    <p><i class="fa fa-pinterest-p"></i></p>
+                                </div>
+                            </div>
                             {% endblock %}
                         </div>
                 </div>
@@ -160,18 +166,36 @@
 
     {% endblock %}
 
+    {% block presentation %}
+        <section class="presentations" id="hello">
+            <div class="row no-gutters height-pres">
+                <div class="col-12 col-sm-12 col-md-12 offset-lg-3 offset-xl-3 col-lg-6 col-xl-6 hello-container align-items-center justify-content-center">
+                    <div class="row no-gutters">
+                        <div class="offset-lg-3 offset-xl-3 col-lg-9 col-xl-9 presentation-container">
+                            <h2 class="text-left text-uppercase">hello !</h2>
+                            <p id="presentation-txt">Je s'appelle Groot, photographe en région parisienne ....</p>
+                        </div>
+                    </div>
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 photo-presentations"></div>
+                </div>
+            </div>
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 bg-presentations"></div>
+            </div>
+        </section>
+    {% endblock %}
+
     {% block contact %}
         <section class="contact" id="contact">
             </div>
             <div class="row no-gutters">
                 <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 contact-article">
                     <div class="row no-gutters">
-                        <div class="col-12">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                             <p class="text-center triple-triangle"><img src="{{ asset('/images/interface/pictos/trois-triangle.png') }}" alt="contact-clairegindre" /></p>
                         </div>
                     </div>
                     <div class="row no-gutters">
-                        <div class="col-12">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                             <h2 class="text-uppercase text-center">contact</h2>
                         </div>
                     </div>
@@ -225,7 +249,7 @@
                             </div>
                             <div class="row no-gutters">
                                 <div class="col-12">
-                                    <p class="text-uppercase text-center">Vous êtes intéréssés pour :</p>
+                                    <p class="text-center">Vous êtes intéréssés pour :</p>
                                 </div>
                             </div>
                             <div class="row no-gutters">
@@ -250,34 +274,14 @@
                         </div>
                     </div>
                     <div class="row no-gutters">
-                        <div class="col-12 d-flex justify-content-center">
-                            <input type="submit" value="Envoyer" name="contact-submit" class="btn sub-contact">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 btn-contact">
+                            <button type="submit" name="contact-submit" class="btn sub-contact">Envoyer</button>
                         </div>
                     </div>
 
                     {{ form_end(contact) }}
 
                 </div>
-            </div>
-        </section>
-    {% endblock %}
-
-    {% block presentation %}
-        <section class="presentations" id="hello">
-            <div class="row no-gutters height-pres">
-                <div class="col-12 col-sm-12 col-md-12 offset-lg-3 offset-xl-3 col-lg-6 col-xl-6 hello-container align-items-center justify-content-center">
-                    <div class="row no-gutters">
-                        <div class="offset-lg-3 offset-xl-3 col-lg-9 col-xl-9">
-                            <p class="triple-triangle text-center"><img src="{{ asset('/images/interface/pictos/trois-triangle.png') }}" alt="presentation-clairegindre"></p>
-                            <h2 class="text-center text-uppercase">hello</h2>
-                            <p>Je s'appelle Groot, photographe en région parisienne ....</p>
-
-                        </div>
-                    </div>
-                    <div class="col-12 photo-presentations"></div>
-                </div>
-            </div>
-            <div class="col-12 bg-presentations"></div>
             </div>
         </section>
     {% endblock %}
@@ -300,7 +304,7 @@
                     <div class="carousel-item active carousel-img">
                         <img src="{{ asset('/images/contact-img.jpg') }}" class="d-block w-100 img-carousel" alt="test_slider" />
                         <div class="infos-carousel">
-                            <h3 class="text-uppercase font-weight-bold">test</h3>
+                            <h3 class="text-uppercase carousel-title">test</h3>
                             <p>test de paragraphe test de paragraphe test de paragraphe test de paragraphe test de paragraphe test de paragraphe</p>
                         </div>
                     </div>
@@ -308,7 +312,7 @@
                     <div class="carousel-item carousel-img">
                         <img src="{{ asset(review.imagePath ~ '/' ~ review.imageName) }}" class="d-block w-100 img-carousel" alt="test_slider" />
                         <div class="infos-carousel">
-                            <h3>{{ review.title }}</h3>
+                            <h3 class="text-uppercase carousel-title">{{ review.title }}</h3>
                             {{ review.content|raw }}
                         </div>
                     </div>
@@ -321,53 +325,90 @@
 
     {% block footer %}
         <footer class="row no-gutters justify-content-around">
-            <div class="col-12 footer-contain">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 footer-contain">
                 <div class="row no-gutters">
-                    <div class="col-12 col-sm-12 col-md-12 col-lg-3 col-xl-3">
-                        <div class="row no-gutters flex-column align-items-center">
-                            <div class="col-12">
-                                <ul class="nav flex-column align-items-center text-uppercase">
-                                    <li class="nav-item"><a href="#" class="nav-link"> home</a></li>
-                                    <li class="nav-item"><a href="#" class="nav-link"> photos</a></li>
-                                    <li class="nav-item"><a href="#" class="nav-link"> informations</a></li>
-                                    <li class="nav-item"><a href="#" class="nav-link"> clients</a></li>
-                                    <li class="nav-item"><a href="#" class="nav-link"> contact</a></li>
-                                </ul>
-                            </div>
-                        </div>
+                    <div class="col-xl-1 col-lg-1 col-md-12 col-sm-12 col-12">
+                        fleche
                     </div>
-                    <div class="col-12 col-sm-12 col-md-12 col-lg-3 col-xl-3">
-                        <div class="row no-gutters flex-column align-items-center">
-                            <div class="col-12 text-center">
-                                <p><strong>Claire Gindre</strong></p>
-                                <p>contact@clairegindre.com</p>
-                                <p>06 06 06 06 06</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-sm-12 col-md-12 col-lg-3 col-xl-3">
+                    <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12">
                         <div class="row no-gutters">
-                            <div class="col-12 text-center">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                <a href="#" class="nav-footer">home</a>
+                                <a href="#" class="nav-footer">photos</a>
+                                <a href="#" class="nav-footer">informations</a>
+                                <a href="#" class="nav-footer">clients</a>
+                                <a href="#" class="nav-footer">contact</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+                        <p><strong>Claire Gindre</strong></p>
+                        <p>contact@clairegindre.com</p>
+                        <p>06 06 06 06 06</p>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+                        <div class="row no-gutters">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                 <p class="text-uppercase">Suivez-moi</p>
-                                <div class="row no-gutters">
-                                    <div class="col-12 justify-content-between">
-                                        <p><i class="fa fa-facebook-official"></i>
-                                            <i class="fa fa-instagram"></i>
-                                            <i class="fa fa-pinterest"></i>
-                                        </p>
-                                    </div>
-                                </div>
+                            </div>
+                        </div>
+                        <div class="row no-gutters">
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">
+                                <i class="fa fa-facebook-official"></i>
+                                <i class="fa fa-instagram"></i>
+                                <i class="fa fa-pinterest"></i>
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 col-sm-12 col-md-12 col-lg-3 col-xl-3">
-                        <div class="row no-gutters">
-                            <div class="col-12 text-center">
-                                <p class="text-uppercase">mentions légales</p>
-                                <p>tous droits réservés <i class="fa fa-copyright"></i> <strong>Claire GINDRE</strong> - 2018</p>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+                        <p class="text-uppercase">mentions légales</p>
+                        <p>tous droits réservés <i class="fa fa-copyright"></i> <strong>Claire GINDRE</strong> - 2018</p>
+                    </div>
+                    {#<div class="col-12 col-sm-12 col-md-12 col-lg-3 col-xl-3">#}
+                        {#<div class="row no-gutters flex-column align-items-center">#}
+                            {#<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">#}
+                                {#<ul class="nav flex-column align-items-center text-uppercase">#}
+                                    {#<li class="nav-item"><a href="#" class="nav-link"> home</a></li>#}
+                                    {#<li class="nav-item"><a href="#" class="nav-link"> photos</a></li>#}
+                                    {#<li class="nav-item"><a href="#" class="nav-link"> informations</a></li>#}
+                                    {#<li class="nav-item"><a href="#" class="nav-link"> clients</a></li>#}
+                                    {#<li class="nav-item"><a href="#" class="nav-link"> contact</a></li>#}
+                                {#</ul>#}
+                            {#</div>#}
+                        {#</div>#}
+                    {#</div>#}
+                    {#<div class="col-12 col-sm-12 col-md-12 col-lg-3 col-xl-3">#}
+                        {#<div class="row no-gutters flex-column align-items-center">#}
+                            {#<div class="col-12 text-center">#}
+                                {#<p><strong>Claire Gindre</strong></p>#}
+                                {#<p>contact@clairegindre.com</p>#}
+                                {#<p>06 06 06 06 06</p>#}
+                            {#</div>#}
+                        {#</div>#}
+                    {#</div>#}
+                    {#<div class="col-12 col-sm-12 col-md-12 col-lg-3 col-xl-3">#}
+                        {#<div class="row no-gutters">#}
+                            {#<div class="col-12 text-center">#}
+                                {#<p class="text-uppercase">Suivez-moi</p>#}
+                                {#<div class="row no-gutters">#}
+                                    {#<div class="col-12 justify-content-between">#}
+                                        {#<p><i class="fa fa-facebook-official"></i>#}
+                                            {#<i class="fa fa-instagram"></i>#}
+                                            {#<i class="fa fa-pinterest"></i>#}
+                                        {#</p>#}
+                                    {#</div>#}
+                                {#</div>#}
+                            {#</div>#}
+                        {#</div>#}
+                    {#</div>#}
+                    {#<div class="col-12 col-sm-12 col-md-12 col-lg-3 col-xl-3">#}
+                        {#<div class="row no-gutters">#}
+                            {#<div class="col-12 text-center">#}
+                                {#<p class="text-uppercase">mentions légales</p>#}
+                                {#<p>tous droits réservés <i class="fa fa-copyright"></i> <strong>Claire GINDRE</strong> - 2018</p>#}
+                                {#</div>#}
+                            {#</div>#}
+                        {#</div>#}
                     </div>
                 </div>
             </footer>

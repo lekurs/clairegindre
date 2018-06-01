@@ -70,7 +70,7 @@
     left: -100%;
     width: 100%;
     height: 100%;
-    background: rgba(95,107,103,.7);
+    background: rgba(24,24,24,.7);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -80,6 +80,60 @@
 }
 
 .link_hover h2 {
+    font-family: Playfair;
     text-transform: uppercase;
-    font-size: 1.8em;
+    font-size: 1.2em;
+    margin: .5em .5em .3em .5em;
+}
+
+p.date-portfolio {
+    margin: 0;
+}
+
+p.place {
+    margin: 0;
+}
+
+/*.link_hover h2:nth-child(1) {*/
+    /*border: 1px solid red;*/
+/*}*/
+
+
+.link_hover h2:nth-child(2) {
+    border: 1px solid green;
+}
+
+
+.link_hover h2:nth-child(3) {
+    border: 1px solid yellow;
+}
+
+
+.link_hover h2:nth-child(4) {
+    border: 1px solid black;
+}
+
+
+.link_hover h2:nth-child(5) {
+    border: 1px solid purple;
+}
+
+
+.link_hover h2:nth-child(6) {
+    border: 1px solid pink;
+}
+
+
+.link_hover h2:nth-child(7) {
+    border: 1px solid darkslategrey;
+}
+
+
+.link_hover h2:nth-child(8) {
+    border: 1px solid grey;
+}
+
+
+.link_hover h2:nth-child(9) {
+    border: 1px solid orange;
 }
