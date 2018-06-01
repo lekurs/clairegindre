@@ -89,13 +89,13 @@ class EditGalleryAction implements EditGalleryActionInterface
 
 //        $form = $this->formFactory->create(GalleryOrderType::class, $gallery)->handleRequest($request);
 
-        $galleryDto = new EditGalleryDTO($gallery->getTitle(), $gallery->getEventDate(), $gallery->getEventPlace(), $gallery->getSlug());
+        $galleryDto = new EditGalleryDTO($gallery->getTitle(), $gallery->getEventDate(), $gallery->getEventPlace(), $gallery->getPictures()->toArray(), $gallery->getSlug());
 
         $editGalleryType = $this->formFactory->create(GalleryOrderType::class, $galleryDto)->handleRequest($request);
 
         if ($this->galleryEditTypeHandler->handle($editGalleryType, $galleryDto)) {
 
-            return $responder(true, $galleryDto, $gallery);
+            return $responder(true, $editGalleryType, $gallery);
         }
 
 //        if($form->isSubmitted() && $form->isValid()) {
@@ -107,6 +107,6 @@ class EditGalleryAction implements EditGalleryActionInterface
 //            return $responder(true, $form, $gallery);
 //        }
 
-        return $responder(false, $galleryDto, $gallery);
+        return $responder(false, $editGalleryType, $gallery);
     }
 }

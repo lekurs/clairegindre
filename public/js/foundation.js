@@ -4745,7 +4745,7 @@ var Abide = function (_Plugin) {
     /**
      * Determines if a selected input passes a custom validation function. Multiple validations can be used, if passed to the element with `data-validator="foo bar baz"` in a space separated listed.
      * @param {Object} $el - jQuery input element.
-     * @param {String} validators - a string of function names matching functions in the Abide.options.validators object.
+     * @param {String} validator - a string of function names matching functions in the Abide.options.validator object.
      * @param {Boolean} required - self explanatory?
      * @returns {Boolean} - true if validations passed.
      */

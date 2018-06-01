@@ -48,12 +48,12 @@ class EditGalleryDTO implements GalleryOrderDTOInterface
      * @param \ArrayAccess $pictures
      * @param string $slug
      */
-    public function __construct(string $title, \DateTime $eventDate, string $eventPlace,  string $slug)
+    public function __construct(string $title, \DateTime $eventDate, string $eventPlace,  array $pictures, string $slug)
     {
         $this->title = $title;
         $this->eventDate = $eventDate;
         $this->eventPlace = $eventPlace;
-//        $this->pictures = $pictures;
+        $this->pictures = $pictures;
         $this->slug = $slug;
     }
 

@@ -187,6 +187,6 @@ class Gallery implements GalleryInterface
         $this->title = $dto->title;
         $this->eventDate = $dto->eventDate;
         $this->eventPlace = $dto->eventPlace;
-//        $this->pictures = $dto->pictures;
+        $this->pictures = $dto->pictures;
     }
 }

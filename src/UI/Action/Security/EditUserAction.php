@@ -62,14 +62,20 @@ class EditUserAction implements EditUserActionInterface
 
     /**
      * EditUserAction constructor.
+     *
      * @param UserRepositoryInterface $userRepository
      * @param UserBuilderInterface $userBuilder
      * @param FormFactoryInterface $formFactory
      * @param EditUserHandlerInterface $userEditTypeHandler
      * @param TokenStorageInterface $tokenStorage
      */
-    public function __construct(UserRepositoryInterface $userRepository, UserBuilderInterface $userBuilder, FormFactoryInterface $formFactory, EditUserHandlerInterface $userEditTypeHandler, TokenStorageInterface $tokenStorage)
-    {
+    public function __construct(
+        UserRepositoryInterface $userRepository,
+        UserBuilderInterface $userBuilder,
+        FormFactoryInterface $formFactory,
+        EditUserHandlerInterface $userEditTypeHandler,
+        TokenStorageInterface $tokenStorage
+    ) {
         $this->userRepository = $userRepository;
         $this->userBuilder = $userBuilder;
         $this->formFactory = $formFactory;
@@ -77,7 +83,11 @@ class EditUserAction implements EditUserActionInterface
         $this->tokenStorage = $tokenStorage;
     }
 
-
+    /**
+     * @param Request $request
+     * @param UserEditResponderInterface $responder
+     * @return mixed
+     */
     public function __invoke(Request $request, UserEditResponderInterface $responder)
     {
         $user = $this->userRepository->getOne($request->attributes->get('slug'));
@@ -90,8 +100,8 @@ class EditUserAction implements EditUserActionInterface
 
         $userEditType = $this->formFactory->create(EditUserType::class, $userDto)->handleRequest($request);
 
-
         if($this->userEditTypeHandler->handle($userEditType, $user)) {
+
             return $responder(true, $userEditType, $user);
         }
 

@@ -319,7 +319,7 @@ class User implements UserInterface, BaseUser
         $this->email = $userDTO->email;
         $this->username = $userDTO->username;
         $this->lastName = $userDTO->lastName;
-        $this->plainPassword = $userDTO->plainPassword;
+        $this->password = $userDTO->plainPassword;
         $this->dateWedding = $userDTO->weddingDate;
         $this->slug = $userDTO->slug;
     }

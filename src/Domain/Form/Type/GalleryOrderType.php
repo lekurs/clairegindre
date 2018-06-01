@@ -61,8 +61,8 @@ class GalleryOrderType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Gallery::class,
-//        'data_class' => EditGalleryDTO::class,
+//            'data_class' => Gallery::class,
+        'data_class' => EditGalleryDTO::class,
 'empty_data' => function (FormInterface $form) {
             return new EditGalleryDTO(
                 $form->get('title')->getData(),

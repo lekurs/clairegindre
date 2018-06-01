@@ -92,9 +92,6 @@ class EditUserHandler implements EditUserHandlerInterface
 
             $user->updateUser($form->getData());
 
-            dump($user);
-            die;
-
             $this->validator->validate($user, [
 
             ]);

@@ -8,17 +8,12 @@
 
 namespace App\Domain\Form\Type;
 
-
 use App\Domain\DTO\ArticleCreationDTO;
-use App\Domain\DTO\Interfaces\ArticleCreationDTOInterface;
 use App\Domain\Models\Benefit;
-use App\Domain\Models\Gallery;
-use App\Domain\Repository\GalleryRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -50,7 +45,7 @@ class AddArticleType extends AbstractType
     {
         $resolver
             ->setDefaults([
-                'data_class' => ArticleCreationDTOInterface::class,
+                'data_class' => ArticleCreationDTO::class,
                 'empty_data' => function (FormInterface $form) {
                                 return new ArticleCreationDTO(
                                     $form->get('title')->getData(),
