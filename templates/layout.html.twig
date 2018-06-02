@@ -147,9 +147,9 @@
                             </nav>
                             <div class="row no-gutters social-container">
                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                    <p><i class="fa fa-instagram"></i></p>
-                                    <p><i class="fa fa-facebook-f"></i></p>
-                                    <p><i class="fa fa-pinterest-p"></i></p>
+                                    <p><a href="https://www.instagram.com/clairegindre_photographe/" target="_blank"><i class="fa fa-instagram"></i></a></p>
+                                    <p><a href="https://www.facebook.com/clairegindre.pg/" target="_blank"><i class="fa fa-facebook-f"></i></a></p>
+                                    <p><a href="https://www.pinterest.fr/ClaireGindrepg/" target="_blank"><i class="fa fa-pinterest-p"></i></a></p>
                                 </div>
                             </div>
                             {% endblock %}
@@ -324,27 +324,28 @@
     {% endblock %}
 
     {% block footer %}
-        <footer class="row no-gutters justify-content-around">
-            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 footer-contain">
-                <div class="row no-gutters">
-                    <div class="col-xl-1 col-lg-1 col-md-12 col-sm-12 col-12">
-                        fleche
+        <footer class="row no-gutters">
+            {#<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 footer-contain">#}
+                {#<div class="row no-gutters">#}
+                    <div class="col-xl-1 col-lg-1 col-md-12 col-sm-12 col-12 arrow-footer">
+                        <img src="{{ asset('images/interface/pictos/fleche.png') }}" alt="arrow" />
                     </div>
                     <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12">
                         <div class="row no-gutters">
                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                <a href="#" class="nav-footer">home</a>
-                                <a href="#" class="nav-footer">photos</a>
-                                <a href="#" class="nav-footer">informations</a>
-                                <a href="#" class="nav-footer">clients</a>
-                                <a href="#" class="nav-footer">contact</a>
+                                <a href="{{ path('index') }}" class="nav-footer" id="link-home">home</a>
+                                <a href="#hello" class="nav-footer" id="link-photo">Hello</a>
+                                <a href="{{ path('blog') }}" class="nav-footer" id="link-blog">Blog</a>
+                                <a href="{{ path('faq') }}" class="nav-footer" id="link-informations">Informations</a>
+                                <a href="{{ path('galleriesCustomers') }}" class="nav-footer" id="link-customers">clients</a>
+                                <a href="#contact" class="nav-footer" id="link-contact">contact</a>
                             </div>
                         </div>
                     </div>
                     <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
                         <p><strong>Claire Gindre</strong></p>
                         <p>contact@clairegindre.com</p>
-                        <p>06 06 06 06 06</p>
+                        <p>06 62 45 10 36</p>
                     </div>
                     <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
                         <div class="row no-gutters">
@@ -354,63 +355,16 @@
                         </div>
                         <div class="row no-gutters">
                             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">
-                                <i class="fa fa-facebook-official"></i>
-                                <i class="fa fa-instagram"></i>
-                                <i class="fa fa-pinterest"></i>
+                                <a href="https://www.instagram.com/clairegindre_photographe/" target="_blank"><i class="fa fa-instagram social-picto-footer"></i></a>
+                                <a href="https://www.facebook.com/clairegindre.pg/" target="_blank"><i class="fa fa-facebook-f social-picto-footer"></i></a>
+                                <a href="https://www.pinterest.fr/ClaireGindrepg/" target="_blank"><i class="fa fa-pinterest-p social-picto-footer"></i></a>
                             </div>
                         </div>
                     </div>
                     <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
                         <p class="text-uppercase">mentions légales</p>
-                        <p>tous droits réservés <i class="fa fa-copyright"></i> <strong>Claire GINDRE</strong> - 2018</p>
+                        <p>Tous droits réservés <i class="fa fa-copyright"></i> <strong>Claire GINDRE - 2018</strong></p>
                     </div>
-                    {#<div class="col-12 col-sm-12 col-md-12 col-lg-3 col-xl-3">#}
-                        {#<div class="row no-gutters flex-column align-items-center">#}
-                            {#<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">#}
-                                {#<ul class="nav flex-column align-items-center text-uppercase">#}
-                                    {#<li class="nav-item"><a href="#" class="nav-link"> home</a></li>#}
-                                    {#<li class="nav-item"><a href="#" class="nav-link"> photos</a></li>#}
-                                    {#<li class="nav-item"><a href="#" class="nav-link"> informations</a></li>#}
-                                    {#<li class="nav-item"><a href="#" class="nav-link"> clients</a></li>#}
-                                    {#<li class="nav-item"><a href="#" class="nav-link"> contact</a></li>#}
-                                {#</ul>#}
-                            {#</div>#}
-                        {#</div>#}
-                    {#</div>#}
-                    {#<div class="col-12 col-sm-12 col-md-12 col-lg-3 col-xl-3">#}
-                        {#<div class="row no-gutters flex-column align-items-center">#}
-                            {#<div class="col-12 text-center">#}
-                                {#<p><strong>Claire Gindre</strong></p>#}
-                                {#<p>contact@clairegindre.com</p>#}
-                                {#<p>06 06 06 06 06</p>#}
-                            {#</div>#}
-                        {#</div>#}
-                    {#</div>#}
-                    {#<div class="col-12 col-sm-12 col-md-12 col-lg-3 col-xl-3">#}
-                        {#<div class="row no-gutters">#}
-                            {#<div class="col-12 text-center">#}
-                                {#<p class="text-uppercase">Suivez-moi</p>#}
-                                {#<div class="row no-gutters">#}
-                                    {#<div class="col-12 justify-content-between">#}
-                                        {#<p><i class="fa fa-facebook-official"></i>#}
-                                            {#<i class="fa fa-instagram"></i>#}
-                                            {#<i class="fa fa-pinterest"></i>#}
-                                        {#</p>#}
-                                    {#</div>#}
-                                {#</div>#}
-                            {#</div>#}
-                        {#</div>#}
-                    {#</div>#}
-                    {#<div class="col-12 col-sm-12 col-md-12 col-lg-3 col-xl-3">#}
-                        {#<div class="row no-gutters">#}
-                            {#<div class="col-12 text-center">#}
-                                {#<p class="text-uppercase">mentions légales</p>#}
-                                {#<p>tous droits réservés <i class="fa fa-copyright"></i> <strong>Claire GINDRE</strong> - 2018</p>#}
-                                {#</div>#}
-                            {#</div>#}
-                        {#</div>#}
-                    </div>
-                </div>
             </footer>
     {% endblock %}
 </body>
