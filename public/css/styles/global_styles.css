@@ -158,6 +158,277 @@ nav {
     border-width: thin;
 }
 
+
+.logo-content {
+    margin-top: 2%;
+    min-width: 165px;
+    min-height: 180px;
+    max-width: 220px;
+}
+
+.logo-img {
+    background: url("/images/logo.png") no-repeat center;
+    background-size: contain;
+    min-height: 160px;
+    height: 100%;
+    display: block;
+}
+
+.logo-img-color {
+    background: url("/images/interface/logos/logo-color.png") no-repeat center;
+    background-size: contain;
+    min-height: 160px;
+    height: 100%;
+    display: block;
+}
+
+.left-menu {
+    margin-top: 5%;
+    text-transform: uppercase;
+}
+
+.left-menu a {
+    color: #fff;
+}
+
+.nav-link {
+    margin-top: 5%;
+    text-transform: uppercase;
+    color: #000000;
+    font-family: Assistant;
+    font-size: 1.1em;
+}
+
+.right-menu {
+    margin-top: 5%;
+    text-transform: uppercase;
+}
+
+.right-menu a {
+    color: #fff;
+}
+
+.right-menu-black a {
+    color: #000000;
+}
+
+a#nav-link-home:before {
+    content: "";
+    position: absolute;
+    width: 20%;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #ffffff;
+    visibility: hidden;
+    -webkit-transform: scaleX(0);
+    transform: scaleX(0);
+    -webkit-transition: all .3s ease-in-out 0s;
+    transition: all .3s ease-in-out 0s;
+}
+
+a#nav-link-home:hover:before {
+    visibility: visible;
+    transform: scaleX(1);
+    -webkit-transform: scaleX(1);
+}
+
+a#nav-link-hello:before {
+    content: "";
+    position: absolute;
+    width: 22%;
+    height: 2px;
+    bottom: 0;
+    left: 78%;
+    background-color: #ffffff;
+    visibility: hidden;
+    -webkit-transform: scaleX(0);
+    transform: scaleX(0);
+    -webkit-transition: all .3s ease-in-out 0s;
+    transition: all .3s ease-in-out 0s;
+}
+
+a#nav-link-hello:hover:before {
+    visibility: visible;
+    transform: scaleX(1);
+    -webkit-transform: scaleX(1);
+}
+
+a#nav-link-blog:before {
+    content: "";
+    position: absolute;
+    width: 19%;
+    height: 2px;
+    top: 0;
+    left: 40%;
+    background-color: #ffffff;
+    visibility: hidden;
+    -webkit-transform: scaleX(0);
+    transform: scaleX(0);
+    -webkit-transition: all .3s ease-in-out 0s;
+    transition: all .3s ease-in-out 0s;
+}
+
+a#nav-link-blog:hover:before {
+    visibility: visible;
+    transform: scaleX(1);
+    -webkit-transform: scaleX(1);
+}
+
+a#nav-link-contact:before {
+    content: "";
+    position: absolute;
+    width: 26%;
+    height: 2px;
+    top: 0;
+    left: 37%;
+    background-color: #ffffff;
+    visibility: hidden;
+    -webkit-transform: scaleX(0);
+    transform: scaleX(0);
+    -webkit-transition: all .3s ease-in-out 0s;
+    transition: all .3s ease-in-out 0s;
+}
+
+a#nav-link-contact:hover:before {
+    visibility: visible;
+    transform: scaleX(1);
+    -webkit-transform: scaleX(1);
+}
+
+a#nav-link-informations:before {
+    content: "";
+    position: absolute;
+    width: 37%;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #ffffff;
+    visibility: hidden;
+    -webkit-transform: scaleX(0);
+    transform: scaleX(0);
+    -webkit-transition: all .3s ease-in-out 0s;
+    transition: all .3s ease-in-out 0s;
+}
+
+a#nav-link-informations:hover:before {
+    visibility: visible;
+    transform: scaleX(1);
+    -webkit-transform: scaleX(1);
+}
+
+a#nav-link-customer:before {
+    content: "";
+    position: absolute;
+    width: 22%;
+    height: 2px;
+    bottom: 0;
+    left: 78%;
+    background-color: #ffffff;
+    visibility: hidden;
+    -webkit-transform: scaleX(0);
+    transform: scaleX(0);
+    -webkit-transition: all .3s ease-in-out 0s;
+    transition: all .3s ease-in-out 0s;
+}
+
+a#nav-link-customer:hover:before {
+    visibility: visible;
+    transform: scaleX(1);
+    -webkit-transform: scaleX(1);
+}
+
+/*a.nav-link:hover:before {*/
+    /*visibility: visible;*/
+    /*transform: scaleX(1);*/
+    /*-webkit-transform: scaleX(1);*/
+/*}*/
+
+a.nav-link-bottom:before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    top: 0;
+    left: 0;
+    background-color: #ffffff;
+    visibility: hidden;
+    -webkit-transform: scaleX(0);
+    transform: scaleX(0);
+    -webkit-transition: all .3s ease-in-out 0s;
+    transition: all .3s ease-in-out 0s;
+}
+
+/*a.nav-link-right:hover:before {*/
+    /*visibility: visible;*/
+    /*transform: scaleX(1);*/
+    /*-webkit-transform: scaleX(1);*/
+/*}*/
+
+
+a.nav-link-black:before {
+    content: "";
+    position: absolute;
+    width: 50%;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #000000;
+    visibility: hidden;
+    -webkit-transform: scaleX(0);
+    transform: scaleX(0);
+    -webkit-transition: all .3s ease-in-out 0s;
+    transition: all .3s ease-in-out 0s;
+}
+
+a.nav-link-black:hover:before {
+    visibility: visible;
+    transform: scaleX(1);
+    -webkit-transform: scaleX(1);
+}
+
+a.nav-link-black-right:before {
+    content: "";
+    position: absolute;
+    width: 50%;
+    height: 2px;
+    bottom: 0;
+    left: 50%;
+    background-color: #000000;
+    visibility: hidden;
+    -webkit-transform: scaleX(0);
+    transform: scaleX(0);
+    -webkit-transition: all .3s ease-in-out 0s;
+    transition: all .3s ease-in-out 0s;
+}
+
+/*a.nav-link-black-bottom:hover:before {*/
+    /*visibility: visible;*/
+    /*transform: scaleX(1);*/
+    /*-webkit-transform: scaleX(1);*/
+/*}*/
+
+a.nav-link-black-bottom:before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    top: 0;
+    left: 0;
+    background-color: #000000;
+    visibility: hidden;
+    -webkit-transform: scaleX(0);
+    transform: scaleX(0);
+    -webkit-transition: all .3s ease-in-out 0s;
+    transition: all .3s ease-in-out 0s;
+}
+
+/*a.nav-link-black-right:hover:before {*/
+    /*visibility: visible;*/
+    /*transform: scaleX(1);*/
+    /*-webkit-transform: scaleX(1);*/
+/*}*/
+
 input:focus, textarea:focus, select:focus, button:focus {
     /*border: none !important;*/
     box-shadow: none !important;
@@ -214,59 +485,6 @@ input:focus, textarea:focus, select:focus, button:focus {
     from {transform: translateY(0);} to {transform: translateY(-10px);}
 }
 
-.logo-content {
-    margin-top: 2%;
-    min-width: 165px;
-    min-height: 180px;
-    max-width: 220px;
-}
-
-.logo-img {
-    background: url("/images/logo.png") no-repeat center;
-    background-size: contain;
-    min-height: 160px;
-    height: 100%;
-    display: block;
-}
-
-.logo-img-color {
-    background: url("/images/interface/logos/logo-color.png") no-repeat center;
-    background-size: contain;
-    min-height: 160px;
-    height: 100%;
-    display: block;
-}
-
-.left-menu {
-    margin-top: 5%;
-    text-transform: uppercase;
-}
-
-.left-menu a {
-    color: #fff;
-}
-
-.nav-link {
-    margin-top: 5%;
-    text-transform: uppercase;
-    color: #000000;
-    font-family: Assistant;
-    font-size: 1.1em;
-}
-
-.right-menu {
-    margin-top: 5%;
-    text-transform: uppercase;
-}
-
-.right-menu a {
-    color: #fff;
-}
-
-.right-menu-black a {
-    color: #000000;
-}
-
 .scroll-down {
     position: absolute;
     width: 100%;
@@ -286,6 +504,10 @@ h2.last-report {
     color: #fff;
     left: 97%;
     font-size: 1.2em;
+}
+
+.social-container a {
+    color: #ffffff;
 }
 
 /*****************************************************************/
@@ -505,6 +727,8 @@ div.polygon-triangle-absolute {
 .contact-form {
     border: none;
     border-radius: 0;
+    border-bottom: 1px solid #242424;
+    border-width: thin;
     height: 70px;
     width: 90%;
     margin: 15px 0;
@@ -694,7 +918,7 @@ footer a.nav-footer {
     text-transform: uppercase;
     margin: .3em 0;
     position: relative;
-    text-decoration: none !important;
+    text-decoration: none;
 }
 
 footer a.nav-footer:before {
@@ -744,6 +968,10 @@ a#link-contact {
 
 footer a.nav-footer:hover {
     color: #ffffff;
+}
+
+#follow-me {
+    margin-left: .6em;
 }
 
 .social-picto-footer {

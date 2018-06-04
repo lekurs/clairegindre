@@ -97,8 +97,8 @@
                                             <div class="row no-gutters nav-border">
                                                 <div class="col-lg-12 col-xl-12">
                                                     <ul class="nav justify-content-between">
-                                                        <li class="nav-item"><a class="nav-link" href="{{ path('index') }}">Home</a></li>
-                                                        <li class="nav-item"><a class="nav-link" href="#hello">Hello</a></li>
+                                                        <li class="nav-item"><a class="nav-link" id="nav-link-home" href="{{ path('index') }}">Home</a></li>
+                                                        <li class="nav-item"><a class="nav-link nav-link-right" id="nav-link-hello" href="#hello">Hello</a></li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -106,7 +106,7 @@
                                             <div class="row no-gutters">
                                                 <div class="col-lg-12 col-xl-12">
                                                     <ul class="nav justify-content-center">
-                                                        <li class="nav-item"><a class="nav-link" href="{{ path('blog') }}">Blog</a></li>
+                                                        <li class="nav-item"><a class="nav-link nav-link-bottom" id="nav-link-blog" href="{{ path('blog') }}">Blog</a></li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -129,8 +129,8 @@
                                         <div class="row no-gutters nav-border">
                                             <div class="col-lg-12 col-xl-12">
                                                 <ul class="nav justify-content-between">
-                                                    <li class="nav-item"><a class="nav-link" href="{{ path('faq') }}">informations</a></li>
-                                                    <li class="nav-item"><a class="nav-link" href="{{ path('galleriesCustomers') }}">clients</a></li>
+                                                    <li class="nav-item"><a class="nav-link" id="nav-link-informations" href="{{ path('faq') }}">informations</a></li>
+                                                    <li class="nav-item"><a class="nav-link nav-link-right" id="nav-link-customer" href="{{ path('galleriesCustomers') }}">clients</a></li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -138,7 +138,7 @@
                                         <div class="row no-gutters">
                                             <div class="col-lg-12 col-xl-12">
                                                 <ul class="nav justify-content-center">
-                                                    <li class="nav-item"><a class="nav-link" href="#contact">contact</a></li>
+                                                    <li class="nav-item"><a class="nav-link nav-link-bottom" id="nav-link-contact" href="#contact">contact</a></li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -325,47 +325,45 @@
 
     {% block footer %}
         <footer class="row no-gutters">
-            {#<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 footer-contain">#}
-                {#<div class="row no-gutters">#}
-                    <div class="col-xl-1 col-lg-1 col-md-12 col-sm-12 col-12 arrow-footer">
-                        <img src="{{ asset('images/interface/pictos/fleche.png') }}" alt="arrow" />
+            <div class="col-xl-1 col-lg-1 col-md-12 col-sm-12 col-12 arrow-footer">
+                <img src="{{ asset('images/interface/pictos/fleche.png') }}" alt="arrow" />
+            </div>
+            <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12">
+                <div class="row no-gutters">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <a href="{{ path('index') }}" class="nav-footer" id="link-home">home</a>
+                        <a href="#hello" class="nav-footer" id="link-photo">Hello</a>
+                        <a href="{{ path('blog') }}" class="nav-footer" id="link-blog">Blog</a>
+                        <a href="{{ path('faq') }}" class="nav-footer" id="link-informations">Informations</a>
+                        <a href="{{ path('galleriesCustomers') }}" class="nav-footer" id="link-customers">clients</a>
+                        <a href="#contact" class="nav-footer" id="link-contact">contact</a>
                     </div>
-                    <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12">
-                        <div class="row no-gutters">
-                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                <a href="{{ path('index') }}" class="nav-footer" id="link-home">home</a>
-                                <a href="#hello" class="nav-footer" id="link-photo">Hello</a>
-                                <a href="{{ path('blog') }}" class="nav-footer" id="link-blog">Blog</a>
-                                <a href="{{ path('faq') }}" class="nav-footer" id="link-informations">Informations</a>
-                                <a href="{{ path('galleriesCustomers') }}" class="nav-footer" id="link-customers">clients</a>
-                                <a href="#contact" class="nav-footer" id="link-contact">contact</a>
-                            </div>
-                        </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+                <p><strong>Claire Gindre</strong></p>
+                <p>contact@clairegindre.com</p>
+                <p>06 62 45 10 36</p>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+                <div class="row no-gutters">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <p class="text-uppercase" id="follow-me">Suivez-moi</p>
                     </div>
-                    <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
-                        <p><strong>Claire Gindre</strong></p>
-                        <p>contact@clairegindre.com</p>
-                        <p>06 62 45 10 36</p>
+                </div>
+                <div class="row no-gutters">
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">
+                        <a href="https://www.instagram.com/clairegindre_photographe/" target="_blank"><i class="fa fa-instagram social-picto-footer"></i></a>
+                        <a href="https://www.facebook.com/clairegindre.pg/" target="_blank"><i class="fa fa-facebook-f social-picto-footer"></i></a>
+                        <a href="https://www.pinterest.fr/ClaireGindrepg/" target="_blank"><i class="fa fa-pinterest-p social-picto-footer"></i></a>
                     </div>
-                    <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
-                        <div class="row no-gutters">
-                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                <p class="text-uppercase">Suivez-moi</p>
-                            </div>
-                        </div>
-                        <div class="row no-gutters">
-                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">
-                                <a href="https://www.instagram.com/clairegindre_photographe/" target="_blank"><i class="fa fa-instagram social-picto-footer"></i></a>
-                                <a href="https://www.facebook.com/clairegindre.pg/" target="_blank"><i class="fa fa-facebook-f social-picto-footer"></i></a>
-                                <a href="https://www.pinterest.fr/ClaireGindrepg/" target="_blank"><i class="fa fa-pinterest-p social-picto-footer"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
-                        <p class="text-uppercase">mentions légales</p>
-                        <p>Tous droits réservés <i class="fa fa-copyright"></i> <strong>Claire GINDRE - 2018</strong></p>
-                    </div>
-            </footer>
+                </div>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+                <p class="text-uppercase">mentions légales</p>
+                <p>Tous droits réservés <i class="fa fa-copyright"></i> <strong>Claire GINDRE - 2018</strong></p>
+            </div>
+        </footer>
     {% endblock %}
 </body>
 

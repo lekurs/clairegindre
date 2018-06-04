@@ -1,9 +1,10 @@
 jQuery(document).ready(function($) {
+    $('.nav-border').css('border-bottom', '1px solid #0000000')
     $('.left-menu').removeClass('left-menu');
-    $('.left-menu > a').addClass('nav-link');
+    $('.left-menu > a').addClass('nav-link-black');
 
     $('.right-menu').removeClass('right-menu');
-    $('.right-menu > a').addClass('nav-link');
+    $('.right-menu > a').addClass('nav-link-black');
 
     var top_position = $('#end-nav').offset().top;
 
