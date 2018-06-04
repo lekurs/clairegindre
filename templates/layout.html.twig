@@ -53,7 +53,7 @@
                     {{ flash_message }}
                 </div>
             {% endfor %}
-            {% for flash_message in app.session.flashBag.get('contact_error') %}
+            {% for flash_message in app.flashes('contact_error') %}
                 <div class="alert alert-warning">
                     {{ flash_message }}
                 </div>
@@ -199,88 +199,8 @@
                             <h2 class="text-uppercase text-center">contact</h2>
                         </div>
                     </div>
-
-                    {{ form_start(contact) }}
-
-                    <div class="row no-gutters">
-                        <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
-                            <div class="row no-gutters">
-                                <div class="col-12 d-flex justify-content-center input-content">
-                                    {{ form_label(contact.name) }}
-                                    {{ form_widget(contact.name, {'attr': {'class': 'contact-form' }}) }}
-                                </div>
-                            </div>
-                            <div class="row no-gutters">
-                                <div class="col-12 d-flex justify-content-center input-content">
-                                    {{ form_label(contact.firstname) }}
-                                    {{ form_widget(contact.firstname, {'attr': {'class': 'contact-form' }}) }}
-                                </div>
-                            </div>
-                            <div class="row no-gutters">
-                                <div class="col-12 d-flex justify-content-center input-content">
-                                    {{ form_label(contact.email) }}
-                                    {{ form_widget(contact.email, {'attr': { 'class': 'contact-form' }}) }}
-                                </div>
-                            </div>
-                            <div class="row no-gutters">
-                                <div class="col-12 d-flex justify-content-center input-content">
-                                    {{ form_label(contact.phone) }}
-                                    {{ form_widget(contact.phone, {'attr': {'class': 'contact-form' }}) }}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
-                            <div class="row no-gutters">
-                                <div class="col-12 d-flex justify-content-center input-content">
-                                    {{ form_widget(contact.date, {'attr': {'class': 'contact-form'}}) }}
-                                </div>
-                            </div>
-                            <div class="row no-gutters">
-                                <div class="col-12 d-flex justify-content-center input-content">
-                                    {{ form_label(contact.place) }}
-                                    {{ form_widget(contact.place, {'attr': {'class': 'contact-form' }}) }}
-                                </div>
-                            </div>
-                            <div class="row no-gutters">
-                                <div class="col-12 d-flex justify-content-center input-content">
-                                    {{ form_label(contact.howKnow) }}
-                                    {{ form_widget(contact.howKnow, {'attr': {'class': 'contact-form' }}) }}
-                                </div>
-                            </div>
-                            <div class="row no-gutters">
-                                <div class="col-12">
-                                    <p class="text-center">Vous êtes intéréssés pour :</p>
-                                </div>
-                            </div>
-                            <div class="row no-gutters">
-                                <div class="col-4 d-flex justify-content-center text-uppercase">
-                                    {{ form_label(contact.event) }}
-                                    {{ form_widget(contact.event) }}
-                                </div>
-                                <div class="col-4 d-flex justify-content-center text-uppercase">
-                                    {{ form_label(contact.eventCouple) }}
-                                    {{ form_widget(contact.eventCouple) }}
-                                </div>
-                                <div class="col-4 d-flex justify-content-center text-uppercase">
-                                    {{ form_label(contact.eventFamily) }}
-                                    {{ form_widget(contact.eventFamily) }}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row no-gutters">
-                        <div class="col-12 d-flex justify-content-center">
-                            {{ form_widget(contact.details, {'attr': {'placeholder': 'Tous les détails de votre évènement m\'intéresse, le style de votre mariage, le nombre d\'invités, le type de cérémonie ...', 'class': 'contact-form' }}) }}
-                        </div>
-                    </div>
-                    <div class="row no-gutters">
-                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 btn-contact">
-                            <button type="submit" name="contact-submit" class="btn sub-contact">Envoyer</button>
-                        </div>
-                    </div>
-
-                    {{ form_end(contact) }}
-
+                    {% form_theme contact "Form/ContactForm/contact_form.html.twig" %}
+                    {{ form(contact) }}
                 </div>
             </div>
         </section>

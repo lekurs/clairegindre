@@ -1,0 +1,85 @@
+
+{% block form %}
+
+{{ form_start(form) }}
+
+<div class="row no-gutters">
+    <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+        <div class="row no-gutters">
+            <div class="col-12 d-flex justify-content-center input-content">
+                {{ form_label(form.name) }}
+                {{ form_widget(form.name, {'attr': {'class': 'contact-form' }}) }}
+            </div>
+        </div>
+        <div class="row no-gutters">
+            <div class="col-12 d-flex justify-content-center input-content">
+                {{ form_label(form.firstname) }}
+                {{ form_widget(form.firstname, {'attr': {'class': 'contact-form' }}) }}
+            </div>
+        </div>
+        <div class="row no-gutters">
+            <div class="col-12 d-flex justify-content-center input-content">
+                {{ form_label(form.email) }}
+                {{ form_widget(form.email, {'attr': { 'class': 'contact-form' }}) }}
+            </div>
+        </div>
+        <div class="row no-gutters">
+            <div class="col-12 d-flex justify-content-center input-content">
+                {{ form_label(form.phone) }}
+                {{ form_widget(form.phone, {'attr': {'class': 'contact-form' }}) }}
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+        <div class="row no-gutters">
+            <div class="col-12 d-flex justify-content-center input-content">
+                {{ form_widget(form.date, {'attr': {'class': 'contact-form'}}) }}
+            </div>
+        </div>
+        <div class="row no-gutters">
+            <div class="col-12 d-flex justify-content-center input-content">
+                {{ form_label(form.place) }}
+                {{ form_widget(form.place, {'attr': {'class': 'contact-form' }}) }}
+            </div>
+        </div>
+        <div class="row no-gutters">
+            <div class="col-12 d-flex justify-content-center input-content">
+                {{ form_label(form.howKnow) }}
+                {{ form_widget(form.howKnow, {'attr': {'class': 'contact-form' }}) }}
+            </div>
+        </div>
+        <div class="row no-gutters">
+            <div class="col-12">
+                <p class="text-center">Vous êtes intéréssés pour :</p>
+            </div>
+        </div>
+        <div class="row no-gutters">
+            <div class="col-4 d-flex justify-content-center text-uppercase">
+                {{ form_label(form.event) }}
+                {{ form_widget(form.event) }}
+            </div>
+            <div class="col-4 d-flex justify-content-center text-uppercase">
+                {{ form_label(form.eventCouple) }}
+                {{ form_widget(form.eventCouple) }}
+            </div>
+            <div class="col-4 d-flex justify-content-center text-uppercase">
+                {{ form_label(form.eventFamily) }}
+                {{ form_widget(form.eventFamily) }}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row no-gutters">
+    <div class="col-12 d-flex justify-content-center">
+        {{ form_widget(form.details, {'attr': {'placeholder': 'Tous les détails de votre évènement m\'intéresse, le style de votre mariage, le nombre d\'invités, le type de cérémonie ...', 'class': 'contact-form' }}) }}
+    </div>
+</div>
+<div class="row no-gutters">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 btn-contact">
+        <button type="submit" name="contact-submit" class="btn sub-contact">Envoyer</button>
+    </div>
+</div>
+
+{{ form_end(form) }}
+
+{% endblock %}

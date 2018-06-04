@@ -7,13 +7,13 @@
 
 {% block content %}
     {% block FlashMessage %}
-        {% for flash_message in app.flashes('register_success') %}
+        {% for flash_message in app.flashes('success') %}
             <div class="alert alert-success">
                 {{ flash_message }}
             </div>
         {% endfor %}
-        {% for flash_message in app.flashes('user_delete_success') %}
-            <div class="alert alert-success">
+        {% for flash_message in app.flashes('error') %}
+            <div class="alert alert-error">
                 {{ flash_message }}
             </div>
         {% endfor %}
