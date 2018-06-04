@@ -15,10 +15,18 @@ services:
                 $targetDirPublic: '%kernel.project_dir%/public/'
                 $dirGallery: '%kernel.project_dir%/public/images/upload/gallery/'
                 $dirPicture: '/images/upload/gallery/'
+#                $mailerAdminEmail: '%env(MAILER_ADMIN_EMAIL)%'
 
     App\Services\SlugHelper:
         autowire: true
         public: false
+
+    App\Services\MailerAdminHelper:
+        autowire: true
+        autoconfigure: true
+        public: false
+        bind:
+            $mailerAdminEmail: '%env(MAILER_ADMIN_EMAIL)%'
 
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
@@ -31,7 +39,3 @@ services:
     App\UI\Action\:
         resource: '../src/UI/Action'
         tags: ['controller.service_arguments']
-
-#    App\Domain\Repository\:
-#        resource: '../src/Domain/Repository'
-#        tags: ['doctrine.repository_service']

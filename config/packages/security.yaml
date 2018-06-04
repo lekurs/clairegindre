@@ -28,6 +28,7 @@ security:
                 target: index
 
     access_control:
-#         - { path: ^/admin, roles: ROLE_ADMIN }
+#         - { path: ^/admin/mails, roles: ROLE_ADMIN }
+#         - { path: ^/admin/users, roles: ROLE_ADMIN }
 #         - { path: ^/, roles: ROLE_USER }
 

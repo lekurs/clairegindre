@@ -42,7 +42,7 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
  *
  * @package App\UI\Action\Admin
  */
-class AdminAction implements AdminActionInterface
+final class AdminAction implements AdminActionInterface
 {
     /**
      * @var AuthorizationCheckerInterface
@@ -140,39 +140,38 @@ class AdminAction implements AdminActionInterface
      */
     public function __invoke(Request $request, AdminResponderInterface $responder)
     {
-        if(false === $this->authorizationChecker->isGranted('ROLE_ADMIN')) {
-            throw new AccessDeniedException('Merci de vous connecter comme Administrateur sur ce site !');
+        if($this->authorizationChecker->isGranted('ROLE_ADMIN')) {
+
+            $users = $this->userRepository->showGalleryByUser();
+
+            $galleries = $this->galleryRepository->getAll();
+
+            $benefits = $this->benefitRepository->getAll();
+
+            $articles = $this->articleRepository->getAll();
+
+            $registration = $this->formFactory->create(RegistrationType::class)->handleRequest($request);
+
+            $benefitsType = $this->formFactory->create(AddBenefitType::class)->handleRequest($request);
+
+            $selectArticle = $this->formFactory->create(SelectGalleryForArticleType::class)->handleRequest($request);
+
+            if ($this->registrationTypeHandler->handle($registration)) {
+
+                return $responder(true, $registration, $benefitsType, $selectArticle, $users, $galleries, $benefits, $articles);
+            }
+
+            if ($this->addBenefitTypeHandler->handle($benefitsType)) {
+
+                return $responder(true, $registration, $benefitsType, $selectArticle,  $users, $galleries, $benefits, $articles);
+            }
+
+            if ($selectArticle->isSubmitted() && $selectArticle->isValid()) {
+
+                return new RedirectResponse($this->urlGenerator->generate('adminAddArticle', ['slug' => $selectArticle->getData()['title']->getSlug()]));
+            }
+
+            return $responder(false, $registration, $benefitsType, $selectArticle, $users, $galleries, $benefits, $articles);
         }
-
-        $users = $this->userRepository->showGalleryByUser();
-
-        $galleries = $this->galleryRepository->getAll();
-
-        $benefits = $this->benefitRepository->getAll();
-
-        $articles = $this->articleRepository->getAll();
-
-        $registration = $this->formFactory->create(RegistrationType::class)->handleRequest($request);
-
-        $benefitsType = $this->formFactory->create(AddBenefitType::class)->handleRequest($request);
-
-        $selectArticle = $this->formFactory->create(SelectGalleryForArticleType::class)->handleRequest($request);
-
-        if ($this->registrationTypeHandler->handle($registration)) {
-
-            return $responder(true, $registration, $benefitsType, $selectArticle, $users, $galleries, $benefits, $articles);
-        }
-
-        if ($this->addBenefitTypeHandler->handle($benefitsType)) {
-
-            return $responder(true, $registration, $benefitsType, $selectArticle,  $users, $galleries, $benefits, $articles);
-        }
-
-        if ($selectArticle->isSubmitted() && $selectArticle->isValid()) {
-
-            return new RedirectResponse($this->urlGenerator->generate('adminAddArticle', ['slug' => $selectArticle->getData()['title']->getSlug()]));
-        }
-
-        return $responder(false, $registration, $benefitsType, $selectArticle, $users, $galleries, $benefits, $articles);
     }
 }

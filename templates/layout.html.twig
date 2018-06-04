@@ -223,15 +223,8 @@
             {# SLIDER COMMENT#}
             <div id="slider-comment" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner">
-                    <div class="carousel-item active carousel-img">
-                        <img src="{{ asset('/images/contact-img.jpg') }}" class="d-block w-100 img-carousel" alt="test_slider" />
-                        <div class="infos-carousel">
-                            <h3 class="text-uppercase carousel-title">test</h3>
-                            <p>test de paragraphe test de paragraphe test de paragraphe test de paragraphe test de paragraphe test de paragraphe</p>
-                        </div>
-                    </div>
-                    {% for review in reviews %}
-                    <div class="carousel-item carousel-img">
+                    {% for key, review in reviews %}
+                    <div class="carousel-item carousel-img {{ key == 0 ? "active" : '' }}">
                         <img src="{{ asset(review.imagePath ~ '/' ~ review.imageName) }}" class="d-block w-100 img-carousel" alt="test_slider" />
                         <div class="infos-carousel">
                             <h3 class="text-uppercase carousel-title">{{ review.title }}</h3>

@@ -8,7 +8,6 @@
 
 namespace App\Services;
 
-use \Transliterator;
 final class SlugHelper
 {
     function replace($desi)
@@ -17,19 +16,6 @@ final class SlugHelper
 
         $value = trim($transliterator->transliterate($desi), '-');
 
-
         return $value;
     }
-//
-//    /**
-//     * @param $string
-//     * @return string
-//     */
-//    public function replace($string)
-//    {
-//        $string = transliterator_transliterate("Any-Latin; NFD; [:Nonspacing Mark:] Remove; NFC; [:Punctuation:] Remove; Lower();", $string);
-//        $string = preg_replace('/[-\s]+/', '-', $string);
-//
-//        return trim($string, '-');
-//    }
 }

@@ -64,11 +64,30 @@ class UserRepository extends ServiceEntityRepository implements UserLoaderInterf
             ->getOneOrNullResult();
     }
 
+    /**
+     * @param $id
+     * @return User
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
     public function getOneById($id): User
     {
         return $this->createQueryBuilder('user')
                             ->where('user.id = :id')
                             ->setParameter('id', $id)
+                            ->getQuery()
+                            ->getOneOrNullResult();
+    }
+
+    /**
+     * @param $email
+     * @return mixed
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function getAdmin($email)
+    {
+        return $this->createQueryBuilder('user')
+                            ->where('user.email = :email')
+                            ->setParameter('email', $email)
                             ->getQuery()
                             ->getOneOrNullResult();
     }
