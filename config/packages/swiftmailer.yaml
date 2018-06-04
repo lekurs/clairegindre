@@ -1,18 +1,10 @@
 swiftmailer:
-    transport:            smtp
-    username:             ~
-    password:             ~
-    host:                 localhost
-    port:                 false
-    encryption:           ~
-    auth_mode:            ~
+    transport: '%env(MAILER_TRANSPORT)%'
+    username: '%env(MAILER_USERNAME)%'
+    password: '%env(MAILER_PASSWORD)%'
+    host: '%env(MAILER_SERVER)%'
+    port: '%env(MAILER_PORT)%'
+    encryption: '%env(MAILER_ENCRYPTION)%'
     spool:
-        type:                 file
-        path:                 '%kernel.cache_dir%/swiftmailer/spool'
-    sender_address:       ~
-    antiflood:
-        threshold:            99
-        sleep:                0
-    delivery_addresses:   []
-    disable_delivery:     ~
+        type: 'memory'
     logging:              '%kernel.debug%'

@@ -9,14 +9,20 @@
 namespace App\Domain\Form\Type;
 
 
+use App\Domain\DTO\ContactDTO;
+use App\Domain\DTO\Interfaces\ContactTypeDTOInterface;
+use App\Domain\Models\Benefit;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ContactType extends AbstractType
@@ -58,24 +64,38 @@ class ContactType extends AbstractType
             ->add('howKnow', TextType::class, array(
                 'label' => 'Comment m\'avez vous connu',
                 'label_attr' => ['class' => 'label_contact'],
-                'required' => false,
+                'required' => true,
             ))
-            ->add('event', CheckboxType::class, array(
-                'label' => 'Mariage',
-                'required' => false,
-            ))
-            ->add('eventCouple', CheckboxType::class, array(
-                'label' => 'Couple',
-                'required' => false,
-            ))
-            ->add('eventFamily', CheckboxType::class, array(
-                'label' => 'Famille',
-                'required' => false,
-            ))
+            ->add('event', EntityType::class, [
+                'expanded' => true,
+                'multiple' => true,
+                'class' => Benefit::class,
+                'choice_label' => 'name'
+            ])
             ->add('details', TextareaType::class, array(
                 'label' => 'Tous les détails de votre évènement m\'intéresse, le style de votre mariage, le nombre d\'invités, le type de cérémonie ...',
                 'label_attr' => ['class' => 'label_contact'],
                 'required' => true,
             ));
+    }
+
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults([
+            'data_class' => ContactTypeDTOInterface::class,
+            'empty_data' => function (FormInterface $form) {
+            return new ContactDTO(
+                $form->get('name')->getData(),
+                $form->get('firstname')->getData(),
+                $form->get('email')->getData(),
+                $form->get('phone')->getData(),
+                $form->get('date')->getData(),
+                $form->get('place')->getData(),
+                $form->get('howKnow')->getData(),
+                $form->get('event')->getData()->toArray(),
+                $form->get('details')->getData()
+            );
+            }
+        ]);
     }
 }

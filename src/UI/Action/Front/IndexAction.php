@@ -57,14 +57,20 @@ class IndexAction implements IndexActionInterface
 
     /**
      * IndexAction constructor.
+     *
      * @param FormFactoryInterface $formFactory
      * @param GalleryRepositoryInterface $galleryRepository
      * @param ContactTypeHandlerInterface $contactTypeHandler
      * @param InstagramLib $instagram
      * @param ReviewsRepositoryInterface $reviewsRepository
      */
-    public function __construct(FormFactoryInterface $formFactory, GalleryRepositoryInterface $galleryRepository, ContactTypeHandlerInterface $contactTypeHandler, InstagramLib $instagram, ReviewsRepositoryInterface $reviewsRepository)
-    {
+    public function __construct(
+        FormFactoryInterface $formFactory,
+        GalleryRepositoryInterface $galleryRepository,
+        ContactTypeHandlerInterface $contactTypeHandler,
+        InstagramLib $instagram,
+        ReviewsRepositoryInterface $reviewsRepository
+    ) {
         $this->formFactory = $formFactory;
         $this->galleryRepository = $galleryRepository;
         $this->contactTypeHandler = $contactTypeHandler;
