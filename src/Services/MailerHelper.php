@@ -65,6 +65,20 @@ final class MailerHelper implements MailerHelperInterface
         $this->swiftMailer->send($message);
     }
 
+    public function sendResponse($subject, $to, $from, $content)
+    {
+        $message = (new \Swift_Message())
+            ->setSubject($subject)
+            ->setTo($to)
+            ->setFrom($from)
+            ->setBody($this->twig->render('mails/response_mail.html.twig', ['content' => $content]), 'text/html');
+//
+//        dump($message);
+//        die;
+
+        $this->swiftMailer->send($message);
+    }
+
     public function getAdmin()
     {
         dump($this->mailerAdminEmail);

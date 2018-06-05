@@ -10,7 +10,10 @@ namespace App\UI\Responder\Admin;
 
 
 use App\UI\Responder\Admin\Interfaces\AnswerMailResponderInterface;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Twig\Environment;
 
 final class AnswerMailResponder implements AnswerMailResponderInterface
@@ -21,19 +24,29 @@ final class AnswerMailResponder implements AnswerMailResponderInterface
     private $twig;
 
     /**
+     * @var UrlGeneratorInterface
+     */
+    private $urlGenerator;
+
+    /**
      * AnswerMailResponder constructor.
      * @param Environment $twig
+     * @param UrlGeneratorInterface $urlGenerator
      */
-    public function __construct(Environment $twig)
+    public function __construct(Environment $twig, UrlGeneratorInterface $urlGenerator)
     {
         $this->twig = $twig;
+        $this->urlGenerator = $urlGenerator;
     }
 
 
-    public function __invoke()
+    public function __invoke($redirect = false, FormInterface $form = null, $mail)
     {
-        return new Response($this->twig->render('back/admin/answer_mails.html.twig', [
-
+        $redirect ? $response = new RedirectResponse($this->urlGenerator->generate('admin')) : $response = new Response($this->twig->render('back/admin/answer_mails.html.twig', [
+            'mail' => $mail,
+            'form' => $form->createView()
         ]));
+
+        return $response;
     }
 }

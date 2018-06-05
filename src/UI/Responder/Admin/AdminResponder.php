@@ -51,19 +51,21 @@ class AdminResponder implements AdminResponderInterface
      * @param $galleries
      * @param $benefits
      * @param $articles
+     * @param $mails
      * @param string $redirectUrl
      * @return mixed|RedirectResponse|Response
      * @throws \Twig_Error_Loader
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    public function __invoke($redirect = false, FormInterface $registrationType = null, FormInterface $addBenefitType = null, FormInterface $selectArticle = null, $users, $galleries, $benefits, $articles, $redirectUrl = 'admin')
+    public function __invoke($redirect = false, FormInterface $registrationType = null, FormInterface $addBenefitType = null, FormInterface $selectArticle = null, $users, $galleries, $benefits, $articles, $mails, $redirectUrl = 'admin')
     {
         $redirect ? $response = new RedirectResponse($this->urlGenerator->generate($redirectUrl)) : $response = new Response($this->twig->render('back/admin/admin.html.twig', [
             'users' => $users,
             'galleries' => $galleries,
             'benefits' => $benefits,
             'articles' => $articles,
+            'mails' => $mails,
             'formRegistration' => $registrationType->createView(),
             'formBenefit' => $addBenefitType->createView(),
             'selectArticle' => $selectArticle->createView()

@@ -16,6 +16,7 @@ use App\Domain\Form\Type\SelectGalleryForArticleType;
 use App\Domain\Repository\Interfaces\ArticleRepositoryInterface;
 use App\Domain\Repository\Interfaces\BenefitRepositoryInterface;
 use App\Domain\Repository\Interfaces\GalleryRepositoryInterface;
+use App\Domain\Repository\Interfaces\MailRepositoryInterface;
 use App\Domain\Repository\Interfaces\UserRepositoryInterface;
 use App\UI\Action\Admin\Interfaces\AdminActionInterface;
 use App\UI\Form\FormHandler\Interfaces\AddArticleTypeHandlerInterface;
@@ -70,6 +71,11 @@ final class AdminAction implements AdminActionInterface
     private $articleRepository;
 
     /**
+     * @var MailRepositoryInterface
+     */
+    private $mailRepository;
+
+    /**
      * @var FormFactoryInterface
      */
     private $formFactory;
@@ -94,7 +100,6 @@ final class AdminAction implements AdminActionInterface
      */
     private $urlGenerator;
 
-
     /**
      * AdminAction constructor.
      *
@@ -103,6 +108,7 @@ final class AdminAction implements AdminActionInterface
      * @param UserRepositoryInterface $userRepository
      * @param BenefitRepositoryInterface $benefitRepository
      * @param ArticleRepositoryInterface $articleRepository
+     * @param MailRepositoryInterface $mailRepository
      * @param FormFactoryInterface $formFactory
      * @param RegistrationTypeHandlerInterface $registrationTypeHandler
      * @param AddArticleTypeHandlerInterface $addArticleTypeHandler
@@ -115,6 +121,7 @@ final class AdminAction implements AdminActionInterface
         UserRepositoryInterface $userRepository,
         BenefitRepositoryInterface $benefitRepository,
         ArticleRepositoryInterface $articleRepository,
+        MailRepositoryInterface $mailRepository,
         FormFactoryInterface $formFactory,
         RegistrationTypeHandlerInterface $registrationTypeHandler,
         AddArticleTypeHandlerInterface $addArticleTypeHandler,
@@ -126,12 +133,14 @@ final class AdminAction implements AdminActionInterface
         $this->userRepository = $userRepository;
         $this->benefitRepository = $benefitRepository;
         $this->articleRepository = $articleRepository;
+        $this->mailRepository = $mailRepository;
         $this->formFactory = $formFactory;
         $this->registrationTypeHandler = $registrationTypeHandler;
         $this->addArticleTypeHandler = $addArticleTypeHandler;
         $this->addBenefitTypeHandler = $addBenefitTypeHandler;
         $this->urlGenerator = $urlGenerator;
     }
+
 
     /**
      * @param Request $request
@@ -150,6 +159,8 @@ final class AdminAction implements AdminActionInterface
 
             $articles = $this->articleRepository->getAll();
 
+            $mails = $this->mailRepository->getAllNotAnswer();
+
             $registration = $this->formFactory->create(RegistrationType::class)->handleRequest($request);
 
             $benefitsType = $this->formFactory->create(AddBenefitType::class)->handleRequest($request);
@@ -158,12 +169,12 @@ final class AdminAction implements AdminActionInterface
 
             if ($this->registrationTypeHandler->handle($registration)) {
 
-                return $responder(true, $registration, $benefitsType, $selectArticle, $users, $galleries, $benefits, $articles);
+                return $responder(true, $registration, $benefitsType, $selectArticle, $users, $galleries, $benefits, $articles, $mails);
             }
 
             if ($this->addBenefitTypeHandler->handle($benefitsType)) {
 
-                return $responder(true, $registration, $benefitsType, $selectArticle,  $users, $galleries, $benefits, $articles);
+                return $responder(true, $registration, $benefitsType, $selectArticle,  $users, $galleries, $benefits, $articles, $mails);
             }
 
             if ($selectArticle->isSubmitted() && $selectArticle->isValid()) {
@@ -171,7 +182,7 @@ final class AdminAction implements AdminActionInterface
                 return new RedirectResponse($this->urlGenerator->generate('adminAddArticle', ['slug' => $selectArticle->getData()['title']->getSlug()]));
             }
 
-            return $responder(false, $registration, $benefitsType, $selectArticle, $users, $galleries, $benefits, $articles);
+            return $responder(false, $registration, $benefitsType, $selectArticle, $users, $galleries, $benefits, $articles, $mails);
         }
     }
 }

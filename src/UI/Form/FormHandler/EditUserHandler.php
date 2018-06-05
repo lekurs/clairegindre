@@ -58,6 +58,7 @@ class EditUserHandler implements EditUserHandlerInterface
 
     /**
      * EditUserHandler constructor.
+     *
      * @param UserRepositoryInterface $userRepository
      * @param SessionInterface $session
      * @param ValidatorInterface $validator
@@ -66,8 +67,15 @@ class EditUserHandler implements EditUserHandlerInterface
      * @param TokenStorageInterface $tokenStorage
      * @param UserPasswordEncoderInterface $encoder
      */
-    public function __construct(UserRepositoryInterface $userRepository, SessionInterface $session, ValidatorInterface $validator, UserBuilderInterface $userBuilder, SlugHelper $stringReplaceHelper, TokenStorageInterface $tokenStorage, UserPasswordEncoderInterface $encoder)
-    {
+    public function __construct(
+        UserRepositoryInterface $userRepository,
+        SessionInterface $session,
+        ValidatorInterface $validator,
+        UserBuilderInterface $userBuilder,
+        SlugHelper $stringReplaceHelper,
+        TokenStorageInterface $tokenStorage,
+        UserPasswordEncoderInterface $encoder
+    ) {
         $this->userRepository = $userRepository;
         $this->session = $session;
         $this->validator = $validator;
@@ -87,8 +95,6 @@ class EditUserHandler implements EditUserHandlerInterface
             } else {
                 $form->getData()->plainPassword = $this->encoder->encodePassword($user, $form->getData()->plainPassword);
                 }
-
-                dump($user, $form->getData()->plainPassword);
 
             $user->updateUser($form->getData());
 

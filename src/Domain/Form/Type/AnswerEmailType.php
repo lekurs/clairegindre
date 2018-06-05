@@ -11,6 +11,7 @@ namespace App\Domain\Form\Type;
 
 use App\Domain\DTO\AnswerMailDTO;
 use App\Domain\DTO\Interfaces\AnswerMailDTOInterface;
+use App\Subscriber\Interfaces\AnswerEmailSubscriberInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -20,15 +21,28 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class AnswerEmailType extends AbstractType
 {
+    /**
+     * @var AnswerEmailSubscriberInterface
+     */
+    private $answerEmailSubscriber;
+
+    /**
+     * AnswerEmailType constructor.
+     * @param AnswerEmailSubscriberInterface $answerEmailSubscriber
+     */
+    public function __construct(AnswerEmailSubscriberInterface $answerEmailSubscriber)
+    {
+        $this->answerEmailSubscriber = $answerEmailSubscriber;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('subject', TextType::class)
-            ->add('from', TextType::class)
-            ->add('to', TextType::class)
             ->add('content', TextareaType::class, [
                 'required' => false
-            ]);
+            ])
+            ->addEventSubscriber($this->answerEmailSubscriber);
     }
 
     public function configureOptions(OptionsResolver $resolver)
@@ -38,8 +52,6 @@ final class AnswerEmailType extends AbstractType
             'empty_data' => function (FormInterface $form) {
                 return new AnswerMailDTO(
                    $form->get('subject')->getData(),
-                   $form->get('from')->getData(),
-                   $form->get('to')->getData(),
                    $form->get('content')->getData()
                 );
             }

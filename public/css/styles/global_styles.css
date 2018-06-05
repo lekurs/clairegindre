@@ -727,7 +727,7 @@ div.polygon-triangle-absolute {
 .contact-form {
     border: none;
     border-radius: 0;
-    border-bottom: 1px solid #242424;
+    /*border-bottom: 1px solid #242424;*/
     border-width: thin;
     height: 70px;
     width: 90%;

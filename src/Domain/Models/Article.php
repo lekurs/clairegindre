@@ -248,7 +248,7 @@ class Article implements ArticleInterface
     }
 
     /**
-     * @param ArrayAccess $galleriesMakers
+     * @param GalleryMakerInterface $galleriesMakers
      */
     public function setGalleriesMakers(GalleryMakerInterface $galleriesMakers): void
     {

@@ -37,19 +37,13 @@ final class AnswerMailDTO implements AnswerMailDTOInterface
      * AnswerMailDTO constructor.
      *
      * @param string $subject
-     * @param string $from
-     * @param string $to
      * @param string $content
      */
     public function __construct(
         string $subject,
-        string $from,
-        string $to,
         string $content
     ) {
         $this->subject = $subject;
-        $this->from = $from;
-        $this->to = $to;
         $this->content = $content;
     }
 }

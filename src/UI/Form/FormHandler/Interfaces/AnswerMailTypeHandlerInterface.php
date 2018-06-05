@@ -10,6 +10,7 @@ namespace App\UI\Form\FormHandler\Interfaces;
 
 
 use App\Domain\Repository\Interfaces\MailRepositoryInterface;
+use App\Services\Interfaces\MailerHelperInterface;
 use App\Services\SlugHelper;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -23,20 +24,21 @@ interface AnswerMailTypeHandlerInterface
      * @param MailRepositoryInterface $mailRepository
      * @param SessionInterface $session
      * @param ValidatorInterface $validator
-     * @param \Swift_Mailer $mailer
+     * @param MailerHelperInterface $mailerHelper
      * @param SlugHelper $slugHelper
      */
     public function __construct(
         MailRepositoryInterface $mailRepository,
         SessionInterface $session,
         ValidatorInterface $validator,
-        \Swift_Mailer $mailer,
+        MailerHelperInterface $mailerHelper,
         SlugHelper $slugHelper
     );
 
     /**
      * @param FormInterface $form
+     * @param $mail
      * @return bool
      */
-    public function handle(FormInterface $form): bool;
+    public function handle(FormInterface $form, $mail): bool;
 }

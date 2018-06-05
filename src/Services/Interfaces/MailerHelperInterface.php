@@ -26,4 +26,13 @@ interface MailerHelperInterface
      * @return mixed
      */
     public function sendConfirmation($subject, $to, $from);
+
+    /**
+     * @param $subject
+     * @param $to
+     * @param $from
+     * @param $content
+     * @return mixed
+     */
+    public function sendResponse($subject, $to, $from, $content);
 }

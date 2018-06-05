@@ -9,7 +9,10 @@
 namespace App\UI\Form\FormHandler;
 
 
+use App\Domain\DTO\AnswerMailDTO;
+use App\Domain\Models\Mail;
 use App\Domain\Repository\Interfaces\MailRepositoryInterface;
+use App\Services\Interfaces\MailerHelperInterface;
 use App\Services\SlugHelper;
 use App\UI\Form\FormHandler\Interfaces\AnswerMailTypeHandlerInterface;
 use Symfony\Component\Form\FormInterface;
@@ -34,9 +37,9 @@ final class AnswerMailTypeHandler implements AnswerMailTypeHandlerInterface
     private $validator;
 
     /**
-     * @var \Swift_Mailer
+     * @var MailerHelperInterface
      */
-    private $mailer;
+    private $mailerHelper;
 
     /**
      * @var SlugHelper
@@ -49,37 +52,47 @@ final class AnswerMailTypeHandler implements AnswerMailTypeHandlerInterface
      * @param MailRepositoryInterface $mailRepository
      * @param SessionInterface $session
      * @param ValidatorInterface $validator
-     * @param \Swift_Mailer $mailer
+     * @param MailerHelperInterface $mailerHelper
      * @param SlugHelper $slugHelper
      */
     public function __construct(
         MailRepositoryInterface $mailRepository,
         SessionInterface $session,
         ValidatorInterface $validator,
-        \Swift_Mailer $mailer,
+        MailerHelperInterface $mailerHelper,
         SlugHelper $slugHelper
     ) {
         $this->mailRepository = $mailRepository;
         $this->session = $session;
         $this->validator = $validator;
-        $this->mailer = $mailer;
+        $this->mailerHelper = $mailerHelper;
         $this->slugHelper = $slugHelper;
     }
 
-    public function handle(FormInterface $form): bool
+    /**
+     * @param FormInterface $form
+     * @param $mail
+     * @return bool
+     */
+    public function handle(FormInterface $form, $mail): bool
     {
         if ($form->isSubmitted() && $form->isValid()) {
-            //Verif du message
 
-            dump($form->getData());
+            $this->session->set('to', $mail->getToEmail());
+
+            //update isAnswer in Entity
+            $email = new Mail($mail->getFromSender(), $mail->getToEmail(), $form->getData()->subject, $form->getData()->content, true, $mail->getSlug(), $mail);
+
+            $test = $mail->answerTo($form->getData());
+
+            $this->mailRepository->update($test);
+
+            dump($test);
+//            die;
+
+            //Send Message
             die;
-
-            //Envoie de l'email
-
-            $message = (new \Swift_Message)
-                ->setSubject($form->getData()->subject);
-
-            $this->mailer->send($message);
+            $this->mailerHelper->sendResponse($form->getData()->subject, $mail->getToEmail(), $mail->getFromSender(), $form->getData()->content);
 
             return true;
         }

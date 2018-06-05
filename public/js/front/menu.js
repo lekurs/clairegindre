@@ -1,5 +1,5 @@
 jQuery(document).ready(function($) {
-    $('.nav-border').css('border-bottom', '1px solid #0000000')
+    $('.nav-border').css('border-bottom', '1px solid #0000000');
     $('.left-menu').removeClass('left-menu');
     $('.left-menu > a').addClass('nav-link-black');
 

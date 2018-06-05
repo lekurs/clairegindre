@@ -19,6 +19,17 @@ interface MailRepositoryInterface
     public function getAll();
 
     /**
+     * @return mixed
+     */
+    public function getAllNotAnswer();
+
+    /**
+     * @param $slug
+     * @return mixed
+     */
+    public function getOneBySlug($slug);
+
+    /**
      * @param Mail $mail
      */
     public function save(Mail $mail):void;

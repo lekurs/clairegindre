@@ -32,6 +32,31 @@ final class MailRepository extends ServiceEntityRepository implements MailReposi
     }
 
     /**
+     * @return mixed
+     */
+    public function getAllNotAnswer()
+    {
+        return $this->createQueryBuilder('mail')
+                            ->where('mail.isAnswered = 0')
+                            ->getQuery()
+                            ->getResult();
+    }
+
+    /**
+     * @param $slug
+     * @return mixed
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function getOneBySlug($slug)
+    {
+        return $this->createQueryBuilder('mail')
+                            ->where('mail.slug = :slug')
+                            ->setParameter('slug', $slug)
+                            ->getQuery()
+                            ->getOneOrNullResult();
+    }
+
+    /**
      * @param Mail $mail
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
@@ -39,6 +64,12 @@ final class MailRepository extends ServiceEntityRepository implements MailReposi
     public function save(Mail $mail):void
     {
         $this->getEntityManager()->persist($mail);
+        $this->getEntityManager()->flush();
+    }
+
+    public function update(Mail $mail):void
+    {
+        $mail->answerTo($mail);
         $this->getEntityManager()->flush();
     }
 }

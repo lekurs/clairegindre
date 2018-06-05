@@ -9,6 +9,7 @@
 namespace App\Domain\Models;
 
 
+use App\Domain\DTO\Interfaces\AnswerMailDTOInterface;
 use App\Domain\Models\Interfaces\MailInterface;
 use Ramsey\Uuid\Uuid;
 
@@ -148,8 +149,8 @@ class Mail implements MailInterface
         return $this->slug;
     }
 
-//    public function answerTo(AnswerMailDTOInterface $mailDTO)
-//    {
-//        //from - content - subject
-//    }
+    public function answerTo(AnswerMailDTOInterface $mailDTO)
+    {
+        $this->isAnswered = 1;
+    }
 }

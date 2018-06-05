@@ -15,14 +15,10 @@ interface AnswerMailDTOInterface
      * AnswerMailDTOInterface constructor.
      *
      * @param string $subject
-     * @param string $from
-     * @param string $to
      * @param string $content
      */
     public function __construct(
         string $subject,
-        string $from,
-        string $to,
         string $content
     );
 }

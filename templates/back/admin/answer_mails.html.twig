@@ -10,27 +10,54 @@
 {% block content %}
     <section>
         <div class="container">
-            <div class="col">
-                <h1>Administration des mails</h1>
-            </div>
             <div class="row">
-                <div class="col">
-                    <h2 class="text-uppercase">Prestations actuelles</h2>
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <h1>Répondre à l'email : {{ mail.subject }}</h1>
                 </div>
             </div>
             <div class="row">
-                <div class="col-6 text-uppercase font-weight-bold">Expéditeur</div>
-                <div class="col text-uppercase font-weight-bold">Modifier</div>
-                <div class="col text-uppercase font-weight-bold">Supprimer</div>
-                {% for mail in mails if mails is defined %}
-                    <div class="col-6">{{ mail.content }}</div>
-                    <div class="col"><i class="fa fa-edit"></i></div>
-                    <div class="col"><i class="fa fa-trash"></i></div>
-                {% else %}
-                    <p>Aucun email</p>
-                {% endfor %}
+                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
+                  <p>Envoyé par :</p>
+                </div>
+                <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9 col-9">
+                    <p>{{ mail.fromSender }}</p>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
+                    <p>Titre :</p>
+                </div>
+                <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9 col-9">
+                    <p>{{ mail.subject }}</p>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
+                    <p>Message :</p>
+                </div>
+                <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9 col-9">
+                    <p>{{ mail.content }}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    {{ form_start(form) }}
+                    {{ form_widget(form) }}
+                    <button type="submit"  class="btn btn-dark">Répondre</button>
+                    {{ form_end(form) }}
+                </div>
             </div>
 
         </div>
     </section>
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+    <script>
+        tinymce.init({
+            selector: 'textarea#answer_email_content',
+            height: 300,
+            toolbar: [
+                'undo redo | styleselect | bold italic | link image',
+                'alignleft aligncenter alignright'
+            ]
+        });
+    </script>
 {% endblock %}
