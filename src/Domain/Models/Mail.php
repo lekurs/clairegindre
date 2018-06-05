@@ -22,12 +22,12 @@ class Mail implements MailInterface
     /**
      * @var string
      */
-    private $from;
+    private $fromSender;
 
     /**
      * @var string
      */
-    private $to;
+    private $toEmail;
 
     /**
      * @var string
@@ -57,8 +57,8 @@ class Mail implements MailInterface
     /**
      * Mail constructor.
      *
-     * @param string $from
-     * @param string $to
+     * @param string $fromSender
+     * @param string $toEmail
      * @param string $subject
      * @param string $content
      * @param bool $isAnswered
@@ -66,17 +66,17 @@ class Mail implements MailInterface
      * @param MailInterface $mail
      */
     public function __construct(
-        string $from,
-        string $to,
+        string $fromSender,
+        string $toEmail,
         string $subject,
         string $content,
         bool $isAnswered,
         string $slug,
-        MailInterface $mail
+        MailInterface $mail = null
     ) {
         $this->id = Uuid::uuid4();
-        $this->from = $from;
-        $this->to = $to;
+        $this->fromSender = $fromSender;
+        $this->toEmail = $toEmail;
         $this->subject = $subject;
         $this->content = $content;
         $this->isAnswered = $isAnswered;
@@ -95,17 +95,17 @@ class Mail implements MailInterface
     /**
      * @return string
      */
-    public function getFrom(): string
+    public function getFromSender(): string
     {
-        return $this->from;
+        return $this->fromSender;
     }
 
     /**
      * @return string
      */
-    public function getTo(): string
+    public function getToEmail(): string
     {
-        return $this->to;
+        return $this->toEmail;
     }
 
     /**

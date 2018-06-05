@@ -12,7 +12,8 @@ namespace App\UI\Form\FormHandler;
 use App\Domain\Models\Mail;
 use App\Domain\Repository\Interfaces\MailRepositoryInterface;
 use App\Domain\Repository\Interfaces\UserRepositoryInterface;
-use App\Services\MailerAdminHelper;
+use App\Services\Interfaces\SlugHelperInterface;
+use App\Services\MailerHelper;
 use App\UI\Form\FormHandler\Interfaces\ContactTypeHandlerInterface;
 use Symfony\Component\Form\FormInterface;
 use Twig\Environment;
@@ -30,14 +31,19 @@ class ContactTypeHandler implements ContactTypeHandlerInterface
     private $userRepository;
 
     /**
-     * @var MailerAdminHelper
+     * @var MailerHelper
      */
-    private $mailerAdmin;
+    private $mailerHelper;
 
     /**
      * @var \Swift_Mailer
      */
     private $swiftMailer;
+
+    /**
+     * @var SlugHelperInterface
+     */
+    private $slugHelper;
 
     /**
      * @var Environment
@@ -49,66 +55,66 @@ class ContactTypeHandler implements ContactTypeHandlerInterface
      *
      * @param MailRepositoryInterface $mailRepository
      * @param UserRepositoryInterface $userRepository
-     * @param MailerAdminHelper $mailerAdmin
+     * @param MailerHelper $mailerHelper
      * @param \Swift_Mailer $swiftMailer
+     * @param SlugHelperInterface $slugHelper
      * @param Environment $twig
      */
     public function __construct(
         MailRepositoryInterface $mailRepository,
         UserRepositoryInterface $userRepository,
-        MailerAdminHelper $mailerAdmin,
+        MailerHelper $mailerHelper,
         \Swift_Mailer $swiftMailer,
+        SlugHelperInterface $slugHelper,
         Environment $twig
     ) {
         $this->mailRepository = $mailRepository;
         $this->userRepository = $userRepository;
-        $this->mailerAdmin = $mailerAdmin;
+        $this->mailerHelper = $mailerHelper;
         $this->swiftMailer = $swiftMailer;
+        $this->slugHelper = $slugHelper;
         $this->twig = $twig;
     }
 
     public function handle(FormInterface $form)
     {
         if($form->isSubmitted() && $form->isValid()) {
+
+            dump($form->getData());
             dump($form->getData()->event->toArray());
             foreach ($form->getData()->event->toArray() as $event) {
                 dump($event->getName());
             }
-            die;
+//            die;
             $user = $this->userRepository->getAdmin('contact@clairegindre.com');
+
+//            dump($event->getName());
+//            dump($user);
+//            die;
+
+//
             $mail = new Mail(
                 $form->getData()->email,
-                $user,
-                'renseignements - ' . $form->getData()->email . ' - ' . $form->getData()->event->toArray()->getBenefit()->getName(),
-                $form->getData()->content,
+                $user->getEmail(),
+//                'renseignements - ' . $form->getData()->email . ' - ' . $form->getData()->event->toArray()->getBenefit()->getName(),
+                'renseignements - ' . $form->getData()->name . ' - ' . $form->getData()->firstname,
+                $form->getData()->details,
                 false,
-                'renseignements - ' . $form->getData()->email . ' - ' . $form->getData()->benefit
+                $this->slugHelper->replace('renseignements - ' . $form->getData()->email)
             );
+//
 
+//
             dump($mail);
+
+            $this->mailRepository->save($mail);
             die;
 
-            $message = (new \Swift_Message)
-                ->setSubject('Prise de contact')
-                ->setFrom($form->getData()->email)
-                ->setTo('lekurs@gmail.com') //Changer pour UserInterface
-                ->setBody($this->twig->render('mails/customerMail.html.twig', [
-                    'DTO' => $form->getData()
-                ]
-            ),'text/html');
+            //Send Email
+            $this->mailerHelper->sendEmail('Prise de contact', $user->getEmail(),  $form->getData()->email);
 
-            $this->swiftMailer->send($message);
-
-//            $user = $this->userRepository->getAdmin('contact@clairegindre.com');
-
-//            $mail = new Mail(
-//                                            $form->getData()->email,
-//                                            $user,
-//                                            'renseignements - ' . $form->getData()->email . ' - ' . $form->getData()->benefit,
-//                                            $form->getData()->content,
-//                                            false,
-//                                            'renseignements - ' . $form->getData()->email . ' - ' . $form->getData()->benefit
-//                                         );
+            //Send confirmation to customer
+            $this->mailerHelper->sendConfirmation('Claire GINDRE - Merci pour votre demande : ' . $form->getData()->name . ' - ' . $form->getData()->firstname, $form->getData()->email, $user->getEmail());
 
             return true;
         }

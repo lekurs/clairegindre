@@ -8,7 +8,9 @@
 
 namespace App\Services;
 
-final class SlugHelper
+use App\Services\Interfaces\SlugHelperInterface;
+
+final class SlugHelper implements SlugHelperInterface
 {
     function replace($desi)
     {

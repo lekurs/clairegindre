@@ -5,10 +5,10 @@
                           http://raw.github.com/doctrine/doctrine2/master/doctrine-mapping.xsd">
     <entity name="App\Domain\Models\Mail" table="clairegindre_mail" repository-class="App\Domain\Repository\MailRepository">
         <id name="id" type="string" column="id" />
-        <field name="content" type="text" unique="false" nullable="false" />
-        <field name="from" type="string" length="100" unique="false" nullable="false" />
+        <field name="fromSender" type="string" length="100" unique="false" nullable="false" />
+        <field name="toEmail" type="string" length="100" nullable="false" unique="false" />
         <field name="subject" type="string" length="100" unique="false" nullable="false" />
-        <field name="to" type="string" length="100" nullable="false" unique="false" />
+        <field name="content" type="text" unique="false" nullable="false" />
         <field name="isAnswered" type="boolean" nullable="false" unique="false" />
         <field name="slug" type="string" length="255" nullable="false" unique="false" />
 

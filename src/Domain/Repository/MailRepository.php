@@ -31,4 +31,14 @@ final class MailRepository extends ServiceEntityRepository implements MailReposi
                                 ->getResult();
     }
 
+    /**
+     * @param Mail $mail
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function save(Mail $mail):void
+    {
+        $this->getEntityManager()->persist($mail);
+        $this->getEntityManager()->flush();
+    }
 }
