@@ -4,59 +4,66 @@
 {{ form_start(form) }}
 
 <div class="row no-gutters">
-    <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
         <div class="row no-gutters">
             <div class="col-12 d-flex justify-content-center input-content">
                 {{ form_label(form.name) }}
                 {{ form_widget(form.name, {'attr': {'class': 'contact-form' }}) }}
+                {{ form_errors(form.name) }}
             </div>
         </div>
         <div class="row no-gutters">
-            <div class="col-12 d-flex justify-content-center input-content">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 d-flex justify-content-center input-content">
                 {{ form_label(form.firstname) }}
                 {{ form_widget(form.firstname, {'attr': {'class': 'contact-form' }}) }}
+                {{ form_errors(form.firstname) }}
             </div>
         </div>
         <div class="row no-gutters">
-            <div class="col-12 d-flex justify-content-center input-content">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 d-flex justify-content-center input-content">
                 {{ form_label(form.email) }}
                 {{ form_widget(form.email, {'attr': { 'class': 'contact-form' }}) }}
+                {{ form_errors(form.email) }}
             </div>
         </div>
         <div class="row no-gutters">
-            <div class="col-12 d-flex justify-content-center input-content">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 d-flex justify-content-center input-content">
                 {{ form_label(form.phone) }}
                 {{ form_widget(form.phone, {'attr': {'class': 'contact-form' }}) }}
+                {{ form_errors(form.phone) }}
             </div>
         </div>
     </div>
     <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
         <div class="row no-gutters">
-            <div class="col-12 d-flex justify-content-center input-content">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 d-flex justify-content-center input-content">
                 {{ form_widget(form.date, {'attr': {'class': 'contact-form'}}) }}
             </div>
         </div>
         <div class="row no-gutters">
-            <div class="col-12 d-flex justify-content-center input-content">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 d-flex justify-content-center input-content">
                 {{ form_label(form.place) }}
                 {{ form_widget(form.place, {'attr': {'class': 'contact-form' }}) }}
+                {{ form_errors(form.place) }}
             </div>
         </div>
         <div class="row no-gutters">
-            <div class="col-12 d-flex justify-content-center input-content">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 d-flex justify-content-center input-content">
                 {{ form_label(form.howKnow) }}
                 {{ form_widget(form.howKnow, {'attr': {'class': 'contact-form' }}) }}
+                {{ form_errors(form.howKnow) }}
             </div>
         </div>
         <div class="row no-gutters">
-            <div class="col-12">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                 <p class="text-center">Vous êtes intéréssés pour :</p>
             </div>
         </div>
         <div class="row no-gutters">
-            <div class="col-4 d-flex justify-content-center text-uppercase">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 d-flex justify-content-center text-uppercase">
                 {{ form_label(form.event) }}
                 {{ form_widget(form.event) }}
+                {{ form_errors(form.event) }}
             </div>
         </div>
     </div>
@@ -64,6 +71,7 @@
 <div class="row no-gutters">
     <div class="col-12 d-flex justify-content-center">
         {{ form_widget(form.details, {'attr': {'placeholder': 'Tous les détails de votre évènement m\'intéresse, le style de votre mariage, le nombre d\'invités, le type de cérémonie ...', 'class': 'contact-form' }}) }}
+        {{ form_errors(form.details) }}
     </div>
 </div>
 <div class="row no-gutters">

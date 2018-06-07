@@ -42,7 +42,15 @@ final class MailerHelper implements MailerHelperInterface
         $this->twig = $twig;
     }
 
-
+    /**
+     * @param $subject
+     * @param $to
+     * @param $from
+     * @return mixed|void
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     */
     public function sendEmail($subject, $to, $from)
     {
         $message = (new \Swift_Message())
@@ -54,6 +62,15 @@ final class MailerHelper implements MailerHelperInterface
         $this->swiftMailer->send($message);
     }
 
+    /**
+     * @param $subject
+     * @param $to
+     * @param $from
+     * @return mixed|void
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     */
     public function sendConfirmation($subject, $to, $from)
     {
         $message = (new \Swift_Message())
@@ -65,16 +82,27 @@ final class MailerHelper implements MailerHelperInterface
         $this->swiftMailer->send($message);
     }
 
+    /**
+     * @param $subject
+     * @param $to
+     * @param $from
+     * @param $content
+     * @return mixed|void
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     */
     public function sendResponse($subject, $to, $from, $content)
     {
-        $message = (new \Swift_Message())
-            ->setSubject($subject)
+        $message = (new \Swift_Message());
+
+        $logo = $message->embed(\Swift_Image::fromPath('images/interface/logos/logo-color.png', 'image/png'));
+
+        $message->setSubject('[NE PAS REPONDRE]' . $subject)
             ->setTo($to)
             ->setFrom($from)
-            ->setBody($this->twig->render('mails/response_mail.html.twig', ['content' => $content]), 'text/html');
-//
-//        dump($message);
-//        die;
+            ->setCc($from)
+            ->setBody($this->twig->render('mails/response_mail.html.twig', ['content' => $content, 'attachment' => $logo]), 'text/html');
 
         $this->swiftMailer->send($message);
     }

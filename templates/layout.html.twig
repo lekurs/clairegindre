@@ -47,18 +47,20 @@
 
 <body>
     {% block body %}
-        {% block FlashMessage %}
-            {% for flash_message in app.flashes('contact_success') %}
-                <div class="alert alert-success">
-                    {{ flash_message }}
-                </div>
-            {% endfor %}
-            {% for flash_message in app.flashes('contact_error') %}
-                <div class="alert alert-warning">
-                    {{ flash_message }}
-                </div>
-            {% endfor %}
-        {% endblock %}
+
+    {% block FlashMessage %}
+        {% for flash_message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ flash_message }}
+            </div>
+        {% endfor %}
+        {% for flash_message in app.flashes('error') %}
+            <div class="alert alert-danger">
+                {{ flash_message }}
+            </div>
+        {% endfor %}
+    {% endblock %}
+
         {% block header %}
             <header>
                 {# NAV MOBILE#}

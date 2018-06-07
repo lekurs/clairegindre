@@ -338,12 +338,6 @@ a#nav-link-customer:hover:before {
     -webkit-transform: scaleX(1);
 }
 
-/*a.nav-link:hover:before {*/
-    /*visibility: visible;*/
-    /*transform: scaleX(1);*/
-    /*-webkit-transform: scaleX(1);*/
-/*}*/
-
 a.nav-link-bottom:before {
     content: "";
     position: absolute;
@@ -358,13 +352,6 @@ a.nav-link-bottom:before {
     -webkit-transition: all .3s ease-in-out 0s;
     transition: all .3s ease-in-out 0s;
 }
-
-/*a.nav-link-right:hover:before {*/
-    /*visibility: visible;*/
-    /*transform: scaleX(1);*/
-    /*-webkit-transform: scaleX(1);*/
-/*}*/
-
 
 a.nav-link-black:before {
     content: "";
@@ -402,12 +389,6 @@ a.nav-link-black-right:before {
     transition: all .3s ease-in-out 0s;
 }
 
-/*a.nav-link-black-bottom:hover:before {*/
-    /*visibility: visible;*/
-    /*transform: scaleX(1);*/
-    /*-webkit-transform: scaleX(1);*/
-/*}*/
-
 a.nav-link-black-bottom:before {
     content: "";
     position: absolute;
@@ -422,12 +403,6 @@ a.nav-link-black-bottom:before {
     -webkit-transition: all .3s ease-in-out 0s;
     transition: all .3s ease-in-out 0s;
 }
-
-/*a.nav-link-black-right:hover:before {*/
-    /*visibility: visible;*/
-    /*transform: scaleX(1);*/
-    /*-webkit-transform: scaleX(1);*/
-/*}*/
 
 input:focus, textarea:focus, select:focus, button:focus {
     /*border: none !important;*/
@@ -452,6 +427,16 @@ input:focus, textarea:focus, select:focus, button:focus {
     width: 100%;
     position: fixed;
     transition: all .8s ease-in-out;
+}
+
+/*****************************************************************/
+/*                                         CONSTRAINTS                                             */
+/*****************************************************************/
+
+.invalid-feedback {
+    position: absolute;
+    left: 30%;
+    top: 3em;
 }
 
 /*****************************************************************/
@@ -744,6 +729,16 @@ div.polygon-triangle-absolute {
     left: 7%;
     color: #5f6b67;
     transition: all 0.5s;
+}
+
+legend.checkbox-label {
+    display: none;
+}
+
+#contact_event {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
 }
 
 .input-content:after, .input-content:before {

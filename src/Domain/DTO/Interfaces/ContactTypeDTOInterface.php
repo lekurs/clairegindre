@@ -24,6 +24,16 @@ interface ContactTypeDTOInterface
      * @param array $event
      * @param string $details
      */
-    public function __construct(string $name, string $firstName, string $email, string $phone, \DateTime $date, string $place, string $howKnow, array $event, string $details);
+    public function __construct(
+        string $name,
+        string $firstName,
+        string $email,
+        string $phone,
+        \DateTime $date,
+        string $place,
+        string $howKnow,
+        array $event,
+        string $details
+    );
 
 }

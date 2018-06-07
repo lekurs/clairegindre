@@ -7,6 +7,5 @@ jQuery(document).ready(function ($) {
         if($(this).val() === "")
             $(this).parent().removeClass('is-completed');
         $(this).parent().removeClass('is-active');
-    })
-
+    });
 })

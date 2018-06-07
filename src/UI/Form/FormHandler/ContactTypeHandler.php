@@ -16,9 +16,11 @@ use App\Services\Interfaces\SlugHelperInterface;
 use App\Services\MailerHelper;
 use App\UI\Form\FormHandler\Interfaces\ContactTypeHandlerInterface;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Twig\Environment;
 
-class ContactTypeHandler implements ContactTypeHandlerInterface
+final class ContactTypeHandler implements ContactTypeHandlerInterface
 {
     /**
      * @var MailRepositoryInterface
@@ -36,14 +38,19 @@ class ContactTypeHandler implements ContactTypeHandlerInterface
     private $mailerHelper;
 
     /**
-     * @var \Swift_Mailer
-     */
-    private $swiftMailer;
-
-    /**
      * @var SlugHelperInterface
      */
     private $slugHelper;
+
+    /**
+     * @var ValidatorInterface
+     */
+    private $validator;
+
+    /**
+     * @var SessionInterface
+     */
+    private $session;
 
     /**
      * @var Environment
@@ -56,27 +63,37 @@ class ContactTypeHandler implements ContactTypeHandlerInterface
      * @param MailRepositoryInterface $mailRepository
      * @param UserRepositoryInterface $userRepository
      * @param MailerHelper $mailerHelper
-     * @param \Swift_Mailer $swiftMailer
      * @param SlugHelperInterface $slugHelper
+     * @param ValidatorInterface $validator
+     * @param SessionInterface $session
      * @param Environment $twig
      */
     public function __construct(
         MailRepositoryInterface $mailRepository,
         UserRepositoryInterface $userRepository,
         MailerHelper $mailerHelper,
-        \Swift_Mailer $swiftMailer,
         SlugHelperInterface $slugHelper,
+        ValidatorInterface $validator,
+        SessionInterface $session,
         Environment $twig
     ) {
         $this->mailRepository = $mailRepository;
         $this->userRepository = $userRepository;
         $this->mailerHelper = $mailerHelper;
-        $this->swiftMailer = $swiftMailer;
         $this->slugHelper = $slugHelper;
+        $this->validator = $validator;
+        $this->session = $session;
         $this->twig = $twig;
     }
 
-    public function handle(FormInterface $form)
+    /**
+     * @param FormInterface $form
+     * @return bool
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     */
+    public function handle(FormInterface $form):bool
     {
         if($form->isSubmitted() && $form->isValid()) {
 
@@ -85,7 +102,7 @@ class ContactTypeHandler implements ContactTypeHandlerInterface
             foreach ($form->getData()->event->toArray() as $event) {
                 dump($event->getName());
             }
-//            die;
+
             $user = $this->userRepository->getAdmin('contact@clairegindre.com');
 
 //            dump($event->getName());
@@ -102,19 +119,22 @@ class ContactTypeHandler implements ContactTypeHandlerInterface
                 false,
                 $this->slugHelper->replace('renseignements - ' . $form->getData()->email)
             );
-//
 
-//
-            dump($mail);
+            $this->validator->validate($mail, [], [
+                'contact_creation'
+            ]);
 
+            //insert mail
             $this->mailRepository->save($mail);
-            die;
 
             //Send Email
             $this->mailerHelper->sendEmail('Prise de contact', $user->getEmail(),  $form->getData()->email);
 
             //Send confirmation to customer
             $this->mailerHelper->sendConfirmation('Claire GINDRE - Merci pour votre demande : ' . $form->getData()->name . ' - ' . $form->getData()->firstname, $form->getData()->email, $user->getEmail());
+
+            $this->session->getFlashBag()->add('success', 'Votre demande de renseignements est validée');
+            $this->session->getFlashBag()->add('error', 'Merci de vérifier les champs renseignés');
 
             return true;
         }

@@ -11,7 +11,7 @@ namespace App\Domain\DTO;
 
 use App\Domain\DTO\Interfaces\ContactTypeDTOInterface;
 
-class ContactDTO implements ContactTypeDTOInterface
+final class ContactTypeDTO implements ContactTypeDTOInterface
 {
     /**
      * @var string
@@ -59,7 +59,7 @@ class ContactDTO implements ContactTypeDTOInterface
     public $details;
 
     /**
-     * ContactDTO constructor.
+     * ContactTypeDTO constructor.
      *
      * @param string $name
      * @param string $firstName

@@ -9,7 +9,7 @@
 namespace App\Domain\Form\Type;
 
 
-use App\Domain\DTO\ContactDTO;
+use App\Domain\DTO\ContactTypeDTO;
 use App\Domain\DTO\Interfaces\ContactTypeDTOInterface;
 use App\Domain\Models\Benefit;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -59,7 +59,7 @@ class ContactType extends AbstractType
             ->add('place', TextType::class, array(
                 'label' => 'Lieu de l\'évenement',
                 'label_attr' => ['class' => 'label_contact'],
-                'required' => false,
+                'required' => true,
             ))
             ->add('howKnow', TextType::class, array(
                 'label' => 'Comment m\'avez vous connu',
@@ -70,6 +70,7 @@ class ContactType extends AbstractType
                 'expanded' => true,
                 'multiple' => true,
                 'class' => Benefit::class,
+                'label_attr' => ['class' => 'checkbox-label'],
                 'choice_label' => 'name'
             ])
             ->add('details', TextareaType::class, array(
@@ -84,7 +85,7 @@ class ContactType extends AbstractType
         $resolver->setDefaults([
             'data_class' => ContactTypeDTOInterface::class,
             'empty_data' => function (FormInterface $form) {
-            return new ContactDTO(
+            return new ContactTypeDTO(
                 $form->get('name')->getData(),
                 $form->get('firstname')->getData(),
                 $form->get('email')->getData(),
@@ -95,7 +96,8 @@ class ContactType extends AbstractType
                 $form->get('event')->getData()->toArray(),
                 $form->get('details')->getData()
             );
-            }
+            },
+            'validation_groups' => ['contact_creation']
         ]);
     }
 }

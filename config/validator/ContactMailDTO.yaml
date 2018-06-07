@@ -1,0 +1,25 @@
+App\Domain\DTO\ContactTypeDTO:
+    properties:
+        name:
+            - Length: { min: 4, max: 30, minMessage: 'Minimum 4 caractères', maxMessage: 'Maximum 30 caractères', groups: ["contact_creation"] }
+            - NotBlank: { groups: ["contact_creation"] }
+        firstname:
+            - Length: { min: 4, max: 100, minMessage: 'Minimum 4 caractères', maxMessage: 'Maximum 30 caractères', groups: ["contact_creation"] }
+            - NotBlank: ~
+        email:
+             - Length: { min: 3, groups: ["contact_creation"] }
+        phone:
+            - Length: { min: 10, max: 14, minMessage: 'Format 0606060606 ou 06/06/06/06/06', maxMessage: 'Format 0606060606 ou 06/06/06/06/06', groups: ["contact_creation"] }
+            - NotBlank: ~
+        date:
+            - Date: ~
+        place:
+            - Length: { min: 4, max: 100, minMessage: 'Minimum 4 caractères', maxMessage: 'Maximum 30 caractères', groups: ["contact_creation"] }
+            - NotBlank: ~
+        howKnow:
+            - Length: { min: 4, max: 100, minMessage: 'Minimum 4 caractères', maxMessage: 'Maximum 30 caractères', groups: ["contact_creation"] }
+            - NotBlank: ~
+        event:
+#            - Choice: { multiple: true, min: 1, minMessage: "Choisir au moins une prestation", groups: ["contact_creation"] }
+        details:
+            - Length: { min: 10, minMessage: "Merci de me donner autant de renseignements que possible", groups: ["contact_creation"] }

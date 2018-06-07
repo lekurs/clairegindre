@@ -90,8 +90,10 @@ final class AnswerMailTypeHandler implements AnswerMailTypeHandlerInterface
 
 
             //Send Message
-            die;
             $this->mailerHelper->sendResponse($form->getData()->subject, $mail->getToEmail(), $mail->getFromSender(), $form->getData()->content);
+//            $this->mailerHelper->sendResponse($form->getData()->subject, 'lekurs@gmail.com', 'lekurs@gmail.com', $form->getData()->content);
+
+            $this->session->getFlashBag()->add('success', 'La réponse à bien été envoyée');
 
             return true;
         }
