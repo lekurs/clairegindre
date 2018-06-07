@@ -149,7 +149,7 @@ class Mail implements MailInterface
         return $this->slug;
     }
 
-    public function answerTo(AnswerMailDTOInterface $mailDTO)
+    public function mailRead()
     {
         $this->isAnswered = 1;
     }

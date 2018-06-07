@@ -80,15 +80,14 @@ final class AnswerMailTypeHandler implements AnswerMailTypeHandlerInterface
 
             $this->session->set('to', $mail->getToEmail());
 
-            //update isAnswer in Entity
-            $email = new Mail($mail->getFromSender(), $mail->getToEmail(), $form->getData()->subject, $form->getData()->content, true, $mail->getSlug(), $mail);
+            //Insert the response
+            $emailResponse = new Mail($mail->getFromSender(), $mail->getToEmail(), $form->getData()->subject, $form->getData()->content, true, $mail->getSlug(), $mail);
 
-            $test = $mail->answerTo($form->getData());
+            $this->mailRepository->save($emailResponse);
 
-            $this->mailRepository->update($test);
+            //The initial Mail have been treated
+            $this->mailRepository->update($mail);
 
-            dump($test);
-//            die;
 
             //Send Message
             die;

@@ -69,7 +69,7 @@ final class MailRepository extends ServiceEntityRepository implements MailReposi
 
     public function update(Mail $mail):void
     {
-        $mail->answerTo($mail);
+        $mail->mailRead();
         $this->getEntityManager()->flush();
     }
 }
