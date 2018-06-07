@@ -1,7 +1,12 @@
 jQuery(document).ready(function($) {
-    $('.nav-border').css('border-bottom', '1px solid #0000000');
+    $('.nav-border').css({'border-bottom': '1px solid #000000 !important'});
+
+    $('.nav-link').css('color', '#000000');
+
+    $('a#nav-link-home:before').css('color', 'red');
+
     $('.left-menu').removeClass('left-menu');
-    $('.left-menu > a').addClass('nav-link-black');
+    $('.nav-item > a').addClass('nav-link-black');
 
     $('.right-menu').removeClass('right-menu');
     $('.right-menu > a').addClass('nav-link-black');
@@ -9,12 +14,10 @@ jQuery(document).ready(function($) {
     var top_position = $('#end-nav').offset().top;
 
     $(window).scroll(function () {
-        console.log(top_position + ' / ' + $(this).scrollTop());
-
         if ($(this).scrollTop() > top_position) {
             $('.nav-desktop').addClass('sticky-white');
         } else {
             $('.nav-desktop').removeClass('sticky-white');
         }
     });
-})
+});
