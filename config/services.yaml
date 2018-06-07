@@ -16,18 +16,11 @@ services:
                 $targetDirPublic: '%kernel.project_dir%/public/'
                 $dirGallery: '%kernel.project_dir%/public/images/upload/gallery/'
                 $dirPicture: '/images/upload/gallery/'
-#                $mailerAdminEmail: '%env(MAILER_ADMIN_EMAIL)%'
+                $mailerAdminEmail: '%mailer_admin_email%'
 
     App\Services\SlugHelper:
         autowire: true
         public: false
-
-    App\Services\MailerHelper:
-        autowire: true
-        autoconfigure: true
-        public: false
-        bind:
-            $mailerAdminEmail: '%mailer_admin_email%'
 
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name

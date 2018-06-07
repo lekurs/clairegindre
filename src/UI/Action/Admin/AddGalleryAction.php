@@ -25,7 +25,8 @@ use Symfony\Component\Routing\Annotation\Route;
  *
  * @Route(
  *     name="adminAddGallery",
- *     path="admin/users",
+ *     path="admin/users/{page}",
+ *     defaults={"page"=1},
  *     methods={"POST"}
  * )
  *
@@ -50,11 +51,15 @@ class AddGalleryAction implements AddGalleryActionInterface
 
     /**
      * AddGalleryAction constructor.
+     *
      * @param FormFactoryInterface $formFactory
      * @param AddGalleryTypeHandlerInterface $galleryHandler
      */
-    public function __construct(FormFactoryInterface $formFactory, AddGalleryTypeHandlerInterface $galleryHandler, EntityManagerInterface $entityManager)
-    {
+    public function __construct(
+        FormFactoryInterface $formFactory,
+        AddGalleryTypeHandlerInterface $galleryHandler,
+        EntityManagerInterface $entityManager
+    ) {
         $this->formFactory = $formFactory;
         $this->galleryHandler = $galleryHandler;
         $this->entityManager = $entityManager;

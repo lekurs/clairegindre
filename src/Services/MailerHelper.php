@@ -35,9 +35,9 @@ final class MailerHelper implements MailerHelperInterface
      * @param \Swift_Mailer $swiftMailer
      * @param Environment $twig
      */
-    public function __construct(\Swift_Mailer $swiftMailer, Environment $twig)
+    public function __construct(string $mailerAdminEmail, \Swift_Mailer $swiftMailer, Environment $twig)
     {
-//        $this->mailerAdminEmail = $mailerAdminEmail;
+        $this->mailerAdminEmail = $mailerAdminEmail;
         $this->swiftMailer = $swiftMailer;
         $this->twig = $twig;
     }
@@ -55,7 +55,7 @@ final class MailerHelper implements MailerHelperInterface
     {
         $message = (new \Swift_Message())
             ->setSubject($subject)
-            ->setTo($to)
+            ->setTo($this->mailerAdminEmail)
             ->setFrom($from)
             ->setBody($this->twig->render('mails/customerMail.html.twig'), 'text/html');
 

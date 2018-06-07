@@ -97,23 +97,11 @@ final class ContactTypeHandler implements ContactTypeHandlerInterface
     {
         if($form->isSubmitted() && $form->isValid()) {
 
-            dump($form->getData());
-            dump($form->getData()->event->toArray());
-            foreach ($form->getData()->event->toArray() as $event) {
-                dump($event->getName());
-            }
-
             $user = $this->userRepository->getAdmin('contact@clairegindre.com');
-
-//            dump($event->getName());
-//            dump($user);
-//            die;
-
 //
             $mail = new Mail(
                 $form->getData()->email,
                 $user->getEmail(),
-//                'renseignements - ' . $form->getData()->email . ' - ' . $form->getData()->event->toArray()->getBenefit()->getName(),
                 'renseignements - ' . $form->getData()->name . ' - ' . $form->getData()->firstname,
                 $form->getData()->details,
                 false,

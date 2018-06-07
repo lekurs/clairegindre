@@ -19,7 +19,5 @@ App\Domain\DTO\ContactTypeDTO:
         howKnow:
             - Length: { min: 4, max: 100, minMessage: 'Minimum 4 caractères', maxMessage: 'Maximum 30 caractères', groups: ["contact_creation"] }
             - NotBlank: ~
-        event:
-#            - Choice: { multiple: true, min: 1, minMessage: "Choisir au moins une prestation", groups: ["contact_creation"] }
         details:
             - Length: { min: 10, minMessage: "Merci de me donner autant de renseignements que possible", groups: ["contact_creation"] }

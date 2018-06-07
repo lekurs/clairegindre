@@ -28,7 +28,8 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
  * @Route(
  *     name="adminUser",
  *     path="admin/users/{page}",
- *     defaults={"page"=1}
+ *     defaults={"page"=1},
+ *     methods={ "GET" }
  * )
  *
  * @package App\UI\Action\Security

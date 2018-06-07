@@ -71,7 +71,7 @@ class ContactType extends AbstractType
                 'multiple' => true,
                 'class' => Benefit::class,
                 'label_attr' => ['class' => 'checkbox-label'],
-                'choice_label' => 'name'
+                'choice_label' => 'name',
             ])
             ->add('details', TextareaType::class, array(
                 'label' => 'Tous les détails de votre évènement m\'intéresse, le style de votre mariage, le nombre d\'invités, le type de cérémonie ...',
