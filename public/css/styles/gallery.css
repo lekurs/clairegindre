@@ -184,6 +184,33 @@ legend {
     color: #363636;
 }
 
+h4.gallery-title {
+    font-family: Playfair;
+    text-transform: uppercase;
+    font-size: 1em;
+}
+
+
+.prestation-date {
+    font-family: Assistant;
+    font-weight: lighter;
+    font-size: .8em;
+}
+
+a.connection-link {
+    color: #ffffff;
+    border: none;
+}
+
+a.connection-link:hover {
+    color: #ffffff;
+}
+
+.gallery-customers-informations >p > i {
+    font-size: 1.5em;
+}
+
+
 /*****************************************************************/
 /*                                      BLOG/ARTICLE/DETAIL                             */
 /*****************************************************************/

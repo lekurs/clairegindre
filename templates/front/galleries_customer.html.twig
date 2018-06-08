@@ -37,16 +37,17 @@
 {% endblock %}
 {% block content %}
     <div class="container">
+        <h2 class="text-center text-uppercase title-faq">Trouvez votre galerie</h2>
         <div class="row no-gutters">
                 {% for gallery in galleries %}
-                        <div class="img-customers col-xl-3 col-lg-3 col-md-4 col-sm-6 col-12">
+                        <div class="img-customers col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
                             <div class="row no-gutters box">
                                 <img src="{{ asset('images/upload/gallery/' ~ gallery.title ~ '/' ~ gallery.pictures.first.pictureName) }}" alt="{{ gallery.pictures.first.pictureName }}" />
                                     <div class="gallery-customers-informations">
-                                        <p><i class="fa fa-lock fa-2x"></i></p>
-                                        <h4>{{ gallery.title }}</h4>
-                                        <p id="prestation-date">{{ gallery.user.dateWedding|date('d-m-Y') }}</p>
-                                        <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#loginFormModal"><i class="fa fa-user-o"></i></button>
+                                        <p><i class="fa fa-lock"></i></p>
+                                        <h4 class="gallery-title">{{ gallery.title }}</h4>
+                                        <p class="prestation-date">{{ gallery.user.dateWedding|date('d M Y') }}</p>
+                                        <a href="#" data-toggle="modal" data-target="#loginFormModal" class="connection-link"><i class="fa fa-user-o"></i></a>
                                     </div>
                             </div>
                         </div>
