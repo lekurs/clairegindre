@@ -645,6 +645,7 @@ section#faq-section {
     align-items: flex-start;
     padding-left: 7em !important;
     padding-right: 7em !important;
+    position: relative;
 }
 
 .benefits > span {
@@ -693,6 +694,30 @@ span.title-faq {
 
 .pricing {
     font-weight: 600;
+}
+
+.line-container {
+    position: relative;
+}
+
+#line-content1 {
+    position: absolute;
+    width: 41%;
+    transform: rotate(90deg);
+    height: .5px;
+    background-color: #ffffff;
+    bottom: 50%;
+    right: -20%;
+}
+
+#line-content2 {
+    position: absolute;
+    width: 41%;
+    transform: rotate(90deg);
+    height: .5px;
+    background-color: #ffffff;
+    bottom: 50%;
+    right: -20%;
 }
 
 /*****************************************************************/
@@ -823,7 +848,6 @@ div.polygon-triangle-absolute {
 .contact-form {
     border: none;
     border-radius: 0;
-    /*border-bottom: 1px solid #242424;*/
     border-width: thin;
     height: 70px;
     width: 90%;
