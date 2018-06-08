@@ -12,16 +12,11 @@ namespace App\UI\Action\Front;
 use App\Domain\Builder\Interfaces\ArticleBuilderInterface;
 use App\Domain\Form\Type\ContactType;
 use App\Domain\Lib\InstagramLib;
-use App\Domain\Models\Article;
-use App\Domain\Models\Benefit;
-use App\Domain\Repository\Interfaces\ArticleRepositoryInterface;
 use App\Domain\Repository\Interfaces\BenefitRepositoryInterface;
 use App\Domain\Repository\Interfaces\GalleryRepositoryInterface;
 use App\Domain\Repository\Interfaces\ReviewsRepositoryInterface;
 use App\UI\Action\Front\Interfaces\BlogActionInterface;
-use App\UI\Form\FormHandler\Interfaces\ContactTypeHandlerInterface;
 use App\UI\Responder\Interfaces\BlogResponderInterface;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -36,7 +31,7 @@ use Symfony\Component\Routing\Annotation\Route;
  *
  * @package App\UI\Action\Front
  */
-class BlogAction implements BlogActionInterface
+final class BlogAction implements BlogActionInterface
 {
     /**
      * @var FormFactoryInterface
@@ -70,7 +65,9 @@ class BlogAction implements BlogActionInterface
 
     /**
      * BlogAction constructor.
+     *
      * @param FormFactoryInterface $formFactory
+     * @param GalleryRepositoryInterface $galleryRepository
      * @param BenefitRepositoryInterface $benefitRepository
      * @param InstagramLib $instagram
      * @param ArticleBuilderInterface $articleBuilder
@@ -92,7 +89,11 @@ class BlogAction implements BlogActionInterface
         $this->reviewsRepository = $reviewsRepository;
     }
 
-
+    /**
+     * @param Request $request
+     * @param BlogResponderInterface $response
+     * @return mixed
+     */
     public function __invoke(Request $request, BlogResponderInterface $response)
     {
         $contact = $this->formFactory->create(ContactType::class)->handleRequest($request);

@@ -51,7 +51,7 @@
                                     <div class="row no-gutters">
                                         <div class="col-lg-12 col-xl-12">
                                             <ul class="nav justify-content-center">
-                                                <li class="nav-item"><a class="nav-link nav-link-bottom" id="nav-link-blog" href="{{ path('blog') }}">Blog</a></li>
+                                                <li class="nav-item"><a class="nav-link nav-link-bottom" id="nav-link-blog" href="{{ path('blog') }}">Photos</a></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -74,7 +74,7 @@
                                     <div class="row no-gutters nav-border-index">
                                         <div class="col-lg-12 col-xl-12">
                                             <ul class="nav justify-content-between">
-                                                <li class="nav-item"><a class="nav-link" id="nav-link-informations" href="{{ path('faq') }}">informations</a></li>
+                                                <li class="nav-item"><a class="nav-link" id="nav-link-informations" href="{{ path('faq') }}">infos</a></li>
                                                 <li class="nav-item"><a class="nav-link nav-link-right" id="nav-link-customer" href="{{ path('galleriesCustomers') }}">clients</a></li>
                                             </ul>
                                         </div>
@@ -116,7 +116,7 @@
                 {% for favoritePicture in gallery.pictures %}
                     {% if favoritePicture.favorite > 0 %}
                         <div class="portfolio-pres thumb" style="background: url({{ asset(favoritePicture.publicPath ~ '/' ~ favoritePicture.pictureName) }}) center center no-repeat; background-size: cover">
-                            <a href="#" class="portfolio_link">
+                            <a href="" class="portfolio_link">
                                 <div class="link_hover">
                                     <h2 class="title-portfolio-contain">{{ gallery.title }}</h2>
                                     <p class="date-portfolio">{{ gallery.eventDate | date('d-m-Y') }}</p>

@@ -1,0 +1,4 @@
+App\Domain\DTO\BenefitCreationDTO:
+    properties:
+        name:
+            - Length: { min: 3, max: 30, minMessage: 'Minimum 3 caractères', maxMessage: 'Maximum 30 caractères', groups: ['benefit_creation'] }

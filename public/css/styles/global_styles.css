@@ -441,7 +441,7 @@ a#nav-link-black-contact:hover:before {
 a#nav-link-black-informations:before {
     content: "";
     position: absolute;
-    width: 37%;
+    width: 22%;
     height: 2px;
     bottom: 0;
     left: 0;
@@ -576,6 +576,18 @@ h2.last-report {
 /*                                              FAQ                                                           */
 /*****************************************************************/
 
+h2.title-faq {
+    font-family: Assistant;
+    font-weight: lighter;
+    font-size: 2em;
+    width: 80%;
+    margin: 30px auto;
+}
+
+section#faq-section {
+    margin-bottom: 100px;
+}
+
 .infos-content {
     background: url("/images/interface/faq/nico_anlor_faq.jpg") no-repeat center;
     position: relative;
@@ -592,7 +604,7 @@ h2.last-report {
 .infos-content h2 {
     font-family: Playfair;
     font-weight: 400;
-    letter-spacing: .1em;
+    letter-spacing: .1rem;
     font-size: 3.5em;
 }
 
@@ -600,7 +612,7 @@ h2.last-report {
     font-size: 3em;
     font-family: Playfair;
     font-weight: 400;
-    letter-spacing: .2rem;
+    letter-spacing: .1rem;
 }
 
 .info-p {
@@ -615,6 +627,10 @@ h2.last-report {
     top: 5%;
 }
 
+.social-media > p > a {
+    color: #ffffff;
+}
+
 .social-media i {
     margin: 10px;
 }
@@ -627,14 +643,30 @@ h2.last-report {
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-    padding-left: 3%;
+    padding-left: 7em !important;
+    padding-right: 7em !important;
 }
 
 .benefits > span {
     margin-top: 10%;
     margin-bottom: 2%;
-    height: 10%;
-    width: 10%;
+    height: 17%;
+    width: 17%;
+}
+
+.prestations-infos {
+    text-align: justify;
+    font-size: .9em;
+}
+
+.presentation-faq {
+    margin: 0 0 -10px 10%;
+}
+
+p.text-presentation-faq {
+    margin: 0 0 1em 10%;
+    width: 85%;
+    text-align: justify;
 }
 
 span.wedding {
@@ -653,8 +685,10 @@ span.family {
 }
 
 span.title-faq {
-    font-size: 2.5em;
-    font-weight: 800;
+    font-size: 2em;
+    font-weight: 400;
+    font-family: Playfair;
+    text-transform: uppercase;
 }
 
 .pricing {
@@ -920,6 +954,19 @@ button.sub-contact {
     font-size: 1.2em;
 }
 
+.insta-logo > a{
+    color: #000000;
+    text-decoration: none;
+    font-family: Assistant;
+    font-weight: lighter;
+}
+
+.insta-logo > a:hover {
+    color: #000000;
+    font-family: Playfair;
+    font-weight: lighter;
+}
+
 .fit-left {
     object-position: left;
 }
@@ -970,6 +1017,10 @@ footer {
     color: #fff;
     padding: 2% 0 0;
     max-height: 280px;
+}
+
+footer p {
+    margin: 0;
 }
 
 
@@ -1044,6 +1095,7 @@ footer a.nav-footer:hover {
 
 #follow-me {
     margin-left: .6em;
+    margin-bottom: 1em;
 }
 
 .social-picto-footer {

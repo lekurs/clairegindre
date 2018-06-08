@@ -9,17 +9,23 @@
 namespace App\Domain\DTO\Interfaces;
 
 
-use App\Domain\Models\Interfaces\ArticleInterface;
+
+use App\Domain\Models\Interfaces\UserInterface;
 
 interface AddCommentOnArticleDTOInterface
 {
     /**
      * AddCommentOnArticleDTOInterface constructor.
      *
-     * @param string $email
-     * @param string $lastName
      * @param string $content
-     * @param ArticleInterface $article
+     * @param string|null $email
+     * @param string|null $lastName
+     * @param UserInterface|null $author
      */
-//    public function __construct(string $email, string $lastName, string $content, ArticleInterface $article);
+    public function __construct(
+        string $content,
+        string $email = null,
+        string $lastName = null,
+        UserInterface $author = null
+    );
 }

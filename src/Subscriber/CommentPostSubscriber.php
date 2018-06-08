@@ -17,7 +17,7 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
-class CommentPostSubscriber implements EventSubscriberInterface
+final class CommentPostSubscriber implements EventSubscriberInterface
 {
     /**
      * @var TokenStorageInterface
@@ -33,6 +33,9 @@ class CommentPostSubscriber implements EventSubscriberInterface
         $this->tokenStorage = $tokenStorage;
     }
 
+    /**
+     * @return array
+     */
     public static function getSubscribedEvents()
     {
         return [
@@ -41,6 +44,9 @@ class CommentPostSubscriber implements EventSubscriberInterface
         ];
     }
 
+    /**
+     * @param FormEvent $event
+     */
     public function manageUserField(FormEvent $event)
     {
         if(!$this->tokenStorage->getToken()->getUser() instanceof UserInterface) {
@@ -49,6 +55,9 @@ class CommentPostSubscriber implements EventSubscriberInterface
         }
     }
 
+    /**
+     * @param FormEvent $event
+     */
     public function manageUserAuthentication(FormEvent $event)
     {
         if($this->tokenStorage->getToken()->getUser() instanceof UserInterface) {

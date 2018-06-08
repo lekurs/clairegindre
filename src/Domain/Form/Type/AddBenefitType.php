@@ -15,7 +15,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class AddBenefitType extends AbstractType
+final class AddBenefitType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -31,8 +31,8 @@ class AddBenefitType extends AbstractType
                                 return new BenefitCreationDTO(
                                    $form->get('name')->getData()
                                 );
-            }
+            },
+            'validation_groups' => ['benefit_creation']
         ));
     }
-
 }

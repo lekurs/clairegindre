@@ -69,10 +69,7 @@ class AdminBlogAction implements AdminGalleryActionInterface
     {
         $categories = $this->entityManager->getRepository(Article::class)->findAll();
 
-        $test = $this->entityManager->getRepository(Gallery::class)->getGalleryWithoutArticle();
-//
-//        dump($test);
-//        die();
+        $this->entityManager->getRepository(Gallery::class)->getGalleryWithoutArticle();
 
         $form = $this->formFactory->create(AddArticleType::class)->handleRequest($request);
 

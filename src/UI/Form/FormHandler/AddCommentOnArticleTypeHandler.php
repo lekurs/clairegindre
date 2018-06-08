@@ -9,16 +9,14 @@
 namespace App\UI\Form\FormHandler;
 
 use App\Domain\Builder\Interfaces\CommentBuilderInterface;
-use App\Domain\Repository\Interfaces\ArticleRepositoryInterface;
 use App\Domain\Repository\Interfaces\CommentRepositoryInterface;
 use App\UI\Form\FormHandler\Interfaces\AddCommentOnArticleTypeHandlerInterface;
 use Symfony\Component\Form\FormInterface;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
-class AddCommentOnOnArticleTypeHandler implements AddCommentOnArticleTypeHandlerInterface
+final class AddCommentOnArticleTypeHandler implements AddCommentOnArticleTypeHandlerInterface
 {
     /**
      * @var ValidatorInterface
@@ -46,15 +44,21 @@ class AddCommentOnOnArticleTypeHandler implements AddCommentOnArticleTypeHandler
     private $commentRepository;
 
     /**
-     * AddCommentOnOnArticleTypeHandler constructor.
+     * AddCommentOnArticleTypeHandler constructor.
+     *
      * @param ValidatorInterface $validator
      * @param SessionInterface $session
      * @param TokenStorageInterface $tokenStorage
      * @param CommentBuilderInterface $commentBuilder
      * @param CommentRepositoryInterface $commentRepository
      */
-    public function __construct(ValidatorInterface $validator, SessionInterface $session, TokenStorageInterface $tokenStorage, CommentBuilderInterface $commentBuilder, CommentRepositoryInterface $commentRepository)
-    {
+    public function __construct(
+        ValidatorInterface $validator,
+        SessionInterface $session,
+        TokenStorageInterface $tokenStorage,
+        CommentBuilderInterface $commentBuilder,
+        CommentRepositoryInterface $commentRepository
+    ) {
         $this->validator = $validator;
         $this->session = $session;
         $this->tokenStorage = $tokenStorage;
@@ -62,14 +66,16 @@ class AddCommentOnOnArticleTypeHandler implements AddCommentOnArticleTypeHandler
         $this->commentRepository = $commentRepository;
     }
 
-
+    /**
+     * @param FormInterface $form
+     * @param $article
+     * @return bool
+     */
     public function handle(FormInterface $form, $article): bool
     {
         if ($form->isSubmitted() && $form->isValid()) {
 
-//            dump($form->getData(),$article, $this->tokenStorage->getToken()->getUser());
-
-            $this->commentBuilder->create(
+            $comment = $this->commentBuilder->create(
                                                                                 $form->getData()->content,
                                                                                 $article,
                                                                                 $form->getData()->email ?? null,
@@ -77,6 +83,10 @@ class AddCommentOnOnArticleTypeHandler implements AddCommentOnArticleTypeHandler
                                                                                 $form->getData()->author ?? null
 
                                                                             );
+
+            $this->validator->validate($comment, [], [
+                'add_comment'
+            ]);
 
             $this->commentRepository->save($this->commentBuilder->getComment());
 

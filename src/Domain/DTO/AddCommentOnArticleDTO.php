@@ -10,10 +10,9 @@ namespace App\Domain\DTO;
 
 
 use App\Domain\DTO\Interfaces\AddCommentOnArticleDTOInterface;
-use App\Domain\Models\Interfaces\ArticleInterface;
 use App\Domain\Models\Interfaces\UserInterface;
 
-class AddCommentOnArticleDTO implements AddCommentOnArticleDTOInterface
+final class AddCommentOnArticleDTO implements AddCommentOnArticleDTOInterface
 {
     /**
      * @var string
@@ -45,7 +44,6 @@ class AddCommentOnArticleDTO implements AddCommentOnArticleDTOInterface
      */
     public function __construct(
         string $content,
-//        ArticleInterface $article,
         string $email = null,
         string $lastName = null,
         UserInterface $author = null

@@ -79,7 +79,7 @@
                     <div class="menu-overlay">
                         <a href="{{ path('index') }}">home</a>
                         <a href="#hello">hello</a>
-                        <a href="{{ path('blog') }}">blog</a>
+                        <a href="{{ path('blog') }}">Photos</a>
                         <a href="{{ path('faq') }}">Informations</a>
                         <a href="#contact">Contact</a>
                         <a href="{{ path('galleriesCustomers') }}">Clients</a>
@@ -108,7 +108,7 @@
                                             <div class="row no-gutters">
                                                 <div class="col-lg-12 col-xl-12">
                                                     <ul class="nav justify-content-center">
-                                                        <li class="nav-item"><a class="nav-link nav-link-bottom" id="nav-link-black-blog" href="{{ path('blog') }}">Blog</a></li>
+                                                        <li class="nav-item"><a class="nav-link nav-link-bottom" id="nav-link-black-blog" href="{{ path('blog') }}">Photos</a></li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -131,7 +131,7 @@
                                         <div class="row no-gutters nav-border">
                                             <div class="col-lg-12 col-xl-12">
                                                 <ul class="nav justify-content-between">
-                                                    <li class="nav-item"><a class="nav-link" id="nav-link-black-informations" href="{{ path('faq') }}">informations</a></li>
+                                                    <li class="nav-item"><a class="nav-link" id="nav-link-black-informations" href="{{ path('faq') }}">infos</a></li>
                                                     <li class="nav-item"><a class="nav-link nav-link-right" id="nav-link-black-customer" href="{{ path('galleriesCustomers') }}">clients</a></li>
                                                 </ul>
                                             </div>
@@ -218,7 +218,7 @@
                         <img class="insta-img" src="{{ instagram.images.standard_resolution.url }}" alt="claire_gindre_photographe_{{ instagram.id }}" />
                     {#</a>#}
                 {% endfor %}
-            <div class="insta-logo">Instagram</div>
+            <div class="insta-logo"> <a href="https://www.instagram.com/clairegindre_photographe/" target="_blank">Instagram</a></div>
         </article>
 
         <article class="col-12 col-sm-12 col-lg-6 col-xl-6 contact">
@@ -250,8 +250,8 @@
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         <a href="{{ path('index') }}" class="nav-footer" id="link-home">home</a>
                         <a href="#hello" class="nav-footer" id="link-photo">Hello</a>
-                        <a href="{{ path('blog') }}" class="nav-footer" id="link-blog">Blog</a>
-                        <a href="{{ path('faq') }}" class="nav-footer" id="link-informations">Informations</a>
+                        <a href="{{ path('blog') }}" class="nav-footer" id="link-blog">Photos</a>
+                        <a href="{{ path('faq') }}" class="nav-footer" id="link-informations">Infos</a>
                         <a href="{{ path('galleriesCustomers') }}" class="nav-footer" id="link-customers">clients</a>
                         <a href="#contact" class="nav-footer" id="link-contact">contact</a>
                     </div>
@@ -265,7 +265,7 @@
             <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
                 <div class="row no-gutters">
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                        <p class="text-uppercase" id="follow-me">Suivez-moi</p>
+                        <p class="text-uppercase" id="follow-me">Suivez-moi sur : </p>
                     </div>
                 </div>
                 <div class="row no-gutters">

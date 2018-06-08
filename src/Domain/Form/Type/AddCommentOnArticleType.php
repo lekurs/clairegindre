@@ -13,17 +13,12 @@ use App\Domain\DTO\AddCommentOnArticleDTO;
 use App\Subscriber\CommentPostSubscriber;
 use App\Subscriber\AddCommentArticleTypeSubscriber;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormEvent;
-use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class AddCommentOnArticleType extends AbstractType
+final class AddCommentOnArticleType extends AbstractType
 {
     /**
      * @var CommentPostSubscriber
@@ -32,6 +27,7 @@ class AddCommentOnArticleType extends AbstractType
 
     /**
      * AddCommentOnArticleType constructor.
+     *
      * @param CommentPostSubscriber $commentPostListener
      */
     public function __construct(CommentPostSubscriber $commentPostListener)
@@ -55,6 +51,9 @@ class AddCommentOnArticleType extends AbstractType
 
     }
 
+    /**
+     * @param OptionsResolver $resolver
+     */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
@@ -63,7 +62,8 @@ class AddCommentOnArticleType extends AbstractType
                             return new AddCommentOnArticleDTO(
                                $form->get('content')->getData()
                             );
-                    }
+                    },
+            'validation_groups' => ['add_comment']
         ]);
     }
 }

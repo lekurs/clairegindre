@@ -74,7 +74,8 @@ class AddGalleryType extends AbstractType
                                             $form->get('eventDate')->getData(),
                                             $form->get('eventPlace')->getData()
                                 );
-                        }
+                        },
+            'validation_groups' => ['gallery_creation']
         ));
     }
 }
