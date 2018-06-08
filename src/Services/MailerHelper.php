@@ -97,12 +97,17 @@ final class MailerHelper implements MailerHelperInterface
         $message = (new \Swift_Message());
 
         $logo = $message->embed(\Swift_Image::fromPath('images/interface/logos/logo-color.png', 'image/png'));
+        $facebook = $message->embed(\Swift_Image::fromPath('images/interface/facebook.png', 'image/png'));
+        $pinterest = $message->embed(\Swift_Image::fromPath('images/interface/pinterest.png', 'image/png'));
+        $instagram = $message->embed(\Swift_Image::fromPath('images/interface/instagram.png', 'image/png'));
 
         $message->setSubject('[NE PAS REPONDRE]' . $subject)
             ->setTo($to)
             ->setFrom($from)
             ->setCc($from)
-            ->setBody($this->twig->render('mails/response_mail.html.twig', ['content' => $content, 'attachment' => $logo]), 'text/html');
+            ->setBody($this->twig->render('mails/response_mail.html.twig', [
+                'content' => $content, 'attachment' => $logo, 'facebook' => $facebook, 'instagram', $instagram, 'pinterest' => $pinterest
+            ]), 'text/html');
 
         $this->swiftMailer->send($message);
     }
