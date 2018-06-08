@@ -12,6 +12,7 @@
             <link href="{{ asset('/css/styles/medium_styles.css') }}" rel="stylesheet" />
             <link href="{{ asset('/css/styles/small_styles.css') }}" rel="stylesheet" />
             <link href="{{ asset('/fonts/font-awesome.min.css') }}" rel="stylesheet">
+            <link href="{{ asset("css/bootstrap-datepicker.min.css") }}" rel="stylesheet">
             <link href="https://fonts.googleapis.com/css?family=Assistant:200,300,400,600,700,800|Playfair+Display:400,700" rel="stylesheet">
         {% endblock %}
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -188,7 +189,6 @@
 
     {% block contact %}
         <section class="contact" id="contact">
-            </div>
             <div class="row no-gutters">
                 <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 contact-article">
                     <div class="row no-gutters">
@@ -289,6 +289,18 @@
     <script src="{{ asset('js/vendor/bootstrap.bundle.js') }}"></script>
     <script src="{{ asset('/js/front/types.js') }}"></script>
     <script src="{{ asset('js/front/nav-mobile.js') }}"></script>
+    <script src="{{ asset("js/front/bootstrap-datepicker.min.js") }}"></script>
+    <script src="{{ asset ('js/front/bootstrap-datepicker.fr.min.js') }}"></script>
+    <script>$('#datepicker').datepicker({
+            language: 'fr',
+            format: 'yyyy-mm-dd'
+    })</script>
+<script>
+    $('#datepicker').on('changeDate',function(e){
+        $(this).datepicker('hide');
+        // $('#contact_date').val(e.date.getFullYear() + '-' +e.date.getMonth()+ '-' + e.date.getDate());
+    })
+</script>
 {% endblock %}
 
 {% endblock %}

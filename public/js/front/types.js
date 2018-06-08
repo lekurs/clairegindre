@@ -8,4 +8,12 @@ jQuery(document).ready(function ($) {
             $(this).parent().removeClass('is-completed');
         $(this).parent().removeClass('is-active');
     });
-})
+
+    // $('#contact_date').on('click', function () {
+    //     $('.position-date-picker').css('display', 'block');
+    // });
+
+    // $('.table-condensed').on('click', function () {
+    //     $('.position-date-picker').css('display', 'none');
+    // });
+});
