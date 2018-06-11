@@ -80,7 +80,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="loginFormModalTitle">Connexion Client</h5>
+                    <h5 class="modal-title modal-perso-title" id="loginFormModalTitle">Connexion Client</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -88,10 +88,21 @@
                 <div class="modal-body">
                     {{ form_start(customerConnectionType) }}
                     <input type="hidden" value="id de lagalerie" name="galleries"/>
-                    {{ form_widget(customerConnectionType) }}
+                    <div class="row no-gutters">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 d-flex justify-content-center input-content">
+                        {{ form_label(customerConnectionType.username) }}
+                        {{ form_widget(customerConnectionType.username, {'attr': {'class': 'contact-form' }}) }}
+                        </div>
+                    </div>
+                     <div class="row no-gutters">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 d-flex justify-content-center input-content">
+                            {{ form_label(customerConnectionType.password) }}
+                            {{ form_widget(customerConnectionType.password, {'attr': {'class': 'contact-form' }}) }}
+                    </div>
+                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-dark">Connexion</button>
+                    <button type="submit" class="btn btn-modal-perso">Connexion</button>
                     {{ form_end(customerConnectionType) }}
                 </div>
             </div>
@@ -102,5 +113,6 @@
 {% block javascripts %}
     {{ parent() }}
     <script src="{{ asset('/js/front/menu.js') }}"></script>
+    <script src="{{ asset('/js/front/types.js') }}"></script>
     <script src="{{ asset('/js/front/galleries_customers.js') }}"></script>
 {% endblock %}

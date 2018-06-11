@@ -7,6 +7,13 @@ html, body {
     letter-spacing: .2px;
 }
 
+.modal-perso-title {
+    font-family: Assistant;
+    font-weight: lighter;
+    font-size: 2em;
+    text-transform: uppercase;
+}
+
 /*****************************************************************/
 /*                                          MOBILE NAV                                               */
 /*****************************************************************/

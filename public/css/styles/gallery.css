@@ -115,6 +115,86 @@ legend {
 /*                      Galleries Customer                                    */
 /* ************************************************** */
 
+.modal-label {
+    display: block;
+    font-size: 16px;
+    position: absolute;
+    bottom: 20%;
+    left: 7%;
+    color: #5f6b67;
+    transition: all 0.5s;
+}
+
+.is-active .label-modal {
+    color: #5f6b67;
+}
+
+.is-completed .label-modal {
+    font-size: 12px;
+    bottom: 70%;
+    left: 7%;
+    opacity: .8;
+}
+
+
+.input-modal:before {
+    content: '';
+    position: absolute;
+    display: block;
+    width: 90%;
+    height: .5px;
+    background-color: #5f6b67;
+    bottom: 14%;
+    left: 5%;
+    transition: all 0.5s;
+}
+
+
+.input-modal::after {
+    height: 2px;
+    transform: scaleX(0);
+}
+
+.is-active::after {
+    transform: scaleX(1);
+}
+
+.is-active .modal-label {
+    color: #5f6b67;
+}
+
+.is-completed .modal-label {
+    font-size: 12px;
+    bottom: 70%;
+    left: 7%;
+    opacity: .8;
+}
+
+.input-modal {
+    border: none;
+    border-radius: 0;
+    height: 70px;
+    width: 100%;
+    margin: 15px 0;
+    font-size: 16px;
+    font-family: Assistant;
+    font-weight: lighter;
+    transition: all .5s ease-in-out;
+}
+
+.btn-modal-perso {
+    background-color: #242424;
+    width: 30%;
+    color: #ffffff;
+    border-radius: 0 !important;
+    text-transform: uppercase;
+    font-family: Assistant;
+    font-weight: lighter;
+    letter-spacing: .2rem;
+    font-size: .8em;
+    margin-right: 5% !important;
+}
+
 .cards-container {
     margin: 0;
     padding: 0;

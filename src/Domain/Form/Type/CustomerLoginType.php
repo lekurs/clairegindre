@@ -27,8 +27,14 @@ final class CustomerLoginType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('username', TextType::class)
-            ->add('password', PasswordType::class);
+            ->add('username', TextType::class, [
+                'label' => 'email@email.com',
+                'label_attr' => ['class' => 'label_contact'],
+            ])
+            ->add('password', PasswordType::class,  [
+                'label' => 'password',
+                'label_attr' => ['class' => 'label-modal']
+            ]);
     }
 
     /**
