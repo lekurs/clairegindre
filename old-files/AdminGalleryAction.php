@@ -11,8 +11,10 @@ namespace App\UI\Action\Admin;
 
 use App\Domain\Models\Gallery;
 use App\UI\Action\Admin\Interfaces\AdminGalleryActionInterface;
+use App\UI\Form\FormHandler\Interfaces\AddArticleTypeHandlerInterface;
 use App\UI\Responder\Admin\Interfaces\AdminGalleryResponderInterface;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -27,19 +29,13 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 final class AdminGalleryAction implements AdminGalleryActionInterface
 {
-    /**
-     * @var EntityManagerInterface
-     */
-    private $entityManager;
+    private $galleryRepository;
 
-    /**
-     * AdminGalleryAction constructor.
-     *
-     * @param EntityManagerInterface $entityManager
-     */
-    public function __construct(EntityManagerInterface $entityManager)
+    private $formFactory;
+
+    public function __construct(EntityManagerInterface $entityManager, FormFactoryInterface $formFactory, AddArticleTypeHandlerInterface $addArticleTypeHandler)
     {
-        $this->entityManager = $entityManager;
+        parent::__construct($entityManager, $formFactory, $addArticleTypeHandler);
     }
 
 

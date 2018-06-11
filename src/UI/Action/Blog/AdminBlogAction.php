@@ -13,6 +13,7 @@ use App\Domain\Models\Article;
 use App\Domain\Models\Gallery;
 use App\Domain\Repository\ArticleRepository;
 use App\UI\Action\Admin\Interfaces\AdminGalleryActionInterface;
+use App\UI\Action\Blog\Interfaces\AdminBlogActionInterface;
 use App\UI\Form\FormHandler\Interfaces\AddArticleTypeHandlerInterface;
 use App\UI\Responder\Interfaces\AdminBlogResponderInterface;
 use Doctrine\ORM\EntityManagerInterface;
@@ -30,7 +31,7 @@ use Symfony\Component\Routing\Annotation\Route;
  *
  * @package App\UI\Action\Blog
  */
-final class AdminBlogAction implements AdminGalleryActionInterface
+final class AdminBlogAction implements AdminBlogActionInterface
 {
     /**
      * @var EntityManagerInterface

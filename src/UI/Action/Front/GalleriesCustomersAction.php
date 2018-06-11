@@ -10,20 +10,15 @@ namespace App\UI\Action\Front;
 
 
 use App\Domain\Builder\Interfaces\GalleryBuilderInterface;
-use App\Domain\DTO\UserLoginDTO;
-use App\Domain\Form\LoginType;
+use App\Domain\Form\Type\LoginType;
 use App\Domain\Form\Type\ContactType;
-use App\Domain\Form\Type\CustomerLoginType;
 use App\Domain\Lib\InstagramLib;
-use App\Domain\Models\Gallery;
 use App\Domain\Repository\Interfaces\GalleryRepositoryInterface;
 use App\Domain\Repository\Interfaces\ReviewsRepositoryInterface;
 use App\Domain\Repository\Interfaces\UserRepositoryInterface;
 use App\UI\Action\Front\Interfaces\GalleriesCustomersActionInterface;
 use App\UI\Responder\Interfaces\GalleriesCustomersResponderInterface;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
-use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
