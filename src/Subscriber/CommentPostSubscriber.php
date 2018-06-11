@@ -51,7 +51,10 @@ final class CommentPostSubscriber implements EventSubscriberInterface, CommentPo
     public function manageUserField(FormEvent $event)
     {
         if(!$this->tokenStorage->getToken()->getUser() instanceof UserInterface) {
-            $event->getForm()->add('email', EmailType::class);
+            $event->getForm()->add('email', EmailType::class, [
+                'label' => 'email@email.com',
+                'label_attr' => ['class' => 'label_contact']
+            ]);
             $event->getForm()->add('lastName', TextType::class);
         }
     }

@@ -29,19 +29,29 @@
             </div>
         </div>
     </div>
-    <div class="row no-gutters">
-        <div class="col-lg-12 col-xl-12 col-md-12 col-sm-12 col-12 gallery-customers-header">
-            <img src="{{ asset('images/background/nico_anlor_b&w.jpg') }}" />
-        </div>
-    </div>
 {% endblock %}
 
 {% block content %}
+    <section>
+        <div class="container-fluid no-gutters">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 infos-content">
+                <div class="row no-gutters" id="end-nav">
+                </div>
+                <div class="row no-gutters social-container">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <p><a href="https://www.instagram.com/clairegindre_photographe/" target="_blank"><i class="fa fa-instagram"></i></a></p>
+                        <p><a href="https://www.facebook.com/clairegindre.pg/" target="_blank"><i class="fa fa-facebook-f"></i></a></p>
+                        <p><a href="https://www.pinterest.fr/ClaireGindrepg/" target="_blank"><i class="fa fa-pinterest-p"></i></a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 <section>
     <div class="container">
         <div class="row no-gutters">
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                <h1 class="text-center text-uppercase">{{ gallery.title }}</h1>
+                <h2 class="text-center text-uppercase title-gallery">{{ gallery.title }}</h2>
             </div>
         </div>
             <div class="row no-gutters cards-container">
@@ -56,16 +66,13 @@
                         </div>
                     </div>
                     <div class="row no-gutters text-center">
-                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 download-picture">
                             <a href="{{ asset(picture.publicPath ~ '/' ~ picture.pictureName) }}"><i class="fa fa-download"></i></a>
                         </div>
                     </div>
                 </div>
                 {% endfor %}
                 </div>
-
-    {% block contact %}
-    {% endblock %}
 
     {% block instagram_contact %}
     {% endblock %}

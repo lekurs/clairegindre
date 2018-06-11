@@ -29,51 +29,70 @@
             </div>
         </div>
     </div>
-    <div class="row no-gutters" id="end-nav">
-        <div class="col-lg-12 col-xl-12 col-md-12 col-sm-12 col-12 gallery-customers-header">
-            <img src="{{ asset('/images/background/nico_anlor_b&w.jpg') }}" />
-        </div>
-    </div>
+    <div class="row no-gutters" id="end-nav"></div>
 {% endblock %}
+
 {% block content %}
-    <div class="container">
-        <h2 class="text-center text-uppercase title-faq">Trouvez votre galerie</h2>
-        <div class="row no-gutters">
-                {% for gallery in galleries %}
-                        <div class="img-customers col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
-                            <div class="row no-gutters box">
-                                <img src="{{ asset('images/upload/gallery/' ~ gallery.title ~ '/' ~ gallery.pictures.first.pictureName) }}" alt="{{ gallery.pictures.first.pictureName }}" />
-                                    <div class="gallery-customers-informations">
-                                        <p><i class="fa fa-lock"></i></p>
-                                        <h4 class="gallery-title">{{ gallery.title }}</h4>
-                                        <p class="prestation-date">{{ gallery.user.dateWedding|date('d M Y') }}</p>
-                                        <a href="#" data-toggle="modal" data-target="#loginFormModal" class="connection-link"><i class="fa fa-user-o"></i></a>
-                                    </div>
-                            </div>
-                        </div>
-                {% endfor %}
+    <section>
+        <div class="container-fluid no-gutters">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 infos-content">
+                <div class="row no-gutters" id="end-nav">
+                    <div class="offset-8 col-md-3 col-lg-3 col-xl-3 d-xl-block d-lg-block d-sm-none d-none infos-galleries">
+                        <h2 class="text-uppercase">blablabal</h2>
+                        <p class="text-justify info-p">blablabal</p>
+                    </div>
+                </div>
+                <div class="row no-gutters social-container">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <p><a href="https://www.instagram.com/clairegindre_photographe/" target="_blank"><i class="fa fa-instagram"></i></a></p>
+                        <p><a href="https://www.facebook.com/clairegindre.pg/" target="_blank"><i class="fa fa-facebook-f"></i></a></p>
+                        <p><a href="https://www.pinterest.fr/ClaireGindrepg/" target="_blank"><i class="fa fa-pinterest-p"></i></a></p>
+                    </div>
+                </div>
+            </div>
         </div>
-        {# PAGINATION FOR USERS #}
-        <nav aria-label="pagination">
-            <ul class="pagination justify-content-center">
-                {% if pages.page > 1 %}
-                    <li class="page-item">
-                        <a href="{{ path('galleriesCustomers', { 'page': pages.page-1}) }}" class="page-link" tabindex="-1">Précédent</a>
-                    </li>
-                {% endif %}
-                {% for p in range(max(pages.page-4, 1), min(pages.page +4, pages.nbPages)) %}
-                    <li class="page-item">
-                        <a href="{{ path('galleriesCustomers', { 'page' : p})}}"  class="page-link">{{ p }}</a>
-                    </li>
-                {% endfor %}
-                {% if pages.page < pages.nbPages %}
-                    <li class="page-item">
-                        <a class="page-link" href="{{ path('galleriesCustomers', { 'page': pages.page+1}) }}">Suivante</a>
-                    </li>
-                {% endif %}
-            </ul>
-        </nav>
-    </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <h2 class="text-center text-uppercase title-faq">Trouvez votre galerie</h2>
+            <div class="row no-gutters">
+                    {% for gallery in galleries %}
+                            <div class="img-customers col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+                                <div class="row no-gutters box">
+                                    <img src="{{ asset('images/upload/gallery/' ~ gallery.title ~ '/' ~ gallery.pictures.first.pictureName) }}" alt="{{ gallery.pictures.first.pictureName }}" />
+                                        <div class="gallery-customers-informations">
+                                            <p><i class="fa fa-lock"></i></p>
+                                            <h4 class="gallery-title">{{ gallery.title }}</h4>
+                                            <p class="prestation-date">{{ gallery.user.dateWedding|date('d M Y') }}</p>
+                                            <a href="#" data-toggle="modal" data-target="#loginFormModal" class="connection-link"><i class="fa fa-user-o"></i></a>
+                                        </div>
+                                </div>
+                            </div>
+                    {% endfor %}
+            </div>
+            {# PAGINATION FOR USERS #}
+            <nav aria-label="pagination">
+                <ul class="pagination justify-content-center">
+                    {% if pages.page > 1 %}
+                        <li class="page-item">
+                            <a href="{{ path('galleriesCustomers', { 'page': pages.page-1}) }}" class="page-link" tabindex="-1">Précédent</a>
+                        </li>
+                    {% endif %}
+                    {% for p in range(max(pages.page-4, 1), min(pages.page +4, pages.nbPages)) %}
+                        <li class="page-item">
+                            <a href="{{ path('galleriesCustomers', { 'page' : p})}}"  class="page-link">{{ p }}</a>
+                        </li>
+                    {% endfor %}
+                    {% if pages.page < pages.nbPages %}
+                        <li class="page-item">
+                            <a class="page-link" href="{{ path('galleriesCustomers', { 'page': pages.page+1}) }}">Suivante</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </section>
 
     <!-- Modal -->
     <div class="modal fade" id="loginFormModal" tabindex="-1" role="dialog" aria-labelledby="loginFormModalTitle" aria-hidden="true">

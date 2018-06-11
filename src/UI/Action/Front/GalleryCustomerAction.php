@@ -8,9 +8,11 @@
 
 namespace App\UI\Action\Front;
 
+use App\Domain\Form\Type\ContactType;
 use App\Domain\Repository\Interfaces\GalleryRepositoryInterface;
 use App\Domain\Repository\Interfaces\UserRepositoryInterface;
 use App\UI\Action\Front\Interfaces\GalleryCustomerActionInterface;
+use App\UI\Form\FormHandler\Interfaces\ContactTypeHandlerInterface;
 use App\UI\Responder\Interfaces\GalleryCustomerResponderInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -34,14 +36,32 @@ final class GalleryCustomerAction implements GalleryCustomerActionInterface
     private $galleryRepository;
 
     /**
+     * @var FormFactoryInterface
+     */
+    private $formFactory;
+
+    /**
+     * @var ContactTypeHandlerInterface
+     */
+    private $contactTypeHandler;
+
+    /**
      * GalleryCustomerAction constructor.
      *
      * @param GalleryRepositoryInterface $galleryRepository
+     * @param FormFactoryInterface $formFactory
+     * @param ContactTypeHandlerInterface $contactTypeHandler
      */
-    public function __construct(GalleryRepositoryInterface $galleryRepository)
-    {
+    public function __construct(
+        GalleryRepositoryInterface $galleryRepository,
+        FormFactoryInterface $formFactory,
+        ContactTypeHandlerInterface $contactTypeHandler
+    ) {
         $this->galleryRepository = $galleryRepository;
+        $this->formFactory = $formFactory;
+        $this->contactTypeHandler = $contactTypeHandler;
     }
+
 
     /**
      * @param Request $request
@@ -52,6 +72,17 @@ final class GalleryCustomerAction implements GalleryCustomerActionInterface
     {
             $gallery = $this->galleryRepository->getWithPictures($request->attributes->get('slugGallery'));
 
-            return $responder($gallery);
+            $contactForm = $this->formFactory->create(ContactType::class)->handleRequest($request);
+
+            $pictures = $gallery->getPictures()->toArray();
+
+//            dump($gallery->getPictures()->toArray());
+
+        if ($this->contactTypeHandler->handle($contactForm)) {
+
+            return $responder(true, $contactForm, $gallery, $pictures);
+        }
+        
+            return $responder(false, $contactForm, $gallery, $pictures);
     }
 }

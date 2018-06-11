@@ -9,20 +9,26 @@
 namespace App\UI\Responder\Interfaces;
 
 
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Twig\Environment;
 
 interface GalleryCustomerResponderInterface
 {
     /**
-     * GalleryCustomerResponder constructor.
+     * GalleryCustomerResponderInterface constructor.
      *
      * @param Environment $twig
+     * @param UrlGeneratorInterface $urlGenerator
      */
-    public function __construct(Environment $twig);
+    public function __construct(Environment $twig, UrlGeneratorInterface $urlGenerator);
 
     /**
+     * @param bool $redirect
+     * @param FormInterface|null $form
      * @param $gallery
+     * @param $pictures
      * @return mixed
      */
-    public function __invoke($gallery);
+    public function __invoke($redirect = false, FormInterface $form = null, $gallery, $pictures);
 }

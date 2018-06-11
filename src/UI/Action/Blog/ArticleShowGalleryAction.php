@@ -129,14 +129,14 @@ final class ArticleShowGalleryAction implements ArticleShowGalleryActionInterfac
     {
         $reviews = $this->reviewsRepository->getAll();
 
-        $article = $this->articleRepository->getOne($request->get('slugArticle'));
+        $article = $this->articleRepository->getOne($request->attributes->get('slugArticle'));
 
-        $gallerys = $this->galleryRepository->getOne($request->attributes->get('slugGallery'));
+        $galerie = $this->galleryRepository->getOne($request->attributes->get('slugGallery'));
 
         $data[] = array();
 
-        foreach($gallerys->getPictures() as $key => $images) {
-            $data[$images->getGalleryMaker()->getLine()][$images->getGalleryMaker()->getDisplayOrder()][] = $images->getPublicPath() . '/' . $images->getPictureName();
+        foreach($galerie->getPictures() as $key => $images) {
+//            $data[$images->getGalleryMaker()->getLine()][$images->getGalleryMaker()->getDisplayOrder()][] = $images->getPublicPath() . '/' . $images->getPictureName();
         }
 
         $form = $this->formFactory->create(ContactType::class);
@@ -147,9 +147,9 @@ final class ArticleShowGalleryAction implements ArticleShowGalleryActionInterfac
 
         if ($this->addCommentHandler->handle($commentType, $article)) {
 
-            return $responder(true, $form, $commentType, $article, $data, $instagram, $reviews);
+            return $responder(true, $form, $commentType, $article, $data, $instagram, $reviews, $galerie);
         }
 
-        return $responder(false,$form, $commentType, $article, $data, $instagram, $reviews);
+        return $responder(false,$form, $commentType, $article, $data, $instagram, $reviews, $galerie);
     }
 }

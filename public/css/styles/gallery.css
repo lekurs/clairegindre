@@ -294,6 +294,13 @@ a.connection-link:hover {
 /*****************************************************************/
 /*                                      BLOG/ARTICLE/DETAIL                             */
 /*****************************************************************/
+.title-gallery {
+    font-family: Assistant;
+    font-weight: lighter;
+    font-size: 2em;
+    width: 80%;
+    margin: 30px auto;
+}
 
 .gallery-customers-header {
     height: 45vh;
@@ -347,4 +354,18 @@ a.connection-link:hover {
     font-size: 2em;
     font-family: 'Playfair';
     letter-spacing: .1rem;
+}
+
+.infos-galleries {
+    width: 100%;
+    position: absolute;
+    left: 0;
+}
+
+.download-picture {
+    text-align: right;
+}
+
+.download-picture i {
+    color: #000000;
 }

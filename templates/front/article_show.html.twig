@@ -25,79 +25,109 @@
                 {% endblock %}
             </div>
         </div>
-        <div class="row no-gutters gallery-customers-header">
-            <div class="col-lg-12 col-xl-12 col-md-12 col-sm-12 col-12">
-                <img src="{{ asset('/images/background/nico_anlor_b&w.jpg') }}" />
-            </div>
-        </div>
     </div>
 {% endblock %}
 
 {% block content %}
-    <div class="container">
-        <div class="row no-gutters">
-            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                <h2 class="text-center article-title">{{ article.title }}</h2>
-            </div>
-        </div>
-        <div class="row no-gutters">
-            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                {% for lines, order in data %}
-                    <div class="row">
-                    {% for display, order in order %}
-                        {% if loop.length > 1 %}
-                            {% for image, images in order %}
-                            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12"><img  src="{{ asset(images) }}"  class="img-gallery lazy" alt="{{ images }}" /></div>
-                                {% endfor %}
-                        {% else %}
-                            {% for image, images in order %}
-                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12"><img  src="{{ asset(images) }}" class="img-gallery lazy" alt="{{ images }}" /></div>
-                            {% endfor %}
-                        {% endif %}
-                    {% endfor %}
+    <section>
+        <div class="container-fluid no-gutters">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 infos-content">
+                <div class="row no-gutters" id="end-nav">
+                    <div class="offset-8 col-md-3 col-lg-3 col-xl-3 d-xl-block d-lg-block d-sm-none d-none infos-blog">
+                        <h2 class="text-uppercase">{{ galerie.title }}</h2>
+                        <p class="text-justify info-p">{{ galerie.eventDate | date }}</p>
                     </div>
-                {% endfor %}
+                </div>
+                <div class="row no-gutters social-container">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <p><a href="https://www.instagram.com/clairegindre_photographe/" target="_blank"><i class="fa fa-instagram"></i></a></p>
+                        <p><a href="https://www.facebook.com/clairegindre.pg/" target="_blank"><i class="fa fa-facebook-f"></i></a></p>
+                        <p><a href="https://www.pinterest.fr/ClaireGindrepg/" target="_blank"><i class="fa fa-pinterest-p"></i></a></p>
+                    </div>
                 </div>
             </div>
-                {#{% endfor %}#}
-        <div class="row no-gutters">
-            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                <h3 class="comment-title">ça vous a plu ? <br>N'hésitez pas à laisser votre commentaire</h3>
-            </div>
         </div>
+    </section>
+
+    <section>
+        <div class="container">
             <div class="row no-gutters">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                    {{ form_start(commentType) }}
-                    {{ form_widget(commentType) }}
-                    <button type="submit" class="btn btn-dark">Publier</button>
-                    {{ form_end(commentType) }}
+                    <h2 class="text-center article-title">{{ article.title }}</h2>
                 </div>
             </div>
-            <div class="row no-gutters comments-container">
+            {#<div class="row no-gutters">#}
+                {#<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">#}
+                    {#{{ gallery.title }}#}
+                {#</div>#}
+            {#</div>#}
+            <div class="row no-gutters">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 article-content">
+                    {{ article.content | raw }}
+                </div>
+            </div>
+            <div class="row no-gutters">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                    {% if article.comments is empty %}
-                        <div class="row">
-                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">Aucun commentaire</div>
-                        </div>
-                    {% endif %}
-                    {% for comment in article.comments %}
-                        {% if comment.email is null %}
-                        <div class="row comments-contain">
-                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">{{ comment.author.username ~ ' - ' ~ comment.author.lastName }}</div>
-                        </div>
-                        {% else %}
-                        <div class="row comments-contain">
-                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">{{ comment.email }}</div>
-                        </div>
-                        {% endif %}
-                        <div class="row comments-contain">
-                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">{{ comment.content | raw }}</div>
+                    {% for lines, order in data %}
+                        <div class="row no-gutters">
+                        {% for display, order in order %}
+                            {% if loop.length > 1 %}
+                                {% for image, images in order %}
+                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12"><img  src="{{ asset(images) }}"  class="img-gallery lazy test" alt="{{ images }}" /></div>
+                                    {% endfor %}
+                            {% else %}
+                                {% for image, images in order %}
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12"><img  src="{{ asset(images) }}" class="img-gallery lazy" alt="{{ images }}" /></div>
+                                {% endfor %}
+                            {% endif %}
+                        {% endfor %}
                         </div>
                     {% endfor %}
+                    </div>
+                </div>
+
+            <div class="row no-gutters">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <h3 class="comment-title">ça t'as plu ? <br>N'hésites pas à me laisser un commentaire !</h3>
                 </div>
             </div>
-        </div>
-    </div>
+                <div class="row no-gutters">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        {{ form_start(commentType) }}
+                        {{ form_widget(commentType) }}
+                        <div class="row no-gutters">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 text-right">
+                                <button type="submit" class="btn btn-perso">Publier</button>
+                            </div>
+                        </div>
+                        {{ form_end(commentType) }}
+                    </div>
+                </div>
+                <div class="row no-gutters comments-container">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        {% if article.comments is empty %}
+                            <div class="row">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 comment">Aucun commentaire</div>
+                            </div>
+                        {% endif %}
+                        {% for comment in article.comments %}
+                            {% if comment.email is null %}
+                            <div class="row">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 comment-name">{{ comment.author.username ~ ' - ' ~ comment.date | date }}</div>
+                            </div>
+                            {% else %}
+                            <div class="row">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 comment-name">{{ comment.lastname }}</div>
+                            </div>
+                            {% endif %}
+                            <div class="row comments-contain">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 comment">{{ comment.content | raw }}</div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+    </section>
 {% endblock %}
 
 {% block contact %}

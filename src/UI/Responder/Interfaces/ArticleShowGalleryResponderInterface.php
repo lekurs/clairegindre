@@ -31,7 +31,8 @@ interface ArticleShowGalleryResponderInterface
      * @param $data
      * @param $instagram
      * @param $reviews
+     * @param $galerie
      * @return mixed
      */
-    public function __invoke($redirect = false, FormInterface $form = null, FormInterface $commentType = null, $article, $data, $instagram, $reviews);
+    public function __invoke($redirect = false, FormInterface $form = null, FormInterface $commentType = null, $article, $data, $instagram, $reviews, $galerie);
 }

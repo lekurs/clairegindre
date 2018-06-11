@@ -44,7 +44,7 @@ final class AddCommentOnArticleType extends AbstractType
     {
         $builder
             ->add('content', TextareaType::class, [
-                'required' => false
+                'required' => false,
             ])
 
             ->addEventSubscriber($this->commentPostListener);
