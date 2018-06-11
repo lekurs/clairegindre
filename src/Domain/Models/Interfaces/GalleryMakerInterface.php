@@ -17,4 +17,5 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 interface GalleryMakerInterface
 {
+
 }
