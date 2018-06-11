@@ -12,7 +12,7 @@ namespace App\Domain\DTO;
 use App\Domain\DTO\Interfaces\AddCommentArticleUserConnectedDTOInterface;
 use App\Domain\Models\Interfaces\UserInterface;
 
-class AddCommentArticleUserConnectedDTO implements AddCommentArticleUserConnectedDTOInterface
+final class AddCommentArticleUserConnectedDTO implements AddCommentArticleUserConnectedDTOInterface
 {
     /**
      * @var UserInterface
@@ -30,10 +30,8 @@ class AddCommentArticleUserConnectedDTO implements AddCommentArticleUserConnecte
      * @param UserInterface $author
      * @param string $content
      */
-    public function __construct(
-        UserInterface $author,
-        string $content
-    ) {
+    public function __construct(UserInterface $author, string $content)
+    {
         $this->author = $author;
         $this->content = $content;
     }

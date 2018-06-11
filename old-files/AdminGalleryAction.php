@@ -9,8 +9,7 @@
 namespace App\UI\Action\Admin;
 
 
-use App\Domain\Builder\Interfaces\GalleryBuilderInterface;
-use App\Domain\Models\Interfaces\GalleryInterface;
+use App\Domain\Models\Gallery;
 use App\UI\Action\Admin\Interfaces\AdminGalleryActionInterface;
 use App\UI\Responder\Admin\Interfaces\AdminGalleryResponderInterface;
 use Doctrine\ORM\EntityManagerInterface;
@@ -26,7 +25,7 @@ use Symfony\Component\Routing\Annotation\Route;
  *
  * @package App\UI\Action\Admin
  */
-class AdminGalleryAction implements AdminGalleryActionInterface
+final class AdminGalleryAction implements AdminGalleryActionInterface
 {
     /**
      * @var EntityManagerInterface
@@ -34,13 +33,19 @@ class AdminGalleryAction implements AdminGalleryActionInterface
     private $entityManager;
 
     /**
-     * @var GalleryBuilderInterface
+     * AdminGalleryAction constructor.
+     *
+     * @param EntityManagerInterface $entityManager
      */
-    private $galleryBuilder;
+    public function __construct(EntityManagerInterface $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
 
     public function __invoke(AdminGalleryResponderInterface $response)
     {
-        $gallery = $this->entityManager->getRepository(GalleryInterface::class)->showAll();
+        $gallery = $this->entityManager->getRepository(Gallery::class)->showAll();
 
         return $response($gallery);
     }

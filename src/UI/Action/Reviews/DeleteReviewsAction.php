@@ -25,7 +25,7 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
  * )
  *
  */
-class DeleteReviewsAction implements DeleteReviewsActionInterface
+final class DeleteReviewsAction implements DeleteReviewsActionInterface
 {
     /**
      * @var ReviewsRepositoryInterface
@@ -39,6 +39,7 @@ class DeleteReviewsAction implements DeleteReviewsActionInterface
 
     /**
      * DeleteReviewsAction constructor.
+     *
      * @param ReviewsRepositoryInterface $reviewsRepository
      * @param AuthorizationCheckerInterface $authorizationChecker
      */
@@ -48,12 +49,19 @@ class DeleteReviewsAction implements DeleteReviewsActionInterface
         $this->authorizationChecker = $authorizationChecker;
     }
 
+    /**
+     * @param Request $request
+     * @param DeleteReviewsResponderInterface $responder
+     * @return mixed
+     */
     public function __invoke(Request $request, DeleteReviewsResponderInterface $responder)
     {
-        $review = $this->reviewsRepository->getOne($request->get('id'));
+        if ($this->authorizationChecker->isGranted('ROLE_ADMIN')) {
+            $review = $this->reviewsRepository->getOne($request->get('id'));
 
-        $this->reviewsRepository->delete($review);
+            $this->reviewsRepository->delete($review);
 
-        return $responder();
+            return $responder();
+        }
     }
 }

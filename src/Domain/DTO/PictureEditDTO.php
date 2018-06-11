@@ -11,7 +11,7 @@ namespace App\Domain\DTO;
 
 use App\Domain\DTO\Interfaces\PictureEditDTOInterface;
 
-class PictureEditDTO implements PictureEditDTOInterface
+final class PictureEditDTO implements PictureEditDTOInterface
 {
     /**
      * @var int
@@ -28,10 +28,8 @@ class PictureEditDTO implements PictureEditDTOInterface
      * @param int $displayOrder
      * @param bool $favorite
      */
-    public function __construct(
-        int $displayOrder,
-        bool $favorite
-    ) {
+    public function __construct(int $displayOrder, bool $favorite)
+    {
         $this->displayOrder = $displayOrder;
         $this->favorite = $favorite;
     }

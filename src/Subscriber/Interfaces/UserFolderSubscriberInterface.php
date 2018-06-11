@@ -9,7 +9,22 @@
 namespace App\Subscriber\Interfaces;
 
 
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Form\FormEvent;
+
 interface UserFolderSubscriberInterface
 {
+    /**
+     * UserFolderSubscriberInterface constructor.
+     *
+     * @param Filesystem $fileSystem
+     * @param string $targetDir
+     */
+    public function __construct(Filesystem $fileSystem, string $targetDir);
 
+    /**
+     * @param FormEvent $formEvent
+     * @return mixed
+     */
+    public function onUserFolder(FormEvent $formEvent);
 }

@@ -11,5 +11,8 @@ namespace App\UI\Responder\Admin\Interfaces;
 
 interface DeletePictureGalleryAjaxResponderInterface
 {
-
+    /**
+     * @return mixed
+     */
+    public function __invoke();
 }

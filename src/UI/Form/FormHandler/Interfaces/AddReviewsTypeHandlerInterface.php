@@ -32,12 +32,20 @@ interface AddReviewsTypeHandlerInterface
      * @param Filesystem $fileSystem
      * @param TokenStorageInterface $tokenStorage
      */
-    public function __construct(ReviewsRepositoryInterface $reviewsRepository, SessionInterface $session, ValidatorInterface $validator, ReviewsBuilderInterface $reviewsBuilder, PictureUploaderHelper $pictureUploaderHelper, string $targetDir, Filesystem $fileSystem, TokenStorageInterface $tokenStorage);
+    public function __construct(
+        ReviewsRepositoryInterface $reviewsRepository,
+        SessionInterface $session,
+        ValidatorInterface $validator,
+        ReviewsBuilderInterface $reviewsBuilder,
+        PictureUploaderHelper $pictureUploaderHelper,
+        string $targetDir,
+        Filesystem $fileSystem,
+        TokenStorageInterface $tokenStorage
+    );
 
     /**
      * @param FormInterface $form
      * @return mixed
      */
     public function handle(FormInterface $form);
-
 }

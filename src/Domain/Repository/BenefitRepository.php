@@ -14,7 +14,7 @@ use App\Domain\Models\Interfaces\BenefitInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
-class BenefitRepository extends ServiceEntityRepository implements BenefitRepositoryInterface
+final class BenefitRepository extends ServiceEntityRepository implements BenefitRepositoryInterface
 {
     /**
      * BenefitRepository constructor.
@@ -69,5 +69,4 @@ class BenefitRepository extends ServiceEntityRepository implements BenefitReposi
     {
         $this->getEntityManager()->flush();
     }
-
 }

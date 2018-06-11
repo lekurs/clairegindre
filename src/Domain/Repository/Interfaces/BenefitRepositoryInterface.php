@@ -36,4 +36,9 @@ interface BenefitRepositoryInterface
      * @param BenefitInterface $benefit
      */
     public function save(BenefitInterface $benefit): void;
+
+    /**
+     * @param BenefitInterface $benefit
+     */
+    public function edit(BenefitInterface $benefit): void;
 }

@@ -9,7 +9,6 @@
 namespace App\UI\Form\FormHandler;
 
 use App\Domain\Builder\Interfaces\UserBuilderInterface;
-use App\Domain\Models\Interfaces\UserInterface;
 use App\Domain\Models\Picture;
 use App\Domain\Repository\Interfaces\UserRepositoryInterface;
 use App\Services\PictureUploaderHelper;
@@ -20,7 +19,7 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
-class RegistrationTypeHandler implements RegistrationTypeHandlerInterface
+final class RegistrationTypeHandler implements RegistrationTypeHandlerInterface
 {
     /**
      * @var UserRepositoryInterface
@@ -64,6 +63,7 @@ class RegistrationTypeHandler implements RegistrationTypeHandlerInterface
 
     /**
      * RegistrationTypeHandler constructor.
+     *
      * @param UserRepositoryInterface $userRepository
      * @param SessionInterface $session
      * @param ValidatorInterface $validator
@@ -93,7 +93,10 @@ class RegistrationTypeHandler implements RegistrationTypeHandlerInterface
         $this->stringReplaceHelper = $stringReplaceHelper;
     }
 
-
+    /**
+     * @param FormInterface $form
+     * @return bool
+     */
     public function handle(FormInterface $form): bool
     {
         if($form->isSubmitted() && $form->isValid()) {
@@ -119,7 +122,7 @@ class RegistrationTypeHandler implements RegistrationTypeHandlerInterface
                                                                         );
 
             $this->validator->validate($user, [], [
-                'registration_creation'
+                'user_creation'
             ]);
 
             $this->userRepository->save($this->userBuilder->getUser());
@@ -130,5 +133,4 @@ class RegistrationTypeHandler implements RegistrationTypeHandlerInterface
         }
         return false;
     }
-
 }

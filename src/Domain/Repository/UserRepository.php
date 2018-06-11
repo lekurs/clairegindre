@@ -10,7 +10,7 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Bridge\Doctrine\Security\User\UserLoaderInterface;
 
-class UserRepository extends ServiceEntityRepository implements UserLoaderInterface, UserRepositoryInterface
+final class UserRepository extends ServiceEntityRepository implements UserLoaderInterface, UserRepositoryInterface
 {
     /**
      * UserRepository constructor.
@@ -128,11 +128,21 @@ class UserRepository extends ServiceEntityRepository implements UserLoaderInterf
         $this->getEntityManager()->flush();
     }
 
+    /**
+     * @return mixed|void
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
     public function update()
     {
         $this->getEntityManager()->flush();
     }
 
+    /**
+     * @param UserInterface $user
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
     public function updateOnline(UserInterface $user)
     {
         if ($user->isOnline() === true) {

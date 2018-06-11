@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Twig\Environment;
 
-class GalleriesCustomersResponder implements GalleriesCustomersResponderInterface
+final class GalleriesCustomersResponder implements GalleriesCustomersResponderInterface
 {
     /**
      * @var Environment
@@ -30,6 +30,7 @@ class GalleriesCustomersResponder implements GalleriesCustomersResponderInterfac
 
     /**
      * GalleriesCustomersResponder constructor.
+     *
      * @param Environment $twig
      * @param UrlGeneratorInterface $urlGenerator
      */

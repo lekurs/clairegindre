@@ -19,8 +19,12 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class AddReviewsType extends AbstractType
+final class AddReviewsType extends AbstractType
 {
+    /**
+     * @param FormBuilderInterface $builder
+     * @param array $options
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -35,6 +39,9 @@ class AddReviewsType extends AbstractType
         ;
     }
 
+    /**
+     * @param OptionsResolver $resolver
+     */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
@@ -46,8 +53,8 @@ class AddReviewsType extends AbstractType
                                 $form->get('online')->getData(),
                                 $form->get('image')->getData()
                             );
-                    }
+                    },
+            'validation_groups' => ['reviews_creation']
         ]);
     }
-
 }

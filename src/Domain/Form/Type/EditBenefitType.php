@@ -17,14 +17,21 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class EditBenefitType extends AbstractType
+final class EditBenefitType extends AbstractType
 {
+    /**
+     * @param FormBuilderInterface $builder
+     * @param array $options
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('name', TextType::class);
     }
 
+    /**
+     * @param OptionsResolver $resolver
+     */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
@@ -34,7 +41,7 @@ class EditBenefitType extends AbstractType
                                 $form->get('name')->getData()
                             );
                     },
+            'validation_groups' => ['benefit_creation']
         ]);
     }
-
 }

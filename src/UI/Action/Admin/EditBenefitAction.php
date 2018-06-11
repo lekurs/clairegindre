@@ -31,7 +31,7 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
  * )
  *
  */
-class EditBenefitAction implements EditBenefitActionInterface
+final class EditBenefitAction implements EditBenefitActionInterface
 {
     /**
      * @var FormFactoryInterface
@@ -81,7 +81,11 @@ class EditBenefitAction implements EditBenefitActionInterface
         $this->editBenefitTypeHandler = $editBenefitTypeHandler;
     }
 
-
+    /**
+     * @param Request $request
+     * @param EditBenefitResponderInterface $responder
+     * @return mixed
+     */
     public function __invoke(Request $request, EditBenefitResponderInterface $responder)
     {
         if (false === $this->authorizationChecker->isGranted('ROLE_ADMIN')) {

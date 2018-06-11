@@ -11,5 +11,8 @@ namespace App\UI\Responder\Admin\Interfaces;
 
 interface UpdateOnlineUserAjaxResponderInterface
 {
-
+    /**
+     * @return mixed
+     */
+    public function __invoke();
 }

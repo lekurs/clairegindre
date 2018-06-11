@@ -12,9 +12,11 @@ namespace App\UI\Action\Blog;
 use App\Domain\Models\Interfaces\GalleryMakerInterface;
 use App\Domain\Repository\Interfaces\ArticleRepositoryInterface;
 use App\Domain\Repository\Interfaces\GalleryRepositoryInterface;
+use App\UI\Action\Blog\Interfaces\GallerieMakerActionInterface;
 use App\UI\Responder\Interfaces\GallerieMakerResponderInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 /**
  * Class GallerieMakerAction
@@ -26,7 +28,7 @@ use Symfony\Component\Routing\Annotation\Route;
  * )
  *
  */
-class GallerieMakerAction implements GalleryMakerInterface
+final class GallerieMakerAction implements GallerieMakerActionInterface
 {
     /**
      * @var GallerieMakerResponderInterface
@@ -44,25 +46,42 @@ class GallerieMakerAction implements GalleryMakerInterface
     private $articleRepository;
 
     /**
+     * @var AuthorizationCheckerInterface
+     */
+    private $authorization;
+
+    /**
      * GallerieMakerAction constructor.
+     *
      * @param GallerieMakerResponderInterface $responder
      * @param GalleryRepositoryInterface $galleryRepository
      * @param ArticleRepositoryInterface $articleRepository
+     * @param AuthorizationCheckerInterface $authorization
      */
-    public function __construct(GallerieMakerResponderInterface $responder, GalleryRepositoryInterface $galleryRepository, ArticleRepositoryInterface $articleRepository)
-    {
+    public function __construct(
+        GallerieMakerResponderInterface $responder,
+        GalleryRepositoryInterface $galleryRepository,
+        ArticleRepositoryInterface $articleRepository,
+        AuthorizationCheckerInterface $authorization
+    ) {
         $this->responder = $responder;
         $this->galleryRepository = $galleryRepository;
         $this->articleRepository = $articleRepository;
+        $this->authorization = $authorization;
     }
 
-
+    /**
+     * @param Request $request
+     * @return mixed
+     */
     public function __invoke(Request $request)
     {
-        $responder = $this->responder;
+        if ($this->authorization->isGranted('ROLE_ADMIN')) {
+            $responder = $this->responder;
 
-        $gallery = $this->galleryRepository->getOne($request->attributes->get('slugGallery'));
+            $gallery = $this->galleryRepository->getOne($request->attributes->get('slugGallery'));
 
-        return $responder(false, $gallery);
+            return $responder(false, $gallery);
+        }
     }
 }

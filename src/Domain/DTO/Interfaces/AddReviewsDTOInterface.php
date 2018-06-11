@@ -18,5 +18,10 @@ interface AddReviewsDTOInterface
      * @param string $image
      * @param bool $online*
      */
-    public function __construct(string $title, string $content, bool $online, string $image);
+    public function __construct(
+        string $title,
+        string $content,
+        bool $online,
+        string $image
+    );
 }

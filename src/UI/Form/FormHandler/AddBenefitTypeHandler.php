@@ -16,7 +16,7 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
-class AddBenefitTypeHandler implements AddBenefitHandlerInterface
+final class AddBenefitTypeHandler implements AddBenefitHandlerInterface
 {
     /**
      * @var BenefitRepositoryInterface
@@ -58,6 +58,10 @@ class AddBenefitTypeHandler implements AddBenefitHandlerInterface
         $this->benefitBuilder = $benefitBuilder;
     }
 
+    /**
+     * @param FormInterface $form
+     * @return bool
+     */
     public function handle(FormInterface $form):bool
     {
         if($form->isSubmitted() && $form->isValid()) {

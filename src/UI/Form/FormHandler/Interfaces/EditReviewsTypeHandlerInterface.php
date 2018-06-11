@@ -29,7 +29,14 @@ interface EditReviewsTypeHandlerInterface
      * @param ReviewsRepositoryInterface $reviewsRepository
      * @param ReviewsBuilderInterface $reviewsBuilder
      */
-    public function __construct(SessionInterface $session, AuthorizationCheckerInterface $authorizationChecker, TokenStorageInterface $tokenStorage, ValidatorInterface $validator, ReviewsRepositoryInterface $reviewsRepository, ReviewsBuilderInterface $reviewsBuilder);
+    public function __construct(
+        SessionInterface $session,
+        AuthorizationCheckerInterface $authorizationChecker,
+        TokenStorageInterface $tokenStorage,
+        ValidatorInterface $validator,
+        ReviewsRepositoryInterface $reviewsRepository,
+        ReviewsBuilderInterface $reviewsBuilder
+    );
 
     /**
      * @param FormInterface $form

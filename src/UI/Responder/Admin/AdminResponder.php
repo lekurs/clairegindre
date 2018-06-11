@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Twig\Environment;
 
-class AdminResponder implements AdminResponderInterface
+final class AdminResponder implements AdminResponderInterface
 {
     /**
      * @var Environment
@@ -34,10 +34,8 @@ class AdminResponder implements AdminResponderInterface
      * @param Environment $twig
      * @param UrlGeneratorInterface $urlGenerator
      */
-    public function __construct(
-        Environment $twig,
-        UrlGeneratorInterface $urlGenerator
-    ) {
+    public function __construct(Environment $twig, UrlGeneratorInterface $urlGenerator)
+    {
         $this->twig = $twig;
         $this->urlGenerator = $urlGenerator;
     }

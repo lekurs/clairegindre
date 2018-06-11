@@ -9,7 +9,8 @@
 namespace App\UI\Action\Security;
 
 
-use App\Domain\Form\LoginType;
+use App\Domain\Form\Type\LoginType;
+use App\UI\Action\Security\Interfaces\LoginActionInterface;
 use App\UI\Responder\Security\Interfaces\UserConnectionResponderInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -24,7 +25,7 @@ use Symfony\Component\Routing\Annotation\Route;
  * )
  *
  */
-class LoginAction
+final class LoginAction implements LoginActionInterface
 {
     /**
      * @var FormFactoryInterface
@@ -51,6 +52,4 @@ class LoginAction
 
         return $responder($form);
     }
-
-
 }

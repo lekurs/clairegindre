@@ -11,7 +11,7 @@ namespace App\Domain\DTO;
 
 use App\Domain\DTO\Interfaces\UserLoginDTOInterface;
 
-class UserLoginDTO implements UserLoginDTOInterface
+final class UserLoginDTO implements UserLoginDTOInterface
 {
     /**
      * @var string
@@ -25,6 +25,7 @@ class UserLoginDTO implements UserLoginDTOInterface
 
     /**
      * UserLoginDTO constructor.
+     *
      * @param string $username
      * @param string $password
      */

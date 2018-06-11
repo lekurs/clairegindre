@@ -38,7 +38,7 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
  *
  * @package App\UI\Action\Blog
  */
-class ArticleShowGalleryAction implements ArticleShowGalleryActionInterface
+final class ArticleShowGalleryAction implements ArticleShowGalleryActionInterface
 {
     /**
      * @var ReviewsRepositoryInterface
@@ -87,6 +87,7 @@ class ArticleShowGalleryAction implements ArticleShowGalleryActionInterface
 
     /**
      * ArticleShowGalleryAction constructor.
+     *
      * @param ReviewsRepositoryInterface $reviewsRepository
      * @param ArticleRepositoryInterface $articleRepository
      * @param GalleryMakerRepository $galleryMakerRepository
@@ -97,8 +98,17 @@ class ArticleShowGalleryAction implements ArticleShowGalleryActionInterface
      * @param TokenStorageInterface $tokenStorage
      * @param SlugHelper $stringReplace
      */
-    public function __construct(ReviewsRepositoryInterface $reviewsRepository, ArticleRepositoryInterface $articleRepository, GalleryMakerRepository $galleryMakerRepository, GalleryRepositoryInterface $galleryRepository, FormFactoryInterface $formFactory, AddCommentOnArticleTypeHandlerInterface $addCommentHandler, InstagramLib $instagram, TokenStorageInterface $tokenStorage, SlugHelper $stringReplace)
-    {
+    public function __construct(
+        ReviewsRepositoryInterface $reviewsRepository,
+        ArticleRepositoryInterface $articleRepository,
+        GalleryMakerRepository $galleryMakerRepository,
+        GalleryRepositoryInterface $galleryRepository,
+        FormFactoryInterface $formFactory,
+        AddCommentOnArticleTypeHandlerInterface $addCommentHandler,
+        InstagramLib $instagram,
+        TokenStorageInterface $tokenStorage,
+        SlugHelper $stringReplace
+    ) {
         $this->reviewsRepository = $reviewsRepository;
         $this->articleRepository = $articleRepository;
         $this->galleryMakerRepository = $galleryMakerRepository;
@@ -110,7 +120,11 @@ class ArticleShowGalleryAction implements ArticleShowGalleryActionInterface
         $this->stringReplace = $stringReplace;
     }
 
-
+    /**
+     * @param Request $request
+     * @param ArticleShowGalleryResponderInterface $responder
+     * @return mixed
+     */
     public function __invoke(Request $request, ArticleShowGalleryResponderInterface $responder)
     {
         $reviews = $this->reviewsRepository->getAll();
@@ -138,5 +152,4 @@ class ArticleShowGalleryAction implements ArticleShowGalleryActionInterface
 
         return $responder(false,$form, $commentType, $article, $data, $instagram, $reviews);
     }
-
 }

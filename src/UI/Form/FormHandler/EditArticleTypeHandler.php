@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
-class EditArticleTypeHandler implements EditArticleTypeHandlerInterface
+final class EditArticleTypeHandler implements EditArticleTypeHandlerInterface
 {
     /**
      * @var SessionInterface
@@ -78,11 +78,11 @@ class EditArticleTypeHandler implements EditArticleTypeHandlerInterface
     {
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $article->updateArticle($form->getData());
+            $articleEdit = $article->updateArticle($form->getData());
 
-//            $this->validator->validate($articleEdit, [], [
-//                'article_edit'
-//            ]);
+            $this->validator->validate($articleEdit, [], [
+                'article_creation'
+            ]);
 
             $this->articleRepository->update();
 

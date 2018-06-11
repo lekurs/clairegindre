@@ -78,7 +78,6 @@ class IndexAction implements IndexActionInterface
         $this->reviewsRepository = $reviewsRepository;
     }
 
-
     /**
      * @param Request $request
      * @param IndexResponderInterface $responder

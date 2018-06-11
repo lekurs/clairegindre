@@ -25,7 +25,7 @@ use Symfony\Component\Routing\Annotation\Route;
  *
  * @package App\UI\Action\Admin
  */
-class DeleteGalleryAction implements DeleteGalleryActionInterface
+final class DeleteGalleryAction implements DeleteGalleryActionInterface
 {
     /**
      * @var GalleryRepositoryInterface

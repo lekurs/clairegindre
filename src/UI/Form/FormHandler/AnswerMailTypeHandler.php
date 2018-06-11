@@ -9,7 +9,6 @@
 namespace App\UI\Form\FormHandler;
 
 
-use App\Domain\DTO\AnswerMailDTO;
 use App\Domain\Models\Mail;
 use App\Domain\Repository\Interfaces\MailRepositoryInterface;
 use App\Services\Interfaces\MailerHelperInterface;
@@ -82,6 +81,8 @@ final class AnswerMailTypeHandler implements AnswerMailTypeHandlerInterface
 
             //Insert the response
             $emailResponse = new Mail($mail->getFromSender(), $mail->getToEmail(), $form->getData()->subject, $form->getData()->content, true, $mail->getSlug(), $mail);
+
+            $this->validator->validate($emailResponse, [], ['answer_mail']);
 
             $this->mailRepository->save($emailResponse);
 

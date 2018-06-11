@@ -10,9 +10,16 @@ namespace App\Domain\Repository\Interfaces;
 
 
 use App\Domain\Models\Interfaces\CommentInterface;
+use Symfony\Bridge\Doctrine\RegistryInterface;
 
 interface CommentRepositoryInterface
 {
+    /**
+     * CommentRepositoryInterface constructor.
+     *
+     * @param RegistryInterface $registry
+     */
+    public function __construct(RegistryInterface $registry);
     /**
      * @return mixed
      */

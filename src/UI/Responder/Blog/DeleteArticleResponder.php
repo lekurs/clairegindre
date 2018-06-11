@@ -13,7 +13,7 @@ use App\UI\Responder\Interfaces\DeleteArticleResponderInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
-class DeleteArticleResponder implements DeleteArticleResponderInterface
+final class DeleteArticleResponder implements DeleteArticleResponderInterface
 {
     /**
      * @var UrlGeneratorInterface

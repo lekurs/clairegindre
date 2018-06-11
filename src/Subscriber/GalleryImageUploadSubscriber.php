@@ -18,7 +18,7 @@ use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 
-class GalleryImageUploadSubscriber implements EventSubscriberInterface, GalleryImageUploadSubscriberInterface
+final class GalleryImageUploadSubscriber implements EventSubscriberInterface, GalleryImageUploadSubscriberInterface
 {
     /**
      * @var Filesystem
@@ -37,6 +37,7 @@ class GalleryImageUploadSubscriber implements EventSubscriberInterface, GalleryI
 
     /**
      * GalleryImageUploadSubscriber constructor.
+     *
      * @param Filesystem $fileSystem
      * @param PictureUploaderHelper $pictureUploadHelper
      * @param string $targetDir
@@ -51,6 +52,9 @@ class GalleryImageUploadSubscriber implements EventSubscriberInterface, GalleryI
         $this->targetDir = $targetDir;
     }
 
+    /**
+     * @return array
+     */
         public static function getSubscribedEvents()
         {
             return [
@@ -58,11 +62,13 @@ class GalleryImageUploadSubscriber implements EventSubscriberInterface, GalleryI
             ];
         }
 
+    /**
+     * @param FormEvent $event
+     */
         public function onGalleryUpload(FormEvent $event)
         {
             foreach ($event->getData() as $image) {
-                dump($event->getForm()->getParent());
-                die();
+
                 $this->pictureUploadHelper->move($image, $this->targetDir . '/gallery/' . $event->getForm()->getParent()->getData()->getId(), $image->getClientOriginalName());
                 $picture = new Picture($image->getClientOriginalName(), 'images/upload/gallery/' . $event->getForm()->getParent()->getData()->getId(), $image->guessClientExtension());
                 $picture->setGallery($event->getForm()->getParent()->getData());

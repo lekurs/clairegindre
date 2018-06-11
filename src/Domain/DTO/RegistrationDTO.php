@@ -10,13 +10,9 @@ namespace App\Domain\DTO;
 
 
 use App\Domain\DTO\Interfaces\RegistrationDTOInterface;
-use App\Domain\Models\Interfaces\PictureInterface;
-use App\Domain\Models\Interfaces\UserInterface;
-use Symfony\Component\Finder\SplFileInfo;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 
-class RegistrationDTO implements RegistrationDTOInterface
+final class RegistrationDTO implements RegistrationDTOInterface
 {
     /**
      * @var string
@@ -62,8 +58,8 @@ class RegistrationDTO implements RegistrationDTOInterface
      * @param string $lastName
      * @param string $plainPassword
      * @param \DateTime $dateWedding
-     * @param $online
-     * @param string $picture
+     * @param \SplFileInfo $picture
+     * @param bool $online
      */
     public function __construct(
         string $email,

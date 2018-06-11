@@ -16,7 +16,7 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
-class PictureEditTypeHandler implements PictureEditTypeHandlerInterface
+final class PictureEditTypeHandler implements PictureEditTypeHandlerInterface
 {
     /**
      * @var PictureRepositoryInterface
@@ -75,5 +75,4 @@ class PictureEditTypeHandler implements PictureEditTypeHandlerInterface
         }
         return false;
     }
-
 }

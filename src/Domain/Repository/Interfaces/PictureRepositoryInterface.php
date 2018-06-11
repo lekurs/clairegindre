@@ -9,9 +9,8 @@
 namespace App\Domain\Repository\Interfaces;
 
 
+use App\Domain\Models\Gallery;
 use App\Domain\Models\Interfaces\PictureInterface;
-use App\Domain\Models\Interfaces\UserInterface;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 interface PictureRepositoryInterface
@@ -30,6 +29,12 @@ interface PictureRepositoryInterface
     public function getOne($id);
 
     /**
+     * @param Gallery $gallery
+     * @return mixed
+     */
+    public function getAllByGallery(Gallery $gallery);
+
+    /**
      * @return mixed
      */
     public function showPicturesByGallery();
@@ -45,6 +50,11 @@ interface PictureRepositoryInterface
      * @return mixed
      */
     public function save(PictureInterface $picture);
+
+    /**
+     * @return mixed
+     */
+    public function update();
 
     /**
      * @param PictureInterface $picture

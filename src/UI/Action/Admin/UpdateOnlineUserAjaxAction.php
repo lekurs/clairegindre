@@ -25,7 +25,7 @@ use Symfony\Component\Routing\Annotation\Route;
  * )
  *
  */
-class UpdateOnlineUserAjaxAction implements UpdateOnlineUserAjaxActionInterface
+final class UpdateOnlineUserAjaxAction implements UpdateOnlineUserAjaxActionInterface
 {
     /**
      * @var UserRepositoryInterface
@@ -41,7 +41,11 @@ class UpdateOnlineUserAjaxAction implements UpdateOnlineUserAjaxActionInterface
         $this->userRepository = $userRepository;
     }
 
-
+    /**
+     * @param Request $request
+     * @param UpdateOnlineUserAjaxResponderInterface $responder
+     * @return mixed
+     */
     public function __invoke(Request $request, UpdateOnlineUserAjaxResponderInterface $responder)
     {
         $user = $this->userRepository->getOneById($request->request->get('id'));

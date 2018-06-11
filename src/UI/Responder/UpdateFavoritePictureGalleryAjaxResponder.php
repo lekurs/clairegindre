@@ -12,8 +12,11 @@ namespace App\UI\Responder;
 use App\UI\Responder\Interfaces\UpdateFavoritePictureGalleryResponderInterface;
 use Symfony\Component\HttpFoundation\Response;
 
-class UpdateFavoritePictureGalleryAjaxResponder implements UpdateFavoritePictureGalleryResponderInterface
+final class UpdateFavoritePictureGalleryAjaxResponder implements UpdateFavoritePictureGalleryResponderInterface
 {
+    /**
+     * @return mixed|Response
+     */
     public function __invoke()
     {
         return new Response('success');

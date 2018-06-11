@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Twig\Environment;
 
-class EditArticleResponder implements EditArticleResponderInterface
+final class EditArticleResponder implements EditArticleResponderInterface
 {
     /**
      * @var Environment
@@ -30,6 +30,7 @@ class EditArticleResponder implements EditArticleResponderInterface
 
     /**
      * EditArticleResponder constructor.
+     *
      * @param Environment $twig
      * @param UrlGeneratorInterface $urlGenerator
      */
@@ -39,6 +40,15 @@ class EditArticleResponder implements EditArticleResponderInterface
         $this->urlGenerator = $urlGenerator;
     }
 
+    /**
+     * @param bool $redirect
+     * @param FormInterface|null $form
+     * @param $articles
+     * @return mixed|RedirectResponse|Response
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     */
     public function __invoke($redirect = false, FormInterface $form = null, $articles)
     {
         $redirect ? $response = new RedirectResponse($this->urlGenerator->generate('admin')) : $response = new Response($this->twig->render('back/admin/Article/edit_article.html.twig', [
@@ -48,6 +58,4 @@ class EditArticleResponder implements EditArticleResponderInterface
 
         return $response;
     }
-
-
 }

@@ -13,8 +13,11 @@ use App\UI\Responder\Admin\Interfaces\DeletePictureGalleryAjaxResponderInterface
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 
-class DeletePictureGalleryAjaxResponder implements DeletePictureGalleryAjaxResponderInterface
+final class DeletePictureGalleryAjaxResponder implements DeletePictureGalleryAjaxResponderInterface
 {
+    /**
+     * @return Response
+     */
     public function __invoke()
     {
         return new Response('success');

@@ -44,18 +44,24 @@ final class ListMailAction implements ListMailActionInterface
 
     /**
      * ListMailAction constructor.
+     *
      * @param MailRepositoryInterface $mailRepository
      * @param ListMailResponderInterface $responder
      * @param AuthorizationCheckerInterface $authorizationChecker
      */
-    public function __construct(MailRepositoryInterface $mailRepository, ListMailResponderInterface $responder, AuthorizationCheckerInterface $authorizationChecker)
-    {
+    public function __construct(
+        MailRepositoryInterface $mailRepository,
+        ListMailResponderInterface $responder,
+        AuthorizationCheckerInterface $authorizationChecker
+    ) {
         $this->mailRepository = $mailRepository;
         $this->responder = $responder;
         $this->authorizationChecker = $authorizationChecker;
     }
 
-
+    /**
+     * @return mixed
+     */
     public function __invoke()
     {
         if ($this->authorizationChecker->isGranted('ROLE_ADMIN'))

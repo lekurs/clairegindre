@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Twig\Environment;
 
-class AddArticleResponder implements AddArticleResponderInterface
+final class AddArticleResponder implements AddArticleResponderInterface
 {
     /**
      * @var Environment
@@ -33,19 +33,23 @@ class AddArticleResponder implements AddArticleResponderInterface
      * @param Environment $twig
      * @param UrlGeneratorInterface $rulGenerator
      */
-    public function __construct(
-        Environment $twig,
-        UrlGeneratorInterface $rulGenerator
-    ) {
+    public function __construct(Environment $twig, UrlGeneratorInterface $rulGenerator)
+    {
         $this->twig = $twig;
         $this->urlGenerator = $rulGenerator;
     }
 
+    /**
+     * @param bool $redirect
+     * @param FormInterface|null $form
+     * @param $gallery
+     * @return mixed|RedirectResponse|Response
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     */
     public function __invoke($redirect = false, FormInterface $form = null, $gallery)
     {
-//        dump(['slugGallery' => $gallery->getSlug(), 'slugArticle' => $gallery->getArticle()->getSlug()]);
-//        die();
-//        'slugGallery' => $gallery->getSlug(),
         $redirect ? $response = new RedirectResponse($this->urlGenerator->generate('adminGallerieMaker', ['slugGallery' => $gallery->getSlug(), 'slugArticle' => $gallery->getArticle()->getSlug()])) : $response = new Response($this->twig->render('back/admin/Article/add_article.html.twig', [
             'form' => $form->createView(),
             'gallery' => $gallery

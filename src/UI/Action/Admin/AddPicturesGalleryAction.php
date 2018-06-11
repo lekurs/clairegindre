@@ -27,7 +27,7 @@ use Symfony\Component\Routing\Annotation\Route;
  * )
  *
  */
-class AddPicturesGalleryAction implements AddPicturesGalleryActionInterface
+final class AddPicturesGalleryAction implements AddPicturesGalleryActionInterface
 {
     /**
      * @var GalleryRepositoryInterface
@@ -46,18 +46,26 @@ class AddPicturesGalleryAction implements AddPicturesGalleryActionInterface
 
     /**
      * AddPicturesGalleryAction constructor.
+     *
      * @param GalleryRepositoryInterface $galleryRepository
      * @param PictureRepositoryInterface $pictureRepository
      * @param SlugHelper $replaceService
      */
-    public function __construct(GalleryRepositoryInterface $galleryRepository, PictureRepositoryInterface $pictureRepository, SlugHelper $replaceService)
-    {
+    public function __construct(
+        GalleryRepositoryInterface $galleryRepository,
+        PictureRepositoryInterface $pictureRepository,
+        SlugHelper $replaceService
+    ) {
         $this->galleryRepository = $galleryRepository;
         $this->pictureRepository = $pictureRepository;
         $this->replaceService = $replaceService;
     }
 
-
+    /**
+     * @param Request $request
+     * @param AddPicturesGalleryResponderInterface $responder
+     * @return mixed
+     */
     public function __invoke(Request $request, AddPicturesGalleryResponderInterface $responder)
     {
         $gallery = $this->galleryRepository->getOne($request->attributes->get('slug'));

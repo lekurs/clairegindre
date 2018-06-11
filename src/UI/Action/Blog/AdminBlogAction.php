@@ -30,7 +30,7 @@ use Symfony\Component\Routing\Annotation\Route;
  *
  * @package App\UI\Action\Blog
  */
-class AdminBlogAction implements AdminGalleryActionInterface
+final class AdminBlogAction implements AdminGalleryActionInterface
 {
     /**
      * @var EntityManagerInterface
@@ -64,7 +64,11 @@ class AdminBlogAction implements AdminGalleryActionInterface
         $this->addArticleTypeHandler = $addArticleTypeHandler;
     }
 
-
+    /**
+     * @param Request $request
+     * @param AdminBlogResponderInterface $responder
+     * @return mixed
+     */
     public function __invoke(Request $request, AdminBlogResponderInterface $responder)
     {
         $categories = $this->entityManager->getRepository(Article::class)->findAll();
@@ -73,7 +77,7 @@ class AdminBlogAction implements AdminGalleryActionInterface
 
         $form = $this->formFactory->create(AddArticleType::class)->handleRequest($request);
 
-        if($this->addArticleTypeHandler->handle($form)) {
+        if ($this->addArticleTypeHandler->handle($form)) {
             return $responder(false, $form, $categories);
         }
 

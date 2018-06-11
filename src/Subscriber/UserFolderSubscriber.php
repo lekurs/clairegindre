@@ -15,7 +15,7 @@ use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 
-class UserFolderSubscriber implements UserFolderSubscriberInterface, EventSubscriberInterface
+final class UserFolderSubscriber implements UserFolderSubscriberInterface, EventSubscriberInterface
 {
     /**
      * @var Filesystem
@@ -38,7 +38,9 @@ class UserFolderSubscriber implements UserFolderSubscriberInterface, EventSubscr
         $this->targetDir = $targetDir;
     }
 
-
+    /**
+     * @return array
+     */
     public static function getSubscribedEvents()
     {
         return [
@@ -46,6 +48,9 @@ class UserFolderSubscriber implements UserFolderSubscriberInterface, EventSubscr
         ];
     }
 
+    /**
+     * @param FormEvent $formEvent
+     */
     public function onUserFolder(FormEvent $formEvent)
     {
         try {

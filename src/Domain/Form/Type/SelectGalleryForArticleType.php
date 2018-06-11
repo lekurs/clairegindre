@@ -19,7 +19,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class SelectGalleryForArticleType extends AbstractType
+final class SelectGalleryForArticleType extends AbstractType
 {
 
     /**

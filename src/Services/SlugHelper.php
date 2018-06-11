@@ -12,6 +12,10 @@ use App\Services\Interfaces\SlugHelperInterface;
 
 final class SlugHelper implements SlugHelperInterface
 {
+    /**
+     * @param $desi
+     * @return mixed|string
+     */
     function replace($desi)
     {
         $transliterator = \Transliterator::createFromRules("::Latin-ASCII; ::Lower; [^[:L:][:N:]]+ > '-';");

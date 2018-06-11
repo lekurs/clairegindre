@@ -9,7 +9,21 @@
 namespace App\UI\Responder\Interfaces;
 
 
+use Twig\Environment;
+
 interface GalleriesForCustomerResponderInterface
 {
+    /**
+     * GalleriesForCustomerResponder constructor.
+     *
+     * @param Environment $twig
+     */
+    public function __construct(Environment $twig);
 
+    /**
+     * @param $gallery
+     * @param $instagram
+     * @return mixed
+     */
+    public  function __invoke($gallery, $instagram);
 }

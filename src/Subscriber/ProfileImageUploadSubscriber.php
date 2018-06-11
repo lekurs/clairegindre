@@ -9,15 +9,13 @@
 namespace App\Subscriber;
 
 
-use App\Domain\Models\Picture;
 use App\Services\PictureUploaderHelper;
 use App\Subscriber\Interfaces\ProfileImageUploadSubscriberInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 
-class ProfileImageUploadSubscriber implements EventSubscriberInterface, ProfileImageUploadSubscriberInterface
+final class ProfileImageUploadSubscriber implements EventSubscriberInterface, ProfileImageUploadSubscriberInterface
 {
     /**
      * @var Filesystem
@@ -50,26 +48,13 @@ class ProfileImageUploadSubscriber implements EventSubscriberInterface, ProfileI
         $this->pictureUploaderHelper = $pictureUploaderHelper;
     }
 
-
+    /**
+     * @return array
+     */
     public static function getSubscribedEvents()
     {
         return [
             FormEvents::SUBMIT => 'onImageUpload'
         ];
-    }
-
-    public function onImageUpload(FormEvent $event)
-    {
-//        try {
-//            $this->fileSystem->mkdir($this->targetDir . '/customers', 0777);
-//        } catch (IOExceptionInterface $exception) {
-//            echo "une erreur est survenue durant la création du répertoire : ".$exception->getPath();
-//        }
-//
-//        $this->pictureUploaderHelper->move($event->getData(), $this->targetDir . '/customers/', $event->getData()->getClientOriginalName());
-//        $picture = new Picture($event->getData()->getClientOriginalName(), '/images/upload/customers', $event->getData()->guessClientExtension());
-//        dump($event->getForm()->getParent()->getData()->picture = $picture);
-//        die();
-//        $event->getForm()->getParent()->getData()->setPicture($picture);
     }
 }

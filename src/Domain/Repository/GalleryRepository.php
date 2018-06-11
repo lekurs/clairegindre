@@ -17,7 +17,7 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
-class GalleryRepository extends ServiceEntityRepository implements GalleryRepositoryInterface
+final class GalleryRepository extends ServiceEntityRepository implements GalleryRepositoryInterface
 {
     /**
      * GalleryRepository constructor.
@@ -43,6 +43,9 @@ class GalleryRepository extends ServiceEntityRepository implements GalleryReposi
                                 ->getOneOrNullResult();
     }
 
+    /**
+     * @return mixed
+     */
     public function getAll()
     {
         return $this->createQueryBuilder('gallery')
@@ -51,6 +54,9 @@ class GalleryRepository extends ServiceEntityRepository implements GalleryReposi
                             ->getResult();
     }
 
+    /**
+     * @return mixed
+     */
     public function getLastNine()
     {
         return $this->createQueryBuilder('gallery')
@@ -78,6 +84,9 @@ class GalleryRepository extends ServiceEntityRepository implements GalleryReposi
             ;
     }
 
+    /**
+     * @return mixed
+     */
     public function getAllWithArticle()
     {
         return $this->createQueryBuilder('gallery')
@@ -86,6 +95,11 @@ class GalleryRepository extends ServiceEntityRepository implements GalleryReposi
                             ->getResult();
     }
 
+    /**
+     * @param $idGallery
+     * @return mixed
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
     public function getWithPicturesById($idGallery)
     {
         return $this->createQueryBuilder('gallery')
@@ -111,6 +125,10 @@ class GalleryRepository extends ServiceEntityRepository implements GalleryReposi
                             ->getOneOrNullResult();
     }
 
+    /**
+     * @param $idUser
+     * @return mixed
+     */
     public function getAllByUser($idUser)
     {
         return $this->createQueryBuilder('gallery')
@@ -191,17 +209,33 @@ class GalleryRepository extends ServiceEntityRepository implements GalleryReposi
         $this->getEntityManager()->flush();
     }
 
+    /**
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
     public function update()
     {
         $this->getEntityManager()->flush();
     }
 
+    /**
+     * @param GalleryInterface $gallery
+     * @return mixed|void
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
     public function delete(GalleryInterface $gallery)
     {
         $this->getEntityManager()->remove($gallery);
         $this->getEntityManager()->flush();
     }
 
+    /**
+     * @param ArticleInterface $article
+     * @param GalleryInterface $gallery
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
     public function removeArticle(ArticleInterface $article, GalleryInterface $gallery)
     {
         $gallery->setArticle(null);

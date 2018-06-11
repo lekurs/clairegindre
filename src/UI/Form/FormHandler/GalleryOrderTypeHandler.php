@@ -16,7 +16,7 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
-class GalleryOrderTypeHandler implements GalleryOrderTypeHandlerInterface
+final class GalleryOrderTypeHandler implements GalleryOrderTypeHandlerInterface
 {
     /**
      * @var GalleryRepositoryInterface
@@ -58,14 +58,17 @@ class GalleryOrderTypeHandler implements GalleryOrderTypeHandlerInterface
         $this->galleryBuilder = $galleryBuilder;
     }
 
+    /**
+     * @param FormInterface $form
+     * @param $gallery
+     * @return bool
+     */
     public function handle(FormInterface $form, $gallery): bool
     {
         if($form->isSubmitted() && $form->isValid()) {
-            dump($form->getData());
-            die;
 
             $this->validator->validate($gallery, [], [
-                'gallery_order',
+                'gallery_creation',
             ]);
 
             $this->galleryRepository->save($gallery);

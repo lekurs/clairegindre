@@ -13,7 +13,7 @@ use App\UI\Responder\Admin\Interfaces\DeleteBenefitResponderInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
-class DeleteBenefitResponder implements DeleteBenefitResponderInterface
+final class DeleteBenefitResponder implements DeleteBenefitResponderInterface
 {
     /**
      * @var UrlGeneratorInterface
@@ -25,12 +25,14 @@ class DeleteBenefitResponder implements DeleteBenefitResponderInterface
      *
      * @param UrlGeneratorInterface $urlGenerator
      */
-    public function __construct(
-        UrlGeneratorInterface $urlGenerator
-    ) {
+    public function __construct(UrlGeneratorInterface $urlGenerator)
+    {
         $this->urlGenerator = $urlGenerator;
     }
 
+    /**
+     * @return mixed|RedirectResponse
+     */
     public function __invoke()
     {
         return $response = new RedirectResponse($this->urlGenerator->generate('admin'));

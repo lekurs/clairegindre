@@ -15,7 +15,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 
-class EditSlugGallerySubscriber implements EventSubscriberInterface, EditSlugGallerySubscriberInterface
+final class EditSlugGallerySubscriber implements EventSubscriberInterface, EditSlugGallerySubscriberInterface
 {
     /**
      * @var SlugHelper

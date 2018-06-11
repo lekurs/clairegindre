@@ -11,5 +11,20 @@ namespace App\Domain\DTO\Interfaces;
 
 interface GalleryOrderDTOInterface
 {
-
+    /**
+     * GalleryOrderDTOInterface constructor.
+     *
+     * @param string $title
+     * @param \DateTime $eventDate
+     * @param string $eventPlace
+     * @param array $pictures
+     * @param string $slug
+     */
+    public function __construct(
+        string $title,
+        \DateTime $eventDate,
+        string $eventPlace,
+        array $pictures,
+        string $slug
+    );
 }

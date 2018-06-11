@@ -17,7 +17,7 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
-class EditBenefitTypeHandler implements EditBenefitTypeHandlerInterface
+final class EditBenefitTypeHandler implements EditBenefitTypeHandlerInterface
 {
     /**
      * @var SessionInterface
@@ -59,7 +59,11 @@ class EditBenefitTypeHandler implements EditBenefitTypeHandlerInterface
         $this->benefitBuilder = $benefitBuilder;
     }
 
-    public function handle(FormInterface $form)
+    /**
+     * @param FormInterface $form
+     * @return bool
+     */
+    public function handle(FormInterface $form):bool
     {
         if ($form->isSubmitted() && $form->isValid()) {
 
@@ -67,7 +71,7 @@ class EditBenefitTypeHandler implements EditBenefitTypeHandlerInterface
                                                                                         $form->getData()->name
                                                                                     );
             $this->validator->validate($benefit, [], [
-                'edit_benefit'
+                'benefit_creation'
             ]);
 
             $this->benefitRepository->edit($benefit->getBenefit());
@@ -79,5 +83,4 @@ class EditBenefitTypeHandler implements EditBenefitTypeHandlerInterface
 
         return false;
     }
-
 }

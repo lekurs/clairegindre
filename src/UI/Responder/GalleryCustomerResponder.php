@@ -13,7 +13,7 @@ use App\UI\Responder\Interfaces\GalleryCustomerResponderInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
 
-class GalleryCustomerResponder implements GalleryCustomerResponderInterface
+final class GalleryCustomerResponder implements GalleryCustomerResponderInterface
 {
     /**
      * @var Environment
@@ -22,6 +22,7 @@ class GalleryCustomerResponder implements GalleryCustomerResponderInterface
 
     /**
      * GalleryCustomerResponder constructor.
+     *
      * @param Environment $twig
      */
     public function __construct(Environment $twig)
@@ -29,11 +30,17 @@ class GalleryCustomerResponder implements GalleryCustomerResponderInterface
         $this->twig = $twig;
     }
 
+    /**
+     * @param $gallery
+     * @return Response
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     */
     public function __invoke($gallery)
     {
         return new Response($this->twig->render('front/gallery_customer.html.twig', [
             'gallery' => $gallery
         ]));
     }
-
 }

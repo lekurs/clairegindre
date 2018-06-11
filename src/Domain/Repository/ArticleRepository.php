@@ -16,7 +16,7 @@ use App\Domain\Models\Article;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
-class ArticleRepository extends ServiceEntityRepository implements ArticleRepositoryInterface
+final class ArticleRepository extends ServiceEntityRepository implements ArticleRepositoryInterface
 {
     /**
      * ArticleRepository constructor.
@@ -78,6 +78,7 @@ class ArticleRepository extends ServiceEntityRepository implements ArticleReposi
 
     /**
      * @param ArticleInterface $article
+     * @param GalleryInterface $gallery
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */

@@ -15,6 +15,7 @@ use App\UI\Action\Blog\Interfaces\DeleteArticleActionInterface;
 use App\UI\Responder\Interfaces\DeleteArticleResponderInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 /**
  * Class DeleteArticleAction
@@ -26,7 +27,7 @@ use Symfony\Component\Routing\Annotation\Route;
  * )
  *
  */
-class DeleteArticleAction implements DeleteArticleActionInterface
+final class DeleteArticleAction implements DeleteArticleActionInterface
 {
     /**
      * @var ArticleRepositoryInterface
@@ -39,18 +40,27 @@ class DeleteArticleAction implements DeleteArticleActionInterface
     private $galleryRepository;
 
     /**
+     * @var AuthorizationCheckerInterface
+     */
+    private $authorization;
+
+    /**
      * DeleteArticleAction constructor.
      *
      * @param ArticleRepositoryInterface $articleRepository
      * @param GalleryRepositoryInterface $galleryRepository
+     * @param AuthorizationCheckerInterface $authorization
      */
     public function __construct(
         ArticleRepositoryInterface $articleRepository,
-        GalleryRepositoryInterface $galleryRepository
+        GalleryRepositoryInterface $galleryRepository,
+        AuthorizationCheckerInterface $authorization
     ) {
         $this->articleRepository = $articleRepository;
         $this->galleryRepository = $galleryRepository;
+        $this->authorization = $authorization;
     }
+
 
     /**
      * @param Request $request
@@ -59,12 +69,14 @@ class DeleteArticleAction implements DeleteArticleActionInterface
      */
     public function __invoke(Request $request, DeleteArticleResponderInterface $responder)
     {
-        $article = $this->articleRepository->getOne($request->get('slug'));
+        if ($this->authorization->isGranted('ROLE_ADMIN')) {
+            $article = $this->articleRepository->getOne($request->get('slug'));
 
-        $gallery = $this->galleryRepository->findArticle($article->getId());
+            $gallery = $this->galleryRepository->findArticle($article->getId());
 
-        $this->galleryRepository->removeArticle($article, $gallery);
+            $this->galleryRepository->removeArticle($article, $gallery);
 
-        return $responder();
+            return $responder();
+        }
     }
 }

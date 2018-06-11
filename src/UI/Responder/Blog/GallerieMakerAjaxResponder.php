@@ -12,8 +12,11 @@ namespace App\UI\Responder\Blog;
 use App\UI\Responder\Interfaces\GallerieMakerAjaxResponderInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-class GallerieMakerAjaxResponder implements GallerieMakerAjaxResponderInterface
+final class GallerieMakerAjaxResponder implements GallerieMakerAjaxResponderInterface
 {
+    /**
+     * @return JsonResponse
+     */
     public function __invoke()
     {
         return new JsonResponse([], 200);

@@ -22,7 +22,7 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 use Symfony\Component\Validator\Constraints\DateTime;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
-class AddReviewsTypeHandler implements AddReviewsTypeHandlerInterface
+final class AddReviewsTypeHandler implements AddReviewsTypeHandlerInterface
 {
     /**
      * @var ReviewsRepositoryInterface
@@ -66,6 +66,7 @@ class AddReviewsTypeHandler implements AddReviewsTypeHandlerInterface
 
     /**
      * AddReviewsTypeHandler constructor.
+     *
      * @param ReviewsRepositoryInterface $reviewsRepository
      * @param SessionInterface $session
      * @param ValidatorInterface $validator
@@ -95,8 +96,11 @@ class AddReviewsTypeHandler implements AddReviewsTypeHandlerInterface
         $this->tokenStorage = $tokenStorage;
     }
 
-
-    public function handle(FormInterface $form)
+    /**
+     * @param FormInterface $form
+     * @return bool|mixed
+     */
+    public function handle(FormInterface $form): bool
     {
         if($form->isSubmitted() && $form->isValid()) {
             try {

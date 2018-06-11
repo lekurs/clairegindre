@@ -54,7 +54,8 @@ final class AnswerEmailType extends AbstractType
                    $form->get('subject')->getData(),
                    $form->get('content')->getData()
                 );
-            }
+            },
+            'validation_groups' => ['contact_creation']
         ]);
     }
 }

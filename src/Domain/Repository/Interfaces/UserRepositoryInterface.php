@@ -27,6 +27,23 @@ interface UserRepositoryInterface
     public function getOne($id): User;
 
     /**
+     * @param $id
+     * @return User
+     */
+    public function getOneById($id): User;
+
+    /**
+     * @param $email
+     * @return mixed
+     */
+    public function getAdmin($email);
+
+    /**
+     * @return array
+     */
+    public function showAll(): array;
+
+    /**
      * @return mixed
      */
     public function showGalleryByUser();
@@ -42,4 +59,15 @@ interface UserRepositoryInterface
      * @param UserInterface $user
      */
     public function save(UserInterface $user): void;
+
+    /**
+     * @return mixed
+     */
+    public function update();
+
+    /**
+     * @param UserInterface $user
+     * @return mixed
+     */
+    public function updateOnline(UserInterface $user);
 }

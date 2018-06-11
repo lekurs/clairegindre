@@ -9,7 +9,15 @@
 namespace App\Domain\DTO\Interfaces;
 
 
+use App\Domain\Models\Interfaces\UserInterface;
+
 interface AddCommentArticleUserConnectedDTOInterface
 {
-
+    /**
+     * AddCommentArticleUserConnectedDTOInterface constructor.
+     *
+     * @param UserInterface $author
+     * @param string $content
+     */
+    public function __construct(UserInterface $author, string $content);
 }

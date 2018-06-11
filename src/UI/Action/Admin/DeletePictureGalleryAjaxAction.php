@@ -25,7 +25,7 @@ use Symfony\Component\Routing\Annotation\Route;
  * )
  *
  */
-class DeletePictureGalleryAjaxAction implements DeletePictureGalleryAjaxActionInterface
+final class DeletePictureGalleryAjaxAction implements DeletePictureGalleryAjaxActionInterface
 {
     /**
      * @var PictureRepositoryInterface

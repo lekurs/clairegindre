@@ -34,7 +34,7 @@ use Symfony\Component\Routing\Annotation\Route;
  * )
  *
  */
-class UploadPicturesGalleryAjaxAction implements UploadPicturesGalleryActionInterface
+final class UploadPicturesGalleryAjaxAction implements UploadPicturesGalleryActionInterface
 {
     /**
      * @var GalleryRepositoryInterface

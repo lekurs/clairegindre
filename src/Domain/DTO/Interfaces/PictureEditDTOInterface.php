@@ -11,5 +11,11 @@ namespace App\Domain\DTO\Interfaces;
 
 interface PictureEditDTOInterface
 {
-
+    /**
+     * PictureEditDTOInterface constructor.
+     *
+     * @param int $displayOrder
+     * @param bool $favorite
+     */
+    public function __construct(int $displayOrder, bool $favorite);
 }

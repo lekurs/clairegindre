@@ -9,7 +9,20 @@
 namespace App\UI\Responder\Admin\Interfaces;
 
 
+use Twig\Environment;
+
 interface ListMailResponderInterface
 {
+    /**
+     * ListMailResponder constructor.
+     *
+     * @param Environment $twig
+     */
+    public function __construct(Environment $twig);
 
+    /**
+     * @param array $mails
+     * @return mixed
+     */
+    public function __invoke(array $mails);
 }

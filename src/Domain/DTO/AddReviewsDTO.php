@@ -11,7 +11,7 @@ namespace App\Domain\DTO;
 
 use App\Domain\DTO\Interfaces\AddReviewsDTOInterface;
 
-class AddReviewsDTO implements AddReviewsDTOInterface
+final class AddReviewsDTO implements AddReviewsDTOInterface
 {
     /**
      * @var string

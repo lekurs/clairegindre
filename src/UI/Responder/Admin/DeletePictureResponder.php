@@ -25,9 +25,8 @@ class DeletePictureResponder implements DeletePictureResponderInterface
      *
      * @param UrlGeneratorInterface $urlGenerator
      */
-    public function __construct(
-        UrlGeneratorInterface $urlGenerator
-    ) {
+    public function __construct(UrlGeneratorInterface $urlGenerator)
+    {
         $this->urlGenerator = $urlGenerator;
     }
 
@@ -35,5 +34,4 @@ class DeletePictureResponder implements DeletePictureResponderInterface
     {
         return new JsonResponse(['success'], 201);
     }
-
 }

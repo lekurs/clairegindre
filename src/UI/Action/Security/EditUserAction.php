@@ -22,6 +22,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 /**
  * Class EditUserAction
@@ -33,7 +34,7 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
  *
  * @package App\UI\Action\Security
  */
-class EditUserAction implements EditUserActionInterface
+final class EditUserAction implements EditUserActionInterface
 {
     /**
      * @var UserRepositoryInterface
@@ -56,6 +57,11 @@ class EditUserAction implements EditUserActionInterface
     private $userEditTypeHandler;
 
     /**
+     * @var AuthorizationCheckerInterface
+     */
+    private $authorization;
+
+    /**
      * @var TokenStorageInterface
      */
     private $tokenStorage;
@@ -67,6 +73,7 @@ class EditUserAction implements EditUserActionInterface
      * @param UserBuilderInterface $userBuilder
      * @param FormFactoryInterface $formFactory
      * @param EditUserHandlerInterface $userEditTypeHandler
+     * @param AuthorizationCheckerInterface $authorizationChecker
      * @param TokenStorageInterface $tokenStorage
      */
     public function __construct(
@@ -74,6 +81,7 @@ class EditUserAction implements EditUserActionInterface
         UserBuilderInterface $userBuilder,
         FormFactoryInterface $formFactory,
         EditUserHandlerInterface $userEditTypeHandler,
+        AuthorizationCheckerInterface $authorizationChecker,
         TokenStorageInterface $tokenStorage
     ) {
         $this->userRepository = $userRepository;
@@ -90,21 +98,19 @@ class EditUserAction implements EditUserActionInterface
      */
     public function __invoke(Request $request, UserEditResponderInterface $responder)
     {
-        $user = $this->userRepository->getOne($request->attributes->get('slug'));
-//        dump($user->getPassword());$this->tokenStorage->setToken();
-//        dump($this->tokenStorage->getToken()->getUser()->getPassword());
+        if ($this->authorization->isGranted('ROLE_ADMIN')) {
+            $user = $this->userRepository->getOne($request->attributes->get('slug'));
 
-//        die();
+            $userDto = new EditUserDTO($user->getEmail(), $user->getUsername(), $user->getLastName(), $user->getPassword(), $user->isOnline(), $user->getDateWedding(), $user->getSlug());
 
-        $userDto = new EditUserDTO($user->getEmail(), $user->getUsername(), $user->getLastName(), $user->getPassword(), $user->isOnline(), $user->getDateWedding(), $user->getSlug());
+            $userEditType = $this->formFactory->create(EditUserType::class, $userDto)->handleRequest($request);
 
-        $userEditType = $this->formFactory->create(EditUserType::class, $userDto)->handleRequest($request);
+            if($this->userEditTypeHandler->handle($userEditType, $user)) {
 
-        if($this->userEditTypeHandler->handle($userEditType, $user)) {
+                return $responder(true, $userEditType, $user);
+            }
 
-            return $responder(true, $userEditType, $user);
+            return $responder(false, $userEditType, $user);
         }
-
-        return $responder(false, $userEditType, $user);
     }
 }

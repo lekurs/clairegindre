@@ -12,11 +12,10 @@ namespace App\UI\Responder\Admin;
 use App\UI\Responder\Admin\Interfaces\UpdateOnlineArticleAjaxResponderInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-class UpdateOnlineArticleAjaxResponder implements UpdateOnlineArticleAjaxResponderInterface
+final class UpdateOnlineArticleAjaxResponder implements UpdateOnlineArticleAjaxResponderInterface
 {
     public function __invoke()
     {
         return new JsonResponse('success', 200);
     }
-
 }

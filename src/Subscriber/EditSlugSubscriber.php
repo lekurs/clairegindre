@@ -10,11 +10,12 @@ namespace App\Subscriber;
 
 
 use App\Services\SlugHelper;
+use App\Subscriber\Interfaces\EditSlugSubscriberInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 
-class EditSlugSubscriber implements EventSubscriberInterface
+final class EditSlugSubscriber implements EventSubscriberInterface, EditSlugSubscriberInterface
 {
     /**
      * @var SlugHelper
@@ -22,7 +23,7 @@ class EditSlugSubscriber implements EventSubscriberInterface
     private $slugHelper;
 
     /**
-     * EditSlugSubscriber constructor.
+     * EditSlugSubscriberInterface constructor.
      * @param SlugHelper $slugHelper
      */
     public function __construct(SlugHelper $slugHelper)
@@ -30,7 +31,9 @@ class EditSlugSubscriber implements EventSubscriberInterface
         $this->slugHelper = $slugHelper;
     }
 
-
+    /**
+     * @return array
+     */
     public static function getSubscribedEvents()
     {
         return [
@@ -38,6 +41,10 @@ class EditSlugSubscriber implements EventSubscriberInterface
         ];
     }
 
+    /**
+     * @param FormEvent $event
+     * @return mixed|void
+     */
     public function onSubmit(FormEvent $event)
     {
         $event->getData()->slug = $this->slugHelper->replace($event->getData()->title);

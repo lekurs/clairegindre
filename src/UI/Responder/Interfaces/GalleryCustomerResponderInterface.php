@@ -9,7 +9,20 @@
 namespace App\UI\Responder\Interfaces;
 
 
+use Twig\Environment;
+
 interface GalleryCustomerResponderInterface
 {
+    /**
+     * GalleryCustomerResponder constructor.
+     *
+     * @param Environment $twig
+     */
+    public function __construct(Environment $twig);
 
+    /**
+     * @param $gallery
+     * @return mixed
+     */
+    public function __invoke($gallery);
 }

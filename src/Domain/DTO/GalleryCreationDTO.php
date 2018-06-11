@@ -11,9 +11,8 @@ namespace App\Domain\DTO;
 
 use App\Domain\DTO\Interfaces\GalleryCreationDTOInterface;
 use App\Domain\Models\Interfaces\BenefitInterface;
-use App\Domain\Models\Interfaces\UserInterface;
 
-class GalleryCreationDTO implements GalleryCreationDTOInterface
+final class GalleryCreationDTO implements GalleryCreationDTOInterface
 {
     /**
      * @var BenefitInterface

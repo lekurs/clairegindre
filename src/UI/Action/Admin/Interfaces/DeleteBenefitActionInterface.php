@@ -24,7 +24,11 @@ interface DeleteBenefitActionInterface
      * @param TokenStorageInterface $tokenStorage
      * @param AuthorizationCheckerInterface $authorization
      */
-    public function __construct(BenefitRepositoryInterface $benefitRepository, TokenStorageInterface $tokenStorage, AuthorizationCheckerInterface $authorization);
+    public function __construct(
+        BenefitRepositoryInterface $benefitRepository,
+        TokenStorageInterface $tokenStorage,
+        AuthorizationCheckerInterface $authorization
+    );
 
     /**
      * @param Request $request

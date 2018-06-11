@@ -18,7 +18,7 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Twig\Environment;
 
-class EditGalleryResponder implements EditGalleryResponderInterface
+final class EditGalleryResponder implements EditGalleryResponderInterface
 {
     /**
      * @var Environment
@@ -42,19 +42,33 @@ class EditGalleryResponder implements EditGalleryResponderInterface
 
     /**
      * EditGalleryResponder constructor.
+     *
      * @param Environment $twig
      * @param ValidatorInterface $validator
      * @param SessionInterface $session
      * @param UrlGeneratorInterface $urlGenerator
      */
-    public function __construct(Environment $twig, ValidatorInterface $validator, SessionInterface $session, UrlGeneratorInterface $urlGenerator)
-    {
+    public function __construct(
+        Environment $twig,
+        ValidatorInterface $validator,
+        SessionInterface $session,
+        UrlGeneratorInterface $urlGenerator
+    ) {
         $this->twig = $twig;
         $this->validator = $validator;
         $this->session = $session;
         $this->urlGenerator = $urlGenerator;
     }
 
+    /**
+     * @param bool $redirect
+     * @param FormInterface|null $form
+     * @param $gallery
+     * @return mixed|RedirectResponse|Response
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     */
     public function __invoke($redirect = false, FormInterface $form = null, $gallery)
     {
         $redirect ? $response = new RedirectResponse($this->urlGenerator->generate('admin')) : $response = new Response($this->twig->render('back/admin/gallery_edit.html.twig', [

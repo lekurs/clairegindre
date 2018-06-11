@@ -1,0 +1,14 @@
+App\Domain\DTO\RegistrationDTO:
+    properties:
+        email:
+            - Email:
+                message: Cet email "{{value}} n'est pas au bon format.
+                checkMX: true
+        username:
+            - Length: { min: 4, max: 50, minMessage: 'Nombre de caractères compris entre 4 et 50', maxMessage: 'Nombre de caractères compris entre 4 et 50', groups: ['user_creation'] }
+            - NotBlank: ~
+        lastname:
+            - Length: { min: 4, max: 50, minMessage: 'Nombre de caractères compris entre 4 et 50', maxMessage: 'Nombre de caractères compris entre 4 et 50', groups: ['user_creation'] }
+            - NotBlank: ~
+        plainPassword:
+            - Length: { min: 4, max: 50, minMessage: 'Nombre de caractères compris entre 4 et 50', maxMessage: 'Nombre de caractères compris entre 4 et 50', groups: ['user_creation'] }

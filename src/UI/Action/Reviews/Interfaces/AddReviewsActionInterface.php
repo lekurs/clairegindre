@@ -20,12 +20,18 @@ interface AddReviewsActionInterface
 {
     /**
      * AddReviewsActionInterface constructor.
+     *
      * @param FormFactoryInterface $formFactory
      * @param ReviewsRepositoryInterface $reviewsRepository
      * @param AddReviewsTypeHandlerInterface $addReviewsTypeHandler
      * @param AuthorizationCheckerInterface $authorizationChecker
      */
-    public function __construct(FormFactoryInterface $formFactory, ReviewsRepositoryInterface $reviewsRepository, AddReviewsTypeHandlerInterface $addReviewsTypeHandler, AuthorizationCheckerInterface $authorizationChecker);
+    public function __construct(
+        FormFactoryInterface $formFactory,
+        ReviewsRepositoryInterface $reviewsRepository,
+        AddReviewsTypeHandlerInterface $addReviewsTypeHandler,
+        AuthorizationCheckerInterface $authorizationChecker
+    );
     /**
      * @param Request $request
      * @param AddReviewsResponderInterface $responder

@@ -18,19 +18,23 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 interface PictureEditTypeHandlerInterface
 {
     /**
-     * PictureEditTypeHandlerInterface constructor.
+     * PictureEditTypeHandler constructor.
      *
      * @param PictureRepositoryInterface $pictureRepository
      * @param SessionInterface $session
      * @param ValidatorInterface $validator
      * @param PictureBuilderInterface $pictureBuilder
      */
-//    public function __construct(PictureRepositoryInterface $pictureRepository, SessionInterface $session, ValidatorInterface $validator, PictureBuilderInterface $pictureBuilder);
+    public function __construct(
+        PictureRepositoryInterface $pictureRepository,
+        SessionInterface $session,
+        ValidatorInterface $validator,
+        PictureBuilderInterface $pictureBuilder
+    );
 
     /**
      * @param FormInterface $form
      * @return bool
      */
     public function handle(FormInterface $form): bool;
-
 }

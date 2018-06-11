@@ -18,7 +18,7 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
-class EditReviewsTypeHandler implements EditReviewsTypeHandlerInterface
+final class EditReviewsTypeHandler implements EditReviewsTypeHandlerInterface
 {
     /**
      * @var SessionInterface
@@ -93,7 +93,7 @@ class EditReviewsTypeHandler implements EditReviewsTypeHandlerInterface
                                                                                         $form->getData()->online
                                                                                     );
             $this->validator->validate($review, [], [
-                'editReview'
+                'reviews_creation'
             ]);
 
             $this->session->getFlashBag()->add('sucess', 'Avis client mis à jour');
@@ -103,6 +103,4 @@ class EditReviewsTypeHandler implements EditReviewsTypeHandlerInterface
 
         return false;
     }
-
-
 }

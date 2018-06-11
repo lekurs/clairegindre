@@ -9,7 +9,19 @@
 namespace App\UI\Responder\Interfaces;
 
 
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+
 interface DeleteArticleResponderInterface
 {
+    /**
+     * DeleteArticleResponderInterface constructor.
+     *
+     * @param UrlGeneratorInterface $urlGenerator
+     */
+    public function __construct(UrlGeneratorInterface $urlGenerator);
 
+    /**
+     * @return mixed
+     */
+    public function __invoke();
 }

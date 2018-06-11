@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Twig\Environment;
 
-class IndexResponder implements IndexResponderInterface
+final class IndexResponder implements IndexResponderInterface
 {
     /**
      * @var Environment
@@ -43,6 +43,17 @@ class IndexResponder implements IndexResponderInterface
         $this->urlGenerator = $urlGenerator;
     }
 
+    /**
+     * @param bool $redirect
+     * @param FormInterface|null $form
+     * @param $instagram
+     * @param $reviews
+     * @param $galleries
+     * @return mixed|RedirectResponse|Response
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     */
     public function __invoke($redirect = false, FormInterface $form = null, $instagram, $reviews, $galleries)
     {
         $redirect ? $response = new RedirectResponse($this->urlGenerator->generate('index')) : $response = new Response($this->twig->render('front/index.html.twig', array(
@@ -54,5 +65,4 @@ class IndexResponder implements IndexResponderInterface
 
         return $response;
     }
-
 }

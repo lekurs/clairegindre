@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Twig\Environment;
 
-class EditBenefitResponder implements EditBenefitResponderInterface
+final class EditBenefitResponder implements EditBenefitResponderInterface
 {
     /**
      * @var Environment
@@ -30,6 +30,7 @@ class EditBenefitResponder implements EditBenefitResponderInterface
 
     /**
      * EditBenefitResponder constructor.
+     *
      * @param Environment $twig
      * @param UrlGeneratorInterface $urlGenerator
      */

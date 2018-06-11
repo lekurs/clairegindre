@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Flex\Response;
 
-class DeleteGalleryResponder implements DeleteGalleryResponderInterface
+final class DeleteGalleryResponder implements DeleteGalleryResponderInterface
 {
     /**
      * @var UrlGeneratorInterface

@@ -9,8 +9,19 @@
 namespace App\Services\Interfaces;
 
 
+use Twig\Environment;
+
 interface MailerHelperInterface
 {
+    /**
+     * MailerHelperInterface constructor.
+     *
+     * @param string $mailerAdminEmail
+     * @param \Swift_Mailer $swiftMailer
+     * @param Environment $twig
+     */
+    public function __construct(string $mailerAdminEmail, \Swift_Mailer $swiftMailer, Environment $twig);
+
     /**
      * @param $subject
      * @param $to

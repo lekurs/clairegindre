@@ -26,7 +26,12 @@ interface AdminBlogChoosePicturesActionInterface
      * @param SessionInterface|null $session
      * @param AuthorizationCheckerInterface $authorizationChecker
      */
-    public function __construct(FormFactoryInterface $formFactory, GalleryRepositoryInterface $galleryRepository, SessionInterface $session = null, AuthorizationCheckerInterface $authorizationChecker);
+    public function __construct(
+        FormFactoryInterface $formFactory,
+        GalleryRepositoryInterface $galleryRepository,
+        SessionInterface $session = null,
+        AuthorizationCheckerInterface $authorizationChecker
+    );
 
     /**
      * @param Request $request
@@ -34,5 +39,4 @@ interface AdminBlogChoosePicturesActionInterface
      * @return mixed
      */
     public function __invoke(Request $request, AdminBlogChoosePicturesResponderInterface $responder);
-
 }

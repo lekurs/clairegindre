@@ -10,6 +10,7 @@ namespace App\UI\Action\Front;
 
 use App\Domain\Repository\Interfaces\GalleryRepositoryInterface;
 use App\Domain\Repository\Interfaces\UserRepositoryInterface;
+use App\UI\Action\Front\Interfaces\GalleryCustomerActionInterface;
 use App\UI\Responder\Interfaces\GalleryCustomerResponderInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,7 +26,7 @@ use Symfony\Component\Routing\Annotation\Route;
  *
  * @package App\UI\Action\Security
  */
-class GalleryCustomerAction
+final class GalleryCustomerAction implements GalleryCustomerActionInterface
 {
     /**
      * @var GalleryRepositoryInterface
@@ -34,6 +35,7 @@ class GalleryCustomerAction
 
     /**
      * GalleryCustomerAction constructor.
+     *
      * @param GalleryRepositoryInterface $galleryRepository
      */
     public function __construct(GalleryRepositoryInterface $galleryRepository)

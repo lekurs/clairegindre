@@ -11,7 +11,7 @@ namespace App\Domain\DTO;
 
 use App\Domain\DTO\Interfaces\EditUserDTOInterface;
 
-class EditUserDTO implements EditUserDTOInterface
+final class EditUserDTO implements EditUserDTOInterface
 {
     /**
      * @var string

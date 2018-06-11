@@ -30,7 +30,7 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
  * )
  *
  */
-class EditArticleAction implements EditArticleActionInterface
+final class EditArticleAction implements EditArticleActionInterface
 {
     /**
      * @var ArticleRepositoryInterface
@@ -72,7 +72,11 @@ class EditArticleAction implements EditArticleActionInterface
         $this->formFactory = $formFactory;
     }
 
-
+    /**
+     * @param Request $request
+     * @param EditArticleResponderInterface $responder
+     * @return mixed
+     */
     public function __invoke(Request $request, EditArticleResponderInterface $responder)
     {
         if(false === $this->authorizationChecker->isGranted('ROLE_ADMIN')) {
@@ -92,8 +96,7 @@ class EditArticleAction implements EditArticleActionInterface
 
         $editArticleType = $this->formFactory->create(EditArticleType::class, $articleDTO)->handleRequest($request);
 
-        if ($this->editArticleTypeHandler->handle($editArticleType, $article))
-        {
+        if ($this->editArticleTypeHandler->handle($editArticleType, $article)) {
             return $responder(true, null, $article);
         }
 

@@ -19,7 +19,7 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
-class GalleryMakerRepository extends ServiceEntityRepository implements GalleryMakerRepositoryInterface
+final class GalleryMakerRepository extends ServiceEntityRepository implements GalleryMakerRepositoryInterface
 {
     /**
      * GalleryMakerRepository constructor.

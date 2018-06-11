@@ -10,7 +10,6 @@ namespace App\UI\Action\Admin;
 
 
 use App\Domain\Form\Type\AddGalleryType;
-use App\Domain\Models\User as UserEntity;
 use App\Domain\Models\User;
 use App\UI\Action\Admin\Interfaces\AddGalleryActionInterface;
 use App\UI\Form\FormHandler\Interfaces\AddGalleryTypeHandlerInterface;
@@ -32,7 +31,7 @@ use Symfony\Component\Routing\Annotation\Route;
  *
  * @package App\UI\Action\Admin
  */
-class AddGalleryAction implements AddGalleryActionInterface
+final class AddGalleryAction implements AddGalleryActionInterface
 {
     /**
      * @var FormFactoryInterface
@@ -54,6 +53,7 @@ class AddGalleryAction implements AddGalleryActionInterface
      *
      * @param FormFactoryInterface $formFactory
      * @param AddGalleryTypeHandlerInterface $galleryHandler
+     * @param EntityManagerInterface $entityManager
      */
     public function __construct(
         FormFactoryInterface $formFactory,
@@ -65,7 +65,11 @@ class AddGalleryAction implements AddGalleryActionInterface
         $this->entityManager = $entityManager;
     }
 
-
+    /**
+     * @param Request $request
+     * @param AddGalleryResponderInterface $responder
+     * @return mixed
+     */
     public function __invoke(Request $request, AddGalleryResponderInterface $responder)
     {
         $form = $this->formFactory->create(AddGalleryType::class)->handleRequest($request);

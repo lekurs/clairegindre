@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Twig\Environment;
 
-class GalleryCustomerConnectionResponder implements GalleryCustomerConnectionResponderInterface
+final class GalleryCustomerConnectionResponder implements GalleryCustomerConnectionResponderInterface
 {
     /**
      * @var Environment
@@ -34,14 +34,19 @@ class GalleryCustomerConnectionResponder implements GalleryCustomerConnectionRes
      * @param Environment $twig
      * @param UrlGeneratorInterface $urlGenerator
      */
-    public function __construct(
-        Environment $twig,
-        UrlGeneratorInterface $urlGenerator
-    ) {
+    public function __construct(Environment $twig, UrlGeneratorInterface $urlGenerator)
+    {
         $this->twig = $twig;
         $this->urlGenerator = $urlGenerator;
     }
 
+    /**
+     * @param bool $redirect
+     * @param FormInterface $form
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     */
     public function __invoke($redirect = false, FormInterface $form)
     {
         $redirect ? $response = new RedirectResponse($this->urlGenerator->generate('adminGalleryCustomer')) : $response = new Response($this->twig->render('back/security/gallery_customer_connection.html.twig', [

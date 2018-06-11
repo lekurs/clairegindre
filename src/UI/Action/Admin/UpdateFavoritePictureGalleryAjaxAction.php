@@ -29,7 +29,7 @@ use Symfony\Component\Routing\Annotation\Route;
  * )
  *
  */
-class UpdateFavoritePictureGalleryAjaxAction implements UpdateFavoritePictureGalleryAjaxActionInterface
+final class UpdateFavoritePictureGalleryAjaxAction implements UpdateFavoritePictureGalleryAjaxActionInterface
 {
     /**
      * @var PictureRepositoryInterface

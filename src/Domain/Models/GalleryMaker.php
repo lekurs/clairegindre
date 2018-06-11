@@ -10,11 +10,9 @@ namespace App\Domain\Models;
 
 
 use App\Domain\Models\Interfaces\ArticleInterface;
-use App\Domain\Models\Interfaces\GalleryMakerInterface;
-use App\Domain\Models\Interfaces\PictureInterface;
 use Ramsey\Uuid\Uuid;
 
-class GalleryMaker implements GalleryMakerInterface
+class GalleryMaker
 {
     /**
      * @var string

@@ -10,7 +10,6 @@ namespace App\Domain\Form\Type;
 
 
 use App\Domain\DTO\EditReviewsDTO;
-use App\Domain\DTO\Interfaces\EditReviewsDTOInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -20,8 +19,12 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class EditReviewType extends AbstractType
+final class EditReviewType extends AbstractType
 {
+    /**
+     * @param FormBuilderInterface $builder
+     * @param array $options
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -33,6 +36,9 @@ class EditReviewType extends AbstractType
             ]);
     }
 
+    /**
+     * @param OptionsResolver $resolver
+     */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
@@ -44,8 +50,8 @@ class EditReviewType extends AbstractType
                                    $form->get('online')->getData(),
                                    $form->get('image')->getData()
                                 );
-                            }
+                            },
+            'validation_groups' => ['reviews_creation']
         ]);
     }
-
 }

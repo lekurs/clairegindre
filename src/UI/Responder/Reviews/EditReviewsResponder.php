@@ -30,6 +30,7 @@ class EditReviewsResponder implements EditReviewsResponderInterface
 
     /**
      * EditReviewsResponder constructor.
+     *
      * @param Environment $twig
      * @param UrlGeneratorInterface $urlGenerator
      */
@@ -39,6 +40,14 @@ class EditReviewsResponder implements EditReviewsResponderInterface
         $this->urlGenerator = $urlGenerator;
     }
 
+    /**
+     * @param bool $redirect
+     * @param FormInterface|null $form
+     * @return mixed|RedirectResponse|Response
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     */
     public function __invoke($redirect = false, FormInterface $form = null)
     {
         $redirect ? $response = new RedirectResponse($this->urlGenerator->generate('adminAddReviews')) : $response = new Response($this->twig->render('back/admin/Reviews/edit_reviews.html.twig', [

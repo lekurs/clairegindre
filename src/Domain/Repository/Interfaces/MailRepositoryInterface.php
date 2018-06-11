@@ -33,4 +33,9 @@ interface MailRepositoryInterface
      * @param Mail $mail
      */
     public function save(Mail $mail):void;
+
+    /**
+     * @param Mail $mail
+     */
+    public function update(Mail $mail):void;
 }

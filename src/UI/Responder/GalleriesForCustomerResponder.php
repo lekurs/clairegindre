@@ -13,7 +13,7 @@ use App\UI\Responder\Interfaces\GalleriesForCustomerResponderInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
 
-class GalleriesForCustomerResponder implements GalleriesForCustomerResponderInterface
+final class GalleriesForCustomerResponder implements GalleriesForCustomerResponderInterface
 {
     /**
      * @var Environment
@@ -22,6 +22,7 @@ class GalleriesForCustomerResponder implements GalleriesForCustomerResponderInte
 
     /**
      * GalleriesForCustomerResponder constructor.
+     *
      * @param Environment $twig
      */
     public function __construct(Environment $twig)
@@ -29,6 +30,14 @@ class GalleriesForCustomerResponder implements GalleriesForCustomerResponderInte
         $this->twig = $twig;
     }
 
+    /**
+     * @param $gallery
+     * @param $instagram
+     * @return Response
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     */
     public  function __invoke($gallery, $instagram)
     {
         return new Response($this->twig->render('front/all_galleries_for_customer.html.twig', [
@@ -36,6 +45,4 @@ class GalleriesForCustomerResponder implements GalleriesForCustomerResponderInte
             'insta' => $instagram
         ]));
     }
-
-
 }

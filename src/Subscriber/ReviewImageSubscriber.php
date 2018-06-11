@@ -11,12 +11,16 @@ namespace App\Subscriber;
 
 use App\Domain\Builder\Interfaces\PictureBuilderInterface;
 use App\Services\PictureUploaderHelper;
+use App\Subscriber\Interfaces\ReviewImageSubscriberInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 
-class ReviewImageSubscriber implements EventSubscriberInterface
+final class ReviewImageSubscriber implements EventSubscriberInterface, ReviewImageSubscriberInterface
 {
+    /**
+     * @return array
+     */
     public static function getSubscribedEvents()
     {
         return [
@@ -24,6 +28,9 @@ class ReviewImageSubscriber implements EventSubscriberInterface
         ];
     }
 
+    /**
+     * @param FormEvent $event
+     */
     public function onSubmit(FormEvent $event)
     {
         if(!$event->getData()) {

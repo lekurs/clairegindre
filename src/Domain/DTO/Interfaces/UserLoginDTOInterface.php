@@ -11,5 +11,11 @@ namespace App\Domain\DTO\Interfaces;
 
 interface UserLoginDTOInterface
 {
-
+    /**
+     * UserLoginDTOInterface constructor.
+     *
+     * @param string $username
+     * @param string $password
+     */
+    public function __construct(string $username, string $password);
 }

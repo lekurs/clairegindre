@@ -28,7 +28,7 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
  * )
  *
  */
-class DeleteBenefitAction implements DeleteBenefitActionInterface
+final class DeleteBenefitAction implements DeleteBenefitActionInterface
 {
     /**
      * @var BenefitRepositoryInterface
@@ -62,7 +62,11 @@ class DeleteBenefitAction implements DeleteBenefitActionInterface
         $this->authorization = $authorization;
     }
 
-
+    /**
+     * @param Request $request
+     * @param DeleteBenefitResponderInterface $responder
+     * @return mixed
+     */
     public function __invoke(Request $request, DeleteBenefitResponderInterface $responder)
     {
         $benefit = $this->benefitRepository->getOne($request->get('id'));

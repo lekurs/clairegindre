@@ -10,6 +10,7 @@ namespace App\Subscriber;
 
 
 use App\Domain\Models\Interfaces\UserInterface;
+use App\Subscriber\Interfaces\CommentPostSubscriberInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -17,7 +18,7 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
-final class CommentPostSubscriber implements EventSubscriberInterface
+final class CommentPostSubscriber implements EventSubscriberInterface, CommentPostSubscriberInterface
 {
     /**
      * @var TokenStorageInterface

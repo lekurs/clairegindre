@@ -48,17 +48,26 @@ final class AnswerEmailAction implements AnswerEmailActionInterface
 
     /**
      * AnswerEmailAction constructor.
+     *
      * @param MailRepositoryInterface $mailRepository
      * @param FormFactoryInterface $formFactory
      * @param AnswerMailTypeHandlerInterface $answerMailHandler
      */
-    public function __construct(MailRepositoryInterface $mailRepository, FormFactoryInterface $formFactory, AnswerMailTypeHandlerInterface $answerMailHandler)
-    {
+    public function __construct(
+        MailRepositoryInterface $mailRepository,
+        FormFactoryInterface $formFactory,
+        AnswerMailTypeHandlerInterface $answerMailHandler
+    ) {
         $this->mailRepository = $mailRepository;
         $this->formFactory = $formFactory;
         $this->answerMailHandler = $answerMailHandler;
     }
 
+    /**
+     * @param Request $request
+     * @param AnswerMailResponderInterface $responder
+     * @return mixed
+     */
     public function __invoke(Request $request, AnswerMailResponderInterface $responder)
     {
         $mail = $this->mailRepository->getOneBySlug($request->attributes->get('slug'));

@@ -65,6 +65,9 @@ final class MailRepository extends ServiceEntityRepository implements MailReposi
         $this->_em->flush();
     }
 
+    /**
+     * @param Mail $mail
+     */
     public function update(Mail $mail):void
     {
         $mail->mailRead();

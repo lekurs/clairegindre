@@ -16,14 +16,13 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class EditUserType extends AbstractType
+final class EditUserType extends AbstractType
 {
     /**
      * @var EditUserSlugSubscriberInterface
@@ -32,6 +31,7 @@ class EditUserType extends AbstractType
 
     /**
      * EditUserType constructor.
+     *
      * @param EditUserSlugSubscriberInterface $editUserSlugSubscriber
      */
     public function __construct(EditUserSlugSubscriberInterface $editUserSlugSubscriber)
@@ -62,6 +62,9 @@ class EditUserType extends AbstractType
             ;
     }
 
+    /**
+     * @param OptionsResolver $resolver
+     */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
@@ -75,7 +78,8 @@ class EditUserType extends AbstractType
                                                 $form->get('weddingDate')->getData(),
                                                 $form->get('online')->getData()
                                             );
-                                            }
+                                },
+            'validation_groups' => ['user_creation']
         ]);
     }
 }

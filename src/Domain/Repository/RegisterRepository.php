@@ -7,8 +7,13 @@ use App\Domain\Repository\Interfaces\RegisterRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
-class RegisterRepository extends ServiceEntityRepository implements RegisterRepositoryInterface
+final class RegisterRepository extends ServiceEntityRepository implements RegisterRepositoryInterface
 {
+    /**
+     * RegisterRepository constructor.
+     *
+     * @param RegistryInterface $registry
+     */
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, User::class);

@@ -9,7 +9,7 @@
 namespace App\UI\Form\FormHandler\Interfaces;
 
 
-use App\Builder\Interfaces\PictureBuilderInterface;
+use App\Domain\Builder\Interfaces\PictureBuilderInterface;
 use App\Domain\Repository\Interfaces\PictureRepositoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -25,7 +25,12 @@ interface AddPictureTypeHandlerInterface
      * @param ValidatorInterface $validator
      * @param PictureBuilderInterface $pictureBuilder
      */
-    public function __construct(PictureRepositoryInterface $pictureRepository, SessionInterface $session, ValidatorInterface $validator, PictureBuilderInterface $pictureBuilder);
+    public function __construct(
+        PictureRepositoryInterface $pictureRepository,
+        SessionInterface $session,
+        ValidatorInterface $validator,
+        PictureBuilderInterface $pictureBuilder
+    );
 
     /**
      * @param FormInterface $form

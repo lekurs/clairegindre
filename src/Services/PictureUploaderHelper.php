@@ -8,9 +8,10 @@
 
 namespace App\Services;
 
+use App\Services\Interfaces\PictureUploaderHelperInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-final class PictureUploaderHelper
+final class PictureUploaderHelper implements PictureUploaderHelperInterface
 {
     /**
      * @param UploadedFile $uploadedFile

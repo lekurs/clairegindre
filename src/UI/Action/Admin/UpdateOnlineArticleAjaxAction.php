@@ -25,7 +25,7 @@ use Symfony\Component\Routing\Annotation\Route;
  * )
  *
  */
-class UpdateOnlineArticleAjaxAction implements UpdateOnlineArticleAjaxActionInterface
+final class UpdateOnlineArticleAjaxAction implements UpdateOnlineArticleAjaxActionInterface
 {
     /**
      * @var ArticleRepositoryInterface
@@ -42,6 +42,11 @@ class UpdateOnlineArticleAjaxAction implements UpdateOnlineArticleAjaxActionInte
         $this->articleRepository = $articleRepository;
     }
 
+    /**
+     * @param Request $request
+     * @param UpdateOnlineArticleAjaxResponderInterface $responder
+     * @return mixed
+     */
     public function __invoke(Request $request, UpdateOnlineArticleAjaxResponderInterface $responder)
     {
         $online = $this->articleRepository->getOneById($request->request->get('id'));

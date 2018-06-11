@@ -12,21 +12,18 @@ namespace App\Domain\Form\Type;
 use App\Domain\DTO\GalleryCreationDTO;
 use App\Domain\DTO\Interfaces\GalleryCreationDTOInterface;
 use App\Domain\Models\Benefit;
-use App\Domain\Models\Gallery;
-use App\Domain\Models\User;
 use App\Subscriber\GalleryImageUploadSubscriber;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class AddGalleryType extends AbstractType
+final class AddGalleryType extends AbstractType
 {
     /**
      * @var GalleryImageUploadSubscriber
@@ -43,7 +40,10 @@ class AddGalleryType extends AbstractType
         $this->galleryImageUploadSubscriber = $galleryImageUploadSubscriber;
     }
 
-
+    /**
+     * @param FormBuilderInterface $builder
+     * @param array $options
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -62,6 +62,9 @@ class AddGalleryType extends AbstractType
             ;
     }
 
+    /**
+     * @param OptionsResolver $resolver
+     */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(

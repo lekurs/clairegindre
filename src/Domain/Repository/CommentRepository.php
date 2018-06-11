@@ -8,7 +8,7 @@ use App\Domain\Repository\Interfaces\CommentRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
-class CommentRepository extends ServiceEntityRepository implements CommentRepositoryInterface
+final class CommentRepository extends ServiceEntityRepository implements CommentRepositoryInterface
 {
     /**
      * CommentRepository constructor.

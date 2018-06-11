@@ -11,7 +11,7 @@ namespace App\Domain\DTO;
 
 use App\Domain\DTO\Interfaces\EditReviewsDTOInterface;
 
-class EditReviewsDTO implements EditReviewsDTOInterface
+final class EditReviewsDTO implements EditReviewsDTOInterface
 {
     /**
      * @var string
@@ -35,23 +35,17 @@ class EditReviewsDTO implements EditReviewsDTOInterface
 
     /**
      * EditReviewsDTO constructor.
-     *
      * @param string $title
      * @param string $content
      * @param bool $online
-     * @param string $image
      */
     public function __construct(
         string $title,
         string $content,
         bool $online
-//        string $image
     ) {
         $this->title = $title;
         $this->content = $content;
         $this->online = $online;
-//        $this->image = $image;
     }
-
-
 }

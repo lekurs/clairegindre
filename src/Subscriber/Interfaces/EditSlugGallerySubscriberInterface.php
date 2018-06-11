@@ -9,7 +9,22 @@
 namespace App\Subscriber\Interfaces;
 
 
+use App\Services\SlugHelper;
+use Symfony\Component\Form\FormEvent;
+
 interface EditSlugGallerySubscriberInterface
 {
+    /**
+     * EditSlugGallerySubscriberInterface constructor.
+     *
+     * @param SlugHelper $slugHelper
+     */
+    public function __construct(SlugHelper $slugHelper);
+
+    /**
+     * @param FormEvent $event
+     * @return mixed
+     */
+    public function onSubmit(FormEvent $event);
 
 }

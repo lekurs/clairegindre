@@ -111,9 +111,4 @@ final class MailerHelper implements MailerHelperInterface
 
         $this->swiftMailer->send($message);
     }
-
-    public function getAdmin()
-    {
-        dump($this->mailerAdminEmail);
-    }
 }

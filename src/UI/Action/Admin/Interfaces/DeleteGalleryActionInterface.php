@@ -24,7 +24,12 @@ interface DeleteGalleryActionInterface
      * @param string $dirGallery
      * @param string $dirPicture
      */
-    public function __construct(GalleryRepositoryInterface $galleryRepository, Filesystem $fileSystem, string $dirGallery, string $dirPicture);
+    public function __construct(
+        GalleryRepositoryInterface $galleryRepository,
+        Filesystem $fileSystem,
+        string $dirGallery,
+        string $dirPicture
+    );
 
     /**
      * @param Request $request
@@ -32,5 +37,4 @@ interface DeleteGalleryActionInterface
      * @return mixed
      */
     public function __invoke(Request $request, DeleteGalleryResponderInterface $responder);
-
 }

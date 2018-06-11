@@ -23,7 +23,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class RegistrationType extends AbstractType
+final class RegistrationType extends AbstractType
 {
     /**
      * @var ProfileImageUploadSubscriber
@@ -49,7 +49,10 @@ class RegistrationType extends AbstractType
         $this->userFolderSubscriber = $userFolderSubscriber;
     }
 
-
+    /**
+     * @param FormBuilderInterface $builder
+     * @param array $options
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -72,9 +75,7 @@ class RegistrationType extends AbstractType
             ->add('dateWedding', DateType::class, array(
                 'label' => 'Date évèvement',
                 'widget' => 'single_text',
-//                'html5' => false,
                 'required' => true,
-//                'attr' => ['class' => 'js-datepicker'],
             ))
             ->add('picture', FileType::class, array(
                 'label' => 'Choisissez un fichier'
@@ -83,6 +84,9 @@ class RegistrationType extends AbstractType
             ;
     }
 
+    /**
+     * @param OptionsResolver $resolver
+     */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
@@ -97,7 +101,8 @@ class RegistrationType extends AbstractType
                                 $form->get('picture')->getData(),
                                 $form->get('online')->getData()
                             );
-                        }
+                        },
+            'validation_groups' => ['user_creation']
         ));
     }
 }

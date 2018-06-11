@@ -28,5 +28,4 @@ interface AdminBlogChoosePicturesResponderInterface
      * @return mixed
      */
     public function __invoke($redirect = false, $gallery = null);
-
 }

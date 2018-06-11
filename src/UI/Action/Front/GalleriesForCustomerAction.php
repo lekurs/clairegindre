@@ -27,7 +27,7 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
  * )
  *
  */
-class GalleriesForCustomerAction implements GalleriesForCustomerActionInterface
+final class GalleriesForCustomerAction implements GalleriesForCustomerActionInterface
 {
     /**
      * @var GalleryRepositoryInterface
@@ -78,6 +78,5 @@ class GalleriesForCustomerAction implements GalleriesForCustomerActionInterface
         $galleries = $this->galleryRepository->getAllByUser($this->tokenStorage->getToken()->getUser()->getId());
 
         return $responder($galleries, $this->instagram->show());
-
     }
 }

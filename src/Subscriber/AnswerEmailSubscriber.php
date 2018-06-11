@@ -50,6 +50,10 @@ final class AnswerEmailSubscriber implements AnswerEmailSubscriberInterface, Eve
         ];
     }
 
+    /**
+     * @param FormEvent $event
+     * @return mixed|void
+     */
     public function manageAnswerEmailField(FormEvent $event)
     {
         if (!$this->tokenStorage->getToken()->getUser() instanceof UserInterface) {
@@ -58,6 +62,10 @@ final class AnswerEmailSubscriber implements AnswerEmailSubscriberInterface, Eve
         }
     }
 
+    /**
+     * @param FormEvent $event
+     * @return mixed|void
+     */
     public function manageAnswerEmailSubmit(FormEvent $event)
     {
         if ($this->tokenStorage->getToken()->getUser() instanceof UserInterface) {

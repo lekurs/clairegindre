@@ -67,14 +67,20 @@ class EditGalleryAction implements EditGalleryActionInterface
 
     /**
      * EditGalleryAction constructor.
+     *
      * @param GalleryRepositoryInterface $galleryRepository
      * @param PictureRepositoryInterface $pictureRepository
      * @param FormFactoryInterface $formFactory
      * @param PictureEditTypeHandlerInterface $pictureEditTypeHandler
      * @param GalleryOrderTypeHandlerInterface $galleryEditTypeHandler
      */
-    public function __construct(GalleryRepositoryInterface $galleryRepository, PictureRepositoryInterface $pictureRepository, FormFactoryInterface $formFactory, PictureEditTypeHandlerInterface $pictureEditTypeHandler, GalleryOrderTypeHandlerInterface $galleryEditTypeHandler)
-    {
+    public function __construct(
+        GalleryRepositoryInterface $galleryRepository,
+        PictureRepositoryInterface $pictureRepository,
+        FormFactoryInterface $formFactory,
+        PictureEditTypeHandlerInterface $pictureEditTypeHandler,
+        GalleryOrderTypeHandlerInterface $galleryEditTypeHandler
+    ) {
         $this->galleryRepository = $galleryRepository;
         $this->pictureRepository = $pictureRepository;
         $this->formFactory = $formFactory;
@@ -82,12 +88,14 @@ class EditGalleryAction implements EditGalleryActionInterface
         $this->galleryEditTypeHandler = $galleryEditTypeHandler;
     }
 
-
+    /**
+     * @param Request $request
+     * @param EditGalleryResponderInterface $responder
+     * @return mixed
+     */
     public function __invoke(Request $request, EditGalleryResponderInterface $responder)
     {
         $gallery = $this->galleryRepository->getWithPictures($request->attributes->get('slug'));
-
-//        $form = $this->formFactory->create(GalleryOrderType::class, $gallery)->handleRequest($request);
 
         $galleryDto = new EditGalleryDTO($gallery->getTitle(), $gallery->getEventDate(), $gallery->getEventPlace(), $gallery->getPictures()->toArray(), $gallery->getSlug());
 
@@ -97,15 +105,6 @@ class EditGalleryAction implements EditGalleryActionInterface
 
             return $responder(true, $editGalleryType, $gallery);
         }
-
-//        if($form->isSubmitted() && $form->isValid()) {
-//
-//            foreach ($form->getData()->getPictures() as $pictures)
-//            {
-//                $this->pictureRepository->update();
-//            }
-//            return $responder(true, $form, $gallery);
-//        }
 
         return $responder(false, $editGalleryType, $gallery);
     }

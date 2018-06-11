@@ -21,7 +21,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class EditArticleType extends AbstractType
+final class EditArticleType extends AbstractType
 {
     /**
      * @var EditSlugSubscriber
@@ -30,13 +30,13 @@ class EditArticleType extends AbstractType
 
     /**
      * EditArticleType constructor.
+     *
      * @param EditSlugSubscriber $editSlugSubscriber
      */
     public function __construct(EditSlugSubscriber $editSlugSubscriber)
     {
         $this->editSlugSubscriber = $editSlugSubscriber;
     }
-
 
     /**
      * @param FormBuilderInterface $builder
@@ -74,8 +74,8 @@ class EditArticleType extends AbstractType
                                        $form->get('personnalButton')->getData(),
                                        $form->get('prestation')->getData()
                                     );
-                    }
+                    },
+            'validation_groups' => ['article_creation']
         ]);
     }
-
 }

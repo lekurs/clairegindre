@@ -11,5 +11,10 @@ namespace App\Domain\DTO\Interfaces;
 
 interface PictureCreationDTOInterface
 {
-
+    /**
+     * PictureCreationDTOInterface constructor.
+     *
+     * @param string $picture
+     */
+    public function __construct(string $picture);
 }

@@ -17,8 +17,12 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class AddCommentArticleUserConnectedType extends AbstractType
+final class AddCommentArticleUserConnectedType extends AbstractType
 {
+    /**
+     * @param FormBuilderInterface $builder
+     * @param array $options
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -28,6 +32,9 @@ class AddCommentArticleUserConnectedType extends AbstractType
             ]);
     }
 
+    /**
+     * @param OptionsResolver $resolver
+     */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
@@ -37,7 +44,8 @@ class AddCommentArticleUserConnectedType extends AbstractType
                                $form->get('author')->getData(),
                                $form->get('content')->getData()
                             );
-                    }
+                    },
+            'validation_groups' => ['comment_creation']
         ]);
     }
 

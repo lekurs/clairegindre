@@ -11,7 +11,7 @@ namespace App\Domain\DTO;
 
 use App\Domain\DTO\Interfaces\GallerySessionDTOInterface;
 
-class GallerySessionDTO implements GallerySessionDTOInterface
+final class GallerySessionDTO implements GallerySessionDTOInterface
 {
     /**
      * @var string
@@ -23,9 +23,8 @@ class GallerySessionDTO implements GallerySessionDTOInterface
      *
      * @param string $id
      */
-    public function __construct(
-        string $id
-    ) {
+    public function __construct(string $id)
+    {
         $this->id = $id;
     }
 }

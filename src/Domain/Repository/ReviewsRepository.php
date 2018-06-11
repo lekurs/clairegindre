@@ -15,7 +15,7 @@ use App\Domain\Repository\Interfaces\ReviewsRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
-class ReviewsRepository extends ServiceEntityRepository implements ReviewsRepositoryInterface
+final class ReviewsRepository extends ServiceEntityRepository implements ReviewsRepositoryInterface
 {
     /**
      * ReviewsRepository constructor.
@@ -27,6 +27,11 @@ class ReviewsRepository extends ServiceEntityRepository implements ReviewsReposi
         parent::__construct($registry, Reviews::class);
     }
 
+    /**
+     * @param $id
+     * @return mixed
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
     public function getOne($id)
     {
         return $this->createQueryBuilder('reviews')

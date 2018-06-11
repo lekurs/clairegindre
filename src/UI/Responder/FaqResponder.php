@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Twig\Environment;
 
-class FaqResponder implements FaqResponderInterface
+final class FaqResponder implements FaqResponderInterface
 {
     /**
      * @var Environment
@@ -30,6 +30,7 @@ class FaqResponder implements FaqResponderInterface
 
     /**
      * FaqResponder constructor.
+     *
      * @param Environment $twig
      * @param UrlGeneratorInterface $urlGenerator
      */
@@ -39,6 +40,16 @@ class FaqResponder implements FaqResponderInterface
         $this->urlGenerator = $urlGenerator;
     }
 
+    /**
+     * @param bool $redirect
+     * @param FormInterface|null $form
+     * @param $reviews
+     * @param $instagram
+     * @return RedirectResponse|Response
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     */
     public function __invoke($redirect = false, FormInterface $form = null, $reviews, $instagram)
     {
         $redirect ? $response = new RedirectResponse($this->urlGenerator->generate('index')) : $response = new Response($this->twig->render('front/faq.html.twig', [
@@ -49,6 +60,4 @@ class FaqResponder implements FaqResponderInterface
 
         return $response;
     }
-
-
 }

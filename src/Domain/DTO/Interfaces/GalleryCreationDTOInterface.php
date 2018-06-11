@@ -16,12 +16,15 @@ interface GalleryCreationDTOInterface
      *
      * @param BenefitInterface $benefit
      * @param string $title
-     * @param array $pictures
+     * @param string $user
+     * @param \DateTime $eventDate
+     * @param string $eventPlace
      */
-//    public function __construct(
-//        BenefitInterface $benefit,
-//        string $title,
-//        array $pictures
-//    );
-
+    public function __construct(
+        BenefitInterface $benefit,
+        string $title,
+        string $user,
+        \DateTime $eventDate,
+        string $eventPlace
+    );
 }

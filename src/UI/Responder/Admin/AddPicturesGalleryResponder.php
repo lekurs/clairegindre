@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Twig\Environment;
 
-class AddPicturesGalleryResponder implements AddPicturesGalleryResponderInterface
+final class AddPicturesGalleryResponder implements AddPicturesGalleryResponderInterface
 {
     /**
      * @var Environment
@@ -29,6 +29,7 @@ class AddPicturesGalleryResponder implements AddPicturesGalleryResponderInterfac
 
     /**
      * AddPicturesGalleryResponder constructor.
+     *
      * @param Environment $twig
      * @param UrlGeneratorInterface $urlGenerator
      */
@@ -38,6 +39,15 @@ class AddPicturesGalleryResponder implements AddPicturesGalleryResponderInterfac
         $this->urlGenerator = $urlGenerator;
     }
 
+    /**
+     * @param bool $redirect
+     * @param $gallery
+     * @param $pictures
+     * @return mixed|RedirectResponse|Response
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     */
     public function __invoke($redirect = false, $gallery, $pictures)
     {
         $redirect ? $response = new RedirectResponse($this->urlGenerator->generate('adminUser')) : $response = new Response($this->twig->render('back/admin/add_gallery.html.twig', [
@@ -47,5 +57,4 @@ class AddPicturesGalleryResponder implements AddPicturesGalleryResponderInterfac
 
         return $response;
     }
-
 }

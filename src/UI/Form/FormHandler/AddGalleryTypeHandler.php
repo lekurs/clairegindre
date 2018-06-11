@@ -24,7 +24,7 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
-class AddGalleryTypeHandler implements AddGalleryTypeHandlerInterface
+final class AddGalleryTypeHandler implements AddGalleryTypeHandlerInterface
 {
     /**
      * @var GalleryRepositoryInterface

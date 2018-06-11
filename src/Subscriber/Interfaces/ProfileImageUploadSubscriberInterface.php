@@ -9,9 +9,22 @@
 namespace App\Subscriber\Interfaces;
 
 
+use App\Services\PictureUploaderHelper;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Form\FormEvent;
 
 interface ProfileImageUploadSubscriberInterface
 {
-    public function onImageUpload(FormEvent $event);
+    /**
+     * ProfileImageUploadSubscriberInterface constructor.
+     *
+     * @param Filesystem $fileSystem
+     * @param string $targetDir
+     * @param PictureUploaderHelper $pictureUploaderHelper
+     */
+    public function __construct(
+        Filesystem $fileSystem,
+        string $targetDir,
+        PictureUploaderHelper $pictureUploaderHelper
+    );
 }

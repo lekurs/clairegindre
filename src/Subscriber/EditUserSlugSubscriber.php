@@ -15,7 +15,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 
-class EditUserSlugSubscriber implements EventSubscriberInterface, EditUserSlugSubscriberInterface
+final class EditUserSlugSubscriber implements EventSubscriberInterface, EditUserSlugSubscriberInterface
 {
     /**
      * @var SlugHelper
@@ -38,6 +38,10 @@ class EditUserSlugSubscriber implements EventSubscriberInterface, EditUserSlugSu
         ];
     }
 
+    /**
+     * @param FormEvent $event
+     * @return mixed|void
+     */
     public function onSubmit(FormEvent $event)
     {
         $event->getData()->slug = $this->slugHelper->replace($event->getData()->username . '-' . $event->getData()->lastName);

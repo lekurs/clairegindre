@@ -12,7 +12,7 @@ use App\Domain\Form\Type\AddBenefitType;
 use App\Domain\Models\Benefit;
 use App\Domain\Repository\BenefitRepository;
 use App\Domain\Repository\Interfaces\BenefitRepositoryInterface;
-use App\UI\Action\Admin\Interfaces\AddPresationActionInterface;
+use App\UI\Action\Admin\Interfaces\AddPrestationActionInterface;
 use App\UI\Form\FormHandler\AddBenefitTypeHandler;
 use App\UI\Responder\Admin\Interfaces\AddPrestationResponderInterface;
 use Doctrine\ORM\EntityManagerInterface;
@@ -30,7 +30,7 @@ use Symfony\Component\Routing\Annotation\Route;
  *
  * @package App\UI\Action\Admin
  */
-class AddPrestationAction implements AddPresationActionInterface
+final class AddPrestationAction implements AddPrestationActionInterface
 {
     /**
      * @var FormFactoryInterface
@@ -64,6 +64,11 @@ class AddPrestationAction implements AddPresationActionInterface
         $this->entityManager = $entityManager;
     }
 
+    /**
+     * @param Request $request
+     * @param AddPrestationResponderInterface $responder
+     * @return mixed
+     */
     public function __invoke(Request $request, AddPrestationResponderInterface $responder)
     {
         $addPrestation = $this->formFactory->create(AddBenefitType::class)->handleRequest($request);
@@ -76,5 +81,4 @@ class AddPrestationAction implements AddPresationActionInterface
         }
         return $responder(false, $addPrestation, $benefits);
     }
-
 }

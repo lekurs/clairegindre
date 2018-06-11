@@ -38,7 +38,7 @@ use Symfony\Component\Routing\Annotation\Route;
  *
  * @package App\UI\Action\Front
  */
-class GalleriesCustomersAction implements GalleriesCustomersActionInterface
+final class GalleriesCustomersAction implements GalleriesCustomersActionInterface
 {
     /**
      * @var GalleryRepositoryInterface
@@ -96,7 +96,12 @@ class GalleriesCustomersAction implements GalleriesCustomersActionInterface
         $this->reviewsRepository = $reviewsRepository;
     }
 
-
+    /**
+     * @param Request $request
+     * @param GalleriesCustomersResponderInterface $responder
+     * @param int $page
+     * @return mixed
+     */
     public function __invoke(Request $request, GalleriesCustomersResponderInterface $responder, int $page)
     {
         $galleries = $this->galleryRepository->getAllWithPaginator($page, 16);
@@ -119,5 +124,4 @@ class GalleriesCustomersAction implements GalleriesCustomersActionInterface
 
         return $responder(false, $contact, $customerLoginType, $galleries, $this->insta->show(), $reviews, $pagination);
     }
-
 }

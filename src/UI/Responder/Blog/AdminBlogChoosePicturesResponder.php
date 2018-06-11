@@ -20,7 +20,7 @@ use Twig\Environment;
  * Class AdminBlogChoosePicturesResponder
  * @package App\UI\Responder\Blog
  */
-class AdminBlogChoosePicturesResponder implements AdminBlogChoosePicturesResponderInterface
+final class AdminBlogChoosePicturesResponder implements AdminBlogChoosePicturesResponderInterface
 {
     /**
      * @var Environment

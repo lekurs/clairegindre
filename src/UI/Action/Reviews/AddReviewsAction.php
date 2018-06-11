@@ -30,7 +30,7 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
  *
  * @package App\UI\Action\Reviews
  */
-class AddReviewsAction implements AddReviewsActionInterface
+final class AddReviewsAction implements AddReviewsActionInterface
 {
     /**
      * @var FormFactoryInterface
@@ -72,7 +72,11 @@ class AddReviewsAction implements AddReviewsActionInterface
         $this->authorizationChecker = $authorizationChecker;
     }
 
-
+    /**
+     * @param Request $request
+     * @param AddReviewsResponderInterface $responder
+     * @return mixed
+     */
     public function __invoke(Request $request, AddReviewsResponderInterface $responder)
     {
         if (false === $this->authorizationChecker->isGranted('ROLE_ADMIN'))

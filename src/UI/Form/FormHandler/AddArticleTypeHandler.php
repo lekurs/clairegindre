@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
-class AddArticleTypeHandler implements AddArticleTypeHandlerInterface
+final class AddArticleTypeHandler implements AddArticleTypeHandlerInterface
 {
     /**
      * @var GalleryRepositoryInterface

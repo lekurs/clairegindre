@@ -29,7 +29,7 @@ interface EditBenefitTypeHandlerInterface
 
     /**
      * @param FormInterface $form
-     * @return mixed
+     * @return bool
      */
-    public function handle(FormInterface $form);
+    public function handle(FormInterface $form):bool ;
 }

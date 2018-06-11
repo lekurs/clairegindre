@@ -10,7 +10,7 @@ use App\Domain\Repository\Interfaces\PictureRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
-class PictureRepository extends ServiceEntityRepository implements PictureRepositoryInterface
+final class PictureRepository extends ServiceEntityRepository implements PictureRepositoryInterface
 {
     public function __construct(RegistryInterface $registry)
     {
@@ -31,6 +31,10 @@ class PictureRepository extends ServiceEntityRepository implements PictureReposi
                             ->getOneOrNullResult();
     }
 
+    /**
+     * @param Gallery $gallery
+     * @return mixed
+     */
     public function getAllByGallery(Gallery $gallery)
     {
         return $this->createQueryBuilder('picture')
@@ -82,6 +86,10 @@ class PictureRepository extends ServiceEntityRepository implements PictureReposi
         $this->getEntityManager()->flush();
     }
 
+    /**
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
     public function update()
     {
         $this->getEntityManager()->flush();

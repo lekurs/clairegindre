@@ -11,5 +11,8 @@ namespace App\UI\Responder\Interfaces;
 
 interface GallerieMakerAjaxResponderInterface
 {
-
+    /**
+     * @return mixed
+     */
+    public function __invoke();
 }

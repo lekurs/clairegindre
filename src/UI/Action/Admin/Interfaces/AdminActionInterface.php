@@ -17,7 +17,9 @@ use App\Domain\Repository\Interfaces\UserRepositoryInterface;
 use App\UI\Form\FormHandler\Interfaces\AddArticleTypeHandlerInterface;
 use App\UI\Form\FormHandler\Interfaces\AddBenefitHandlerInterface;
 use App\UI\Form\FormHandler\Interfaces\RegistrationTypeHandlerInterface;
+use App\UI\Responder\Admin\Interfaces\AdminResponderInterface;
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
@@ -51,4 +53,11 @@ interface AdminActionInterface
         AddBenefitHandlerInterface $addBenefitTypeHandler,
         UrlGeneratorInterface $urlGenerator
     );
+
+    /**
+     * @param Request $request
+     * @param AdminResponderInterface $responder
+     * @return mixed
+     */
+    public function __invoke(Request $request, AdminResponderInterface $responder);
 }

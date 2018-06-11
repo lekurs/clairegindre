@@ -9,14 +9,14 @@
 namespace App\UI\Form\FormHandler;
 
 
-use App\Builder\Interfaces\PictureBuilderInterface;
+use App\Domain\Builder\Interfaces\PictureBuilderInterface;
 use App\Domain\Repository\Interfaces\PictureRepositoryInterface;
 use App\UI\Form\FormHandler\Interfaces\AddPictureTypeHandlerInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
-class AddPictureTypeHandler implements AddPictureTypeHandlerInterface
+final class AddPictureTypeHandler implements AddPictureTypeHandlerInterface
 {
     /**
      * @var PictureRepositoryInterface
@@ -58,6 +58,10 @@ class AddPictureTypeHandler implements AddPictureTypeHandlerInterface
         $this->pictureBuilder = $pictureBuilder;
     }
 
+    /**
+     * @param FormInterface $form
+     * @return bool
+     */
     public function handle(FormInterface $form): bool
     {
         if($form->isSubmitted() && $form->isValid()) {

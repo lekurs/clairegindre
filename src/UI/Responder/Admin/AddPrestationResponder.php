@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Twig\Environment;
 
-class AddPrestationResponder implements AddPrestationResponderInterface
+final class AddPrestationResponder implements AddPrestationResponderInterface
 {
     /**
      * @var Environment
@@ -49,5 +49,4 @@ class AddPrestationResponder implements AddPrestationResponderInterface
         ]));
         return $response;
     }
-
 }

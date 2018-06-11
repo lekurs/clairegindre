@@ -11,7 +11,7 @@ namespace App\Domain\DTO;
 
 use App\Domain\DTO\Interfaces\PictureCreationDTOInterface;
 
-class PictureCreationDTO implements PictureCreationDTOInterface
+final class PictureCreationDTO implements PictureCreationDTOInterface
 {
     /**
      * @var string
@@ -23,9 +23,8 @@ class PictureCreationDTO implements PictureCreationDTOInterface
      *
      * @param string $picture
      */
-    public function __construct(
-        string $picture
-    ) {
+    public function __construct(string $picture)
+    {
         $this->picture = $picture;
     }
 }

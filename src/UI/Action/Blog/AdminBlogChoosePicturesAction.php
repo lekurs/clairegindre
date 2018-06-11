@@ -32,7 +32,7 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
  * )
  * @package App\UI\Action\Blog
  */
-class AdminBlogChoosePicturesAction implements AdminBlogChoosePicturesActionInterface
+final class AdminBlogChoosePicturesAction implements AdminBlogChoosePicturesActionInterface
 {
     /**
      * @var FormFactoryInterface
@@ -74,7 +74,11 @@ class AdminBlogChoosePicturesAction implements AdminBlogChoosePicturesActionInte
         $this->authorizationChecker = $authorizationChecker;
     }
 
-
+    /**
+     * @param Request $request
+     * @param AdminBlogChoosePicturesResponderInterface $responder
+     * @return mixed
+     */
     public function __invoke(Request $request, AdminBlogChoosePicturesResponderInterface $responder)
     {
         if (false === $this->authorizationChecker->isGranted('ROLE_ADMIN')) {
@@ -88,8 +92,6 @@ class AdminBlogChoosePicturesAction implements AdminBlogChoosePicturesActionInte
             if (is_null($gallery)) {
                 throw new Exception('Ajouter des images dans la galerie avant de créer le blog');
             }
-//
-//            dump($gallery);
 
             $form = $this->formFactory->create(SelectPicturesForArticleType::class, $gallery)->handleRequest($request);
 

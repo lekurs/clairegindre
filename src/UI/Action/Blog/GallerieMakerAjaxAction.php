@@ -30,7 +30,7 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
  * )
  *
  */
-class GallerieMakerAjaxAction implements GallerieMakerAjaxActionInterface
+final class GallerieMakerAjaxAction implements GallerieMakerAjaxActionInterface
 {
     /**
      * @var GalleryMakerBuilderInterface
@@ -64,6 +64,7 @@ class GallerieMakerAjaxAction implements GallerieMakerAjaxActionInterface
 
     /**
      * GallerieMakerAjaxAction constructor.
+     *
      * @param GalleryMakerBuilderInterface $galleryPageBuilder
      * @param GalleryMakerRepositoryInterface $galleryPageRepository
      * @param GalleryRepositoryInterface $galleryRepository
@@ -71,8 +72,14 @@ class GallerieMakerAjaxAction implements GallerieMakerAjaxActionInterface
      * @param AuthorizationCheckerInterface $authorizationChecker
      * @param SessionInterface $session
      */
-    public function __construct(GalleryMakerBuilderInterface $galleryPageBuilder, GalleryMakerRepositoryInterface $galleryPageRepository, GalleryRepositoryInterface $galleryRepository, ArticleRepositoryInterface $articleRepository, AuthorizationCheckerInterface $authorizationChecker, SessionInterface $session)
-    {
+    public function __construct(
+        GalleryMakerBuilderInterface $galleryPageBuilder,
+        GalleryMakerRepositoryInterface $galleryPageRepository,
+        GalleryRepositoryInterface $galleryRepository,
+        ArticleRepositoryInterface $articleRepository,
+        AuthorizationCheckerInterface $authorizationChecker,
+        SessionInterface $session
+    ) {
         $this->galleryPageBuilder = $galleryPageBuilder;
         $this->galleryPageRepository = $galleryPageRepository;
         $this->galleryRepository = $galleryRepository;
@@ -81,31 +88,31 @@ class GallerieMakerAjaxAction implements GallerieMakerAjaxActionInterface
         $this->session = $session;
     }
 
-
+    /**
+     * @param Request $request
+     * @param GallerieMakerAjaxResponderInterface $responder
+     * @return mixed
+     */
     public function __invoke(Request $request, GallerieMakerAjaxResponderInterface $responder)
     {
-//        $article = $this->articleRepository->getOne($request->get('slugArticle'));
+        if ($this->authorizationChecker->isGranted('ROLE_ADMIN')) {
 
-        $gallery = $this->galleryRepository->getOne($request->attributes->get('slugGallery'));
+            $gallery = $this->galleryRepository->getOne($request->attributes->get('slugGallery'));
 
+            $pictures = $gallery->getPictures();
 
-        $pictures = $gallery->getPictures();
-
-        foreach($request->request->get('line') as $key => $line) {
-            foreach ($line as $imageKey => $image) {
-                foreach ($pictures as $picture) {
-                    if ($picture->getId() === $image) {
-                        $this->galleryPageBuilder->create($gallery->getArticle(), $key, $imageKey, $image);
-                        $this->galleryPageRepository->save($this->galleryPageBuilder->getGalleryBuilder(), $picture);
+            foreach($request->request->get('line') as $key => $line) {
+                foreach ($line as $imageKey => $image) {
+                    foreach ($pictures as $picture) {
+                        if ($picture->getId() === $image) {
+                            $this->galleryPageBuilder->create($gallery->getArticle(), $key, $imageKey, $image);
+                            $this->galleryPageRepository->save($this->galleryPageBuilder->getGalleryBuilder(), $picture);
+                        }
                     }
                 }
             }
+
+            return $responder();
         }
-
-        die;
-
-//        $this->galleryPageRepository->save($this->galleryPageBuilder->getGalleryBuilder(), $image);
-
-        return $responder();
     }
 }

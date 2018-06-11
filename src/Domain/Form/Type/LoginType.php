@@ -6,7 +6,7 @@
  * Time: 10:36
  */
 
-namespace App\Domain\Form;
+namespace App\Domain\Form\Type;
 
 
 use App\Domain\DTO\UserLoginDTO;

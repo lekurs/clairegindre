@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Twig\Environment;
 
-class ArticleShowGalleryResponder implements ArticleShowGalleryResponderInterface
+final class ArticleShowGalleryResponder implements ArticleShowGalleryResponderInterface
 {
     /**
      * @var Environment
@@ -43,8 +43,8 @@ class ArticleShowGalleryResponder implements ArticleShowGalleryResponderInterfac
      * @param bool $redirect
      * @param FormInterface|null $form
      * @param FormInterface|null $commentType
-     * @param $gallery
-     * @param $comments
+     * @param $article
+     * @param $data
      * @param $instagram
      * @param $reviews
      * @return RedirectResponse|Response

@@ -9,7 +9,14 @@
 namespace App\Domain\Repository\Interfaces;
 
 
+use Symfony\Bridge\Doctrine\RegistryInterface;
+
 interface RegisterRepositoryInterface
 {
-
+    /**
+     * RegisterRepositoryInterface constructor.
+     *
+     * @param RegistryInterface $registry
+     */
+    public function __construct(RegistryInterface $registry);
 }

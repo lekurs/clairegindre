@@ -11,11 +11,13 @@ namespace App\UI\Action\Security;
 
 use App\Domain\Builder\Interfaces\UserBuilderInterface;
 use App\Domain\Form\Type\RegistrationType;
+use App\UI\Action\Security\Interfaces\RegisterActionInterface;
 use App\UI\Form\FormHandler\Interfaces\RegistrationTypeHandlerInterface;
 use App\UI\Responder\Security\Interfaces\RegisterResponderInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
@@ -28,7 +30,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
  *
  * @package App\UI\Action\Security
  */
-class RegisterAction
+class RegisterAction implements RegisterActionInterface
 {
     /**
      * @var FormFactoryInterface
@@ -46,6 +48,11 @@ class RegisterAction
     private $registrationTypeHandler;
 
     /**
+     * @var AuthorizationCheckerInterface
+     */
+    private $authorization;
+
+    /**
      * @var UserBuilderInterface
      */
     private $userBuilder;
@@ -56,29 +63,38 @@ class RegisterAction
      * @param FormFactoryInterface $formFactory
      * @param UserPasswordEncoderInterface $userPasswordEncoder
      * @param RegistrationTypeHandlerInterface $registrationTypeHandler
+     * @param AuthorizationCheckerInterface $authorizationChecker
      * @param UserBuilderInterface $userBuilder
      */
     public function __construct(
         FormFactoryInterface $formFactory,
         UserPasswordEncoderInterface $userPasswordEncoder,
         RegistrationTypeHandlerInterface $registrationTypeHandler,
+        AuthorizationCheckerInterface $authorizationChecker,
         UserBuilderInterface $userBuilder
     ) {
         $this->formFactory = $formFactory;
         $this->userPasswordEncoder = $userPasswordEncoder;
         $this->registrationTypeHandler = $registrationTypeHandler;
+        $this->authorization = $authorizationChecker;
         $this->userBuilder = $userBuilder;
     }
 
-
+    /**
+     * @param Request $request
+     * @param RegisterResponderInterface $responder
+     * @return mixed
+     */
     public function __invoke(Request $request, RegisterResponderInterface $responder)
     {
-        $registerType = $this->formFactory->create(RegistrationType::class)->handleRequest($request);
+        if ($this->authorization->isGranted('ROLE_ADMIN')) {
 
-        if($this->registrationTypeHandler->handle($registerType)) {
-            return $responder(true);
+            $registerType = $this->formFactory->create(RegistrationType::class)->handleRequest($request);
+
+            if($this->registrationTypeHandler->handle($registerType)) {
+                return $responder(true);
+            }
+            return $responder(false, $registerType);
         }
-        return $responder(false, $registerType);
     }
-
 }

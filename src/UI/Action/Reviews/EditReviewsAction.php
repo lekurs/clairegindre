@@ -30,7 +30,7 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
  * )
  *
  */
-class EditReviewsAction implements EditReviewsActionInterface
+final class EditReviewsAction implements EditReviewsActionInterface
 {
     /**
      * @var AuthorizationCheckerInterface
@@ -59,14 +59,20 @@ class EditReviewsAction implements EditReviewsActionInterface
 
     /**
      * EditReviewsAction constructor.
+     *
      * @param AuthorizationCheckerInterface $authorizationChecker
      * @param TokenStorageInterface $tokenStorage
      * @param FormFactoryInterface $formFactory
      * @param EditReviewsTypeHandlerInterface $editReviewsTypeHandler
      * @param ReviewsRepositoryInterface $reviewsRepository
      */
-    public function __construct(AuthorizationCheckerInterface $authorizationChecker, TokenStorageInterface $tokenStorage, FormFactoryInterface $formFactory, EditReviewsTypeHandlerInterface $editReviewsTypeHandler, ReviewsRepositoryInterface $reviewsRepository)
-    {
+    public function __construct(
+        AuthorizationCheckerInterface $authorizationChecker,
+        TokenStorageInterface $tokenStorage,
+        FormFactoryInterface $formFactory,
+        EditReviewsTypeHandlerInterface $editReviewsTypeHandler,
+        ReviewsRepositoryInterface $reviewsRepository
+    ) {
         $this->authorizationChecker = $authorizationChecker;
         $this->tokenStorage = $tokenStorage;
         $this->formFactory = $formFactory;
@@ -74,18 +80,23 @@ class EditReviewsAction implements EditReviewsActionInterface
         $this->reviewsRepository = $reviewsRepository;
     }
 
+    /**
+     * @param Request $request
+     * @param EditReviewsResponderInterface $responder
+     * @return mixed
+     */
     public function __invoke(Request $request, EditReviewsResponderInterface $responder)
     {
-        $review = $this->reviewsRepository->getOne($request->get('id'));
+        if ($this->authorizationChecker->isGranted('ROLE_ADMIN')) {
+            $review = $this->reviewsRepository->getOne($request->get('id'));
 
-        $reviewDTO = new EditReviewsDTO($review->getTitle(), $review->getContent(), $review->isOnline(), $review->getImageName());
+            $reviewDTO = new EditReviewsDTO($review->getTitle(), $review->getContent(), $review->isOnline(), $review->getImageName());
 
-        $editReviewType = $this->formFactory->create(EditReviewType::class, $reviewDTO);
+            $editReviewType = $this->formFactory->create(EditReviewType::class, $reviewDTO);
 
 //        if ($this->editReviewsTypeHandler)
 
-        return $responder(false, $editReviewType);
+            return $responder(false, $editReviewType);
+        }
     }
-
-
 }

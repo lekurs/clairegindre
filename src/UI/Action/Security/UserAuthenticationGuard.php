@@ -21,7 +21,7 @@ use Symfony\Component\Security\Guard\Authenticator\AbstractFormLoginAuthenticato
  *
  * @author GINDRE Maxime <gindre.maxime@gmail.com>
  */
-class UserAuthenticationGuard extends AbstractFormLoginAuthenticator
+final class UserAuthenticationGuard extends AbstractFormLoginAuthenticator
 {
     const ALLOWED_URL = ['login', 'galleriesCustomers'];
     /**

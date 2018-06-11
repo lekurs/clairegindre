@@ -15,7 +15,7 @@ use App\UI\Action\Admin\Interfaces\DeletePictureActionInterface;
 use App\UI\Responder\Admin\Interfaces\DeletePictureResponderInterface;
 use Symfony\Component\HttpFoundation\Request;
 
-class DeletePictureAction implements DeletePictureActionInterface
+final class DeletePictureAction implements DeletePictureActionInterface
 {
     /**
      * @var PictureRepositoryInterface

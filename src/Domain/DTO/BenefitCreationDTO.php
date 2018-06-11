@@ -11,7 +11,7 @@ namespace App\Domain\DTO;
 
 use App\Domain\DTO\Interfaces\BenefitCreationDTOInterface;
 
-class BenefitCreationDTO implements BenefitCreationDTOInterface
+final class BenefitCreationDTO implements BenefitCreationDTOInterface
 {
     /**
      * @var string
@@ -23,9 +23,8 @@ class BenefitCreationDTO implements BenefitCreationDTOInterface
      *
      * @param string $name
      */
-    public function __construct(
-        string $name
-    ) {
+    public function __construct(string $name)
+    {
         $this->name = $name;
     }
 }

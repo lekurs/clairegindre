@@ -19,7 +19,7 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
-class EditUserHandler implements EditUserHandlerInterface
+final class EditUserHandler implements EditUserHandlerInterface
 {
     /**
      * @var UserRepositoryInterface
@@ -85,7 +85,11 @@ class EditUserHandler implements EditUserHandlerInterface
         $this->encoder = $encoder;
     }
 
-
+    /**
+     * @param FormInterface $form
+     * @param $user
+     * @return bool
+     */
     public function handle(FormInterface $form, $user): bool
     {
         if($form->isSubmitted() && $form->isValid()) {
@@ -98,8 +102,8 @@ class EditUserHandler implements EditUserHandlerInterface
 
             $user->updateUser($form->getData());
 
-            $this->validator->validate($user, [
-
+            $this->validator->validate($user, [], [
+                'user_creation'
             ]);
 
             $this->session->getFlashBag()->add('success', 'Utilisateur mis à jour');

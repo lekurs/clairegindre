@@ -12,7 +12,7 @@ namespace App\UI\Responder\Admin;
 use App\UI\Responder\Admin\Interfaces\UpdateOnlineUserAjaxResponderInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-class UpdateOnlineUserAjaxResponder implements UpdateOnlineUserAjaxResponderInterface
+final class UpdateOnlineUserAjaxResponder implements UpdateOnlineUserAjaxResponderInterface
 {
     /**
      * @return JsonResponse

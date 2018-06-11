@@ -13,7 +13,7 @@ use App\UI\Responder\Interfaces\DeleteReviewsResponderInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
-class DeleteReviewsResponder implements DeleteReviewsResponderInterface
+final class DeleteReviewsResponder implements DeleteReviewsResponderInterface
 {
     /**
      * @var UrlGeneratorInterface
@@ -30,6 +30,9 @@ class DeleteReviewsResponder implements DeleteReviewsResponderInterface
         $this->urlGenerator = $urlGenerator;
     }
 
+    /**
+     * @return mixed|RedirectResponse
+     */
     public function __invoke()
     {
         return $response = new RedirectResponse($this->urlGenerator->generate('adminAddReviews'));

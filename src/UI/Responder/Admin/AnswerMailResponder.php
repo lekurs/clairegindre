@@ -39,7 +39,15 @@ final class AnswerMailResponder implements AnswerMailResponderInterface
         $this->urlGenerator = $urlGenerator;
     }
 
-
+    /**
+     * @param bool $redirect
+     * @param FormInterface|null $form
+     * @param $mail
+     * @return mixed|RedirectResponse|Response
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     */
     public function __invoke($redirect = false, FormInterface $form = null, $mail)
     {
         $redirect ? $response = new RedirectResponse($this->urlGenerator->generate('admin')) : $response = new Response($this->twig->render('back/admin/answer_mails.html.twig', [

@@ -17,6 +17,7 @@ use App\UI\Responder\Interfaces\AddArticleResponderInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 /**
  * Class AddArticleAction.
@@ -26,7 +27,7 @@ use Symfony\Component\Routing\Annotation\Route;
  *     path="/admin/article/create/{slug}"
  * )
  */
-class AddArticleAction implements AddArticleActionInterface
+final class AddArticleAction implements AddArticleActionInterface
 {
     /**
      * @var GalleryRepositoryInterface
@@ -43,20 +44,28 @@ class AddArticleAction implements AddArticleActionInterface
     private $addArticleTypeHandler;
 
     /**
+     * @var AuthorizationCheckerInterface
+     */
+    private $authorizationChecker;
+
+    /**
      * AddArticleAction constructor.
      *
      * @param GalleryRepositoryInterface $galleryRepository
      * @param FormFactoryInterface $formFactory
      * @param AddArticleTypeHandlerInterface $addArticleTypeHandler
+     * @param AuthorizationCheckerInterface $authorizationChecker
      */
     public function __construct(
         GalleryRepositoryInterface $galleryRepository,
         FormFactoryInterface $formFactory,
-        AddArticleTypeHandlerInterface $addArticleTypeHandler
+        AddArticleTypeHandlerInterface $addArticleTypeHandler,
+        AuthorizationCheckerInterface $authorizationChecker
     ) {
         $this->galleryRepository = $galleryRepository;
         $this->formFactory = $formFactory;
         $this->addArticleTypeHandler = $addArticleTypeHandler;
+        $this->authorizationChecker = $authorizationChecker;
     }
 
     /**
@@ -66,14 +75,16 @@ class AddArticleAction implements AddArticleActionInterface
      */
     public function __invoke(Request $request, AddArticleResponderInterface $responder)
     {
-        $gallery = $this->galleryRepository->getOne($request->attributes->get('slug'));
+        if ($this->authorizationChecker->isGranted('ROLE_ADMIN')) {
+            $gallery = $this->galleryRepository->getOne($request->attributes->get('slug'));
 
-        $addArticleType = $this->formFactory->create(AddArticleType::class)->handleRequest($request);
+            $addArticleType = $this->formFactory->create(AddArticleType::class)->handleRequest($request);
 
-        if($this->addArticleTypeHandler->handle($addArticleType, $gallery)) {
+            if($this->addArticleTypeHandler->handle($addArticleType, $gallery)) {
 
-            return $responder(true, null, $gallery);
+                return $responder(true, null, $gallery);
+            }
+            return $responder(false, $addArticleType, $gallery);
         }
-        return $responder(false, $addArticleType, $gallery);
     }
 }

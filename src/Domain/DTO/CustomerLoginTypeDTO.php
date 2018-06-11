@@ -11,7 +11,7 @@ namespace App\Domain\DTO;
 
 use App\Domain\DTO\Interfaces\CustomerLoginTypeDTOInterface;
 
-class CustomerLoginTypeDTO implements CustomerLoginTypeDTOInterface
+final class CustomerLoginTypeDTO implements CustomerLoginTypeDTOInterface
 {
     /**
      * @var string
@@ -29,10 +29,8 @@ class CustomerLoginTypeDTO implements CustomerLoginTypeDTOInterface
      * @param string $username
      * @param string $password
      */
-    public function __construct(
-        string $username,
-        string $password
-    ) {
+    public function __construct(string $username, string $password)
+    {
         $this->username = $username;
         $this->password = $password;
     }
