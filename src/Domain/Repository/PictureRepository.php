@@ -2,6 +2,7 @@
 
 namespace App\Domain\Repository;
 
+use App\Domain\Models\Article;
 use App\Domain\Models\Gallery;
 use App\Domain\Models\Interfaces\PictureInterface;
 use App\Domain\Models\Interfaces\UserInterface;
@@ -72,6 +73,17 @@ final class PictureRepository extends ServiceEntityRepository implements Picture
                             ->setParameter('galleryId', $galleryId)
                             ->getQuery()
                             ->getOneOrNullResult();
+    }
+
+    public function getWithGalerieMaker(Gallery $gallery)
+    {
+        return $this->createQueryBuilder('picture')
+                            ->leftJoin('picture.gallery', 'gallery')
+                            ->where('picture.gallery = :gallery')
+                            ->andWhere('picture.galleryMaker IS NOT NULL')
+                            ->setParameter('gallery', $gallery->getId())
+                            ->getQuery()
+                            ->getResult();
     }
 
     /**

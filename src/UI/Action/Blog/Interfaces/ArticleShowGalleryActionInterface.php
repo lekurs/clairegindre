@@ -13,6 +13,7 @@ use App\Domain\Lib\InstagramLib;
 use App\Domain\Repository\GalleryMakerRepository;
 use App\Domain\Repository\Interfaces\ArticleRepositoryInterface;
 use App\Domain\Repository\Interfaces\GalleryRepositoryInterface;
+use App\Domain\Repository\Interfaces\PictureRepositoryInterface;
 use App\Domain\Repository\Interfaces\ReviewsRepositoryInterface;
 use App\Services\SlugHelper;
 use App\UI\Form\FormHandler\Interfaces\AddCommentOnArticleTypeHandlerInterface;
@@ -28,6 +29,7 @@ interface ArticleShowGalleryActionInterface
      *
      * @param ReviewsRepositoryInterface $reviewsRepository
      * @param ArticleRepositoryInterface $articleRepository
+     * @param PictureRepositoryInterface $pictureRepository
      * @param GalleryMakerRepository $galleryMakerRepository
      * @param GalleryRepositoryInterface $galleryRepository
      * @param FormFactoryInterface $formFactory
@@ -39,6 +41,7 @@ interface ArticleShowGalleryActionInterface
     public function __construct(
         ReviewsRepositoryInterface $reviewsRepository,
         ArticleRepositoryInterface $articleRepository,
+        PictureRepositoryInterface $pictureRepository,
         GalleryMakerRepository $galleryMakerRepository,
         GalleryRepositoryInterface $galleryRepository,
         FormFactoryInterface $formFactory,

@@ -18,6 +18,7 @@ use App\Domain\Repository\GalleryMakerRepository;
 use App\Domain\Repository\Interfaces\ArticleRepositoryInterface;
 use App\Domain\Repository\Interfaces\CommentRepositoryInterface;
 use App\Domain\Repository\Interfaces\GalleryRepositoryInterface;
+use App\Domain\Repository\Interfaces\PictureRepositoryInterface;
 use App\Domain\Repository\Interfaces\ReviewsRepositoryInterface;
 use App\Services\SlugHelper;
 use App\UI\Action\Blog\Interfaces\ArticleShowGalleryActionInterface;
@@ -71,6 +72,11 @@ final class ArticleShowGalleryAction implements ArticleShowGalleryActionInterfac
     private $addCommentHandler;
 
     /**
+     * @var PictureRepositoryInterface
+     */
+    private $pictureRepository;
+
+    /**
      * @var InstagramLib
      */
     private $instagram;
@@ -90,6 +96,7 @@ final class ArticleShowGalleryAction implements ArticleShowGalleryActionInterfac
      *
      * @param ReviewsRepositoryInterface $reviewsRepository
      * @param ArticleRepositoryInterface $articleRepository
+     * @param PictureRepositoryInterface $pictureRepository
      * @param GalleryMakerRepository $galleryMakerRepository
      * @param GalleryRepositoryInterface $galleryRepository
      * @param FormFactoryInterface $formFactory
@@ -101,6 +108,7 @@ final class ArticleShowGalleryAction implements ArticleShowGalleryActionInterfac
     public function __construct(
         ReviewsRepositoryInterface $reviewsRepository,
         ArticleRepositoryInterface $articleRepository,
+        PictureRepositoryInterface $pictureRepository,
         GalleryMakerRepository $galleryMakerRepository,
         GalleryRepositoryInterface $galleryRepository,
         FormFactoryInterface $formFactory,
@@ -117,6 +125,7 @@ final class ArticleShowGalleryAction implements ArticleShowGalleryActionInterfac
         $this->addCommentHandler = $addCommentHandler;
         $this->instagram = $instagram;
         $this->tokenStorage = $tokenStorage;
+        $this->pictureRepository = $pictureRepository;
         $this->stringReplace = $stringReplace;
     }
 
@@ -133,10 +142,12 @@ final class ArticleShowGalleryAction implements ArticleShowGalleryActionInterfac
 
         $galerie = $this->galleryRepository->getOne($request->attributes->get('slugGallery'));
 
+        $pictures = $this->pictureRepository->getWithGalerieMaker($galerie);
+
         $data[] = array();
 
-        foreach($galerie->getPictures() as $key => $images) {
-//            $data[$images->getGalleryMaker()->getLine()][$images->getGalleryMaker()->getDisplayOrder()][] = $images->getPublicPath() . '/' . $images->getPictureName();
+        foreach($pictures as $key => $picture) {
+            $data[$picture->getGalleryMaker()->getLine()][$picture->getGalleryMaker()->getDisplayOrder()][] = $picture->getPublicPath() . '/' . $picture->getPictureName();
         }
 
         $form = $this->formFactory->create(ContactType::class);
