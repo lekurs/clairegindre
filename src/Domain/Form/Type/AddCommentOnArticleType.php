@@ -45,6 +45,7 @@ final class AddCommentOnArticleType extends AbstractType
         $builder
             ->add('content', TextareaType::class, [
                 'required' => false,
+                'attr' => ['class' => 'comment-form', 'placeholder' => 'Votre commentaire']
             ])
 
             ->addEventSubscriber($this->commentPostListener);

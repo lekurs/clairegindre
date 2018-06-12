@@ -32,4 +32,10 @@
     a#link-contact {
         width: 4em;
     }
+
+/** ARTICLE **/
+
+    .article-img-container {
+        height: 31em;
+    }
 }

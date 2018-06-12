@@ -83,10 +83,10 @@ final class AddCommentOnArticleTypeHandler implements AddCommentOnArticleTypeHan
                                                                                 $form->getData()->author ?? null
 
                                                                             );
-
-            $this->validator->validate($comment, [], [
-                'add_comment'
-            ]);
+//
+//            $this->validator->validate($comment, [], [
+//                'add_comment'
+//            ]);
 
             $this->commentRepository->save($this->commentBuilder->getComment());
 

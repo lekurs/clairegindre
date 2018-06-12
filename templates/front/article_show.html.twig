@@ -88,7 +88,7 @@
 
             <div class="row no-gutters">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                    <h3 class="comment-title">ça t'as plu ? <br>N'hésites pas à me laisser un commentaire !</h3>
+                    <h3 class="comment-title">ça vous a plu ? <br>N'hésitez pas à me laisser un commentaire !</h3>
                 </div>
             </div>
                 <div class="row no-gutters">
@@ -113,7 +113,7 @@
                         {% for comment in article.comments %}
                             {% if comment.email is null %}
                             <div class="row">
-                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 comment-name">{{ comment.author.username ~ ' - ' ~ comment.date | date }}</div>
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 comment-name">{{ comment.author.lastname ~ ' - ' ~ comment.date | date }}</div>
                             </div>
                             {% else %}
                             <div class="row">

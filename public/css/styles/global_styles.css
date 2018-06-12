@@ -99,7 +99,7 @@ html, body {
 .menu-overlay {
     background-color: #242424;
     color: #333;
-    height: 50%;
+    height: 40%;
     width: 100%;
     position: fixed;
     opacity: 0;
@@ -173,7 +173,7 @@ nav {
 
 
 .logo-content {
-    margin-top: 2%;
+    /*margin-top: 2%;*/
     min-width: 165px;
     min-height: 180px;
     max-width: 220px;
@@ -810,11 +810,13 @@ section.presentations {
     font-family: Playfair;
     font-weight: lighter;
     font-size: 7em;
-    margin: 0;
+    margin: 0 .5em;
 }
 
 p#presentation-txt {
     font-size: 1.2em;
+    text-align: justify;
+    margin: 0 3em;
 }
 
 .photo-presentations {

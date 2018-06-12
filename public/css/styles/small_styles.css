@@ -57,7 +57,7 @@
 
     .social-container {
         left: 93%;
-        top: 7%;
+        top: 7% !important;
     }
 
     .insta-list {
@@ -75,7 +75,7 @@
     footer {
         background-color: #242424;
         color: #fff;
-        padding: 2% 0 0;
+        padding: 2% 0 30px;
     }
 
     footer a.nav-footer {
@@ -103,4 +103,29 @@
         margin-top: 1em;
     }
 
+    /***************************************************************/
+    /*                                              BLOG                                                     */
+    /***************************************************************/
+
+    h2.blog-title {
+        font-size: 1.5em;
+        margin-top: .5em;
+    }
+
+    .blog-title ~ p {
+        font-size: .8em;
+    }
+
+    p.gallery-title {
+        font-size: 1em !important;
+    }
+
+    .article-txt-container {
+        margin-bottom: 2em;
+        padding-bottom: 1em;
+    }
+
+    .article-img-container {
+        height: 15em;
+    }
 }
