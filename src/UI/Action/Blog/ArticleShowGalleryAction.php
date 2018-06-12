@@ -144,6 +144,8 @@ final class ArticleShowGalleryAction implements ArticleShowGalleryActionInterfac
 
         $pictures = $this->pictureRepository->getWithGalerieMaker($galerie);
 
+        $favorite = $this->pictureRepository->getFavoriteByGalerie($galerie);
+
         $data[] = array();
 
         foreach($pictures as $key => $picture) {
@@ -158,9 +160,9 @@ final class ArticleShowGalleryAction implements ArticleShowGalleryActionInterfac
 
         if ($this->addCommentHandler->handle($commentType, $article)) {
 
-            return $responder(true, $form, $commentType, $article, $data, $instagram, $reviews, $galerie);
+            return $responder(true, $form, $commentType, $article, $data, $instagram, $reviews, $galerie, $favorite);
         }
 
-        return $responder(false,$form, $commentType, $article, $data, $instagram, $reviews, $galerie);
+        return $responder(false,$form, $commentType, $article, $data, $instagram, $reviews, $galerie, $favorite);
     }
 }

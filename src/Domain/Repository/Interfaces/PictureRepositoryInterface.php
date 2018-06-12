@@ -46,6 +46,12 @@ interface PictureRepositoryInterface
     public function getFavorite($galleryId);
 
     /**
+     * @param Gallery $gallery
+     * @return mixed
+     */
+    public function getWithGalerieMaker(Gallery $gallery);
+
+    /**
      * @param PictureInterface $picture
      * @return mixed
      */

@@ -60,6 +60,17 @@ final class PictureRepository extends ServiceEntityRepository implements Picture
             ->getResult();
     }
 
+    public function getFavoriteByGalerie(Gallery $galerie)
+    {
+        return $this->createQueryBuilder('picture')
+                                ->leftJoin('picture.gallery', 'gallery')
+                                ->where('picture.gallery = :galerie')
+                                ->setParameter('galerie', $galerie->getId())
+                                ->andWhere('picture.favorite = 1')
+                                ->getQuery()
+                                ->getOneOrNullResult();
+    }
+
     /**
      * @param $galleryId
      * @return mixed
@@ -75,6 +86,10 @@ final class PictureRepository extends ServiceEntityRepository implements Picture
                             ->getOneOrNullResult();
     }
 
+    /**
+     * @param Gallery $gallery
+     * @return mixed
+     */
     public function getWithGalerieMaker(Gallery $gallery)
     {
         return $this->createQueryBuilder('picture')

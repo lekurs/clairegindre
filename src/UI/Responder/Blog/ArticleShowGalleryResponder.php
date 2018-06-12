@@ -47,12 +47,14 @@ final class ArticleShowGalleryResponder implements ArticleShowGalleryResponderIn
      * @param $data
      * @param $instagram
      * @param $reviews
-     * @return RedirectResponse|Response
+     * @param $galerie
+     * @param $favorite
+     * @return mixed|RedirectResponse|Response
      * @throws \Twig_Error_Loader
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    public function __invoke($redirect = false, FormInterface $form = null, FormInterface $commentType = null, $article, $data, $instagram, $reviews, $galerie)
+    public function __invoke($redirect = false, FormInterface $form = null, FormInterface $commentType = null, $article, $data, $instagram, $reviews, $galerie, $favorite)
     {
         $redirect ? $response = new RedirectResponse($this->urlGenerator->generate('blog')) : $response = new Response($this->twig->render('front/article_show.html.twig', array(
             'contact' => $form->createView(),
@@ -61,7 +63,8 @@ final class ArticleShowGalleryResponder implements ArticleShowGalleryResponderIn
             'commentType' => $commentType->createView(),
             'article' => $article,
             'data' => $data,
-            'galerie' => $galerie
+            'galerie' => $galerie,
+            'favorite' => $favorite
         )));
 
         return $response;
