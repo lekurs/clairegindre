@@ -41,9 +41,6 @@
     color: #FFFFFF;
     text-transform: uppercase;
     position: relative;
-    text-align: right;
-    padding-right: 1em;
-    font-size: 1.2em;
     -moz-border-radius: 0 !important;
     -webkit-border-radius: 0 !important;
     border-radius: 0 !important;
@@ -400,16 +397,6 @@ span.portraits:hover {
     margin-bottom: 2em;
 }
 
-/*.comment {*/
-    /*border-bottom: 1px solid #242424;*/
-    /*border-width: thin;*/
-/*}*/
-
-/*.comments-contain {*/
-    /*border-bottom: 1px solid #242424;*/
-    /*border-width: thin;*/
-/*}*/
-
 .comments-contain:after {
     content: "";
     height: 1px;
@@ -461,7 +448,6 @@ h3.comment-title {
     left: 7%;
     opacity: .8;
 }
-
 
 .input-modal:before {
     content: '';
@@ -531,6 +517,6 @@ h3.comment-title {
     font-size: 16px;
 }
 
-label {
-    display: none;
-}
+/*label {*/
+    /*display: none;*/
+/*}*/

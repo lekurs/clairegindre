@@ -38,4 +38,11 @@
     .article-img-container {
         height: 31em;
     }
+
+    .filter-button-dynamique {
+        text-align: right;
+        padding-right: 1em;
+        font-size: 1.2em;
+    }
+
 }

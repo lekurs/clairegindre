@@ -98,4 +98,32 @@
         margin-top: 1em;
     }
 
+
+    /** BLOG **/
+
+    .article-txt-container {
+        margin-bottom: 1.5em;
+    }
+
+    h2.blog-title {
+        font-size: 1.5em;
+        margin-top: .5em;
+    }
+
+    .blog-title ~ p {
+        font-size: .8em;
+    }
+
+    p.gallery-title {
+        font-size: 1em !important;
+    }
+
+    .link_to_gallery {
+        margin-bottom: 1em;
+    }
+
+    .article-img-container {
+        height: 20em;
+    }
+
 }
