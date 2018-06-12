@@ -30,7 +30,6 @@ html, body {
 }
 
 .menu-circle {
-    background-color: #ffffff;
     width: 100%;
     height: 100%;
     position: absolute;
@@ -62,7 +61,7 @@ html, body {
 }
 
 .menu-line {
-    background-color: #333;
+    background-color: #ffffff;
     height: 2px;
     width: 100%;
     border-radius: 2px;
@@ -98,7 +97,7 @@ html, body {
 }
 
 .menu-overlay {
-    background-color: #ffffff;
+    background-color: #242424;
     color: #333;
     height: 50%;
     width: 100%;
@@ -117,13 +116,15 @@ html, body {
 }
 
 .menu-overlay a {
-    color: #333;
-    font-weight: bold;
-    font-size: 2em;
+    color: #fff;
     margin: 5% 1% 0;
     display: block;
     text-decoration: none;
     position: relative;
+    font-family: Assistant;
+    text-transform: uppercase;
+    font-weight: lighter;
+    font-size: 1em;
 }
 
 .menu-overlay a:hover {
@@ -256,10 +257,10 @@ a#nav-link-home:hover:before {
 a#nav-link-hello:before {
     content: "";
     position: absolute;
-    width: 22%;
+    width: 18%;
     height: 2px;
     bottom: 0;
-    left: 78%;
+    left: 82%;
     background-color: #ffffff;
     visibility: hidden;
     -webkit-transform: scaleX(0);
@@ -319,7 +320,7 @@ a#nav-link-contact:hover:before {
 a#nav-link-informations:before {
     content: "";
     position: absolute;
-    width: 37%;
+    width: 18%;
     height: 2px;
     bottom: 0;
     left: 0;
@@ -1043,13 +1044,6 @@ button.sub-contact {
 /*                                              FOOTER                                                    */
 /*****************************************************************/
 
-footer {
-    background-color: #242424;
-    color: #fff;
-    padding: 2% 0 0;
-    max-height: 280px;
-}
-
 footer p {
     margin: 0;
 }
@@ -1096,29 +1090,6 @@ footer a.nav-footer:hover:before {
     -webkit-transform: scaleX(1);
 }
 
-a#link-home {
-    width: 2.5em;
-}
-
-a#link-photo {
-    width: 2.8em
-}
-
-a#link-blog {
-    width: 2.4em;
-}
-
-a#link-informations {
-    width: 6.5em;
-}
-
-a#link-customers {
-    width: 3.5em;
-}
-
-a#link-contact {
-    width: 4em;
-}
 
 footer a.nav-footer:hover {
     color: #ffffff;

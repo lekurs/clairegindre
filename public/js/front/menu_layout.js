@@ -10,4 +10,12 @@ jQuery(document).ready(function($) {
            $('.nav-desktop').removeClass('sticky');
        }
    });
+
+    $(window).on('resize', function () {
+        if (document.body.clientWidth > '768') {
+            // $('.sticky').css('height', '22vh')
+            $('.social-container').css('top', '40%');
+            $('.logo-content').css('margin-top', '6%');
+        }
+    });
 });

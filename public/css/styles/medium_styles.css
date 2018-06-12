@@ -14,4 +14,58 @@
         margin: 0;
     }
 
+    /***************************************************************/
+    /*                                              INDEX                                                   */
+    /***************************************************************/
+    .btn-contact {
+        padding-right: 1.5em !important;
+    }
+
+    button.sub-contact {
+        width: 15%;
+    }
+
+    .social-container {
+        left: 88%;
+    }
+
+    .insta-list {
+        height: 30em;
+    }
+
+    .insta-list img {
+        height: 100%;
+    }
+
+    footer {
+        background-color: #242424;
+        color: #fff;
+        padding: 2% 0 0;
+    }
+
+    footer a.nav-footer {
+        text-align: center;
+    }
+
+    footer p {
+        text-align: center;
+    }
+
+    .social-footer-container {
+        text-align: center;
+        margin-bottom: 1em;
+    }
+
+    footer .arrow-footer {
+        display: none;
+    }
+
+    .contact-footer {
+        margin-top: 1em;
+    }
+
+    p#follow-me {
+        margin-top: 1em;
+    }
+
 }

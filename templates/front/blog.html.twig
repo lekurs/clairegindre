@@ -7,6 +7,10 @@
 {% endblock %}
 
 {% block header %}
+    <header>
+    {% block mobile %}
+        {{ parent() }}
+        {% endblock %}
     <div class="row no-gutters">
         <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
             <div class="row justify-content-center no-gutters nav-desktop">
@@ -27,6 +31,7 @@
         </div>
         <div class="row no-gutters" id="end-nav"></div>
     </div>
+    </header>
 {% endblock %}
 
 {% block content %}

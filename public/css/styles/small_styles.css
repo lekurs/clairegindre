@@ -13,4 +13,94 @@
     .infos-txt p {
         margin: 0;
     }
+
+    /***************************************************************/
+    /*                                              INDEX                                                   */
+    /***************************************************************/
+    .logo-img {
+        min-height: 90px;
+        margin-top: .2em;
+    }
+
+    .logo-content {
+        min-height: 130px;
+    }
+
+    .presentation-container > h2 {
+        font-family: Playfair;
+        font-weight: lighter;
+        font-size: 3em;
+        margin: 0 0 0 .6em;
+    }
+
+    p#presentation-txt {
+        font-size: .8em;
+        margin: 0 2em;
+        text-align: justify;
+    }
+
+    .photo-presentations {
+        top: -25%;
+        left: 30%;
+        width: 36%;
+        height: 40%;
+    }
+
+
+    .btn-contact {
+        padding-right: 1em !important;
+    }
+
+    button.sub-contact {
+        width: 30%;
+    }
+
+    .social-container {
+        left: 93%;
+        top: 7%;
+    }
+
+    .insta-list {
+        height: 15em;
+    }
+
+    .insta-list img {
+        height: 100%;
+    }
+
+    .insta-logo {
+        font-size: .9em;
+    }
+
+    footer {
+        background-color: #242424;
+        color: #fff;
+        padding: 2% 0 0;
+    }
+
+    footer a.nav-footer {
+        text-align: center;
+    }
+
+    footer p {
+        text-align: center;
+    }
+
+    .social-footer-container {
+        text-align: center;
+        margin-bottom: 1em;
+    }
+
+    footer .arrow-footer {
+        display: none;
+    }
+
+    .contact-footer {
+        margin-top: 1em;
+    }
+
+    p#follow-me {
+        margin-top: 1em;
+    }
+
 }

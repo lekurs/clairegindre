@@ -66,6 +66,7 @@
         {% block header %}
             <header>
                 {# NAV MOBILE#}
+                {% block mobile %}
                 <nav class="d-xl-none d-lg-none mobile-nav" role="navigation">
                     <div class="menu">
                         <span class="menu-circle"></span>
@@ -82,11 +83,12 @@
                         <a href="{{ path('index') }}">home</a>
                         <a href="#hello">hello</a>
                         <a href="{{ path('blog') }}">Photos</a>
-                        <a href="{{ path('faq') }}">Informations</a>
+                        <a href="{{ path('faq') }}">Infos</a>
                         <a href="#contact">Contact</a>
                         <a href="{{ path('galleriesCustomers') }}">Clients</a>
                     </div>
                 </nav>
+                {% endblock %}
                 {# END NAV MOBILE #}
 
                 <div class="row no-gutters">
@@ -177,7 +179,10 @@
                     <div class="row no-gutters">
                         <div class="offset-lg-3 offset-xl-3 col-lg-9 col-xl-9 presentation-container">
                             <h2 class="text-left text-uppercase">hello !</h2>
-                            <p id="presentation-txt">Je s'appelle Groot, photographe en région parisienne ....</p>
+                            <p id="presentation-txt">
+                                Je suis Claire Gindre, j'ai deux amours, le graphisme et la photographie. Graphiste depuis presque toujours, la photographie est arrivée un peu plus tard dans ma vie à travers un boîtier Argentique. Depuis je n'ai plus quitté mon boîtier.
+                                Au delà du côté créatif, ce qui me plait enormément c'est d'aller à la rencontre de nouvelles personnes et de pouvoir immortaliser de belles histoires pour en laisser un souvenir intérissable.
+                            </p>
                         </div>
                     </div>
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 photo-presentations"></div>
@@ -243,7 +248,7 @@
 
     {% block footer %}
         <footer class="row no-gutters">
-            <div class="col-xl-1 col-lg-1 col-md-12 col-sm-12 col-12 arrow-footer">
+            <div class="col-xl-1 col-lg-1 col-md-12 col-sm-12 col-12 arrow-footer d-sm-none d-md-none d-xl-block d-lg-block">
                 <img src="{{ asset('images/interface/pictos/fleche.png') }}" alt="arrow" />
             </div>
             <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12">
@@ -258,7 +263,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+            <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12 contact-footer">
                 <p><strong>Claire Gindre</strong></p>
                 <p>contact@clairegindre.com</p>
                 <p>06 62 45 10 36</p>
@@ -270,7 +275,7 @@
                     </div>
                 </div>
                 <div class="row no-gutters">
-                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">
+                    <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 social-footer-container">
                         <a href="https://www.instagram.com/clairegindre_photographe/" target="_blank"><i class="fa fa-instagram social-picto-footer"></i></a>
                         <a href="https://www.facebook.com/clairegindre.pg/" target="_blank"><i class="fa fa-facebook-f social-picto-footer"></i></a>
                         <a href="https://www.pinterest.fr/ClaireGindrepg/" target="_blank"><i class="fa fa-pinterest-p social-picto-footer"></i></a>

@@ -40,6 +40,12 @@ interface PictureRepositoryInterface
     public function showPicturesByGallery();
 
     /**
+     * @param Gallery $galerie
+     * @return mixed
+     */
+    public function getFavoriteByGalerie(Gallery $galerie);
+
+    /**
      * @param $galleryId
      * @return mixed
      */
