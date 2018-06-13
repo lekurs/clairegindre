@@ -2,10 +2,8 @@
 
 {% block content %}
     {% block title_admin %}
-        <h1>Administration des utilisateurs</h1>
+        <h1 class="title-admin">Administration des utilisateurs</h1>
     {% endblock %}
-
-    {{ parent() }}
 
     <section>
         <div class="container users">
@@ -40,7 +38,7 @@
                                 <p>{{ user.username }} - {{ user.lastName }}</p>
                             </div>
                             <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
-                                <a href="{{ path('adminUserEdit', {'slug': user.slug}) }}"><i class="fa fa-edit"></i></a>
+                                <a href="{{ path('adminUserEdit', {'slug': user.slug}) }}" class="edit-user-icon"><i class="fa fa-edit"></i></a>
                             </div>
                             <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
                                 {% if user.online == 1 %}
@@ -87,10 +85,10 @@
                                         <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3 show-gallery-details">
                                             <div class="row no-gutters">
                                                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 infos-gallery">
-                                                    <a href="{{ path('adminAddPicturesGallery', {'slug': gallery.slug}) }}"><i class="fa fa-edit"></i></a>
+                                                    <a href="{{ path('adminAddPicturesGallery', {'slug': gallery.slug}) }}" class="edit-user-icon"><i class="fa fa-edit"></i></a>
                                                 </div>
                                                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 no-gutters infos-gallery">
-                                                    <a href="{{ path('adminDeleteGallery', {'slug': gallery.slug}) }}"><i class="fa fa-trash"></i></a>
+                                                    <a href="{{ path('adminDeleteGallery', {'slug': gallery.slug}) }}" class="edit-user-icon"><i class="fa fa-trash"></i></a>
                                                 </div>
                                             </div>
                                         </div>
@@ -101,8 +99,8 @@
                                     {% endfor %}
                                 </div>
                                 <div class="row no-gutters  add-gallery">
-                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                        <span data-toggle="modal" data-target="#createGalleryModal" data-id="{{ user.id }}"><button type="button" class="btn btn-success btn-add-gallery"><i class="fa fa-plus"></i></button> </span>
+                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 text-right">
+                                        <span data-toggle="modal" data-target="#createGalleryModal" data-id="{{ user.id }}"><button type="button" class="btn btn-add-gallery"><i class="fa fa-plus"></i></button> </span>
                                     </div>
                                 </div>
                             </div>
@@ -112,7 +110,7 @@
             {% endfor %}
             <div class="row no-gutters">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                    <span data-toggle="modal" data-target="#createUserModal" ><button type="button" class="btn btn-dark admin-button"><i class="fa fa-user fa-2x"></i></button></span>
+                    <span data-toggle="modal" data-target="#createUserModal" ><button type="button" class="btn admin-button"><i class="fa fa-user fa-2x"></i></button></span>
                 </div>
             </div>
         </div>
@@ -121,17 +119,17 @@
                 <ul class="pagination justify-content-center">
                     {% if pages.page > 1 %}
                             <li class="page-item">
-                                <a href="{{ path('adminUser', { 'page': pages.page-1}) }}" class="page-link" tabindex="-1">Précédent</a>
+                                <a href="{{ path('adminUser', { 'page': pages.page-1}) }}" class="page-link page-link-perso" tabindex="-1">Précédent</a>
                             </li>
                     {% endif %}
                     {% for p in range(max(pages.page-4, 1), min(pages.page +4, pages.nbPages)) %}
                     <li class="page-item">
-                        <a href="{{ path('adminUser', { 'page' : p})}}"  class="page-link">{{ p }}</a>
+                        <a href="{{ path('adminUser', { 'page' : p})}}"  class="page-link page-link-perso">{{ p }}</a>
                     </li>
                     {% endfor %}
                     {% if pages.page < pages.nbPages %}
                     <li class="page-item">
-                        <a class="page-link" href="{{ path('adminUser', { 'page': pages.page+1}) }}">Suivante</a>
+                        <a class="page-link page-link-perso" href="{{ path('adminUser', { 'page': pages.page+1}) }}">Suivante</a>
                     </li>
                     {% endif %}
                 </ul>

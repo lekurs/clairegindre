@@ -15,11 +15,37 @@
 .admin-button {
     margin: 1em auto;
     width: 100%;
+    margin: 1em auto;
+    width: 100%;
+    border-radius: 0;
+    background-color: #242424;
+    color: #ffffff;
+}
+
+.admin-button:hover {
+    margin: 1em auto;
+    width: 100%;
+    margin: 1em auto;
+    width: 100%;
+    border-radius: 0;
+    background-color: #ffffff;
+    color: #242424;
+    border: 1px solid #242424;
 }
 
 .admin-block {
     margin: 5em auto;
     /*height: 40vh;*/
+}
+
+.title-admin {
+    font-family: Assistant;
+    font-weight: lighter;
+    font-size: 2em;
+    width: 80%;
+    margin: 30px auto;
+    text-align: center;
+    text-transform: uppercase;
 }
 
 .admin-users-block {
@@ -32,11 +58,23 @@
 .admin-block-title {
     font-weight: bold;
     text-align: left;
-    text-transform: capitalize;
+    text-transform: uppercase;
+    font-size: 1.5em;
 }
 
 .admin-emails-block {
     margin: 1em auto;
+}
+
+.email-link {
+    color: #242424;
+    text-transform: capitalize;
+}
+
+.email-link:hover {
+    color: #242424;
+    text-decoration: line-through;
+    text-transform: uppercase;
 }
 
 .admin-emails-block > div:first-of-type {
@@ -63,11 +101,29 @@
 #envelop-emails {
     text-align: left;
     padding-left: 1.8em;
+    font-size: 2em;
+    color: #242424;
+}
+
+.arrow-double {
+    text-align: left;
+    padding-left: 1.8em;
+    font-size: 2em;
+    color: #242424;
+}
+
+.icon-admin {
+    text-align: left;
+    padding-left: 1.8em;
+    font-size: 2em;
+    color: #242424;
 }
 
 #arrow-emails {
     text-align: right;
     padding-right: 1.8em;
+    font-size: 2em;
+    color: #242424;
 }
 
 .admin-users-block-content {
@@ -87,18 +143,22 @@
 }
 
 .header-infos-admin-thumb {
-    background-color: #5f6b67;
     color: #ffffff;
-    height: 2.5em;
+    height: auto;
     text-align: center;
     margin: 0;
-    align-items: center;
+    align-items: left;
 }
 
 .header-infos-admin-thumb h5 {
-    height: 1.5em;
     margin: 0;
     padding: 0;
+    font-size: 3em;
+    font-family: Assistant;
+    font-weight: lighter;
+    color: #242424;
+    text-transform: uppercase;
+    text-align: left;
 }
 
 .arrow-title-admin {
@@ -147,6 +207,14 @@
     border-width: thin;
 }
 
+.edit-user-icon {
+    color: #000000;
+}
+
+.edit-user-icon:hover {
+    color: #000000;
+}
+
 .admin-user-online {
     color: green;
 }
@@ -166,44 +234,42 @@
 .add-gallery {
     text-align: center;
     width: 100%;
-    border: 1px solid #32383e;
-    border-width: thin;
-    border-top: none;
 }
 
 .btn-add-gallery {
-    width: 15%;
+    width: 4%;
+    border-radius: 0;
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+    color: #ffffff;
+    background-color: #242424;
+}
+
+.btn-add-gallery:hover {
+    width: 4%;
+    border-radius: 0;
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+    color: #242424;
+    background-color: #ffffff;
+    border: 1px solid #242424;
 }
 
 .new-user {
     width: 100%;
 }
 
-.infos-gallery-title-container {
-    border-bottom: 1px solid #32383e;
-    border-width: thin;
-}
-
-.favorite-picture {
-    border-left: 1px solid #32383e;
-    border-width: thin;
-}
-
 .infos-gallery-title {
-    background-color: #DDDDDD;
-    font-size: 1.1em;
-    font-weight: bold;
+    font-size: 1.5em;
+    font-weight: lighter;
     padding: 5px 0;
-    border-right: 1px solid #32383e;
-    border-top: 1px solid#32383e;
+    border-right: 1px solid #242424;
     border-width: thin;
+    font-family: Assistant;
 }
 
 .infos-gallery {
     margin: 0;
-    border-right: 1px solid #32383e;
-    border-bottom: 1px solid #32383e;
-    border-width: thin;
 }
 
 .infos-gallery p {
@@ -216,4 +282,20 @@
 
 .fa.fa-user.not-connected {
     color: red;
+}
+
+.page-link-perso {
+    border: none !important;
+    color: #000000;
+    font-family: Assistant;
+    font-weight: lighter;
+}
+
+.page-link-perso:hover {
+    border: none !important;
+    color: #000000;
+    font-family: Assistant;
+    font-weight: lighter;
+    background-color: transparent !important;
+    transform: scaleX(1.3);
 }
