@@ -16,8 +16,10 @@ jQuery(document).ready(function($) {
     $(window).scroll(function () {
         if ($(this).scrollTop() > top_position) {
             $('.nav-desktop').addClass('sticky-white');
+            $('.social-container').addClass('social-container-black');
         } else {
             $('.nav-desktop').removeClass('sticky-white');
+            $('.social-container').removeClass('social-container-black');
         }
     });
 });

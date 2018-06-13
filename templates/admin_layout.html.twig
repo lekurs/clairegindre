@@ -52,43 +52,46 @@
 <body>
 {% block header %}
     <header>
-    {# MOBILE NAV#}
-    <nav class="d-xl-none d-lg-none mobile-nav" role="navigation">
-        <div class="menu">
-            <span class="menu-circle"></span>
-            <a href="#" class="menu-link">
-                        <span class="menu-icon">
-                            <span class="menu-line menu-line-1"></span>
-                            <span class="menu-line menu-line-2"></span>
-                            <span class="menu-line menu-line-3"></span>
-                        </span>
-            </a>
-        </div>
+        {# NAV MOBILE#}
+        {% block mobile %}
+            <nav class="d-xl-none d-lg-none mobile-nav" role="navigation">
+                <div class="menu">
+                    <span class="menu-circle"></span>
+                    <a href="#" class="menu-link">
+                            <span class="menu-icon">
+                                <span class="menu-line menu-line-1"></span>
+                                <span class="menu-line menu-line-2"></span>
+                                <span class="menu-line menu-line-3"></span>
+                            </span>
+                    </a>
+                </div>
 
-        <div class="menu-overlay">
-            <a href="{{ path('admin') }}">home</a>
-            <a href="{{ path('adminUser', { 'page': '1' }) }}">Clients</a>
-            <a href="{{ path('faq') }}">Informations</a>
-            <a href="{{ path('adminAddReviews') }}">Avis Clients</a>
-            <a href="{{ path('index') }}">Retour Site</a>
-        </div>
-    </nav>
+                <div class="menu-overlay">
+                    <a href="{{ path('index') }}">home</a>
+                    <a href="#hello">hello</a>
+                    <a href="{{ path('blog') }}">Photos</a>
+                    <a href="{{ path('faq') }}">Infos</a>
+                    <a href="#contact">Contact</a>
+                    <a href="{{ path('galleriesCustomers') }}">Clients</a>
+                </div>
+            </nav>
+        {% endblock %}
         {# END NAV MOBILE #}
 
         <div class="row no-gutters">
             <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                <div class="row justify-content-center no-gutters">
+                <div class="row justify-content-center no-gutters nav-desktop">
                     {% block left_menu %}
                         {# LEFT MENU #}
-                        <nav class="col-lg-5 col-xl-5 d-none d-md-none d-sm-none d-lg-block d-xl-block">
+                        <nav class="col-lg-5 col-xl-5 right-menu d-none d-md-none d-sm-none d-lg-block d-xl-block">
                             <div class="row no-gutters justify-content-center align-items-center">
                                 <div class="col-lg-6 col-xl-6">
                                     {#ROW RIGHT#}
-                                    <div class="row no-gutters">
+                                    <div class="row no-gutters nav-border">
                                         <div class="col-lg-12 col-xl-12">
                                             <ul class="nav justify-content-between">
-                                                <li class="nav-item"><a class="nav-link menus-admin" href="{{ path('admin') }}">Accueil</a></li>
-                                                <li class="nav-item"><a class="nav-link menus-admin" href="{{ path('adminUser', {'page': '1'}) }}">Clients</a></li>
+                                                <li class="nav-item"><a class="nav-link" id="nav-link-black-home" href="{{ path('index') }}">Home</a></li>
+                                                <li class="nav-item"><a class="nav-link nav-link-right" id="nav-link-black-hello" href="#hello">Hello</a></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -96,7 +99,7 @@
                                     <div class="row no-gutters">
                                         <div class="col-lg-12 col-xl-12">
                                             <ul class="nav justify-content-center">
-                                                <li class="nav-item"><a class="nav-link menus-admin" href="{{ path('blog') }}">Galeries</a></li>
+                                                <li class="nav-item"><a class="nav-link nav-link-bottom" id="nav-link-black-blog" href="{{ path('blog') }}">Photos</a></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -107,20 +110,20 @@
                     {# LOGO#}
                     {% block logo %}
                         <div class="col-lg-2 col-xl-2 logo-content">
-                            <h1><a href="{{ path('index') }}" class="logo-img-color"></a></h1>
+                            <h1><a href="#" class="logo-img-color"></a></h1>
                         </div>
                     {% endblock %}
                     {# RIGHT MENU #}
                     {% block right_menu %}
-                        <nav class="col-lg-5 col-xl-5 d-none d-md-none d-sm-none d-lg-block d-xl-block">
+                        <nav class="col-lg-5 col-xl-5 right-menu d-none d-md-none d-sm-none d-lg-block d-xl-block" id="end-nav">
                             <div class="row no-gutters justify-content-center align-items-center">
                                 <div class="col-lg-6 col-xl-6">
                                     {#ROW RIGHT#}
-                                    <div class="row no-gutters">
+                                    <div class="row no-gutters nav-border">
                                         <div class="col-lg-12 col-xl-12">
                                             <ul class="nav justify-content-between">
-                                                <li class="nav-item"><a class="nav-link menus-admin" href="{{ path('faq') }}">Blog</a></li>
-                                                <li class="nav-item"><a class="nav-link menus-admin" href="{{ path('adminAddReviews') }}">Avis Clients</a></li>
+                                                <li class="nav-item"><a class="nav-link" id="nav-link-black-informations" href="{{ path('faq') }}">infos</a></li>
+                                                <li class="nav-item"><a class="nav-link nav-link-right" id="nav-link-black-customer" href="{{ path('galleriesCustomers') }}">clients</a></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -128,19 +131,21 @@
                                     <div class="row no-gutters">
                                         <div class="col-lg-12 col-xl-12">
                                             <ul class="nav justify-content-center">
-                                                <li class="nav-item"><a class="nav-link menus-admin" href="#contact">contact</a></li>
+                                                <li class="nav-item"><a class="nav-link nav-link-bottom" id="nav-link-black-contact" href="#contact">contact</a></li>
                                             </ul>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </nav>
-                    {% endblock %}
-                    <div class="row no-gutters">
-                        <div class="col-lg-12 col-xl-12 col-md-12 col-sm-12 col-12 gallery-customers-header">
-                            <img src="{{ asset('/images/background/nico_anlor_b&w.jpg') }}" />
+                        <div class="row no-gutters social-container">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                <p><a href="https://www.instagram.com/clairegindre_photographe/" target="_blank"><i class="fa fa-instagram"></i></a></p>
+                                <p><a href="https://www.facebook.com/clairegindre.pg/" target="_blank"><i class="fa fa-facebook-f"></i></a></p>
+                                <p><a href="https://www.pinterest.fr/ClaireGindrepg/" target="_blank"><i class="fa fa-pinterest-p"></i></a></p>
+                            </div>
                         </div>
-                    </div>
+                    {% endblock %}
                 </div>
             </div>
         </div>

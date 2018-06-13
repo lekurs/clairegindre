@@ -9,7 +9,10 @@
     .infos-txt {
         background-color: #242424;
         color: #fff;
+        padding-left: 7em !important;
+        padding-right: 7em !important;
     }
+
     .infos-txt p {
         margin: 0;
     }

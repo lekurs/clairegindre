@@ -14,6 +14,10 @@ html, body {
     text-transform: uppercase;
 }
 
+input:focus, textarea:focus, select:focus, button:focus {
+    box-shadow: none !important;
+}
+
 /*****************************************************************/
 /*                                          MOBILE NAV                                               */
 /*****************************************************************/
@@ -61,7 +65,7 @@ html, body {
 }
 
 .menu-line {
-    background-color: #ffffff;
+    background-color: #000000;
     height: 2px;
     width: 100%;
     border-radius: 2px;
@@ -86,6 +90,7 @@ html, body {
 
 .menu.open .menu-line-1 {
     transform: translateY(7px) translateY(-50%) rotate(-135deg);
+    background-color: #ffffff;
 }
 
 .menu.open .menu-line-2 {
@@ -94,6 +99,7 @@ html, body {
 
 .menu.open .menu-line-3 {
     transform: translateY(-7px) translateY(50%) rotate(135deg);
+    background-color: #ffffff;
 }
 
 .menu-overlay {
@@ -173,10 +179,10 @@ nav {
 
 
 .logo-content {
-    /*margin-top: 2%;*/
     min-width: 165px;
     min-height: 180px;
     max-width: 220px;
+    margin-top: 2%;
 }
 
 .logo-img {
@@ -489,11 +495,6 @@ a#nav-link-black-customer:hover:before {
 }
 /*****************************************************************/
 
-input:focus, textarea:focus, select:focus, button:focus {
-    /*border: none !important;*/
-    box-shadow: none !important;
-}
-
 .container-fluid {
     padding: 0;
 }
@@ -574,6 +575,10 @@ h2.last-report {
     color: #fff;
     left: 97%;
     font-size: 1.2em;
+}
+
+.social-container-black a{
+    color: #000000 !important;
 }
 
 .social-container a {
