@@ -74,7 +74,9 @@
                                 <div class="row no-gutters">
                                     {% for gallery in user.galleries %}
                                         <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3 infos-gallery favorite-picture">
-                                            <p>favorite</p>
+                                            {% for picture in gallery.pictures if picture.favorite > 0%}
+                                            <p class="img-favorite-admin"><img src="{{ picture.publicPath ~ '/' ~ picture.pictureName }}" alt="{{ picture.pictureName }}" /> </p>
+                                            {% endfor %}
                                         </div>
                                         <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3 infos-gallery">
                                             <p>{{ gallery.title }}</p>

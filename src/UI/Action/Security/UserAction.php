@@ -94,6 +94,7 @@ final class UserAction implements UserActionInterface
     public function __invoke(Request $request, UserResponderInterface $responder, int $page)
     {
         if ($this->authorizationChecker->isGranted('ROLE_ADMIN')) {
+
             $addGalleryType = $this->formFactory->create(AddGalleryType::class);
             $registrationType = $this->formFactory->create(RegistrationType::class);
 
