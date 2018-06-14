@@ -38,7 +38,9 @@ final class AnswerEmailType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('subject', TextType::class)
+            ->add('subject', TextType::class, [
+                'label_attr' => ['class' => 'label_contact' ]
+            ])
             ->add('content', TextareaType::class, [
                 'required' => false
             ])

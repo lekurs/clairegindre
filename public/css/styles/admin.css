@@ -1,4 +1,40 @@
 /* Adminstration */
+input:focus, textarea:focus, select:focus, button:focus {
+    box-shadow: none !important;
+}
+
+/*.input-content:after, .input-content:before {*/
+    /*content: '';*/
+    /*position: absolute;*/
+    /*display: block;*/
+    /*width: 90%;*/
+    /*height: .5px;*/
+    /*background-color: #5f6b67;*/
+    /*bottom: 14%;*/
+    /*left: 5%;*/
+    /*transition: all 0.5s;*/
+/*}*/
+
+/*.input-content::after {*/
+    /*height: 2px;*/
+    /*transform: scaleX(0);*/
+/*}*/
+
+/*.is-active::after {*/
+    /*transform: scaleX(1);*/
+/*}*/
+
+/*.is-active .label_contact {*/
+    /*color: #5f6b67;*/
+/*}*/
+
+/*.is-completed .label_contact {*/
+    /*font-size: 12px;*/
+    /*bottom: 70%;*/
+    /*left: 7%;*/
+    /*opacity: .8;*/
+/*}*/
+
 
 /**************************************************/
 /*                                  ADMIN INDEX                                                */
@@ -302,4 +338,12 @@
 
 .img-favorite-admin > img{
     width: 40%;
+}
+
+/*****************************************************************/
+/*                                      ANSWER MAIL                                               */
+/*****************************************************************/
+
+.admin-mail {
+    text-transform: uppercase;
 }
