@@ -68,7 +68,9 @@
         <div class="row no-gutters">
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 d-flex justify-content-center text-uppercase">
                 {%- block checkbox_widget -%}
-                    <input type="checkbox" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %} /> <span>{{ label }}</span>
+                    <p>
+                    <input type="checkbox" {{ block('widget_attributes') }} />
+                    <label class="container-label" for="{{ label }}">{{ label }}</label></p>
                 {%- endblock checkbox_widget -%}
 
                 {#{{ form_label(form.event) }}#}

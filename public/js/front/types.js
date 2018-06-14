@@ -19,6 +19,7 @@ jQuery(document).ready(function ($) {
         $(this).parent().removeClass('is-active');
     });
 
+
     // $('#contact_date').on('click', function () {
     //     $('.position-date-picker').css('display', 'block');
     // });
