@@ -1,40 +1,115 @@
 /* Adminstration */
+
+html, body {
+    font-family: 'Assistant', serif;
+    font-weight: 200;
+    margin: 0 auto;
+    letter-spacing: .2px;
+}
+
+section {
+    margin-bottom: 5em;
+}
+
+section#edit-benefit {
+    margin-bottom: 16em;
+}
+
 input:focus, textarea:focus, select:focus, button:focus {
     box-shadow: none !important;
 }
 
-/*.input-content:after, .input-content:before {*/
-    /*content: '';*/
-    /*position: absolute;*/
-    /*display: block;*/
-    /*width: 90%;*/
-    /*height: .5px;*/
-    /*background-color: #5f6b67;*/
-    /*bottom: 14%;*/
-    /*left: 5%;*/
-    /*transition: all 0.5s;*/
-/*}*/
+label.label-admin {
+    display: block;
+    font-size: 16px;
+    transform: translateY(25px);
+    color: #242424;
+    transition: all .5s;
+}
 
-/*.input-content::after {*/
-    /*height: 2px;*/
-    /*transform: scaleX(0);*/
-/*}*/
+input.admin-input {
+    position: relative;
+    background: transparent;
+    width: 100%;
+    border: none;
+    outline: none;
+    padding: 8px 0;
+    font-size: 16px;
+    border-bottom: 1px solid #242424;
+    border-width: thin;
+    border-radius: 0;
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+}
 
-/*.is-active::after {*/
-    /*transform: scaleX(1);*/
-/*}*/
+.admin-button-mini-modal {
+    width: 25%;
+    border-radius: 0;
+    background-color: #242424;
+    color: #ffffff;
+    text-transform: uppercase;
+}
 
-/*.is-active .label_contact {*/
-    /*color: #5f6b67;*/
-/*}*/
+.admin-button-mini-modal:hover {
+    width: 25%;
+    border-radius: 0;
+    background-color: #ffffff;
+    color: #242424;
+    border: 1px solid #242424;
+    text-transform: uppercase;
+}
 
-/*.is-completed .label_contact {*/
-    /*font-size: 12px;*/
-    /*bottom: 70%;*/
-    /*left: 7%;*/
-    /*opacity: .8;*/
-/*}*/
+.admin-button-mini {
+    width: 10%;
+    border-radius: 0;
+    background-color: #242424;
+    color: #ffffff;
+    text-transform: uppercase;
+}
 
+
+.admin-button-mini-modal-close {
+    width: 25%;
+    border-radius: 0;
+    background-color: #6c757d;
+    color: #ffffff;
+    text-transform: uppercase;
+}
+
+.admin-button-mini-modal-close:hover {
+    width: 25%;
+    border-radius: 0;
+    background-color: #ffffff;
+    color: #6c757d;
+    border: 1px solid #6c757d;
+    text-transform: uppercase;
+}
+
+
+.admin-button-mini {
+    width: 10%;
+    border-radius: 0;
+    background-color: #242424;
+    color: #ffffff;
+    text-transform: uppercase;
+}
+
+.admin-button-mini:hover {
+    margin: 1em;
+    width: 10%;
+    border-radius: 0;
+    background-color: #ffffff;
+    color: #242424;
+    border: 1px solid #242424;
+    text-transform: uppercase;
+}
+
+h5.modal-title-admin {
+    font-family: Assistant;
+    font-weight: lighter;
+    font-size: 1.5em;
+    text-transform: uppercase;
+}
 
 /**************************************************/
 /*                                  ADMIN INDEX                                                */
@@ -345,5 +420,110 @@ input:focus, textarea:focus, select:focus, button:focus {
 /*****************************************************************/
 
 .admin-mail {
+    text-transform: uppercase;
+}
+
+
+/*****************************************************************/
+/*                                      GALLERY EDIT                                               */
+/*****************************************************************/
+
+h2.admin-middle-title {
+    font-family: Assistant;
+    font-weight: lighter;
+    font-size: 2em;
+    width: 80%;
+    margin: 30px auto;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.label-admin-mini {
+    display: block;
+    font-size: 16px;
+    transform: translateY(35px);
+    color: #242424;
+    margin: 17px;
+    transition: all .5s;
+}
+
+.admin-input-mini {
+    position: relative;
+    background: transparent;
+    width: 90%;
+    border: none;
+    outline: none;
+    margin: 0 auto;
+    padding: 8px 0;
+    font-size: 16px;
+    border-bottom: 1px solid #242424;
+    border-width: thin;
+    border-radius: 0;
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+}
+
+#edit-gallery-button {
+    margin: 1em;
+    width: 36%;
+    border-radius: 0;
+    background-color: #242424;
+    color: #ffffff;
+    text-transform: uppercase;
+}
+
+#edit-gallery-button:hover {
+    margin: 1em;
+    width: 36%;
+    border-radius: 0;
+    background-color: #ffffff;
+    color: #242424;
+    border: 1px solid #242424;
+    text-transform: uppercase;
+}
+
+
+/*****************************************************************/
+/*                                      ARTICLE EDIT                                               */
+/*****************************************************************/
+
+#submit-article {
+    width: 10%;
+    border-radius: 0;
+    background-color: #242424;
+    color: #ffffff;
+    text-transform: uppercase;
+}
+
+#submit-article:hover {
+    width: 10%;
+    border-radius: 0;
+    background-color: #ffffff;
+    color: #242424;
+    border: 1px solid #242424;
+    text-transform: uppercase;
+}
+
+
+/*****************************************************************/
+/*                                      ADD GALLERY                                               */
+/*****************************************************************/
+
+#admin-button-gallery {
+    margin: 1em;
+    width: 20%;
+    border-radius: 0;
+    background-color: #242424;
+    color: #ffffff;
+    text-transform: uppercase;
+}
+
+#admin-button-gallery:hover {
+    margin: 1em;
+    width: 20%;
+    border-radius: 0;
+    background-color: #ffffff;
+    color: #242424;
+    border: 1px solid #242424;
     text-transform: uppercase;
 }

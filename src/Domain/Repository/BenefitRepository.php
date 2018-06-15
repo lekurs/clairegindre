@@ -43,15 +43,13 @@ final class BenefitRepository extends ServiceEntityRepository implements Benefit
      * @return array
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
-    public function getOne($id): array
+    public function getOne($id)
     {
         return $this->createQueryBuilder('benefit')
-            ->select('benefit.name')
             ->where('benefit.id= :id')
             ->setParameter('id', $id)
             ->getQuery()
-            ->getOneOrNullResult()
-        ;
+            ->getOneOrNullResult();
     }
 
     /**

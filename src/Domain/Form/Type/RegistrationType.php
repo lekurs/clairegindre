@@ -58,29 +58,44 @@ final class RegistrationType extends AbstractType
         $builder
             ->add('email', EmailType::class, array(
                 'label' => 'Email',
+                'label_attr' => ['class' => 'label-admin'],
+                'attr' => ['class' => 'admin-input'],
                 'required' => true,
             ))
             ->add('username', TextType::class, array(
                 'label' => 'Nom',
+                'label_attr' => ['class' => 'label-admin'],
+                'attr' => ['class' => 'admin-input'],
                 'required' => true,
               ))
             ->add('lastName', TextType::class, array(
                 'label' => 'Prénom',
+                'label_attr' => ['class' => 'label-admin'],
+                'attr' => ['class' => 'admin-input'],
                 'required' => true,
             ))
             ->add('plainPassword', PasswordType::class, array(
                 'label' => 'Mot de passe',
+                'label_attr' => ['class' => 'label-admin'],
+                'attr' => ['class' => 'admin-input'],
                 'required' => true,
             ))
             ->add('dateWedding', DateType::class, array(
                 'label' => 'Date évèvement',
+                'label_attr' => ['class' => 'label-admin'],
+                'attr' => ['class' => 'admin-input'],
                 'widget' => 'single_text',
                 'required' => true,
             ))
             ->add('picture', FileType::class, array(
-                'label' => 'Choisissez un fichier'
+                'label' => ' ',
+                'label_attr' => ['class' => 'label-admin'],
             ))
-            ->add('online', CheckboxType::class)
+            ->add('online', CheckboxType::class, [
+                'label' => 'En ligne ?',
+                'label_attr' => ['class' => 'label-admin'],
+                'attr' => ['class' => 'admin-input'],
+            ])
             ;
     }
 

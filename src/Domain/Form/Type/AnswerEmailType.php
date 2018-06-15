@@ -39,10 +39,13 @@ final class AnswerEmailType extends AbstractType
     {
         $builder
             ->add('subject', TextType::class, [
-                'label_attr' => ['class' => 'label_contact' ]
+                'label_attr' => ['class' => 'label-admin' ],
+                'label' => 'Sujet',
+                'attr' => ['class' => 'admin-input']
             ])
             ->add('content', TextareaType::class, [
-                'required' => false
+                'required' => false,
+                'label' => ' '
             ])
             ->addEventSubscriber($this->answerEmailSubscriber);
     }

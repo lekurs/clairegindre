@@ -45,15 +45,28 @@ final class EditArticleType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title', TextType::class)
-            ->add('content', TextareaType::class)
-            ->add('online', CheckboxType::class, [
-                'required' => false
+            ->add('title', TextType::class, [
+                'label' => 'Titre',
+                'label_attr' => ['class' => 'label-admin'],
+                'attr' => ['class' => 'admin-input']
             ])
-            ->add('personnalButton', TextType::class)
+            ->add('content', TextareaType::class, [
+                'label' => ' ',
+                'attr' => ['class' => 'admin-input']
+            ])
+            ->add('online', CheckboxType::class, [
+                'required' => false,
+                'label' => 'En ligne ?',
+            ])
+            ->add('personnalButton', TextType::class, [
+                'label' => 'Bouton personnalisé',
+                'label_attr' => ['class' => 'label-admin'],
+                'attr' => ['class' => 'admin-input']
+            ])
             ->add('prestation', EntityType::class, [
                 'class' => Benefit::class,
-                'choice_label' => 'name'
+                'choice_label' => 'name',
+                'label' => 'Choix de la prestation'
             ])
         ->addEventSubscriber($this->editSlugSubscriber);
         ;

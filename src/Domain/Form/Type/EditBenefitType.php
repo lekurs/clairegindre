@@ -26,7 +26,11 @@ final class EditBenefitType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', TextType::class);
+            ->add('name', TextType::class, [
+                'label' => 'Nom de la prestation',
+                'label_attr' => ['class' => 'label-admin'],
+                'attr' => ['class' => 'admin-input']
+            ]);
     }
 
     /**

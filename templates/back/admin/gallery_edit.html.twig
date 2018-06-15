@@ -13,11 +13,13 @@
 <div class="container">
     <div class="row">
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-            <h2>Mise à jour de la galerie : {{ gallery.title }}</h2>
+            <h1 class="title-admin">Mise à jour de la galerie : {{ gallery.title }}</h1>
         </div>
     </div>
     <div class="row no-gutters">
+
         {%  form_theme form 'form/fields.html.twig' %}
+
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 container-form">
             {{ form_start(form) }}
             <div class="row no-gutters">
@@ -44,15 +46,15 @@
             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 parameters-container">
                 <div class="row no-gutters">
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                        <h2>Paramètres</h2>
+                        <h2 class="admin-middle-title">Paramètres</h2>
                         <p>{{ form_row(form.title) }}</p>
                         <p>{{ form_row(form.eventDate) }}</p>
                         <p>{{ form_row(form.eventPlace) }}</p>
                     </div>
                 </div>
                 <div class="row no-gutters">
-                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                        <button type="submit" class="btn btn-dark sub-login">Mettre à jour</button>
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 text-right">
+                        <button type="submit" class="btn sub-login" id="edit-gallery-button">Mettre à jour</button>
                     </div>
                 </div>
             </div>

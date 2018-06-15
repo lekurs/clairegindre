@@ -344,7 +344,7 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="createUserModalTitle">Enregistrer un client</h5>
+                        <h5 class="modal-title-admin" id="createUserModalTitle">Enregistrer un client</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -352,10 +352,11 @@
                     {{ form_start(formRegistration) }}
                     <div class="modal-body">
                         {{ form_widget(formRegistration) }}
+                        {{ form_errors(formRegistration) }}
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-                        <button type="submit"  class="btn btn-primary">Enregistrer</button>
+                        <button type="button" class="btn admin-button-mini-modal-close" data-dismiss="modal">Fermer</button>
+                        <button type="submit"  class="btn admin-button-mini-modal">Enregistrer</button>
                     </div>
                     {{ form_end(formRegistration) }}
                 </div>
@@ -367,19 +368,20 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="createBenefitModalTitle">Enregistrer une prestation</h5>
+                        <h5 class="modal-title-admin" id="createBenefitModalTitle">Enregistrer une prestation</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     {{ form_start(formBenefit) }}
                     <div class="modal-body">
-                        {{ form_label(formBenefit.name, 'Titre de prestation', { 'attr': { 'class': 'none' } }) }}
-                        {{ form_row(formBenefit.name, { 'attr' :  { 'class' : '' }}) }}
+                        {{ form_label(formBenefit.name) }}
+                        {{ form_widget(formBenefit.name) }}
+                        {{ form_errors(formBenefit) }}
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-                        <button type="submit"  class="btn btn-primary">Enregistrer</button>
+                        <button type="button" class="btn admin-button-mini-modal-close" data-dismiss="modal">Fermer</button>
+                        <button type="submit"  class="btn admin-button-mini-modal">Enregistrer</button>
                     </div>
                     {{ form_end(formBenefit) }}
                 </div>
@@ -391,7 +393,7 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="createArticleModalTitle">Enregistrer un article</h5>
+                        <h5 class="modal-title-admin" id="createArticleModalTitle">Enregistrer un article</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -401,8 +403,8 @@
                         {{ form_widget(selectArticle) }}
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-                        <button type="submit"  class="btn btn-primary" id="galleryId">Enregistrer</button></a>
+                        <button type="button" class="btn admin-button-mini-modal-close" data-dismiss="modal">Fermer</button>
+                        <button type="submit"  class="btn admin-button-mini-modal">Enregistrer</button>
                     </div>
                     {{ form_end(selectArticle) }}
                 </div>

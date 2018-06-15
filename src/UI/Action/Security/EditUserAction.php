@@ -99,6 +99,7 @@ final class EditUserAction implements EditUserActionInterface
     public function __invoke(Request $request, UserEditResponderInterface $responder)
     {
         if ($this->authorization->isGranted('ROLE_ADMIN')) {
+
             $user = $this->userRepository->getOne($request->attributes->get('slug'));
 
             $userDto = new EditUserDTO($user->getEmail(), $user->getUsername(), $user->getLastName(), $user->getPassword(), $user->isOnline(), $user->getDateWedding(), $user->getSlug());

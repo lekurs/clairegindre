@@ -49,9 +49,23 @@ final class GalleryOrderType extends AbstractType
                 'allow_add' => true,
                 'allow_delete' => true
             ])
-            ->add('title', TextType::class)
-            ->add('eventDate', DateType::class)
-            ->add('eventPlace', TextType::class)
+            ->add('title', TextType::class, [
+                'label' => 'titre',
+                'label_attr' => ['class' => 'label-admin-mini'],
+                'attr' => ['class' => 'admin-input-mini']
+            ])
+            ->add('eventDate', DateType::class, [
+                'label' => 'Date de l\'évenement',
+                'label_attr' => ['class' => 'label-admin-mini'],
+                'widget' => 'single_text',
+                'required' => true,
+                'attr' => ['class' => 'admin-input-mini']
+            ])
+            ->add('eventPlace', TextType::class, [
+                'label' => 'Lieu',
+                'label_attr' => ['class' => 'label-admin-mini'],
+                'attr' => ['class' => 'admin-input-mini']
+            ])
             ->addEventSubscriber($this->editSlugGallerySubscriber)
         ;
 

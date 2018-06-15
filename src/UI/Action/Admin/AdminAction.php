@@ -149,7 +149,7 @@ final class AdminAction implements AdminActionInterface
      */
     public function __invoke(Request $request, AdminResponderInterface $responder)
     {
-        if($this->authorizationChecker->isGranted('ROLE_ADMIN')) {
+        if ($this->authorizationChecker->isGranted('ROLE_ADMIN')) {
 
             $users = $this->userRepository->showGalleryByUser();
 

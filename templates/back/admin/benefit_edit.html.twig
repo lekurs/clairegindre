@@ -8,25 +8,29 @@
 {% endblock %}
 
 {% block content %}
-    <section>
+    <section id="edit-benefit">
         <div class="container">
             <div class="row no-gutters">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                     {% block title_admin %}
-                    <h1>Administration des catégories de prestations</h1>
+                    <h1 class="title-admin">Administration des catégories de prestations</h1>
                     {% endblock %}
                 </div>
             </div>
             <div class="row no-gutters">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                    <h2>Modifier la prestation : {{ benefit.name }}</h2>
+                    <h2 class="title-admin">Modifier la prestation : {{ benefit.name }}</h2>
                 </div>
             </div>
             <div class="row no-gutters">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 benefit-form">
                     {{ form_start(benefitType) }}
                     {{ form_row(benefitType.name) }}
-                    <button type="submit" class="btn btn-dark submit-form">Modifier</button>
+                    <div class="row no-gutters">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 text-right">
+                            <button type="submit" class="btn admin-button-mini">Modifier</button>
+                        </div>
+                    </div>
                 {{ form_end(benefitType) }}
                 </div>
             </div>

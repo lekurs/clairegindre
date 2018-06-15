@@ -30,7 +30,7 @@ interface BenefitRepositoryInterface
      * @param $id
      * @return array
      */
-    public function getOne($id): array;
+    public function getOne($id);
 
     /**
      * @param BenefitInterface $benefit

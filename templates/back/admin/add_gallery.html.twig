@@ -14,7 +14,7 @@
         <div class="row no-gutters">
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                 {% block title_admin %}
-                <h1>Gestion de la galerie : {{ gallery.title }}</h1>
+                <h1 class="title-admin">Gestion de la galerie : {{ gallery.title }}</h1>
                 {% endblock %}
             </div>
         </div>
@@ -27,9 +27,9 @@
         {% if gallery is not empty %}
             <div class="row no-gutters">
                 <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12">
-                    <h2 class="text-center text-uppercase">Les images de la galerie</h2>
+                    <h1 class="title-admin">Les images de la galerie</h1>
                 </div>
-                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12">
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 d-flex justify-content-center align-items-center">
                     <i class="fa fa-angle-double-down fa-2x down-gallery"></i>
                 </div>
             </div>
@@ -55,8 +55,8 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                    <a href="{{ path('admin') }}"><button type="button" class="btn btn-dark back-admin">Retour à l'administration</button></a>
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 text-right">
+                    <a href="{{ path('admin') }}"><button type="button" class="btn" id="admin-button-gallery">Retour à l'administration</button></a>
                 </div>
             </div>
         {% endif %}

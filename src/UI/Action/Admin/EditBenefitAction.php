@@ -92,7 +92,7 @@ final class EditBenefitAction implements EditBenefitActionInterface
             throw new AccessDeniedException('Merci de vous connecter en Administrateur');
         }
 
-        $benefit = $this->benefitRepository->getOne($request->get('id'));
+        $benefit = $this->benefitRepository->getOne($request->attributes->get('id'));
 
         $benefitDTO = new EditBenefitDTO($benefit->getName());
 
@@ -100,7 +100,7 @@ final class EditBenefitAction implements EditBenefitActionInterface
 
         if ($this->editBenefitTypeHandler->handle($editBenefitType)) {
 
-            return $responder(true);
+            return $responder(true, $editBenefitType, $benefit);
         }
 
         return $responder(false, $editBenefitType, $benefit);

@@ -18,7 +18,7 @@
                 {% block title_admin %}
                     <div class="row no-gutters">
                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                            <h1>Article de blog pour la galerie : {{ articles.gallery.title }}</h1>
+                            <h1 class="title-admin">Article de blog pour la galerie : {{ articles.gallery.title }}</h1>
                         </div>
                     </div>
                 {% endblock %}
@@ -27,7 +27,11 @@
                         {{ form_start(editArticleType) }}
                         {#{{ form_row(editArticleType.vars.data.creationDate | date('d-m-Y')) }}#}
                         {{ form_widget(editArticleType) }}
-                        <button type="submit" class="btn btn-dark">Modifier</button>
+                        <div class="row no-gutters">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-sm-12 text-right">
+                                <button type="submit" class="btn" id="submit-article">Modifier</button>
+                            </div>
+                        </div>
                         {{ form_end(editArticleType) }}
                     </div>
                 </div>
