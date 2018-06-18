@@ -1,0 +1,7 @@
+App\Domain\DTO\AddCommentOnArticleDTO:
+    properties:
+#        author:
+#            - Length: { min: 4, max: 100, minMessage: 'Minimum 4 caractères', maxMessage: 'Maximum 100 caractères', groups: ['add_comment'] }
+#            - NotBlank: ~
+        content:
+            - Length: { min: 4, minMessage: 'Minimum 4 caractères', groups: ['add_comment']  }

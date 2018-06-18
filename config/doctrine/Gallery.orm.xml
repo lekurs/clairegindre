@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                          http://raw.github.com/doctrine/doctrine2/master/doctrine-mapping.xsd">
+
+    <entity name="App\Domain\Models\Gallery" table="clairegindre_gallery" repository-class="App\Domain\Repository\GalleryRepository">
+        <id name="id" column="id" type="string"/>
+        <field name="title" type="string" length="255" nullable="false" unique="true" />
+        <field name="slug" type="string" length="200" nullable="false" unique="false" />
+        <field name="creationDate" type="date" nullable="true" unique="false" />
+        <field name="eventDate" type="datetime" nullable="true" unique="false" />
+        <field name="eventPlace" type="string" length="150" unique="false" />
+
+        <one-to-one field="article" target-entity="App\Domain\Models\Article" inversed-by="gallery">
+        </one-to-one>
+
+        <one-to-many field="pictures" target-entity="App\Domain\Models\Picture" mapped-by="gallery" orphan-removal="true">
+            <cascade>
+                <cascade-persist/>
+                <cascade-remove/>
+            </cascade>
+        </one-to-many>
+
+        <many-to-one field="user" target-entity="App\Domain\Models\User" inversed-by="galleries" >
+            <join-column name="user_id" referenced-column-name="id" />
+        </many-to-one>
+
+        <many-to-one field="benefit" target-entity="App\Domain\Models\Benefit" inversed-by="galleries">
+            <cascade>
+                <cascade-persist/>
+            </cascade>
+            <join-column name="benefit_id" referenced-column-name="id"/>
+        </many-to-one>
+
+    </entity>
+</doctrine-mapping>

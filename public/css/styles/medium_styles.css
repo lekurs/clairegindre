@@ -1,6 +1,131 @@
 
 /* TABLETTE */
 @media all and (min-width: 481px) and (max-width: 1400px) {
+    .infos-content {
+        height: 30vh;
+    }
 
+    .infos-txt {
+        background-color: #242424;
+        color: #fff;
+        padding-left: 7em !important;
+        padding-right: 7em !important;
+    }
+
+    .infos-txt p {
+        margin: 0;
+    }
+
+    /***************************************************************/
+    /*                                              INDEX                                                   */
+    /***************************************************************/
+    .logo-img {
+        min-height: 115px;
+        margin-top: .2em;
+    }
+
+    .logo-content {
+        min-height: 130px;
+    }
+
+    .presentation-container > h2 {
+        font-family: Playfair;
+        font-weight: lighter;
+        font-size: 3em;
+        margin: 1em 0 0 3.5em;
+    }
+
+    p#presentation-txt {
+        font-size: .9em;
+        margin: 1em 12em;
+        text-align: justify;
+    }
+
+    .photo-presentations {
+        top: -25%;
+        left: 30%;
+        width: 36%;
+        height: 40%;
+    }
+
+    .btn-contact {
+        padding-right: 1.5em !important;
+    }
+
+    button.sub-contact {
+        width: 15%;
+    }
+
+    .social-container {
+        left: 88%;
+        top: 7%;
+    }
+
+    .insta-list {
+        height: 30em;
+    }
+
+    .insta-list img {
+        height: 100%;
+    }
+
+    footer {
+        background-color: #242424;
+        color: #fff;
+        padding: 2% 0 30px;
+    }
+
+    footer a.nav-footer {
+        text-align: center;
+    }
+
+    footer p {
+        text-align: center;
+    }
+
+    .social-footer-container {
+        text-align: center;
+        margin-bottom: 1em;
+    }
+
+    footer .arrow-footer {
+        display: none;
+    }
+
+    .contact-footer {
+        margin-top: 1em;
+    }
+
+    p#follow-me {
+        margin-top: 1em;
+    }
+
+
+    /** BLOG **/
+
+    .article-txt-container {
+        margin-bottom: 1.5em;
+    }
+
+    h2.blog-title {
+        font-size: 1.5em;
+        margin-top: .5em;
+    }
+
+    .blog-title ~ p {
+        font-size: .8em;
+    }
+
+    p.gallery-title {
+        font-size: 1em !important;
+    }
+
+    .link_to_gallery {
+        margin-bottom: 1em;
+    }
+
+    .article-img-container {
+        height: 20em;
+    }
 
 }

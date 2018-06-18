@@ -1,0 +1,101 @@
+
+{% block form %}
+
+{{ form_start(form) }}
+
+<div class="row no-gutters">
+    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+        <div class="row no-gutters">
+            <div class="col-12 d-flex justify-content-center input-content">
+                {{ form_label(form.name) }}
+                {{ form_widget(form.name, {'attr': {'class': 'contact-form' }}) }}
+                {{ form_errors(form.name) }}
+            </div>
+        </div>
+        <div class="row no-gutters">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 d-flex justify-content-center input-content">
+                {{ form_label(form.firstname) }}
+                {{ form_widget(form.firstname, {'attr': {'class': 'contact-form' }}) }}
+                {{ form_errors(form.firstname) }}
+            </div>
+        </div>
+        <div class="row no-gutters">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 d-flex justify-content-center input-content">
+                {{ form_label(form.email) }}
+                {{ form_widget(form.email, {'attr': { 'class': 'contact-form' }}) }}
+                {{ form_errors(form.email) }}
+            </div>
+        </div>
+        <div class="row no-gutters">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 d-flex justify-content-center input-content">
+                {{ form_label(form.phone) }}
+                {{ form_widget(form.phone, {'attr': {'class': 'contact-form' }}) }}
+                {{ form_errors(form.phone) }}
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+        <div class="row no-gutters">
+            {#<div class="position-date-picker date" id='datepicker'></div>#}
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 d-flex justify-content-center">
+                <div class='input-group input-content date' id='datepicker'>
+                        {{ form_label(form.date) }}
+                        {{ form_widget(form.date, {'attr': {'class': 'contact-form'}}) }}
+                    <span class="input-group-addon">
+                        <i class="fa fa-calendar"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="row no-gutters">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 d-flex justify-content-center input-content">
+                {{ form_label(form.place) }}
+                {{ form_widget(form.place, {'attr': {'class': 'contact-form' }}) }}
+                {{ form_errors(form.place) }}
+            </div>
+        </div>
+        <div class="row no-gutters">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 d-flex justify-content-center input-content">
+                {{ form_label(form.howKnow) }}
+                {{ form_widget(form.howKnow, {'attr': {'class': 'contact-form' }}) }}
+                {{ form_errors(form.howKnow) }}
+            </div>
+        </div>
+        <div class="row no-gutters">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <p class="text-center">Vous êtes intéréssés pour :</p>
+            </div>
+        </div>
+        <div class="row no-gutters">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 d-flex justify-content-center text-uppercase">
+                {%- block checkbox_widget -%}
+                    <p>
+                    <input type="checkbox" {{ block('widget_attributes') }} />
+                    <label class="container-label" for="{{ label }}">{{ label }}</label></p>
+                {%- endblock checkbox_widget -%}
+
+                {#{{ form_label(form.event) }}#}
+                {{ form_widget(form.event)}}
+                {{ form_errors(form.event) }}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row no-gutters">
+    <div class="col-12 d-flex justify-content-center">
+        {{ form_widget(form.details, {'attr': {'placeholder': 'Tous les détails de votre évènement m\'intéresse.', 'class': 'contact-form' }}) }}
+        {{ form_errors(form.details) }}
+    </div>
+</div>
+<div class="row no-gutters">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 btn-contact">
+        <button type="submit" name="contact-submit" class="btn sub-contact">Envoyer</button>
+    </div>
+</div>
+
+{{ form_end(form) }}
+
+{% endblock %}
+
+<script src="{{ asset("js/bootstrap-datepicker.min.js") }}"></script>
+<script src="{{ asset ('locales/bootstrap-datepicker.fr.min.js') }}"></script>

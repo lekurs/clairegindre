@@ -1,0 +1,136 @@
+{% extends "layout.html.twig" %}
+
+{% block head %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/styles/gallery.css') }}" xmlns="http://www.w3.org/1999/html">
+
+    {% block title %}
+        <title>Galeries Clients</title>
+    {% endblock %}
+
+{% endblock %}
+
+{% block content %}
+    <section>
+        <div class="container-fluid no-gutters">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 infos-content">
+                <div class="row no-gutters" id="end-nav">
+                </div>
+                <div class="row no-gutters social-container">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <p><a href="https://www.instagram.com/clairegindre_photographe/" target="_blank"><i class="fa fa-instagram"></i></a></p>
+                        <p><a href="https://www.facebook.com/clairegindre.pg/" target="_blank"><i class="fa fa-facebook-f"></i></a></p>
+                        <p><a href="https://www.pinterest.fr/ClaireGindrepg/" target="_blank"><i class="fa fa-pinterest-p"></i></a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+<section>
+    <div class="container-fluid">
+        <div class="row no-gutters">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <h2 class="text-center text-uppercase title-gallery">{{ gallery.title }}</h2>
+            </div>
+        </div>
+            <div class="row no-gutters cards-container">
+                <div class="gallery-container">
+                    {% for picture in gallery.pictures %}
+                        <img src="{{ asset(picture.publicPath ~ '/' ~ picture.pictureName) }}" alt="{{ picture.pictureName }}"  class="img-fluid img-gallery-customer" data-position="{{ picture.displayOrder }}" data-id="{{ picture.displayOrder }}" data-toggle="modal" data-target ="#sliderImg" />
+                    {% endfor %}
+                </div>
+                {#{% for picture in gallery.pictures %}#}
+                {#<div class="col-xl-2 col-lg-2 col-md-6 col-sm-6 col-6 gallery-content-img">#}
+                    {#<div class="row no-gutters text-center cards-content">#}
+                        {#<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">#}
+                            {#<img src="{{ asset(picture.publicPath ~ '/' ~ picture.pictureName) }}" alt="{{ picture.pictureName }}"  class="img-fluid" data-position="{{ picture.displayOrder }}" data-id="{{ picture.displayOrder }} "/>#}
+                                {#<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 infos-gallery-img">#}
+                                    {#<span data-toggle="modal" data-target="#sliderImg"><button type="button" class="btn"><i class="fa fa-search fa-2x"></i></button></span>#}
+                                {#</div>#}
+                        {#</div>#}
+                    {#</div>#}
+                    {#<div class="row no-gutters text-center">#}
+                        {#<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 download-picture">#}
+                            {#<a href="{{ asset(picture.publicPath ~ '/' ~ picture.pictureName) }}"><i class="fa fa-download"></i></a>#}
+                        {#</div>#}
+                    {#</div>#}
+                </div>
+                {#{% endfor %}#}
+                </div>
+
+    {% block instagram_contact %}
+    {% endblock %}
+    </div>
+
+
+    <!-- Modal -->
+    {#<div class="modal fade" id="sliderImg" tabindex="-1" role="dialog" aria-labelledby="sliderImgTitle" aria-hidden="true">#}
+        {#<div class="modal-dialog modal-dialog-centered" role="document" >#}
+            {#<div class="modal-content">#}
+                {#<div class="modal-header">#}
+                    {#<button type="button" class="close" data-dismiss="modal" aria-label="Close">#}
+                        {#<span aria-hidden="true">&times;</span>#}
+                    {#</button>#}
+                {#</div>#}
+                {#<div class="modal-body">#}
+                    {#SLIDER#}
+                    {#<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" >#}
+                        {#<ol class="carousel-indicators">#}
+                            {#<li data-target="#carouselExampleIndicators" data-slide-to="{{ gallery.pictures.first.displayOrder }}" class="active"></li>#}
+                            {#{% for pictures in gallery.pictures %}#}
+                                {#<li data-target="#carouselExampleIndicators" data-slide-to="{{ pictures.displayOrder }}"></li>#}
+                            {#{% endfor %}#}
+                        {#</ol>#}
+                        {#<div class="carousel-inner">#}
+                            {#{% for pictures in gallery.pictures %}#}
+                                {#<div class="carousel-item">#}
+                                    {#d-block w-100#}
+                                    {#<img src="{{ asset(pictures.publicPath ~ '/' ~ pictures.pictureName) }}" alt="{{ pictures.pictureName }}" class="d-block w-100"  data-slide="{{ pictures.displayOrder }}" />#}
+                                {#</div>#}
+                            {#{% endfor %}#}
+                            {#</div>#}
+                        {#</div>#}
+                        {#<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">#}
+                            {#<span class="carousel-control-prev-icon" aria-hidden="true"></span>#}
+                            {#<span class="sr-only">Previous</span>#}
+                        {#</a>#}
+                        {#<a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">#}
+                            {#<span class="carousel-control-next-icon" aria-hidden="true"></span>#}
+                            {#<span class="sr-only">Next</span>#}
+                        {#</a>#}
+                    {#</div>#}
+                {#</div>#}
+            {#</div>#}
+        {#</div>#}
+    <div class="modal-perso" id="mymodal">
+                <div class="modal-contenu">
+                    <div class="modal-head">
+                        <h1 class="title-gallery">{{ gallery.title }}</h1>
+                        <span class="close-modal"><i class="fa fa-close fa-2x"></i></span>
+                    </div>
+                </div>
+                <div class="slider-container">
+                {% for pictures in gallery.pictures %}
+                    <div class="img-container">
+                        <img src="{{ asset(pictures.publicPath ~ '/' ~ pictures.pictureName) }}" alt="{{ pictures.pictureName }}" class=""  data-slide="{{ pictures.displayOrder }}" />
+                    </div>
+                {% endfor %}
+            </div>
+        {#<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">#}
+            {#<span class="carousel-control-prev-icon" aria-hidden="true"></span>#}
+            {#<span class="sr-only">Previous</span>#}
+        {#</a>#}
+        {#<a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">#}
+            {#<span class="carousel-control-next-icon" aria-hidden="true"></span>#}
+            {#<span class="sr-only">Next</span>#}
+        {#</a>#}
+    </div>
+        </div>
+</section>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('/js/front/menu.js') }}"></script>
+    <script src="{{ asset('/js/front/gallery_customers.js') }}"></script>
+{% endblock %}

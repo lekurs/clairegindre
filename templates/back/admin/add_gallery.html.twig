@@ -1,0 +1,95 @@
+{% extends "admin_layout.html.twig" %}
+
+{%  block head %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/styles/drop_pictures.css') }}" />
+    {% block title %}
+        <title>Ajout d'une galerie photos</title>
+    {% endblock %}
+{% endblock %}
+
+{% block content %}
+<section>
+    <div class="container">
+        <div class="row no-gutters">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                {% block title_admin %}
+                <h1 class="title-admin">Gestion de la galerie : {{ gallery.title }}</h1>
+                {% endblock %}
+            </div>
+        </div>
+
+        <div class="row no-gutters">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" id="drop-container">
+
+            </div>
+        </div>
+        {% if gallery is not empty %}
+            <div class="row no-gutters">
+                <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12">
+                    <h1 class="title-admin">Les images de la galerie</h1>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 d-flex justify-content-center align-items-center">
+                    <i class="fa fa-angle-double-down fa-2x down-gallery"></i>
+                </div>
+            </div>
+            <div class="row no-gutters pictures-gallery-container">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class="row no-gutters cards cards-gallery-down" id="sortable">
+                        {% for picture in pictures %}
+                            <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12 box-picture">
+                                <div class="row no-gutters cards-content">
+                                    <img src="{{ asset(picture.publicPath ~ '/' ~ picture.pictureName) }}" alt="{{ picture.pictureName }}"  class="img-fluid" data-position="{{ picture.displayOrder }}"/>
+                                </div>
+                                <div class="row no-gutters cards-pictos">
+                                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 favorite-icone-container">
+                                        <i class="fa fa-star favorite-icone {% if picture.favorite > 0 %}favorite-image{% endif %}" data-id="{{ picture.id }}"></i>
+                                    </div>
+                                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
+                                        <i class="fa fa-trash delete-image" data-id="{{ picture.id }}"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 text-right">
+                    <a href="{{ path('admin') }}"><button type="button" class="btn" id="admin-button-gallery">Retour à l'administration</button></a>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>$ (function () {
+            $('#sortable').sortable();
+            $ ('#sortable').disableSelection();
+        });</script>
+    <script src="/js/back/dropPictures.js"></script>
+    <script>$(document).ready(function () {
+            $('#drop-container').dropPictures(
+                {
+                    'script' : '{{ path('uploadImages', { 'slugGallery': gallery.slug }) }}',
+                    'target': '{{ gallery.title }}',
+                    'gallery': '{{ gallery.slug }}',
+                    'direction': '{{ gallery.slug }}'
+                }
+            );
+        });
+    </script>
+    <script src="{{ asset('js/back/action_add_gallery.js') }}"></script>
+    <script src="{{ asset('js/back/add_favorite.js') }}"></script>
+    <script>$(document).ready(function() {
+            $('.favorite-icone-container').favoritePicture(
+                {
+                    'script': '{{ path('adminEditFavoritePicture', { 'gallerySlug' : gallery.slug}) }}'
+                }
+            ) ;
+        });
+    </script>
+{% endblock %}

@@ -2,4 +2,47 @@
 /* DESKTOP */
 @media all and (min-width: 1401px) {
 
+    footer {
+        background-color: #242424;
+        color: #fff;
+        padding: 2% 0 0;
+        max-height: 280px;
+    }
+
+    a#link-home {
+        width: 2.5em;
+    }
+
+    a#link-photo {
+        width: 2.8em
+    }
+
+    a#link-blog {
+        width: 2.4em;
+    }
+
+    a#link-informations {
+        width: 6.5em;
+    }
+
+    a#link-customers {
+        width: 3.5em;
+    }
+
+    a#link-contact {
+        width: 4em;
+    }
+
+/** ARTICLE **/
+
+    .article-img-container {
+        height: 31em;
+    }
+
+    .filter-button-dynamique {
+        text-align: right;
+        padding-right: 1em;
+        font-size: 1.2em;
+    }
+
 }

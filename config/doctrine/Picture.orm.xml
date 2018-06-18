@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                          http://raw.github.com/doctrine/doctrine2/master/doctrine-mapping.xsd">
+
+    <entity name="App\Domain\Models\Picture" table="clairegindre_picture" repository-class="App\Domain\Repository\PictureRepository">
+    <id name="id" column="id" type="string"/>
+            <field name="pictureName" type="string" length="100" nullable="false" unique="false" />
+            <field name="publicPath" type="string" length="255" nullable="false" unique="false" />
+            <field name="extension" type="string" length="5" nullable="false" unique="false" />
+            <field name="displayOrder" type="integer" nullable="true" unique="false" />
+            <field name="favorite" type="boolean" nullable="false" unique="false" />
+
+            <many-to-one field="gallery" target-entity="App\Domain\Models\Gallery" inversed-by="pictures">
+                <join-column name="gallery_id" referenced-column-name="id" />
+            </many-to-one>
+
+            <one-to-one field="galleryMaker" target-entity="App\Domain\Models\GalleryMaker" >
+                <join-column name="gallery_maker_id" referenced-column-name="id" />
+            </one-to-one>
+
+    </entity>
+
+</doctrine-mapping>

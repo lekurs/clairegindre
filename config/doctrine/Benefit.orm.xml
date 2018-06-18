@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                          http://raw.github.com/doctrine/doctrine2/master/doctrine-mapping.xsd">
+
+    <entity name="App\Domain\Models\Benefit" table="clairegindre_benefit" repository-class="App\Domain\Repository\BenefitRepository">
+        <id name="id" column="id" type="string"/>
+        <field name="name" type="string" length="50" nullable="false" unique="false"/>
+
+        <one-to-many field="galleries" target-entity="App\Domain\Models\Gallery" mapped-by="benefit">
+            <cascade>
+                <cascade-persist/>
+            </cascade>
+        </one-to-many>
+        <many-to-one field="user" target-entity="App\Domain\Models\User" inversed-by="benefits">
+            <join-column name="user_id" referenced-column-name="id" />
+        </many-to-one>
+        <one-to-many field="articles" target-entity="App\Domain\Models\Article" mapped-by="prestation">
+            <cascade>
+                <cascade-persist/>
+            </cascade>
+        </one-to-many>
+    </entity>
+</doctrine-mapping>

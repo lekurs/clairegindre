@@ -1,0 +1,100 @@
+/*****************************************************************/
+/*                                        LOGIN PAGE                                                  */
+/*****************************************************************/
+
+.connection-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.login-type-container {
+    padding-bottom: 3em;
+}
+
+.login-type-header {
+    height: 7em;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #363636;
+    border-bottom: none;
+    border-width: thin;
+    -webkit-box-shadow: 7px 0px 5px 0px rgba(0,0,0,0.12);
+    -moz-box-shadow: 7px 0px 5px 0px rgba(0,0,0,0.12);
+    box-shadow: 7px 0px 5px 0px rgba(0,0,0,0.12);
+}
+
+.login-type-header p {
+    text-align: center;
+    font-size: 1.2em;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin: 0;
+    padding: 0;
+    background-color: rgba(36,36,36,.8);
+    color: #FFFFFF;
+    height: 4em;
+    padding-top: 1.2em;
+}
+
+.login-type-image {
+    border: 1px solid #363636;
+    border-bottom: none;
+    border-top: none;
+    border-width: thin;
+    -webkit-box-shadow: 7px 0px 5px 0px rgba(0,0,0,0.12);
+    -moz-box-shadow: 7px 0px 5px 0px rgba(0,0,0,0.12);
+    box-shadow: 7px 0px 5px 0px rgba(0,0,0,0.12);
+}
+
+.login-type-image img {
+    width: 100%;
+}
+
+.login-type-content-form {
+    border: 1px solid #363636;
+    border-top: none;
+    border-width: thin;
+    padding-bottom: 2em;
+    -webkit-box-shadow: 7px 0px 5px 0px rgba(0,0,0,0.12);
+    -moz-box-shadow: 7px 0px 5px 0px rgba(0,0,0,0.12);
+    box-shadow: 7px 0px 5px 0px rgba(0,0,0,0.12);
+}
+
+form label {
+    display: none;
+}
+
+input[type="text"] {
+    border: none;
+    background-color: rgba(36,36,36,.8);
+    color: #FFFFFF;
+    font-size: .9em;
+    margin: 1.5em auto;
+}
+
+input[type="password"] {
+    border: none;
+    background-color: rgba(36,36,36,.8);
+    color: #FFFFFF;
+    font-size: .9em;
+    margin: 1.5em auto;
+}
+
+.sub-login {
+    width: 100%;
+    text-transform: uppercase;
+    background-color: rgba(36,36,36,.8);
+    border: 1px solid transparent;
+    color: #FFFFFF;
+}
+
+.sub-login:hover {
+    width: 100%;
+    text-transform: uppercase;
+    color: rgba(36,36,36,.8);
+    border: 1px solid rgba(36,36,36,.8);
+    background-color: #FFFFFF;
+}

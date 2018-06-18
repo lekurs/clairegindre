@@ -1,0 +1,193 @@
+{% extends('admin_layout.html.twig') %}
+
+{% block content %}
+    {% block title_admin %}
+        <h1 class="title-admin">Administration des utilisateurs</h1>
+    {% endblock %}
+
+    <section>
+        <div class="container users">
+            <div class="row no-gutters admin-infos-users-title">
+                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
+                    <p class="text-uppercase font-weight-bold">Image utilisateur</p>
+                </div>
+                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
+                    <p class="text-uppercase font-weight-bold">Utilisateur</p>
+                </div>
+                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
+                    <p class="text-uppercase font-weight-bold">Modifier Utilisateur</p>
+                </div>
+                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
+                    <p class="text-uppercase font-weight-bold">Actif</p>
+                </div>
+                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
+                    <p class="text-uppercase font-weight-bold">Date évènement</p>
+                </div>
+                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
+                    <p class="text-uppercase font-weight-bold">Galeries Photos</p>
+                </div>
+            </div>
+            {% for user in users %}
+                <div class="row no-gutters gallery-container">
+                    <div class="col">
+                        <div class="row no-gutters user-information-container">
+                            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2 info-user-image">
+                                <img src="{{ user.picture.publicPath ~ '/' ~ user.picture.pictureName }}" alt="{{ user.picture.pictureName }}" />
+                            </div>
+                            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
+                                <p>{{ user.username }} - {{ user.lastName }}</p>
+                            </div>
+                            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
+                                <a href="{{ path('adminUserEdit', {'slug': user.slug}) }}" class="edit-user-icon"><i class="fa fa-edit"></i></a>
+                            </div>
+                            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
+                                {% if user.online == 1 %}
+                                <p class="admin-user-online"><i class="fa fa-thumbs-up"></i></p>
+                                {% else %}
+                                    <p class="admin-user-offline"><i class="fa fa-thumbs-down"></i></p>
+                                    {% endif %}
+                            </div>
+                            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
+                                <p>{{ user.dateWedding | date('d/M/Y') }}</p>
+                            </div>
+                            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
+                                <i class="fa fa-search show-gallery"></i>
+                            </div>
+                        </div>
+                        <div class="row no-gutters">
+                            <div class="col show-galleries">
+                                <h3>Détails Galeries</h3>
+                                <div class="row no-gutters infos-gallery-title-container">
+                                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3 infos-gallery-title favorite-picture">
+                                        <p class="text-uppercase">Favorite</p>
+                                    </div>
+                                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3 infos-gallery-title">
+                                        <p class="text-uppercase">Titre</p>
+                                    </div>
+                                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3 infos-gallery-title">
+                                        <p class="text-uppercase">Prestation</p>
+                                    </div>
+                                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3 infos-gallery-title">
+                                        <p class="text-uppercase">Modifier | Supprimer</p>
+                                    </div>
+                                </div>
+                                <div class="row no-gutters">
+                                    {% for gallery in user.galleries %}
+                                        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3 infos-gallery favorite-picture">
+                                            {% for picture in gallery.pictures if picture.favorite > 0%}
+                                            <p class="img-favorite-admin"><img src="{{ picture.publicPath ~ '/' ~ picture.pictureName }}" alt="{{ picture.pictureName }}" /> </p>
+                                            {% endfor %}
+                                        </div>
+                                        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3 infos-gallery">
+                                            <p>{{ gallery.title }}</p>
+                                        </div>
+                                        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3 show-gallery-details infos-gallery">
+                                            <p>{{ gallery.benefit.name }}</p>
+                                        </div>
+                                        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3 show-gallery-details">
+                                            <div class="row no-gutters">
+                                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 infos-gallery">
+                                                    <a href="{{ path('adminAddPicturesGallery', {'slug': gallery.slug}) }}" class="edit-user-icon"><i class="fa fa-edit"></i></a>
+                                                </div>
+                                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 no-gutters infos-gallery">
+                                                    <a href="{{ path('adminDeleteGallery', {'slug': gallery.slug}) }}" class="edit-user-icon"><i class="fa fa-trash"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% else %}
+                                        <div class="col show-galleries">
+                                            <p class="text-center">Aucune galerie</p>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                                <div class="row no-gutters  add-gallery">
+                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 text-right">
+                                        <span data-toggle="modal" data-target="#createGalleryModal" data-id="{{ user.id }}"><button type="button" class="btn btn-add-gallery"><i class="fa fa-plus"></i></button> </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            <div class="row no-gutters">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <span data-toggle="modal" data-target="#createUserModal" ><button type="button" class="btn admin-button"><i class="fa fa-user fa-2x"></i></button></span>
+                </div>
+            </div>
+        </div>
+        {# PAGINATION FOR USERS #}
+            <nav aria-label="pagination">
+                <ul class="pagination justify-content-center">
+                    {% if pages.page > 1 %}
+                            <li class="page-item">
+                                <a href="{{ path('adminUser', { 'page': pages.page-1}) }}" class="page-link page-link-perso" tabindex="-1">Précédent</a>
+                            </li>
+                    {% endif %}
+                    {% for p in range(max(pages.page-4, 1), min(pages.page +4, pages.nbPages)) %}
+                    <li class="page-item">
+                        <a href="{{ path('adminUser', { 'page' : p})}}"  class="page-link page-link-perso">{{ p }}</a>
+                    </li>
+                    {% endfor %}
+                    {% if pages.page < pages.nbPages %}
+                    <li class="page-item">
+                        <a class="page-link page-link-perso" href="{{ path('adminUser', { 'page': pages.page+1}) }}">Suivante</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </nav>
+
+        <!-- MODAL + USER -->
+        <div class="modal fade" id="createUserModal" tabindex="-1" role="dialog" aria-labelledby="createUserModalTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="createUserModalTitle">Enregistrer un client</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    {{ form_start(formRegistration) }}
+                    <div class="modal-body">
+                        {{ form_widget(formRegistration) }}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                        <button type="submit"  class="btn btn-primary">Enregistrer</button>
+                    </div>
+                    {{ form_end(formRegistration) }}
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- Modal -->
+    <div class="modal fade" id="createGalleryModal" tabindex="-1" role="dialog" aria-labelledby="createGalleryModalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="createGalleryModalTitle">Création d'une galerie</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                {{ form_start(addGalleryType) }}
+                <div class="modal-body">
+                    {{ form_widget(addGalleryType) }}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                    <button type="submit"  class="btn btn-primary">Enregistrer</button>
+                </div>
+                {{ form_end(addGalleryType) }}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/back/show_galleries_users.js') }}"></script>
+{% endblock %}

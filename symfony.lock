@@ -59,8 +59,35 @@
     "egulias/email-validator": {
         "version": "2.1.3"
     },
+    "firebase/php-jwt": {
+        "version": "v5.0.0"
+    },
+    "google/auth": {
+        "version": "v1.3.0"
+    },
+    "google/cloud-core": {
+        "version": "v1.20.5"
+    },
+    "google/cloud-storage": {
+        "version": "v1.5.2"
+    },
+    "guzzlehttp/guzzle": {
+        "version": "6.3.3"
+    },
+    "guzzlehttp/promises": {
+        "version": "v1.3.1"
+    },
+    "guzzlehttp/psr7": {
+        "version": "1.4.2"
+    },
     "jdorn/sql-formatter": {
         "version": "v1.2.17"
+    },
+    "monolog/monolog": {
+        "version": "1.23.0"
+    },
+    "nikic/php-parser": {
+        "version": "v4.0.0"
     },
     "ocramius/package-versions": {
         "version": "1.2.0"
@@ -68,17 +95,29 @@
     "ocramius/proxy-manager": {
         "version": "2.1.1"
     },
+    "paragonie/random_compat": {
+        "version": "v2.0.11"
+    },
     "psr/cache": {
         "version": "1.0.1"
     },
     "psr/container": {
         "version": "1.0.0"
     },
+    "psr/http-message": {
+        "version": "1.0.1"
+    },
     "psr/log": {
         "version": "1.0.2"
     },
     "psr/simple-cache": {
         "version": "1.0.0"
+    },
+    "ramsey/uuid": {
+        "version": "3.7.3"
+    },
+    "rize/uri-template": {
+        "version": "0.3.2"
     },
     "swiftmailer/swiftmailer": {
         "version": "v6.0.2"
@@ -167,11 +206,26 @@
             "ref": "fadbfe33303a76e25cb63401050439aa9b1a9c7f"
         }
     },
+    "symfony/monolog-bridge": {
+        "version": "v4.0.4"
+    },
+    "symfony/monolog-bundle": {
+        "version": "3.1",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "3.1",
+            "ref": "371d1a2b69984710646b09a1182ef1d4308c904f"
+        }
+    },
     "symfony/options-resolver": {
         "version": "v4.0.3"
     },
     "symfony/orm-pack": {
         "version": "v1.0.5"
+    },
+    "symfony/polyfill-ctype": {
+        "version": "v1.8.0"
     },
     "symfony/polyfill-intl-icu": {
         "version": "v1.6.0"
@@ -199,6 +253,15 @@
     },
     "symfony/security": {
         "version": "v4.0.3"
+    },
+    "symfony/security-bundle": {
+        "version": "3.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "3.3",
+            "ref": "f8a63faa0d9521526499c0a8f403c9964ecb0527"
+        }
     },
     "symfony/stopwatch": {
         "version": "v4.0.3"

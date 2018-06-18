@@ -1,0 +1,57 @@
+{% extends "admin_layout.html.twig" %}
+
+{%  block head %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/styles/blog.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/styles/galleriemaker.css') }}" />
+    {% block title %}
+        <title>Admin | Article</title>
+    {% endblock %}
+{% endblock %}
+
+{% block content %}
+    {% block FlashMessage %}
+
+    {% endblock %}
+
+    {% block showBlog %}
+    <section>
+        <div class="container">
+            {% block title_admin %}
+                <div class="row no-gutters">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <h1>Article de blog pour la galerie : {{ gallery.title }}</h1>
+                    </div>
+                </div>
+            {% endblock %}
+            <div class="row">
+                <div class="col-xl-12 col-lg-12 col-sm-12 col-md-12 col-12">
+                    {{ form_start(form) }}
+                    {{ form_widget(form) }}
+                    <button type="submit" class="btn btn-dark">Suivant</button>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+
+            <div class="row no-gutters">
+                <div class="maker container no-gutters" data-id="article_{{ gallery.title }}"></div>
+            </div>
+        </div>
+    {% endblock %}
+
+</section>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        tinymce.init({
+            selector: 'textarea#add_article_content',
+            height: 300,
+            toolbar: [
+                'undo redo | styleselect | bold italic | link image',
+                'alignleft aligncenter alignright'
+            ]
+        });
+    </script>
+{% endblock %}

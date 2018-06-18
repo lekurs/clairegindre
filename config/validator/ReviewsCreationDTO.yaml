@@ -1,0 +1,7 @@
+App\Domain\DTO\AnswerMailDTO:
+    properties:
+        title:
+            - Length: { min: 4, max: 100, minMessage: 'Minimum 4 caractères', maxMessage: 'Maximum 100 caractères', groups: ['reviews_creation'] }
+            - NotBlank: ~
+        content:
+            - Length: { min: 20, groups : ['reviews_creation']}

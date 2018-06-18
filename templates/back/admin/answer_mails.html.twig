@@ -1,0 +1,63 @@
+{% extends "admin_layout.html.twig" %}
+
+{%  block head %}
+    {{ parent() }}
+    {% block title %}
+        <title>Administration des familles</title>
+    {% endblock %}
+{% endblock %}
+
+{% block content %}
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <h1 class="title-admin">Répondre à l'email : {{ mail.subject }}</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
+                  <p class="admin-mail">Envoyé par :</p>
+                </div>
+                <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9 col-9">
+                    <p>{{ mail.fromSender }}</p>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
+                    <p class="admin-mail">Titre :</p>
+                </div>
+                <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9 col-9">
+                    <p>{{ mail.subject }}</p>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
+                    <p class="admin-mail">Message :</p>
+                </div>
+                <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9 col-9">
+                    <p>{{ mail.content }}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    {{ form_start(form) }}
+                    {{ form_widget(form) }}
+                    <button type="submit"  class="btn btn-dark">Répondre</button>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+
+        </div>
+    </section>
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+    <script>
+        tinymce.init({
+            selector: 'textarea#answer_email_content',
+            height: 300,
+            toolbar: [
+                'undo redo | styleselect | bold italic | link image',
+                'alignleft aligncenter alignright'
+            ]
+        });
+    </script>
+{% endblock %}

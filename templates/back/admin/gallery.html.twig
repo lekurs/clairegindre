@@ -1,0 +1,28 @@
+{% extends "back/admin/admin.html.twig" %}
+
+{% block head %}
+    {{ parent() }}
+    {% block title %}
+        <title>Galeries utilisateurs</title>
+    {% endblock %}
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col">Client</div>
+            <div class="col">Galerie(s)</div>
+            <div class="col">Edit</div>
+            <div class="col">Del</div>
+        </div>
+
+{% for gallery in galleryByUser %}
+        <div class="row">
+            <div class="col">{{ gallery.user.username }}</div>
+            <div class="col">{{ gallery.title }}</div>
+            <div class="col"><a href="{{ path('adminGalleryEdit', {'id' : gallery.id}) }}"><i class="fa fa-edit"></i></a></div>
+            <div class="col"><i class="fa fa-trash"></i></div>
+        </div>
+{% endfor %}
+    </div>
+{% endblock %}

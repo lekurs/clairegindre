@@ -1,0 +1,39 @@
+{% extends "admin_layout.html.twig" %}
+
+{%  block head %}
+    {{ parent() }}
+    {% block title %}
+        <title>Admin | Prestations des prestations</title>
+    {% endblock %}
+{% endblock %}
+
+{% block content %}
+    <section id="edit-benefit">
+        <div class="container">
+            <div class="row no-gutters">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    {% block title_admin %}
+                    <h1 class="title-admin">Administration des catégories de prestations</h1>
+                    {% endblock %}
+                </div>
+            </div>
+            <div class="row no-gutters">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <h2 class="title-admin">Modifier la prestation : {{ benefit.name }}</h2>
+                </div>
+            </div>
+            <div class="row no-gutters">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 benefit-form">
+                    {{ form_start(benefitType) }}
+                    {{ form_row(benefitType.name) }}
+                    <div class="row no-gutters">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 text-right">
+                            <button type="submit" class="btn admin-button-mini">Modifier</button>
+                        </div>
+                    </div>
+                {{ form_end(benefitType) }}
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

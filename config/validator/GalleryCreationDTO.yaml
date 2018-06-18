@@ -1,0 +1,8 @@
+App\Domain\DTO\GalleryCreationDTO:
+    properties:
+        title:
+            - Length: { min: 4, max: 150, minMessage: 'Minimum 4 caractères', maxMessage: 'Trop de caractères, 150 maximum authorisés', groups: ['gallery_creation'] }
+            - NotBlank: ~
+        eventPlace:
+            - Length: { min: 3, max: 150, minMessage: 'Pas assez de caractères - minimum : 3', maxMessage: 'Trop de caractères - Max authorisés : 150', groups: ['gallery_creation'] }
+            - NotBlank: ~

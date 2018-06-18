@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                          http://raw.github.com/doctrine/doctrine2/master/doctrine-mapping.xsd">
+
+    <entity name="App\Domain\Models\Article" table="clairegindre_article" repository-class="App\Domain\Repository\ArticleRepository">
+        <id name="id" column="id" type="string"/>
+        <field name="title" type="string" length="100" nullable="false" unique="false" />
+        <field name="content" type="text" nullable="false" unique="false" />
+        <field name="online" type="boolean" nullable="false" unique="false" />
+        <field name="creationDate" type="date" nullable="false" unique="false" />
+        <field name="modificationDate" type="integer" nullable="true" unique="false" />
+        <field name="personnalButton" type="string" nullable="true" unique="false" />
+        <field name="slug" type="string" nullable="false" unique="false" />
+
+        <one-to-one field="gallery" target-entity="App\Domain\Models\Gallery" mapped-by="article" />
+
+        <many-to-one field="author" target-entity="App\Domain\Models\User" inversed-by="articles" />
+
+        <one-to-many field="comments" target-entity="App\Domain\Models\Comment" mapped-by="article" />
+
+        <many-to-one field="prestation" target-entity="App\Domain\Models\Benefit" inversed-by="articles" />
+
+        <one-to-many field="galleriesMakers" target-entity="App\Domain\Models\GalleryMaker" mapped-by="article">
+            <cascade>
+                <cascade-persist/>
+                <cascade-remove/>
+            </cascade>
+        </one-to-many>
+
+    </entity>
+
+</doctrine-mapping>

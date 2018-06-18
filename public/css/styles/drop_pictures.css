@@ -1,0 +1,141 @@
+/*****************************************************************/
+/*                                  DROP PICTURES                                               */
+/*****************************************************************/
+
+/* Barre d'action boutons */
+.browse {
+    display: none;
+}
+
+#drop-container {
+    height: 50vh;
+    border: 1px solid #363636;
+    border-width: thin;
+    margin-bottom: 2em;
+    overflow: auto;
+}
+
+.drop_pictures_action_bars {
+    z-index: 999;
+    margin-bottom: 2em;
+}
+
+.drop_pictures_button {
+    margin-left: 10px;
+}
+
+.drop_pictures_line {
+    border-top: 1px solid #DDDDDD;
+    border-width: thin;
+    padding: 15px 0;
+}
+
+.drop_pictures_line:first-child {
+    margin-top: 3.5em;
+}
+
+.drop_pictures_previews {
+    width: 100%;
+}
+
+.grey-line {
+    background-color: #f9f9f9;
+}
+
+.colProgressBar {
+    display: flex;
+    align-items: center;
+}
+
+.progress {
+    width: 100%;
+}
+
+.colDelete .fa {
+    cursor: pointer;
+}
+
+.check_box_favorite.selected, favorite-image.selected {
+    color: gold !important;
+}
+
+/*****************************************************************/
+/*                                  UPDATE GALLERY                                            */
+/*****************************************************************/
+
+#sortable {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: auto;
+}
+
+.cards {
+    width: 100%;
+    height: 10%;
+}
+
+/*.cards-content {*/
+    /*align-items: flex-start;*/
+    /*height: 80%;*/
+    /*justify-content: center;*/
+/*}*/
+
+.cards-gallery-down {
+    overflow: auto;
+}
+
+#sortable li {
+    margin: 3px 3px 3px 0;
+    padding: 1px;
+    float: left;
+    width: 25%;
+    height: 25%;
+}
+
+#sortable img {
+    width: auto;
+    height: 100px;
+}
+
+.cards-pictos {
+    text-align: center;
+}
+
+
+.down-gallery {
+    animation: bounce 0.7s ease infinite;
+}
+
+@keyframes bounce {
+    rom {transform: translateY(0);} to {transform: translateY(-10px);}
+}
+
+.down-gallery.active {
+    transform: rotate(180deg);
+    transition: all .5s ease-in-out;
+}
+
+.favorite-image {
+    color: gold;
+}
+
+.pictures-gallery-container {
+    margin-bottom: 3em;
+}
+
+.back-admin {
+    width: 100%;
+    margin-bottom: 3em;
+    text-transform: uppercase;
+}
+
+.drop-container-edit {
+    margin: 3em auto;
+}
+
+.edit-thumb-options {
+    cursor: pointer;
+    margin-top: 4em;
+}

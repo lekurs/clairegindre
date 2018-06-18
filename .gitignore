@@ -4,4 +4,8 @@
 /public/bundles/
 /var/
 /vendor/
+.idea/
 ###< symfony/framework-bundle ###
+
+##google
+config/credentials/google/credentials.json

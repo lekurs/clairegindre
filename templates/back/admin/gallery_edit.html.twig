@@ -1,0 +1,115 @@
+{% extends "admin_layout.html.twig" %}
+
+    {%  block head %}
+        {{ parent() }}
+        <link rel="stylesheet" href="{{ asset('css/styles/drop_pictures.css') }}" />
+        {% block title %}
+            <title>Edition de la galerie : {{ gallery.title }}</title>
+        {% endblock %}
+    {% endblock %}
+{% block content %}
+    {{ parent() }}
+
+<div class="container">
+    <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <h1 class="title-admin">Mise à jour de la galerie : {{ gallery.title }}</h1>
+        </div>
+    </div>
+    <div class="row no-gutters">
+
+        {%  form_theme form 'form/fields.html.twig' %}
+
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 container-form">
+            {{ form_start(form) }}
+            <div class="row no-gutters">
+                <div class="col-8 picture-thumb-container" data-sortable=".picture-thumb" id="sort1">
+                    {% for images in form.pictures %}
+                    <div class="picture-thumb" data-position="{{ images.vars.data.displayOrder }}" data-id="">
+                        <div class="content-thumb" >
+                            {{ form_row(images) }}
+                            <img src="{{ asset(images.vars.data.publicPath ~ '/' ~ images.vars.data.pictureName) }}" class="imgCheck" alt="{{ images.vars.data.pictureName }}" />
+                        </div>
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 text-center">
+                            <div class="row no-gutters edit-thumb-options">
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
+                                    <i class="fa fa-star favorite-icone {% if images.vars.data.favorite > 0 %}favorite-image{% endif %}" data-id="{{ images.vars.data.id }}"></i>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
+                                    <i class="fa fa-trash trash-icone" data-id="{{ images.vars.data.id }}"></i>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 parameters-container">
+                <div class="row no-gutters">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <h2 class="admin-middle-title">Paramètres</h2>
+                        <p>{{ form_row(form.title) }}</p>
+                        <p>{{ form_row(form.eventDate) }}</p>
+                        <p>{{ form_row(form.eventPlace) }}</p>
+                    </div>
+                </div>
+                <div class="row no-gutters">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 text-right">
+                        <button type="submit" class="btn sub-login" id="edit-gallery-button">Mettre à jour</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+        {{ form_end(form) }}
+
+    <div class="row no-gutters drop-container-edit">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" id="drop-container">
+
+        </div>
+    </div>
+
+</div>
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+<script src="{{ asset('js/vendor/interactjs.js') }}"></script>
+<script src="{{ asset('js/back/editGallery.js') }}"></script>
+<script src="{{ asset('js/back/add_favorite.js') }}"></script>
+<script src="{{ asset('js/back/pictureEdit.js') }}"></script>
+<script src="{{ asset('js/back/dropPictures.js') }}"></script>
+<script src="{{ asset('js/back/deletePicture.js') }}"></script>
+<script>$(document).ready(function () {
+        $('#drop-container').dropPictures(
+            {
+                'script' : '{{ path('uploadImages', { 'slugGallery': gallery.slug }) }}',
+                'target': '{{ gallery.title }}',
+                'gallery': '{{ gallery.slug }}',
+                'direction': '{{ gallery.slug }}'
+            }
+        );
+    });
+</script>
+<script>
+    sortable = new Sortable(
+        document.querySelector('#sort1'),
+    )
+</script>
+<script>$(document).ready(function() {
+        $('.favorite-icone-container').favoritePicture(
+            {
+                'script': '{{ path('adminEditFavoritePicture', { 'gallerySlug' : gallery.slug}) }}'
+            }
+        ) ;
+    });
+</script>
+<script>$(document).ready(function () {
+        $('.trash-icone').deletePicture(
+            {
+                'script': '{{ path('adminDeletePictureGallery') }}'
+            }
+        );
+    });
+</script>
+{% endblock %}

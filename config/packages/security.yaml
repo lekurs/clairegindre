@@ -1,0 +1,35 @@
+security:
+    encoders:
+          App\Domain\Models\User:
+                algorithm: bcrypt
+
+    providers:
+        our_db_provider:
+                    entity:
+                        class: App\Domain\Models\User
+                        property: email
+
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        main:
+            pattern: ^/
+            guard:
+                authenticators:
+                    - App\UI\Action\Security\UserAuthenticationGuard
+
+            anonymous: ~
+            logout_on_user_change: true
+            provider: our_db_provider
+            logout:
+                path: logout
+                target: index
+
+    access_control:
+         - { path: ^/admin/mails, roles: ROLE_ADMIN }
+         - { path: ^/admin/blog, roles: ROLE_ADMIN }
+#         - { path: ^/admin/users, roles: ROLE_ADMIN }
+#         - { path: ^/, roles: ROLE_USER }
+

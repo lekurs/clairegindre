@@ -1,0 +1,51 @@
+{% extends "layout.html.twig" %}
+
+{% block head %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/styles/gallery.css') }}">
+
+    {% block title %}
+        <title>Galeries Clients</title>
+    {% endblock %}
+
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row no-gutters">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <h2>Bienvenue sur vos galeries photos</h2>
+            </div>
+        <div class="row no-gutters gallery-container-customer">
+            {% for gallery in galleries %}
+                <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 col-12">
+                    <div class="row no-gutters box">
+                        <img src="{{ asset('images/upload/gallery/' ~ gallery.title ~ '/' ~ gallery.pictures.first.pictureName) }}" alt="{{ gallery.pictures.first.pictureName }}" />
+                        <a href="{{ path('galleryCustomer', { 'slugUser': gallery.user.slug, 'slugGallery' : gallery.slug } ) }}">
+                            <div class="gallery-customers-informations">
+                                <h4>{{ gallery.title }}</h4>
+                                <p id="prestation-date">{{ gallery.user.dateWedding|date('d-m-Y') }}</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    {% block contact %}
+
+    {% endblock %}
+
+    {% block instagram_contact %}
+
+    {% endblock %}
+
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('/js/front/menu.js') }}"></script>
+    <script src="{{ asset('/js/front/galleries_customers.js') }}"></script>
+{% endblock %}

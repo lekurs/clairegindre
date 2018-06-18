@@ -6,13 +6,15 @@
         <!-- Use FOUNDATION CSS -->
         {% block stylesheet %}
             <link href="{{ asset('/css/bootstrap.css') }}" rel="stylesheet" />
+            {#<link href="{{ asset('/css/materialize.css') }}" rel="stylesheet" />#}
             <link href="{{ asset('/css/styles/global_styles.css') }}" rel="stylesheet" />
             <link href="{{ asset('/css/styles/portfolio.css') }}" rel="stylesheet" />
             <link href="{{ asset('/css/styles/large_styles.css') }}" rel="stylesheet" />
             <link href="{{ asset('/css/styles/medium_styles.css') }}" rel="stylesheet" />
             <link href="{{ asset('/css/styles/small_styles.css') }}" rel="stylesheet" />
             <link href="{{ asset('/fonts/font-awesome.min.css') }}" rel="stylesheet">
-            <link href="https://fonts.googleapis.com/css?family=Assistant:200,300,400,600,700,800|Quicksand:300,400,500,700" rel="stylesheet">
+            <link href="{{ asset("css/bootstrap-datepicker.min.css") }}" rel="stylesheet">
+            <link href="https://fonts.googleapis.com/css?family=Assistant:200,300,400,600,700,800|Playfair+Display:400,700" rel="stylesheet">
         {% endblock %}
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -41,80 +43,100 @@
         {% endblock %}
 
         {%  block title %}
-            <title>{{ title }}</title>
         {% endblock %}
-
     </head>
 {% endblock %}
 
 <body>
     {% block body %}
-        {% block FlashMessage %}
-            {% for flash_message in app.flashes %}
-                <div class="alert alert-success">
-                    {{ flash_message }}
-                </div>
-            {% endfor %}
-            {% for flash_message in app.session.flashBag.get('contact_error') %}
-                <div class="alert alert-warning">
-                    {{ flash_message }}
-                </div>
-            {% endfor %}
-        {% endblock %}
+
+    {% block FlashMessage %}
+        {% for flash_message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ flash_message }}
+            </div>
+        {% endfor %}
+        {% for flash_message in app.flashes('error') %}
+            <div class="alert alert-danger">
+                {{ flash_message }}
+            </div>
+        {% endfor %}
+    {% endblock %}
+
         {% block header %}
             <header>
+                {# NAV MOBILE#}
+                {% block mobile %}
+                <nav class="d-xl-none d-lg-none mobile-nav" role="navigation">
+                    <div class="menu">
+                        <span class="menu-circle"></span>
+                        <a href="#" class="menu-link">
+                            <span class="menu-icon">
+                                <span class="menu-line menu-line-1"></span>
+                                <span class="menu-line menu-line-2"></span>
+                                <span class="menu-line menu-line-3"></span>
+                            </span>
+                        </a>
+                    </div>
+
+                    <div class="menu-overlay">
+                        <a href="{{ path('index') }}">home</a>
+                        <a href="#hello">hello</a>
+                        <a href="{{ path('blog') }}">Photos</a>
+                        <a href="{{ path('faq') }}">Infos</a>
+                        <a href="#contact">Contact</a>
+                        <a href="{{ path('galleriesCustomers') }}">Clients</a>
+                    </div>
+                </nav>
+                {% endblock %}
+                {# END NAV MOBILE #}
+
                 <div class="row no-gutters">
-                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 header-img">
-                        <div class="row justify-content-center no-gutters">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                        <div class="row justify-content-center no-gutters nav-desktop">
+                            {% block left_menu %}
                             {# LEFT MENU #}
-                            <nav class="col-lg-5 col-xl-5 left-menu d-none d-md-none d-sm-none d-lg-block d-xl-block">
-                                <div class="row no-gutters justify-content-center align-items-center">
-                                    <div class="col-lg-6 col-xl-6">
-                                        {#ROW LEFT1#}
-                                        <div class="row no-gutters">
-                                            <div class="col-lg-12 col-xl-12">
-                                                <ul class="nav justify-content-between">
-                                                    <li class="nav-item"><a class="nav-link" href="#">home</a></li>
-                                                    <li class="nav-item"><a class="nav-link" href="#">Hello</a></li>
-                                                </ul>
+                                <nav class="col-lg-5 col-xl-5 right-menu d-none d-md-none d-sm-none d-lg-block d-xl-block">
+                                    <div class="row no-gutters justify-content-center align-items-center">
+                                        <div class="col-lg-6 col-xl-6">
+                                            {#ROW RIGHT#}
+                                            <div class="row no-gutters nav-border">
+                                                <div class="col-lg-12 col-xl-12">
+                                                    <ul class="nav justify-content-between">
+                                                        <li class="nav-item"><a class="nav-link" id="nav-link-black-home" href="{{ path('index') }}">Home</a></li>
+                                                        <li class="nav-item"><a class="nav-link nav-link-right" id="nav-link-black-hello" href="#hello">Hello</a></li>
+                                                    </ul>
+                                                </div>
                                             </div>
-                                        </div>
-                                        {# ROW LEFT2#}
-                                        <div class="row no-gutters">
-                                            <div class="col-lg-12 col-xl-12">
-                                                <ul class="nav justify-content-center">
-                                                    <li class="nav-item"><a class="nav-link" href="#">photos</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        {# ROW LEFT3 #}
-                                        <div class="row no-gutters">
-                                            <div class="col-lg-12 col-xl-12">
-                                                <ul class="nav justify-content-around">
-                                                    <li class="nav-item"><a class="nav-link" href="#">all</a></li>
-                                                    <li class="nav-item"><a class="nav-link" href="#">mariage</a></li>
-                                                    <li class="nav-item"><a class="nav-link" href="#">couple</a></li>
-                                                    <li class="nav-item"><a class="nav-link" href="#">famille</a></li>
-                                                </ul>
+                                            {# ROW RIGHT2#}
+                                            <div class="row no-gutters">
+                                                <div class="col-lg-12 col-xl-12">
+                                                    <ul class="nav justify-content-center">
+                                                        <li class="nav-item"><a class="nav-link nav-link-bottom" id="nav-link-black-blog" href="{{ path('blog') }}">Photos</a></li>
+                                                    </ul>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </nav>
+                                </nav>
+                            {% endblock %}
                             {# LOGO#}
+                            {% block logo %}
                             <div class="col-lg-2 col-xl-2 logo-content">
-                                <h1><a href="#" class="logo-img"></a></h1>
+                                <h1><a href="#" class="logo-img-color"></a></h1>
                             </div>
+                            {% endblock %}
                             {# RIGHT MENU #}
-                            <nav class="col-lg-5 col-xl-5 right-menu d-none d-md-none d-sm-none d-lg-block d-xl-block">
+                            {% block right_menu %}
+                            <nav class="col-lg-5 col-xl-5 right-menu d-none d-md-none d-sm-none d-lg-block d-xl-block" id="end-nav">
                                 <div class="row no-gutters justify-content-center align-items-center">
                                     <div class="col-lg-6 col-xl-6">
                                         {#ROW RIGHT#}
-                                        <div class="row no-gutters">
+                                        <div class="row no-gutters nav-border">
                                             <div class="col-lg-12 col-xl-12">
                                                 <ul class="nav justify-content-between">
-                                                    <li class="nav-item"><a class="nav-link" href="#">informations</a></li>
-                                                    <li class="nav-item"><a class="nav-link" href="#">clients</a></li>
+                                                    <li class="nav-item"><a class="nav-link" id="nav-link-black-informations" href="{{ path('faq') }}">infos</a></li>
+                                                    <li class="nav-item"><a class="nav-link nav-link-right" id="nav-link-black-customer" href="{{ path('galleriesCustomers') }}">clients</a></li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -122,117 +144,72 @@
                                         <div class="row no-gutters">
                                             <div class="col-lg-12 col-xl-12">
                                                 <ul class="nav justify-content-center">
-                                                    <li class="nav-item"><a class="nav-link" href="#">contact</a></li>
+                                                    <li class="nav-item"><a class="nav-link nav-link-bottom" id="nav-link-black-contact" href="#contact">contact</a></li>
                                                 </ul>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </nav>
+                            <div class="row no-gutters social-container">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                    <p><a href="https://www.instagram.com/clairegindre_photographe/" target="_blank"><i class="fa fa-instagram"></i></a></p>
+                                    <p><a href="https://www.facebook.com/clairegindre.pg/" target="_blank"><i class="fa fa-facebook-f"></i></a></p>
+                                    <p><a href="https://www.pinterest.fr/ClaireGindrepg/" target="_blank"><i class="fa fa-pinterest-p"></i></a></p>
+                                </div>
+                            </div>
+                            {% endblock %}
                         </div>
                 </div>
             </div>
 
-            <div class="scroll-down"><i class="fa fa-angle-down fa-4x"></i> </div>
+            {#<div class="scroll-down"><i class="fa fa-angle-down angle-bounce-layout fa-4x"></i> </div>#}
 
             </header>
         {% endblock %}
-    {% endblock %}
 
     {% block content %}
 
     {% endblock %}
 
-    {% block contact %}
-        <section class="contact">
+    {% block presentation %}
+        <section class="presentations" id="hello">
+            <div class="row no-gutters height-pres">
+                <div class="col-12 col-sm-12 col-md-12 offset-lg-3 offset-xl-3 col-lg-6 col-xl-6 hello-container align-items-center justify-content-center">
+                    <div class="row no-gutters">
+                        <div class="offset-lg-3 offset-xl-3 col-lg-9 col-xl-9 presentation-container">
+                            <h2 class="text-left text-uppercase">hello !</h2>
+                            <p id="presentation-txt">
+                                Je suis Claire Gindre, j'ai deux amours, le graphisme et la photographie. Graphiste depuis presque toujours, la photographie est arrivée un peu plus tard dans ma vie à travers un boîtier Argentique. Depuis je n'ai plus quitté mon boîtier.
+                                Au delà du côté créatif, ce qui me plait enormément c'est d'aller à la rencontre de nouvelles personnes et de pouvoir immortaliser de belles histoires pour en laisser un souvenir intérissable.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 photo-presentations"></div>
+                </div>
             </div>
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 bg-presentations"></div>
+            </div>
+        </section>
+    {% endblock %}
+
+    {% block contact %}
+        <section class="contact" id="contact">
             <div class="row no-gutters">
                 <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 contact-article">
                     <div class="row no-gutters">
-                        <div class="col-12">
-                            <p class="text-center triple-triangle"><img src="{{ asset('/images/pictos/trois-triangle.png') }}" alt="contact-clairegindre" /></p>
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                            <p class="text-center triple-triangle"><img src="{{ asset('/images/interface/pictos/trois-triangle.png') }}" alt="contact-clairegindre" /></p>
                         </div>
                     </div>
                     <div class="row no-gutters">
-                        <div class="col-12">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                             <h2 class="text-uppercase text-center">contact</h2>
                         </div>
                     </div>
 
-                    {{ form_start(contact) }}
-
-                    <div class="row no-gutters">
-                        <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
-                            <div class="row no-gutters">
-                                <div class="col-12 d-flex justify-content-center">
-                                    {{ form_widget(contact.name, {'attr': {'placeholder': 'Nom : ', 'class': 'contact-form' }}) }}
-                                </div>
-                            </div>
-                            <div class="row no-gutters">
-                                <div class="col-12 d-flex justify-content-center">
-                                    {{ form_widget(contact.firstname, {'attr': {'placeholder': 'Prénom : ', 'class': 'contact-form' }}) }}
-                                </div>
-                            </div>
-                            <div class="row no-gutters">
-                                <div class="col-12 d-flex justify-content-center">
-                                    {{ form_widget(contact.email, {'attr': {'placeholder': 'Email : email@email.com ', 'class': 'contact-form' }}) }}
-                                </div>
-                            </div>
-                            <div class="row no-gutters">
-                                <div class="col-12 d-flex justify-content-center">
-                                    {{ form_widget(contact.phone, {'attr': {'placeholder': 'Téléphone : ', 'class': 'contact-form' }}) }}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
-                            <div class="row no-gutters">
-                                <div class="col-12 d-flex justify-content-center">
-                                    {{ form_widget(contact.date, {'attr': {'class': 'contact-form'}}) }}
-                                </div>
-                            </div>
-                            <div class="row no-gutters">
-                                <div class="col-12 d-flex justify-content-center">
-                                    {{ form_widget(contact.place, {'attr': {'placeholder': 'Lieu de votre évènement : ', 'class': 'contact-form' }}) }}
-                                </div>
-                            </div>
-                            <div class="row no-gutters">
-                                <div class="col-12 d-flex justify-content-center">
-                                    {{ form_widget(contact.howKnow, {'attr': {'placeholder': 'Comment m\'avez vous connu ? ', 'class': 'contact-form' }}) }}
-                                </div>
-                            </div>
-                            <div class="row no-gutters">
-                                <div class="col-12">
-                                    <p class="text-uppercase text-center">Vous êtes intéréssés pour :</p>
-                                </div>
-                            </div>
-                            <div class="row no-gutters">
-                                <div class="col-4 d-flex justify-content-center text-uppercase">
-                                    {{ form_label(contact.event) }}
-                                    {{ form_widget(contact.event) }}
-                                </div>
-                                <div class="col-4 d-flex justify-content-center text-uppercase">
-                                    {{ form_label(contact.eventCouple) }}
-                                    {{ form_widget(contact.eventCouple) }}
-                                </div>
-                                <div class="col-4 d-flex justify-content-center text-uppercase">
-                                    {{ form_label(contact.eventFamily) }}
-                                    {{ form_widget(contact.eventFamily) }}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row no-gutters">
-                        <div class="col-12 d-flex justify-content-center">
-                            {{ form_widget(contact.details, {'attr': {'placeholder': 'Tous les détails de votre évènement m\'intéresse, le style de votre mariage, le nombre d\'invités, le type de cérémonie ...', 'class': 'contact-form' }}) }}
-                        </div>
-                    </div>
-                    <div class="row no-gutters">
-                        <div class="col-12 d-flex justify-content-center">
-                            <input type="submit" value="Envoyer" name="contact-submit" class="btn sub-contact">
-                        </div>
-                    </div>
-
-                    {{ form_end(contact) }}
+                    {% form_theme contact "Form/ContactForm/contact_form.html.twig" %}
+                    {{ form(contact) }}
 
                 </div>
             </div>
@@ -241,32 +218,28 @@
 
     {% block instagram_contact %}
     <section class="row no-gutters">
-        <article class="col-12 col-sm-12 col-lg-6 col-xl-6 instagram insta-list">
-                {%  for instagram in json %}
+        <article class="col-lg-6 col-xl-6 col-md-12 col-sm-12 col-12 instagram insta-list">
+                {%  for instagram in insta %}
                     {#<a href="{{ instagram.link }}" class="instagram-link">#}
                         <img class="insta-img" src="{{ instagram.images.standard_resolution.url }}" alt="claire_gindre_photographe_{{ instagram.id }}" />
                     {#</a>#}
                 {% endfor %}
+            <div class="insta-logo"> <a href="https://www.instagram.com/clairegindre_photographe/" target="_blank">Instagram</a></div>
         </article>
 
         <article class="col-12 col-sm-12 col-lg-6 col-xl-6 contact">
             {# SLIDER COMMENT#}
             <div id="slider-comment" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner">
-                    <div class="carousel-item active carousel-img">
-                        <img src="{{ asset('/images/contact-img.jpg') }}" class="d-block w-100 img-carousel" alt="test_slider" />
+                    {% for key, review in reviews %}
+                    <div class="carousel-item carousel-img {{ key == 0 ? "active" : '' }}">
+                        <img src="{{ asset(review.imagePath ~ '/' ~ review.imageName) }}" class="d-block w-100 img-carousel" alt="test_slider" />
                         <div class="infos-carousel">
-                            <h3 class="text-uppercase font-weight-bold">test</h3>
-                            <p>test de paragraphe test de paragraphe test de paragraphe test de paragraphe test de paragraphe test de paragraphe</p>
+                            <h3 class="text-uppercase carousel-title">{{ review.title }}</h3>
+                            {{ review.content|raw }}
                         </div>
                     </div>
-                    <div class="carousel-item carousel-img">
-                        <img src="{{ asset('/images/mariage-home.jpg') }}" class="d-block w-100 img-carousel" alt="test_slider" />
-                        <div class="infos-carousel">
-                            <h3>test</h3>
-                            <p>test de paragraphe</p>
-                        </div>
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
         </article>
@@ -274,63 +247,67 @@
     {% endblock %}
 
     {% block footer %}
-        <footer class="row no-gutters justify-content-around">
-            <div class="col-12 footer-contain">
+        <footer class="row no-gutters">
+            <div class="col-xl-1 col-lg-1 col-md-12 col-sm-12 col-12 arrow-footer d-sm-none d-md-none d-xl-block d-lg-block">
+                <img src="{{ asset('images/interface/pictos/fleche.png') }}" alt="arrow" />
+            </div>
+            <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12">
                 <div class="row no-gutters">
-                    <div class="col-12 col-sm-12 col-md-12 col-lg-3 col-xl-3">
-                        <div class="row no-gutters flex-column align-items-center">
-                            <div class="col-12">
-                                <ul class="nav flex-column align-items-center text-uppercase">
-                                    <li class="nav-item"><a href="#" class="nav-link"> home</a></li>
-                                    <li class="nav-item"><a href="#" class="nav-link"> photos</a></li>
-                                    <li class="nav-item"><a href="#" class="nav-link"> informations</a></li>
-                                    <li class="nav-item"><a href="#" class="nav-link"> clients</a></li>
-                                    <li class="nav-item"><a href="#" class="nav-link"> contact</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-sm-12 col-md-12 col-lg-3 col-xl-3">
-                        <div class="row no-gutters flex-column align-items-center">
-                            <div class="col-12 text-center">
-                                <p><strong>Claire Gindre</strong></p>
-                                <p>contact@clairegindre.com</p>
-                                <p>06 06 06 06 06</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-sm-12 col-md-12 col-lg-3 col-xl-3">
-                        <div class="row no-gutters">
-                            <div class="col-12 text-center">
-                                <p class="text-uppercase">Suivez-moi</p>
-                                <div class="row no-gutters">
-                                    <div class="col-12 justify-content-between">
-                                        <p><i class="fa fa-facebook-official"></i>
-                                            <i class="fa fa-instagram"></i>
-                                            <i class="fa fa-pinterest"></i>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-sm-12 col-md-12 col-lg-3 col-xl-3">
-                        <div class="row no-gutters">
-                            <div class="col-12 text-center">
-                                <p class="text-uppercase">mentions légales</p>
-                                <p>tous droits réservés <i class="fa fa-copyright"></i> <strong>Claire GINDRE</strong> - 2018</p>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <a href="{{ path('index') }}" class="nav-footer" id="link-home">home</a>
+                        <a href="#hello" class="nav-footer" id="link-photo">Hello</a>
+                        <a href="{{ path('blog') }}" class="nav-footer" id="link-blog">Photos</a>
+                        <a href="{{ path('faq') }}" class="nav-footer" id="link-informations">Infos</a>
+                        <a href="{{ path('galleriesCustomers') }}" class="nav-footer" id="link-customers">clients</a>
+                        <a href="#contact" class="nav-footer" id="link-contact">contact</a>
                     </div>
                 </div>
-            </footer>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12 contact-footer">
+                <p><strong>Claire Gindre</strong></p>
+                <p>contact@clairegindre.com</p>
+                <p>06 62 45 10 36</p>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+                <div class="row no-gutters">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <p class="text-uppercase" id="follow-me">Suivez-moi sur : </p>
+                    </div>
+                </div>
+                <div class="row no-gutters">
+                    <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 social-footer-container">
+                        <a href="https://www.instagram.com/clairegindre_photographe/" target="_blank"><i class="fa fa-instagram social-picto-footer"></i></a>
+                        <a href="https://www.facebook.com/clairegindre.pg/" target="_blank"><i class="fa fa-facebook-f social-picto-footer"></i></a>
+                        <a href="https://www.pinterest.fr/ClaireGindrepg/" target="_blank"><i class="fa fa-pinterest-p social-picto-footer"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+                <p class="text-uppercase">mentions légales</p>
+                <p>Tous droits réservés <i class="fa fa-copyright"></i> <strong>Claire GINDRE - 2018</strong></p>
+            </div>
+        </footer>
     {% endblock %}
 </body>
 
 {% block javascripts %}
-    <script src="/js/vendor/jquery-min.js"></script>
-    <script src="/js/vendor/bootstrap.bundle.js"></script>
+    <script src="{{ asset('js/vendor/jquery-min.js') }}"></script>
+    <script src="{{ asset('js/vendor/bootstrap.bundle.js') }}"></script>
+    <script src="{{ asset('js/vendor/materialize.js') }}"></script>
+    <script src="{{ asset('/js/front/types.js') }}"></script>
+    <script src="{{ asset('js/front/nav-mobile.js') }}"></script>
+    <script src="{{ asset("js/front/bootstrap-datepicker.min.js") }}"></script>
+    <script src="{{ asset ('js/front/bootstrap-datepicker.fr.min.js') }}"></script>
+    <script>$('#datepicker').datepicker({
+            language: 'fr',
+            format: 'yyyy-mm-dd'
+    })</script>
+<script>
+    $('#datepicker').on('changeDate',function(e){
+        $(this).datepicker('hide');
+    });
+</script>
 {% endblock %}
 
+{% endblock %}
 </html>

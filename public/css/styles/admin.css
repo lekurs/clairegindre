@@ -1,0 +1,529 @@
+/* Adminstration */
+
+html, body {
+    font-family: 'Assistant', serif;
+    font-weight: 200;
+    margin: 0 auto;
+    letter-spacing: .2px;
+}
+
+section {
+    margin-bottom: 5em;
+}
+
+section#edit-benefit {
+    margin-bottom: 16em;
+}
+
+input:focus, textarea:focus, select:focus, button:focus {
+    box-shadow: none !important;
+}
+
+label.label-admin {
+    display: block;
+    font-size: 16px;
+    transform: translateY(25px);
+    color: #242424;
+    transition: all .5s;
+}
+
+input.admin-input {
+    position: relative;
+    background: transparent;
+    width: 100%;
+    border: none;
+    outline: none;
+    padding: 8px 0;
+    font-size: 16px;
+    border-bottom: 1px solid #242424;
+    border-width: thin;
+    border-radius: 0;
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+}
+
+.admin-button-mini-modal {
+    width: 25%;
+    border-radius: 0;
+    background-color: #242424;
+    color: #ffffff;
+    text-transform: uppercase;
+}
+
+.admin-button-mini-modal:hover {
+    width: 25%;
+    border-radius: 0;
+    background-color: #ffffff;
+    color: #242424;
+    border: 1px solid #242424;
+    text-transform: uppercase;
+}
+
+.admin-button-mini {
+    width: 10%;
+    border-radius: 0;
+    background-color: #242424;
+    color: #ffffff;
+    text-transform: uppercase;
+}
+
+
+.admin-button-mini-modal-close {
+    width: 25%;
+    border-radius: 0;
+    background-color: #6c757d;
+    color: #ffffff;
+    text-transform: uppercase;
+}
+
+.admin-button-mini-modal-close:hover {
+    width: 25%;
+    border-radius: 0;
+    background-color: #ffffff;
+    color: #6c757d;
+    border: 1px solid #6c757d;
+    text-transform: uppercase;
+}
+
+
+.admin-button-mini {
+    width: 10%;
+    border-radius: 0;
+    background-color: #242424;
+    color: #ffffff;
+    text-transform: uppercase;
+}
+
+.admin-button-mini:hover {
+    margin: 1em;
+    width: 10%;
+    border-radius: 0;
+    background-color: #ffffff;
+    color: #242424;
+    border: 1px solid #242424;
+    text-transform: uppercase;
+}
+
+h5.modal-title-admin {
+    font-family: Assistant;
+    font-weight: lighter;
+    font-size: 1.5em;
+    text-transform: uppercase;
+}
+
+/**************************************************/
+/*                                  ADMIN INDEX                                                */
+/**************************************************/
+
+.menus-admin  {
+    color: #5f6b67;
+}
+
+.menus-admin  a {
+    color: #5f6b67;
+}
+
+.admin-button {
+    margin: 1em auto;
+    width: 100%;
+    margin: 1em auto;
+    width: 100%;
+    border-radius: 0;
+    background-color: #242424;
+    color: #ffffff;
+}
+
+.admin-button:hover {
+    margin: 1em auto;
+    width: 100%;
+    margin: 1em auto;
+    width: 100%;
+    border-radius: 0;
+    background-color: #ffffff;
+    color: #242424;
+    border: 1px solid #242424;
+}
+
+.admin-block {
+    margin: 5em auto;
+    /*height: 40vh;*/
+}
+
+.title-admin {
+    font-family: Assistant;
+    font-weight: lighter;
+    font-size: 2em;
+    width: 80%;
+    margin: 30px auto;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.admin-users-block {
+    border-bottom: 1px solid #5f6b67;
+    border-width: thin;
+    align-items: center;
+    margin: 1em auto;
+}
+
+.admin-block-title {
+    font-weight: bold;
+    text-align: left;
+    text-transform: uppercase;
+    font-size: 1.5em;
+}
+
+.admin-emails-block {
+    margin: 1em auto;
+}
+
+.email-link {
+    color: #242424;
+    text-transform: capitalize;
+}
+
+.email-link:hover {
+    color: #242424;
+    text-decoration: line-through;
+    text-transform: uppercase;
+}
+
+.admin-emails-block > div:first-of-type {
+    border-bottom: 1px solid #5f6b67;
+    border-width: thin;
+    align-items: center;
+    padding-left: 0;
+}
+
+.admin-emails-block > div:nth-child(2) {
+    border-bottom: 1px solid #5f6b67;
+    border-width: thin;
+    align-items: center;
+}
+
+.admin-emails-block  p {
+    margin: 0;
+}
+
+#emails-block {
+    margin-bottom: 3em;
+}
+
+#envelop-emails {
+    text-align: left;
+    padding-left: 1.8em;
+    font-size: 2em;
+    color: #242424;
+}
+
+.arrow-double {
+    text-align: left;
+    padding-left: 1.8em;
+    font-size: 2em;
+    color: #242424;
+}
+
+.icon-admin {
+    text-align: left;
+    padding-left: 1.8em;
+    font-size: 2em;
+    color: #242424;
+}
+
+#arrow-emails {
+    text-align: right;
+    padding-right: 1.8em;
+    font-size: 2em;
+    color: #242424;
+}
+
+.admin-users-block-content {
+    height: 30vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.admin-users-block  p {
+    margin: 0;
+}
+
+.admin-gallery-block-content {
+    height: 30vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.header-infos-admin-thumb {
+    color: #ffffff;
+    height: auto;
+    text-align: center;
+    margin: 0;
+    align-items: left;
+}
+
+.header-infos-admin-thumb h5 {
+    margin: 0;
+    padding: 0;
+    font-size: 3em;
+    font-family: Assistant;
+    font-weight: lighter;
+    color: #242424;
+    text-transform: uppercase;
+    text-align: left;
+}
+
+.arrow-title-admin {
+    position: relative;
+    left: 35%;
+    right: 0;
+}
+
+.admin-users-block a, .admin-gallery-block-content a, .admin-benefits-part a {
+    color: #BBBBBB;
+    transition: all .2s ease-in-out;
+}
+
+.admin-users-block a:hover, .admin-gallery-block-content a:hover, .admin-benefits-part a:hover {
+    color: #000000;
+    font-size: 1.5em;
+}
+
+.fa.online {
+    color: green;
+    cursor: pointer;
+}
+
+.fa.offline {
+    color: red;
+    cursor: pointer;
+}
+
+/*****************************************************************/
+/*                                      USERS VIEW                                                   */
+/*****************************************************************/
+
+.container.users {
+    text-align: center;
+    margin-top: 5em;
+}
+
+.admin-infos-users-title {
+    margin: 1em auto;
+}
+
+.user-information-container {
+    margin-bottom: 2em;
+    padding-bottom: 2em;
+    border-bottom: 1px solid #5f6b67;
+    border-width: thin;
+}
+
+.edit-user-icon {
+    color: #000000;
+}
+
+.edit-user-icon:hover {
+    color: #000000;
+}
+
+.admin-user-online {
+    color: green;
+}
+
+.admin-user-offline {
+    color: red;
+}
+
+.info-user-image > img {
+    width: 50%;
+}
+
+.show-galleries {
+    margin-bottom: 2em;
+}
+
+.add-gallery {
+    text-align: center;
+    width: 100%;
+}
+
+.btn-add-gallery {
+    width: 4%;
+    border-radius: 0;
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+    color: #ffffff;
+    background-color: #242424;
+}
+
+.btn-add-gallery:hover {
+    width: 4%;
+    border-radius: 0;
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+    color: #242424;
+    background-color: #ffffff;
+    border: 1px solid #242424;
+}
+
+.new-user {
+    width: 100%;
+}
+
+.infos-gallery-title {
+    font-size: 1.5em;
+    font-weight: lighter;
+    padding: 5px 0;
+    border-right: 1px solid #242424;
+    border-width: thin;
+    font-family: Assistant;
+}
+
+.infos-gallery {
+    margin: 0;
+}
+
+.infos-gallery p {
+    margin: 0;
+}
+
+.fa.fa-user.connected {
+    color: green;
+}
+
+.fa.fa-user.not-connected {
+    color: red;
+}
+
+.page-link-perso {
+    border: none !important;
+    color: #000000;
+    font-family: Assistant;
+    font-weight: lighter;
+}
+
+.page-link-perso:hover {
+    border: none !important;
+    color: #000000;
+    font-family: Assistant;
+    font-weight: lighter;
+    background-color: transparent !important;
+    transform: scaleX(1.3);
+}
+
+.img-favorite-admin > img{
+    width: 40%;
+}
+
+/*****************************************************************/
+/*                                      ANSWER MAIL                                               */
+/*****************************************************************/
+
+.admin-mail {
+    text-transform: uppercase;
+}
+
+
+/*****************************************************************/
+/*                                      GALLERY EDIT                                               */
+/*****************************************************************/
+
+h2.admin-middle-title {
+    font-family: Assistant;
+    font-weight: lighter;
+    font-size: 2em;
+    width: 80%;
+    margin: 30px auto;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.label-admin-mini {
+    display: block;
+    font-size: 16px;
+    transform: translateY(35px);
+    color: #242424;
+    margin: 17px;
+    transition: all .5s;
+}
+
+.admin-input-mini {
+    position: relative;
+    background: transparent;
+    width: 90%;
+    border: none;
+    outline: none;
+    margin: 0 auto;
+    padding: 8px 0;
+    font-size: 16px;
+    border-bottom: 1px solid #242424;
+    border-width: thin;
+    border-radius: 0;
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+}
+
+#edit-gallery-button {
+    margin: 1em;
+    width: 36%;
+    border-radius: 0;
+    background-color: #242424;
+    color: #ffffff;
+    text-transform: uppercase;
+}
+
+#edit-gallery-button:hover {
+    margin: 1em;
+    width: 36%;
+    border-radius: 0;
+    background-color: #ffffff;
+    color: #242424;
+    border: 1px solid #242424;
+    text-transform: uppercase;
+}
+
+
+/*****************************************************************/
+/*                                      ARTICLE EDIT                                               */
+/*****************************************************************/
+
+#submit-article {
+    width: 10%;
+    border-radius: 0;
+    background-color: #242424;
+    color: #ffffff;
+    text-transform: uppercase;
+}
+
+#submit-article:hover {
+    width: 10%;
+    border-radius: 0;
+    background-color: #ffffff;
+    color: #242424;
+    border: 1px solid #242424;
+    text-transform: uppercase;
+}
+
+
+/*****************************************************************/
+/*                                      ADD GALLERY                                               */
+/*****************************************************************/
+
+#admin-button-gallery {
+    margin: 1em;
+    width: 20%;
+    border-radius: 0;
+    background-color: #242424;
+    color: #ffffff;
+    text-transform: uppercase;
+}
+
+#admin-button-gallery:hover {
+    margin: 1em;
+    width: 20%;
+    border-radius: 0;
+    background-color: #ffffff;
+    color: #242424;
+    border: 1px solid #242424;
+    text-transform: uppercase;
+}
