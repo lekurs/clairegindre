@@ -54,12 +54,12 @@
                 <ul class="pagination justify-content-center">
                     {% if pages.page > 1 %}
                         <li class="page-item">
-                            <a href="{{ path('galleriesCustomers', { 'page': pages.page-1}) }}" class="page-link" tabindex="-1">Précédent</a>
+                            <a href="{{ path('galleriesCustomers', { 'page': pages.page-1}) }}" class="page-link-perso" tabindex="-1">Précédent</a>
                         </li>
                     {% endif %}
                     {% for p in range(max(pages.page-4, 1), min(pages.page +4, pages.nbPages)) %}
                         <li class="page-item">
-                            <a href="{{ path('galleriesCustomers', { 'page' : p})}}"  class="page-link">{{ p }}</a>
+                            <a href="{{ path('galleriesCustomers', { 'page' : p})}}"  class="page-link-perso">{{ p }}</a>
                         </li>
                     {% endfor %}
                     {% if pages.page < pages.nbPages %}

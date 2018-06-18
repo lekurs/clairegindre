@@ -602,7 +602,7 @@ section#faq-section {
 }
 
 .infos-content {
-    background: url("/images/interface/faq/nico_anlor_faq.jpg") no-repeat center;
+    background: url("/images/interface/faq/laetitia-nicolas.jpg") no-repeat center;
     position: relative;
     background-size: cover;
     height: 70vh;
@@ -870,6 +870,16 @@ div.polygon-triangle-absolute {
     margin: 15px 0;
     transition: .2s ease-out, opacity .2s linear;
     font-size: 16px;
+}.contact-form {
+    border: none;
+    border-radius: 0;
+    /*border-bottom: 1px solid #000000;*/
+    border-width: thin;
+    height: 70px;
+    width: 90%;
+    margin: 15px 0;
+    transition: .2s ease-out, opacity .2s linear;
+    font-size: 16px;
 }
 
 .label_contact {
@@ -1114,221 +1124,87 @@ footer a.nav-footer:hover {
     color: #ffffff;
 }
 
+/*****************************************************************/
+/*                                              GALLERIES                                              */
+/*****************************************************************/
 
-
-/*!* Checkboxes*/
-   /*========================================================================== *!*/
-/*!* Remove default checkbox *!*/
-/*[type="checkbox"]:not(:checked),*/
-/*[type="checkbox"]:checked {*/
-    /*position: absolute;*/
-    /*opacity: 0;*/
-    /*pointer-events: none;*/
-/*}*/
-
-/*[type="checkbox"] {*/
-    /*!* checkbox aspect *!*/
-/*}*/
-
-/*[type="checkbox"] + span:not(.lever) {*/
-    /*position: relative;*/
-    /*padding-left: 35px;*/
-    /*cursor: pointer;*/
-    /*display: inline-block;*/
-    /*height: 25px;*/
-    /*line-height: 25px;*/
-    /*font-size: 1rem;*/
-    /*-webkit-user-select: none;*/
-    /*-moz-user-select: none;*/
-    /*-ms-user-select: none;*/
-    /*user-select: none;*/
-/*}*/
-
-/*[type="checkbox"] + span:not(.lever):before,*/
-/*[type="checkbox"]:not(.filled-in) + span:not(.lever):after {*/
-    /*content: '';*/
-    /*position: absolute;*/
-    /*top: 0;*/
-    /*left: 0;*/
-    /*width: 18px;*/
-    /*height: 18px;*/
-    /*z-index: 0;*/
-    /*border: 2px solid #5a5a5a;*/
-    /*border-radius: 1px;*/
-    /*margin-top: 3px;*/
-    /*-webkit-transition: .2s;*/
-    /*transition: .2s;*/
-/*}*/
-
-/*[type="checkbox"]:not(.filled-in) + span:not(.lever):after {*/
-    /*border: 0;*/
-    /*-webkit-transform: scale(0);*/
-    /*transform: scale(0);*/
-/*}*/
-
-/*[type="checkbox"]:not(:checked):disabled + span:not(.lever):before {*/
-    /*border: none;*/
-    /*background-color: rgba(0, 0, 0, 0.42);*/
-/*}*/
-
-/*[type="checkbox"].tabbed:focus + span:not(.lever):after {*/
-    /*-webkit-transform: scale(1);*/
-    /*transform: scale(1);*/
-    /*border: 0;*/
-    /*border-radius: 50%;*/
-    /*-webkit-box-shadow: 0 0 0 10px rgba(0, 0, 0, 0.1);*/
-    /*box-shadow: 0 0 0 10px rgba(0, 0, 0, 0.1);*/
-    /*background-color: rgba(0, 0, 0, 0.1);*/
-/*}*/
-
-/*[type="checkbox"]:checked + span:not(.lever):before {*/
-    /*top: -4px;*/
-    /*left: -5px;*/
-    /*width: 12px;*/
-    /*height: 22px;*/
-    /*border-top: 2px solid transparent;*/
-    /*border-left: 2px solid transparent;*/
-    /*border-right: 2px solid #26a69a;*/
-    /*border-bottom: 2px solid #26a69a;*/
-    /*-webkit-transform: rotate(40deg);*/
-    /*transform: rotate(40deg);*/
-    /*-webkit-backface-visibility: hidden;*/
-    /*backface-visibility: hidden;*/
-    /*-webkit-transform-origin: 100% 100%;*/
-    /*transform-origin: 100% 100%;*/
-/*}*/
-
-/*!* Customize the label (the container) *!*/
-/*.container-label {*/
-    /*display: block;*/
-    /*position: relative;*/
-    /*padding-left: 35px;*/
-    /*margin-bottom: 12px;*/
-    /*cursor: pointer;*/
-    /*font-size: 22px;*/
-    /*-webkit-user-select: none;*/
-    /*-moz-user-select: none;*/
-    /*-ms-user-select: none;*/
-    /*user-select: none;*/
-/*}*/
-
-/*!* Hide the browser's default checkbox *!*/
-/*.container-label input {*/
-    /*position: absolute;*/
-    /*opacity: 0;*/
-    /*cursor: pointer;*/
-/*}*/
-
-/*!* Create a custom checkbox *!*/
-/*.checkmark {*/
-    /*position: absolute;*/
-    /*top: 0;*/
-    /*left: 0;*/
-    /*height: 25px;*/
-    /*width: 25px;*/
-    /*background-color: #eee;*/
-/*}*/
-
-/*!* On mouse-over, add a grey background color *!*/
-/*.container-label:hover input ~ .checkmark {*/
-    /*background-color: #ccc;*/
-/*}*/
-
-/*!* When the checkbox is checked, add a blue background *!*/
-/*.container-label input:checked ~ .checkmark {*/
-    /*background-color: #2196F3;*/
-/*}*/
-
-/*!* Create the checkmark/indicator (hidden when not checked) *!*/
-/*.checkmark:after {*/
-    /*content: "";*/
-    /*position: absolute;*/
-    /*display: none;*/
-/*}*/
-
-/*!* Show the checkmark when checked *!*/
-/*.container-label input:checked ~ .checkmark:after {*/
-    /*display: block;*/
-/*}*/
-
-/*!* Style the checkmark/indicator *!*/
-/*.container-label .checkmark:after {*/
-    /*left: 9px;*/
-    /*top: 5px;*/
-    /*width: 5px;*/
-    /*height: 10px;*/
-    /*border: solid white;*/
-    /*border-width: 0 3px 3px 0;*/
-    /*-webkit-transform: rotate(45deg);*/
-    /*-ms-transform: rotate(45deg);*/
-    /*transform: rotate(45deg);*/
-/*}*/
-
-[type="checkbox"]:not(:checked),
-[type="checkbox"]:checked {
-    position: absolute;
-    left: -9999px;
+.page-link-perso {
+    border: none !important;
+    color: #000000;
+    font-family: Assistant;
+    font-weight: lighter;
 }
-[type="checkbox"]:not(:checked) + label,
-[type="checkbox"]:checked + label {
-    position: relative;
-    padding-left: 1.95em;
+
+.page-link-perso:hover {
+    border: none !important;
+    color: #000000;
+    font-family: Assistant;
+    font-weight: lighter;
+    background-color: transparent !important;
+    transform: scaleX(1.3);
+}
+
+/*****************************************************************/
+/*                             GALLERIES CUSTOMER                                       */
+/*****************************************************************/
+
+.gallery-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    margin-bottom: 5em;
+}
+
+.gallery-container img {
+    flex: 1 1 auto;
+    width: auto;
+    height: auto;
+    max-height: 300px;
+    max-width: 400px;
+    margin: 5px;
+    object-fit: cover;
+    object-position: center;
     cursor: pointer;
 }
 
-/* checkbox aspect */
-[type="checkbox"]:not(:checked) + label:before,
-[type="checkbox"]:checked + label:before {
-    content: '';
-    position: absolute;
-    left: 0; top: 0;
-    width: 1.25em; height: 1.25em;
-    border: 2px solid #ccc;
-    background: #fff;
-    border-radius: 4px;
-    box-shadow: inset 0 1px 3px rgba(0,0,0,.1);
-}
-/* checked mark aspect */
-[type="checkbox"]:not(:checked) + label:after,
-[type="checkbox"]:checked + label:after {
-    content: '✔';
-    position: absolute;
-    top: .2em; left: .275em;
-    font-size: 1.4em;
-    line-height: 0.8;
-    color: #09ad7e;
-    transition: all .2s;
-    font-family: Helvetica, Arial, sans-serif;
-}
-/* checked mark aspect changes */
-[type="checkbox"]:not(:checked) + label:after {
-    opacity: 0;
-    transform: scale(0);
-}
-[type="checkbox"]:checked + label:after {
-    opacity: 1;
-    transform: scale(1);
-}
-/* disabled checkbox */
-[type="checkbox"]:disabled:not(:checked) + label:before,
-[type="checkbox"]:disabled:checked + label:before {
-    box-shadow: none;
-    border-color: #bbb;
-    background-color: #ddd;
-}
-[type="checkbox"]:disabled:checked + label:after {
-    color: #999;
-}
-[type="checkbox"]:disabled + label {
-    color: #aaa;
-}
-/* accessibility */
-[type="checkbox"]:checked:focus + label:before,
-[type="checkbox"]:not(:checked):focus + label:before {
-    border: 2px dotted blue;
+#sliderImg {
+    width: 100vw;
+    height: 100vh;
 }
 
-/* hover style just for information */
-label:hover:before {
-    border: 2px solid #4778d9!important;
+.modal-perso {
+    width: 100vw;
+    height: 100vh;
+    background-color: #ffffff;
+    display: none;
+    z-index: 9999;
+    position: fixed;
+    top: 0;
+    color: #242424;
+}
+
+.modal-head {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin: 1em;
+}
+
+.slider-container {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
+.img-container {
+    width: 100%;
+    height: 100%;
+}
+
+.img-container > img {
+    max-width: 90%;
+    object-fit: cover;
+    width: auto;
+    height: 90%;
 }
