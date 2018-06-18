@@ -15,6 +15,8 @@ use App\Domain\Models\Interfaces\UserInterface;
 use App\Domain\Models\Picture;
 use App\Domain\Models\User;
 use App\Domain\Repository\Interfaces\GalleryRepositoryInterface;
+use App\Infra\GCP\Storage\Helper\Interfaces\StorageWriterInterface;
+use App\Infra\GCP\Storage\Service\Interfaces\FileHelperInterface;
 use App\Services\PictureUploaderHelper;
 use App\Services\SlugHelper;
 use App\UI\Form\FormHandler\Interfaces\AddGalleryTypeHandlerInterface;
@@ -67,6 +69,11 @@ final class AddGalleryTypeHandler implements AddGalleryTypeHandlerInterface
     private $dirGallery;
 
     /**
+     * @var FileHelperInterface
+     */
+    private $fileHelper;
+
+    /**
      * AddGalleryTypeHandler constructor.
      *
      * @param GalleryRepositoryInterface $galleryRepository
@@ -77,6 +84,7 @@ final class AddGalleryTypeHandler implements AddGalleryTypeHandlerInterface
      * @param Filesystem $fileSystem
      * @param SlugHelper $replaceService
      * @param string $dirGallery
+     * @param FileHelperInterface $fileHelper
      */
     public function __construct(
         GalleryRepositoryInterface $galleryRepository,
@@ -86,7 +94,8 @@ final class AddGalleryTypeHandler implements AddGalleryTypeHandlerInterface
         PictureUploaderHelper $pictureUploaderHelper,
         Filesystem $fileSystem,
         SlugHelper $replaceService,
-        string $dirGallery
+        string $dirGallery,
+        FileHelperInterface $fileHelper
     ) {
         $this->galleryRepository = $galleryRepository;
         $this->session = $session;
@@ -96,6 +105,7 @@ final class AddGalleryTypeHandler implements AddGalleryTypeHandlerInterface
         $this->fileSystem = $fileSystem;
         $this->replaceService = $replaceService;
         $this->dirGallery = $dirGallery;
+        $this->fileHelper = $fileHelper;
     }
 
     /**
@@ -106,13 +116,16 @@ final class AddGalleryTypeHandler implements AddGalleryTypeHandlerInterface
     public function handle(FormInterface $form, $user): bool
     {
         if($form->isSubmitted() && $form->isSubmitted()) {
+
             try {
                 $this->fileSystem->mkdir($this->dirGallery, 0777);
             } catch (IOExceptionInterface $exception) {
                 echo "une erreur est survenue durant la création du répertoire : ".$exception->getPath();
             }
 
-            $gallery = $this->galleryBuilder->create($form->getData()->title, $user, $form->getData()->eventDate, $form->getData()->eventPlace, $form->getData()->benefit, $this->replaceService->replace($form->getData()->title), new \DateTime());
+            $gallery = $this->galleryBuilder->create(
+                $form->getData()->title, $user, $form->getData()->eventDate, $form->getData()->eventPlace, $form->getData()->benefit, $this->replaceService->replace($form->getData()->title), new \DateTime()
+            );
 
             if(!$this->fileSystem->exists($this->dirGallery . $this->replaceService->replace($form->getData()->title))) {
 

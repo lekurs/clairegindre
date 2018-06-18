@@ -14,6 +14,7 @@ use App\Domain\Builder\Interfaces\PictureBuilderInterface;
 use App\Domain\Models\Gallery;
 use App\Domain\Repository\Interfaces\GalleryRepositoryInterface;
 use App\Domain\Repository\Interfaces\PictureRepositoryInterface;
+use App\Infra\GCP\Storage\Service\Interfaces\FileHelperInterface;
 use App\Services\PictureUploaderHelper;
 use App\Services\SlugHelper;
 use App\UI\Action\Admin\Interfaces\UploadPicturesGalleryActionInterface;
@@ -87,6 +88,11 @@ final class UploadPicturesGalleryAjaxAction implements UploadPicturesGalleryActi
     private $dirPicture;
 
     /**
+     * @var FileHelperInterface
+     */
+    private $fileHelper;
+
+    /**
      * UploadPicturesGalleryAjaxAction constructor.
      *
      * @param GalleryRepositoryInterface $galleryRepository
@@ -99,6 +105,7 @@ final class UploadPicturesGalleryAjaxAction implements UploadPicturesGalleryActi
      * @param string $dirGallery
      * @param SlugHelper $stringReplaceService
      * @param string $dirPicture
+     * @param FileHelperInterface $fileHelper
      */
     public function __construct(
         GalleryRepositoryInterface $galleryRepository,
@@ -110,7 +117,8 @@ final class UploadPicturesGalleryAjaxAction implements UploadPicturesGalleryActi
         Filesystem $fileSystem,
         string $dirGallery,
         SlugHelper $stringReplaceService,
-        string  $dirPicture
+        string  $dirPicture,
+        FileHelperInterface $fileHelper
     ) {
         $this->galleryRepository = $galleryRepository;
         $this->formFactory = $formFactory;
@@ -122,6 +130,7 @@ final class UploadPicturesGalleryAjaxAction implements UploadPicturesGalleryActi
         $this->dirGallery = $dirGallery;
         $this->stringReplaceService = $stringReplaceService;
         $this->dirPicture = $dirPicture;
+        $this->fileHelper = $fileHelper;
     }
 
     /**
@@ -132,11 +141,13 @@ final class UploadPicturesGalleryAjaxAction implements UploadPicturesGalleryActi
     {
         $gallery = $this->galleryRepository->getOne($request->attributes->get('slugGallery'));
 
-        $this->pictureUploaderHelper->move(
-                                                                            $request->files->get('picture'),
-                                                                            $this->dirGallery . $gallery->getSlug(),
-                                                                            $request->files->get('picture')->getClientOriginalName()
-                                                                        );
+        $this->fileHelper->upload($request->files->get('picture'), $gallery->getSlug());
+
+//        $this->pictureUploaderHelper->move(
+//                                                                            $request->files->get('picture'),
+//                                                                            $this->dirGallery . $gallery->getSlug(),
+//                                                                            $request->files->get('picture')->getClientOriginalName()
+//                                                                        );
         $this->pictureBuilder->create(
                                                                 $request->files->get('picture')->getClientOriginalName(),
                                                                 $this->dirPicture . $gallery->getSlug(),

@@ -4,6 +4,7 @@ parameters:
     locale: 'en'
     customer_directory: '%kernel.project_dir%/public/uploads/customers'
     mailer_admin_email: '%env(MAILER_ADMIN_EMAIL)%'
+    bucket_name: '%env(BUCKET_NAME)%'
 
 services:
     # default configuration for services in *this* file
@@ -17,6 +18,9 @@ services:
                 $dirGallery: '%kernel.project_dir%/public/images/upload/gallery/'
                 $dirPicture: '/images/upload/gallery/'
                 $mailerAdminEmail: '%mailer_admin_email%'
+                $credentialsFileName: 'credentials.json'
+                $credentialsFolder: '%kernel.project_dir%/config/credentials/google'
+                $bucketName: '%bucket_name%'
 
     App\Services\SlugHelper:
         autowire: true

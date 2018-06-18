@@ -11,6 +11,8 @@ namespace App\UI\Form\FormHandler\Interfaces;
 
 use App\Domain\Builder\Interfaces\GalleryBuilderInterface;
 use App\Domain\Repository\Interfaces\GalleryRepositoryInterface;
+use App\Infra\GCP\Storage\Helper\Interfaces\StorageWriterInterface;
+use App\Infra\GCP\Storage\Service\Interfaces\FileHelperInterface;
 use App\Services\PictureUploaderHelper;
 use App\Services\SlugHelper;
 use Symfony\Component\Filesystem\Filesystem;
@@ -31,6 +33,7 @@ interface AddGalleryTypeHandlerInterface
      * @param Filesystem $fileSystem
      * @param SlugHelper $replaceService
      * @param string $dirGallery
+     * @param FileHelperInterface $fileHelper
      */
     public function __construct(
         GalleryRepositoryInterface $galleryRepository,
@@ -40,7 +43,8 @@ interface AddGalleryTypeHandlerInterface
         PictureUploaderHelper $pictureUploaderHelper,
         Filesystem $fileSystem,
         SlugHelper $replaceService,
-        string $dirGallery
+        string $dirGallery,
+        FileHelperInterface $fileHelper
     ) ;
 
     /**

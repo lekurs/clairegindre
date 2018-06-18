@@ -6,3 +6,6 @@
 /vendor/
 .idea/
 ###< symfony/framework-bundle ###
+
+##google
+config/credentials/google/credentials.json
