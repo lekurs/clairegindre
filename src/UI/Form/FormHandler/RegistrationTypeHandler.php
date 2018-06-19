@@ -102,14 +102,14 @@ final class RegistrationTypeHandler implements RegistrationTypeHandlerInterface
         if($form->isSubmitted() && $form->isValid()) {
 
             try {
-            $this->fileSystem->mkdir($this->targetDir . '/customers', 0777);
+            $this->fileSystem->mkdir($this->targetDir . '/customers', 777);
         } catch (IOExceptionInterface $exception) {
             echo "une erreur est survenue durant la création du répertoire : ".$exception->getPath();
         }
-//
-//        $this->pictureUploaderHelper->move($form->getData()->picture, $this->targetDir . 'customers/', $form->getData()->picture->getClientOriginalName());
-//
-//        $picture = new Picture($form->getData()->picture->getClientOriginalName(), '/images/upload/customers', $form->getData()->picture->guessClientExtension());
+
+        $this->pictureUploaderHelper->move($form->getData()->picture, $this->targetDir . 'customers/', $form->getData()->picture->getClientOriginalName());
+
+        $picture = new Picture($form->getData()->picture->getClientOriginalName(), '/images/upload/customers', $form->getData()->picture->guessClientExtension());
 
             $user = $this->userBuilder->create(
                                                                             $form->getData()->email,
@@ -117,7 +117,7 @@ final class RegistrationTypeHandler implements RegistrationTypeHandlerInterface
                                                                             $form->getData()->lastName,
                                                                             $form->getData()->plainPassword,
                                                                             $form->getData()->dateWedding,
-//                                                                            $picture,
+                                                                            $picture,
                                                                             '1',
                                                                             'ROLE_USER',
                                                                             $this->stringReplaceHelper->replace($form->getData()->username . '-' . $form->getData()->lastName)

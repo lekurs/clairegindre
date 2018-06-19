@@ -27,7 +27,7 @@ interface UserBuilderInterface
      * @param string $slug
      * @return UserBuilderInterface
      */
-//    public function create(string $email, string $username, string $lastName, string $password, \DateTime $dateTime, PictureInterface $picture, bool $online, $role, string $slug): UserBuilderInterface;
+    public function create(string $email, string $username, string $lastName, string $password, \DateTime $dateTime, PictureInterface $picture, bool $online, $role, string $slug): UserBuilderInterface;
 
     /**
      * @return User
