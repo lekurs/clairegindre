@@ -151,7 +151,7 @@ final class AdminAction implements AdminActionInterface
     {
 //        if ($this->authorizationChecker->isGranted('ROLE_ADMIN')) {
 
-            $users = $this->userRepository->showAll();
+            $users = $this->userRepository->showGalleryByUser();
 
             $galleries = $this->galleryRepository->getAll();
 
