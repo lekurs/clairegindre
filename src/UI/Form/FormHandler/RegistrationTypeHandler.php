@@ -100,13 +100,15 @@ final class RegistrationTypeHandler implements RegistrationTypeHandlerInterface
     public function handle(FormInterface $form): bool
     {
         if($form->isSubmitted() && $form->isValid()) {
+
             try {
             $this->fileSystem->mkdir($this->targetDir . '/customers', 0777);
         } catch (IOExceptionInterface $exception) {
             echo "une erreur est survenue durant la création du répertoire : ".$exception->getPath();
         }
 
-        $this->pictureUploaderHelper->move($form->getData()->picture, $this->targetDir . '/customers/', $form->getData()->picture->getClientOriginalName());
+        $this->pictureUploaderHelper->move($form->getData()->picture, $this->targetDir . 'customers/', $form->getData()->picture->getClientOriginalName());
+
         $picture = new Picture($form->getData()->picture->getClientOriginalName(), '/images/upload/customers', $form->getData()->picture->guessClientExtension());
 
             $user = $this->userBuilder->create(
