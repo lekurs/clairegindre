@@ -141,6 +141,9 @@ final class UploadPicturesGalleryAjaxAction implements UploadPicturesGalleryActi
     {
         $gallery = $this->galleryRepository->getOne($request->attributes->get('slugGallery'));
 
+        $this->fileHelper->getFileName($request->files->get('picture'));
+        die;
+
         $this->fileHelper->upload($request->files->get('picture'), $gallery->getSlug());
 
 //        $this->pictureUploaderHelper->move(

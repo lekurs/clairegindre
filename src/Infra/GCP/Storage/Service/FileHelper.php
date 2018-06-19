@@ -49,6 +49,11 @@ final class FileHelper implements FileHelperInterface
         $this->newFileName = md5(str_rot13(uniqid())) . "." . $file->guessExtension();
     }
 
+    public function getFileName(\SplFileInfo $fileInfo)
+    {
+        return $this->generateFileName($fileInfo);
+    }
+
     /**
      * @param \SplFileInfo $toUploadFile
      * @param string $uploadDirectory
