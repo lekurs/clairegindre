@@ -72,7 +72,7 @@ final class RegistrationDTO implements RegistrationDTOInterface
         string $lastName,
         string $plainPassword,
         \DateTime $dateWedding,
-        \SplFileInfo $picture = null,
+//        \SplFileInfo $picture = null,
         bool $online
     ) {
         $this->email = $email;
@@ -80,7 +80,7 @@ final class RegistrationDTO implements RegistrationDTOInterface
         $this->lastName = $lastName;
         $this->plainPassword = $plainPassword;
         $this->dateWedding = $dateWedding;
-        $this->picture = $picture;
+//        $this->picture = $picture;
         $this->online = $online;
     }
 }

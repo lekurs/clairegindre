@@ -28,7 +28,7 @@ interface RegistrationDTOInterface
         string $lastName,
         string $plainPassword,
         \DateTime $dateWedding,
-        \SplFileInfo $picture,
+//        \SplFileInfo $picture,
         bool $online
     );
 }
