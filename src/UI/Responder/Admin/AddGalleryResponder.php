@@ -50,11 +50,11 @@ final class AddGalleryResponder implements AddGalleryResponderInterface
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    public function __invoke($redirect = false, FormInterface $form = null)
+    public function __invoke($redirect = false, FormInterface $form = null, $user)
     {
         $redirect ? $response = new RedirectResponse($this->urlGenerator->generate('adminUser')) : $response = new Response($this->twig->render('back/admin/add_gallery.html.twig', [
-//            'gallery' => $form->createView(),
-//            'user' => $user,
+            'gallery' => $form->createView(),
+            'user' => $user,
         ]));
 
         return $response;

@@ -32,5 +32,5 @@ interface AddGalleryResponderInterface
      * @param $user
      * @return mixed
      */
-    public function __invoke($redirect = false, FormInterface $form = null);
+    public function __invoke($redirect = false, FormInterface $form = null, $user);
 }
