@@ -5,7 +5,7 @@
                           http://raw.github.com/doctrine/doctrine2/master/doctrine-mapping.xsd">
 
     <entity name="App\Domain\Models\Gallery" table="clairegindre_gallery" repository-class="App\Domain\Repository\GalleryRepository">
-        <id name="id" column="id" type="string"/>
+        <id name="id" column="id" type="uuid"/>
         <field name="title" type="string" length="255" nullable="false" unique="true" />
         <field name="slug" type="string" length="200" nullable="false" unique="false" />
         <field name="creationDate" type="date" nullable="true" unique="false" />

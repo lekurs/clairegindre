@@ -5,7 +5,7 @@
                           http://raw.github.com/doctrine/doctrine2/master/doctrine-mapping.xsd">
 
     <entity name="App\Domain\Models\Article" table="clairegindre_article" repository-class="App\Domain\Repository\ArticleRepository">
-        <id name="id" column="id" type="string"/>
+        <id name="id" column="id" type="uuid"/>
         <field name="title" type="string" length="100" nullable="false" unique="false" />
         <field name="content" type="text" nullable="false" unique="false" />
         <field name="online" type="boolean" nullable="false" unique="false" />
