@@ -90,6 +90,7 @@ final class RegistrationType extends AbstractType
             ->add('picture', FileType::class, array(
                 'label' => ' ',
                 'label_attr' => ['class' => 'label-admin'],
+                'required' => false,
             ))
             ->add('online', CheckboxType::class, [
                 'label' => 'En ligne ?',
