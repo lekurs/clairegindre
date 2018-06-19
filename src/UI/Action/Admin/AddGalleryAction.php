@@ -81,6 +81,6 @@ final class AddGalleryAction implements AddGalleryActionInterface
             return $responder(true, $form, $user);
         }
 
-        return $responder(false, $addGalleryType, $user);
+        return $responder(false, $user);
     }
 }

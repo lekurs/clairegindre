@@ -40,11 +40,6 @@ final class StorageBridge implements StorageBridgeInterface
     {
         $credentialsFolder = str_replace('\\', '/', $this->credentialsFolder);
 
-//        dump( json_decode(
-//            file_get_contents($credentialsFolder . '/' . $this->credentialsFileName),
-//            true
-//        ));
-//        die;
         return new StorageClient([
             'keyFile' => json_decode(
                file_get_contents($credentialsFolder . '/' . $this->credentialsFileName),
