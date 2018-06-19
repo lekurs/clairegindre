@@ -111,7 +111,7 @@ class User implements UserInterface, BaseUser
         string $plainPassword,
         callable $encoder,
         \DateTime $dateWedding,
-        PictureInterface $picture = null,
+//        PictureInterface $picture = null,
         bool $online,
         string $roles,
         string $slug
@@ -122,7 +122,7 @@ class User implements UserInterface, BaseUser
         $this->lastName = $lastName;
         $this->password = $encoder($plainPassword, null);
         $this->dateWedding = $dateWedding;
-        $this->picture = $picture;
+//        $this->picture = $picture;
         $this->online = $online;
         $this->roles[] = $roles;
         $this->slug = $slug;

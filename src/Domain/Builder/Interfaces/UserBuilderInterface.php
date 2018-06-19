@@ -27,25 +27,7 @@ interface UserBuilderInterface
      * @param string $slug
      * @return UserBuilderInterface
      */
-    public function create(string $email, string $username, string $lastName, string $password, \DateTime $dateTime, PictureInterface $picture, bool $online, $role, string $slug): UserBuilderInterface;
-
-//    /**
-//     * @param int $user
-//     * @return UserBuilderInterface
-//     */
-//    public function withId(int $user): UserBuilderInterface;
-//
-//    /**
-//     * @param string $password
-//     * @return UserBuilderInterface
-//     */
-//    public function withPassword(string $password): UserBuilderInterface;
-//
-//    /**
-//     * @param Picture $picture
-//     * @return UserBuilderInterface
-//     */
-//    public function withPicture(Picture $picture): UserBuilderInterface;
+//    public function create(string $email, string $username, string $lastName, string $password, \DateTime $dateTime, PictureInterface $picture, bool $online, $role, string $slug): UserBuilderInterface;
 
     /**
      * @return User
