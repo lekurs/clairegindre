@@ -87,7 +87,7 @@ class RegisterAction implements RegisterActionInterface
      */
     public function __invoke(Request $request, RegisterResponderInterface $responder)
     {
-        if ($this->authorization->isGranted('ROLE_ADMIN')) {
+//        if ($this->authorization->isGranted('ROLE_ADMIN')) {
 
             $registerType = $this->formFactory->create(RegistrationType::class)->handleRequest($request);
 
@@ -96,5 +96,5 @@ class RegisterAction implements RegisterActionInterface
             }
             return $responder(false, $registerType);
         }
-    }
+//    }
 }
