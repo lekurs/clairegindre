@@ -111,7 +111,7 @@ class User implements UserInterface, BaseUser
         string $plainPassword,
         callable $encoder,
         \DateTime $dateWedding,
-        PictureInterface $picture,
+        PictureInterface $picture = null,
         bool $online,
         string $roles,
         string $slug
