@@ -32,6 +32,11 @@ final class RegistrationDTO implements RegistrationDTOInterface
     /**
      * @var string
      */
+    public $lastname;
+
+    /**
+     * @var string
+     */
     public $plainPassword;
 
     /**

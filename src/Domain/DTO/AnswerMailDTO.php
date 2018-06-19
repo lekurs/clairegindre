@@ -34,6 +34,11 @@ final class AnswerMailDTO implements AnswerMailDTOInterface
     public $content;
 
     /**
+     * @var string
+     */
+    public $title;
+
+    /**
      * AnswerMailDTO constructor.
      *
      * @param string $subject
