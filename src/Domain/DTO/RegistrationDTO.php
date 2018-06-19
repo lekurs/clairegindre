@@ -72,7 +72,7 @@ final class RegistrationDTO implements RegistrationDTOInterface
         string $lastName,
         string $plainPassword,
         \DateTime $dateWedding,
-        \SplFileInfo $picture,
+        \SplFileInfo $picture = null,
         bool $online
     ) {
         $this->email = $email;

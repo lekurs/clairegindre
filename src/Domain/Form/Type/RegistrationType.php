@@ -114,7 +114,7 @@ final class RegistrationType extends AbstractType
                                 $form->get('lastName')->getData(),
                                 $form->get('plainPassword')->getData(),
                                 $form->get('dateWedding')->getData(),
-                                $form->get('picture')->getData(),
+//                                $form->get('picture')->getData(),
                                 $form->get('online')->getData()
                             );
                         },
