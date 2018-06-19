@@ -106,10 +106,10 @@ final class RegistrationTypeHandler implements RegistrationTypeHandlerInterface
         } catch (IOExceptionInterface $exception) {
             echo "une erreur est survenue durant la création du répertoire : ".$exception->getPath();
         }
-
-        $this->pictureUploaderHelper->move($form->getData()->picture, $this->targetDir . 'customers/', $form->getData()->picture->getClientOriginalName());
-
-        $picture = new Picture($form->getData()->picture->getClientOriginalName(), '/images/upload/customers', $form->getData()->picture->guessClientExtension());
+//
+//        $this->pictureUploaderHelper->move($form->getData()->picture, $this->targetDir . 'customers/', $form->getData()->picture->getClientOriginalName());
+//
+//        $picture = new Picture($form->getData()->picture->getClientOriginalName(), '/images/upload/customers', $form->getData()->picture->guessClientExtension());
 
             $user = $this->userBuilder->create(
                                                                             $form->getData()->email,
