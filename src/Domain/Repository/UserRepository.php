@@ -113,6 +113,7 @@ final class UserRepository extends ServiceEntityRepository implements UserLoader
     {
         return $this->createQueryBuilder('user')
                             ->leftJoin('user.galleries', 'galleries')
+                            ->where('user.galleries IS NOT NULL')
                             ->getQuery()
                             ->getResult();
     }
