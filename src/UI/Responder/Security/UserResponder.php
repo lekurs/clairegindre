@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Twig\Environment;
 
-class UserResponder implements UserResponderInterface
+final class UserResponder implements UserResponderInterface
 {
     /**
      * @var Environment
@@ -43,7 +43,7 @@ class UserResponder implements UserResponderInterface
 
     public function __invoke($redirect = false, FormInterface $addGalleryType = null, FormInterface $registrationType = null, $users, $pages)
     {
-        $redirect ? $response = new RedirectResponse($this->urlGenerator->generate('adminUser')) : $response = new Response($this->twig->render('back/admin/users.html.twig', [
+        $redirect ? $response = new RedirectResponse($this->urlGenerator->generate('admin')) : $response = new Response($this->twig->render('back/admin/users.html.twig', [
             'users' => $users,
             'addGalleryType' => $addGalleryType->createView(),
             'formRegistration' => $registrationType->createView(),
