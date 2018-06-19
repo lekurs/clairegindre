@@ -5,7 +5,7 @@
                           http://raw.github.com/doctrine/doctrine2/master/doctrine-mapping.xsd">
 
     <entity name="App\Domain\Models\Benefit" table="clairegindre_benefit" repository-class="App\Domain\Repository\BenefitRepository">
-        <id name="id" column="id" type="string"/>
+        <id name="id" column="id" type="uuid"/>
         <field name="name" type="string" length="50" nullable="false" unique="false"/>
 
         <one-to-many field="galleries" target-entity="App\Domain\Models\Gallery" mapped-by="benefit">
