@@ -128,4 +128,10 @@
         height: 20em;
     }
 
+
+    .img-reviews {
+        width: auto;
+        height: 20%;
+    }
+
 }

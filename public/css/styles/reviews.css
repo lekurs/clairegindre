@@ -56,3 +56,8 @@
 .switch-rectangle .switch-toggle {
     border-radius: 0;
 }
+
+.img-reviews {
+    width: 100%;
+    height: 100%;
+}
