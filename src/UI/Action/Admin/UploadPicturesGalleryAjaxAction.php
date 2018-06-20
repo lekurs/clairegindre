@@ -143,7 +143,7 @@ final class UploadPicturesGalleryAjaxAction implements UploadPicturesGalleryActi
 
         $fileStorage = $this->fileHelper->generateFileName($request->files->get('picture'));
 
-        $this->fileHelper->upload($fileStorage, $gallery->getSlug());
+        $this->fileHelper->upload($request->files->get('picture'), $gallery->getSlug());
 
 //        $this->pictureUploaderHelper->move(
 //                                                                            $request->files->get('picture'),
