@@ -159,7 +159,7 @@ final class UploadPicturesGalleryAjaxAction implements UploadPicturesGalleryActi
 //                                                                        );
         $this->pictureBuilder->create(
                                                                 $request->files->get('picture')->getClientOriginalName(),
-                                                                'https://storage.googleapis.com/clairegindre_photos/' . $gallery->getSlug() . '/' . $fileStorage,
+                                                                $this->urlStorage . $gallery->getSlug() . '/' . $fileStorage,
 //                                                                $this->dirPicture . $gallery->getSlug(),
                                                                 $request->files->get('picture')->guessClientExtension(),
                                                                 $request->request->get('order'),
