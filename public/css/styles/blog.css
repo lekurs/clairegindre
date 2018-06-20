@@ -412,9 +412,9 @@ span.portraits:hover {
     font-size: .9em;
 }
 
-.article-content > p:first-of-type {
-    padding: 0 5px;
-    margin-bottom: 40px;
+.article-content > p {
+    padding: 0;
+    margin: 0;
 }
 
 h3.comment-title {
