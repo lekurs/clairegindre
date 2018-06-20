@@ -13,6 +13,15 @@
     border-width: thin;
 }
 
+.title-reveiws {
+    text-transform: uppercase;
+    font-family: Assistant;
+    font-size: .9em;
+    font-weight: lighter;
+    text-align: left;
+    margin-bottom: 2em;
+}
+
 /** TOGGLE SWITCH **/
 .switch {
     width: 40%;
@@ -57,7 +66,12 @@
     border-radius: 0;
 }
 
+.content-reviews p{
+    margin: 0;
+}
+
 .img-reviews {
     width: 100%;
     height: 100%;
+    padding-bottom: 1em;
 }

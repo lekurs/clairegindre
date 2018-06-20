@@ -25,12 +25,12 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12">Image</div>
-                <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12">Titre</div>
-                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12">Résumé</div>
-                <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12">Statut</div>
-                <div class="col-xl-1 col-lg-1 col-md-12 col-sm-12 col-12">Editer</div>
-                <div class="col-xl-1 col-lg-1 col-md-12 col-sm-12 col-12">Supprimer</div>
+                <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12"><h5 class="title-reveiws">Image</h5></div>
+                <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12"><h5 class="title-reveiws">Titre</h5></div>
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12"><h5 class="title-reveiws">Résumé</h5></div>
+                <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12"><h5 class="title-reveiws">Statut</h5></div>
+                <div class="col-xl-1 col-lg-1 col-md-12 col-sm-12 col-12"><h5 class="title-reveiws">Editer</h5></div>
+                <div class="col-xl-1 col-lg-1 col-md-12 col-sm-12 col-12"><h5 class="title-reveiws">Supprimer</h5></div>
             </div>
             <div class="row reviews-container">
             {% for review in reviews %}
@@ -41,8 +41,8 @@
                         <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12">
                             <p>{{ review.title }}</p>
                         </div>
-                        <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12">
-                            {{ review.content }}
+                        <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 content-reviews">
+                            {{ review.content|raw }}
                         </div>
                         <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12">
                             <div class="row no-gutters">
