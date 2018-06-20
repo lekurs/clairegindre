@@ -111,6 +111,7 @@ final class UploadPicturesGalleryAjaxAction implements UploadPicturesGalleryActi
      * @param SlugHelper $stringReplaceService
      * @param string $dirPicture
      * @param FileHelperInterface $fileHelper
+     * @param string $urlStorage
      */
     public function __construct(
         GalleryRepositoryInterface $galleryRepository,
@@ -158,8 +159,9 @@ final class UploadPicturesGalleryAjaxAction implements UploadPicturesGalleryActi
 //                                                                            $request->files->get('picture')->getClientOriginalName()
 //                                                                        );
         $this->pictureBuilder->create(
-                                                                $request->files->get('picture')->getClientOriginalName(),
-                                                                $this->urlStorage . $gallery->getSlug() . '/' . $fileStorage,
+                                                                $fileStorage,
+//                                                                $request->files->get('picture')->getClientOriginalName(),
+                                                                $this->urlStorage . $gallery->getSlug() . '/',
 //                                                                $this->dirPicture . $gallery->getSlug(),
                                                                 $request->files->get('picture')->guessClientExtension(),
                                                                 $request->request->get('order'),

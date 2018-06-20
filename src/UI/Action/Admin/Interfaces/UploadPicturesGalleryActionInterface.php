@@ -36,6 +36,7 @@ interface UploadPicturesGalleryActionInterface
      * @param SlugHelper $stringReplaceService
      * @param string $dirPicture
      * @param FileHelperInterface $fileHelper
+     * @param $urlStorage
      */
     public function __construct(
         GalleryRepositoryInterface $galleryRepository,
