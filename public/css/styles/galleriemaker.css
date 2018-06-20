@@ -68,3 +68,11 @@ li.galleriemaker-indication{
 .galleriemaker-thumb {
     width: 100%;
 }
+
+#back-admin-button {
+    margin: 2em 0 5em 0;
+}
+
+#createImgModal {
+    width: 100%;
+}

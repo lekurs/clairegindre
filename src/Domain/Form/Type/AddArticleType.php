@@ -29,16 +29,31 @@ final class AddArticleType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title', TextType::class)
+            ->add('title', TextType::class, [
+                'label' => 'Titre',
+                'label_attr' => ['class' => 'label-admin'],
+                'attr' => ['class' => 'admin-input'],
+                'required' => true
+            ])
             ->add('content', TextareaType::class, [
+                'required' => false,
+                'label' => 'Article',
+                'label_attr' => ['class' => 'label-admin'],
+                'attr' => ['class' => 'admin-input'],
+            ])
+            ->add('personnalButton', TextType::class, [
+                'label_attr' => ['class' => 'label-admin'],
+                'attr' => ['class' => 'admin-input'],
+                'label' => 'Bouton personnalisé',
+                'required' => true
+            ])
+            ->add('online', CheckboxType::class, [
                 'required' => false
             ])
-            ->add('personnalButton', TextType::class)
-            ->add('online', CheckboxType::class)
             ->add('prestation', EntityType::class, [
                 'class' => Benefit::class,
                 'choice_label' => 'name',
-                'label_attr' => ['class' => 'sr-only',],
+                'label_attr' => ['class' => 'label-admin'],
                 'constraints' => [
                     new UniqueEntity(['fields' => 'id'])
                     ]
