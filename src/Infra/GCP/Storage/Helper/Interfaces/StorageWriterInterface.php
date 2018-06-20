@@ -28,4 +28,9 @@ interface StorageWriterInterface
      * @return StorageObject
      */
     public function writeBucket($bucketName, $fileName, $opts = []): StorageObject;
+
+    /**
+     * @param $bucketName
+     */
+    public function deleteBucket($bucketName) : void;
 }

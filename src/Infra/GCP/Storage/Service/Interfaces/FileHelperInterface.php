@@ -34,7 +34,7 @@ interface FileHelperInterface
     public function upload(\SplFileInfo $toUploadFile, string $uploadDirectory): void;
 
     /**
-     * @param $deleteDirectory
+     * @param $bucketName
      */
-    public function deleteDirectory($deleteDirectory) : void;
+    public function deleteDirectory($bucketName) : void;
 }
