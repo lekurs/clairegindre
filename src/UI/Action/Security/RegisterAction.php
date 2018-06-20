@@ -13,6 +13,7 @@ use App\Domain\Builder\Interfaces\UserBuilderInterface;
 use App\Domain\Form\Type\RegistrationType;
 use App\UI\Action\Security\Interfaces\RegisterActionInterface;
 use App\UI\Form\FormHandler\Interfaces\RegistrationTypeHandlerInterface;
+use App\UI\Responder\Errors\AuthenticationErrorsResponder;
 use App\UI\Responder\Security\Interfaces\RegisterResponderInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -58,6 +59,11 @@ class RegisterAction implements RegisterActionInterface
     private $userBuilder;
 
     /**
+     * @var AuthenticationErrorsResponder
+     */
+    private $errorResponder;
+
+    /**
      * RegisterAction constructor.
      *
      * @param FormFactoryInterface $formFactory
@@ -71,13 +77,15 @@ class RegisterAction implements RegisterActionInterface
         UserPasswordEncoderInterface $userPasswordEncoder,
         RegistrationTypeHandlerInterface $registrationTypeHandler,
         AuthorizationCheckerInterface $authorizationChecker,
-        UserBuilderInterface $userBuilder
+        UserBuilderInterface $userBuilder,
+        AuthenticationErrorsResponder $errorsResponder
     ) {
         $this->formFactory = $formFactory;
         $this->userPasswordEncoder = $userPasswordEncoder;
         $this->registrationTypeHandler = $registrationTypeHandler;
         $this->authorization = $authorizationChecker;
         $this->userBuilder = $userBuilder;
+        $this->errorResponder = $errorsResponder;
     }
 
     /**
@@ -87,7 +95,7 @@ class RegisterAction implements RegisterActionInterface
      */
     public function __invoke(Request $request, RegisterResponderInterface $responder)
     {
-//        if ($this->authorization->isGranted('ROLE_ADMIN')) {
+        if ($this->authorization->isGranted('ROLE_ADMIN')) {
 
             $registerType = $this->formFactory->create(RegistrationType::class)->handleRequest($request);
 
@@ -96,5 +104,8 @@ class RegisterAction implements RegisterActionInterface
             }
             return $responder(false, $registerType);
         }
-//    }
+//        $error = $this->errorResponder;
+//
+//        return $error;
+    }
 }

@@ -29,18 +29,18 @@ interface RegisterActionInterface
      * @param AuthorizationCheckerInterface $authorizationChecker
      * @param UserBuilderInterface $userBuilder
      */
-    public function __construct(
-        FormFactoryInterface $formFactory,
-        UserPasswordEncoderInterface $userPasswordEncoder,
-        RegistrationTypeHandlerInterface $registrationTypeHandler,
-        AuthorizationCheckerInterface $authorizationChecker,
-        UserBuilderInterface $userBuilder
-    );
+//    public function __construct(
+//        FormFactoryInterface $formFactory,
+//        UserPasswordEncoderInterface $userPasswordEncoder,
+//        RegistrationTypeHandlerInterface $registrationTypeHandler,
+//        AuthorizationCheckerInterface $authorizationChecker,
+//        UserBuilderInterface $userBuilder
+//    );
 
     /**
      * @param Request $request
      * @param RegisterResponderInterface $responder
      * @return mixed
      */
-    public function __invoke(Request $request, RegisterResponderInterface $responder);
+//    public function __invoke(Request $request, RegisterResponderInterface $responder);
 }
