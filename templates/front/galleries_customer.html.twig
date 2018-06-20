@@ -38,7 +38,10 @@
                     {% for gallery in galleries %}
                             <div class="img-customers col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
                                 <div class="row no-gutters box">
-                                    <img src="{{ asset( gallery.pictures.first.publicPath ~ '/' ~ gallery.pictures.first.pictureName) }}" alt="{{ gallery.pictures.first.pictureName }}" />
+                                    {% for picture in gallery.pictures %}
+                                    {% if picture.favorite > 0 %}
+                                    <img src="{{ asset( picture.publicPath ~ '/' ~ picture.pictureName) }}" alt="{{ gallery.pictures.first.pictureName }}" />
+                                    {% endif %}
                                         <div class="gallery-customers-informations">
                                             <p><i class="fa fa-lock"></i></p>
                                             <h4 class="gallery-title">{{ gallery.title }}</h4>
