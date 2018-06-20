@@ -93,6 +93,11 @@ final class UploadPicturesGalleryAjaxAction implements UploadPicturesGalleryActi
     private $fileHelper;
 
     /**
+     * @var string
+     */
+    private $urlStorage;
+
+    /**
      * UploadPicturesGalleryAjaxAction constructor.
      *
      * @param GalleryRepositoryInterface $galleryRepository
@@ -118,7 +123,8 @@ final class UploadPicturesGalleryAjaxAction implements UploadPicturesGalleryActi
         string $dirGallery,
         SlugHelper $stringReplaceService,
         string  $dirPicture,
-        FileHelperInterface $fileHelper
+        FileHelperInterface $fileHelper,
+        string $urlStorage
     ) {
         $this->galleryRepository = $galleryRepository;
         $this->formFactory = $formFactory;
@@ -131,6 +137,7 @@ final class UploadPicturesGalleryAjaxAction implements UploadPicturesGalleryActi
         $this->stringReplaceService = $stringReplaceService;
         $this->dirPicture = $dirPicture;
         $this->fileHelper = $fileHelper;
+        $this->urlStorage = $urlStorage;
     }
 
     /**
@@ -152,7 +159,7 @@ final class UploadPicturesGalleryAjaxAction implements UploadPicturesGalleryActi
 //                                                                        );
         $this->pictureBuilder->create(
                                                                 $request->files->get('picture')->getClientOriginalName(),
-                                                                'https://storage.googleapis.com/clairegindre_photos' . $gallery->getSlug() . '/' . $fileStorage,
+                                                                'https://storage.googleapis.com/clairegindre_photos/' . $gallery->getSlug() . '/' . $fileStorage,
 //                                                                $this->dirPicture . $gallery->getSlug(),
                                                                 $request->files->get('picture')->guessClientExtension(),
                                                                 $request->request->get('order'),

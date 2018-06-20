@@ -48,7 +48,8 @@ interface UploadPicturesGalleryActionInterface
         string $dirGallery,
         SlugHelper $stringReplaceService,
         string  $dirPicture,
-        FileHelperInterface $fileHelper
+        FileHelperInterface $fileHelper,
+        string $urlStorage
     );
 
     /**
