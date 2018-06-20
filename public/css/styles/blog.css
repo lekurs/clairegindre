@@ -413,8 +413,11 @@ span.portraits:hover {
 }
 
 .article-content > p {
-    padding: 0;
-    margin: 0;
+    padding:  0 5px;
+}
+
+.article-content > p:last-of-type {
+    margin-bottom: 40px;
 }
 
 h3.comment-title {
