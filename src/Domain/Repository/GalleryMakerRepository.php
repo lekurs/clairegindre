@@ -9,6 +9,7 @@
 namespace App\Domain\Repository;
 
 
+use App\Domain\Models\Gallery;
 use App\Domain\Models\GalleryMaker;
 use App\Domain\Models\Interfaces\ArticleInterface;
 use App\Domain\Models\Interfaces\GalleryMakerInterface;

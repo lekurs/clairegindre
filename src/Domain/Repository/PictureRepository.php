@@ -94,9 +94,12 @@ final class PictureRepository extends ServiceEntityRepository implements Picture
     {
         return $this->createQueryBuilder('picture')
                             ->leftJoin('picture.gallery', 'gallery')
+                            ->leftJoin('picture.galleryMaker', 'gallery_maker')
                             ->where('picture.gallery = :gallery')
                             ->andWhere('picture.galleryMaker IS NOT NULL')
                             ->setParameter('gallery', $gallery->getId())
+                            ->orderBy('gallery_maker.line', 'ASC')
+                            ->addOrderBy('gallery_maker.displayOrder', 'ASC')
                             ->getQuery()
                             ->getResult();
     }
