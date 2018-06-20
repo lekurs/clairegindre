@@ -58,7 +58,7 @@ final class FileHelper implements FileHelperInterface
     {
         $this->storageWriter->writeBucket($this->bucketName, $toUploadFile->getPathname(), [
             'name' => $uploadDirectory . '/' . $this->newFileName,
-            'entity' => 'allUsers',
+            'predefinedAcl' => 'publicRead',
         ]);
     }
 }
