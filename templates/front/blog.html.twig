@@ -55,7 +55,7 @@
                                 <div class="row no-gutters">
                                     {% for picture in gallery.pictures %}
                                         {% if picture.favorite > 0 %}
-                                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 article-img-container" style="background: url('{{ asset('/images/upload/gallery/' ~ gallery.slug ~ '/' ~ picture.pictureName) }}') center center; background-size: cover;"></div>
+                                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 article-img-container" style="background: url('{{ picture.picturePath ~ '/' ~ picture.pictureName) }}') center center; background-size: cover;"></div>
                                         {% endif %}
                                     {% endfor %}
                                 </div>
