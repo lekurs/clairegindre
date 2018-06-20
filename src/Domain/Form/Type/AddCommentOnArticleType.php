@@ -44,6 +44,7 @@ final class AddCommentOnArticleType extends AbstractType
     {
         $builder
             ->add('content', TextareaType::class, [
+                'label_attr' => ['class' => 'label-hidden'],
                 'required' => false,
                 'attr' => ['class' => 'comment-form', 'placeholder' => 'Votre commentaire']
             ])

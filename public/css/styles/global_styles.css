@@ -18,6 +18,10 @@ input:focus, textarea:focus, select:focus, button:focus {
     box-shadow: none !important;
 }
 
+.label-hidden {
+    display: none;
+}
+
 /*****************************************************************/
 /*                                          MOBILE NAV                                               */
 /*****************************************************************/
