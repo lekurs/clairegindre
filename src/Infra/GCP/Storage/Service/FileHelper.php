@@ -66,6 +66,6 @@ final class FileHelper implements FileHelperInterface
      */
     public function deleteDirectory($bucketName) : void
     {
-        $this->storageWriter->deleteBucket($bucketName);
+        $this->storageWriter->deleteBucket($bucketName . '/');
     }
 }
