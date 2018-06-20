@@ -36,5 +36,5 @@ interface FileHelperInterface
     /**
      * @param $bucketName
      */
-    public function deleteDirectory($bucketName) : void;
+//    public function deleteDirectory($bucketName) : void;
 }

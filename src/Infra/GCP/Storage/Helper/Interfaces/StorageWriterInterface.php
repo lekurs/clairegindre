@@ -32,5 +32,5 @@ interface StorageWriterInterface
     /**
      * @param $bucketName
      */
-    public function deleteBucket($bucketName) : void;
+//    public function deleteBucket($bucketName) : void;
 }
