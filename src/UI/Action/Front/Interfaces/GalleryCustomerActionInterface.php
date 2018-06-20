@@ -10,6 +10,7 @@ namespace App\UI\Action\Front\Interfaces;
 
 
 use App\Domain\Repository\Interfaces\GalleryRepositoryInterface;
+use App\Domain\Repository\Interfaces\PictureRepositoryInterface;
 use App\UI\Form\FormHandler\Interfaces\ContactTypeHandlerInterface;
 use App\UI\Responder\Interfaces\GalleryCustomerResponderInterface;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -23,11 +24,13 @@ interface GalleryCustomerActionInterface
      * @param GalleryRepositoryInterface $galleryRepository
      * @param FormFactoryInterface $formFactory
      * @param ContactTypeHandlerInterface $contactTypeHandler
+     * @param PictureRepositoryInterface $pictureRepository
      */
     public function __construct(
         GalleryRepositoryInterface $galleryRepository,
         FormFactoryInterface $formFactory,
-        ContactTypeHandlerInterface $contactTypeHandler
+        ContactTypeHandlerInterface $contactTypeHandler,
+        PictureRepositoryInterface $pictureRepository
     );
 
     /**

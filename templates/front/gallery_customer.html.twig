@@ -35,7 +35,7 @@
         </div>
             <div class="row no-gutters cards-container">
                 <div class="gallery-container">
-                    {% for picture in gallery.pictures %}
+                    {% for picture in pictures %}
                         <img src="{{ asset(picture.publicPath ~ '/' ~ picture.pictureName) }}" alt="{{ picture.pictureName }}"  class="img-fluid img-gallery-customer" data-position="{{ picture.displayOrder }}" data-id="{{ picture.displayOrder }}" data-toggle="modal" data-target ="#sliderImg" />
                     {% endfor %}
                 </div>

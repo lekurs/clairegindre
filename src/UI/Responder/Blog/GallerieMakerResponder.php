@@ -46,10 +46,11 @@ final class GallerieMakerResponder implements GallerieMakerResponderInterface
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    public function __invoke($redirect = false, $gallery)
+    public function __invoke($redirect = false, $gallery, $pictures)
     {
         $redirect ? $response = new RedirectResponse($this->urlGenerator->generate('admin')) : $response = new Response($this->twig->render('back/admin/Article/add_galleriemaker_article.html.twig', [
             'gallery' => $gallery,
+            'pictures' => $pictures
         ]));
 
         return $response;

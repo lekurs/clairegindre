@@ -48,7 +48,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="row">
-                        {% for picture in gallery.pictures %}
+                        {% for picture in pictures %}
                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                 <img src="{{ asset(picture.publicPath ~ '/' ~ picture.pictureName) }}"  class="img-thumbnail rounded float-left" id="{{ picture.id }}">
                             </div>

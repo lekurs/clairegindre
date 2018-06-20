@@ -12,6 +12,7 @@ namespace App\UI\Action\Blog;
 use App\Domain\Models\Interfaces\GalleryMakerInterface;
 use App\Domain\Repository\Interfaces\ArticleRepositoryInterface;
 use App\Domain\Repository\Interfaces\GalleryRepositoryInterface;
+use App\Domain\Repository\Interfaces\PictureRepositoryInterface;
 use App\UI\Action\Blog\Interfaces\GallerieMakerActionInterface;
 use App\UI\Responder\Interfaces\GallerieMakerResponderInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -36,6 +37,11 @@ final class GallerieMakerAction implements GallerieMakerActionInterface
     private $responder;
 
     /**
+     * @var PictureRepositoryInterface
+     */
+    private $pictureRepository;
+
+    /**
      * @var GalleryRepositoryInterface
      */
     private $galleryRepository;
@@ -54,17 +60,20 @@ final class GallerieMakerAction implements GallerieMakerActionInterface
      * GallerieMakerAction constructor.
      *
      * @param GallerieMakerResponderInterface $responder
+     * @param PictureRepositoryInterface $pictureRepository
      * @param GalleryRepositoryInterface $galleryRepository
      * @param ArticleRepositoryInterface $articleRepository
      * @param AuthorizationCheckerInterface $authorization
      */
     public function __construct(
         GallerieMakerResponderInterface $responder,
+        PictureRepositoryInterface $pictureRepository,
         GalleryRepositoryInterface $galleryRepository,
         ArticleRepositoryInterface $articleRepository,
         AuthorizationCheckerInterface $authorization
     ) {
         $this->responder = $responder;
+        $this->pictureRepository = $pictureRepository;
         $this->galleryRepository = $galleryRepository;
         $this->articleRepository = $articleRepository;
         $this->authorization = $authorization;
@@ -79,9 +88,11 @@ final class GallerieMakerAction implements GallerieMakerActionInterface
         if ($this->authorization->isGranted('ROLE_ADMIN')) {
             $responder = $this->responder;
 
-            $gallery = $this->galleryRepository->getWithPictures($request->attributes->get('slugGallery'));
+            $gallery = $this->galleryRepository->getOne($request->attributes->get('slugGallery'));
 
-            return $responder(false, $gallery);
+            $pictures = $this->pictureRepository->getAllByGallery($gallery);
+
+            return $responder(false, $gallery, $pictures);
         }
     }
 }

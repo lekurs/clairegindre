@@ -27,5 +27,5 @@ interface GallerieMakerResponderInterface
      * @param $gallery
      * @return mixed
      */
-    public function __invoke($redirect = false, $gallery);
+    public function __invoke($redirect = false, $gallery, $pictures);
 }

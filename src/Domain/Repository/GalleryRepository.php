@@ -79,7 +79,7 @@ final class GalleryRepository extends ServiceEntityRepository implements Gallery
             ->where('gallery.slug = :slug')
             ->setParameter('slug', $slug)
             ->innerJoin('gallery.pictures', 'pictures')
-            ->orderBy('pictures.displayOrder')
+            ->orderBy('pictures.displayOrder', 'ASC')
             ->getQuery()
             ->getOneOrNullResult()
             ;
