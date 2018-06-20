@@ -60,4 +60,9 @@ final class FileHelper implements FileHelperInterface
             'name' => $uploadDirectory . '/' . $this->newFileName
         ]);
     }
+
+    public function deleteDirectory($deleteDirectory) : void
+    {
+        $this->storageBridge->createClient()->bucket($this->bucketName, $deleteDirectory)->delete();
+    }
 }

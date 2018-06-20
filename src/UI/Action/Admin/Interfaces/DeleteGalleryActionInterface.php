@@ -10,7 +10,7 @@ namespace App\UI\Action\Admin\Interfaces;
 
 
 use App\Domain\Repository\Interfaces\GalleryRepositoryInterface;
-use App\Infra\GCP\Storage\Helper\Interfaces\StorageWriterInterface;
+use App\Infra\GCP\Storage\Service\Interfaces\FileHelperInterface;
 use App\UI\Responder\Admin\Interfaces\DeleteGalleryResponderInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Request;
@@ -30,7 +30,7 @@ interface DeleteGalleryActionInterface
         Filesystem $fileSystem,
         string $dirGallery,
         string $dirPicture,
-        StorageWriterInterface $storageWriter
+        FileHelperInterface $fileHelper
     );
 
     /**

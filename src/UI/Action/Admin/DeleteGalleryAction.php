@@ -9,7 +9,7 @@
 namespace App\UI\Action\Admin;
 
 use App\Domain\Repository\Interfaces\GalleryRepositoryInterface;
-use App\Infra\GCP\Storage\Helper\Interfaces\StorageWriterInterface;
+use App\Infra\GCP\Storage\Service\Interfaces\FileHelperInterface;
 use App\UI\Action\Admin\Interfaces\DeleteGalleryActionInterface;
 use App\UI\Responder\Admin\Interfaces\DeleteGalleryResponderInterface;
 use Symfony\Component\Filesystem\Filesystem;
@@ -49,9 +49,9 @@ final class DeleteGalleryAction implements DeleteGalleryActionInterface
     private $dirPicture;
 
     /**
-     * @var StorageWriterInterface
+     * @var FileHelperInterface
      */
-    private $storageWriter;
+    private $fileHelper;
 
     /**
      * DeleteGalleryAction constructor.
@@ -66,13 +66,13 @@ final class DeleteGalleryAction implements DeleteGalleryActionInterface
         Filesystem $fileSystem,
         string $dirGallery,
         string $dirPicture,
-        StorageWriterInterface $storageWriter
+        FileHelperInterface $fileHelper
     ) {
         $this->galleryRepository = $galleryRepository;
         $this->fileSystem = $fileSystem;
         $this->dirGallery = $dirGallery;
         $this->dirPicture = $dirPicture;
-        $this->storageWriter = $storageWriter;
+        $this->fileHelper = $fileHelper;
     }
 
     /**
@@ -84,8 +84,7 @@ final class DeleteGalleryAction implements DeleteGalleryActionInterface
     {
         $gallery = $this->galleryRepository->getOne($request->get('slug'));
 
-        $this->storageWriter->deleteBucket($gallery->getSlug());
-
+        $this->fileHelper->deleteDirectory($gallery->getSlug());
         die;
 
         foreach($gallery->getPictures() as $picture) {
