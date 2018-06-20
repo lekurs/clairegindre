@@ -21,6 +21,7 @@ services:
                 $credentialsFileName: 'credentials.json'
                 $credentialsFolder: '%kernel.project_dir%/config/credentials/google'
                 $bucketName: '%bucket_name%'
+#                $urlStorage: '%https://storage.googleapis.com/%'
 
     App\Services\SlugHelper:
         autowire: true

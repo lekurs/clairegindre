@@ -22,6 +22,12 @@ interface FileHelperInterface
     public function __construct(StorageWriterInterface $storageWriter, string $bucketName);
 
     /**
+     * @param \SplFileInfo $file
+     * @return string
+     */
+    public function generateFileName(\SplFileInfo $file): string ;
+
+    /**
      * @param \SplFileInfo $toUploadFile
      * @param string $uploadDirectory
      */

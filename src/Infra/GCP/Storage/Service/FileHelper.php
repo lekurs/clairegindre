@@ -43,15 +43,11 @@ final class FileHelper implements FileHelperInterface
 
     /**
      * @param \SplFileInfo $file
+     * @return string
      */
-    private function generateFileName(\SplFileInfo $file): void
+    public function generateFileName(\SplFileInfo $file): string
     {
-        $this->newFileName = md5(str_rot13(uniqid())) . "." . $file->guessExtension();
-    }
-
-    public function getFileName(\SplFileInfo $fileInfo)
-    {
-        return $this->generateFileName($fileInfo);
+        return $this->newFileName = md5(str_rot13(uniqid())) . "." . $file->guessExtension();
     }
 
     /**
@@ -60,8 +56,6 @@ final class FileHelper implements FileHelperInterface
      */
     public function upload(\SplFileInfo $toUploadFile, string $uploadDirectory): void
     {
-        $this->generateFileName($toUploadFile);
-
         $this->storageWriter->writeBucket($this->bucketName, $toUploadFile->getPathname(), [
             'name' => $uploadDirectory . '/' . $this->newFileName
         ]);

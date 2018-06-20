@@ -141,10 +141,9 @@ final class UploadPicturesGalleryAjaxAction implements UploadPicturesGalleryActi
     {
         $gallery = $this->galleryRepository->getOne($request->attributes->get('slugGallery'));
 
-        dump($this->fileHelper->getFileName($request->files->get('picture')));
-        die;
+        $fileStorage = $this->fileHelper->generateFileName($request->files->get('picture'));
 
-        $this->fileHelper->upload($request->files->get('picture'), $gallery->getSlug());
+        $this->fileHelper->upload($fileStorage, $gallery->getSlug());
 
 //        $this->pictureUploaderHelper->move(
 //                                                                            $request->files->get('picture'),
@@ -153,7 +152,8 @@ final class UploadPicturesGalleryAjaxAction implements UploadPicturesGalleryActi
 //                                                                        );
         $this->pictureBuilder->create(
                                                                 $request->files->get('picture')->getClientOriginalName(),
-                                                                $this->dirPicture . $gallery->getSlug(),
+                                                                'https://storage.googleapis.com/clairegindre_photos' . $gallery->getSlug() . '/' . $fileStorage,
+//                                                                $this->dirPicture . $gallery->getSlug(),
                                                                 $request->files->get('picture')->guessClientExtension(),
                                                                 $request->request->get('order'),
                                                                 $request->request->get('favorite'), $gallery
