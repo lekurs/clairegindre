@@ -1,0 +1,57 @@
+.checkbox-prettify[type="checkbox"]+span:not(.lever) {
+    position: relative;
+    padding-left: 20px;
+    cursor: pointer;
+    display: inline-block;
+    height: 15px;
+    line-height: 20px;
+    font-size: 1rem;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.checkbox-prettify[type="checkbox"]+span:not(.lever):before, .checkbox-prettify[type="checkbox"]:not(.filled-in)+span:not(.lever):after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 14px;
+    height: 14px;
+    z-index: 0;
+    border: 1px solid #5a5a5a;
+    border-radius: 1px;
+    margin-top: 3px;
+    -webkit-transition: .2s;
+    transition: .2s;
+}
+.checkbox-prettify[type="checkbox"]:not(:checked), .checkbox-prettify[type="checkbox"]:checked
+{
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.checkbox-prettify[type="checkbox"]:not(.filled-in)+span:not(.lever):after {
+    border: 0;
+    -webkit-transform: scale(0);
+    transform: scale(0);
+}
+
+.checkbox-prettify[type="checkbox"]:checked+span:not(.lever):before {
+    top: -4px;
+    left: -5px;
+    width: 6px;
+    height: 11px;
+    border-top: 2px solid transparent !important;
+    border-left: 2px solid transparent !important;
+    border-right: 2px solid #26a69a;
+    border-bottom: 2px solid #26a69a;
+    -webkit-transform: rotate(40deg);
+    transform: rotate(40deg);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-transform-origin: 100% 100%;
+    transform-origin: 100% 100%;
+}

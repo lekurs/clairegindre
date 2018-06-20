@@ -774,6 +774,10 @@ section.contact h2 {
     height: auto;
 }
 
+#check-event > p {
+    display: none;
+}
+
 
 /*****************************************************************/
 /*                                            PRESENTATION                                       */
