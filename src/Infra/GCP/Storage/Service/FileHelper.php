@@ -57,8 +57,7 @@ final class FileHelper implements FileHelperInterface
     public function upload(\SplFileInfo $toUploadFile, string $uploadDirectory): void
     {
         $this->storageWriter->writeBucket($this->bucketName, $toUploadFile->getPathname(), [
-            'name' => $uploadDirectory . '/' . $this->newFileName,
-            'predefinedAcl' => 'publicRead',
+            'name' => $uploadDirectory . '/' . $this->newFileName
         ]);
     }
 }
