@@ -84,6 +84,9 @@ final class DeleteGalleryAction implements DeleteGalleryActionInterface
     {
         $gallery = $this->galleryRepository->getOne($request->get('slug'));
 
+        dump($gallery);
+        die;
+
         $this->storageWriter->deleteBucket($gallery->getSlug());
 
         die;
