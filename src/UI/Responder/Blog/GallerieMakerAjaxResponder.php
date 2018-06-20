@@ -19,6 +19,6 @@ final class GallerieMakerAjaxResponder implements GallerieMakerAjaxResponderInte
      */
     public function __invoke()
     {
-        return new JsonResponse([], 200);
+        return new JsonResponse(['success'], 200);
     }
 }

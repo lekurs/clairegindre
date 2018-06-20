@@ -116,7 +116,7 @@
                 {% for favoritePicture in gallery.pictures %}
                     {% if favoritePicture.favorite > 0 %}
                         <div class="portfolio-pres thumb" style="background: url({{ asset(favoritePicture.publicPath ~ '/' ~ favoritePicture.pictureName) }}) center center no-repeat; background-size: cover">
-                            {#<a href="{{ path('showArticle', { 'slugArticle': gallery.article.slug, 'slugGallery': gallery.slug }) }}" class="portfolio_link">#}
+                            <a href="{{ path('showArticle', { 'slugArticle': gallery.article.slug, 'slugGallery': gallery.slug }) }}" class="portfolio_link">
                                 <div class="link_hover">
                                     <h2 class="title-portfolio-contain">{{ gallery.title }}</h2>
                                     <p class="date-portfolio">{{ gallery.eventDate | date('d-m-Y') }}</p>

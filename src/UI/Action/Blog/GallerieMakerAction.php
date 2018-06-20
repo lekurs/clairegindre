@@ -79,7 +79,7 @@ final class GallerieMakerAction implements GallerieMakerActionInterface
         if ($this->authorization->isGranted('ROLE_ADMIN')) {
             $responder = $this->responder;
 
-            $gallery = $this->galleryRepository->getOne($request->attributes->get('slugGallery'));
+            $gallery = $this->galleryRepository->getWithPictures($request->attributes->get('slugGallery'));
 
             return $responder(false, $gallery);
         }
