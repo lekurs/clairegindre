@@ -414,6 +414,7 @@ span.portraits:hover {
 
 .article-content > p {
     padding:  0 5px;
+    margin: 0;
 }
 
 .article-content > p:last-of-type {
