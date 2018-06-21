@@ -109,7 +109,7 @@ input:focus, textarea:focus, select:focus, button:focus {
 .menu-overlay {
     background-color: #242424;
     color: #333;
-    height: 45%;
+    height: 48%;
     width: 100%;
     position: fixed;
     opacity: 0;

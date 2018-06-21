@@ -25,11 +25,8 @@
         padding-right: 4em !important;
     }
 
-    #infos-title-mobile {
-        font-size: 3em;
-        font-family: Playfair;
-        font-weight: 400;
-        letter-spacing: .1rem;
+    .infos-title:nth-child(1) {
+        padding-top: .5em;
     }
 
     .info-p {
