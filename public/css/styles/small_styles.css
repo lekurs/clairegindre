@@ -63,6 +63,18 @@
         top: 7% !important;
     }
 
+    .infos-carousel {
+        padding: 0 4% !important;
+    }
+
+    .carousel-title ~ p {
+        font-size: .7em;
+    }
+
+    .infos-carousel h3 {
+        font-size: 1.3em;
+    }
+
     .insta-list {
         height: 15em;
     }
