@@ -103,9 +103,11 @@
             selector: 'textarea#add_reviews_content',
             height: 300,
             toolbar: [
-                'undo redo | styleselect | bold italic | link image | link',
+                'undo redo | styleselect | bold italic | link image | anchor',
                 'alignleft aligncenter alignright'
-            ]
+            ],
+            plugins: "anchor",
+            menubar: "insert"
         });
     </script>
     <script src="{{ asset('js/back/update_online_review.js') }}"></script>

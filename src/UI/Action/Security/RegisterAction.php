@@ -65,7 +65,7 @@ class RegisterAction implements RegisterActionInterface
 
     /**
      * RegisterAction constructor.
-     * 
+     *
      * @param FormFactoryInterface $formFactory
      * @param UserPasswordEncoderInterface $userPasswordEncoder
      * @param RegistrationTypeHandlerInterface $registrationTypeHandler

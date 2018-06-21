@@ -63,9 +63,11 @@
             selector: 'textarea#add_article_content',
             height: 300,
             toolbar: [
-                'undo redo | styleselect | bold italic | link image',
+                'undo redo | styleselect | bold italic | link image| link image',
                 'alignleft aligncenter alignright'
-            ]
+            ],
+            plugins: "link",
+            menubar: "insert"
         });
     </script>
 {% endblock %}

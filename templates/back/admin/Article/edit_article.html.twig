@@ -35,17 +35,6 @@
                         {{ form_end(editArticleType) }}
                     </div>
                 </div>
-                {#<div class="row no-gutters">#}
-                    {#<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">#}
-                        {#{%  for galleryMaker in articles.galleriesMakers %}#}
-                            {#<p>{{ galleryMaker.line }}</p>#}
-                        {#{% endfor %}#}
-                    {#</div>#}
-                {#</div>#}
-                {# GALLERIE MAKER #}
-                {#<div class="row no-gutters">#}
-                    {#<div class="maker container no-gutters" data-id="article_{{ articles.gallery.title }}"></div>#}
-                {#</div>#}
             </div>
 
             <div class="modal fade" id="createImgModal" tabindex="-1" role="dialog" aria-labelledby="createImgModalTitle" aria-hidden="true">
@@ -97,9 +86,11 @@
         selector: 'textarea#edit_article_content',
         height: 300,
         toolbar: [
-            'undo redo | styleselect | bold italic | link image',
+            'undo redo | styleselect | bold italic | link image| link image',
             'alignleft aligncenter alignright'
-        ]
+        ],
+        plugins: "link",
+        menubar: "insert"
     });
 </script>
 {% endblock %}
