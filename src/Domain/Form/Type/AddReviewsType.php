@@ -28,14 +28,27 @@ final class AddReviewsType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title', TextType::class)
-            ->add('content', TextareaType::class, [
-                'required' => false
+            ->add('title', TextType::class, [
+                'label' => 'Titre',
+                'label_attr' => ['class' => 'label-admin'],
+                'attr' => ['class' => 'admin-input'],
+                'required' => true,
+            ])
+            ->add('content', TextareaType::class,  [
+                'label' => 'Avis client',
+                'label_attr' => ['class' => 'label-admin'],
+                'attr' => ['class' => 'admin-input'],
+                'required' => false,
             ])
             ->add('online', CheckboxType::class, [
-                'required' => false
+                'required' => false,
+                "attr" => ['class' => 'mycheckbox'],
+                'label' => 'Mise en ligne',
+                'label_attr' => ['class' => 'label-admin']
             ])
-            ->add('image', FileType::class)
+            ->add('image', FileType::class, [
+                'label_attr' => ['class' => 'label-hidden']
+            ])
         ;
     }
 

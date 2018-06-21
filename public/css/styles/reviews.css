@@ -1,7 +1,6 @@
 /** REVIEWS ADMIN PAGE **/
 
 .reviews-container {
-    height: 40vh;
     overflow-y: auto;
     overflow-x: hidden;
 }
@@ -31,8 +30,8 @@ a > i {
 }
 
 .img-reviews {
-    width: 100%;
-    height: 100%;
+    width: 100% !important;
+    height: auto;
     padding-bottom: 1em;
 }
 

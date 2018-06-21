@@ -25,26 +25,26 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12"><h5 class="title-reveiws">Image</h5></div>
-                <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12"><h5 class="title-reveiws">Titre</h5></div>
-                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12"><h5 class="title-reveiws">Résumé</h5></div>
-                <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12"><h5 class="title-reveiws">Statut</h5></div>
-                <div class="col-xl-1 col-lg-1 col-md-12 col-sm-12 col-12"><h5 class="title-reveiws">Editer</h5></div>
-                <div class="col-xl-1 col-lg-1 col-md-12 col-sm-12 col-12"><h5 class="title-reveiws">Supprimer</h5></div>
+                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2"><h5 class="title-reveiws">Image</h5></div>
+                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2"><h5 class="title-reveiws">Titre</h5></div>
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4"><h5 class="title-reveiws">Résumé</h5></div>
+                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2"><h5 class="title-reveiws">Statut</h5></div>
+                <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"><h5 class="title-reveiws">Editer</h5></div>
+                <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"><h5 class="title-reveiws">Supprimer</h5></div>
             </div>
             <div class="row reviews-container">
             {% for review in reviews %}
                     <div class="row reviews-content">
-                        <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12">
+                        <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
                             <img src="{{ asset(review.imagePath ~ '/' ~ review.imageName) }}" class="img-reviews" />
                         </div>
-                        <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12">
+                        <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
                             <p>{{ review.title }}</p>
                         </div>
-                        <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 content-reviews">
+                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 content-reviews">
                             {{ review.content|raw }}
                         </div>
-                        <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12">
+                        <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
                             <div class="row no-gutters">
                                 <div class="switch switch-rectangle">
                                     <input type="checkbox" id="checkbox3" class="switch-checkbox" value="{{ review.online }}" {% if review.online != 0 %} checked {% endif %} data-id="{{ review.id }}" />
@@ -54,10 +54,10 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xl-1 col-lg-1 col-md-12 col-sm-12 col-12">
+                        <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1">
                             <a href="{{ path('adminEditReview', { 'id': review.id }) }}"><i class="fa fa-edit"></i></a>
                         </div>
-                        <div class="col-xl-1 col-lg-1 col-md-12 col-sm-12 col-12">
+                        <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1">
                             <a href="{{ path('adminDeleteReview', { 'id': review.id }) }}"><i class="fa fa-trash"></i></a>
                         </div>
                     </div>
@@ -76,7 +76,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="createReviewsModalTitle">Ajouter un avis client</h5>
+                    <h5 class="modal-title-admin" id="createReviewsModalTitle">Ajouter un avis client</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -86,8 +86,8 @@
                     {{ form_widget(form) }}
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-                    <button type="submit"  class="btn btn-primary">Ajouter</button>
+                    <button type="button" class="btn admin-button-mini-modal-close" data-dismiss="modal">Fermer</button>
+                    <button type="submit"  class="btn admin-button-mini-modal">Ajouter</button>
                 </div>
                 {{ form_end(form) }}
             </div>

@@ -33,13 +33,13 @@
                             <div class="row ">
                                 <div class="col-xl-10 col-lg-10 col-md-12 col-sm-12 col-12 offset-xl-1 offset-lg-1">
                                     <div class="row no-gutters header-infos-admin-thumb">
-                                        <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1" id="envelop-emails">
+                                        <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 icon-admin">
                                             <i class="fa fa-envelope"></i>
                                         </div>
                                         <div class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-10">
                                             <h5>emails</h5>
                                         </div>
-                                        <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1" id="arrow-emails">
+                                        <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 ic" id="arrow-emails">
                                             <i class="fa fa-angle-double-down"></i>
                                         </div>
                                     </div>
@@ -54,11 +54,11 @@
                                 </div>
                             </div>
                             {% for mail in mails if mails is defined%}
-                            <div class="row admin-emails-block">
-                                <div class="col-xl-5 col-lg-5 col-md-12 col-sm-12 col-12 offset-xl-1 offset-lg-1">
+                            <div class="row admin-emails-block justify-content-center">
+                                <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5 col-5">
                                     <p><a href="{{ path('admin_answer_mail', { 'slug': mail.slug }) }}" class="email-link">{{ mail.subject }}</a></p>
                                 </div>
-                                <div class="col-xl-5 col-lg-5 col-md-12 col-sm-12 col-12">
+                                <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5 col-5">
                                     <p>{{ mail.fromSender }}</p>
                                 </div>
                             </div>
