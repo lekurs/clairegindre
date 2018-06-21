@@ -9,15 +9,16 @@
 namespace App\UI\Action\Admin;
 
 
-use App\Domain\DTO\AnswerMailDTO;
 use App\Domain\Form\Type\AnswerEmailType;
 use App\Domain\Repository\Interfaces\MailRepositoryInterface;
 use App\UI\Action\Admin\Interfaces\AnswerEmailActionInterface;
 use App\UI\Form\FormHandler\Interfaces\AnswerMailTypeHandlerInterface;
 use App\UI\Responder\Admin\Interfaces\AnswerMailResponderInterface;
+use App\UI\Responder\Errors\AuthenticationErrorsResponder;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 /**
  * Class AnswerEmailAction
@@ -47,20 +48,37 @@ final class AnswerEmailAction implements AnswerEmailActionInterface
     private $answerMailHandler;
 
     /**
+     * @var AuthorizationCheckerInterface
+     */
+    private $authorizationChecker;
+
+    /**
+     * @var AuthenticationErrorsResponder
+     */
+    private $authorizationErrorResponder;
+
+
+    /**
      * AnswerEmailAction constructor.
      *
      * @param MailRepositoryInterface $mailRepository
      * @param FormFactoryInterface $formFactory
      * @param AnswerMailTypeHandlerInterface $answerMailHandler
+     * @param AuthorizationCheckerInterface $authorizationChecker
+     * @param AuthenticationErrorsResponder $errorsResponder
      */
     public function __construct(
         MailRepositoryInterface $mailRepository,
         FormFactoryInterface $formFactory,
-        AnswerMailTypeHandlerInterface $answerMailHandler
+        AnswerMailTypeHandlerInterface $answerMailHandler,
+        AuthorizationCheckerInterface $authorizationChecker,
+        AuthenticationErrorsResponder $errorsResponder
     ) {
         $this->mailRepository = $mailRepository;
         $this->formFactory = $formFactory;
         $this->answerMailHandler = $answerMailHandler;
+        $this->authorizationChecker = $authorizationChecker;
+        $this->authorizationErrorResponder = $errorsResponder;
     }
 
     /**
@@ -70,15 +88,22 @@ final class AnswerEmailAction implements AnswerEmailActionInterface
      */
     public function __invoke(Request $request, AnswerMailResponderInterface $responder)
     {
-        $mail = $this->mailRepository->getOneBySlug($request->attributes->get('slug'));
+        if ($this->authorizationChecker->isGranted('ROLE_ADMIN')) {
+            $mail = $this->mailRepository->getOneBySlug($request->attributes->get('slug'));
 
-        $form = $this->formFactory->create(AnswerEmailType::class)->handleRequest($request);
+            $form = $this->formFactory->create(AnswerEmailType::class)->handleRequest($request);
 
-        if ($this->answerMailHandler->handle($form, $mail)) {
+            if ($this->answerMailHandler->handle($form, $mail)) {
 
-            return $responder(true, $form, $mail);
+                return $responder(true, $form, $mail);
+            }
+
+            return $responder(false, $form, $mail);
         }
+        else {
+            $error = $this->authorizationErrorResponder;
 
-        return $responder(false, $form, $mail);
+            return $error();
+        }
     }
 }
