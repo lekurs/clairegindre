@@ -6,15 +6,59 @@
         height: 30vh;
     }
 
+    #menu-line-1 {
+        background-color: #ffffff;
+    }
+
+    #menu-line-2 {
+        background-color: #ffffff;
+    }
+
+    #menu-line-3 {
+        background-color: #ffffff;
+    }
+
     .infos-txt {
         background-color: #242424;
         color: #fff;
-        padding-left: 7em !important;
-        padding-right: 7em !important;
+        padding-left: 4em !important;
+        padding-right: 4em !important;
+    }
+
+    #infos-title-mobile {
+        font-size: 3em;
+        font-family: Playfair;
+        font-weight: 400;
+        letter-spacing: .1rem;
+    }
+
+    .info-p {
+        text-align: justify;
+        font-size: .9em;
     }
 
     .infos-txt p {
         margin: 0;
+    }
+
+    .benefits {
+        background-color: #242424;
+        color: #fff;
+        padding-left: 4em !important;
+        padding-right: 4em !important;
+        height: auto;
+    }
+
+    span.wedding {
+        height: 2em;
+    }
+
+    span.couple {
+        height: 2em;
+    }
+
+    span.family {
+        height: 2em;
     }
 
     /***************************************************************/
@@ -27,6 +71,7 @@
 
     .logo-content {
         min-height: 130px;
+        padding-bottom: 5%;
     }
 
     .presentation-container > h2 {
@@ -160,6 +205,10 @@
 
     .blog-pictos-filter {
         margin-right: 0.2em;
+    }
+
+    #btn-blog {
+        width: auto;
     }
 
     /***************************************************************/

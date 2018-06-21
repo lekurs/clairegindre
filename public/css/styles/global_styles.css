@@ -109,7 +109,7 @@ input:focus, textarea:focus, select:focus, button:focus {
 .menu-overlay {
     background-color: #242424;
     color: #333;
-    height: 40%;
+    height: 45%;
     width: 100%;
     position: fixed;
     opacity: 0;
@@ -630,10 +630,6 @@ section#faq-section {
     font-family: Playfair;
     font-weight: 400;
     letter-spacing: .1rem;
-}
-
-.info-p {
-    font-weight: 300;
 }
 
 .social-media {
