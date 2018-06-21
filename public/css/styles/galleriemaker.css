@@ -76,3 +76,7 @@ li.galleriemaker-indication{
 #createImgModal {
     width: 100%;
 }
+
+.sticky-white {
+    position: relative;
+}
