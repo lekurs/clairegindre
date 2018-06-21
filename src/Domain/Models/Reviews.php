@@ -9,6 +9,7 @@
 namespace App\Domain\Models;
 
 
+use App\Domain\DTO\EditReviewsDTO;
 use App\Domain\Models\Interfaces\ReviewsInterface;
 use App\Domain\Models\Interfaces\UserInterface;
 use Ramsey\Uuid\Uuid;
@@ -148,5 +149,20 @@ class Reviews implements ReviewsInterface
     public function isOnline(): bool
     {
         return $this->online;
+    }
+
+    /**
+     * @param EditReviewsDTO $dto
+     */
+    public function manageReviews(EditReviewsDTO $dto)
+    {
+        $this->title = $dto->title;
+        $this->content = $dto->content;
+        $this->online = $dto->online;
+    }
+
+    public function manageOnline(bool $online): void
+    {
+        $this->online = $online;
     }
 }

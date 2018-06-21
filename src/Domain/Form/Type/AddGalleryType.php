@@ -55,10 +55,20 @@ final class AddGalleryType extends AbstractType
                         new UniqueEntity(['fields' => 'id'])
                     ]
                 ))
-                ->add('title', TextType::class)
+                ->add('title', TextType::class, [
+                    'label' => 'Titre',
+                    'label_attr' => ['class' => 'label-admin'],
+                    'attr' => ['class' => 'admin-input'],
+                    'required' => true,
+                ])
                 ->add('user', HiddenType::class)
                 ->add('eventDate', DateType::class)
-                ->add('eventPlace', TextType::class)
+                ->add('eventPlace', TextType::class, [
+                    'label' => 'Lieu de l\'évènement',
+                    'label_attr' => ['class' => 'label-admin'],
+                    'attr' => ['class' => 'admin-input'],
+                    'required' => true,
+                ])
             ;
     }
 

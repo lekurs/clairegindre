@@ -28,12 +28,25 @@ final class EditReviewType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title', TextType::class)
-            ->add('content', TextareaType::class)
-            ->add('online', CheckboxType::class)
-            ->add('image', FileType::class, [
-                'required' => false
+            ->add('title', TextType::class, [
+                'label' => 'Titre',
+                'label_attr' => ['class' => 'label-admin'],
+                'attr' => ['class' => 'admin-input']
+            ])
+            ->add('content', TextareaType::class, [
+                'required' => false,
+                'label_attr' => ['class' => 'label-admin'],
+                'attr' => ['class' => 'admin-input'],
+                'label' => 'Avis Client'
+            ])
+            ->add('online', CheckboxType::class, [
+                'attr' => ['class' => 'mycheckbox'],
+                'label_attr' => ['class' => 'label-admin'],
+                'label' => 'Mettre en ligne ?'
             ]);
+//            ->add('image', FileType::class, [
+//                'required' => false
+//            ]);
     }
 
     /**
@@ -47,8 +60,8 @@ final class EditReviewType extends AbstractType
                                 return new EditReviewsDTO(
                                    $form->get('title')->getData(),
                                    $form->get('content')->getData(),
-                                   $form->get('online')->getData(),
-                                   $form->get('image')->getData()
+                                   $form->get('online')->getData()
+//                                   $form->get('image')->getData()
                                 );
                             },
             'validation_groups' => ['reviews_creation']

@@ -1,5 +1,5 @@
 jQuery(document).ready(function ($) {
-    console.log('test');
+
     $('.form-group').on('focus', function () {
         $(this).parent().addClass('is-active is-completed');
     });

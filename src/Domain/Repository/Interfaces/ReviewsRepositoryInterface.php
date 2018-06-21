@@ -44,6 +44,11 @@ interface ReviewsRepositoryInterface
     public function save(ReviewsInterface $reviews);
 
     /**
+     * update
+     */
+    public function update(): void;
+
+    /**
      * @param ReviewsInterface $reviews
      * @return mixed
      */

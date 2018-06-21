@@ -40,7 +40,8 @@ interface EditReviewsTypeHandlerInterface
 
     /**
      * @param FormInterface $form
+     * @param $review
      * @return mixed
      */
-    public function handle(FormInterface $form);
+    public function handle(FormInterface $form, $review);
 }

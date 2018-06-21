@@ -47,7 +47,7 @@
                         <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12">
                             <div class="row no-gutters">
                                 <div class="switch switch-rectangle">
-                                    <input type="checkbox" id="checkbox3" class="switch-checkbox" value="{{ review.online }}" {% if review.online != 0 %} checked {% endif %}>
+                                    <input type="checkbox" id="checkbox3" class="switch-checkbox" value="{{ review.online }}" {% if review.online != 0 %} checked {% endif %} data-id="{{ review.id }}" />
                                     <label for="checkbox3" class="switch-label">
                                         <div class="switch-toggle"></div>
                                     </label>
@@ -98,15 +98,22 @@
 
 {% block javascripts %}
     {{ parent() }}
-    <script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=7g8w49lzy5eyqt1o7hle0gzlmm3c84veiyraf1nwtm9eur9t"></script>
     <script>
         tinymce.init({
             selector: 'textarea#add_reviews_content',
             height: 300,
             toolbar: [
-                'undo redo | styleselect | bold italic | link image',
+                'undo redo | styleselect | bold italic | link image | link',
                 'alignleft aligncenter alignright'
             ]
+        });
+    </script>
+    <script src="{{ asset('js/back/update_online_review.js') }}"></script>
+    <script>
+        $(document).ready(function () {
+            $('input[type="checkbox"].switch-checkbox').updateReview({
+                script: '{{ path('adminUpdateOnlineReview') }}'
+            });
         });
     </script>
 {% endblock %}

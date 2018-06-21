@@ -88,13 +88,17 @@ final class EditReviewsAction implements EditReviewsActionInterface
     public function __invoke(Request $request, EditReviewsResponderInterface $responder)
     {
         if ($this->authorizationChecker->isGranted('ROLE_ADMIN')) {
+
             $review = $this->reviewsRepository->getOne($request->get('id'));
 
             $reviewDTO = new EditReviewsDTO($review->getTitle(), $review->getContent(), $review->isOnline(), $review->getImageName());
 
-            $editReviewType = $this->formFactory->create(EditReviewType::class, $reviewDTO);
+            $editReviewType = $this->formFactory->create(EditReviewType::class, $reviewDTO)->handleRequest($request);
 
-//        if ($this->editReviewsTypeHandler)
+        if ($this->editReviewsTypeHandler->handle($editReviewType, $review)) {
+
+            return $responder(true, $editReviewType);
+        }
 
             return $responder(false, $editReviewType);
         }

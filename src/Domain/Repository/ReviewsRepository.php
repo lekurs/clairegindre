@@ -67,24 +67,40 @@ final class ReviewsRepository extends ServiceEntityRepository implements Reviews
     /**
      * @param ReviewsInterface $reviews
      * @return mixed|void
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function save(ReviewsInterface $reviews)
+    public function save(ReviewsInterface $reviews):void
     {
-        $this->getEntityManager()->persist($reviews);
-        $this->getEntityManager()->flush();
+        $this->_em->persist($reviews);
+        $this->_em->flush();
+    }
+
+
+    public function update(): void
+    {
+        $this->_em->flush();
+    }
+
+    /**
+     * @param Reviews $reviews
+     */
+    public function updateOnline(Reviews $reviews):void
+    {
+        if ($reviews->isOnline() == true) {
+            $reviews->manageOnline(false);
+        } else {
+            $reviews->manageOnline(true);
+        }
+
+        $this->_em->flush();
     }
 
     /**
      * @param ReviewsInterface $reviews
      * @return mixed|void
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function delete(ReviewsInterface $reviews)
+    public function delete(ReviewsInterface $reviews):void
     {
-        $this->getEntityManager()->remove($reviews);
-        $this->getEntityManager()->flush();
+        $this->_em->remove($reviews);
+        $this->_em->flush();
     }
 }

@@ -13,6 +13,10 @@
     border-width: thin;
 }
 
+a > i {
+    color: #000000;
+}
+
 .title-reveiws {
     text-transform: uppercase;
     font-family: Assistant;
@@ -20,6 +24,16 @@
     font-weight: lighter;
     text-align: left;
     margin-bottom: 2em;
+}
+
+.content-reviews p{
+    margin: 0;
+}
+
+.img-reviews {
+    width: 100%;
+    height: 100%;
+    padding-bottom: 1em;
 }
 
 /** TOGGLE SWITCH **/
@@ -64,14 +78,4 @@
 
 .switch-rectangle .switch-toggle {
     border-radius: 0;
-}
-
-.content-reviews p{
-    margin: 0;
-}
-
-.img-reviews {
-    width: 100%;
-    height: 100%;
-    padding-bottom: 1em;
 }

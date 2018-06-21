@@ -12,6 +12,7 @@
             <link href="{{ asset('/css/styles/small_styles.css') }}" rel="stylesheet" />
             <link href="{{ asset('/css/styles/gallery.css') }}" rel="stylesheet" />
             <link href="{{ asset('/css/styles/admin.css') }}" rel="stylesheet" />
+            <link href="{{ asset('css/styles/checkbox-prettify.css') }}" rel="stylesheet" />
             <link href="{{ asset('/fonts/font-awesome.min.css') }}" rel="stylesheet">
             <link href="https://fonts.googleapis.com/css?family=Assistant:200,300,400,600,700,800|Quicksand:300,400,500,700" rel="stylesheet">
         {% endblock %}
@@ -155,6 +156,11 @@
     <script src="{{ asset('js/front/nav-mobile.js') }}"></script>
     <script src="{{ asset('/js/front/menu.js') }}"></script>
     <script src="{{ asset('/js/back/type-admin.js') }}"></script>
+    <script src="{{ asset('js/front/checkbox-prettify.js') }}"></script>
+    <script>
+        $(".mycheckbox").checkboxPrettify(".mycheckbox", {colorselected:'#000000', colordefault:"#242424"});
+        $(".mycheckbox2").checkboxPrettify(".mycheckbox2");
+    </script>
 {% endblock %}
 
 </html>

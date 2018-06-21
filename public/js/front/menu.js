@@ -17,9 +17,16 @@ jQuery(document).ready(function($) {
         if ($(this).scrollTop() > top_position) {
             $('.nav-desktop').addClass('sticky-white');
             $('.social-container').addClass('social-container-black');
+            $('.menu').css({
+                'position' : 'fixed',
+                'z-index': '999999'
+            })
         } else {
             $('.nav-desktop').removeClass('sticky-white');
             $('.social-container').removeClass('social-container-black');
+            $('.menu').css({
+                'position' : 'absolute',
+            })
         }
     });
 });

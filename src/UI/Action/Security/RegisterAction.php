@@ -104,8 +104,8 @@ class RegisterAction implements RegisterActionInterface
             }
             return $responder(false, $registerType);
         }
-//        $error = $this->errorResponder;
-//
-//        return $error;
+        $error = $this->errorResponder;
+
+        return $error();
     }
 }

@@ -96,7 +96,6 @@ class Article implements ArticleInterface
      * @param string $personnalButton
      * @param string $slug
      * @param BenefitInterface $prestation
-     * @param GalleryMakerInterface|null $galleryMaker
      */
     public function __construct(
         string $title,

@@ -305,6 +305,11 @@
         $(this).datepicker('hide');
     });
 </script>
+<script src="{{ asset('js/front/checkbox-prettify.js') }}"></script>
+<script>
+    $(".mycheckbox").checkboxPrettify(".mycheckbox", {colorselected:'#000000', colordefault:"#242424"});
+    $(".mycheckbox2").checkboxPrettify(".mycheckbox2");
+</script>
 {% endblock %}
 
 {% endblock %}

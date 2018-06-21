@@ -78,24 +78,20 @@ final class EditReviewsTypeHandler implements EditReviewsTypeHandlerInterface
 
     /**
      * @param FormInterface $form
-     * @return mixed|void
+     * @param $review
+     * @return bool
      */
-    public function handle(FormInterface $form):bool
+    public function handle(FormInterface $form, $review):bool
     {
-        if($form->isValid() && $form->isSubmitted()) {
-            
-            $review = $this->reviewsBuilder->create(
-                                                                                        $form->getData()->title,
-                                                                                        $form->getData()->content,
-                                                                                        '',
-                                                                                        $this->tokenStorage->getToken()->getUser(),
-                                                                                        '',
-                                                                                        '',
-                                                                                        $form->getData()->online
-                                                                                    );
-            $this->validator->validate($review, [], [
+        if($form->isSubmitted() && $form->isValid()) {
+
+            $editReview = $review->manageReviews($form->getData());
+
+            $this->validator->validate($editReview, [], [
                 'reviews_creation'
             ]);
+
+            $this->reviewsRepository->update();
 
             $this->session->getFlashBag()->add('sucess', 'Avis client mis à jour');
 
