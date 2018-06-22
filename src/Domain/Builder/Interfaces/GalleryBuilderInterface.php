@@ -20,13 +20,16 @@ interface GalleryBuilderInterface
     /**
      * @param string $title
      * @param UserInterface $user
+     * @param \DateTime $eventDate
+     * @param string $eventPlace
      * @param BenefitInterface $benefit
      * @param string $slug
-     * @param \DateTime $creationDate
+     * @param \Datetime $creationDate
      * @param ArticleInterface|null $article
+     * @param bool $online
      * @return GalleryBuilderInterface
      */
-//    public function create(string $title, UserInterface $user, BenefitInterface $benefit, string $slug, \DateTime $creationDate, ArticleInterface $article = null): GalleryBuilderInterface;
+    public function create(string $title, UserInterface $user, \DateTime $eventDate, string $eventPlace, BenefitInterface $benefit, string $slug, \Datetime $creationDate, ArticleInterface $article = null, bool $online = true): GalleryBuilderInterface;
 
     /**
      * @param PictureInterface $picture

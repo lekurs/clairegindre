@@ -167,34 +167,22 @@ final class UploadPicturesGalleryAjaxAction implements UploadPicturesGalleryActi
 
         $fileStorage = $this->fileHelper->generateFileName($request->files->get('picture'));
 
-//        $this->resizeImageHelper->resize($request->files->get('picture'), $this->dirGallery . $gallery->getSlug(), $fileStorage);
+        $this->resizeImageHelper->resize($request->files->get('picture'), $this->dirGallery . $gallery->getSlug(), $fileStorage);
 
         $this->fileHelper->upload($request->files->get('picture'), $gallery->getSlug());
 
 //        $this->fileHelper->uploadMini($request->files->get('picture'), $gallery->getSlug());
 
-//        $this->pictureUploaderHelper->move($request->files->get('picture'), $gallery->getSlug(), $request->files->get('picture')->getOriginalClientName());
-
         $this->pictureBuilder->create(
             $fileStorage,
+            $this->dirGallery . $gallery->getSlug(),
             $this->urlStorage . $gallery->getSlug(),
-            $this->urlStorageBackup . $gallery->getSlug(),
             $request->files->get('picture')->guessClientExtension(),
             $request->request->get('order'),
             $request->request->get('favorite'), $gallery
         );
 
         $this->pictureRepository->save($this->pictureBuilder->getPicture());
-
-//        $this->pictureBuilder->create(
-//            'backup_' . $fileStorage,
-//            $this->urlStorage . $gallery->getSlug(),
-//            $request->files->get('picture')->guessClientExtension(),
-//            $request->request->get('order'),
-//            $request->request->get('favorite'), $gallery
-//        );
-//
-//        $this->pictureRepository->save($this->pictureBuilder->getPicture());
 
         return new JsonResponse([], 201);
     }

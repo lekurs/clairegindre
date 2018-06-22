@@ -11,6 +11,7 @@
         <field name="creationDate" type="date" nullable="true" unique="false" />
         <field name="eventDate" type="datetime" nullable="true" unique="false" />
         <field name="eventPlace" type="string" length="150" unique="false" />
+        <field name="online" type="boolean" nullable="false" />
 
         <one-to-one field="article" target-entity="App\Domain\Models\Article" inversed-by="gallery">
         </one-to-one>

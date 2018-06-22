@@ -52,6 +52,11 @@ class Gallery implements GalleryInterface
     private $article;
 
     /**
+     * @var bool
+     */
+    private $online;
+
+    /**
      * @var string
      */
     private $slug;
@@ -66,10 +71,13 @@ class Gallery implements GalleryInterface
      *
      * @param string $title
      * @param UserInterface $user
+     * @param \DateTime $eventDate
+     * @param string $eventPlace
      * @param BenefitInterface $benefit
      * @param string $slug
      * @param \DateTime $creationDate
      * @param ArticleInterface|null $article
+     * @param bool $online
      */
     public function __construct(
         string $title,
@@ -79,7 +87,8 @@ class Gallery implements GalleryInterface
         BenefitInterface $benefit,
         string $slug,
         \DateTime $creationDate,
-        ArticleInterface $article = null
+        ArticleInterface $article = null,
+        bool $online = true
     ) {
         $this->id = Uuid::uuid4();
         $this->title = $title;
@@ -90,6 +99,7 @@ class Gallery implements GalleryInterface
         $this->slug = $slug;
         $this->creationDate = new \DateTime();
         $this->article = $article;
+        $this->online = $online;
     }
 
     /**

@@ -18,20 +18,36 @@ use App\Domain\Models\Interfaces\GalleryInterface;
 use App\Domain\Models\Interfaces\PictureInterface;
 use App\Domain\Models\Interfaces\UserInterface;
 
-class GalleryBuilder implements GalleryBuilderInterface
+final class GalleryBuilder implements GalleryBuilderInterface
 {
     /**
      * @var Gallery
      */
     private $gallery;
 
-    public function create(string $title, UserInterface $user, \DateTime $eventDate, string $eventPlace, BenefitInterface $benefit, string $slug, \Datetime $creationDate, ArticleInterface $article = null): GalleryBuilderInterface
+    /**
+     * @param string $title
+     * @param UserInterface $user
+     * @param \DateTime $eventDate
+     * @param string $eventPlace
+     * @param BenefitInterface $benefit
+     * @param string $slug
+     * @param \Datetime $creationDate
+     * @param ArticleInterface|null $article
+     * @param bool $online
+     * @return GalleryBuilderInterface
+     */
+    public function create(string $title, UserInterface $user, \DateTime $eventDate, string $eventPlace, BenefitInterface $benefit, string $slug, \Datetime $creationDate, ArticleInterface $article = null, bool $online = true): GalleryBuilderInterface
     {
-        $this->gallery = new Gallery($title, $user, $eventDate, $eventPlace, $benefit, $slug, $creationDate = new \DateTime(), $article);
+        $this->gallery = new Gallery($title, $user, $eventDate, $eventPlace, $benefit, $slug, $creationDate = new \DateTime(), $article, $online);
 
         return $this;
     }
 
+    /**
+     * @param User $user
+     * @return GalleryBuilderInterface
+     */
     public function withUser(User $user): GalleryBuilderInterface
     {
         $this->gallery->setUser($user);
@@ -39,6 +55,10 @@ class GalleryBuilder implements GalleryBuilderInterface
         return $this;
     }
 
+    /**
+     * @param Benefit $benefit
+     * @return GalleryBuilderInterface
+     */
     public function withBenefit(Benefit $benefit): GalleryBuilderInterface
     {
         $this->gallery->setBenefit($benefit);
@@ -46,6 +66,10 @@ class GalleryBuilder implements GalleryBuilderInterface
         return $this;
     }
 
+    /**
+     * @param PictureInterface $picture
+     * @return GalleryBuilderInterface
+     */
     public function withPicture(PictureInterface $picture): GalleryBuilderInterface
     {
         $this->gallery->setPictures($picture);
@@ -53,6 +77,10 @@ class GalleryBuilder implements GalleryBuilderInterface
         return $this;
     }
 
+    /**
+     * @param ArticleInterface $article
+     * @return GalleryBuilderInterface
+     */
     public function withArticle(ArticleInterface $article): GalleryBuilderInterface
     {
         $this->gallery->setArticle($article);
@@ -60,6 +88,9 @@ class GalleryBuilder implements GalleryBuilderInterface
         return $this;
     }
 
+    /**
+     * @return GalleryInterface
+     */
     public function getGallery(): GalleryInterface
     {
         return $this->gallery;
