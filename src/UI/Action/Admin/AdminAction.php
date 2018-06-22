@@ -24,6 +24,7 @@ use App\UI\Form\FormHandler\Interfaces\AddBenefitHandlerInterface;
 use App\UI\Form\FormHandler\Interfaces\RegistrationTypeHandlerInterface;
 use App\UI\Form\FormHandler\SelectGalleryTypeHandler;
 use App\UI\Responder\Admin\Interfaces\AdminResponderInterface;
+use App\UI\Responder\Errors\AuthenticationErrorsResponder;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -101,6 +102,11 @@ final class AdminAction implements AdminActionInterface
     private $urlGenerator;
 
     /**
+     * @var AuthenticationErrorsResponder
+     */
+    private $errorsResponder;
+
+    /**
      * AdminAction constructor.
      *
      * @param AuthorizationCheckerInterface $authorizationChecker
@@ -114,6 +120,7 @@ final class AdminAction implements AdminActionInterface
      * @param AddArticleTypeHandlerInterface $addArticleTypeHandler
      * @param AddBenefitHandlerInterface $addBenefitTypeHandler
      * @param UrlGeneratorInterface $urlGenerator
+     * @param AuthenticationErrorsResponder $errorsResponder
      */
     public function __construct(
         AuthorizationCheckerInterface $authorizationChecker,
@@ -126,7 +133,8 @@ final class AdminAction implements AdminActionInterface
         RegistrationTypeHandlerInterface $registrationTypeHandler,
         AddArticleTypeHandlerInterface $addArticleTypeHandler,
         AddBenefitHandlerInterface $addBenefitTypeHandler,
-        UrlGeneratorInterface $urlGenerator
+        UrlGeneratorInterface $urlGenerator,
+        AuthenticationErrorsResponder $errorsResponder
     ) {
         $this->authorizationChecker = $authorizationChecker;
         $this->galleryRepository = $galleryRepository;
@@ -139,6 +147,7 @@ final class AdminAction implements AdminActionInterface
         $this->addArticleTypeHandler = $addArticleTypeHandler;
         $this->addBenefitTypeHandler = $addBenefitTypeHandler;
         $this->urlGenerator = $urlGenerator;
+        $this->errorsResponder = $errorsResponder;
     }
 
 
@@ -183,6 +192,10 @@ final class AdminAction implements AdminActionInterface
             }
 
             return $responder(false, $registration, $benefitsType, $selectArticle, $users, $galleries, $benefits, $articles, $mails);
+        } else {
+            $error = $this->errorsResponder;
+
+            return $error();
         }
     }
 }

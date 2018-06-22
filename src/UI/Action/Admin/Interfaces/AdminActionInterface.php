@@ -18,6 +18,7 @@ use App\UI\Form\FormHandler\Interfaces\AddArticleTypeHandlerInterface;
 use App\UI\Form\FormHandler\Interfaces\AddBenefitHandlerInterface;
 use App\UI\Form\FormHandler\Interfaces\RegistrationTypeHandlerInterface;
 use App\UI\Responder\Admin\Interfaces\AdminResponderInterface;
+use App\UI\Responder\Errors\AuthenticationErrorsResponder;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -39,6 +40,7 @@ interface AdminActionInterface
      * @param AddArticleTypeHandlerInterface $addArticleTypeHandler
      * @param AddBenefitHandlerInterface $addBenefitTypeHandler
      * @param UrlGeneratorInterface $urlGenerator
+     * @param AuthenticationErrorsResponder $errorsResponder
      */
     public function __construct(
         AuthorizationCheckerInterface $authorizationChecker,
@@ -51,7 +53,8 @@ interface AdminActionInterface
         RegistrationTypeHandlerInterface $registrationTypeHandler,
         AddArticleTypeHandlerInterface $addArticleTypeHandler,
         AddBenefitHandlerInterface $addBenefitTypeHandler,
-        UrlGeneratorInterface $urlGenerator
+        UrlGeneratorInterface $urlGenerator,
+        AuthenticationErrorsResponder $errorsResponder
     );
 
     /**
