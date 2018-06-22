@@ -175,7 +175,7 @@ final class UploadPicturesGalleryAjaxAction implements UploadPicturesGalleryActi
 
         $this->pictureBuilder->create(
             $fileStorage,
-            $this->dirGallery . $gallery->getSlug(),
+            $this->dirPicture . $gallery->getSlug(),
             $this->urlStorage . $gallery->getSlug(),
             $request->files->get('picture')->guessClientExtension(),
             $request->request->get('order'),
