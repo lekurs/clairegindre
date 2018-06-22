@@ -27,6 +27,11 @@ class Picture implements PictureInterface
     /**
      * @var string
      */
+    private $backupPath;
+
+    /**
+     * @var string
+     */
     private $extension;
 
     /**
@@ -59,6 +64,7 @@ class Picture implements PictureInterface
      *
      * @param string $pictureName
      * @param string $publicPath
+     * @param string $backupPath
      * @param string $extension
      * @param int $displayOrder
      * @param bool $favorite
@@ -69,6 +75,7 @@ class Picture implements PictureInterface
     public function __construct(
         string $pictureName,
         string $publicPath,
+        string $backupPath,
         string $extension,
         int $displayOrder = 0,
         bool $favorite = false,
@@ -79,6 +86,7 @@ class Picture implements PictureInterface
         $this->id = Uuid::uuid4();
         $this->pictureName = $pictureName;
         $this->publicPath = $publicPath;
+        $this->backupPath = $backupPath;
         $this->extension = $extension;
         $this->displayOrder = $displayOrder;
         $this->favorite = $favorite;
@@ -166,6 +174,14 @@ class Picture implements PictureInterface
     public function setPublicPath($publicPath): void
     {
         $this->publicPath = $publicPath;
+    }
+
+    /**
+     * @return string
+     */
+    public function getBackupPath(): string
+    {
+        return $this->backupPath;
     }
 
     /**

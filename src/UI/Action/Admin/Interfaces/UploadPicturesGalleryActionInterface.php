@@ -36,22 +36,24 @@ interface UploadPicturesGalleryActionInterface
      * @param SlugHelper $stringReplaceService
      * @param string $dirPicture
      * @param FileHelperInterface $fileHelper
-     * @param $urlStorage
+     * @param string $urlStorage
+     * @param string $urlStorageBackup
      */
-    public function __construct(
-        GalleryRepositoryInterface $galleryRepository,
-        FormFactoryInterface $formFactory,
-        PictureBuilderInterface $pictureBuilder,
-        GalleryBuilderInterface $galleryBuilder,
-        PictureRepositoryInterface $pictureRepository,
-        PictureUploaderHelper $pictureUploaderHelper,
-        Filesystem $fileSystem,
-        string $dirGallery,
-        SlugHelper $stringReplaceService,
-        string  $dirPicture,
-        FileHelperInterface $fileHelper,
-        string $urlStorage
-    );
+//    public function __construct(
+//        GalleryRepositoryInterface $galleryRepository,
+//        FormFactoryInterface $formFactory,
+//        PictureBuilderInterface $pictureBuilder,
+//        GalleryBuilderInterface $galleryBuilder,
+//        PictureRepositoryInterface $pictureRepository,
+//        PictureUploaderHelper $pictureUploaderHelper,
+//        Filesystem $fileSystem,
+//        string $dirGallery,
+//        SlugHelper $stringReplaceService,
+//        string  $dirPicture,
+//        FileHelperInterface $fileHelper,
+//        string $urlStorage,
+//        string $urlStorageBackup
+//    );
 
     /**
      * @param Request $request

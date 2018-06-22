@@ -62,6 +62,11 @@ final class RegistrationTypeHandler implements RegistrationTypeHandlerInterface
     private $stringReplaceHelper;
 
     /**
+     * @var string
+     */
+    private $urlStorageBackup;
+
+    /**
      * RegistrationTypeHandler constructor.
      *
      * @param UserRepositoryInterface $userRepository
@@ -72,6 +77,7 @@ final class RegistrationTypeHandler implements RegistrationTypeHandlerInterface
      * @param PictureUploaderHelper $pictureUploaderHelper
      * @param string $targetDir
      * @param SlugHelper $stringReplaceHelper
+     * @param string $urlStorageBackup
      */
     public function __construct(
         UserRepositoryInterface $userRepository,
@@ -81,7 +87,8 @@ final class RegistrationTypeHandler implements RegistrationTypeHandlerInterface
         Filesystem $fileSystem,
         PictureUploaderHelper $pictureUploaderHelper,
         string $targetDir,
-        SlugHelper $stringReplaceHelper
+        SlugHelper $stringReplaceHelper,
+        string $urlStorageBackup
     ) {
         $this->userRepository = $userRepository;
         $this->session = $session;
@@ -91,6 +98,7 @@ final class RegistrationTypeHandler implements RegistrationTypeHandlerInterface
         $this->pictureUploaderHelper = $pictureUploaderHelper;
         $this->targetDir = $targetDir;
         $this->stringReplaceHelper = $stringReplaceHelper;
+        $this->urlStorageBackup = $urlStorageBackup;
     }
 
     /**
@@ -109,19 +117,19 @@ final class RegistrationTypeHandler implements RegistrationTypeHandlerInterface
 
         $this->pictureUploaderHelper->move($form->getData()->picture, $this->targetDir . 'customers/', $form->getData()->picture->getClientOriginalName());
 
-        $picture = new Picture($form->getData()->picture->getClientOriginalName(), '/images/upload/customers', $form->getData()->picture->guessClientExtension());
+        $picture = new Picture($form->getData()->picture->getClientOriginalName(), '/images/upload/customers', '/images/upload/customers', $form->getData()->picture->guessClientExtension());
 
             $user = $this->userBuilder->create(
-                                                                            $form->getData()->email,
-                                                                            $form->getData()->username,
-                                                                            $form->getData()->lastName,
-                                                                            $form->getData()->plainPassword,
-                                                                            $form->getData()->dateWedding,
-                                                                            $picture,
-                                                                            '1',
-                                                                            'ROLE_USER',
-                                                                            $this->stringReplaceHelper->replace($form->getData()->username . '-' . $form->getData()->lastName)
-                                                                        );
+                    $form->getData()->email,
+                    $form->getData()->username,
+                    $form->getData()->lastName,
+                    $form->getData()->plainPassword,
+                    $form->getData()->dateWedding,
+                    $picture,
+                    '1',
+                    'ROLE_USER',
+                    $this->stringReplaceHelper->replace($form->getData()->username . '-' . $form->getData()->lastName)
+                );
 
             $this->validator->validate($user, [], [
                 'user_creation'

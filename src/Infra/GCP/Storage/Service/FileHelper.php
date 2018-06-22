@@ -30,15 +30,21 @@ final class FileHelper implements FileHelperInterface
     private $bucketName;
 
     /**
+     * @var string
+     */
+    private $backupBucket;
+
+    /**
      * FileHelper constructor.
      *
      * @param StorageWriterInterface $storageWriter
      * @param string $bucketName
      */
-    public function __construct(StorageWriterInterface $storageWriter, string $bucketName)
+    public function __construct(StorageWriterInterface $storageWriter, string $bucketName, string $backupBucket)
     {
         $this->storageWriter = $storageWriter;
         $this->bucketName = $bucketName;
+        $this->backupBucket = $backupBucket;
     }
 
     /**
@@ -56,13 +62,22 @@ final class FileHelper implements FileHelperInterface
      */
     public function upload(\SplFileInfo $toUploadFile, string $uploadDirectory): void
     {
+        dump($toUploadFile->getPathname());
+        die;
         $this->storageWriter->writeBucket($this->bucketName, $toUploadFile->getPathname(), [
             'name' => $uploadDirectory . '/' . $this->newFileName
         ]);
     }
 
+    public function uploadMini(\SplFileInfo $toUploadFile, string $uploadDirectory): void
+    {
+        $this->storageWriter->writeBucket($this->backupBucket, $toUploadFile->getPathname(), [
+            'name' => $uploadDirectory . '/' . $this->newFileName
+        ]);
+    }
+
     /**
-     * @param $bucketName
+     * @param $directory
      */
     public function deleteDirectory($directory) : void
     {

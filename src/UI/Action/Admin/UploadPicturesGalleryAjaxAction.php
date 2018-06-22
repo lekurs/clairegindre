@@ -15,6 +15,7 @@ use App\Domain\Models\Gallery;
 use App\Domain\Repository\Interfaces\GalleryRepositoryInterface;
 use App\Domain\Repository\Interfaces\PictureRepositoryInterface;
 use App\Infra\GCP\Storage\Service\Interfaces\FileHelperInterface;
+use App\Services\Interfaces\ResizeImageHelperInterface;
 use App\Services\PictureUploaderHelper;
 use App\Services\SlugHelper;
 use App\UI\Action\Admin\Interfaces\UploadPicturesGalleryActionInterface;
@@ -93,9 +94,19 @@ final class UploadPicturesGalleryAjaxAction implements UploadPicturesGalleryActi
     private $fileHelper;
 
     /**
+     * @var ResizeImageHelperInterface
+     */
+    private $resizeImageHelper;
+
+    /**
      * @var string
      */
     private $urlStorage;
+
+    /**
+     * @var string
+     */
+    private $urlStorageBackup;
 
     /**
      * UploadPicturesGalleryAjaxAction constructor.
@@ -112,6 +123,7 @@ final class UploadPicturesGalleryAjaxAction implements UploadPicturesGalleryActi
      * @param string $dirPicture
      * @param FileHelperInterface $fileHelper
      * @param string $urlStorage
+     * @param string $urlStorageBackup
      */
     public function __construct(
         GalleryRepositoryInterface $galleryRepository,
@@ -125,7 +137,9 @@ final class UploadPicturesGalleryAjaxAction implements UploadPicturesGalleryActi
         SlugHelper $stringReplaceService,
         string  $dirPicture,
         FileHelperInterface $fileHelper,
-        string $urlStorage
+        ResizeImageHelperInterface $resizeImageHelper,
+        string $urlStorage,
+        string $urlStorageBackup
     ) {
         $this->galleryRepository = $galleryRepository;
         $this->formFactory = $formFactory;
@@ -138,7 +152,9 @@ final class UploadPicturesGalleryAjaxAction implements UploadPicturesGalleryActi
         $this->stringReplaceService = $stringReplaceService;
         $this->dirPicture = $dirPicture;
         $this->fileHelper = $fileHelper;
+        $this->resizeImageHelper = $resizeImageHelper;
         $this->urlStorage = $urlStorage;
+        $this->urlStorageBackup = $urlStorageBackup;
     }
 
     /**
@@ -151,24 +167,34 @@ final class UploadPicturesGalleryAjaxAction implements UploadPicturesGalleryActi
 
         $fileStorage = $this->fileHelper->generateFileName($request->files->get('picture'));
 
-        $this->fileHelper->upload($request->files->get('picture'), $gallery->getSlug());
+        $this->resizeImageHelper->resize($request->files->get('picture'), $this->dirGallery . $gallery->getSlug(), $fileStorage);
 
-//        $this->pictureUploaderHelper->move(
-//                                                                            $request->files->get('picture'),
-//                                                                            $this->dirGallery . $gallery->getSlug(),
-//                                                                            $request->files->get('picture')->getClientOriginalName()
-//                                                                        );
+//        $this->fileHelper->upload($request->files->get('picture'), $gallery->getSlug());
+
+//        $this->fileHelper->uploadMini($request->files->get('picture'), $gallery->getSlug());
+
+//        $this->pictureUploaderHelper->move($request->files->get('picture'), $gallery->getSlug(), $request->files->get('picture')->getOriginalClientName());
+
         $this->pictureBuilder->create(
-                                                                $fileStorage,
-//                                                                $request->files->get('picture')->getClientOriginalName(),
-                                                                $this->urlStorage . $gallery->getSlug(),
-//                                                                $this->dirPicture . $gallery->getSlug(),
-                                                                $request->files->get('picture')->guessClientExtension(),
-                                                                $request->request->get('order'),
-                                                                $request->request->get('favorite'), $gallery
-                                                            );
+            $fileStorage,
+            $this->urlStorage . $gallery->getSlug(),
+            $this->urlStorageBackup . $gallery->getSlug(),
+            $request->files->get('picture')->guessClientExtension(),
+            $request->request->get('order'),
+            $request->request->get('favorite'), $gallery
+        );
 
         $this->pictureRepository->save($this->pictureBuilder->getPicture());
+
+//        $this->pictureBuilder->create(
+//            'backup_' . $fileStorage,
+//            $this->urlStorage . $gallery->getSlug(),
+//            $request->files->get('picture')->guessClientExtension(),
+//            $request->request->get('order'),
+//            $request->request->get('favorite'), $gallery
+//        );
+//
+//        $this->pictureRepository->save($this->pictureBuilder->getPicture());
 
         return new JsonResponse([], 201);
     }

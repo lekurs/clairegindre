@@ -31,6 +31,7 @@ interface RegistrationTypeHandlerInterface
      * @param PictureUploaderHelper $pictureUploaderHelper
      * @param string $targetDir
      * @param SlugHelper $stringReplaceHelper
+     * @param string $storageBackup
      */
     public function __construct(
         UserRepositoryInterface $userRepository,
@@ -40,7 +41,8 @@ interface RegistrationTypeHandlerInterface
         Filesystem $fileSystem,
         PictureUploaderHelper $pictureUploaderHelper,
         string $targetDir,
-        SlugHelper $stringReplaceHelper
+        SlugHelper $stringReplaceHelper,
+        string $storageBackup
     );
 
     /**

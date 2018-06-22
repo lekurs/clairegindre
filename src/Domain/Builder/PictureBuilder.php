@@ -21,9 +21,9 @@ class PictureBuilder implements PictureBuilderInterface
      */
     private $picture;
 
-    public function create(string $pictureName, string $publicPath, string $extension, int $displayOrder, bool $favorite = false, GalleryInterface $gallery = null, ArticleInterface $article = null): PictureBuilderInterface
+    public function create(string $pictureName, string $publicPath, string $backupPath, string $extension, int $displayOrder, bool $favorite = false, GalleryInterface $gallery = null, ArticleInterface $article = null): PictureBuilderInterface
     {
-        $this->picture = new Picture($pictureName, $publicPath, $extension, $displayOrder, $favorite, $gallery, $article);
+        $this->picture = new Picture($pictureName, $publicPath, $backupPath, $extension, $displayOrder, $favorite, $gallery, $article);
 
         return $this;
     }

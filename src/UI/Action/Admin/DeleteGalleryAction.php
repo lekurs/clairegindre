@@ -60,6 +60,7 @@ final class DeleteGalleryAction implements DeleteGalleryActionInterface
      * @param Filesystem $fileSystem
      * @param string $dirGallery
      * @param string $dirPicture
+     * @param FileHelperInterface $fileHelper
      */
     public function __construct(
         GalleryRepositoryInterface $galleryRepository,
@@ -84,14 +85,10 @@ final class DeleteGalleryAction implements DeleteGalleryActionInterface
     {
         $gallery = $this->galleryRepository->getOne($request->get('slug'));
 
-        $this->fileHelper->deleteDirectory($gallery->getSlug());
-        die;
+        $picture = $gallery->getPictures()->toArray();
 
-        foreach($gallery->getPictures() as $picture) {
+        $gallery->getPictures()->removeElement($picture);
 
-            $gallery->getPictures()->removeElement($picture);
-
-        }
 
         $this->fileSystem->remove($this->dirGallery .  $gallery->getSlug());
 

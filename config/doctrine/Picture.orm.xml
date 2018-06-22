@@ -8,6 +8,7 @@
     <id name="id" column="id" type="uuid"/>
             <field name="pictureName" type="string" length="100" nullable="false" unique="false" />
             <field name="publicPath" type="string" length="255" nullable="false" unique="false" />
+            <field name="backupPath" type="string" length="255" nullable="false" unique="false" />
             <field name="extension" type="string" length="5" nullable="false" unique="false" />
             <field name="displayOrder" type="integer" nullable="true" unique="false" />
             <field name="favorite" type="boolean" nullable="false" unique="false" />

@@ -19,6 +19,7 @@ interface PictureBuilderInterface
     /**
      * @param string $pictureName
      * @param string $publicPath
+     * @param string $backupPath
      * @param string $extension
      * @param int $displayOrder
      * @param bool $favorite
@@ -26,7 +27,7 @@ interface PictureBuilderInterface
      * @param ArticleInterface|null $article
      * @return PictureBuilderInterface
      */
-    public function create(string $pictureName, string $publicPath, string $extension, int $displayOrder, bool $favorite = false, GalleryInterface $gallery = null, ArticleInterface $article = null): PictureBuilderInterface;
+    public function create(string $pictureName, string $publicPath, string $backupPath, string $extension, int $displayOrder, bool $favorite = false, GalleryInterface $gallery = null, ArticleInterface $article = null): PictureBuilderInterface;
 
     /**
      * @param string $name

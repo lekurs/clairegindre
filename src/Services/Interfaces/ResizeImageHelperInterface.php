@@ -11,5 +11,11 @@ namespace App\Services\Interfaces;
 
 interface ResizeImageHelperInterface
 {
-
+    /**
+     * @param \SplFileInfo $image
+     * @param $directory
+     * @param $newName
+     * @return mixed
+     */
+    public function resize(\SplFileInfo $image, $directory, $newName);
 }
