@@ -115,6 +115,19 @@ legend {
 /*                      Galleries Customer                                    */
 /* ************************************************** */
 
+.favorite-blog-picture {
+    /*background: url("/images/interface/faq/laetitia-nicolas.jpg") no-repeat center;*/
+    position: relative;
+    /*background-size: cover;*/
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-end;
+    color: #fff;
+    padding-top: 10%;
+}
+
 .modal-label {
     display: block;
     font-size: 16px;
