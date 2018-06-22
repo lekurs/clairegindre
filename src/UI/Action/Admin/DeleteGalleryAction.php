@@ -9,6 +9,7 @@
 namespace App\UI\Action\Admin;
 
 use App\Domain\Repository\Interfaces\GalleryRepositoryInterface;
+use App\Domain\Repository\Interfaces\PictureRepositoryInterface;
 use App\Infra\GCP\Storage\Service\Interfaces\FileHelperInterface;
 use App\UI\Action\Admin\Interfaces\DeleteGalleryActionInterface;
 use App\UI\Responder\Admin\Interfaces\DeleteGalleryResponderInterface;
@@ -32,6 +33,11 @@ final class DeleteGalleryAction implements DeleteGalleryActionInterface
      * @var GalleryRepositoryInterface
      */
     private $galleryRepository;
+
+    /**
+     * @var PictureRepositoryInterface
+     */
+    private $pictureRepository;
 
     /**
      * @var Filesystem
@@ -64,12 +70,14 @@ final class DeleteGalleryAction implements DeleteGalleryActionInterface
      */
     public function __construct(
         GalleryRepositoryInterface $galleryRepository,
+        PictureRepositoryInterface $pictureRepository,
         Filesystem $fileSystem,
         string $dirGallery,
         string $dirPicture,
         FileHelperInterface $fileHelper
     ) {
         $this->galleryRepository = $galleryRepository;
+        $this->pictureRepository = $pictureRepository;
         $this->fileSystem = $fileSystem;
         $this->dirGallery = $dirGallery;
         $this->dirPicture = $dirPicture;
@@ -85,12 +93,19 @@ final class DeleteGalleryAction implements DeleteGalleryActionInterface
     {
         $gallery = $this->galleryRepository->getOne($request->get('slug'));
 
-        $picture = $gallery->getPictures()->toArray();
+        foreach ($gallery->getPictures() as $picture) {
+            $gallery->removeElement();
+        }
 
         $gallery->getPictures()->removeElement($picture);
 
+        dump($picture->getPicture());
+        die;
+
 
         $this->fileSystem->remove($this->dirGallery .  $gallery->getSlug());
+
+        $this->pictureRepository->delete($picture);
 
         $this->galleryRepository->delete($gallery);
 
