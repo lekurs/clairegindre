@@ -35,7 +35,7 @@ final class ResizeImageHelper implements ResizeImageHelperInterface
 
         imagecopyresampled($imageBackupCreation, $newPicture, 0, 0, 0 ,0, $newWidth, $newHeight, $sizeOriginal[0], $sizeOriginal[1]);
 
-        imagejpeg($newPicture, $directory . '/' . $newName . '.jpg', 75);
+        imagejpeg($newPicture, $directory . '/' . $newName, 75);
 
     }
 }
