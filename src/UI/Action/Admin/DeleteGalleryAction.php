@@ -35,11 +35,6 @@ final class DeleteGalleryAction implements DeleteGalleryActionInterface
     private $galleryRepository;
 
     /**
-     * @var PictureRepositoryInterface
-     */
-    private $pictureRepository;
-
-    /**
      * @var Filesystem
      */
     private $fileSystem;
@@ -70,14 +65,12 @@ final class DeleteGalleryAction implements DeleteGalleryActionInterface
      */
     public function __construct(
         GalleryRepositoryInterface $galleryRepository,
-        PictureRepositoryInterface $pictureRepository,
         Filesystem $fileSystem,
         string $dirGallery,
         string $dirPicture,
         FileHelperInterface $fileHelper
     ) {
         $this->galleryRepository = $galleryRepository;
-        $this->pictureRepository = $pictureRepository;
         $this->fileSystem = $fileSystem;
         $this->dirGallery = $dirGallery;
         $this->dirPicture = $dirPicture;
@@ -93,19 +86,12 @@ final class DeleteGalleryAction implements DeleteGalleryActionInterface
     {
         $gallery = $this->galleryRepository->getOne($request->get('slug'));
 
-        foreach ($gallery->getPictures() as $picture) {
-            $gallery->removeElement();
+        foreach($gallery->getPictures() as $picture) {
+
+            $gallery->getPictures()->removeElement($picture);
         }
 
-        $gallery->getPictures()->removeElement($picture);
-
-        dump($picture->getPicture());
-        die;
-
-
         $this->fileSystem->remove($this->dirGallery .  $gallery->getSlug());
-
-        $this->pictureRepository->delete($picture);
 
         $this->galleryRepository->delete($gallery);
 

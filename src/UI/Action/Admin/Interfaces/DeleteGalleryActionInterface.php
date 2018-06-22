@@ -24,14 +24,15 @@ interface DeleteGalleryActionInterface
      * @param Filesystem $fileSystem
      * @param string $dirGallery
      * @param string $dirPicture
-//     */
-//    public function __construct(
-//        GalleryRepositoryInterface $galleryRepository,
-//        Filesystem $fileSystem,
-//        string $dirGallery,
-//        string $dirPicture,
-//        FileHelperInterface $fileHelper
-//    );
+     * @param FileHelperInterface $fileHelper
+     */
+    public function __construct(
+        GalleryRepositoryInterface $galleryRepository,
+        Filesystem $fileSystem,
+        string $dirGallery,
+        string $dirPicture,
+        FileHelperInterface $fileHelper
+    );
 
     /**
      * @param Request $request
