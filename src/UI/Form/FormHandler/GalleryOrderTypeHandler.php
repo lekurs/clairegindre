@@ -71,7 +71,7 @@ final class GalleryOrderTypeHandler implements GalleryOrderTypeHandlerInterface
                 'gallery_creation',
             ]);
 
-            $this->galleryRepository->save($gallery);
+            $this->galleryRepository->update();
 
             $this->session->getFlashBag()->add('success', 'La galerie à bien été modifiée');
 

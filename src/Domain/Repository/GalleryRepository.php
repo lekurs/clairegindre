@@ -204,7 +204,7 @@ final class GalleryRepository extends ServiceEntityRepository implements Gallery
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function save(GalleryInterface $gallery)
+    public function save(Gallery $gallery)
     {
         $this->getEntityManager()->persist($gallery);
         $this->getEntityManager()->flush();

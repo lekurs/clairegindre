@@ -9,6 +9,7 @@
 namespace App\Domain\Repository\Interfaces;
 
 
+use App\Domain\Models\Gallery;
 use App\Domain\Models\Interfaces\ArticleInterface;
 use App\Domain\Models\Interfaces\GalleryInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
@@ -94,10 +95,10 @@ interface GalleryRepositoryInterface
     public function findArticle($idArticle);
 
     /**
-     * @param GalleryInterface $gallery
+     * @param Gallery $gallery
      * @return mixed
      */
-    public function save(GalleryInterface $gallery);
+    public function save(Gallery $gallery);
 
     /**
      * @return mixed
