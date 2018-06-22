@@ -88,6 +88,7 @@ final class EditUserAction implements EditUserActionInterface
         $this->userBuilder = $userBuilder;
         $this->formFactory = $formFactory;
         $this->userEditTypeHandler = $userEditTypeHandler;
+        $this->authorization = $authorizationChecker;
         $this->tokenStorage = $tokenStorage;
     }
 
