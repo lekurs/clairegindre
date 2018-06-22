@@ -4840,7 +4840,7 @@ Abide.defaults = {
   inputErrorClass: 'is-invalid-input',
 
   /**
-   * Class selector to use to target Form Errors for show/hide.
+   * Class selector to use to target form Errors for show/hide.
    * @option
    * @type {string}
    * @default '.form-error'
@@ -4848,7 +4848,7 @@ Abide.defaults = {
   formErrorSelector: '.form-error',
 
   /**
-   * Class added to Form Errors on failed validation.
+   * Class added to form Errors on failed validation.
    * @option
    * @type {string}
    * @default 'is-visible'
