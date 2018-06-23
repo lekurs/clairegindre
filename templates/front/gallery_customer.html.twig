@@ -118,9 +118,9 @@
                         <i class="fa fa-arrow-right"></i>
                     </div>
                     {#{{ asset(pictures.publicPath ~ '/' ~ pictures.pictureName) }}#}
-                {% for pictures in gallery.pictures %}
-                        <img src="" alt="{{ pictures.pictureName }}" class="img-container"  data-slide="{{ pictures.displayOrder }}" />
-                {% endfor %}
+                {#{% for pictures in gallery.pictures %}#}
+                        <img src="" alt="{{ gallery.pictures.pictureName }}" class="img-container"  data-slide="{{ gallery.pictures.displayOrder }}" />
+                {#{% endfor %}#}
                     {#</div>#}
             </div>
         {#<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">#}

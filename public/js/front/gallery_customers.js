@@ -1,28 +1,11 @@
 $(document).ready(function () {
-    var box = $('.cards-content');
-    var infos = $('.infos-gallery-img');
-    var container = $('.cards-content');
-
-    // $(box).on('mouseover', function () {
-    //     $(this).find(infos).css('opacity', '1');
-    // });
-    // $(box).on('mouseout', function () {
-    //     $(this).find(infos).css('opacity', '0');
-    // });
-    // $(box).on('click', function () {
-    //     $(this).find('.modal').modal('show');
-    // });
-
-    // $('.close').on('click', function () {
-    //     $(this).find('.modal').modal('hide');
-    // });
     var images = $('.img-container');
     var widthContainer = (images.length * 100);
 
-    for (var i=0; i < images.length; i++)
-    {
-
-    }
+    // for (var i=0; i < images.length; i++)
+    // {
+    //
+    // }
 
     $('.img-gallery-customer').on('click', function () {
         $('.sticky-white').hide(0);
