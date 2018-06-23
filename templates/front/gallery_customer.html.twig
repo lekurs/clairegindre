@@ -36,7 +36,7 @@
             <div class="row no-gutters cards-container">
                 <div class="gallery-container">
                     {% for picture in pictures %}
-                        <img src="{{ asset(picture.publicPath ~ '/' ~ picture.pictureName) }}" alt="{{ picture.pictureName }}"  class="img-fluid img-gallery-customer" data-position="{{ picture.displayOrder }}" data-id="{{ picture.displayOrder }}" data-toggle="modal" data-target ="#sliderImg" />
+                        <img src="{{ asset(picture.publicPath ~ '/' ~ picture.pictureName) }}" alt="{{ picture.pictureName }}"  class="img-fluid img-gallery-customer" data-position="{{ picture.displayOrder }}" data-id="{{ picture.pictureName }}" data-toggle="modal" data-target ="#sliderImg" />
                     {% endfor %}
                 </div>
                 {#{% for picture in gallery.pictures %}#}
@@ -110,11 +110,18 @@
                     </div>
                 </div>
                 <div class="slider-container">
-                {% for pictures in gallery.pictures %}
-                    <div class="img-container">
-                        <img src="{{ asset(pictures.publicPath ~ '/' ~ pictures.pictureName) }}" alt="{{ pictures.pictureName }}" class=""  data-slide="{{ pictures.displayOrder }}" />
+                    {#<div class="img-container">#}
+                    <div class="arrow-left-slider-modal">
+                        <i class="fa fa-arrow-left"></i>
                     </div>
+                    <div class="arrow-right-slider-modal">
+                        <i class="fa fa-arrow-right"></i>
+                    </div>
+                    {#{{ asset(pictures.publicPath ~ '/' ~ pictures.pictureName) }}#}
+                {% for pictures in gallery.pictures %}
+                        <img src="" alt="{{ pictures.pictureName }}" class="img-container"  data-slide="{{ pictures.displayOrder }}" />
                 {% endfor %}
+                    {#</div>#}
             </div>
         {#<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">#}
             {#<span class="carousel-control-prev-icon" aria-hidden="true"></span>#}

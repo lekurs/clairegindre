@@ -1197,19 +1197,38 @@ footer a.nav-footer:hover {
 }
 
 .slider-container {
-    width: 100%;
     height: 100%;
-    text-align: center;
+    float: left;
+    width: 100%;
 }
 
 .img-container {
-    width: 100%;
-    height: 100%;
+    object-fit: contain;
+    height: auto;
+    max-height: 85%;
+    width: 80%;
 }
 
-.img-container > img {
-    max-width: 90%;
-    object-fit: cover;
-    width: auto;
-    height: 90%;
+.arrow-left-slider-modal {
+    position: absolute;
+    width: 4%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+    left: 0;
+    top: 35%;
+    /* bottom: -50%; */
+}
+
+.arrow-right-slider-modal {
+    position: absolute;
+    width: 4%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+    left: 94%;
+    top: 35%;
 }

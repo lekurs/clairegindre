@@ -16,17 +16,25 @@ $(document).ready(function () {
     // $('.close').on('click', function () {
     //     $(this).find('.modal').modal('hide');
     // });
+    var images = $('.img-container');
+    var widthContainer = (images.length * 100);
 
-    $('.img-container').hide(0);
+    for (var i=0; i < images.length; i++)
+    {
 
+    }
 
     $('.img-gallery-customer').on('click', function () {
         $('.sticky-white').hide(0);
         $('<body>').css('overflow', 'hidden');
+        imgId = $(this).attr('data-id');
 
         $('.modal-perso').show();
-        $(this).parent().show();
-        console.log($('.modal-perso').children);
+
+        // $('.slider-container').css('width', widthContainer + '%');
+        // $(images).css('width', (Math.round(100 / images.length) + '%') );
+
+        $('.img-container').attr('src', '//storage.googleapis.com/clairegindre_photos/'+ imgId);
 
     });
 
