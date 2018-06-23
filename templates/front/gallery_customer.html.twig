@@ -117,9 +117,9 @@
                     <div class="arrow-right-slider-modal">
                         <i class="fa fa-arrow-right"></i>
                     </div>
-                    {#{{ asset(pictures.publicPath ~ '/' ~ pictures.pictureName) }}#}
+                    {#{{ asset(pictures.publicPath ~ '/' ~ pictures.pictureName) }}#}{# alt="{{ gallery.pictures.pictureName }}" data-slide="{{ gallery.pictures.displayOrder }}"#}
                 {#{% for pictures in gallery.pictures %}#}
-                        <img src="" alt="{{ gallery.pictures.pictureName }}" class="img-container"  data-slide="{{ gallery.pictures.displayOrder }}" />
+                        <img src=""  class="img-container"   />
                 {#{% endfor %}#}
                     {#</div>#}
             </div>
