@@ -36,7 +36,7 @@
             <div class="row no-gutters cards-container">
                 <div class="gallery-container">
                     {% for picture in pictures %}
-                        <img src="{{ asset(picture.publicPath ~ '/' ~ picture.pictureName) }}" alt="{{ picture.pictureName }}"  class="img-fluid img-gallery-customer" data-position="{{ picture.displayOrder }}" data-id="{{ picture.pictureName }}" data-toggle="modal" data-target ="#sliderImg" />
+                        <img src="{{ asset(picture.publicPath ~ '/' ~ picture.pictureName) }}" alt="{{ picture.pictureName }}"  class="img-fluid img-gallery-customer" data-position="{{ picture.displayOrder }}" data-id="{{ picture.backupPath ~ '/' ~ picture.pictureName }}" data-toggle="modal" data-target ="#sliderImg" />
                     {% endfor %}
                 </div>
                 {#{% for picture in gallery.pictures %}#}
