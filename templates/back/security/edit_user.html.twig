@@ -10,14 +10,20 @@
 {% block content %}
 
     {% block title_admin %}
-    <h1>Modification de l'utilisateur {{ user.username }}</h1>
+    <h1 class="title-admin">Modification de l'utilisateur {{ user.username }}</h1>
     {% endblock %}
 
     {{ parent() }}
 <section>
-    {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button type="submit" class="btn btn-primary">Mettre à jour</button>
-    {{ form_end(form) }}
+    <div class="container">
+        <div class="row no-gutters">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                {{ form_start(form) }}
+                {{ form_widget(form) }}
+                <button type="submit" class="btn admin-button text-uppercase">Mettre à jour</button>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
 </section>
 {% endblock %}

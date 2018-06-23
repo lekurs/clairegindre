@@ -10,6 +10,7 @@ namespace App\Domain\Repository;
 
 
 use App\Domain\Models\Interfaces\ArticleInterface;
+use App\Domain\Models\Interfaces\GalleryMakerInterface;
 use App\Domain\Repository\Interfaces\GalleryRepositoryInterface;
 use App\Domain\Models\Gallery;
 use App\Domain\Models\Interfaces\GalleryInterface;
@@ -44,6 +45,20 @@ final class GalleryRepository extends ServiceEntityRepository implements Gallery
     }
 
     /**
+     * @param $idGallery
+     * @return mixed
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function getOneById($idGallery)
+    {
+        return $this->createQueryBuilder('gallery')
+                                ->where('gallery.id = :gallery')
+                                ->setParameter('gallery', $idGallery)
+                                ->getQuery()
+                                ->getOneOrNullResult();
+    }
+
+    /**
      * @return mixed
      */
     public function getAll()
@@ -61,7 +76,11 @@ final class GalleryRepository extends ServiceEntityRepository implements Gallery
     {
         return $this->createQueryBuilder('gallery')
                             ->leftJoin('gallery.pictures', 'pictures')
+                            ->leftJoin('gallery.article', 'article')
                             ->where('pictures.favorite = 1')
+                            ->andWhere('gallery.online = true')
+                            ->andWhere('gallery.article IS NOT NULL')
+                            ->andWhere('article.online = 1')
                             ->orderBy('gallery.eventDate', 'DESC')
                             ->setMaxResults(9)
                             ->getQuery()
@@ -92,6 +111,8 @@ final class GalleryRepository extends ServiceEntityRepository implements Gallery
     {
         return $this->createQueryBuilder('gallery')
                             ->where('gallery.article IS NOT NULL')
+                            ->leftJoin('gallery.article', 'article')
+                            ->where('article.online = 1')
                             ->getQuery()
                             ->getResult();
     }
@@ -200,7 +221,7 @@ final class GalleryRepository extends ServiceEntityRepository implements Gallery
     }
 
     /**
-     * @param GalleryInterface $gallery
+     * @param Gallery $gallery
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
@@ -217,6 +238,19 @@ final class GalleryRepository extends ServiceEntityRepository implements Gallery
     public function update()
     {
         $this->getEntityManager()->flush();
+    }
+
+    /**
+     * @param Gallery $gallery
+     */
+    public function updateOnline(Gallery $gallery)
+    {
+        if ($gallery->isOnline() == true) {
+            $gallery->manageOnline(false);
+        } else {
+            $gallery->manageOnline(true);
+        }
+        $this->_em->flush();
     }
 
     /**
@@ -237,9 +271,12 @@ final class GalleryRepository extends ServiceEntityRepository implements Gallery
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function removeArticle(ArticleInterface $article, GalleryInterface $gallery)
+    public function removeArticle(ArticleInterface $article, GalleryInterface $gallery, GalleryMakerInterface $galleryMaker)
     {
         $gallery->setArticle(null);
+
+        $galleryMaker->setPictures(null);
+        
         $this->getEntityManager()->remove($article);
         $this->getEntityManager()->flush();
     }

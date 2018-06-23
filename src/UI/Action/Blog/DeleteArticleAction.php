@@ -70,6 +70,7 @@ final class DeleteArticleAction implements DeleteArticleActionInterface
     public function __invoke(Request $request, DeleteArticleResponderInterface $responder)
     {
         if ($this->authorization->isGranted('ROLE_ADMIN')) {
+
             $article = $this->articleRepository->getOne($request->get('slug'));
 
             $gallery = $this->galleryRepository->findArticle($article->getId());

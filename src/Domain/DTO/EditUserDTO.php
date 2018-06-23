@@ -10,6 +10,7 @@ namespace App\Domain\DTO;
 
 
 use App\Domain\DTO\Interfaces\EditUserDTOInterface;
+use App\Domain\Models\Picture;
 
 final class EditUserDTO implements EditUserDTOInterface
 {
@@ -42,11 +43,6 @@ final class EditUserDTO implements EditUserDTOInterface
      * @var \DateTime
      */
     public $weddingDate;
-
-    /**
-     * @var \SplFileInfo
-     */
-    public $picture;
 
     /**
      * @var string

@@ -122,6 +122,7 @@ final class UploadPicturesGalleryAjaxAction implements UploadPicturesGalleryActi
      * @param SlugHelper $stringReplaceService
      * @param string $dirPicture
      * @param FileHelperInterface $fileHelper
+     * @param ResizeImageHelperInterface $resizeImageHelper
      * @param string $urlStorage
      * @param string $urlStorageBackup
      */
@@ -169,7 +170,7 @@ final class UploadPicturesGalleryAjaxAction implements UploadPicturesGalleryActi
 
         $this->resizeImageHelper->resize($request->files->get('picture'), $this->dirGallery . $gallery->getSlug(), $fileStorage);
 
-        $this->fileHelper->upload($request->files->get('picture'), $gallery->getSlug());
+//        $this->fileHelper->upload($request->files->get('picture'), $gallery->getSlug());
 
 //        $this->fileHelper->uploadMini($request->files->get('picture'), $gallery->getSlug());
 

@@ -12,6 +12,7 @@ namespace App\UI\Action\Security\Interfaces;
 use App\Domain\Builder\Interfaces\UserBuilderInterface;
 use App\Domain\Repository\Interfaces\UserRepositoryInterface;
 use App\UI\Form\FormHandler\Interfaces\EditUserHandlerInterface;
+use App\UI\Responder\Errors\AuthenticationErrorsResponder;
 use App\UI\Responder\Security\Interfaces\UserEditResponderInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -29,6 +30,7 @@ interface EditUserActionInterface
      * @param EditUserHandlerInterface $userEditTypeHandler
      * @param AuthorizationCheckerInterface $authorizationChecker
      * @param TokenStorageInterface $tokenStorage
+     * @param AuthenticationErrorsResponder $errorsResponder
      */
     public function __construct(
         UserRepositoryInterface $userRepository,
@@ -36,7 +38,8 @@ interface EditUserActionInterface
         FormFactoryInterface $formFactory,
         EditUserHandlerInterface $userEditTypeHandler,
         AuthorizationCheckerInterface $authorizationChecker,
-        TokenStorageInterface $tokenStorage
+        TokenStorageInterface $tokenStorage,
+        AuthenticationErrorsResponder $errorsResponder
     );
 
     /**

@@ -16,6 +16,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -46,17 +47,37 @@ final class EditUserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('username', TextType::class)
-            ->add('lastName', TextType::class)
-            ->add('email', EmailType::class)
+            ->add('username', TextType::class, [
+                'label' => 'Nom',
+                'label_attr' => ['class' => 'label-admin'],
+                'attr' => ['class' => 'admin-input'],
+                'required' => true,
+            ])
+            ->add('lastName', TextType::class, [
+                'label' => 'Prénom',
+                'label_attr' => ['class' => 'label-admin'],
+                'attr' => ['class' => 'admin-input'],
+                'required' => true,
+            ])
+            ->add('email', EmailType::class, [
+                'label' => 'Email',
+                'label_attr' => ['class' => 'label-admin'],
+                'attr' => ['class' => 'admin-input'],
+                'required' => true,
+            ])
             ->add('plainPassword', PasswordType::class, [
-                'required' => false
+                'label' => 'Mot de passe',
+                'label_attr' => ['class' => 'label-admin'],
+                'attr' => ['class' => 'admin-input'],
+                'required' => false,
             ])
             ->add('weddingDate', DateType::class, [
-//                'widget' => 'single_text',
+                'widget' => 'single_text',
             ])
             ->add('online', CheckboxType::class, [
-                'required' => false
+                'required' => false,
+                'attr' => ['class' => 'mycheckbox'],
+                'label' => 'Actif ?'
             ])
             ->addEventSubscriber($this->editUserSlugSubscriber)
             ;
@@ -75,8 +96,8 @@ final class EditUserType extends AbstractType
                                                 $form->get('lastName')->getData(),
                                                 $form->get('email')->getData(),
                                                 $form->get('plainPassword')->getData(),
-                                                $form->get('weddingDate')->getData(),
-                                                $form->get('online')->getData()
+                                                $form->get('online')->getData(),
+                                                $form->get('weddingDate')->getData()
                                             );
                                 },
             'validation_groups' => ['user_creation']

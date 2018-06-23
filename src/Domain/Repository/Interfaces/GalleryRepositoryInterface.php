@@ -30,6 +30,12 @@ interface GalleryRepositoryInterface
     public function getOne($slugGallery);
 
     /**
+     * @param $gallery
+     * @return mixed
+     */
+    public function getOneById($gallery);
+
+    /**
      * @return mixed
      */
     public function getAll();
@@ -104,6 +110,12 @@ interface GalleryRepositoryInterface
      * @return mixed
      */
     public function update();
+
+    /**
+     * @param Gallery $gallery
+     * @return mixed
+     */
+    public function updateOnline(Gallery $gallery);
 
     /**
      * @param GalleryInterface $gallery

@@ -157,8 +157,11 @@
                                     </div>
                                 </div>
                                 <div class="row no-gutters justify-content-center admin-users-block">
-                                    <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8 col-8">
+                                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
                                         <p class="admin-block-title">Nom - prénom</p>
+                                    </div>
+                                    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-sm-2">
+                                        <p class="admin-block-title">Status</p>
                                     </div>
                                     <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
                                         <p class="admin-block-title">Photos</p>
@@ -178,8 +181,11 @@
                                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                         {% for gallery in galleries %}
                                             <div class="row no-gutters justify-content-center admin-users-block">
-                                                <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8 col-8">
+                                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
                                                     <p>{{ gallery.title }}</p>
+                                                </div>
+                                                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
+                                                    <p><i class="fa fa-circle statement-gallery {% if gallery.online > 0 %}online {% else %}offline{% endif %}" data-id="{{ gallery.id }}"></i></p>
                                                 </div>
                                                 <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
                                                     {{ gallery.pictures|length }}
@@ -289,7 +295,7 @@
                                         <p class="admin-block-title">Commentaires</p>
                                     </div>
                                     <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
-                                        <p class="admin-block-title text-center">Etat</p>
+                                        <p class="admin-block-title text-center">Status</p>
                                     </div>
                                     <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
                                         <div class="row no-gutters">
@@ -432,6 +438,14 @@
     $(document).ready(function () {
         $('.fa.fa-user.statement').updateUser({
             script: '{{ path('adminUpdateOnlineUser') }}'
+        });
+    });
+</script>
+<script src="{{ asset('js/back/update_online_gallery.js') }}"></script>
+<script>
+    $(document).ready(function () {
+        $('.fa.statement-gallery').updateOnlineGallery({
+            script: '{{ path('adminUpdateOnlineGallery') }}'
         });
     });
 </script>

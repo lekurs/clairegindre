@@ -185,6 +185,14 @@ class Gallery implements GalleryInterface
     }
 
     /**
+     * @return bool
+     */
+    public function isOnline(): bool
+    {
+        return $this->online;
+    }
+
+    /**
      * @return string
      */
     public function getSlug(): string
@@ -198,5 +206,10 @@ class Gallery implements GalleryInterface
         $this->eventDate = $dto->eventDate;
         $this->eventPlace = $dto->eventPlace;
         $this->pictures = $dto->pictures;
+    }
+
+    public function manageOnline(bool $online):void
+    {
+        $this->online = $online;
     }
 }

@@ -15,6 +15,7 @@ use App\Domain\Form\Type\EditUserType;
 use App\Domain\Repository\Interfaces\UserRepositoryInterface;
 use App\UI\Action\Security\Interfaces\EditUserActionInterface;
 use App\UI\Form\FormHandler\Interfaces\EditUserHandlerInterface;
+use App\UI\Responder\Errors\AuthenticationErrorsResponder;
 use App\UI\Responder\Security\Interfaces\UserEditResponderInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -67,6 +68,11 @@ final class EditUserAction implements EditUserActionInterface
     private $tokenStorage;
 
     /**
+     * @var AuthenticationErrorsResponder
+     */
+    private $errorResponder;
+
+    /**
      * EditUserAction constructor.
      *
      * @param UserRepositoryInterface $userRepository
@@ -75,6 +81,7 @@ final class EditUserAction implements EditUserActionInterface
      * @param EditUserHandlerInterface $userEditTypeHandler
      * @param AuthorizationCheckerInterface $authorizationChecker
      * @param TokenStorageInterface $tokenStorage
+     * @param AuthenticationErrorsResponder $errorsResponder
      */
     public function __construct(
         UserRepositoryInterface $userRepository,
@@ -82,7 +89,8 @@ final class EditUserAction implements EditUserActionInterface
         FormFactoryInterface $formFactory,
         EditUserHandlerInterface $userEditTypeHandler,
         AuthorizationCheckerInterface $authorizationChecker,
-        TokenStorageInterface $tokenStorage
+        TokenStorageInterface $tokenStorage,
+        AuthenticationErrorsResponder $errorsResponder
     ) {
         $this->userRepository = $userRepository;
         $this->userBuilder = $userBuilder;
@@ -90,6 +98,7 @@ final class EditUserAction implements EditUserActionInterface
         $this->userEditTypeHandler = $userEditTypeHandler;
         $this->authorization = $authorizationChecker;
         $this->tokenStorage = $tokenStorage;
+        $this->errorResponder = $errorsResponder;
     }
 
     /**
@@ -103,7 +112,14 @@ final class EditUserAction implements EditUserActionInterface
 
             $user = $this->userRepository->getOne($request->attributes->get('slug'));
 
-            $userDto = new EditUserDTO($user->getEmail(), $user->getUsername(), $user->getLastName(), $user->getPassword(), $user->isOnline(), $user->getDateWedding(), $user->getSlug());
+            $userDto = new EditUserDTO(
+                $user->getEmail(),
+                $user->getUsername(),
+                $user->getLastName(), $user->getPassword(),
+                $user->isOnline(),
+                $user->getDateWedding(),
+                $user->getSlug()
+            );
 
             $userEditType = $this->formFactory->create(EditUserType::class, $userDto)->handleRequest($request);
 
@@ -113,6 +129,11 @@ final class EditUserAction implements EditUserActionInterface
             }
 
             return $responder(false, $userEditType, $user);
+        }
+        else {
+            $error = $this->errorResponder;
+
+            return $error();
         }
     }
 }
