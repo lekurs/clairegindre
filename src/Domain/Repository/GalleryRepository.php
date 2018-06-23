@@ -271,11 +271,9 @@ final class GalleryRepository extends ServiceEntityRepository implements Gallery
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function removeArticle(ArticleInterface $article, GalleryInterface $gallery, GalleryMakerInterface $galleryMaker)
+    public function removeArticle(ArticleInterface $article, GalleryInterface $gallery)
     {
         $gallery->setArticle(null);
-
-        $galleryMaker->setPictures(null);
         
         $this->getEntityManager()->remove($article);
         $this->getEntityManager()->flush();
