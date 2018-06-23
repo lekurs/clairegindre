@@ -18,6 +18,7 @@ $(document).ready(function () {
         // $(images).css('width', (Math.round(100 / images.length) + '%') );
 
         $('.img-container').attr('src', imgId);
+        $('.link-to-dl-image').attr('href', imgId);
 
     });
 
