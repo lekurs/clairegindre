@@ -34,7 +34,7 @@ $(document).ready(function () {
         // $('.slider-container').css('width', widthContainer + '%');
         // $(images).css('width', (Math.round(100 / images.length) + '%') );
 
-        $('.img-container').attr('src', '//storage.googleapis.com/clairegindre_photos/'+ imgId);
+        $('.img-container').attr('src', 'https://storage.googleapis.com/clairegindre_photos/'+ imgId);
 
     });
 
