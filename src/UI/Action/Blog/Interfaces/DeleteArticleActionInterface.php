@@ -13,6 +13,7 @@ use App\Domain\Repository\Interfaces\ArticleRepositoryInterface;
 use App\Domain\Repository\Interfaces\GalleryRepositoryInterface;
 use App\UI\Responder\Interfaces\DeleteArticleResponderInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 interface DeleteArticleActionInterface
@@ -23,11 +24,13 @@ interface DeleteArticleActionInterface
      * @param ArticleRepositoryInterface $articleRepository
      * @param GalleryRepositoryInterface $galleryRepository
      * @param AuthorizationCheckerInterface $authorization
+     * @param SessionInterface $session
      */
     public function __construct(
         ArticleRepositoryInterface $articleRepository,
         GalleryRepositoryInterface $galleryRepository,
-        AuthorizationCheckerInterface $authorization
+        AuthorizationCheckerInterface $authorization,
+        SessionInterface $session
     ) ;
 
     /**

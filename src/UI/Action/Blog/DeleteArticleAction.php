@@ -14,6 +14,7 @@ use App\Domain\Repository\Interfaces\GalleryRepositoryInterface;
 use App\UI\Action\Blog\Interfaces\DeleteArticleActionInterface;
 use App\UI\Responder\Interfaces\DeleteArticleResponderInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
@@ -45,20 +46,28 @@ final class DeleteArticleAction implements DeleteArticleActionInterface
     private $authorization;
 
     /**
+     * @var SessionInterface
+     */
+    private $session;
+
+    /**
      * DeleteArticleAction constructor.
      *
      * @param ArticleRepositoryInterface $articleRepository
      * @param GalleryRepositoryInterface $galleryRepository
      * @param AuthorizationCheckerInterface $authorization
+     * @param SessionInterface $session
      */
     public function __construct(
         ArticleRepositoryInterface $articleRepository,
         GalleryRepositoryInterface $galleryRepository,
-        AuthorizationCheckerInterface $authorization
+        AuthorizationCheckerInterface $authorization,
+        SessionInterface $session
     ) {
         $this->articleRepository = $articleRepository;
         $this->galleryRepository = $galleryRepository;
         $this->authorization = $authorization;
+        $this->session = $session;
     }
 
 
@@ -76,6 +85,8 @@ final class DeleteArticleAction implements DeleteArticleActionInterface
             $gallery = $this->galleryRepository->findArticle($article->getId());
 
             $this->galleryRepository->removeArticle($article, $gallery);
+
+            $this->session->getFlashBag()->add('success', 'La galerie à bien été supprimée');
 
             return $responder();
         }

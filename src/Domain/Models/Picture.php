@@ -293,7 +293,7 @@ class Picture implements PictureInterface
     /**
      * @param GalleryMakerInterface $galleryMaker
      */
-    public function setGalleryMaker(GalleryMakerInterface $galleryMaker): void
+    public function setGalleryMaker(GalleryMakerInterface $galleryMaker = null): void
     {
         $this->galleryMaker = $galleryMaker;
     }
