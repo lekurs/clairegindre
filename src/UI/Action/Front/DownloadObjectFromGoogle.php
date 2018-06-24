@@ -52,7 +52,7 @@ class DownloadObjectFromGoogle
 
         $fileName = $image . '.jpeg';
 
-        $object = 'url: ' . $url . 'gallery : ' .  $gallery . 'filename : ' . $fileName;
+        $object = 'url: ' . $url . 'gallery : ' .  $gallery . 'filename : ' . $image;
 
         dump($object);
         die;
