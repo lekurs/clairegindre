@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class DownloadObjectFromGoogleResponder
 {
-    public function __invoke($object)
+    public function __invoke($object, $filename)
     {
         $file = fopen($object, 'r');
 
@@ -22,7 +22,7 @@ class DownloadObjectFromGoogleResponder
         $response->headers->set('Content-Type' ,'application/force-download');
         $response->headers->set('Content-Type', 'application/octet-stream');
         $response->headers->set('Content-Type', 'application/download');
-        $response->headers->set('Content-Disposition', 'attachment; filename = " ' . $object . ' " ' );
+        $response->headers->set('Content-Disposition', 'attachment; filename = " ' . $filename . ' " ' );
 
 //        readfile($file);
 
