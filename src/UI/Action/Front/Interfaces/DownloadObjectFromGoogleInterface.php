@@ -10,6 +10,7 @@ namespace App\UI\Action\Front\Interfaces;
 
 
 use App\Infra\GCP\Storage\Service\Interfaces\FileHelperInterface;
+use App\UI\Responder\DownloadObjectFromGoogleResponder;
 use Symfony\Component\HttpFoundation\Request;
 
 interface DownloadObjectFromGoogleInterface
@@ -23,7 +24,8 @@ interface DownloadObjectFromGoogleInterface
 
     /**
      * @param Request $request
+     * @param DownloadObjectFromGoogleResponder $responder
      * @return mixed
      */
-    public function __invoke(Request $request);
+    public function __invoke(Request $request, DownloadObjectFromGoogleResponder $responder);
 }
