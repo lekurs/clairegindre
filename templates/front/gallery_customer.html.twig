@@ -53,6 +53,11 @@
                         <h1 class="title-gallery">{{ gallery.title }}</h1>
                         <span class="close-modal"><i class="fa fa-close fa-2x"></i></span>
                     </div>
+                    <div class="row no-gutters">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                            <a href="" class="link-to-dl-image">Télécharger l'image<i class="fa fa-download fa-2x"></i></a>
+                        </div>
+                    </div>
                 </div>
                 <div class="slider-container">
                     {#<div class="img-container">#}
@@ -65,8 +70,8 @@
                     {#{{ asset(pictures.publicPath ~ '/' ~ pictures.pictureName) }}#}{# alt="{{ gallery.pictures.pictureName }}" data-slide="{{ gallery.pictures.displayOrder }}"#}
                 {#{% for pictures in gallery.pictures %}#}
                         <img src=""  class="img-container"   />
-                    <div class="download-picture-hd">
-                        <a href="" class="link-to-dl-image"><i class="fa fa-download fa-2x"></i></a>
+                    {#<div class="download-picture-hd">#}
+                        {#<a href="" class="link-to-dl-image"><i class="fa fa-download fa-2x"></i></a>#}
                 {#{% endfor %}#}
                     {#</div>#}
                      </div>

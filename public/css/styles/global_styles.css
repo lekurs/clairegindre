@@ -1201,6 +1201,7 @@ footer a.nav-footer:hover {
     float: left;
     width: 100%;
     position: relative;
+    text-align: center;
 }
 
 .img-container {

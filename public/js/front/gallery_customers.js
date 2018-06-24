@@ -12,7 +12,7 @@ $(document).ready(function () {
         $('<body>').css('overflow', 'hidden');
         imgId = $(this).attr('data-id');
 
-        $('.modal-perso').show();
+        $('.modal-perso').show('1500');
 
         // $('.slider-container').css('width', widthContainer + '%');
         // $(images).css('width', (Math.round(100 / images.length) + '%') );
@@ -23,7 +23,7 @@ $(document).ready(function () {
     });
 
     $('.close-modal').on('click', function () {
-        $('.modal-perso').hide();
+        $('.modal-perso').hide('1500');
 
         $('.sticky-white').show(0);
         $('<body>').css('overflow', 'auto');
