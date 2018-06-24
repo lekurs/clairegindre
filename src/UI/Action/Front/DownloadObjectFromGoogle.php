@@ -61,8 +61,8 @@ final class DownloadObjectFromGoogle implements DownloadObjectFromGoogleInterfac
 
         $object = $url .  $gallery . $fileName;
 
-        dump($object, $fileName);
-        die;
+//        dump($object, $fileName);
+//        die;
 
 //        $this->fileHelper->downloadFile($gallery, $fileName, $object);
 
