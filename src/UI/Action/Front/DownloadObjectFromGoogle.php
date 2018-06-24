@@ -15,7 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
  * Class DownloadObjectFromGoogle
  * @Route(
  *     name="dlGoogle",
- *     path="gallery/{slugGallery}/{objectName}"
+ *     path="gallery/dl/{slugGallery}/{objectName}"
  * )
  */
 class DownloadObjectFromGoogle
