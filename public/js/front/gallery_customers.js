@@ -10,13 +10,14 @@ $(document).ready(function () {
     $('.img-gallery-customer').on('click', function () {
         $('.sticky-white').hide(0);
         $('<body>').css('overflow', 'hidden');
-        imgId = $(this).attr('data-url');
+        imgUrl = $(this).attr('data-url');
+        imgId = $(this).attr('data-id');
 
         $('.modal-perso').show('1500');
 
         $('.img-container').attr('src', imgId);
         $('.link-to-dl-image').attr('href', imgId);
-        $('.link-to-dl-image').attr('download', imgId);
+        $('.link-to-dl-image').attr('download', imgUrl);
 
     });
 
