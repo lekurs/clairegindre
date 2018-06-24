@@ -27,7 +27,7 @@ class DownloadObjectFromGoogleResponder
         $response->headers->set('Content-Type', 'application/download');
         $response->headers->set('Content-Disposition', 'attachment; filename = " ' . $object);
 
-        readfile($object);
+//        readfile($object);
 
         return $response;
     }
