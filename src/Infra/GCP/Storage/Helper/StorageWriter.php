@@ -43,9 +43,7 @@ final class StorageWriter implements StorageWriterInterface
 
     public function dl($bucketName, $directory, $fileName)
     {
-        dump($bucketName, $directory, $fileName);
-        die;
-        return $this->storageBridge->createClient()->bucket($bucketName . '/' . $directory)->object($fileName);
+        return $this->storageBridge->createClient()->bucket($bucketName)->object($directory . $fileName);
     }
 
     /**
