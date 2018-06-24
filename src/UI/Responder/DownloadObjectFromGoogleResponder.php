@@ -17,8 +17,8 @@ class DownloadObjectFromGoogleResponder
     {
         $file = fopen($object, 'r');
 
-        dump($file, $filename);
-        die;
+//        dump($file, $filename);
+//        die;
 
         $response = new Response();
 
@@ -27,7 +27,7 @@ class DownloadObjectFromGoogleResponder
         $response->headers->set('Content-Type', 'application/download');
         $response->headers->set('Content-Disposition', 'attachment; filename = " ' . $filename);
 
-//        readfile($file);
+        readfile($filename);
 
         return $response;
     }
