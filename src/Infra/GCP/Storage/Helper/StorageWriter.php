@@ -41,6 +41,11 @@ final class StorageWriter implements StorageWriterInterface
         return $this->storageBridge->createClient()->bucket($bucketName)->upload(fopen($fileName, 'r'), $opts);
     }
 
+    public function dl($bucketName, $directory, $fileName)
+    {
+        return $this->storageBridge->createClient()->bucket($bucketName . '/' . $directory)->object($fileName);
+    }
+
     /**
      * @param $bucketName
      * @param array $opts

@@ -51,10 +51,6 @@ class DownloadObjectFromGoogle
 
         $object = $url . $gallery . $image . '.jpeg';
 
-//        dump($gallery);
-//        dump($object);
-//        die;
-
-        $this->fileHelper->downloadFile($object, '/test');
+        $this->fileHelper->downloadFile($gallery, $object, $object, '/test');
     }
 }

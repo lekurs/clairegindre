@@ -37,7 +37,7 @@ interface FileHelperInterface
      * @param $object
      * @param $destination
      */
-    public function downloadFile($object, $destination): void;
+//    public function downloadFile($object, $destination): void;
 
     /**
      * @param $bucketName
