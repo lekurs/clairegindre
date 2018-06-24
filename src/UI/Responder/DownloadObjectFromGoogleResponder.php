@@ -17,9 +17,9 @@ class DownloadObjectFromGoogleResponder
     {
         $response = new Response();
 
-        $response->headers->set('Content-Description: File Transfer');
-        $response->headers->set('Content-Type: application/octet-stream');
-        $response->headers->set('Content-Disposition : attachment; filename = " ' . $fileName . ' " ' );
+        $response->headers->set('Content-Description: File Transfer' ,'image/jpg');
+//        $response->headers->set('Content-Type: application/octet-stream');
+//        $response->headers->set('Content-Disposition : attachment; filename = " ' . $fileName . ' " ' );
 
         return $response;
     }
