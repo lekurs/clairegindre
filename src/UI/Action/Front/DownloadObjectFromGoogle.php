@@ -33,7 +33,7 @@ final class DownloadObjectFromGoogle implements DownloadObjectFromGoogleInterfac
 
     /**
      * DownloadObjectFromGoogle constructor.
-     * 
+     *
      * @param FileHelperInterface $fileHelper
      * @param string $urlStorage
      */
@@ -58,6 +58,8 @@ final class DownloadObjectFromGoogle implements DownloadObjectFromGoogleInterfac
         $fileName = '/' . $image . '.jpeg';
 
         $object = $url .  $gallery . $fileName;
+
+        fopen($fileName, 'r');
 
         $this->fileHelper->downloadFile($gallery, $fileName, $object);
     }
