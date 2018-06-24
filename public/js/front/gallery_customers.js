@@ -14,11 +14,9 @@ $(document).ready(function () {
 
         $('.modal-perso').show('1500');
 
-        // $('.slider-container').css('width', widthContainer + '%');
-        // $(images).css('width', (Math.round(100 / images.length) + '%') );
-
         $('.img-container').attr('src', imgId);
         $('.link-to-dl-image').attr('href', imgId);
+        $('.link-to-dl-image').attr('download', imgId);
 
     });
 
@@ -28,16 +26,4 @@ $(document).ready(function () {
         $('.sticky-white').show(0);
         $('<body>').css('overflow', 'auto');
     });
-
-    // $(container).on('click', function () {
-    //     //Création de la première image
-    //     carouselItem = $('<div class="carousel-item">');
-    //     console.log(carouselItem);
-    //     $('.carousel-inner').prepend(carouselItem);
-    //     $('.carousel-item.active').append('<img id="first">');
-    //     $('#first').addClass('d-block w-100').attr('src', $(this).find('img').attr('src'));
-    //
-    //     //On attribut l'ordre d'apparition des images
-    //
-    // });
 });
