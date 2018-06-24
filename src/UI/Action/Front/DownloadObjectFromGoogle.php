@@ -45,12 +45,15 @@ class DownloadObjectFromGoogle
     public function __invoke(Request $request)
     {
         $url = $this->urlStorage;
+
         $image = $request->attributes->get('objectName');
 
         $gallery = $request->attributes->get('slugGallery');
 
+        $fileName = $image . '.jpeg';
+
         $object = $url . $gallery . $image . '.jpeg';
 
-        $this->fileHelper->downloadFile($gallery, $object, $object, '/test');
+        $this->fileHelper->downloadFile($gallery, $fileName, $object, '/test');
     }
 }
