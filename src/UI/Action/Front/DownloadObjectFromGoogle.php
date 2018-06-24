@@ -57,14 +57,14 @@ final class DownloadObjectFromGoogle implements DownloadObjectFromGoogleInterfac
 
         $gallery = $request->attributes->get('slugGallery');
 
-        $fileName = $image . '.jpeg';
+        $fileName = '/' . $image . '.jpeg';
 
         $object = $url .  $gallery . $fileName;
 
 //        dump($object, $fileName);
 //        die;
 
-        $this->fileHelper->downloadFile($gallery, $fileName, $object);
+        $this->fileHelper->downloadFile();
 
         return $responder($object, $fileName);
     }
