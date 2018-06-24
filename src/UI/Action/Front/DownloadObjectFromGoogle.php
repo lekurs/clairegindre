@@ -26,17 +26,33 @@ class DownloadObjectFromGoogle
     private $fileHelper;
 
     /**
+     * @var string
+     */
+    private $urlStorage;
+
+    /**
      * DownloadObjectFromGoogle constructor.
      * @param FileHelperInterface $fileHelper
+     * @param string $urlStorage
      */
-    public function __construct(FileHelperInterface $fileHelper)
+    public function __construct(FileHelperInterface $fileHelper, string $urlStorage)
     {
         $this->fileHelper = $fileHelper;
+        $this->urlStorage = $urlStorage;
     }
+
 
     public function __invoke(Request $request)
     {
-        $object = $request->attributes->get('objectName');
+        $url = $this->urlStorage;
+        $image = $request->attributes->get('objectName');
+        $gallery = $request->attributes->get('gallerySlug');
+
+        $object = $url . $gallery . $image . '/jpg';
+
+        dump($url . '/' . $image . '/' . $gallery);
+        dump($object);
+        die;
 
         $this->fileHelper->downloadFile($object, '/test');
     }
