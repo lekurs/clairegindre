@@ -17,6 +17,9 @@ class DownloadObjectFromGoogleResponder
     {
         $file = fopen($object, 'r');
 
+        dump($file, $filename);
+        die;
+
         $response = new Response();
 
         $response->headers->set('Content-Type' ,'application/force-download');
