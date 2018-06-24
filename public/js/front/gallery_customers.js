@@ -10,7 +10,7 @@ $(document).ready(function () {
     $('.img-gallery-customer').on('click', function () {
         $('.sticky-white').hide(0);
         $('<body>').css('overflow', 'hidden');
-        imgId = $(this).attr('data-id');
+        imgId = $(this).attr('data-url');
 
         $('.modal-perso').show('1500');
 
