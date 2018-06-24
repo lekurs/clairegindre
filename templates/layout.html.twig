@@ -281,11 +281,27 @@
                 </div>
             </div>
             <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
-                <p class="text-uppercase">mentions légales</p>
+                <p class="text-uppercase mentions-link"><span data-toggle="modal" data-target="#showMentionsModal" >mentions légales</span></p>
                 <p>Tous droits réservés <i class="fa fa-copyright"></i> <strong>Claire GINDRE - 2018</strong></p>
             </div>
         </footer>
     {% endblock %}
+
+    <!-- MODAL MENTIONS -->
+    <div class="modal fade" id="showMentionsModal" tabindex="-1" role="dialog" aria-labelledby="ShowMentionsModalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-mentions" id="ShowMentionsModalTitle">Mentions légales</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                {{ include('front/mentions-legales.html.twig') }}
+            </div>
+        </div>
+    </div>
+
 </body>
 
 {% block javascripts %}

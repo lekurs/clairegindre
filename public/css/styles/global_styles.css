@@ -889,7 +889,7 @@ div.polygon-triangle-absolute {
 .label_date {
     position: absolute;
     padding-bottom: .5em;
-    z-index: 9999;
+    z-index: 1001;
     left: 7%;
     top: 27%;
 }
@@ -903,7 +903,7 @@ input#contact_date {
 .position-icon-datepicker {
     position: absolute;
     right: 65%;
-    z-index: 9999;
+    z-index: 1001;
     top: 27%;
     cursor: pointer;
 }
@@ -1246,4 +1246,32 @@ footer a.nav-footer:hover {
     max-height: 80%;
     width: auto;
     max-width: 100%;
+}
+
+/*****************************************************************/
+/*                                  MENTIONS LEGALES                                       */
+/*****************************************************************/
+
+p.mentions-link {
+    cursor: pointer;
+}
+
+h5.modal-mentions {
+    font-family: Assistant;
+    font-weight: lighter;
+    font-size: 1.5em;
+    text-transform: uppercase;
+}
+
+h2.title-mentions {
+    font-family: Assistant;
+    font-weight: lighter;
+    font-size: 1.2em;
+    text-transform: uppercase;
+    margin: .4em 0;
+}
+
+p.mentions {
+    margin: 0;
+    text-align: justify;
 }
