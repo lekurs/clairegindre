@@ -15,7 +15,7 @@ $(document).ready(function () {
         $('.modal-perso').show('1500');
 
         $('.img-container').attr('src', imgId);
-        $('.link-to-dl-image').attr('href', 'dl/' + imgId);
+        $('.link-to-dl-image').attr('href', imgId);
         $('.link-to-dl-image').attr('download', imgId);
 
     });
