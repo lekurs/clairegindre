@@ -8,6 +8,7 @@
 
 namespace App\UI\Action\Front;
 use App\Infra\GCP\Storage\Service\Interfaces\FileHelperInterface;
+use App\UI\Action\Front\Interfaces\DownloadObjectFromGoogleInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -18,7 +19,7 @@ use Symfony\Component\Routing\Annotation\Route;
  *     path="gallery/dl/{slugGallery}/{objectName}"
  * )
  */
-class DownloadObjectFromGoogle
+final class DownloadObjectFromGoogle implements DownloadObjectFromGoogleInterface
 {
     /**
      * @var FileHelperInterface
@@ -32,6 +33,7 @@ class DownloadObjectFromGoogle
 
     /**
      * DownloadObjectFromGoogle constructor.
+     * 
      * @param FileHelperInterface $fileHelper
      * @param string $urlStorage
      */
@@ -41,7 +43,10 @@ class DownloadObjectFromGoogle
         $this->urlStorage = $urlStorage;
     }
 
-
+    /**
+     * @param Request $request
+     * @return mixed|void
+     */
     public function __invoke(Request $request)
     {
         $url = $this->urlStorage;
@@ -53,9 +58,6 @@ class DownloadObjectFromGoogle
         $fileName = '/' . $image . '.jpeg';
 
         $object = $url .  $gallery . $fileName;
-
-//        dump($object);
-//        die;
 
         $this->fileHelper->downloadFile($gallery, $fileName, $object);
     }

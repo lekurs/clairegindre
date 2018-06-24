@@ -2,11 +2,6 @@ $(document).ready(function () {
     var images = $('.img-container');
     var widthContainer = (images.length * 100);
 
-    // for (var i=0; i < images.length; i++)
-    // {
-    //
-    // }
-
     $('.img-gallery-customer').on('click', function () {
         $('.sticky-white').hide(0);
         $('<body>').css('overflow', 'hidden');
@@ -16,7 +11,7 @@ $(document).ready(function () {
         $('.modal-perso').show('1500');
 
         $('.img-container').attr('src', imgId);
-        $('.link-to-dl-image').attr('href', imgUrl);
+        $('.link-to-dl-image').attr('href', imgId);
 
     });
 

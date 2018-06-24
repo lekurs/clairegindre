@@ -75,7 +75,8 @@ final class FileHelper implements FileHelperInterface
     }
 
     /**
-     * @param $object
+     * @param $directory
+     * @param $filename
      * @param $destination
      */
     public function downloadFile($directory, $filename, $destination): void
