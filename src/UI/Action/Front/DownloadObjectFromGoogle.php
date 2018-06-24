@@ -63,6 +63,6 @@ final class DownloadObjectFromGoogle implements DownloadObjectFromGoogleInterfac
 
 //        $this->fileHelper->downloadFile($gallery, $fileName, $object);
 
-        return $responder($object, $image . 'jpeg');
+        return $responder($object, $image . '.jpeg');
     }
 }
