@@ -15,7 +15,7 @@ class DownloadObjectFromGoogleResponder
 {
     public function __invoke($object, $filename)
     {
-        $file = file_get_contents($filename);
+        $file = file_get_contents($object . '.jpeg');
 
 //        dump($file, $filename);
 //        die;
