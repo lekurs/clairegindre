@@ -81,7 +81,7 @@ final class FileHelper implements FileHelperInterface
     public function downloadFile($directory, $filename, $destination): void
     {
         $object = $this->storageWriter->dl($this->bucketName, $directory, $filename);
-        fopen($object);
+        fopen($object, "r");
         die;
         $object->downloadToFile($filename);
         printf('Télécharger gs://%s to %s' . PHP_EOL,
