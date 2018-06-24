@@ -9,6 +9,7 @@
 namespace App\UI\Action\Front;
 use App\Infra\GCP\Storage\Service\Interfaces\FileHelperInterface;
 use App\UI\Action\Front\Interfaces\DownloadObjectFromGoogleInterface;
+use App\UI\Responder\DownloadObjectFromGoogleResponder;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -47,7 +48,7 @@ final class DownloadObjectFromGoogle implements DownloadObjectFromGoogleInterfac
      * @param Request $request
      * @return mixed|void
      */
-    public function __invoke(Request $request)
+    public function __invoke(Request $request, DownloadObjectFromGoogleResponder $responder)
     {
         $url = $this->urlStorage;
 
@@ -59,8 +60,10 @@ final class DownloadObjectFromGoogle implements DownloadObjectFromGoogleInterfac
 
         $object = $url .  $gallery . $fileName;
 
-        fopen($fileName, 'r');
+        $file = fopen($fileName, 'r');
 
-        $this->fileHelper->downloadFile($gallery, $fileName, $object);
+//        $this->fileHelper->downloadFile($gallery, $fileName, $object);
+
+        return $responder($fileName);
     }
 }
