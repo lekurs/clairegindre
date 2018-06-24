@@ -50,7 +50,7 @@ class DownloadObjectFromGoogle
 
         $gallery = $request->attributes->get('slugGallery');
 
-        $fileName = $image . '.jpeg';
+        $fileName = './' . $image . '.jpeg';
 
         $object = $url .  $gallery . $fileName;
 
