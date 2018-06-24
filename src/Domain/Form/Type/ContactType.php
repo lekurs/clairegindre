@@ -54,7 +54,7 @@ final class ContactType extends AbstractType
             ))
             ->add('date', DateType::class, array(
                 'label' => 'Date de l\'évenement',
-                'label_attr' => ['class' => 'label_contact'],
+                'label_attr' => ['class' => 'label_date'],
                 'widget' => 'single_text',
                 'required' => true,
             ))

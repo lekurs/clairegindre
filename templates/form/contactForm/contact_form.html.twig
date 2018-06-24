@@ -36,12 +36,11 @@
     </div>
     <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
         <div class="row no-gutters">
-            {#<div class="position-date-picker date" id='datepicker'></div>#}
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 d-flex justify-content-center">
-                <div class='input-group input-content date' id='datepicker'>
+                <div class='input-group input-content date datepicker-container' id='datepicker'>
                         {{ form_label(form.date) }}
                         {{ form_widget(form.date, {'attr': {'class': 'contact-form'}}) }}
-                    <span class="input-group-addon">
+                    <span class="input-group-addon position-icon-datepicker">
                         <i class="fa fa-calendar"></i>
                     </span>
                 </div>

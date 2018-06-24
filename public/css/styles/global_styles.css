@@ -874,16 +874,6 @@ div.polygon-triangle-absolute {
     margin: 15px 0;
     transition: .2s ease-out, opacity .2s linear;
     font-size: 16px;
-}.contact-form {
-    border: none;
-    border-radius: 0;
-    /*border-bottom: 1px solid #000000;*/
-    border-width: thin;
-    height: 70px;
-    width: 90%;
-    margin: 15px 0;
-    transition: .2s ease-out, opacity .2s linear;
-    font-size: 16px;
 }
 
 .label_contact {
@@ -894,6 +884,36 @@ div.polygon-triangle-absolute {
     left: 7%;
     color: #5f6b67;
     transition: all 0.5s;
+}
+
+.label_date {
+    position: absolute;
+    padding-bottom: .5em;
+    z-index: 9999;
+    left: 7%;
+    top: 27%;
+}
+
+input#contact_date {
+    margin-bottom: 15px !important;
+    padding-left: 7%;
+    padding-top: 4%;
+}
+
+.position-icon-datepicker {
+    position: absolute;
+    right: 65%;
+    z-index: 9999;
+    top: 27%;
+    cursor: pointer;
+}
+
+.position-icon-datepicker > i {
+    transition: all .5s ease-in-out;
+}
+
+.position-icon-datepicker > i:hover {
+    transform: scale(1.5);
 }
 
 legend.checkbox-label {
