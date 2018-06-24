@@ -15,10 +15,7 @@ class DownloadObjectFromGoogleResponder
 {
     public function __invoke($object, $filename)
     {
-        $file = file_get_contents($object . '.jpeg');
-
-//        dump($file, $filename);
-//        die;
+        $file = file_get_contents($object);
 
         $response = new Response();
 
@@ -26,8 +23,6 @@ class DownloadObjectFromGoogleResponder
         $response->headers->set('Content-Type', 'application/octet-stream');
         $response->headers->set('Content-Type', 'application/download');
 //        $response->headers->set('Content-Disposition', 'attachment; filename = " ' . $object);
-
-//        readfile($object);
 
         return $response;
     }
