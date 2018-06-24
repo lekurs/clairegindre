@@ -48,7 +48,7 @@ class DownloadObjectFromGoogle
         $image = $request->attributes->get('objectName');
         $gallery = $request->attributes->get('gallerySlug');
 
-        $object = $url . $gallery . $image . '/jpg';
+        $object = $url . $gallery . $image . '.jpg';
 
         dump($url . '/' . $image . '/' . $gallery);
         dump($object);
