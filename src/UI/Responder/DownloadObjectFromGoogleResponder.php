@@ -15,13 +15,15 @@ class DownloadObjectFromGoogleResponder
 {
     public function __invoke($fileName)
     {
+        $file = fopen($fileName, 'r');
+
         $response = new Response();
 
         $response->headers->set('Content-Description' ,'image.jpg');
 //        $response->headers->set('Content-Type', 'application/octet-stream');
         $response->headers->set('Content-Disposition', 'attachment; filename = " ' . $fileName . ' " ' );
 
-        readfile($fileName);
+        readfile($file);
 
         return $response;
     }
