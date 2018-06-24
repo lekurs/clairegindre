@@ -21,6 +21,8 @@ class DownloadObjectFromGoogleResponder
         $response->headers->set('Content-Type', 'application/octet-stream');
         $response->headers->set('Content-Disposition', 'attachment; filename = " ' . $fileName . ' " ' );
 
+        readfile($fileName):
+
         return $response;
     }
 }

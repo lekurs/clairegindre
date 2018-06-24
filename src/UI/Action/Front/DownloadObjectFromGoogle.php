@@ -63,10 +63,8 @@ final class DownloadObjectFromGoogle implements DownloadObjectFromGoogleInterfac
 
         $file = fopen($object, 'r');
 
-        readfile($file);
-
 //        $this->fileHelper->downloadFile($gallery, $fileName, $object);
 
-//        return $responder($object);
+        return $responder($object);
     }
 }
