@@ -113,7 +113,7 @@
 
         <div class="gallery">
                 {% for picture in galleries[3].pictures if picture.favorite > 0 %}
-                    <div class="portfolio-pres thumb" style="background: url({{ asset(picture.publicPath ~ '/' ~ picture.pictureName) }}) center center no-repeat; background-size: cover">
+                    <div class="portfolio-pres thumb left-1" style="background: url({{ asset(picture.publicPath ~ '/' ~ picture.pictureName) }}) center center no-repeat; background-size: cover">
                     <a href="{{ path('showArticle', { 'slugArticle': galleries[3].article.slug, 'slugGallery': galleries[3].slug }) }}" class="portfolio_link">
                     <div class="link_hover">
                     <h2 class="title-portfolio-contain">{{ galleries[3].title }}</h2>
@@ -124,7 +124,7 @@
                     </div>
                     {% endfor %}
             {% for picture in galleries[1].pictures if picture.favorite > 0 %}
-                <div class="portfolio-pres thumb" style="background: url({{ asset(picture.publicPath ~ '/' ~ picture.pictureName) }}) center center no-repeat; background-size: cover">
+                <div class="portfolio-pres thumb left-2" style="background: url({{ asset(picture.publicPath ~ '/' ~ picture.pictureName) }}) center center no-repeat; background-size: cover">
                     <a href="{{ path('showArticle', { 'slugArticle': galleries[1].article.slug, 'slugGallery': galleries[1].slug }) }}" class="portfolio_link">
                         <div class="link_hover">
                             <h2 class="title-portfolio-contain">{{ galleries[1].title }}</h2>
@@ -135,7 +135,7 @@
                 </div>
             {% endfor %}
             {% for picture in galleries[2].pictures if picture.favorite > 0 %}
-                <div class="portfolio-pres thumb" style="background: url({{ asset(picture.publicPath ~ '/' ~ picture.pictureName) }}) center center no-repeat; background-size: cover">
+                <div class="portfolio-pres thumb left-3" style="background: url({{ asset(picture.publicPath ~ '/' ~ picture.pictureName) }}) center center no-repeat; background-size: cover">
                     <a href="{{ path('showArticle', { 'slugArticle': galleries[2].article.slug, 'slugGallery': galleries[2].slug }) }}" class="portfolio_link">
                         <div class="link_hover">
                             <h2 class="title-portfolio-contain">{{ galleries[2].title }}</h2>
@@ -146,7 +146,7 @@
                 </div>
             {% endfor %}
             {% for picture in galleries[0].pictures if picture.favorite > 0 %}
-                <div class="portfolio-pres thumb" style="background: url({{ asset(picture.publicPath ~ '/' ~ picture.pictureName) }}) center center no-repeat; background-size: cover">
+                <div class="portfolio-pres thumb middle-1" style="background: url({{ asset(picture.publicPath ~ '/' ~ picture.pictureName) }}) center center no-repeat; background-size: cover">
                     <a href="{{ path('showArticle', { 'slugArticle': galleries[0].article.slug, 'slugGallery': galleries[0].slug }) }}" class="portfolio_link">
                         <div class="link_hover">
                             <h2 class="title-portfolio-contain">{{ galleries[0].title }}</h2>
@@ -157,7 +157,7 @@
                 </div>
             {% endfor %}
             {% for picture in galleries[4].pictures if picture.favorite > 0 %}
-                <div class="portfolio-pres thumb" style="background: url({{ asset(picture.publicPath ~ '/' ~ picture.pictureName) }}) center center no-repeat; background-size: cover">
+                <div class="portfolio-pres thumb middle-2" style="background: url({{ asset(picture.publicPath ~ '/' ~ picture.pictureName) }}) center center no-repeat; background-size: cover">
                     <a href="{{ path('showArticle', { 'slugArticle': galleries[4].article.slug, 'slugGallery': galleries[4].slug }) }}" class="portfolio_link">
                         <div class="link_hover">
                             <h2 class="title-portfolio-contain">{{ galleries[4].title }}</h2>
@@ -168,7 +168,7 @@
                 </div>
             {% endfor %}
             {% for picture in galleries[5].pictures if picture.favorite > 0 %}
-                <div class="portfolio-pres thumb" style="background: url({{ asset(picture.publicPath ~ '/' ~ picture.pictureName) }}) center center no-repeat; background-size: cover">
+                <div class="portfolio-pres thumb middle-3" style="background: url({{ asset(picture.publicPath ~ '/' ~ picture.pictureName) }}) center center no-repeat; background-size: cover">
                     <a href="{{ path('showArticle', { 'slugArticle': galleries[5].article.slug, 'slugGallery': galleries[5].slug }) }}" class="portfolio_link">
                         <div class="link_hover">
                             <h2 class="title-portfolio-contain">{{ galleries[5].title }}</h2>
@@ -179,7 +179,7 @@
                 </div>
             {% endfor %}
             {% for picture in galleries[6].pictures if picture.favorite > 0 %}
-                <div class="portfolio-pres thumb" style="background: url({{ asset(picture.publicPath ~ '/' ~ picture.pictureName) }}) center center no-repeat; background-size: cover">
+                <div class="portfolio-pres thumb middle-4" style="background: url({{ asset(picture.publicPath ~ '/' ~ picture.pictureName) }}) center center no-repeat; background-size: cover">
                     <a href="{{ path('showArticle', { 'slugArticle': galleries[6].article.slug, 'slugGallery': galleries[6].slug }) }}" class="portfolio_link">
                         <div class="link_hover">
                             <h2 class="title-portfolio-contain">{{ galleries[6].title }}</h2>
@@ -190,7 +190,7 @@
                 </div>
             {% endfor %}
             {% for picture in galleries[7].pictures if picture.favorite > 0 %}
-                <div class="portfolio-pres thumb" style="background: url({{ asset(picture.publicPath ~ '/' ~ picture.pictureName) }}) center center no-repeat; background-size: cover">
+                <div class="portfolio-pres thumb right-1" style="background: url({{ asset(picture.publicPath ~ '/' ~ picture.pictureName) }}) center center no-repeat; background-size: cover">
                     <a href="{{ path('showArticle', { 'slugArticle': galleries[7].article.slug, 'slugGallery': galleries[7].slug }) }}" class="portfolio_link">
                         <div class="link_hover">
                             <h2 class="title-portfolio-contain">{{ galleries[7].title }}</h2>
@@ -201,7 +201,7 @@
                 </div>
             {% endfor %}
             {% for picture in galleries[8].pictures if picture.favorite > 0 %}
-                <div class="portfolio-pres thumb" style="background: url({{ asset(picture.publicPath ~ '/' ~ picture.pictureName) }}) center center no-repeat; background-size: cover">
+                <div class="portfolio-pres thumb right-2" style="background: url({{ asset(picture.publicPath ~ '/' ~ picture.pictureName) }}) center center no-repeat; background-size: cover">
                     <a href="{{ path('showArticle', { 'slugArticle': galleries[8].article.slug, 'slugGallery': galleries[8].slug }) }}" class="portfolio_link">
                         <div class="link_hover">
                             <h2 class="title-portfolio-contain">{{ galleries[8].title }}</h2>
