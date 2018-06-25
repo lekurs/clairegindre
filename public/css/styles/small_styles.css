@@ -91,6 +91,10 @@
         height: 40%;
     }
 
+    .position-icon-datepicker {
+        right: 50%;
+    }
+
 
     .btn-contact {
         padding-right: 1em !important;
