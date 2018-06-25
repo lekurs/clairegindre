@@ -80,11 +80,11 @@ final class FileHelper implements FileHelperInterface
     }
 
     /**
-     * @param $directory
-     * @param $filename
-     * @param $destination
+     * @param string $directory
+     * @param string $filename
+     * @param string $destination
      */
-    public function downloadFile($directory, $filename, $destination): void
+    public function downloadFile(string $directory, string $filename, string $destination): void
     {
         $object = $this->storageWriter->dl($this->bucketName, $directory, $filename);
 
@@ -93,8 +93,9 @@ final class FileHelper implements FileHelperInterface
 
     /**
      * @param $directory
+     * @param $fileName
      */
-    public function deleteDirectory($directory, $fileName) : void
+    public function deleteDirectory(string $directory, string $fileName) : void
     {
         $this->storageWriter->deleteBucket($this->bucketName, $directory, $fileName);
     }

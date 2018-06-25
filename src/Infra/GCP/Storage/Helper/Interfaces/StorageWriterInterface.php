@@ -22,15 +22,17 @@ interface StorageWriterInterface
     public function __construct(StorageBridgeInterface $storageBridge);
 
     /**
-     * @param $bucketName
-     * @param $fileName
+     * @param string $bucketName
+     * @param string $fileName
      * @param array $opts
      * @return StorageObject
      */
-    public function writeBucket($bucketName, $fileName, $opts = []): StorageObject;
+    public function writeBucket(string $bucketName, string $fileName, $opts = []): StorageObject;
 
     /**
-     * @param $bucketName
+     * @param string $bucketName
+     * @param string $directory
+     * @param string $fileName
      */
-//    public function deleteBucket($bucketName) : void;
+    public function deleteBucket(string $bucketName, string $directory, string $fileName) : void;
 }

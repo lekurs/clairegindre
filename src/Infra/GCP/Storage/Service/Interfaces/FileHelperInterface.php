@@ -39,14 +39,15 @@ interface FileHelperInterface
     public function upload(\SplFileInfo $toUploadFile, string $uploadDirectory): void;
 
     /**
-     * @param $directory
-     * @param $filename
-     * @param $destination
+     * @param string $directory
+     * @param string $filename
+     * @param string $destination
      */
-    public function downloadFile($directory, $filename, $destination): void;
+    public function downloadFile(string $directory, string $filename, string $destination): void;
 
     /**
-     * @param $directory
+     * @param string $directory
+     * @param string $fileName
      */
-//    public function deleteDirectory($directory) : void;
+    public function deleteDirectory(string $directory, string $fileName) : void;
 }

@@ -47,10 +47,11 @@ final class StorageWriter implements StorageWriterInterface
     }
 
     /**
-     * @param $bucketName
-     * @param array $opts
+     * @param string $bucketName
+     * @param string $directory
+     * @param string $fileName
      */
-    public function deleteBucket($bucketName, $directory, $fileName) : void
+    public function deleteBucket(string $bucketName, string $directory, string $fileName) : void
     {
         $this->storageBridge->createClient()->bucket($bucketName)->object($directory . '/' . $fileName)->delete();
     }
