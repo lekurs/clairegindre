@@ -91,13 +91,13 @@
         height: 40%;
     }
 
-    .label_date {
-        top: 15% !important;
-    }
+    /*.label_date {*/
+        /*top: 15% !important;*/
+    /*}*/
 
     .position-icon-datepicker {
         right: 50%;
-        top: 15%;
+        /*top: 15%;*/
     }
 
 
