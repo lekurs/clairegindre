@@ -47,7 +47,7 @@ final class DownloadObjectFromGoogle implements DownloadObjectFromGoogleInterfac
     /**
      * @param Request $request
      * @param DownloadObjectFromGoogleResponder $responder
-     * @return mixed|\Symfony\Component\HttpFoundation\Response
+     * @return mixed|void
      */
     public function __invoke(Request $request, DownloadObjectFromGoogleResponder $responder)
     {
@@ -61,8 +61,6 @@ final class DownloadObjectFromGoogle implements DownloadObjectFromGoogleInterfac
 
         $object = $url .  $gallery . $fileName;
 
-//        $this->fileHelper->downloadFile($gallery, $fileName, $object);
-
-        return $responder($object, $fileName);
+        return $responder($object);
     }
 }
