@@ -46,13 +46,18 @@ final class UserAuthenticationGuard extends AbstractFormLoginAuthenticator
 
     /**
      * UserAuthenticationGuard constructor.
+     *
      * @param CsrfTokenManagerInterface $csrfToken
      * @param UrlGeneratorInterface $urlGenerator
      * @param GalleryRepositoryInterface $galleryRepository
      * @param UserPasswordEncoderInterface $passwordEncoder
      */
-    public function __construct(CsrfTokenManagerInterface $csrfToken, UrlGeneratorInterface $urlGenerator, GalleryRepositoryInterface $galleryRepository, UserPasswordEncoderInterface $passwordEncoder)
-    {
+    public function __construct(
+        CsrfTokenManagerInterface $csrfToken,
+        UrlGeneratorInterface $urlGenerator,
+        GalleryRepositoryInterface $galleryRepository,
+        UserPasswordEncoderInterface $passwordEncoder
+    ) {
         $this->csrfToken = $csrfToken;
         $this->urlGenerator = $urlGenerator;
         $this->galleryRepository = $galleryRepository;

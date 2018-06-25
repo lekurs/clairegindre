@@ -86,7 +86,7 @@ final class DeleteArticleAction implements DeleteArticleActionInterface
 
             $this->galleryRepository->removeArticle($article, $gallery);
 
-            $this->session->getFlashBag()->add('success', 'La galerie à bien été supprimée');
+            $this->session->getFlashBag()->add('success', 'L\'article à bien été supprimé');
 
             return $responder();
         }

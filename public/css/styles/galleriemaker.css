@@ -4,8 +4,8 @@
 
 .galleriemaker-row{
     padding:5px;
-    background:#eee;
-    border:1px solid #ddd;
+    /*background:#eee;*/
+    /*border:1px solid #ddd;*/
 }
 
 li.galleriemaker-capsule{
@@ -36,8 +36,21 @@ li.galleriemaker-indication{
     text-align:  right;
 }
 
+.galleriemaker-baraction {
+    position: fixed;
+    top: 96%;
+    left: 5px;
+    width: 23%;
+    background-color: #EEEEEE;
+    border: 1px solid #dddddd;
+    color: #000000;
+    text-transform: uppercase;
+    font-size: 0.8em;
+    font-weight: bold;
+}
+
 .galleriemaker-baraction button.btn{
-    margin-right:10px
+    margin-right:10px;
 }
 
 .galleriemaker-btn-del{
