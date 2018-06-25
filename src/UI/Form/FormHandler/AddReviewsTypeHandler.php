@@ -111,7 +111,12 @@ final class AddReviewsTypeHandler implements AddReviewsTypeHandlerInterface
 
             $this->pictureUploaderHelper->move($form->getData()->image, $this->targetDir . '/reviews/' . str_replace(' ', '_', strtolower($form->getData()->title)), $form->getData()->image->getClientOriginalName());
 
-            $picture = new Picture($form->getData()->image->getClientOriginalName(), '/images/upload/reviews/' .$form->getData()->title , $form->getData()->image->guessClientExtension());
+            $picture = new Picture(
+                $form->getData()->image->getClientOriginalName(),
+                '/images/upload/reviews/' .$form->getData()->title ,
+                '/images/upload/reviews/' .$form->getData()->title ,
+                $form->getData()->image->guessClientExtension()
+            );
 
             $reviews = $this->reviewsBuilder->create(
                                                                                         $form->getData()->title,
