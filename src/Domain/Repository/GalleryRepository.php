@@ -113,6 +113,7 @@ final class GalleryRepository extends ServiceEntityRepository implements Gallery
                             ->where('gallery.article IS NOT NULL')
                             ->leftJoin('gallery.article', 'article')
                             ->where('article.online = 1')
+                            ->orderBy('gallery.eventDate', 'DESC')
                             ->getQuery()
                             ->getResult();
     }
