@@ -53,11 +53,24 @@ final class MailerHelper implements MailerHelperInterface
      */
     public function sendEmail($subject, $to, $from)
     {
-        $message = (new \Swift_Message())
+        $message = (new \Swift_Message());
+
+        $logo = $message->embed(\Swift_Image::fromPath('images/interface/logos/logo-color.png', 'image/png'));
+        $facebook = $message->embed(\Swift_Image::fromPath('images/interface/pictos/facebook.png', 'image/png'));
+        $pinterest = $message->embed(\Swift_Image::fromPath('images/interface/pictos/pinterest.png', 'image/png'));
+        $insta = $message->embed(\Swift_Image::fromPath('images/interface/pictos/instagram.png', 'image/png'));
+
+
+        $message
             ->setSubject($subject)
             ->setTo($this->mailerAdminEmail)
             ->setFrom($from)
-            ->setBody($this->twig->render('mails/customerMail.html.twig'), 'text/html');
+            ->setBody($this->twig->render('mails/customerMail.html.twig', [
+                'attachment' => $logo,
+                'facebook' => $facebook,
+                'instagram', $insta,
+                'pinterest' => $pinterest
+            ]), 'text/html');
 
         $this->swiftMailer->send($message);
     }
@@ -73,11 +86,23 @@ final class MailerHelper implements MailerHelperInterface
      */
     public function sendConfirmation($subject, $to, $from)
     {
-        $message = (new \Swift_Message())
+        $message = (new \Swift_Message());
+
+        $logo = $message->embed(\Swift_Image::fromPath('images/interface/logos/logo-color.png', 'image/png'));
+        $facebook = $message->embed(\Swift_Image::fromPath('images/interface/pictos/facebook.png', 'image/png'));
+        $pinterest = $message->embed(\Swift_Image::fromPath('images/interface/pictos/pinterest.png', 'image/png'));
+        $insta = $message->embed(\Swift_Image::fromPath('images/interface/pictos/instagram.png', 'image/png'));
+
+        $message
             ->setSubject($subject)
             ->setTo($to)
             ->setFrom($from)
-            ->setBody($this->twig->render('mails/confirmation_mail.html.twig'), 'text/html');
+            ->setBody($this->twig->render('mails/confirmation_mail.html.twig', [
+                'attachment' => $logo,
+                'facebook' => $facebook,
+                'instagram', $insta,
+                'pinterest' => $pinterest
+            ]), 'text/html');
 
         $this->swiftMailer->send($message);
     }
@@ -97,16 +122,20 @@ final class MailerHelper implements MailerHelperInterface
         $message = (new \Swift_Message());
 
         $logo = $message->embed(\Swift_Image::fromPath('images/interface/logos/logo-color.png', 'image/png'));
-        $facebook = $message->embed(\Swift_Image::fromPath('images/interface/facebook.png', 'image/png'));
-        $pinterest = $message->embed(\Swift_Image::fromPath('images/interface/pinterest.png', 'image/png'));
-        $instagram = $message->embed(\Swift_Image::fromPath('images/interface/instagram.png', 'image/png'));
+        $facebook = $message->embed(\Swift_Image::fromPath('images/interface/fpictos/acebook.png', 'image/png'));
+        $pinterest = $message->embed(\Swift_Image::fromPath('images/interface/pictos/pinterest.png', 'image/png'));
+        $insta = $message->embed(\Swift_Image::fromPath('images/interface/pictos/instagram.png', 'image/png'));
 
         $message->setSubject('[NE PAS REPONDRE]' . $subject)
             ->setTo($to)
             ->setFrom($from)
             ->setCc($from)
             ->setBody($this->twig->render('mails/response_mail.html.twig', [
-                'content' => $content, 'attachment' => $logo, 'facebook' => $facebook, 'instagram', $instagram, 'pinterest' => $pinterest
+                'content' => $content,
+                'attachment' => $logo,
+                'facebook' => $facebook,
+                'instagram', $insta,
+                'pinterest' => $pinterest
             ]), 'text/html');
 
         $this->swiftMailer->send($message);

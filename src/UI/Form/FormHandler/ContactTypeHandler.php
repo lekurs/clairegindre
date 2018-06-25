@@ -122,7 +122,6 @@ final class ContactTypeHandler implements ContactTypeHandlerInterface
             $this->mailerHelper->sendConfirmation('Claire GINDRE - Merci pour votre demande : ' . $form->getData()->name . ' - ' . $form->getData()->firstname, $form->getData()->email, $user->getEmail());
 
             $this->session->getFlashBag()->add('success', 'Votre demande de renseignements est validée');
-            $this->session->getFlashBag()->add('error', 'Merci de vérifier les champs renseignés');
 
             return true;
         }
