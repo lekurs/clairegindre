@@ -43,25 +43,25 @@ final class AddPrestationAction implements AddPrestationActionInterface
     private $addBenefitTypeHandler;
 
     /**
-     * @var EntityManagerInterface
+     * @var BenefitRepositoryInterface
      */
-    private $entityManager;
+    private $benefitRepository;
 
     /**
      * AddPrestationAction constructor.
      *
      * @param FormFactoryInterface $formFactory
      * @param AddBenefitTypeHandler $addBenefitTypeHandler
-     * @param EntityManagerInterface $entityManager
+     * @param BenefitRepositoryInterface $benefitRepository
      */
     public function __construct(
         FormFactoryInterface $formFactory,
         AddBenefitTypeHandler $addBenefitTypeHandler,
-        EntityManagerInterface $entityManager
+        BenefitRepositoryInterface $benefitRepository
     ) {
         $this->formFactory = $formFactory;
         $this->addBenefitTypeHandler = $addBenefitTypeHandler;
-        $this->entityManager = $entityManager;
+        $this->benefitRepository = $benefitRepository;
     }
 
     /**
@@ -73,7 +73,7 @@ final class AddPrestationAction implements AddPrestationActionInterface
     {
         $addPrestation = $this->formFactory->create(AddBenefitType::class)->handleRequest($request);
 
-        $benefits = $this->entityManager->getRepository(Benefit::class)->getAll();
+        $benefits = $this->benefitRepository->getAll();
 
         if($this->addBenefitTypeHandler->handle($addPrestation)) {
 

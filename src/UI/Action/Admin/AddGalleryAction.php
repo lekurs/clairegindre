@@ -14,10 +14,12 @@ use App\Domain\Models\User;
 use App\UI\Action\Admin\Interfaces\AddGalleryActionInterface;
 use App\UI\Form\FormHandler\Interfaces\AddGalleryTypeHandlerInterface;
 use App\UI\Responder\Admin\Interfaces\AddGalleryResponderInterface;
+use App\UI\Responder\Errors\AuthenticationErrorsResponder;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 /**
  * Class AddGalleryAction
@@ -49,20 +51,36 @@ final class AddGalleryAction implements AddGalleryActionInterface
     private $entityManager;
 
     /**
+     * @var AuthenticationErrorsResponder
+     */
+    private $authentificationError;
+
+    /**
+     * @var AuthorizationCheckerInterface
+     */
+    private $authorizationChecker;
+
+    /**
      * AddGalleryAction constructor.
      *
      * @param FormFactoryInterface $formFactory
      * @param AddGalleryTypeHandlerInterface $galleryHandler
      * @param EntityManagerInterface $entityManager
+     * @param AuthenticationErrorsResponder $errorsResponder
+     * @param AuthorizationCheckerInterface $authorizationChecker
      */
     public function __construct(
         FormFactoryInterface $formFactory,
         AddGalleryTypeHandlerInterface $galleryHandler,
-        EntityManagerInterface $entityManager
+        EntityManagerInterface $entityManager,
+        AuthenticationErrorsResponder $errorsResponder,
+        AuthorizationCheckerInterface $authorizationChecker
     ) {
         $this->formFactory = $formFactory;
         $this->galleryHandler = $galleryHandler;
         $this->entityManager = $entityManager;
+        $this->authentificationError = $errorsResponder;
+        $this->authorizationChecker = $authorizationChecker;
     }
 
     /**
@@ -72,15 +90,23 @@ final class AddGalleryAction implements AddGalleryActionInterface
      */
     public function __invoke(Request $request, AddGalleryResponderInterface $responder)
     {
-        $form = $this->formFactory->create(AddGalleryType::class)->handleRequest($request);
+        if ($this->authorizationChecker->isGranted('ROLE_ADMIN')) {
 
-        $user = $this->entityManager->getRepository(User::class)->find($request->request->get('add_gallery')['user']);
+            $form = $this->formFactory->create(AddGalleryType::class)->handleRequest($request);
 
-        if ($this->galleryHandler->handle($form, $user)) {
+            $user = $this->entityManager->getRepository(User::class)->find($request->request->get('add_gallery')['user']);
 
-            return $responder(true, $form, $user);
+            if ($this->galleryHandler->handle($form, $user)) {
+
+                return $responder(true, $form, $user);
+            }
+
+            return $responder(false, $user);
+        } else {
+
+            $error = $this->authentificationError;
+
+            return $error();
         }
-
-        return $responder(false, $user);
     }
 }

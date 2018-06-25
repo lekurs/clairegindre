@@ -9,9 +9,9 @@
 namespace App\UI\Action\Admin\Interfaces;
 
 
+use App\Domain\Repository\Interfaces\BenefitRepositoryInterface;
 use App\UI\Form\FormHandler\AddBenefitTypeHandler;
 use App\UI\Responder\Admin\Interfaces\AddPrestationResponderInterface;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -22,12 +22,12 @@ interface AddPrestationActionInterface
      *
      * @param FormFactoryInterface $formFactory
      * @param AddBenefitTypeHandler $addBenefitTypeHandler
-     * @param EntityManagerInterface $entityManager
+     * @param BenefitRepositoryInterface $benefitRepository
      */
     public function __construct(
         FormFactoryInterface $formFactory,
         AddBenefitTypeHandler $addBenefitTypeHandler,
-        EntityManagerInterface $entityManager
+        BenefitRepositoryInterface $benefitRepository
     );
 
     /**

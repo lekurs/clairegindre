@@ -24,7 +24,7 @@ interface BenefitRepositoryInterface
     /**
      * @return array
      */
-    public function getAll(): array ;
+    public function getAll() ;
 
     /**
      * @param $id

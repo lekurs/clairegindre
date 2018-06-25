@@ -27,9 +27,9 @@ final class BenefitRepository extends ServiceEntityRepository implements Benefit
     }
 
     /**
-     * @return array
+     * @return array|mixed
      */
-    public function getAll(): array
+    public function getAll()
     {
         return $this->createQueryBuilder('benefit')
             ->orderBy('benefit.id')

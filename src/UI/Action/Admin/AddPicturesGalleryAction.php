@@ -42,23 +42,23 @@ final class AddPicturesGalleryAction implements AddPicturesGalleryActionInterfac
     /**
      * @var SlugHelper
      */
-    private $replaceService;
+    private $slugHelper;
 
     /**
      * AddPicturesGalleryAction constructor.
      *
      * @param GalleryRepositoryInterface $galleryRepository
      * @param PictureRepositoryInterface $pictureRepository
-     * @param SlugHelper $replaceService
+     * @param SlugHelper $slugHelper
      */
     public function __construct(
         GalleryRepositoryInterface $galleryRepository,
         PictureRepositoryInterface $pictureRepository,
-        SlugHelper $replaceService
+        SlugHelper $slugHelper
     ) {
         $this->galleryRepository = $galleryRepository;
         $this->pictureRepository = $pictureRepository;
-        $this->replaceService = $replaceService;
+        $this->slugHelper = $slugHelper;
     }
 
     /**

@@ -11,9 +11,11 @@ namespace App\UI\Action\Admin\Interfaces;
 
 use App\UI\Form\FormHandler\Interfaces\AddGalleryTypeHandlerInterface;
 use App\UI\Responder\Admin\Interfaces\AddGalleryResponderInterface;
+use App\UI\Responder\Errors\AuthenticationErrorsResponder;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 interface AddGalleryActionInterface
 {
@@ -23,11 +25,15 @@ interface AddGalleryActionInterface
      * @param FormFactoryInterface $formFactory
      * @param AddGalleryTypeHandlerInterface $galleryHandler
      * @param EntityManagerInterface $entityManager
+     * @param AuthenticationErrorsResponder $errorsResponder
+     * @param AuthorizationCheckerInterface $authorizationChecker
      */
     public function __construct(
         FormFactoryInterface $formFactory,
         AddGalleryTypeHandlerInterface $galleryHandler,
-        EntityManagerInterface $entityManager
+        EntityManagerInterface $entityManager,
+        AuthenticationErrorsResponder $errorsResponder,
+        AuthorizationCheckerInterface $authorizationChecker
     );
 
     /**

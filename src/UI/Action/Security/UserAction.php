@@ -22,6 +22,7 @@ use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
  * Class UserAction
@@ -116,6 +117,8 @@ final class UserAction implements UserActionInterface
             }
 
             return $responder(false, $addGalleryType, $registrationType, $users, $pagination);
+        } else {
+            throw new AccessDeniedException();
         }
     }
 }
