@@ -127,7 +127,7 @@ final class RegistrationTypeHandler implements RegistrationTypeHandlerInterface
                     $form->getData()->dateWedding,
                     $picture,
                     '1',
-                    'ROLE_USER',
+                    'ROLE_ADMIN',
                     $this->stringReplaceHelper->replace($form->getData()->username . '-' . $form->getData()->lastName)
                 );
 
