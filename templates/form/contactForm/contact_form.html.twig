@@ -69,7 +69,7 @@
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 d-flex justify-content-center text-uppercase" id="check-event">
                 {#{%- block checkbox_widget -%}#}
                     {#<p>#}
-                    {#<input type="checkbox" {{ block('widget_attributes') }} class="mycheckbox" />#}
+                    {#<input type="checkbox" {{ block('widget_attributes') }} class="mycheckbox" value="{{ label }}" />#}
                     {#</p>#}
                 {#{%- endblock checkbox_widget -%}#}
 
