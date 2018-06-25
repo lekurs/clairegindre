@@ -9,10 +9,10 @@
 namespace App\UI\Responder\Admin;
 
 
-use App\UI\Responder\Admin\Interfaces\UpdateOnlineUserAjaxResponderInterface;
+use App\UI\Responder\Admin\Interfaces\UpdateReviewOnlineAjaxResponderInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-final class UpdateReviewOnlineAjaxResponder implements UpdateOnlineUserAjaxResponderInterface
+final class UpdateReviewOnlineAjaxResponder implements UpdateReviewOnlineAjaxResponderInterface
 {
     /**
      * @return JsonResponse
