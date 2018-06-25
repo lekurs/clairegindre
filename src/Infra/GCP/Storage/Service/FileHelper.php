@@ -36,18 +36,17 @@ final class FileHelper implements FileHelperInterface
     private $backupBucket;
 
     /**
-     * @var SlugHelperInterface
-     */
-    private $slugHelper;
-
-    /**
      * FileHelper constructor.
      *
      * @param StorageWriterInterface $storageWriter
      * @param string $bucketName
+     * @param string $backupBucket
      */
-    public function __construct(StorageWriterInterface $storageWriter, string $bucketName, string $backupBucket, SlugHelperInterface $slugHelper)
-    {
+    public function __construct(
+        StorageWriterInterface $storageWriter,
+        string $bucketName,
+        string $backupBucket
+    ) {
         $this->storageWriter = $storageWriter;
         $this->bucketName = $bucketName;
         $this->backupBucket = $backupBucket;

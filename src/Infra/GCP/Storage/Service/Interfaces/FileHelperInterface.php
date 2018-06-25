@@ -18,8 +18,13 @@ interface FileHelperInterface
      *
      * @param StorageWriterInterface $storageWriter
      * @param string $bucketName
+     * @param string $backupBucket
      */
-//    public function __construct(StorageWriterInterface $storageWriter, string $bucketName, string $backupBucket);
+    public function __construct(
+        StorageWriterInterface $storageWriter,
+        string $bucketName,
+        string $backupBucket
+    );
 
     /**
      * @param \SplFileInfo $file
