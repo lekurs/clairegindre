@@ -13,6 +13,7 @@ use App\UI\Action\Admin\Interfaces\DeletePictureGalleryAjaxActionInterface;
 use App\UI\Responder\Admin\Interfaces\DeletePictureGalleryAjaxResponderInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -43,20 +44,28 @@ final class DeletePictureGalleryAjaxAction implements DeletePictureGalleryAjaxAc
     private $targetDirPublic;
 
     /**
+     * @var SessionInterface
+     */
+    private $session;
+
+    /**
      * DeletePictureGalleryAjaxAction constructor.
      *
      * @param PictureRepositoryInterface $pictureRepository
      * @param Filesystem $fileSystem
      * @param string $targetDirPublic
+     * @param SessionInterface $session
      */
     public function __construct(
         PictureRepositoryInterface $pictureRepository,
         Filesystem $fileSystem,
-        string $targetDirPublic
+        string $targetDirPublic,
+        SessionInterface $session
     ) {
         $this->pictureRepository = $pictureRepository;
         $this->fileSystem = $fileSystem;
         $this->targetDirPublic = $targetDirPublic;
+        $this->session = $session;
     }
 
     /**
@@ -71,6 +80,8 @@ final class DeletePictureGalleryAjaxAction implements DeletePictureGalleryAjaxAc
         $this->fileSystem->remove($this->targetDirPublic . '/' .$picture->getPublicPath(). '/' .$picture->getPictureName());
 
         $this->pictureRepository->delete($picture);
+
+        $this->session->getFlashBag()->add('success', 'La galerie a été supprimée');
 
         return $responder();
     }

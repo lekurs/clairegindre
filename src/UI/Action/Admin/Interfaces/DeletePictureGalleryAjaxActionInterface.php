@@ -13,6 +13,7 @@ use App\Domain\Repository\Interfaces\PictureRepositoryInterface;
 use App\UI\Responder\Admin\Interfaces\DeletePictureGalleryAjaxResponderInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 interface DeletePictureGalleryAjaxActionInterface
 {
@@ -22,8 +23,14 @@ interface DeletePictureGalleryAjaxActionInterface
      * @param PictureRepositoryInterface $pictureRepository
      * @param Filesystem $fileSystem
      * @param string $targetDirPublic
+     * @param SessionInterface $session
      */
-    public function __construct(PictureRepositoryInterface $pictureRepository, Filesystem $fileSystem, string $targetDirPublic);
+    public function __construct(
+        PictureRepositoryInterface $pictureRepository,
+        Filesystem $fileSystem,
+        string $targetDirPublic,
+        SessionInterface $session
+    );
 
     /**
      * @param Request $request

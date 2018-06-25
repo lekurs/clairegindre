@@ -11,6 +11,7 @@ namespace App\Infra\GCP\Storage\Service;
 
 use App\Infra\GCP\Storage\Helper\Interfaces\StorageWriterInterface;
 use App\Infra\GCP\Storage\Service\Interfaces\FileHelperInterface;
+use App\Services\Interfaces\SlugHelperInterface;
 
 final class FileHelper implements FileHelperInterface
 {
@@ -35,12 +36,17 @@ final class FileHelper implements FileHelperInterface
     private $backupBucket;
 
     /**
+     * @var SlugHelperInterface
+     */
+    private $slugHelper;
+
+    /**
      * FileHelper constructor.
      *
      * @param StorageWriterInterface $storageWriter
      * @param string $bucketName
      */
-    public function __construct(StorageWriterInterface $storageWriter, string $bucketName, string $backupBucket)
+    public function __construct(StorageWriterInterface $storageWriter, string $bucketName, string $backupBucket, SlugHelperInterface $slugHelper)
     {
         $this->storageWriter = $storageWriter;
         $this->bucketName = $bucketName;
@@ -53,9 +59,7 @@ final class FileHelper implements FileHelperInterface
      */
     public function generateFileName(\SplFileInfo $file): string
     {
-        dump($file->getClientOriginalName());
-        die;
-        return $this->newFileName = $file->getBasename();
+        return $this->newFileName = strtolower($this->slugHelper->replace($file->getClientOriginalName()));
     }
 
     /**
