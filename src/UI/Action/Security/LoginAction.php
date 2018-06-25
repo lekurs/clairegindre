@@ -48,8 +48,6 @@ final class LoginAction implements LoginActionInterface
      */
     public function __invoke(Request $request, UserConnectionResponderInterface $responder)
     {
-        phpinfo();
-        die;
         $form = $this->formFactory->create(LoginType::class)->handleRequest($request);
 
         return $responder($form);
