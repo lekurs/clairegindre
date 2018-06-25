@@ -127,14 +127,6 @@ class Article implements ArticleInterface
     }
 
     /**
-     * @param mixed $id
-     */
-    public function setId($id): void
-    {
-        $this->id = $id;
-    }
-
-    /**
      * @return string
      */
     public function getTitle(): string
