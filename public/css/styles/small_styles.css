@@ -148,30 +148,6 @@
         text-align: center;
     }
 
-    a#link-home {
-        width: 2.5em;
-    }
-
-    a#link-photo {
-        width: 2.8em
-    }
-
-    a#link-blog {
-        width: 2.4em;
-    }
-
-    a#link-informations {
-        width: 6.5em;
-    }
-
-    a#link-customers {
-        width: 3.5em;
-    }
-
-    a#link-contact {
-        width: 4em;
-    }
-
     footer p {
         text-align: center;
     }
