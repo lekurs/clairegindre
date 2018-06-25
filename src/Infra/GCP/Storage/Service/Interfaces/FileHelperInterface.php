@@ -48,5 +48,5 @@ interface FileHelperInterface
     /**
      * @param $directory
      */
-    public function deleteDirectory($directory) : void;
+//    public function deleteDirectory($directory) : void;
 }

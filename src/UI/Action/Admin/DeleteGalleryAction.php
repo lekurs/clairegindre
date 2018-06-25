@@ -109,6 +109,8 @@ final class DeleteGalleryAction implements DeleteGalleryActionInterface
             foreach($gallery->getPictures() as $picture) {
 
                 $gallery->getPictures()->removeElement($picture);
+
+                $this->fileHelper->deleteDirectory($gallery->getSlug(), $picture->getPictureName());
             }
 
             $this->fileSystem->remove($this->dirGallery .  $gallery->getSlug());

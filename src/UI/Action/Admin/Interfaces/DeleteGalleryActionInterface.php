@@ -30,15 +30,15 @@ interface DeleteGalleryActionInterface
      * @param AuthorizationCheckerInterface $authorizationChecker
      * @param AuthenticationErrorsResponder $errorResponder
      */
-    public function __construct(
-        GalleryRepositoryInterface $galleryRepository,
-        Filesystem $fileSystem,
-        string $dirGallery,
-        string $dirPicture,
-        FileHelperInterface $fileHelper,
-        AuthorizationCheckerInterface $authorizationChecker,
-        AuthenticationErrorsResponder $errorResponder
-    );
+//    public function __construct(
+//        GalleryRepositoryInterface $galleryRepository,
+//        Filesystem $fileSystem,
+//        string $dirGallery,
+//        string $dirPicture,
+//        FileHelperInterface $fileHelper,
+//        AuthorizationCheckerInterface $authorizationChecker,
+//        AuthenticationErrorsResponder $errorResponder
+//    );
 
     /**
      * @param Request $request
