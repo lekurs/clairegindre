@@ -12,8 +12,10 @@ namespace App\UI\Action\Admin\Interfaces;
 use App\Domain\Repository\Interfaces\BenefitRepositoryInterface;
 use App\UI\Form\FormHandler\AddBenefitTypeHandler;
 use App\UI\Responder\Admin\Interfaces\AddPrestationResponderInterface;
+use App\UI\Responder\Errors\AuthenticationErrorsResponder;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 interface AddPrestationActionInterface
 {
@@ -23,11 +25,15 @@ interface AddPrestationActionInterface
      * @param FormFactoryInterface $formFactory
      * @param AddBenefitTypeHandler $addBenefitTypeHandler
      * @param BenefitRepositoryInterface $benefitRepository
+     * @param AuthorizationCheckerInterface $authorizationChecker
+     * @param AuthenticationErrorsResponder $errorResponder
      */
     public function __construct(
         FormFactoryInterface $formFactory,
         AddBenefitTypeHandler $addBenefitTypeHandler,
-        BenefitRepositoryInterface $benefitRepository
+        BenefitRepositoryInterface $benefitRepository,
+        AuthorizationCheckerInterface $authorizationChecker,
+        AuthenticationErrorsResponder $errorResponder
     );
 
     /**

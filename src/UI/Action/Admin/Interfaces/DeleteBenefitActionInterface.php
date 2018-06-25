@@ -11,6 +11,7 @@ namespace App\UI\Action\Admin\Interfaces;
 
 use App\Domain\Repository\Interfaces\BenefitRepositoryInterface;
 use App\UI\Responder\Admin\Interfaces\DeleteBenefitResponderInterface;
+use App\UI\Responder\Errors\AuthenticationErrorsResponder;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
@@ -23,11 +24,13 @@ interface DeleteBenefitActionInterface
      * @param BenefitRepositoryInterface $benefitRepository
      * @param TokenStorageInterface $tokenStorage
      * @param AuthorizationCheckerInterface $authorization
+     * @param AuthenticationErrorsResponder $errorsResponder
      */
     public function __construct(
         BenefitRepositoryInterface $benefitRepository,
         TokenStorageInterface $tokenStorage,
-        AuthorizationCheckerInterface $authorization
+        AuthorizationCheckerInterface $authorization,
+        AuthenticationErrorsResponder $errorsResponder
     );
 
     /**

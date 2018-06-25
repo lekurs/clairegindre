@@ -13,9 +13,11 @@ use App\Domain\Repository\Interfaces\PictureRepositoryInterface;
 use App\Infra\GCP\Storage\Service\Interfaces\FileHelperInterface;
 use App\UI\Action\Admin\Interfaces\DeleteGalleryActionInterface;
 use App\UI\Responder\Admin\Interfaces\DeleteGalleryResponderInterface;
+use App\UI\Responder\Errors\AuthenticationErrorsResponder;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 /**
  * Class DeleteGalleryAction
@@ -55,6 +57,16 @@ final class DeleteGalleryAction implements DeleteGalleryActionInterface
     private $fileHelper;
 
     /**
+     * @var AuthorizationCheckerInterface
+     */
+    private $authorizationChecker;
+
+    /**
+     * @var AuthenticationErrorsResponder
+     */
+    private $errorResponder;
+
+    /**
      * DeleteGalleryAction constructor.
      *
      * @param GalleryRepositoryInterface $galleryRepository
@@ -62,20 +74,27 @@ final class DeleteGalleryAction implements DeleteGalleryActionInterface
      * @param string $dirGallery
      * @param string $dirPicture
      * @param FileHelperInterface $fileHelper
+     * @param AuthorizationCheckerInterface $authorizationChecker
+     * @param AuthenticationErrorsResponder $errorResponder
      */
     public function __construct(
         GalleryRepositoryInterface $galleryRepository,
         Filesystem $fileSystem,
         string $dirGallery,
         string $dirPicture,
-        FileHelperInterface $fileHelper
+        FileHelperInterface $fileHelper,
+        AuthorizationCheckerInterface $authorizationChecker,
+        AuthenticationErrorsResponder $errorResponder
     ) {
         $this->galleryRepository = $galleryRepository;
         $this->fileSystem = $fileSystem;
         $this->dirGallery = $dirGallery;
         $this->dirPicture = $dirPicture;
         $this->fileHelper = $fileHelper;
+        $this->authorizationChecker = $authorizationChecker;
+        $this->errorResponder = $errorResponder;
     }
+
 
     /**
      * @param Request $request
@@ -84,17 +103,23 @@ final class DeleteGalleryAction implements DeleteGalleryActionInterface
      */
     public function __invoke(Request $request, DeleteGalleryResponderInterface $responder)
     {
-        $gallery = $this->galleryRepository->getOne($request->get('slug'));
+        if ($this->authorizationChecker->isGranted('ROLE_ADMIN')) {
+            $gallery = $this->galleryRepository->getOne($request->get('slug'));
 
-        foreach($gallery->getPictures() as $picture) {
+            foreach($gallery->getPictures() as $picture) {
 
-            $gallery->getPictures()->removeElement($picture);
+                $gallery->getPictures()->removeElement($picture);
+            }
+
+            $this->fileSystem->remove($this->dirGallery .  $gallery->getSlug());
+
+            $this->galleryRepository->delete($gallery);
+
+            return $responder();
+        } else {
+            $error = $this->errorResponder;
+
+            return $error();
         }
-
-        $this->fileSystem->remove($this->dirGallery .  $gallery->getSlug());
-
-        $this->galleryRepository->delete($gallery);
-
-        return $responder();
     }
 }

@@ -15,10 +15,12 @@ use App\Domain\Repository\Interfaces\BenefitRepositoryInterface;
 use App\UI\Action\Admin\Interfaces\AddPrestationActionInterface;
 use App\UI\Form\FormHandler\AddBenefitTypeHandler;
 use App\UI\Responder\Admin\Interfaces\AddPrestationResponderInterface;
+use App\UI\Responder\Errors\AuthenticationErrorsResponder;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 /**
  * Class AddPrestationAction
@@ -48,20 +50,36 @@ final class AddPrestationAction implements AddPrestationActionInterface
     private $benefitRepository;
 
     /**
+     * @var AuthorizationCheckerInterface
+     */
+    private $authorizationChecker;
+
+    /**
+     * @var AuthenticationErrorsResponder
+     */
+    private $errorResponder;
+
+    /**
      * AddPrestationAction constructor.
      *
      * @param FormFactoryInterface $formFactory
      * @param AddBenefitTypeHandler $addBenefitTypeHandler
      * @param BenefitRepositoryInterface $benefitRepository
+     * @param AuthorizationCheckerInterface $authorizationChecker
+     * @param AuthenticationErrorsResponder $errorResponder
      */
     public function __construct(
         FormFactoryInterface $formFactory,
         AddBenefitTypeHandler $addBenefitTypeHandler,
-        BenefitRepositoryInterface $benefitRepository
+        BenefitRepositoryInterface $benefitRepository,
+        AuthorizationCheckerInterface $authorizationChecker,
+        AuthenticationErrorsResponder $errorResponder
     ) {
         $this->formFactory = $formFactory;
         $this->addBenefitTypeHandler = $addBenefitTypeHandler;
         $this->benefitRepository = $benefitRepository;
+        $this->authorizationChecker = $authorizationChecker;
+        $this->errorResponder = $errorResponder;
     }
 
     /**
@@ -71,14 +89,20 @@ final class AddPrestationAction implements AddPrestationActionInterface
      */
     public function __invoke(Request $request, AddPrestationResponderInterface $responder)
     {
-        $addPrestation = $this->formFactory->create(AddBenefitType::class)->handleRequest($request);
+        if ($this->authorizationChecker->isGranted('ROLE_ADMIN')) {
+            $addPrestation = $this->formFactory->create(AddBenefitType::class)->handleRequest($request);
 
-        $benefits = $this->benefitRepository->getAll();
+            $benefits = $this->benefitRepository->getAll();
 
-        if($this->addBenefitTypeHandler->handle($addPrestation)) {
+            if($this->addBenefitTypeHandler->handle($addPrestation)) {
 
-            return $responder(true, $addPrestation, $benefits);
+                return $responder(true, $addPrestation, $benefits);
+            }
+            return $responder(false, $addPrestation, $benefits);
+        } else {
+            $error = $this->errorResponder;
+
+            return $error();
         }
-        return $responder(false, $addPrestation, $benefits);
     }
 }

@@ -8,11 +8,10 @@
 
 namespace App\UI\Action\Admin;
 
-use App\Domain\Models\Benefit;
 use App\Domain\Repository\Interfaces\BenefitRepositoryInterface;
 use App\UI\Action\Admin\Interfaces\DeleteBenefitActionInterface;
 use App\UI\Responder\Admin\Interfaces\DeleteBenefitResponderInterface;
-use Doctrine\ORM\EntityManagerInterface;
+use App\UI\Responder\Errors\AuthenticationErrorsResponder;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
@@ -24,7 +23,6 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
  * @Route(
  *     name="adminDeleteBenefit",
  *     path="admin/benefit/delete/{id}",
-
  * )
  *
  */
@@ -46,20 +44,28 @@ final class DeleteBenefitAction implements DeleteBenefitActionInterface
     private $authorization;
 
     /**
+     * @var AuthenticationErrorsResponder
+     */
+    private $errorResponder;
+
+    /**
      * DeleteBenefitAction constructor.
      *
      * @param BenefitRepositoryInterface $benefitRepository
      * @param TokenStorageInterface $tokenStorage
      * @param AuthorizationCheckerInterface $authorization
+     * @param AuthenticationErrorsResponder $errorResponder
      */
     public function __construct(
         BenefitRepositoryInterface $benefitRepository,
         TokenStorageInterface $tokenStorage,
-        AuthorizationCheckerInterface $authorization
+        AuthorizationCheckerInterface $authorization,
+        AuthenticationErrorsResponder $errorResponder
     ) {
         $this->benefitRepository = $benefitRepository;
         $this->tokenStorage = $tokenStorage;
         $this->authorization = $authorization;
+        $this->errorResponder = $errorResponder;
     }
 
     /**
@@ -69,11 +75,17 @@ final class DeleteBenefitAction implements DeleteBenefitActionInterface
      */
     public function __invoke(Request $request, DeleteBenefitResponderInterface $responder)
     {
-        $benefit = $this->benefitRepository->getOne($request->get('id'));
+        if ($this->authorization->isGranted('ROLE_ADMIN')) {
+            $benefit = $this->benefitRepository->getOne($request->get('id'));
 
-        $this->entityManager->remove($benefit);
-        $this->entityManager->flush();
+            $this->entityManager->remove($benefit);
+            $this->entityManager->flush();
 
-        return $responder();
+            return $responder();
+        } else {
+            $error = $this->errorResponder;
+
+            return $error();
+        }
     }
 }

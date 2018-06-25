@@ -1,0 +1,39 @@
+.error-container {
+    height: 100%;
+}
+
+.title-error {
+    font-family: Assistant;
+    font-size: 10em;
+    text-align: left;
+    margin: 60% 0 0 0;
+}
+
+.title-error ~ p {
+    margin: 0;
+    font-family: Assistant;
+    font-weight: lighter;
+    text-align: left;
+    font-size: 4em;
+}
+
+.error-acces {
+    font-size: 3em !important;
+}
+
+p > a {
+    text-align: right;
+}
+
+.btn-error-page {
+    width: 50%;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    background-color: #242424;
+    color: #ffffff;
+}
+
+.btn-error-container {
+    text-align: right !important;
+}

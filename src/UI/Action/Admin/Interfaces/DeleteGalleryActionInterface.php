@@ -12,8 +12,10 @@ namespace App\UI\Action\Admin\Interfaces;
 use App\Domain\Repository\Interfaces\GalleryRepositoryInterface;
 use App\Infra\GCP\Storage\Service\Interfaces\FileHelperInterface;
 use App\UI\Responder\Admin\Interfaces\DeleteGalleryResponderInterface;
+use App\UI\Responder\Errors\AuthenticationErrorsResponder;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 interface DeleteGalleryActionInterface
 {
@@ -25,13 +27,17 @@ interface DeleteGalleryActionInterface
      * @param string $dirGallery
      * @param string $dirPicture
      * @param FileHelperInterface $fileHelper
+     * @param AuthorizationCheckerInterface $authorizationChecker
+     * @param AuthenticationErrorsResponder $errorResponder
      */
     public function __construct(
         GalleryRepositoryInterface $galleryRepository,
         Filesystem $fileSystem,
         string $dirGallery,
         string $dirPicture,
-        FileHelperInterface $fileHelper
+        FileHelperInterface $fileHelper,
+        AuthorizationCheckerInterface $authorizationChecker,
+        AuthenticationErrorsResponder $errorResponder
     );
 
     /**
