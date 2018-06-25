@@ -10,8 +10,8 @@ $(document).ready(function () {
 
         $('.modal-perso').show('1500');
 
-        $('.img-container').attr('src', imgId);
-        $('.link-to-dl-image').attr('href', imgUrl);
+        $('.img-container').attr('src', imgUrl);
+        $('.link-to-dl-image').attr('href', imgId);
 
     });
 
