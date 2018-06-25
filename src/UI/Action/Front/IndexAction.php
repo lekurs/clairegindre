@@ -85,8 +85,6 @@ class IndexAction implements IndexActionInterface
      */
     public function __invoke(Request $request, IndexResponderInterface $responder)
     {
-        phpinfo();
-        die;
         $reviews = $this->reviewsRepository->getAllOnline();
 
         $galleries = $this->galleryRepository->getLastNine();
