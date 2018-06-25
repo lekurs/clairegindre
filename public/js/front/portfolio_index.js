@@ -27,28 +27,34 @@ jQuery(document).ready(function ($) {
         $(this).find('.link_hover').animate(_getDir($(this), event), 500);
     });
 
-// $(window).on('resize', function () {
-//     if (document.body.clientWidth > '768') {
-//         $('.portfolio-pres:nth-child(1)').addClass('left-1');
-//         $('.portfolio-pres:nth-child(2)').addClass('left-2');
-//         $('.portfolio-pres:nth-child(3)').addClass('left-3');
-//         $('.portfolio-pres:nth-child(4)').addClass('middle-1');
-//         $('.portfolio-pres:nth-child(5)').addClass('middle-2');
-//         $('.portfolio-pres:nth-child(6)').addClass('middle-3');
-//         $('.portfolio-pres:nth-child(7)').addClass('middle-4');
-//         $('.portfolio-pres:nth-child(8)').addClass('right-1');
-//         $('.portfolio-pres:nth-child(9)').addClass('right-2');
-//     } else {
-//         $('.portfolio-pres:nth-child(1)').removeClass('left-1');
-//         $('.portfolio-pres:nth-child(2)').removeClass('left-2');
-//         $('.portfolio-pres:nth-child(3)').removeClass('left-3');
-//         $('.portfolio-pres:nth-child(4)').removeClass('middle-1');
-//         $('.portfolio-pres:nth-child(5)').removeClass('middle-2');
-//         $('.portfolio-pres:nth-child(6)').removeClass('middle-3');
-//         $('.portfolio-pres:nth-child(7)').removeClass('middle-4');
-//         $('.portfolio-pres:nth-child(8)').removeClass('right-1');
-//         $('.portfolio-pres:nth-child(9)').removeClass('right-2');
-//     }
+$(window).on('resize', function () {
+    if (document.body.clientWidth > '768') {
+        $('.portfolio-pres:nth-child(1)').removeClass('left-1');
+        $('.portfolio-pres:nth-child(1)').addClass('middle-1');
+        // $('.portfolio-pres:nth-child(2)').addClass('left-2');
+        // $('.portfolio-pres:nth-child(3)').addClass('left-3');
+        $('.portfolio-pres:nth-child(4)').removeClass('middle-1');
+        $('.portfolio-pres:nth-child(4)').addClass('left-1');
+        // $('.portfolio-pres:nth-child(5)').addClass('middle-2');
+        // $('.portfolio-pres:nth-child(6)').addClass('middle-3');
+        // $('.portfolio-pres:nth-child(7)').addClass('middle-4');
+        // $('.portfolio-pres:nth-child(8)').addClass('right-1');
+        // $('.portfolio-pres:nth-child(9)').addClass('right-2');
+    } else {
+        $('.portfolio-pres:nth-child(1)').removeClass('left-1');
+        $('.portfolio-pres:nth-child(1)').addClass('middle-1');
+        $('.portfolio-pres:nth-child(4)').removeClass('middle-1');
+        $('.portfolio-pres:nth-child(4)').addClass('left-1');
+        // $('.portfolio-pres:nth-child(1)').removeClass('left-1');
+        // $('.portfolio-pres:nth-child(2)').removeClass('left-2');
+        // $('.portfolio-pres:nth-child(3)').removeClass('left-3');
+        // $('.portfolio-pres:nth-child(4)').removeClass('middle-1');
+        // $('.portfolio-pres:nth-child(5)').removeClass('middle-2');
+        // $('.portfolio-pres:nth-child(6)').removeClass('middle-3');
+        // $('.portfolio-pres:nth-child(7)').removeClass('middle-4');
+        // $('.portfolio-pres:nth-child(8)').removeClass('right-1');
+        // $('.portfolio-pres:nth-child(9)').removeClass('right-2');
+    }
 
 });
 
