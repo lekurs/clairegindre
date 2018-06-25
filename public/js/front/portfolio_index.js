@@ -54,7 +54,7 @@ jQuery(document).ready(function ($) {
 //         // $('.portfolio-pres:nth-child(7)').removeClass('middle-4');
 //         // $('.portfolio-pres:nth-child(8)').removeClass('right-1');
 //         // $('.portfolio-pres:nth-child(9)').removeClass('right-2');
-    }
+//     }
 
 });
 
