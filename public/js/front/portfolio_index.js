@@ -56,6 +56,6 @@ jQuery(document).ready(function ($) {
 //         // $('.portfolio-pres:nth-child(9)').removeClass('right-2');
 //     }
 
-});
+// });
 
 });
