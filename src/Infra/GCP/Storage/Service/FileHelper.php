@@ -53,7 +53,7 @@ final class FileHelper implements FileHelperInterface
      */
     public function generateFileName(\SplFileInfo $file): string
     {
-        return $this->newFileName = $file->getFilename();
+        return $this->newFileName = $file->getBasename();
     }
 
     /**
