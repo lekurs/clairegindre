@@ -7,7 +7,7 @@
 
 .reviews-content {
     margin-bottom: 1.5em;
-    height: 8em;
+    height: auto;
     border-bottom: 1px solid #363636;
     border-width: thin;
 }
