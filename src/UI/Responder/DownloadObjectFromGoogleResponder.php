@@ -15,14 +15,18 @@ class DownloadObjectFromGoogleResponder
 {
     public function __invoke($object, $filename)
     {
-        $file = file_get_contents($object);
+        $file = $object;
 
         $response = new Response();
 
-        $response->headers->set('Content-Type' ,'application/force-download');
         $response->headers->set('Content-Type', 'application/octet-stream');
-        $response->headers->set('Content-Type', 'application/download');
-//        $response->headers->set('Content-Disposition', 'attachment; filename = " ' . $object);
+        $response->headers->set('Pragma' ,'no-cache');
+        $response->headers->set('Cache-Control', 'no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
+        $response->headers->set('Content-Disposition', 'attachment; filename = ' . basename($file));
+        $response->headers->set('Expires', 0);
+
+        readfile($file);
+        exit();
 
         return $response;
     }
