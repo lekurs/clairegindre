@@ -534,7 +534,7 @@ a#nav-link-black-customer:hover:before {
 /*****************************************************************/
 
 .header-img {
-    background: url("/images/anlor-nico-header-photo.jpg") no-repeat center;
+    background: url("/images/background/mariage-yvelines.jpg") no-repeat center;
     min-height: 100vh;
     width: auto;
     -webkit-background-size: cover;
@@ -590,6 +590,30 @@ h2.last-report {
 }
 
 /*****************************************************************/
+/*                                              BLOG                                                                    */
+/*****************************************************************/
+
+.blog-content {
+    background: url("/images/background/photo-blog.jpg") no-repeat center;
+    position: relative;
+    background-size: cover;
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-end;
+    color: #fff;
+    padding-top: 10%;
+}
+
+.blog-content h2 {
+    font-family: Playfair;
+    font-weight: 400;
+    letter-spacing: .1rem;
+    font-size: 3.5em;
+}
+
+/*****************************************************************/
 /*                                              FAQ                                                           */
 /*****************************************************************/
 
@@ -606,7 +630,7 @@ section#faq-section {
 }
 
 .infos-content {
-    background: url("/images/interface/faq/laetitia-nicolas.jpg") no-repeat center;
+    background: url("/images/background/photo-info.jpg") no-repeat center;
     position: relative;
     background-size: cover;
     height: 70vh;
@@ -1152,6 +1176,26 @@ footer a.nav-footer:hover {
 /*****************************************************************/
 /*                                              GALLERIES                                              */
 /*****************************************************************/
+
+.galleries-content {
+    background: url("/images/background/photo-galeries-photos-clients.jpg") no-repeat center;
+    position: relative;
+    background-size: cover;
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-end;
+    color: #fff;
+    padding-top: 10%;
+}
+
+.galleries-content h2 {
+    font-family: Playfair;
+    font-weight: 400;
+    letter-spacing: .1rem;
+    font-size: 3.5em;
+}
 
 .page-link-perso {
     border: none !important;
