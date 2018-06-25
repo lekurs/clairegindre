@@ -16,6 +16,7 @@ use App\UI\Responder\Admin\Interfaces\DeleteGalleryResponderInterface;
 use App\UI\Responder\Errors\AuthenticationErrorsResponder;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
@@ -67,6 +68,11 @@ final class DeleteGalleryAction implements DeleteGalleryActionInterface
     private $errorResponder;
 
     /**
+     * @var SessionInterface
+     */
+    private $session;
+
+    /**
      * DeleteGalleryAction constructor.
      *
      * @param GalleryRepositoryInterface $galleryRepository
@@ -76,6 +82,7 @@ final class DeleteGalleryAction implements DeleteGalleryActionInterface
      * @param FileHelperInterface $fileHelper
      * @param AuthorizationCheckerInterface $authorizationChecker
      * @param AuthenticationErrorsResponder $errorResponder
+     * @param SessionInterface $session
      */
     public function __construct(
         GalleryRepositoryInterface $galleryRepository,
@@ -84,7 +91,8 @@ final class DeleteGalleryAction implements DeleteGalleryActionInterface
         string $dirPicture,
         FileHelperInterface $fileHelper,
         AuthorizationCheckerInterface $authorizationChecker,
-        AuthenticationErrorsResponder $errorResponder
+        AuthenticationErrorsResponder $errorResponder,
+        SessionInterface $session
     ) {
         $this->galleryRepository = $galleryRepository;
         $this->fileSystem = $fileSystem;
@@ -93,6 +101,7 @@ final class DeleteGalleryAction implements DeleteGalleryActionInterface
         $this->fileHelper = $fileHelper;
         $this->authorizationChecker = $authorizationChecker;
         $this->errorResponder = $errorResponder;
+        $this->session = $session;
     }
 
 
@@ -117,7 +126,10 @@ final class DeleteGalleryAction implements DeleteGalleryActionInterface
 
             $this->galleryRepository->delete($gallery);
 
+            $this->session->getFlashBag()->add('success', 'La galerie à été supprimée');
+
             return $responder();
+
         } else {
             $error = $this->errorResponder;
 

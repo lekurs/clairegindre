@@ -15,6 +15,7 @@ use App\UI\Responder\Admin\Interfaces\DeleteGalleryResponderInterface;
 use App\UI\Responder\Errors\AuthenticationErrorsResponder;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 interface DeleteGalleryActionInterface
@@ -29,16 +30,18 @@ interface DeleteGalleryActionInterface
      * @param FileHelperInterface $fileHelper
      * @param AuthorizationCheckerInterface $authorizationChecker
      * @param AuthenticationErrorsResponder $errorResponder
+     * @param SessionInterface $session
      */
-//    public function __construct(
-//        GalleryRepositoryInterface $galleryRepository,
-//        Filesystem $fileSystem,
-//        string $dirGallery,
-//        string $dirPicture,
-//        FileHelperInterface $fileHelper,
-//        AuthorizationCheckerInterface $authorizationChecker,
-//        AuthenticationErrorsResponder $errorResponder
-//    );
+    public function __construct(
+        GalleryRepositoryInterface $galleryRepository,
+        Filesystem $fileSystem,
+        string $dirGallery,
+        string $dirPicture,
+        FileHelperInterface $fileHelper,
+        AuthorizationCheckerInterface $authorizationChecker,
+        AuthenticationErrorsResponder $errorResponder,
+        SessionInterface $session
+    );
 
     /**
      * @param Request $request
