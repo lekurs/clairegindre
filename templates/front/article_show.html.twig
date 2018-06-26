@@ -46,15 +46,15 @@
                         {% for display, order in order %}
                             {% if loop.length > 2 %}
                             {% for image, images in order %}
-                                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12"><img  src="{{ asset(images) }}"  class="img-gallery lazy test" alt="{{ images }}" /></div>
+                                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 win"><img src="{{ asset('images/interface/pictos/loading.svg') }}"  data-src="{{ asset(images) }}"  class="img-gallery lazy" alt="{{ images }}" /></div>
                             {% endfor %}
                             {% elseif loop.length > 1%}
                                 {% for image, images in order %}
-                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12"><img  src="{{ asset(images) }}"  class="img-gallery lazy test" alt="{{ images }}" /></div>
+                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 win"><img src="{{ asset('images/interface/pictos/loading.svg') }}"  data-src="{{ asset(images) }}"  class="img-gallery lazy" alt="{{ images }}" /></div>
                                     {% endfor %}
                             {% else %}
                                 {% for image, images in order %}
-                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12"><img  src="{{ asset(images) }}" class="img-gallery lazy" alt="{{ images }}" /></div>
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 win"><img src="{{ asset('images/interface/pictos/loading.svg') }}"  data-src="{{ asset(images) }}" class="img-gallery lazy" alt="{{ images }}" /></div>
                                 {% endfor %}
                             {% endif %}
                         {% endfor %}
@@ -116,6 +116,7 @@
     <script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=7g8w49lzy5eyqt1o7hle0gzlmm3c84veiyraf1nwtm9eur9t"></script>
     <script src="{{ asset('/js/front/menu.js') }}"></script>
     <script src="{{ asset('js/front/lazyload.js') }}"></script>
+    <script src="{{ asset('js/vendor/jquery.imagesDelay.min.js') }}"></script>
     <script>
         tinymce.init({
             selector: 'textarea#add_comment_article_not_logged_content',
@@ -126,8 +127,9 @@
         });
     </script>
     <script>
-        $(document).ready(function(){
-            $(document).lazyload();
-        });
+        $('.lazy').imagesDelay(
+            -400
+        );
+
     </script>
 {% endblock %}
