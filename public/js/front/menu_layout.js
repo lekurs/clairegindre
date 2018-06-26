@@ -6,14 +6,26 @@ jQuery(document).ready(function($) {
    $(window).scroll(function () {
        if ($(this).scrollTop() > top_position) {
            $('.nav-desktop').addClass('sticky');
+           $('.social-container').addClass('social-container-black');
+           $('.menu').css({
+               'position' : 'fixed',
+               'z-index': '999999'
+           });
+           $('.menu-overlay').css('z-index', '100000');
+           // $('.open').css('z-index', '1000000');
        } else {
            $('.nav-desktop').removeClass('sticky');
+           $('.social-container').removeClass('social-container-black');
+           $('.menu').css({
+               'position' : 'absolute',
+           });
+           $('.menu-overlay').css('z-index', '999999');
+           $('.open').css('z-index', '999999');
        }
    });
 
     $(window).on('resize', function () {
         if (document.body.clientWidth > '768') {
-            // $('.sticky').css('height', '22vh')
             $('.social-container').css('top', '40%');
             $('.logo-content').css('margin-top', '6%');
         }
