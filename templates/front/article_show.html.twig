@@ -13,7 +13,7 @@
                 <div class="row no-gutters" id="end-nav">
                     <div class="offset-8 col-md-3 col-lg-3 col-xl-3 d-xl-block d-lg-block d-sm-none d-none infos-blog">
                         <h2 class="text-uppercase">{{ galerie.title }}</h2>
-                        <p class="text-justify info-p">{{ galerie.eventDate | date }}</p>
+                        <p class="text-justify info-p">{{ galerie.eventDate | date('d M y') }}</p>
                     </div>
                 </div>
                 <div class="row no-gutters social-container">
@@ -90,7 +90,7 @@
                         {% for comment in article.comments %}
                             {% if comment.email is null %}
                             <div class="row">
-                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 comment-name">{{ comment.author.lastname ~ ' - ' ~ comment.date | date }}</div>
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 comment-name">{{ comment.author.lastname ~ ' - ' ~ comment.date | date('d M  y') }}</div>
                             </div>
                             {% else %}
                             <div class="row">

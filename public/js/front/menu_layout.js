@@ -12,7 +12,6 @@ jQuery(document).ready(function($) {
                'z-index': '999999'
            });
            $('.menu-overlay').css('z-index', '100000');
-           // $('.open').css('z-index', '1000000');
        } else {
            $('.nav-desktop').removeClass('sticky');
            $('.social-container').removeClass('social-container-black');
