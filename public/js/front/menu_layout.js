@@ -26,7 +26,6 @@ jQuery(document).ready(function($) {
     $(window).on('resize', function () {
         if (document.body.clientWidth > '768') {
             $('.social-container').css('top', '40%');
-            $('.logo-content').css('margin-top', '6%');
         }
     });
 });
