@@ -24,15 +24,13 @@ class LoginType extends AbstractType
         $builder
             ->add('username', TextType::class, [
                 'label' => 'email@email.com',
-//                'label_attr' => ['class' => 'label-admin'],
-//                'attr' => ['class' => 'admin-input'],
-                'required' => true,
+                'label_attr' => ['class'  => 'modal-label'],
+                'required' => true
             ])
             ->add('password', PasswordType::class, [
                 'label' => 'password',
-                'label_attr' => ['class' => 'label-admin'],
-                'attr' => ['class' => 'admin-input'],
-                'required' => true,
+                'label_attr' => ['class'  => 'modal-label'],
+                'required' => true
             ]);
     }
 
