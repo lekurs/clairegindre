@@ -114,11 +114,11 @@
         <div class="gallery">
                 {% for picture in galleries[3].pictures if picture.favorite > 0 %}
                     <div class="portfolio-pres thumb left-1" style="background: url({{ asset(picture.publicPath ~ '/' ~ picture.pictureName) }}) center center no-repeat; background-size: cover">
-                    <a href="{{ path('showArticle', { 'slugArticle': galleries[3].article.slug, 'slugGallery': galleries[3].slug }) }}" class="portfolio_link">
+                    <a href="{{ path('showArticle', { 'slugArticle': galleries[0].article.slug, 'slugGallery': galleries[0].slug }) }}" class="portfolio_link">
                     <div class="link_hover">
-                    <h2 class="title-portfolio-contain">{{ galleries[3].title }}</h2>
-                    <p class="date-portfolio">{{ galleries[3].eventDate | date('d-m-Y') }}</p>
-                    <p class="place">{{ galleries[3].eventPlace }}</p>
+                    <h2 class="title-portfolio-contain">{{ galleries[0].title }}</h2>
+                    <p class="date-portfolio">{{ galleries[0].eventDate | date('d-m-Y') }}</p>
+                    <p class="place">{{ galleries[0].eventPlace }}</p>
                     </div>
                     </a>
                     </div>
@@ -147,11 +147,11 @@
             {% endfor %}
             {% for picture in galleries[0].pictures if picture.favorite > 0 %}
                 <div class="portfolio-pres thumb middle-1" style="background: url({{ asset(picture.publicPath ~ '/' ~ picture.pictureName) }}) center center no-repeat; background-size: cover">
-                    <a href="{{ path('showArticle', { 'slugArticle': galleries[0].article.slug, 'slugGallery': galleries[0].slug }) }}" class="portfolio_link">
+                    <a href="{{ path('showArticle', { 'slugArticle': galleries[3].article.slug, 'slugGallery': galleries[3].slug }) }}" class="portfolio_link">
                         <div class="link_hover">
-                            <h2 class="title-portfolio-contain">{{ galleries[0].title }}</h2>
-                            <p class="date-portfolio">{{ galleries[0].eventDate | date('d-m-Y') }}</p>
-                            <p class="place">{{ galleries[0].eventPlace }}</p>
+                            <h2 class="title-portfolio-contain">{{ galleries[3].title }}</h2>
+                            <p class="date-portfolio">{{ galleries[3].eventDate | date('d-m-Y') }}</p>
+                            <p class="place">{{ galleries[3].eventPlace }}</p>
                         </div>
                     </a>
                 </div>
