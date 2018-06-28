@@ -38,7 +38,7 @@ use Symfony\Component\Routing\Annotation\Route;
  *
  * @package App\UI\Action\Admin
  */
-class EditGalleryAction implements EditGalleryActionInterface
+final class EditGalleryAction implements EditGalleryActionInterface
 {
     /**
      * @var GalleryRepositoryInterface
