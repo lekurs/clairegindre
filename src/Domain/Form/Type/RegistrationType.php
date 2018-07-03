@@ -84,7 +84,7 @@ final class RegistrationType extends AbstractType
                 'label' => 'Date évèvement',
                 'label_attr' => ['class' => 'label-admin'],
                 'attr' => ['class' => 'admin-input'],
-                'widget' => 'single_text',
+//                'widget' => 'single_text',
                 'required' => true,
             ))
             ->add('picture', FileType::class, array(
