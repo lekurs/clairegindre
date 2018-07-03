@@ -108,9 +108,6 @@ final class RegistrationTypeHandler implements RegistrationTypeHandlerInterface
     public function handle(FormInterface $form): bool
     {
         if($form->isSubmitted() && $form->isValid()) {
-
-            dump($form->getData()->picture->getClientOriginalName());
-            die;
             try {
             $this->fileSystem->mkdir($this->targetDir . '/customers', 777);
         } catch (IOExceptionInterface $exception) {
