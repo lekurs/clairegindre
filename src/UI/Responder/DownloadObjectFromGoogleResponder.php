@@ -20,9 +20,6 @@ class DownloadObjectFromGoogleResponder implements DownloadObjectFromGoogleRespo
     {
         $file = $object;
 
-        dump($file);
-        die;
-
         header('Content-Type: application/octet-stream');
         header('Content-disposition: attachment; filename='.basename($file));
         header('Pragma: no-cache');
