@@ -13,7 +13,7 @@
 {% block content %}
     <section>
         <div class="container-fluid no-gutters">
-            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 favorite-blog-picture" {% for picture in gallery.pictures if picture.favorite > 0 %}style="url('{{ picture.publicPath ~ '/' ~ picture.pictureName }}') center center; background-size: cover; "{% endfor %}>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 favorite-blog-picture" {% for picture in gallery.pictures if picture.favorite > 0 %}style="background: url('{{ picture.publicPath ~ '/' ~ picture.pictureName }}') center center; background-size: cover; "{% endfor %}>
                 <div class="row no-gutters" id="end-nav">
                 </div>
                 <div class="row no-gutters social-container">
