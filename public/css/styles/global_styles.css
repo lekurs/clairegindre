@@ -835,6 +835,18 @@ section.presentations {
     color: #ffffff;
 }
 
+.link-hello {
+    font-weight: 600;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.link-hello:hover {
+    font-weight: bold;
+    color: #ffffff;
+    text-decoration: none;
+}
+
 .presentation-container {
     margin-top: 2.5em;
 }
