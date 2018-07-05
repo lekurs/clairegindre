@@ -46,15 +46,15 @@
                         {% for display, order in order %}
                             {% if loop.length > 2 %}
                             {% for image, images in order %}
-                                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 win"><img src="{{ asset('images/interface/pictos/loading.svg') }}"  data-src="{{ asset(images) }}"  class="img-gallery lazy" alt="{{ images }}" /></div>
+                                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 win"><img src="{{ asset(images) }}"  data-src="{{ asset(images) }}"  class="img-gallery lazy" alt="{{ images }}" /></div>
                             {% endfor %}
                             {% elseif loop.length > 1%}
                                 {% for image, images in order %}
-                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 win"><img src="{{ asset('images/interface/pictos/loading.svg') }}"  data-src="{{ asset(images) }}"  class="img-gallery lazy" alt="{{ images }}" /></div>
+                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 win"><img src="{{ asset(images) }}"  data-src="{{ asset(images) }}"  class="img-gallery lazy" alt="{{ images }}" /></div>
                                     {% endfor %}
                             {% else %}
                                 {% for image, images in order %}
-                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 win"><img src="{{ asset('images/interface/pictos/loading.svg') }}"  data-src="{{ asset(images) }}" class="img-gallery lazy" alt="{{ images }}" /></div>
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 win"><img src="{{ asset(images) }}"  data-src="{{ asset(images) }}" class="img-gallery lazy" alt="{{ images }}" /></div>
                                 {% endfor %}
                             {% endif %}
                         {% endfor %}
