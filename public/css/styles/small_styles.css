@@ -58,6 +58,8 @@
         height: 2em;
     }
 
+
+
     /***************************************************************/
     /*                                              INDEX                                                   */
     /***************************************************************/
@@ -146,6 +148,21 @@
 
     footer a.nav-footer {
         text-align: center;
+    }
+
+    footer a.nav-footer:before {
+        content: "";
+        position: absolute;
+        width: 18%;
+        height: 2px;
+        bottom: 0;
+        left: 41%;
+        background-color: #ffffff;
+        visibility: hidden;
+        -webkit-transform: scaleX(0);
+        transform: scaleX(0);
+        -webkit-transition: all .3s ease-in-out 0s;
+        transition: all .3s ease-in-out 0s;
     }
 
     footer p {

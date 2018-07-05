@@ -534,7 +534,7 @@ a#nav-link-black-customer:hover:before {
 /*****************************************************************/
 
 .header-img {
-    background: url("/images/background/mariage-yvelines.jpg") no-repeat center;
+    background: url("/images/background/mariage-yvelines2.jpg") no-repeat center;
     min-height: 100vh;
     width: auto;
     -webkit-background-size: cover;
@@ -586,6 +586,10 @@ h2.last-report {
 }
 
 .social-container a {
+    color: #ffffff;
+}
+
+.social-black {
     color: #ffffff;
 }
 
