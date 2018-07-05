@@ -1038,7 +1038,7 @@ button.sub-contact {
 .insta-list {
     display: grid;
     grid-gap: 0rem;
-    /*display: -ms-grid;*/
+    display: -ms-grid;
     /*-ms-grid-columns: 33.33% 33.33% 33.33% 33.33%;*/
     grid-template-columns: repeat(auto-fit, 33.33%);
     /*-ms-grid-rows: 50%;*/
