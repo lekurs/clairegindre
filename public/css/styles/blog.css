@@ -440,6 +440,16 @@ span.portraits:hover {
     margin: 0;
 }
 
+.article-content > p a{
+    color: #000000;
+    font-weight: bold;
+}
+
+.article-content > p a:hover{
+    color: #000000;
+    font-weight: bold;
+}
+
 .article-content > p:last-of-type {
     margin-bottom: 40px;
 }
