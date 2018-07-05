@@ -442,12 +442,14 @@ span.portraits:hover {
 
 .article-content > p a{
     color: #000000;
-    font-weight: bold;
+    font-weight: normal;
+    text-decoration: none;
 }
 
 .article-content > p a:hover{
     color: #000000;
-    font-weight: bold;
+    font-weight: normal;
+    text-decoration: none;
 }
 
 .article-content > p:last-of-type {
