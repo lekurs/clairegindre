@@ -112,7 +112,7 @@
         <h2 class="text-center text-uppercase title-portfolio">love & fun</h2>
 
         <div class="gallery">
-                {% for picture in galleries[3].pictures if picture.favorite > 0 %}
+                {% for picture in galleries[0].pictures if picture.favorite > 0 %}
                     <div class="portfolio-pres thumb left-1" style="background: url({{ asset(picture.publicPath ~ '/' ~ picture.pictureName) }}) center center no-repeat; background-size: cover">
                     <a href="{{ path('showArticle', { 'slugArticle': galleries[0].article.slug, 'slugGallery': galleries[0].slug }) }}" class="portfolio_link">
                     <div class="link_hover">
@@ -145,7 +145,7 @@
                     </a>
                 </div>
             {% endfor %}
-            {% for picture in galleries[0].pictures if picture.favorite > 0 %}
+            {% for picture in galleries[3].pictures if picture.favorite > 0 %}
                 <div class="portfolio-pres thumb middle-1" style="background: url({{ asset(picture.publicPath ~ '/' ~ picture.pictureName) }}) center center no-repeat; background-size: cover">
                     <a href="{{ path('showArticle', { 'slugArticle': galleries[3].article.slug, 'slugGallery': galleries[3].slug }) }}" class="portfolio_link">
                         <div class="link_hover">
