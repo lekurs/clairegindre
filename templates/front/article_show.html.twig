@@ -90,7 +90,7 @@
                         {% for comment in galerie.article.comments %}
                             {% if comment.email is null %}
                             <div class="row">
-                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 comment-name">{{ comment.author.lastname ~ ' - ' ~ comment.date | date('d M  y') }}</div>
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 comment-name">{{ comment.author.lastname ~ ' - ' ~ comment.date | localizeddate('none', 'none', null, null, 'dd MMMM Y') }}</div>
                             </div>
                             {% else %}
                             <div class="row">
