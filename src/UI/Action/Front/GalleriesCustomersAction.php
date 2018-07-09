@@ -99,7 +99,7 @@ final class GalleriesCustomersAction implements GalleriesCustomersActionInterfac
      */
     public function __invoke(Request $request, GalleriesCustomersResponderInterface $responder, int $page)
     {
-        $galleries = $this->galleryRepository->getAllWithPaginator($page, 16);
+        $galleries = $this->galleryRepository->getAllWithPaginator($page, 15);
 
         $reviews = $this->reviewsRepository->getAllOnline();
 
