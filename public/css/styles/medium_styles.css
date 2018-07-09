@@ -2,7 +2,7 @@
 /* TABLETTE */
 @media all and (min-width: 481px) and (max-width: 1400px) {
     .infos-content {
-        height: 30vh;
+        height: 87vh;
     }
 
     .infos-txt {
@@ -132,7 +132,7 @@
     }
 
     .article-img-container {
-        height: 20em;
+        height: 22em;
     }
 
 

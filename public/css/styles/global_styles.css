@@ -637,7 +637,7 @@ section#faq-section {
     background: url("/images/background/photo-info.jpg") no-repeat center;
     position: relative;
     background-size: cover;
-    height: 70vh;
+    height: 84vh;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
