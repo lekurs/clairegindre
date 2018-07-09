@@ -191,6 +191,7 @@ final class GalleryRepository extends ServiceEntityRepository implements Gallery
         $qb = $this->createQueryBuilder('gallery')
                             ->innerJoin('gallery.pictures', 'pictures')
                             ->where('pictures.favorite = 1')
+                            ->orderBy('gallery.eventDate', 'DESC')
                             ->setFirstResult($premierePage)
                             ->setMaxResults($max);
 

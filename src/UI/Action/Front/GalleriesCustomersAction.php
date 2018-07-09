@@ -105,7 +105,7 @@ final class GalleriesCustomersAction implements GalleriesCustomersActionInterfac
 
         $pagination = [
            'page' => $page,
-           'nbPages' => ceil(count($galleries) / 16)
+           'nbPages' => ceil(count($galleries) / 15)
         ];
 
         $contact = $this->formFactory->create(ContactType::class)->handleRequest($request);
