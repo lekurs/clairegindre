@@ -13,7 +13,7 @@
                 <div class="row no-gutters" id="end-nav">
                     <div class="offset-8 col-md-3 col-lg-3 col-xl-3 d-xl-block d-lg-block d-sm-none d-none infos-blog">
                         <h2 class="text-uppercase">{{ galerie.title }}</h2>
-                        <p class="text-justify info-p">{{ galerie.eventDate | date('d M y') }}</p>
+                        <p class="text-justify info-p">{{ galerie.eventDate | localizeddate('none', 'none', null, null, 'dd MMMM Y') }}</p>
                     </div>
                 </div>
                 <div class="row no-gutters social-container">
