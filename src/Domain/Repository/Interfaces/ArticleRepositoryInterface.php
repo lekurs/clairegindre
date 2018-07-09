@@ -28,6 +28,12 @@ interface ArticleRepositoryInterface
     public function getOne($slug);
 
     /**
+     * @param $slug
+     * @return mixed
+     */
+    public function getSlug($slug);
+
+    /**
      * @return mixed
      */
     public function getAll();

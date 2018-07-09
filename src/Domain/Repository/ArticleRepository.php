@@ -42,6 +42,19 @@ final class ArticleRepository extends ServiceEntityRepository implements Article
                             ->getOneOrNullResult();
     }
 
+    /**
+     * @param $slug
+     * @return mixed
+     */
+    public function getSlug($slug)
+    {
+        return $this->createQueryBuilder('article')
+                                ->where('article.slug = :slug')
+                                ->setParameter('slug', $slug)
+                                ->getQuery()
+                                ->getResult();
+    }
+
     public function getAll()
     {
         return $this->createQueryBuilder('article')

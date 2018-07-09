@@ -138,7 +138,7 @@ final class ArticleShowGalleryAction implements ArticleShowGalleryActionInterfac
     {
         $reviews = $this->reviewsRepository->getAll();
 
-        $article = $this->articleRepository->getOne($request->attributes->get('slugArticle'));
+        $article = $this->articleRepository->getSlug($request->attributes->get('slugArticle'));
 
         $galerie = $this->galleryRepository->getOne($request->attributes->get('slugGallery'));
 
