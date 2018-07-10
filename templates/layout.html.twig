@@ -172,6 +172,13 @@
 
     {% block presentation %}
         <section class="presentations" id="hello">
+            <img src="{{ asset('images/background/presentation-full.jpg') }}" alt="presentation-claire-gindre-photographe" class="img-presentation"
+                        srcset="{{ asset('images/background/presentation-full-mini.jpg') }} 320w,
+                                        {{ asset('images/background/presentation-full-480.jpg') }} 480w,
+                                        {{ asset('images/background/presentation-full-720.jpg') }} 720w,
+                                        {{ asset('images/background/presentation-full-1024.jpg') }} 1024w,
+                                        {{ asset('images/background/presentation-full-1440.jpg') }} 1440w,
+                        " alt="presentation-claire-gindre-photographe" />
             <div class="row no-gutters height-pres">
                 <div class="col-12 col-sm-12 col-md-12 offset-lg-3 offset-xl-3 col-lg-6 col-xl-6 hello-container align-items-center justify-content-center">
                     <div class="row no-gutters">
