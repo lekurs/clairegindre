@@ -67,7 +67,9 @@ final class GalleryOrderTypeHandler implements GalleryOrderTypeHandlerInterface
     {
         if($form->isSubmitted() && $form->isValid()) {
 
-            $this->validator->validate($gallery, [], [
+            $galleryEdit = $gallery->update($form->getData());
+
+            $this->validator->validate($galleryEdit, [], [
                 'gallery_creation',
             ]);
 
