@@ -101,7 +101,7 @@ final class EditGalleryAction implements EditGalleryActionInterface
 
         $editGalleryType = $this->formFactory->create(GalleryOrderType::class, $galleryDto)->handleRequest($request);
 
-        if ($this->galleryEditTypeHandler->handle($editGalleryType, $galleryDto)) {
+        if ($this->galleryEditTypeHandler->handle($editGalleryType, $gallery)) {
 
             return $responder(true, $editGalleryType, $gallery);
         }
