@@ -179,7 +179,11 @@ nav {
     margin-top: 3%;
 }
 
-.nav-desktop {
+nav-desktop {
+    position: relative;
+}
+
+.nav-desktop-index {
     position: absolute;
     top: 0;
     width: 100%;
