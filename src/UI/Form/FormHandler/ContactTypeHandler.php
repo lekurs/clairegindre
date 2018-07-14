@@ -98,10 +98,7 @@ final class ContactTypeHandler implements ContactTypeHandlerInterface
         if($form->isSubmitted() && $form->isValid()) {
 
             $user = $this->userRepository->getAdmin('contact@clairegindre.com');
-
-            dump($form->getData());
-            die;
-//
+            
             $mail = new Mail(
                 $form->getData()->email,
                 $user->getEmail(),
