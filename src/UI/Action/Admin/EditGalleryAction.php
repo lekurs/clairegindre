@@ -97,7 +97,13 @@ final class EditGalleryAction implements EditGalleryActionInterface
     {
         $gallery = $this->galleryRepository->getWithPictures($request->attributes->get('slug'));
 
-        $galleryDto = new EditGalleryDTO($gallery->getTitle(), $gallery->getEventDate(), $gallery->getEventPlace(), $gallery->getPictures()->toArray(), $gallery->getSlug());
+        $galleryDto = new EditGalleryDTO(
+            $gallery->getTitle(),
+            $gallery->getEventDate(),
+            $gallery->getEventPlace(),
+            $gallery->getPictures()->toArray(),
+            $gallery->getSlug()
+        );
 
         $editGalleryType = $this->formFactory->create(GalleryOrderType::class, $galleryDto)->handleRequest($request);
 
