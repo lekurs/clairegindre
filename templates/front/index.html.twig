@@ -217,17 +217,17 @@
                     </a>
                 </div>
             {% endfor %}
-            {#{% for picture in galleries[8].pictures if picture.favorite > 0 %}#}
-            {#<div class="portfolio-pres thumb right-2" style="background: url({{ asset(picture.publicPath ~ '/' ~ picture.pictureName) }}) center center no-repeat; background-size: cover">#}
-                {#<a href="{{ path('showArticle', { 'slugArticle': galleries[8].article.slug, 'slugGallery': galleries[8].slug }) }}" class="portfolio_link">#}
-                    {#<div class="link_hover">#}
-                        {#<h2 class="title-portfolio-contain">{{ galleries[8].title }}</h2>#}
-                        {#<p class="date-portfolio">{{ galleries[8].eventDate | date('d-m-Y') }}</p>#}
-                        {#<p class="place">{{ galleries[8].eventPlace }}</p>#}
-                    {#</div>#}
-                {#</a>#}
-            {#</div>#}
-            {#{% endfor %}#}
+            {% for picture in galleries[8].pictures if picture.favorite > 0 %}
+            <div class="portfolio-pres thumb right-2" style="background: url({{ asset(picture.publicPath ~ '/' ~ picture.pictureName) }}) center center no-repeat; background-size: cover">
+                <a href="{{ path('showArticle', { 'slugArticle': galleries[8].article.slug, 'slugGallery': galleries[8].slug }) }}" class="portfolio_link">
+                    <div class="link_hover">
+                        <h2 class="title-portfolio-contain">{{ galleries[8].title }}</h2>
+                        <p class="date-portfolio">{{ galleries[8].eventDate | date('d-m-Y') }}</p>
+                        <p class="place">{{ galleries[8].eventPlace }}</p>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
         </div>
 
         </div>
