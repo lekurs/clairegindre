@@ -134,6 +134,14 @@ class Mail implements MailInterface
     }
 
     /**
+     * @return string
+     */
+    public function getPhone(): string
+    {
+        return $this->phone;
+    }
+
+    /**
      * @return bool
      */
     public function isAnswered(): bool
