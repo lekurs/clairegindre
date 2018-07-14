@@ -41,6 +41,11 @@ class Mail implements MailInterface
     private $content;
 
     /**
+     * @var string
+     */
+    private $phone;
+
+    /**
      * @var bool
      */
     private $isAnswered;
@@ -62,6 +67,7 @@ class Mail implements MailInterface
      * @param string $toEmail
      * @param string $subject
      * @param string $content
+     * @param string $phone
      * @param bool $isAnswered
      * @param string $slug
      * @param MailInterface $mail
@@ -71,6 +77,7 @@ class Mail implements MailInterface
         string $toEmail,
         string $subject,
         string $content,
+        string $phone,
         bool $isAnswered,
         string $slug,
         MailInterface $mail = null
@@ -80,6 +87,7 @@ class Mail implements MailInterface
         $this->toEmail = $toEmail;
         $this->subject = $subject;
         $this->content = $content;
+        $this->phone = $phone;
         $this->isAnswered = $isAnswered;
         $this->slug = $slug;
         $this->mail = $mail;
