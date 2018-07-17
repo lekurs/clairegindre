@@ -877,6 +877,18 @@ section.presentations {
     text-decoration: none;
 }
 
+.link-hello-black {
+    font-weight: 600;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.link-hello-black:hover {
+    font-weight: bold;
+    color: #000000;
+    text-decoration: none;
+}
+
 .presentation-container {
     margin-top: 2.5em;
 }
