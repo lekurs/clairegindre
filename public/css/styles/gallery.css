@@ -361,6 +361,12 @@ a.connection-link:hover {
     padding: 0 5px;
 }
 
+.gallery-customers-informations > h4 {
+    font-family: Playfair;
+    font-size: 1em;
+    text-transform: uppercase;
+}
+
 .comment-title {
     text-transform: uppercase;
     font-weight: bold;
