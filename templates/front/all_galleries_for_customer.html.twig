@@ -18,22 +18,21 @@
             </div>
         <div class="row no-gutters gallery-container-customer">
             {% for gallery in galleries %}
-                <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 col-12">
-                    <div class="row no-gutters box">
-                        {% for picture in gallery.pictures %}
-                            {% if picture.favorite > 0 %}
-                                <img src="{{ asset( picture.publicPath ~ '/' ~ picture.pictureName) }}" alt="{{ gallery.pictures.first.pictureName }}" />
-                            {% endif %}
-                        {% endfor %}
-                        {#<img src="{{ asset('images/upload/gallery/' ~ gallery.slug ~ '/' ~ gallery.pictures.first.pictureName) }}" alt="{{ gallery.pictures.first.pictureName }}" />#}
-                        <a href="{{ path('galleryCustomer', { 'slugUser': gallery.user.slug, 'slugGallery' : gallery.slug } ) }}">
-                            <div class="gallery-customers-informations">
-                                <h4>{{ gallery.title }}</h4>
-                                <p id="prestation-date">{{ gallery.eventDate|localizeddate('none', 'none', null, null, 'dd MMMM Y') }}</p>
+                 <div class="img-customers col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+                            <div class="row no-gutters box">
+                    {% for picture in gallery.pictures %}
+                        {% if picture.favorite > 0 %}
+                            <img src="{{ asset( picture.publicPath ~ '/' ~ picture.pictureName) }}" alt="{{ gallery.pictures.first.pictureName }}" />
+                        {% endif %}
+                    {% endfor %}
+                                <div class="gallery-customers-informations">
+                                    <p><i class="fa fa-lock"></i></p>
+                                    <h4 class="gallery-title">{{ gallery.title }}</h4>
+                                    <p class="prestation-date">{{ gallery.user.dateWedding|localizeddate('none', 'none', null, null, 'dd MMMM Y') }}</p>
+                                    <a href="#" data-toggle="modal" data-target="#loginFormModal" class="connection-link"><i class="fa fa-user-o"></i></a>
+                                </div>
                             </div>
-                        </a>
                     </div>
-                </div>
             {% endfor %}
         </div>
     </div>
