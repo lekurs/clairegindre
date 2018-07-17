@@ -25,12 +25,13 @@
                             <img src="{{ asset( picture.publicPath ~ '/' ~ picture.pictureName) }}" alt="{{ gallery.pictures.first.pictureName }}" />
                         {% endif %}
                     {% endfor %}
+                                <a href="{{ path('galleryCustomer', { 'slugUser': gallery.user.slug, 'slugGallery' : gallery.slug } ) }}">
                                 <div class="gallery-customers-informations">
                                     <p><i class="fa fa-lock"></i></p>
                                     <h4 class="gallery-title">{{ gallery.title }}</h4>
                                     <p class="prestation-date">{{ gallery.eventDate|localizeddate('none', 'none', null, null, 'dd MMMM Y') }}</p>
-                                    <a href="#" data-toggle="modal" data-target="#loginFormModal" class="connection-link"><i class="fa fa-user-o"></i></a>
                                 </div>
+                                </a>
                             </div>
                     </div>
             {% endfor %}
