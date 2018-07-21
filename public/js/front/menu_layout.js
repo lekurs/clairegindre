@@ -13,7 +13,7 @@ jQuery(document).ready(function($) {
            });
            $('.menu-overlay').css('z-index', '100000');
        } else {
-           $('.nav-desktop').removeClass('sticky');
+           $('.nav-desktop-index').removeClass('sticky');
            $('.social-container').removeClass('social-container-black');
            $('.menu').css({
                'position' : 'absolute',
