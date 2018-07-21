@@ -5,7 +5,7 @@ jQuery(document).ready(function($) {
 
    $(window).scroll(function () {
        if ($(this).scrollTop() > top_position) {
-           $('.nav-desktop').addClass('sticky');
+           $('.nav-desktop-index').addClass('sticky');
            $('.social-container').addClass('social-container-black');
            $('.menu').css({
                'position' : 'fixed',
