@@ -15,7 +15,7 @@ jQuery(document).ready(function($) {
 
     $(window).scroll(function () {
         if ($(this).scrollTop() > top_position) {
-            $('.nav-desktop').addClass('sticky-white');
+            $('.nav-desktop').addClass('sticky-white-index');
             $('.social-container').addClass('social-container-black');
             $('.menu').css({
                 'position' : 'fixed',
