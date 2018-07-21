@@ -225,7 +225,7 @@
 
     {% block instagram_contact %}
     <section class="row no-gutters">
-        <article class="col-lg-6 col-xl-6 col-md-12 col-sm-12 col-12 instagram insta-list">
+        <article class="col-lg-6 col-xl-6 col-md-12 col-sm-12 col-12" id="folio">
                 {%  for instagram in insta %}
                     {#<a href="{{ instagram.link }}" class="instagram-link">#}
                         <img class="insta-img" src="{{ instagram.images.standard_resolution.url }}" alt="claire_gindre_photographe_{{ instagram.id }}" />
@@ -239,7 +239,7 @@
             <div id="slider-comment" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner">
                     {% for key, review in reviews %}
-                    <div class="carousel-item carousel-img {{ key == 0 ? "active" : '' }}">
+                    <div class="carousel-item carousel-img {{ key == 0 ? "active" : '' }}" {{ key == 0 ? "id=second" : '' }}>
                         <img src="{{ asset(review.imagePath ~ '/' ~ review.imageName) }}" class="d-block w-100 img-carousel" alt="test_slider" />
                         <div class="infos-carousel">
                             <h3 class="text-uppercase carousel-title">{{ review.title }}</h3>
@@ -321,6 +321,7 @@
     <script src="{{ asset('js/front/nav-mobile.js') }}"></script>
     <script src="{{ asset("js/front/bootstrap-datepicker.min.js") }}"></script>
     <script src="{{ asset ('js/front/bootstrap-datepicker.fr.min.js') }}"></script>
+    <script src="{{ asset ('js/front/portfolio.jquery.js') }}"></script>
     <script>$('#datepicker').datepicker({
             language: 'fr',
             format: 'yyyy-mm-dd'
@@ -335,6 +336,13 @@
     $(".mycheckbox").checkboxPrettify(".mycheckbox", {colorselected:'#000000', colordefault:"#242424"});
     $(".mycheckbox2").checkboxPrettify(".mycheckbox2");
 </script>
+    <script>
+        $(window).on("load", function (e) {
+            $("#folio").portefolio({nbcolonne:3});
+            h = ($("#second").height())/2;
+            $(".content-img").css("height", Math.round(h));
+        });
+    </script>
 {% endblock %}
 
 {% endblock %}

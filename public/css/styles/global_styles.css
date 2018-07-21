@@ -1107,6 +1107,7 @@ button.sub-contact {
     text-transform: uppercase;
     font-weight: bolder;
     font-size: 1.2em;
+    z-index: 999;
 }
 
 .insta-logo > a{
