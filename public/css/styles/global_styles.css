@@ -652,7 +652,7 @@ section#faq-section {
 }
 
 .infos-content {
-    background: url("/images/background/photo-info.jpg") no-repeat center;
+    background: url("/images/background/photo-info-web.jpg") no-repeat center;
     position: relative;
     background-size: cover;
     height: 84vh;
@@ -1236,7 +1236,7 @@ footer a.nav-footer:hover {
 /*****************************************************************/
 
 .galleries-content {
-    background: url("/images/background/photo-galeries-photos-clients.jpg") no-repeat center;
+    background: url("/images/background/photo-galeries-photos-clients-web.jpg") no-repeat center;
     position: relative;
     background-size: cover;
     height: 70vh;
