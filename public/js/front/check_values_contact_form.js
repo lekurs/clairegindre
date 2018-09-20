@@ -3,6 +3,8 @@ const inputs = document.getElementsByTagName("input");
 const faElt = document.createElement("i");
 const faCrossElt = document.createElement("i");
 
+console.log("test");
+
 
 for (var i=0; i<inputs.length; i++) {
     inputs[i].addEventListener("input", function (e) {
