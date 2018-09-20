@@ -1,7 +1,7 @@
-const form = document.querySelector("form");
-const inputs = document.getElementsByTagName("input");
-const faElt = document.createElement("i");
-const faCrossElt = document.createElement("i");
+var form = document.querySelector("form");
+var inputs = document.getElementsByTagName("input");
+var faElt = document.createElement("i");
+var faCrossElt = document.createElement("i");
 
 console.log("test");
 
@@ -11,7 +11,7 @@ for (var i=0; i<inputs.length; i++) {
         this.after(spanElt);
         this.after(faElt);
 
-        let value = e.target.value;
+        var value = e.target.value;
 
         if (value.length >= 4) {
             faElt.className = 'fa fa-check';
