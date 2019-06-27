@@ -13,9 +13,7 @@
             <field name="displayOrder" type="integer" nullable="true" unique="false" />
             <field name="favorite" type="boolean" nullable="false" unique="false" />
 
-            <many-to-one field="gallery" target-entity="App\Domain\Models\Gallery" inversed-by="pictures">
-                <join-column name="gallery_id" referenced-column-name="id" />
-            </many-to-one>
+            <many-to-one field="gallery" target-entity="App\Domain\Models\Gallery" inversed-by="pictures" />
 
             <one-to-one field="galleryMaker" target-entity="App\Domain\Models\GalleryMaker">
                 <join-column name="gallery_maker_id" referenced-column-name="id" />
