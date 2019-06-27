@@ -10,9 +10,25 @@ namespace App\Services;
 
 
 use App\Services\Interfaces\ResizeImageHelperInterface;
+use Symfony\Component\Filesystem\Filesystem;
 
 final class ResizeImageHelper implements ResizeImageHelperInterface
 {
+    private $fileHelper;
+
+    private $dirGallery;
+
+    /**
+     * ResizeImageHelper constructor.
+     * @param Filesystem $fileHelper
+     * @param string $dirGallery
+     */
+    public function __construct(Filesystem $fileHelper, string $dirGallery)
+    {
+        $this->fileHelper = $fileHelper;
+        $this->dirGallery = $dirGallery;
+    }
+
     /**
      * @param \SplFileInfo $image
      * @param $directory
