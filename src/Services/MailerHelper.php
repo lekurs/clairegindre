@@ -51,7 +51,7 @@ final class MailerHelper implements MailerHelperInterface
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    public function sendEmail($subject, $to, $from)
+    public function sendEmail($subject, $to, $from, $customer)
     {
         $message = (new \Swift_Message());
 
@@ -60,16 +60,12 @@ final class MailerHelper implements MailerHelperInterface
         $pinterest = $message->embed(\Swift_Image::fromPath('images/interface/pictos/pinterest.png', 'image/png'));
         $insta = $message->embed(\Swift_Image::fromPath('images/interface/pictos/instagram.png', 'image/png'));
 
-
         $message
             ->setSubject($subject)
             ->setTo($this->mailerAdminEmail)
             ->setFrom($from)
             ->setBody($this->twig->render('mails/customerMail.html.twig', [
-                'attachment' => $logo,
-                'facebook' => $facebook,
-                'instagram', $insta,
-                'pinterest' => $pinterest
+                'customer' => $customer
             ]), 'text/html');
 
         $this->swiftMailer->send($message);

@@ -896,8 +896,8 @@ section.presentations {
 .presentation-container >  h2 {
     font-family: Playfair;
     font-weight: lighter;
-    font-size: 7em;
-    margin: 0 .5em;
+    font-size: 6em;
+    margin: 0 .6em;
 }
 
 p#presentation-txt {
@@ -1376,4 +1376,22 @@ h2.title-mentions {
 p.mentions {
     margin: 0;
     text-align: justify;
+}
+
+@media all and (min-width: 1024px) and (max-width: 1399px) {
+    .presentation-container > h2 {
+        font-size: 5em !important;
+        margin: 1em 0 0 .2em !important;
+    }
+
+    .photo-presentations {
+         top: 25% !important;
+        left: -15% !important;
+        width: 36%;
+        height: 40%;
+    }
+
+    p#presentation-txt {
+        margin: 1em !important;
+    }
 }

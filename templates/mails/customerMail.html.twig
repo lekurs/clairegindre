@@ -5,8 +5,18 @@
     <div class="row">
         <div class="col">
             <h1 class="text-uppercase">Bonjour !</h1>
-            <p>Vous avez reçu un nouvel email</p>
-            <p>Pensez à consulter le site</p>
+            <p>Vous avez reçu un nouvel email de {{ customer.name ~ ' ' ~ customer.firstname }}</p>
+            <p>Email : {{ customer.email }}</p>
+            <p>Téléphone : {{ customer.phone }}</p>
+            <p>Date de l'évenement : {{ customer.date|date('d-m-Y') }}</p>
+            <p>Lieu : {{ customer.place }}</p>
+            <p>Intéréssés par :
+                {% for asking in customer.event %}
+                - {{ asking.name }} <br>
+                {% endfor %}
+            </p>
+            <p>Comment ils m'ont connus : {{ customer.howKnow }}</p>
+            <p>Message client : {{ customer.details }}</p>
         </div>
     </div>
     <div class="row">
@@ -17,10 +27,6 @@
             <p>78150 Le Chesnay</p>
             <p>contact@clairegindre.com</p>
             <p>www.clairegindre.com</p>
-            {#<p><a href="https://www.facebook.com/clairegindre.pg/" target="_blank"><img src="{{ facebook }}" alt="facebook" width="1.5em"></a></p>#}
-            {#<p><a href="www.instagram.com/clairegindre.pg" target="_blank"><img src="{{ instagram }}" alt="instagram" width="1.5em"></a></p>#}
-            {#<p><a href="https://www.pinterest.fr/ClaireGindrepg/" target="_blank"><img src="{{ pinterest }}" alt="pinterest" width="1.5em"></a></p>#}
-            {#<h1><img src="{{ attachment }}" alt="logo-claire-gindre" style="width: 7em; height: auto" /></h1>#}
         </div>
     </div>
 </div>

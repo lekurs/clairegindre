@@ -69,14 +69,11 @@ final class GalleryOrderTypeHandler implements GalleryOrderTypeHandlerInterface
 
             $galleryEdit = $gallery->update($form->getData());
 
-//            dump($gallery, $form->getData()->pictures);
-//            die;
-
             $this->validator->validate($galleryEdit, [], [
                 'gallery_creation',
             ]);
 
-//            $this->galleryRepository->update();
+            $this->galleryRepository->update();
 
             $this->session->getFlashBag()->add('success', 'La galerie à bien été modifiée');
 

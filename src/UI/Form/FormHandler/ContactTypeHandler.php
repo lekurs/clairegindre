@@ -114,10 +114,10 @@ final class ContactTypeHandler implements ContactTypeHandlerInterface
             ]);
 
             //insert mail
-            $this->mailRepository->save($mail);
+//            $this->mailRepository->save($mail);
 
             //Send Email
-            $this->mailerHelper->sendEmail('Prise de contact', $user->getEmail(),  $form->getData()->email);
+            $this->mailerHelper->sendEmail('Prise de contact', $user->getEmail(),  $form->getData()->email, $form->getData());
 
             //Send confirmation to customer
             $this->mailerHelper->sendConfirmation('Claire GINDRE - Merci pour votre demande : ' . $form->getData()->name . ' - ' . $form->getData()->firstname, $form->getData()->email, $user->getEmail());

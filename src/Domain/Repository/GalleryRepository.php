@@ -230,8 +230,8 @@ final class GalleryRepository extends ServiceEntityRepository implements Gallery
      */
     public function save(Gallery $gallery)
     {
-        $this->getEntityManager()->persist($gallery);
-        $this->getEntityManager()->flush();
+        $this->_em->persist($gallery);
+        $this->_em->flush();
     }
 
     /**
@@ -240,7 +240,7 @@ final class GalleryRepository extends ServiceEntityRepository implements Gallery
      */
     public function update()
     {
-        $this->getEntityManager()->flush();
+        $this->_em->flush();
     }
 
     /**
@@ -264,8 +264,8 @@ final class GalleryRepository extends ServiceEntityRepository implements Gallery
      */
     public function delete(GalleryInterface $gallery)
     {
-        $this->getEntityManager()->remove($gallery);
-        $this->getEntityManager()->flush();
+        $this->_em->remove($gallery);
+        $this->_em->flush();
     }
 
     /**
@@ -282,7 +282,7 @@ final class GalleryRepository extends ServiceEntityRepository implements Gallery
             $picture->setGalleryMaker(null);
         }
         
-        $this->getEntityManager()->remove($article);
-        $this->getEntityManager()->flush();
+        $this->_em->remove($article);
+        $this->_em->flush();
     }
 }

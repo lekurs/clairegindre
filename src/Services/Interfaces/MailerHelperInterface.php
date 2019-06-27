@@ -28,7 +28,7 @@ interface MailerHelperInterface
      * @param $from
      * @return mixed
      */
-    public function sendEmail($subject, $to, $from);
+    public function sendEmail($subject, $to, $from, $customer);
 
     /**
      * @param $subject
