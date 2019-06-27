@@ -168,8 +168,13 @@ final class UploadPicturesGalleryAjaxAction implements UploadPicturesGalleryActi
 
         $fileStorage = $this->fileHelper->generateFileName($request->files->get('picture'));
 
-        $this->resizeImageHelper->resize($request->files->get('picture'), $this->dirGallery . $gallery->getSlug(), $fileStorage);
+        //On déplace dans un dossier temp
 
+//        $this->resizeImageHelper->moveTmp($request->files->get('picture'), $this->dirGallery . 'tmp/' . $gallery->getSlug()); //a reactive
+
+                $this->resizeImageHelper->readDirectory($this->dirGallery . 'tmp/' . $gallery->getSlug());
+
+        //On upload l'image HD sur le bucket
         $this->fileHelper->upload($request->files->get('picture'), $gallery->getSlug());
 
         $this->pictureBuilder->create(
@@ -183,6 +188,6 @@ final class UploadPicturesGalleryAjaxAction implements UploadPicturesGalleryActi
 
         $this->pictureRepository->save($this->pictureBuilder->getPicture());
 
-        return new JsonResponse([], 201);
+        return new JsonResponse(['success'], 200);
     }
 }

@@ -99,23 +99,6 @@ final class ContactTypeHandler implements ContactTypeHandlerInterface
 
             $user = $this->userRepository->getAdmin('contact@clairegindre.com');
 
-            $mail = new Mail(
-                $form->getData()->email,
-                $user->getEmail(),
-                'renseignements - ' . $form->getData()->name . ' - ' . $form->getData()->firstname,
-                $form->getData()->details,
-                $form->getData()->phone,
-                false,
-                $this->slugHelper->replace('renseignements - ' . $form->getData()->email)
-            );
-
-            $this->validator->validate($mail, [], [
-                'contact_creation'
-            ]);
-
-            //insert mail
-//            $this->mailRepository->save($mail);
-
             //Send Email
             $this->mailerHelper->sendEmail('Prise de contact', $user->getEmail(),  $form->getData()->email, $form->getData());
 
