@@ -176,6 +176,7 @@ final class UploadPicturesGalleryAjaxAction implements UploadPicturesGalleryActi
 
         //On upload l'image HD sur le bucket
         $this->fileHelper->upload($request->files->get('picture'), $gallery->getSlug());
+        
 
         $this->pictureBuilder->create(
             $fileStorage,
