@@ -17,5 +17,5 @@ interface ResizeImageHelperInterface
      * @param $newName
      * @return mixed
      */
-    public function resize(\SplFileInfo $image, $directory, $newName);
+//    public function resize(\SplFileInfo $image, $directory, $newName);
 }
