@@ -170,7 +170,7 @@ final class UploadPicturesGalleryAjaxAction implements UploadPicturesGalleryActi
 
         //On déplace dans un dossier temp
 
-        $this->resizeImageHelper->moveTmp($request->files->get('picture'), $this->dirGallery . 'tmp/' . $gallery->getSlug()); //a reactive
+//        $this->resizeImageHelper->moveTmp($request->files->get('picture'), $this->dirGallery . 'tmp/' . $gallery->getSlug()); //a reactive
 
 //                $this->resizeImageHelper->readDirectory($this->dirGallery . 'tmp/' . $gallery->getSlug());
 
