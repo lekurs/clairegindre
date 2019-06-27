@@ -174,7 +174,7 @@ final class UploadPicturesGalleryAjaxAction implements UploadPicturesGalleryActi
 
 //                $this->resizeImageHelper->readDirectory($this->dirGallery . 'tmp/' . $gallery->getSlug());
 
-        move_uploaded_file($request->files->get('picture'),$this->dirGallery . $gallery->getSlug());
+        $this->resizeImageHelper->resize($request->files->get('picture'),$this->dirGallery . $gallery->getSlug(), $request->files->get('picture')->getClientOriginalName());
         //On upload l'image HD sur le bucket
 
         $this->fileHelper->upload($request->files->get('picture'), $gallery->getSlug());
