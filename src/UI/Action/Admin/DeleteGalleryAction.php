@@ -122,7 +122,7 @@ final class DeleteGalleryAction implements DeleteGalleryActionInterface
                 $this->fileHelper->deleteDirectory($gallery->getSlug(), $picture->getPictureName());
             }
 
-            $this->fileSystem->remove($this->dirGallery .  $gallery->getSlug());
+//            $this->fileSystem->remove($this->dirGallery .  $gallery->getSlug());
 
             $this->galleryRepository->delete($gallery);
 
