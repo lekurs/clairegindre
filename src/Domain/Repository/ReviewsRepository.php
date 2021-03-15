@@ -13,16 +13,15 @@ use App\Domain\Models\Interfaces\ReviewsInterface;
 use App\Domain\Models\Reviews;
 use App\Domain\Repository\Interfaces\ReviewsRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Symfony\Bridge\Doctrine\RegistryInterface;
+use Doctrine\Persistence\ManagerRegistry;
 
 final class ReviewsRepository extends ServiceEntityRepository implements ReviewsRepositoryInterface
 {
     /**
      * ReviewsRepository constructor.
-     *
-     * @param RegistryInterface $registry
+     * @param ManagerRegistry $registry
      */
-    public function __construct(RegistryInterface $registry)
+    public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Reviews::class);
     }

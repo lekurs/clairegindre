@@ -12,10 +12,14 @@ namespace App\Domain\Repository;
 use App\Domain\Models\Mail;
 use App\Domain\Repository\Interfaces\MailRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Persistence\ManagerRegistry;
 
 final class MailRepository extends ServiceEntityRepository implements MailRepositoryInterface
 {
+    /**
+     * MailRepository constructor.
+     * @param ManagerRegistry $registry
+     */
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Mail::class);

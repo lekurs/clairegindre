@@ -17,17 +17,16 @@ use App\Domain\Models\Interfaces\PictureInterface;
 use App\Domain\Models\Picture;
 use App\Domain\Repository\Interfaces\GalleryMakerRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Common\Persistence\ManagerRegistry;
-use Symfony\Bridge\Doctrine\RegistryInterface;
+use Doctrine\Persistence\ManagerRegistry;
 
 final class GalleryMakerRepository extends ServiceEntityRepository implements GalleryMakerRepositoryInterface
 {
     /**
      * GalleryMakerRepository constructor.
      *
-     * @param RegistryInterface $registry
+     * @param ManagerRegistry $registry
      */
-    public function __construct(RegistryInterface $registry)
+    public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, GalleryMaker::class);
     }

@@ -9,11 +9,15 @@ use App\Domain\Models\Interfaces\UserInterface;
 use App\Domain\Models\Picture;
 use App\Domain\Repository\Interfaces\PictureRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Symfony\Bridge\Doctrine\RegistryInterface;
+use Doctrine\Persistence\ManagerRegistry;
 
 final class PictureRepository extends ServiceEntityRepository implements PictureRepositoryInterface
 {
-    public function __construct(RegistryInterface $registry)
+    /**
+     * PictureRepository constructor.
+     * @param ManagerRegistry $registry
+     */
+    public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Picture::class);
     }

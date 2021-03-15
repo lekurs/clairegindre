@@ -16,16 +16,16 @@ use App\Domain\Models\Gallery;
 use App\Domain\Models\Interfaces\GalleryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
-use Symfony\Bridge\Doctrine\RegistryInterface;
+use Doctrine\Persistence\ManagerRegistry;
 
 final class GalleryRepository extends ServiceEntityRepository implements GalleryRepositoryInterface
 {
     /**
      * GalleryRepository constructor.
      *
-     * @param RegistryInterface $registry
+     * @param ManagerRegistry $registry
      */
-    public function __construct(RegistryInterface $registry)
+    public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Gallery::class);
     }
